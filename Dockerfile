@@ -8,8 +8,8 @@ RUN apk add --no-cache python3 make g++
 # Create app directory
 WORKDIR /usr/src/app
 
-# Enable Corepack to use pnpm if desired
-RUN corepack enable && npm i -g pnpm
+# Enable Corepack (includes pnpm, yarn, etc.)
+RUN corepack enable
 
 # Copy dependency manifests first for better layer caching
 COPY package.json pnpm-lock.yaml* ./
