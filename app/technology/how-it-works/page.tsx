@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
+import ProcessDiagram from '@/components/animations/ProcessDiagram';
 
 const processSteps = [
   {
@@ -69,26 +71,17 @@ export default function HowItWorksPage() {
       {/* Process Overview */}
       <section className="section-padding bg-white">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="mb-4">The KPP Process</h2>
-            <p className="text-lg text-gray-text max-w-3xl mx-auto">
-              KPP technology harnesses kinetic energy through a sophisticated mechanical 
-              system that converts motion into clean, continuous electrical power.
-            </p>
-          </div>
+          <FadeInWhenVisible>
+            <div className="text-center mb-12">
+              <h2 className="mb-4">The KPP Process</h2>
+              <p className="text-lg text-gray-text max-w-3xl mx-auto">
+                KPP technology harnesses kinetic energy through a sophisticated mechanical 
+                system that converts motion into clean, continuous electrical power.
+              </p>
+            </div>
+          </FadeInWhenVisible>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
-                  {step.step}
-                </div>
-                <div className="text-4xl mb-4">{step.icon}</div>
-                <h3 className="text-xl font-semibold text-primary mb-3">{step.title}</h3>
-                <p className="text-gray-text">{step.description}</p>
-              </div>
-            ))}
-          </div>
+          <ProcessDiagram steps={processSteps} />
         </div>
       </section>
 
