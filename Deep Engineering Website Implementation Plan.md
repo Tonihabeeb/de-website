@@ -1,0 +1,271 @@
+# Deep Engineering Website – Implementation Plan
+
+This document translates the *UI/UX & Content Guide* into an actionable roadmap for building the Deep Engineering marketing site with **Next.js 15**, **Tailwind CSS**, and a headless CMS.
+
+---
+
+## 0 • Pre-Stage: Environment & Container Setup
+
+This preliminary phase ensures every developer has a consistent tool-chain and a reproducible containerised workspace before any code is written.
+
+### 0.1 Local Prerequisites
+1. **Node.js** ≥ 20.x LTS (includes `npm`).  
+   • Verify with `node -v` and `npm -v`.
+2. **Git** ≥ 2.40 for version control.  
+   • Configure global identity: `git config --global user.name "Your Name"` and `git config --global user.email "email@example.com"`.
+3. **Docker Desktop** (or Podman) for building/running containers.  
+   • Verify with `docker version`.
+4. **(Optional) VS Code + Dev Containers extension** for seamless container dev.
+
+### 0.2 GitHub Repository Setup
+1. Create repo **deep-engineering-web** (private) under organisation/account.  
+2. Generate SSH key: `ssh-keygen -t ed25519 -C "dev@deepengineering.co"`; add the public key to GitHub → *Settings › SSH & GPG keys*.  
+3. Initialise project folder (or clone if already created):
+   ```bash
+   git init
+   git remote add origin git@github.com:<org>/deep-engineering-web.git
+   ```
+4. Commit baseline `.gitignore`, `README.md`, and dev-container files (see below).  
+5. Enable branch protection on `main` and set up required PR review.
+
+### 0.3 Development Container
+Provide a Dockerised environment so CI, Codespaces, and local machines run identical stacks.
+
+**Dockerfile (root):**
+```dockerfile
+# --- Base image
+FROM node:20-alpine AS base
+WORKDIR /usr/src/app
+
+# Install global tooling
+RUN corepack enable && npm i -g pnpm
+
+# Copy deps manifests first for better layer caching
+COPY package.json pnpm-lock.yaml* package-lock.json* ./
+RUN if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else npm ci; fi
+
+# Copy source afterwards
+COPY . .
+
+CMD [ "npm", "run", "dev" ]
+```
+
+**docker-compose.yml (dev convenience):**
+```yaml
+dev:
+  image: deep-engineering-web:latest
+  build: .
+  ports:
+    - "3000:3000"  # Next.js
+  volumes:
+    - .:/usr/src/app
+    - node_modules:/usr/src/app/node_modules
+volumes:
+  node_modules:
+```
+
+**.devcontainer/devcontainer.json:** (for VS Code + GitHub Codespaces)
+```json
+{
+  "name": "Deep Engineering Web",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20", 
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install"
+}
+```
+
+Usage:
+```bash
+# Build the image once
+docker compose build
+
+# Start dev container (hot-reload)
+docker compose up
+```
+
+### 0.4 Environment Variables
+Create `.env.local` (excluded from Git) for local secrets:
+```
+SANITY_PROJECT_ID=
+SANITY_DATASET=production
+SANITY_API_TOKEN=
+NEXT_PUBLIC_VERCEL_ENV=development
+```
+
+### 0.5 CI/CD Prep
+1. Add `Dockerfile` build step to GitHub Actions (future work).
+2. Store required secrets (*VERCEL_TOKEN*, *SANITY_TOKEN*, etc.) in **GitHub › Settings › Secrets and Variables**.
+
+*Outcome*: A fully reproducible dev environment that any contributor can spin up with `docker compose up`, with code tracked in GitHub from day one.
+
+---
+
+## 1 • Project Foundations
+
+| Item | Decision |
+|------|----------|
+| **Framework** | Next.js 15 (App Router) – supports SSG/ISR and first-class Vercel deployment. |
+| **Styling** | Tailwind CSS v3 with custom theme (brand colours, fonts). |
+| **Animation** | Framer Motion (UI / reveal) + optional GSAP (scroll-driven diagrams). |
+| **State / Data** | Headless CMS – **Sanity v3** recommended (visual editing + structured content). |
+| **Hosting** | Primary: Vercel (CI/CD, ISR). Secondary: Static export (`next export`) for cPanel fallback. |
+| **Version control** | GitHub (main ↔ vercel prod). |
+
+### 1.1 Initial Setup
+1. `npx create-next-app@latest deep-engineering-web --ts --tailwind`
+2. Install deps: `npm i @sanity/client framer-motion @heroicons/react`
+3. Configure commit linting / Prettier / ESLint.
+4. Add GitHub repo; connect to Vercel for preview deploys.
+
+---
+
+## 2 • Information Architecture → Routing
+
+| URL | Page/Section | Notes |
+|-----|--------------|-------|
+| `/` | Home | Hero, highlights, CTAs. |
+| `/about` | About Us | Mission, team intro, partners. |
+| `/technology` | Tech Landing (KPP Overview) | Dropdown sub-nav links. |
+| `/technology/how-it-works` | How KPP Works | Diagram + step-scroll animation. |
+| `/technology/components` | KPP Components | Split into parts if long. |
+| `/technology/performance` | Performance & Specs | Charts, data. |
+| `/projects` | Projects Grid | Cards linking to project detail (optional). |
+| `/team` | Team | Grid of profiles. |
+| `/contact` | Contact | Form + company info/map. |
+
+*404*, robots, sitemap.xml auto-generated by Next SEO.
+
+---
+
+## 3 • Design System
+
+1. **Tailwind Theme**
+   - `colors.primary #18335A`, `colors.accent #2150FE`, `colors.warm #C84209`.
+   - Extend `fontFamily.serif = ['Crimson Pro', ...]`, `fontFamily.sans = ['Heebo', ...]`.
+2. **Global Styles**
+   - Set base font-size 16 px; line-height 1.5.
+   - `@layer base` for headings (serif) & link transitions.
+3. **Reusable Components**
+   - `Navbar`, `Footer`, `Container`, `SectionHeading`.
+   - UI atoms: `Button`, `Card`, `IconBullet`.
+
+---
+
+## 4 • Component & Section Breakdown
+
+| Page | Sections / Components |
+|------|-----------------------|
+| **Home** | `HeroSection`, `FeaturesGrid`, `MiniAbout`, `MiniProjects`, CTA banner. |
+| **About** | `CompanyStory`, `MissionVision`, `PartnersCarousel`, `TeamIntro`. |
+| **Technology** | `OverviewHero`, `BenefitsGrid`, `TechNavTabs`. |
+| **How It Works** | `ProcessDiagram` (scroll-animated), `PhysicsExplainer`, video embed. |
+| **Components** | `ComponentList` (accordion or cards), imagery gallery. |
+| **Performance** | `StatsGrid`, `Charts`, `EnvImpact`. |
+| **Projects** | `ProjectsList` (cards), optional project filter, map embed. |
+| **Team** | `TeamGrid`, optional quote slider. |
+| **Contact** | `ContactForm`, `OfficeLocations`, map (leaflet/static). |
+
+---
+
+## 5 • CMS Schema Sketch (Sanity)
+
+```txt
+Page (singleton)
+  – title
+  – slug
+  – hero {heading, subheading, image}
+  – sections [array of block references]
+
+Project
+  – name, slug, status, capacityMW, location, description, image[]
+
+TeamMember
+  – name, role, bio, image, socials{}
+
+TechSection
+  – category (overview | how-it-works | components | performance)
+  – title, body (portable text), images[]
+```
+
+*Visual Editing*: Enable `@sanity/visual-editing` + `ContentSourceMap` for inline editing.
+
+---
+
+## 6 • Animation Strategy
+
+1. Entrance fades/slides via `framer-motion` variants & `Viewport`.
+2. Hero background subtle motion (video / particles) – lazy-loaded.
+3. Scroll-triggered diagram on `/technology/how-it-works` using GSAP `ScrollTrigger` (optional).
+4. prefers-reduced-motion media query respect.
+
+---
+
+## 7 • Accessibility & Performance
+
+- Colour-contrast audit via Lighthouse.
+- Semantic HTML, `aria-` labels on nav & forms.
+- Optimise images through Next `Image` component.
+- Use SSG/ISR; enable compression & caching.
+
+---
+
+## 8 • Testing & QA
+
+| Phase | Tools |
+|-------|-------|
+| Unit / component | Jest + React Testing Library. |
+| Visual regression | Storybook + Chromatic. |
+| E2E happy path | Playwright Cloud; test contact form, nav, mobile. |
+| Accessibility | axe-core via jest-axe, Lighthouse CI. |
+
+---
+
+## 9 • Deployment Workflow
+
+1. **Preview** – Push → GitHub → Vercel preview.
+2. **Production** – Merge main → auto deploy.
+3. **Static Export (fallback)** – `npm run export`; upload `/out` to cPanel.
+4. CMS webhook triggers Vercel revalidate API for ISR pages.
+
+---
+
+## 10 • Timeline (Indicative)
+
+| Week | Milestone |
+|------|-----------|
+| 1 | Project setup, theme, global layout, Navbar/Footer. |
+| 2 | Home page sections built + responsive. |
+| 3 | About, Projects, Team pages. |
+| 4 | Technology overview + sub-nav, FeaturesGrid component. |
+| 5 | How-It-Works diagram & animations. |
+| 6 | Contact form integration & testing. |
+| 7 | CMS schema, content migration, visual editing. |
+| 8 | QA, accessibility, performance tuning. |
+| 9 | Final stakeholder review & content polish. |
+| 10 | Production launch & static export hand-off. |
+
+---
+
+## 11 • Risks & Mitigations
+
+| Risk | Impact | Mitigation |
+|------|--------|-----------|
+| Complex scroll animations hurt performance | Med | Use GSAP only on desktop, throttle FPS, provide fallback. |
+| CMS learning curve for editors | Low | Provide Loom training videos & docs. |
+| Limited bandwidth on cPanel static updates | Low | Automate FTP deploy from GitHub Action. |
+
+---
+
+## 12 • Next Steps
+
+1. Approve tech stack & CMS choice.
+2. Create GitHub repo & configure Vercel project.
+3. Bootstrap Next.js codebase per §1.1.
+4. Begin implementation following timeline.
+
+---
+
+*Prepared by: AI Implementation Assistant* 

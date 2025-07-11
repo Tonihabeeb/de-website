@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  web:
+    image: deep-engineering-web:dev
+    build: .
+    ports:
+      - "3000:3000" # Next.js dev server
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+volumes:
+  node_modules: 
