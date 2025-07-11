@@ -1,4 +1,7 @@
 import HeroSection from '@/components/sections/HeroSection';
+import MiniAbout from '@/components/sections/MiniAbout';
+import MiniProjects from '@/components/sections/MiniProjects';
+import CTABanner from '@/components/sections/CTABanner';
 
 export default function Home() {
   return (
@@ -43,6 +46,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <MiniAbout />
+      <MiniProjects />
+      <CTABanner />
     </div>
   );
 } 
