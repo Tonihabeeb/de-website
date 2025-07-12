@@ -1,3 +1,5 @@
-import studio from '@sanity/eslint-config-studio'
+import next from '@next/eslint-plugin-next';
 
-export default [...studio]
+export default [
+  next.configs.recommended,
+];
