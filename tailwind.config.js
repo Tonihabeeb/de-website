@@ -6,6 +6,10 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Heebo', 'sans-serif'],
+      serif: ['Crimson Pro', 'serif'],
+    },
     extend: {
       colors: {
         primary: {
@@ -21,10 +25,6 @@ module.exports = {
           text: '#4C4C4D',
           light: '#F0F0F1',
         }
-      },
-      fontFamily: {
-        serif: ['Crimson Pro', 'serif'],
-        sans: ['Heebo', 'sans-serif'],
       },
       fontSize: {
         'hero': ['4rem', { lineHeight: '1.1' }],

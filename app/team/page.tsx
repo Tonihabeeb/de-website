@@ -1,51 +1,11 @@
 import Link from 'next/link';
+import { getTeamMembers } from '@/utils/sanity-data';
+import { urlForImage } from '@/lib/sanity';
 
-const teamMembers = [
-  {
-    name: 'Eng. Ranj Sherko',
-    role: 'Managing Partner',
-    bio: 'Leading Deep Engineering's mission to revolutionize Iraq's energy landscape with innovative KPP technology.',
-    expertise: 'Renewable Energy, Project Management',
-    image: '/team/ranj-sherko.jpg' // Placeholder
-  },
-  {
-    name: 'Dr. Ahmed Hassan',
-    role: 'Technical Director',
-    bio: 'Overseeing the technical implementation of KPP projects and ensuring optimal performance across all installations.',
-    expertise: 'Mechanical Engineering, KPP Technology',
-    image: '/team/ahmed-hassan.jpg' // Placeholder
-  },
-  {
-    name: 'Sarah Al-Zahra',
-    role: 'Project Manager',
-    bio: 'Managing project timelines, stakeholder relationships, and ensuring successful delivery of all KPP installations.',
-    expertise: 'Project Management, Stakeholder Relations',
-    image: '/team/sarah-alzahra.jpg' // Placeholder
-  },
-  {
-    name: 'Mohammed Al-Rashid',
-    role: 'Electrical Engineer',
-    bio: 'Specializing in electrical systems integration and grid connection for KPP power plants.',
-    expertise: 'Electrical Engineering, Grid Integration',
-    image: '/team/mohammed-rashid.jpg' // Placeholder
-  },
-  {
-    name: 'Layla Al-Mahmoud',
-    role: 'SCADA Specialist',
-    bio: 'Managing control systems and real-time monitoring for optimal KPP performance and safety.',
-    expertise: 'SCADA Systems, Control Engineering',
-    image: '/team/layla-mahmoud.jpg' // Placeholder
-  },
-  {
-    name: 'Omar Al-Khalil',
-    role: 'Finance Manager',
-    bio: 'Overseeing financial planning, investment strategies, and ensuring sustainable project financing.',
-    expertise: 'Financial Planning, Investment Management',
-    image: '/team/omar-khalil.jpg' // Placeholder
-  }
-];
+export default async function TeamPage() {
+  // Fetch team members from Sanity CMS
+  const teamMembers = await getTeamMembers();
 
-export default function TeamPage() {
   return (
     <div>
       {/* Hero Section */}
@@ -72,29 +32,53 @@ export default function TeamPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="bg-gray-light rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
-                {/* Profile Image Placeholder */}
-                <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mx-auto mb-4">
-                  <div className="text-white text-center">
-                    <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <p className="text-xs opacity-90">Photo</p>
-                  </div>
+          {teamMembers && teamMembers.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {teamMembers.map((member: any) => (
+                <div key={member._id} className="bg-gray-light rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                  {/* Profile Image */}
+                  {member.image ? (
+                    <div className="w-32 h-32 mx-auto mb-4">
+                      <img 
+                        src={urlForImage(member.image).url()} 
+                        alt={member.name}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="text-white text-center">
+                        <svg className="w-1.5 h-1.5 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <p className="text-xs opacity-90">Photo</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <h3 className="text-xl font-semibold text-primary mb-2">{member.name}</h3>
+                  <p className="text-accent-warm font-medium mb-3">{member.role}</p>
+                  <p className="text-gray-text text-sm mb-4">{member.bio}</p>
+                  
+                  {member.expertise && (
+                    <div className="text-xs text-gray-text">
+                      <span className="font-medium">Expertise:</span> {member.expertise}
+                    </div>
+                  )}
                 </div>
-                
-                <h3 className="text-xl font-semibold text-primary mb-2">{member.name}</h3>
-                <p className="text-accent-warm font-medium mb-3">{member.role}</p>
-                <p className="text-gray-text text-sm mb-4">{member.bio}</p>
-                
-                <div className="text-xs text-gray-text">
-                  <span className="font-medium">Expertise:</span> {member.expertise}
-                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-gray-400 mb-4">
+                <svg className="w-1.5 h-1.5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-semibold text-gray-text mb-2">No Team Members Found</h3>
+              <p className="text-gray-text">Team members will appear here once they are added to the CMS.</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -117,11 +101,11 @@ export default function TeamPage() {
               
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-2">35+</div>
+                  <div className="text-xl font-bold text-primary mb-2">35+</div>
                   <div className="text-sm text-gray-text">Team Members</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-2">4</div>
+                  <div className="text-xl font-bold text-primary mb-2">4</div>
                   <div className="text-sm text-gray-text">Disciplines</div>
                 </div>
               </div>
@@ -131,8 +115,8 @@ export default function TeamPage() {
               <h3 className="mb-6">Our Values</h3>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
+                    <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                   </div>
@@ -143,8 +127,8 @@ export default function TeamPage() {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
+                    <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
@@ -155,8 +139,8 @@ export default function TeamPage() {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mr-4 mt-1">
+                    <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </div>

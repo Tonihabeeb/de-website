@@ -5,6 +5,7 @@ const footerNavigation = {
     { name: 'About', href: '/about' },
     { name: 'Team', href: '/team' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Style Guide', href: '/style-guide' },
   ],
   technology: [
     { name: 'KPP Overview', href: '/technology' },

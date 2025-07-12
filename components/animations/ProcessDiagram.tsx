@@ -77,7 +77,7 @@ export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
           >
             {/* Step Circle */}
             <motion.div
-              className="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4 relative"
+              className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-lg font-bold mx-auto mb-4 relative"
               whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -86,7 +86,7 @@ export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
             
             {/* Icon */}
             <motion.div 
-              className="text-4xl mb-4"
+              className="text-xs mb-4"
               initial={{ rotate: 0 }}
               animate={isInView ? { rotate: 360 } : { rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.5 + index * 0.2 }}

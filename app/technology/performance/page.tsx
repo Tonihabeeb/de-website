@@ -4,9 +4,9 @@ const performanceMetrics = [
   {
     category: 'Power Generation',
     metrics: [
-      { name: 'Rated Capacity', value: '25 MW', description: 'Continuous power output per unit' },
-      { name: 'Peak Capacity', value: '30 MW', description: 'Maximum output under optimal conditions' },
-      { name: 'Availability Factor', value: '98%', description: 'Annual operational availability' },
+      { name: 'Output Options', value: '1 MW & 5 MW', description: 'Module options available' },
+      { name: 'Availability', value: '100%', description: 'Continuous operation capability' },
+      { name: 'Load Profiles', value: 'Baseload', description: 'Stable power generation' },
       { name: 'Capacity Factor', value: '95%', description: 'Actual vs. theoretical maximum output' }
     ]
   },
@@ -14,7 +14,7 @@ const performanceMetrics = [
     category: 'Efficiency',
     metrics: [
       { name: 'Overall Efficiency', value: '85-90%', description: 'Total system efficiency' },
-      { name: 'Generator Efficiency', value: '95%', description: 'Electrical conversion efficiency' },
+      { name: 'Generator Efficiency', value: '95%', description: '500 kW generator at 375 RPM' },
       { name: 'Transmission Efficiency', value: '98%', description: 'Mechanical transmission efficiency' },
       { name: 'Control System', value: '99.9%', description: 'SCADA system reliability' }
     ]
@@ -24,8 +24,8 @@ const performanceMetrics = [
     metrics: [
       { name: 'CO2 Emissions', value: '0 g/kWh', description: 'Zero carbon emissions' },
       { name: 'NOx Emissions', value: '0 mg/kWh', description: 'Zero nitrogen oxide emissions' },
-      { name: 'Particulate Matter', value: '0 mg/kWh', description: 'Zero particulate emissions' },
-      { name: 'Water Usage', value: 'Minimal', description: 'No water consumption for operation' }
+      { name: 'Water Usage', value: '<5% recirculation', description: 'Minimal water needs, periodic top-up' },
+      { name: 'Land Footprint', value: '~300 m²/MW', description: 'Compact design vs. thousands for other sources' }
     ]
   }
 ];
@@ -33,35 +33,39 @@ const performanceMetrics = [
 const comparisonData = [
   {
     technology: 'KPP',
-    capacity: '25 MW',
+    capacity: '1-5 MW',
     efficiency: '85-90%',
     emissions: 'Zero',
-    availability: '98%',
-    fuel: 'None'
+    availability: '100%',
+    fuel: 'None',
+    cost: '~€25/MWh'
   },
   {
     technology: 'Solar PV',
-    capacity: '25 MW',
+    capacity: '1-5 MW',
     efficiency: '15-20%',
     emissions: 'Zero',
     availability: '25%',
-    fuel: 'None'
+    fuel: 'None',
+    cost: '€40-60/MWh'
   },
   {
     technology: 'Wind',
-    capacity: '25 MW',
+    capacity: '1-5 MW',
     efficiency: '30-40%',
     emissions: 'Zero',
     availability: '35%',
-    fuel: 'None'
+    fuel: 'None',
+    cost: '€35-55/MWh'
   },
   {
     technology: 'Gas Turbine',
-    capacity: '25 MW',
+    capacity: '1-5 MW',
     efficiency: '35-45%',
     emissions: 'High',
     availability: '85%',
-    fuel: 'Natural Gas'
+    fuel: 'Natural Gas',
+    cost: '€60-80/MWh'
   }
 ];
 
@@ -161,6 +165,7 @@ export default function PerformancePage() {
                   <th className="px-6 py-4 text-center">Emissions</th>
                   <th className="px-6 py-4 text-center">Availability</th>
                   <th className="px-6 py-4 text-center">Fuel</th>
+                  <th className="px-6 py-4 text-center">Levelized Cost</th>
                 </tr>
               </thead>
               <tbody>
@@ -172,6 +177,7 @@ export default function PerformancePage() {
                     <td className="px-6 py-4 text-center">{tech.emissions}</td>
                     <td className="px-6 py-4 text-center">{tech.availability}</td>
                     <td className="px-6 py-4 text-center">{tech.fuel}</td>
+                    <td className="px-6 py-4 text-center font-semibold">{tech.cost}</td>
                   </tr>
                 ))}
               </tbody>
@@ -195,7 +201,7 @@ export default function PerformancePage() {
             {environmentalBenefits.map((benefit, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="flex items-start">
-                  <div className="text-4xl mr-4">{benefit.icon}</div>
+                  <div className="text-[16px] mr-4">{benefit.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-3">{benefit.title}</h3>
                     <p className="text-gray-text mb-3">{benefit.description}</p>
@@ -227,11 +233,11 @@ export default function PerformancePage() {
               
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-2">0%</div>
+                  <div className="text-xl font-bold text-primary mb-2">0%</div>
                   <div className="text-sm text-gray-text">Fuel Costs</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-2">98%</div>
+                  <div className="text-xl font-bold text-primary mb-2">98%</div>
                   <div className="text-sm text-gray-text">Availability</div>
                 </div>
               </div>
@@ -276,7 +282,7 @@ export default function PerformancePage() {
             <div className="bg-gray-light rounded-lg p-8 text-center">
               <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center">
                 <div className="text-white text-center">
-                  <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                   <p className="text-lg font-semibold">Efficiency Trends</p>
@@ -288,7 +294,7 @@ export default function PerformancePage() {
             <div className="bg-gray-light rounded-lg p-8 text-center">
               <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center">
                 <div className="text-white text-center">
-                  <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
                   <p className="text-lg font-semibold">Power Output</p>

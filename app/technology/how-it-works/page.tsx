@@ -1,31 +1,31 @@
 import Link from 'next/link';
 import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
-import ProcessDiagram from '@/components/animations/ProcessDiagram';
+import ScrollTriggeredDiagram from '@/components/animations/ScrollTriggeredDiagram';
 
 const processSteps = [
   {
     step: '01',
-    title: 'Kinetic Energy Input',
-    description: 'The system receives kinetic energy from various sources, including wind, water flow, or mechanical motion.',
-    icon: '🌪️'
+    title: 'Air Injection',
+    description: 'Air is injected into underwater floaters, causing them to rise due to buoyancy forces.',
+    icon: '💨'
   },
   {
     step: '02',
-    title: 'Energy Conversion',
-    description: 'Advanced mechanical systems convert kinetic energy into rotational motion with high efficiency.',
-    icon: '⚙️'
+    title: 'Buoyancy-Driven Motion',
+    description: 'The rising floaters drive a chain system that converts vertical motion into rotational energy.',
+    icon: '⬆️'
   },
   {
     step: '03',
-    title: 'Power Generation',
-    description: 'Rotational energy drives generators to produce clean, continuous electrical power.',
+    title: 'Energy Conversion',
+    description: 'Rotational energy turns a generator to produce clean electrical power.',
     icon: '⚡'
   },
   {
     step: '04',
-    title: 'Grid Integration',
-    description: 'Smart control systems ensure seamless integration with existing power infrastructure.',
-    icon: '🔌'
+    title: 'Air Release & Cycle',
+    description: 'At the top, air is released and the floater sinks back down to repeat the cycle continuously.',
+    icon: '🔄'
   }
 ];
 
@@ -81,7 +81,7 @@ export default function HowItWorksPage() {
             </div>
           </FadeInWhenVisible>
           
-          <ProcessDiagram steps={processSteps} />
+          <ScrollTriggeredDiagram steps={processSteps} />
         </div>
       </section>
 
@@ -92,24 +92,28 @@ export default function HowItWorksPage() {
             <div>
               <h2 className="mb-6">The Physics Behind KPP</h2>
               <p className="text-lg text-gray-text mb-6 leading-relaxed">
-                KPP technology is based on fundamental principles of kinetic energy and 
-                mechanical energy conversion. The system captures kinetic energy from 
-                various sources and converts it into rotational mechanical energy.
+                By leveraging Archimedes' Principle (buoyancy) and gravity in a closed-loop, 
+                KPP continuously converts mechanical motion into electricity.
               </p>
               <p className="text-lg text-gray-text mb-6 leading-relaxed">
-                Through a series of precisely engineered mechanical components, including 
-                specialized gears, flywheels, and transmission systems, the kinetic energy 
-                is amplified and converted into electrical energy via high-efficiency generators.
+                The system uses an innovative air injection engine that creates controlled 
+                buoyancy forces, driving a chain mechanism that converts vertical motion 
+                into rotational energy with high efficiency.
+              </p>
+              <p className="text-lg text-gray-text mb-6 leading-relaxed">
+                A 500 kW Low-Speed Permanent Magnet Generator runs at 375 RPM with ~95% 
+                efficiency, enabling direct grid connection without gearboxes.
               </p>
               <p className="text-lg text-gray-text leading-relaxed">
-                The entire process is controlled by advanced SCADA systems that monitor 
-                performance, optimize efficiency, and ensure safe operation around the clock.
+                The entire process is controlled by an integrated SCADA system that ensures 
+                optimal performance and safety, automatically adjusting air input and 
+                monitoring output in real-time.
               </p>
             </div>
             <div className="bg-white rounded-lg p-8">
               <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center">
                 <div className="text-white text-center">
-                  <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                   <p className="text-lg font-semibold">Technical Diagram</p>
@@ -136,7 +140,7 @@ export default function HowItWorksPage() {
             {keyAdvantages.map((advantage, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="flex items-start">
-                  <div className="text-3xl mr-4">{advantage.icon}</div>
+                  <div className="text-lg mr-4">{advantage.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">{advantage.title}</h3>
                     <p className="text-gray-text">{advantage.description}</p>
@@ -162,7 +166,7 @@ export default function HowItWorksPage() {
           <div className="bg-white rounded-lg p-8 text-center">
             <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center">
               <div className="text-white text-center">
-                <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <p className="text-lg font-semibold">KPP Technology Video</p>

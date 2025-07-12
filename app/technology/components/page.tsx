@@ -2,40 +2,40 @@ import Link from 'next/link';
 
 const components = [
   {
-    name: 'Kinetic Energy Capture System',
-    description: 'Advanced mechanical systems that capture and convert kinetic energy from various sources into rotational motion.',
-    features: ['High-efficiency energy capture', 'Multiple input sources', 'Adaptive control systems'],
-    icon: '🌪️'
+    name: 'Air Injection Engine',
+    description: 'Innovative system that injects air into underwater floaters, creating controlled buoyancy forces.',
+    features: ['Precision air control', 'Buoyancy optimization', 'Energy-efficient operation'],
+    icon: '💨'
   },
   {
-    name: 'Power Transmission System',
-    description: 'Precision-engineered gears and transmission components that amplify and transfer mechanical energy.',
-    features: ['High-torque transmission', 'Efficiency optimization', 'Durability engineering'],
-    icon: '⚙️'
+    name: 'Floater & Chain System',
+    description: 'Buoyant floaters connected to a chain mechanism that converts vertical motion into rotational energy.',
+    features: ['High-efficiency conversion', 'Durable materials', 'Continuous operation'],
+    icon: '⬆️'
   },
   {
-    name: 'Electrical Generation Units',
-    description: 'High-efficiency generators that convert mechanical energy into electrical power with minimal losses.',
-    features: ['High-efficiency conversion', 'Grid-compatible output', 'Smart synchronization'],
+    name: '500 kW Generator',
+    description: 'Low-Speed Permanent Magnet Generator running at 375 RPM with ~95% efficiency.',
+    features: ['Direct grid connection', 'No gearboxes required', 'High reliability'],
     icon: '⚡'
   },
   {
+    name: 'Water Tank System',
+    description: 'Contained water environment where floaters operate, requiring minimal water recirculation.',
+    features: ['<5% water top-up needed', 'Efficient heat management', 'Environmental protection'],
+    icon: '💧'
+  },
+  {
     name: 'SCADA Control System',
-    description: 'Advanced monitoring and control systems that ensure optimal performance and safe operation.',
-    features: ['Real-time monitoring', 'Automated optimization', 'Remote operation capability'],
+    description: 'Integrated Supervisory Control and Data Acquisition system for optimal performance.',
+    features: ['Real-time monitoring', 'Automated optimization', 'Remote operation'],
     icon: '🖥️'
   },
   {
     name: 'Grid Integration Module',
-    description: 'Smart systems that ensure seamless connection and synchronization with existing power infrastructure.',
+    description: 'Smart systems ensuring seamless connection with existing power infrastructure.',
     features: ['Grid synchronization', 'Power quality management', 'Load balancing'],
     icon: '🔌'
-  },
-  {
-    name: 'Safety & Protection Systems',
-    description: 'Comprehensive safety systems that protect equipment and ensure reliable operation.',
-    features: ['Overload protection', 'Emergency shutdown', 'Environmental monitoring'],
-    icon: '🛡️'
   }
 ];
 
@@ -100,7 +100,7 @@ export default function ComponentsPage() {
             {components.map((component, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="flex items-start mb-4">
-                  <div className="text-4xl mr-4">{component.icon}</div>
+                  <div className="text-[16px] mr-4">{component.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">{component.name}</h3>
                     <p className="text-gray-text mb-4">{component.description}</p>
@@ -163,7 +163,7 @@ export default function ComponentsPage() {
               <div key={index} className="bg-gray-light rounded-lg p-6 text-center">
                 <div className="w-full h-48 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center mb-4">
                   <div className="text-white text-center">
-                    <div className="text-4xl mb-2">{component.icon}</div>
+                    <div className="text-[16px] mb-2">{component.icon}</div>
                     <p className="text-sm font-semibold">{component.name}</p>
                   </div>
                 </div>
@@ -194,11 +194,11 @@ export default function ComponentsPage() {
               
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-2">ISO 9001</div>
+                  <div className="text-xl font-bold text-primary mb-2">ISO 9001</div>
                   <div className="text-sm text-gray-text">Quality Management</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-2">IEC 61400</div>
+                  <div className="text-xl font-bold text-primary mb-2">IEC 61400</div>
                   <div className="text-sm text-gray-text">Safety Standards</div>
                 </div>
               </div>
@@ -208,32 +208,32 @@ export default function ComponentsPage() {
               <h3 className="mb-6">Certifications</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <span className="text-gray-text">ISO 9001:2015 Quality Management</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <span className="text-gray-text">IEC 61400 Safety Standards</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <span className="text-gray-text">CE Marking Compliance</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-4">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
