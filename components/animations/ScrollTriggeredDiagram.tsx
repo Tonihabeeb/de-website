@@ -128,7 +128,7 @@ export default function ScrollTriggeredDiagram({ steps }: ScrollTriggeredDiagram
           {steps.map((step, index) => (
             <div
               key={index}
-              ref={el => stepRefs.current[index] = el}
+              ref={(el) => { stepRefs.current[index] = el; }}
               className="relative z-10 text-center bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100"
             >
               {/* Step Circle */}
