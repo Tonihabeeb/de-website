@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
 
@@ -107,17 +107,65 @@ export default function ContactPage() {
   const contactInfo = [
     {
       title: 'Headquarters',
-      address: 'Erbil, Kurdistan Region, Iraq',
-      phone: '+964 XXX XXX XXXX',
+      address: 'Roya Tower A 1-14, Erbil-44001, Iraq',
+      phone: '+964 750 466 3879',
+      phone2: '+964 751 235 3179',
       email: 'info@deepengineering.co'
     },
     {
       title: 'Basra Office',
-      address: 'Basra, Iraq',
-      phone: '+964 XXX XXX XXXX',
+      address: 'Al Muhendisen - Al Zubair Road, Basra, Iraq',
+      phone: '+964 773 033 3879',
       email: 'basra@deepengineering.co'
     }
   ];
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Deep Engineering',
+      url: 'https://deepengineering.co',
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+964 750 466 3879',
+          contactType: 'customer support',
+          areaServed: 'IQ',
+          availableLanguage: ['English', 'Arabic'],
+          email: 'info@deepengineering.co',
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+964 751 235 3179',
+          contactType: 'customer support',
+          areaServed: 'IQ',
+          availableLanguage: ['English', 'Arabic'],
+          email: 'info@deepengineering.co',
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+964 773 033 3879',
+          contactType: 'branch office',
+          areaServed: 'IQ',
+          availableLanguage: ['English', 'Arabic'],
+          email: 'basra@deepengineering.co',
+        }
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Erbil, Kurdistan Region',
+        addressLocality: 'Erbil',
+        addressCountry: 'IQ'
+      }
+    });
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   return (
     <div>
@@ -126,8 +174,8 @@ export default function ContactPage() {
         <div className="container">
           <FadeInWhenVisible>
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="mb-6">Contact Us</h1>
-              <p className="text-xl text-gray-200 leading-relaxed">
+              <h1 className="mb-6 text-white drop-shadow-md">Contact Us</h1>
+              <p className="text-xl text-white leading-relaxed">
                 Get in touch with our team to learn more about KPP technology, 
                 discuss partnership opportunities, or explore project collaboration.
               </p>
@@ -146,14 +194,24 @@ export default function ContactPage() {
                 <h2 className="mb-6">Send us a Message</h2>
                 
                 {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-                    Thank you for your message! We'll get back to you soon.
+                  <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded" role="alert" aria-live="polite">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      Thank you for your message! We'll get back to you soon.
+                    </div>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-                    There was an error sending your message. Please try again.
+                  <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded" role="alert" aria-live="assertive">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                      There was an error sending your message. Please try again.
+                    </div>
                   </div>
                 )}
 
@@ -173,9 +231,12 @@ export default function ContactPage() {
                           errors.name ? 'border-red-500' : 'border-gray-300'
                         }`}
                         placeholder="Your full name"
+                        aria-describedby={errors.name ? "name-error" : undefined}
+                        aria-invalid={!!errors.name}
+                        required
                       />
                       {errors.name && (
-                        <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                        <p id="name-error" className="mt-1 text-sm text-red-600" role="alert">{errors.name}</p>
                       )}
                     </div>
 
@@ -281,9 +342,25 @@ export default function ContactPage() {
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-describedby={isSubmitting ? "submitting-status" : undefined}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message'
+                    )}
                   </button>
+                  {isSubmitting && (
+                    <p id="submitting-status" className="sr-only" aria-live="polite">
+                      Form is being submitted, please wait.
+                    </p>
+                  )}
                 </form>
               </div>
             </FadeInWhenVisible>
@@ -310,17 +387,22 @@ export default function ContactPage() {
                           </svg>
                           <span className="text-gray-text">{info.address}</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-start">
                           <svg className="w-1.5 h-1.5 text-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
-                          <span className="text-gray-text">{info.phone}</span>
+                          <div className="text-gray-text">
+                            <a href={`tel:${info.phone.replace(/\s+/g, '')}`} className="underline block">{info.phone}</a>
+                            {info.phone2 && (
+                              <a href={`tel:${info.phone2.replace(/\s+/g, '')}`} className="underline block">{info.phone2}</a>
+                            )}
+                          </div>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-1.5 h-1.5 text-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
-                          <span className="text-gray-text">{info.email}</span>
+                          <a href={`mailto:${info.email}`} className="text-gray-text underline">{info.email}</a>
                         </div>
                       </div>
                     </div>

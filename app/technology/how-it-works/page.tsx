@@ -1,31 +1,58 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
 import ScrollTriggeredDiagram from '@/components/animations/ScrollTriggeredDiagram';
+
+export const metadata: Metadata = {
+  title: 'How KPP Works',
+  description: 'Discover how the Kinetic Power Plant (KPP) technology works - from air injection to energy conversion. Learn the science behind fuel-free, 24/7 power generation.',
+  keywords: 'how KPP works, kinetic power plant process, fuel-free energy generation, KPP technology explanation, renewable energy science, continuous power generation',
+  openGraph: {
+    title: 'How KPP Works - The Science Behind Fuel-Free Power Generation',
+    description: 'Discover how the Kinetic Power Plant (KPP) technology works - from air injection to energy conversion. Learn the science behind fuel-free, 24/7 power generation.',
+    url: 'https://deepengineering.co/technology/how-it-works',
+    images: [
+      {
+        url: '/how-kpp-works-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'How KPP Technology Works',
+      },
+    ],
+  },
+  twitter: {
+    title: 'How KPP Works - The Science Behind Fuel-Free Power Generation',
+    description: 'Discover how the Kinetic Power Plant (KPP) technology works - from air injection to energy conversion. Learn the science behind fuel-free, 24/7 power generation.',
+  },
+  alternates: {
+    canonical: '/technology/how-it-works',
+  },
+};
 
 const processSteps = [
   {
     step: '01',
     title: 'Air Injection',
     description: 'Air is injected into underwater floaters, causing them to rise due to buoyancy forces.',
-    icon: '💨'
+    icon: <span role="img" aria-label="Air Injection">💨</span>
   },
   {
     step: '02',
     title: 'Buoyancy-Driven Motion',
     description: 'The rising floaters drive a chain system that converts vertical motion into rotational energy.',
-    icon: '⬆️'
+    icon: <span role="img" aria-label="Buoyancy-Driven Motion">⬆️</span>
   },
   {
     step: '03',
     title: 'Energy Conversion',
     description: 'Rotational energy turns a generator to produce clean electrical power.',
-    icon: '⚡'
+    icon: <span role="img" aria-label="Energy Conversion">⚡</span>
   },
   {
     step: '04',
     title: 'Air Release & Cycle',
     description: 'At the top, air is released and the floater sinks back down to repeat the cycle continuously.',
-    icon: '🔄'
+    icon: <span role="img" aria-label="Air Release and Cycle">🔄</span>
   }
 ];
 
@@ -33,22 +60,22 @@ const keyAdvantages = [
   {
     title: 'No Fuel Required',
     description: 'Operates entirely on kinetic energy, eliminating fuel costs and supply chain dependencies.',
-    icon: '🚫⛽'
+    icon: <span role="img" aria-label="No Fuel Required">🚫⛽</span>
   },
   {
     title: 'Weather Independent',
     description: 'Unlike solar or wind, KPP technology works continuously regardless of weather conditions.',
-    icon: '🌤️'
+    icon: <span role="img" aria-label="Weather Independent">🌤️</span>
   },
   {
     title: 'Zero Emissions',
     description: 'Clean energy generation with no CO2, NOx, or particulate emissions.',
-    icon: '🌱'
+    icon: <span role="img" aria-label="Zero Emissions">🌱</span>
   },
   {
     title: 'Baseload Capability',
     description: 'Provides reliable 24/7 power generation to meet continuous energy demands.',
-    icon: '📈'
+    icon: <span role="img" aria-label="Baseload Capability">📈</span>
   }
 ];
 
@@ -59,8 +86,8 @@ export default function HowItWorksPage() {
       <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">How KPP Technology Works</h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <h1 className="mb-6 text-white drop-shadow-md">How KPP Works</h1>
+            <p className="text-xl text-white leading-relaxed">
               Discover the innovative physics and engineering behind the Kinetic Power Plant 
               technology that's revolutionizing energy generation.
             </p>
@@ -140,7 +167,7 @@ export default function HowItWorksPage() {
             {keyAdvantages.map((advantage, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="flex items-start">
-                  <div className="text-lg mr-4">{advantage.icon}</div>
+                  <div className="text-4xl mr-4">{advantage.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">{advantage.title}</h3>
                     <p className="text-gray-text">{advantage.description}</p>
@@ -182,7 +209,7 @@ export default function HowItWorksPage() {
         <div className="container">
           <div className="text-center mb-8">
             <h2 className="mb-4">Explore Further</h2>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+            <p className="text-xl text-white max-w-3xl mx-auto">
               Learn more about KPP components and performance specifications.
             </p>
           </div>

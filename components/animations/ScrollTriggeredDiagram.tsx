@@ -14,7 +14,7 @@ interface ScrollTriggeredDiagramProps {
     step: string;
     title: string;
     description: string;
-    icon: string;
+    icon: string | React.ReactNode;
   }>;
 }
 

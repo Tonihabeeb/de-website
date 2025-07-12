@@ -1,19 +1,79 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
 import { getTeamMembers } from '@/utils/sanity-data';
 import { urlForImage } from '@/lib/sanity';
+import { Fragment } from 'react';
+import Head from 'next/head';
+
+export const metadata: Metadata = {
+  title: 'Our Team',
+  description: 'Meet the Deep Engineering team - 35+ professionals across mechanical, electrical, SCADA, and finance disciplines. Discover the experts driving Iraq\'s renewable energy future.',
+  keywords: 'Deep Engineering team, Iraq renewable energy experts, KPP specialists, clean energy professionals, sustainable power team Iraq',
+  openGraph: {
+    title: 'Deep Engineering Team - Renewable Energy Experts in Iraq',
+    description: 'Meet the Deep Engineering team - 35+ professionals across mechanical, electrical, SCADA, and finance disciplines. Discover the experts driving Iraq\'s renewable energy future.',
+    url: 'https://deepengineering.co/team',
+    images: [
+      {
+        url: '/team-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Deep Engineering Team Members',
+      },
+    ],
+  },
+  twitter: {
+    title: 'Deep Engineering Team - Renewable Energy Experts in Iraq',
+    description: 'Meet the Deep Engineering team - 35+ professionals across mechanical, electrical, SCADA, and finance disciplines. Discover the experts driving Iraq\'s renewable energy future.',
+  },
+  alternates: {
+    canonical: '/team',
+  },
+};
+
+const teamStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'John Doe',
+    jobTitle: 'CEO',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Deep Engineering',
+    },
+    image: 'https://deepengineering.co/team/john-doe.jpg',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Jane Smith',
+    jobTitle: 'CTO',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Deep Engineering',
+    },
+    image: 'https://deepengineering.co/team/jane-smith.jpg',
+  },
+  // Add more team members as needed
+];
 
 export default async function TeamPage() {
-  // Fetch team members from Sanity CMS
   const teamMembers = await getTeamMembers();
-
   return (
-    <div>
+    <Fragment>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(teamStructuredData) }}
+        />
+      </Head>
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">Meet Our Team</h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <h1 className="mb-6 text-white drop-shadow-md">Meet Our Team</h1>
+            <p className="text-xl text-white leading-relaxed">
               Our multidisciplinary team of 35+ professionals brings together expertise 
               in mechanical, electrical, SCADA, and finance to drive Iraq's clean energy future.
             </p>
@@ -39,10 +99,13 @@ export default async function TeamPage() {
                   {/* Profile Image */}
                   {member.image ? (
                     <div className="w-32 h-32 mx-auto mb-4">
-                      <img 
+                      <Image 
                         src={urlForImage(member.image).url()} 
-                        alt={member.name}
+                        alt={`Photo of ${member.name}, ${member.role}`}
+                        width={128}
+                        height={128}
                         className="w-full h-full object-cover rounded-full"
+                        priority={false}
                       />
                     </div>
                   ) : (
@@ -159,7 +222,7 @@ export default async function TeamPage() {
       <section className="section-padding bg-primary text-white">
         <div className="container text-center">
           <h2 className="mb-4">Join Our Mission</h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
             We're always looking for passionate professionals who share our vision for 
             a sustainable energy future. Join us in revolutionizing Iraq's energy landscape.
           </p>
@@ -171,6 +234,6 @@ export default async function TeamPage() {
           </Link>
         </div>
       </section>
-    </div>
+    </Fragment>
   );
 } 

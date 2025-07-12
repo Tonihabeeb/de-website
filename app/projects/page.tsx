@@ -1,19 +1,86 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
 import { getProjects } from '@/utils/sanity-data';
 import { urlForImage } from '@/lib/sanity';
+import { Fragment } from 'react';
+import Head from 'next/head';
+
+export const metadata: Metadata = {
+  title: 'Our Projects',
+  description: 'Explore Deep Engineering\'s renewable energy projects across Iraq. From the 90 MW Samawah project to 300 MW in Kurdistan Region, discover our commitment to sustainable power development.',
+  keywords: 'Deep Engineering projects, Iraq renewable energy projects, KPP power plants, Samawah project, Kurdistan energy projects, clean energy development Iraq',
+  openGraph: {
+    title: 'Deep Engineering Projects - Renewable Energy Development in Iraq',
+    description: 'Explore Deep Engineering\'s renewable energy projects across Iraq. From the 90 MW Samawah project to 300 MW in Kurdistan Region, discover our commitment to sustainable power development.',
+    url: 'https://deepengineering.co/projects',
+    images: [
+      {
+        url: '/projects-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Deep Engineering Renewable Energy Projects',
+      },
+    ],
+  },
+  twitter: {
+    title: 'Deep Engineering Projects - Renewable Energy Development in Iraq',
+    description: 'Explore Deep Engineering\'s renewable energy projects across Iraq. From the 90 MW Samawah project to 300 MW in Kurdistan Region, discover our commitment to sustainable power development.',
+  },
+  alternates: {
+    canonical: '/projects',
+  },
+};
+
+const projectsStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Project',
+    name: 'Samawah KPP Project',
+    description: '90 MW kinetic power plant project in Samawah, Iraq, in partnership with the Ministry of Electricity.',
+    location: {
+      '@type': 'Place',
+      name: 'Samawah, Iraq',
+    },
+    sponsor: {
+      '@type': 'Organization',
+      name: 'Deep Engineering',
+    },
+    status: 'In progress',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Project',
+    name: 'Kurdistan Region KPP Projects',
+    description: '300 MW of kinetic power plant projects planned in the Kurdistan Region (Zakho, Soran, Raparin, Garmian).',
+    location: {
+      '@type': 'Place',
+      name: 'Kurdistan Region, Iraq',
+    },
+    sponsor: {
+      '@type': 'Organization',
+      name: 'Deep Engineering',
+    },
+    status: 'Planned',
+  },
+];
 
 export default async function ProjectsPage() {
-  // Fetch projects from Sanity CMS
   const projects = await getProjects();
-
   return (
-    <div>
+    <Fragment>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsStructuredData) }}
+        />
+      </Head>
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">Our Projects</h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <h1 className="mb-6 text-white drop-shadow-md">Our Projects</h1>
+            <p className="text-xl text-white leading-relaxed">
               Deep Engineering is currently developing 390 MW of KPP projects across Iraq 
               to deliver clean energy where it's needed most.
             </p>
@@ -38,10 +105,13 @@ export default async function ProjectsPage() {
                 <div key={project._id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
                   {project.image && (
                     <div className="mb-4">
-                      <img 
+                      <Image 
                         src={urlForImage(project.image).url()} 
                         alt={project.name}
+                        width={600}
+                        height={192}
                         className="w-full h-48 object-cover rounded-lg"
+                        priority={false}
                       />
                     </div>
                   )}
@@ -132,7 +202,7 @@ export default async function ProjectsPage() {
       <section className="section-padding bg-primary text-white">
         <div className="container text-center">
           <h2 className="mb-4">Interested in Our Projects?</h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
             Whether you're looking to partner with us, invest in clean energy, or learn more 
             about our technology, we'd love to hear from you.
           </p>
@@ -144,6 +214,6 @@ export default async function ProjectsPage() {
           </Link>
         </div>
       </section>
-    </div>
+    </Fragment>
   );
 } 

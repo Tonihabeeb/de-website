@@ -7,7 +7,7 @@ interface ProcessStep {
   step: string;
   title: string;
   description: string;
-  icon: string;
+  icon: string | React.ReactNode;
 }
 
 interface ProcessDiagramProps {
@@ -86,10 +86,12 @@ export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
             
             {/* Icon */}
             <motion.div 
-              className="text-xs mb-4"
+              className="text-4xl mb-4"
               initial={{ rotate: 0 }}
               animate={isInView ? { rotate: 360 } : { rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.5 + index * 0.2 }}
+              role="img"
+              aria-label={step.title + ' icon'}
             >
               {step.icon}
             </motion.div>

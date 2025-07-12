@@ -1,12 +1,39 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { getTechSections } from '@/utils/sanity-data';
+
+export const metadata: Metadata = {
+  title: 'KPP Technology',
+  description: 'Discover the revolutionary Kinetic Power Plant (KPP) technology - fuel-free, emissions-free power generation that works 24/7. Learn how KPP provides continuous clean energy anywhere.',
+  keywords: 'KPP technology, kinetic power plant, fuel-free energy, emissions-free power, 24/7 renewable energy, continuous power generation, clean energy technology',
+  openGraph: {
+    title: 'KPP Technology - Revolutionary Fuel-Free Power Generation',
+    description: 'Discover the revolutionary Kinetic Power Plant (KPP) technology - fuel-free, emissions-free power generation that works 24/7. Learn how KPP provides continuous clean energy anywhere.',
+    url: 'https://deepengineering.co/technology',
+    images: [
+      {
+        url: '/technology-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'KPP Technology - Kinetic Power Plant',
+      },
+    ],
+  },
+  twitter: {
+    title: 'KPP Technology - Revolutionary Fuel-Free Power Generation',
+    description: 'Discover the revolutionary Kinetic Power Plant (KPP) technology - fuel-free, emissions-free power generation that works 24/7. Learn how KPP provides continuous clean energy anywhere.',
+  },
+  alternates: {
+    canonical: '/technology',
+  },
+};
 
 const technologyFeatures = [
   {
     title: 'Clean Power',
     description: 'Operates without any fuel, water, wind or solar input – generating electricity with zero emissions (no CO₂, NOx, or other pollutants).',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
       </svg>
     )
@@ -15,7 +42,7 @@ const technologyFeatures = [
     title: 'Continuous Power',
     description: 'Provides stable baseload power 24/7, independent of weather conditions, with built-in redundancy ensuring near 100% uptime.',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     )
@@ -24,7 +51,7 @@ const technologyFeatures = [
     title: 'Decentralized',
     description: 'Can be installed at the point of need – even off-grid locations – reducing transmission losses.',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
@@ -34,7 +61,7 @@ const technologyFeatures = [
     title: 'Scalable',
     description: 'Modular design allows capacity from a few megawatts to 100+ MW by paralleling units. Start with what you need and expand easily.',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
       </svg>
     )
@@ -43,7 +70,7 @@ const technologyFeatures = [
     title: 'Small Footprint',
     description: 'Requires far less land than solar or wind: ~300 m² per MW (vs. thousands for other sources).',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
     )
@@ -52,7 +79,7 @@ const technologyFeatures = [
     title: 'Competitive',
     description: 'Projected levelized cost ~€25/MWh – delivering affordable energy along with grid stability benefits.',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     )
@@ -91,8 +118,8 @@ export default async function TechnologyPage() {
       <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">KPP Technology</h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <h1 className="mb-6 text-white drop-shadow-md">Kinetic Power Plant (KPP) Technology</h1>
+            <p className="text-xl text-white leading-relaxed">
               The revolutionary Kinetic Power Plant (KPP) technology delivers continuous, 
               clean energy without fuel dependency or weather constraints.
             </p>
@@ -172,7 +199,7 @@ export default async function TechnologyPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {technologyFeatures.map((feature, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center text-white mb-4">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mb-4">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-primary mb-3">{feature.title}</h3>
@@ -214,7 +241,7 @@ export default async function TechnologyPage() {
       <section className="section-padding bg-primary text-white">
         <div className="container text-center">
           <h2 className="mb-4">Ready to Learn More?</h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
             Discover how KPP technology works and explore its components and performance 
             specifications in detail.
           </p>

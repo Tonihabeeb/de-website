@@ -19,8 +19,8 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FadeInWhenVisible delay={0.1}>
               <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-                <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <BoltIcon className="w-2 h-2 text-white" />
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BoltIcon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Clean Power</h3>
                 <p className="text-gray-text">No fuel or emissions – 100% green energy.</p>
@@ -29,18 +29,18 @@ export default async function Home() {
             
             <FadeInWhenVisible delay={0.2}>
               <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-                <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <ClockIcon className="w-2 h-2 text-white" />
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <ClockIcon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Continuous 24/7</h3>
-                <p className="text-gray-text">Uninterrupted baseload power, day and night.</p>
+                <p className="text-gray-text">Uninterrupted baseload power.</p>
               </div>
             </FadeInWhenVisible>
             
             <FadeInWhenVisible delay={0.3}>
               <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-                <div className="w-4 h-4 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPinIcon className="w-2 h-2 text-white" />
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MapPinIcon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Decentralized</h3>
                 <p className="text-gray-text">Installable at the point of need, even off-grid.</p>

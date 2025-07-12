@@ -1,4 +1,31 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'KPP Components',
+  description: 'Explore the key components of the Kinetic Power Plant (KPP) technology. From floaters and chains to generators and control systems - discover the engineering behind fuel-free power.',
+  keywords: 'KPP components, kinetic power plant parts, fuel-free energy components, renewable energy technology parts, KPP engineering, power generation components',
+  openGraph: {
+    title: 'KPP Components - The Engineering Behind Fuel-Free Power',
+    description: 'Explore the key components of the Kinetic Power Plant (KPP) technology. From floaters and chains to generators and control systems - discover the engineering behind fuel-free power.',
+    url: 'https://deepengineering.co/technology/components',
+    images: [
+      {
+        url: '/kpp-components-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'KPP Technology Components',
+      },
+    ],
+  },
+  twitter: {
+    title: 'KPP Components - The Engineering Behind Fuel-Free Power',
+    description: 'Explore the key components of the Kinetic Power Plant (KPP) technology. From floaters and chains to generators and control systems - discover the engineering behind fuel-free power.',
+  },
+  alternates: {
+    canonical: '/technology/components',
+  },
+};
 
 const components = [
   {
@@ -77,7 +104,7 @@ export default function ComponentsPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="mb-6">KPP Components</h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <p className="text-xl text-white leading-relaxed">
               Explore the sophisticated components that make up a KPP power plant, 
               each designed for maximum efficiency and reliability.
             </p>
@@ -100,7 +127,7 @@ export default function ComponentsPage() {
             {components.map((component, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="flex items-start mb-4">
-                  <div className="text-[16px] mr-4">{component.icon}</div>
+                  <div className="text-4xl mr-4" role="img" aria-label={component.name + ' icon'}>{component.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-2">{component.name}</h3>
                     <p className="text-gray-text mb-4">{component.description}</p>
@@ -163,7 +190,7 @@ export default function ComponentsPage() {
               <div key={index} className="bg-gray-light rounded-lg p-6 text-center">
                 <div className="w-full h-48 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center mb-4">
                   <div className="text-white text-center">
-                    <div className="text-[16px] mb-2">{component.icon}</div>
+                    <div className="text-4xl mb-2" role="img" aria-label={component.name + ' icon'}>{component.icon}</div>
                     <p className="text-sm font-semibold">{component.name}</p>
                   </div>
                 </div>

@@ -1,4 +1,31 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description: 'Learn about Deep Engineering, Iraq\'s pioneer in renewable energy project development. Founded in 2019, we\'re the exclusive KPP licensee bringing world-class kinetic power plant technology to Iraq.',
+  keywords: 'about Deep Engineering, Iraq renewable energy, KPP licensee, kinetic power plant, clean energy company, sustainable power Iraq',
+  openGraph: {
+    title: 'About Deep Engineering - Iraq\'s Renewable Energy Pioneer',
+    description: 'Learn about Deep Engineering, Iraq\'s pioneer in renewable energy project development. Founded in 2019, we\'re the exclusive KPP licensee bringing world-class kinetic power plant technology to Iraq.',
+    url: 'https://deepengineering.co/about',
+    images: [
+      {
+        url: '/about-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Deep Engineering Team and Mission',
+      },
+    ],
+  },
+  twitter: {
+    title: 'About Deep Engineering - Iraq\'s Renewable Energy Pioneer',
+    description: 'Learn about Deep Engineering, Iraq\'s pioneer in renewable energy project development. Founded in 2019, we\'re the exclusive KPP licensee bringing world-class kinetic power plant technology to Iraq.',
+  },
+  alternates: {
+    canonical: '/about',
+  },
+};
 
 export default function AboutPage() {
   return (
@@ -7,8 +34,8 @@ export default function AboutPage() {
       <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">About Deep Engineering</h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <h1 className="mb-6 text-white drop-shadow-md">About Deep Engineering</h1>
+            <p className="text-xl text-white leading-relaxed">
               Iraq's pioneer in renewable energy project development, turning innovative 
               technology into sustainable power solutions for a brighter future.
             </p>
@@ -138,7 +165,7 @@ export default function AboutPage() {
       <section className="section-padding bg-primary text-white">
         <div className="container text-center">
           <h2 className="mb-4">Join Our Team</h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
             We're always looking for passionate professionals who share our vision for 
             a sustainable energy future.
           </p>

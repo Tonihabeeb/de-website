@@ -5,7 +5,6 @@ const footerNavigation = {
     { name: 'About', href: '/about' },
     { name: 'Team', href: '/team' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Style Guide', href: '/style-guide' },
   ],
   technology: [
     { name: 'KPP Overview', href: '/technology' },
@@ -21,76 +20,77 @@ const footerNavigation = {
 };
 
 export default function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="bg-primary text-white">
+    <footer className="bg-primary text-white" role="contentinfo">
       <div className="container section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <h3 className="text-2xl font-serif font-semibold mb-4">Deep Engineering</h3>
-            <p className="text-gray-300 mb-4 max-w-md">
+            <h3 className="text-2xl font-serif font-semibold mb-4 text-white drop-shadow-lg">Deep Engineering</h3>
+            <p className="text-white mb-4 max-w-md drop-shadow-lg">
               Iraq's pioneer in renewable energy project development, turning innovative 
               technology into sustainable power solutions.
             </p>
-            <div className="space-y-2 text-sm text-gray-300">
-              <p>📍 Erbil, Iraq (HQ)</p>
-              <p>📍 Basra, Iraq (Branch)</p>
-              <p>📧 info@deepengineering.co</p>
-            </div>
+            <address className="space-y-2 text-sm text-white not-italic drop-shadow-lg">
+              <p>📍 Roya Tower A 1-14, Erbil-44001, Iraq (HQ)</p>
+              <p>📍 Al Muhendisen - Al Zubair Road, Basra, Iraq (Branch)</p>
+              <p>📧 <a href="mailto:info@deepengineering.co" className="underline">info@deepengineering.co</a></p>
+            </address>
           </div>
 
           {/* Technology Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Technology</h4>
+          <nav aria-label="Technology navigation">
+            <h4 className="font-semibold mb-4 text-white drop-shadow-lg">Technology</h4>
             <ul className="space-y-2">
               {footerNavigation.technology.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-200"
+                    className="text-white hover:text-white transition-colors duration-200 drop-shadow-lg"
                   >
                     {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Projects Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Projects</h4>
+          <nav aria-label="Projects navigation">
+            <h4 className="font-semibold mb-4 text-white drop-shadow-lg">Projects</h4>
             <ul className="space-y-2">
               {footerNavigation.projects.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-200"
+                    className="text-white hover:text-white transition-colors duration-200 drop-shadow-lg"
                   >
                     {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-300 text-sm">
-              © 2024 Deep Engineering. All rights reserved.
+            <p className="text-white text-sm drop-shadow-lg">
+              © {year} Deep Engineering. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <nav className="flex space-x-6 mt-4 md:mt-0" aria-label="Company navigation">
               {footerNavigation.company.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                  className="text-white hover:text-white transition-colors duration-200 text-sm drop-shadow-lg"
                 >
                   {item.name}
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
         </div>
       </div>

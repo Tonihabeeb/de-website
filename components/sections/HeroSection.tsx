@@ -63,7 +63,7 @@ export default function HeroSection() {
         <div className="max-w-4xl mx-auto">
           {/* Main Tagline */}
           <motion.h1 
-            className="text-hero lg:text-hero-lg font-serif font-bold mb-6 leading-tight"
+            className="text-hero lg:text-hero-lg font-serif font-bold mb-6 leading-tight text-white drop-shadow-md"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -73,7 +73,7 @@ export default function HeroSection() {
           
           {/* Subtagline */}
           <motion.p 
-            className="text-xl lg:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl lg:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -126,9 +126,9 @@ export default function HeroSection() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="text-2xl font-bold mb-2">
-                <AnimatedCounter end={390} suffix=" MW" />
+                <span className="drop-shadow-sm"><AnimatedCounter end={390} suffix=" MW" /></span>
               </div>
-              <div className="text-gray-300">Planned Capacity</div>
+              <div className="text-white drop-shadow-sm">Planned Capacity</div>
             </motion.div>
             <motion.div 
               className="text-center"
@@ -136,7 +136,7 @@ export default function HeroSection() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="text-2xl font-bold mb-2">24/7</div>
-              <div className="text-gray-300">Continuous Power</div>
+              <div className="text-white drop-shadow-sm">Continuous Power</div>
             </motion.div>
             <motion.div 
               className="text-center"
@@ -144,9 +144,9 @@ export default function HeroSection() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="text-2xl font-bold mb-2">
-                <AnimatedCounter end={0} />
+                <span className="drop-shadow-sm"><AnimatedCounter end={0} /></span>
               </div>
-              <div className="text-gray-300">Emissions</div>
+              <div className="text-white drop-shadow-sm">Emissions</div>
             </motion.div>
           </motion.div>
         </div>

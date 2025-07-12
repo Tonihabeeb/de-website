@@ -1,4 +1,31 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'KPP Performance & Specifications',
+  description: 'Explore the performance metrics and technical specifications of the Kinetic Power Plant (KPP) technology. Discover efficiency, capacity, environmental impact, and operational data.',
+  keywords: 'KPP performance, kinetic power plant specifications, fuel-free energy efficiency, renewable energy metrics, KPP technical data, power generation performance',
+  openGraph: {
+    title: 'KPP Performance & Specifications - Technical Excellence in Renewable Energy',
+    description: 'Explore the performance metrics and technical specifications of the Kinetic Power Plant (KPP) technology. Discover efficiency, capacity, environmental impact, and operational data.',
+    url: 'https://deepengineering.co/technology/performance',
+    images: [
+      {
+        url: '/kpp-performance-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'KPP Performance and Specifications',
+      },
+    ],
+  },
+  twitter: {
+    title: 'KPP Performance & Specifications - Technical Excellence in Renewable Energy',
+    description: 'Explore the performance metrics and technical specifications of the Kinetic Power Plant (KPP) technology. Discover efficiency, capacity, environmental impact, and operational data.',
+  },
+  alternates: {
+    canonical: '/technology/performance',
+  },
+};
 
 const performanceMetrics = [
   {
@@ -104,7 +131,7 @@ export default function PerformancePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="mb-6">Performance & Specifications</h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
+            <p className="text-xl text-white leading-relaxed">
               Detailed performance data, efficiency metrics, and environmental impact 
               analysis of KPP technology.
             </p>
@@ -201,7 +228,7 @@ export default function PerformancePage() {
             {environmentalBenefits.map((benefit, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="flex items-start">
-                  <div className="text-[16px] mr-4">{benefit.icon}</div>
+                  <div className="text-4xl mr-4">{benefit.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-3">{benefit.title}</h3>
                     <p className="text-gray-text mb-3">{benefit.description}</p>
@@ -311,7 +338,7 @@ export default function PerformancePage() {
         <div className="container">
           <div className="text-center mb-8">
             <h2 className="mb-4">Explore Technology</h2>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+            <p className="text-xl text-white max-w-3xl mx-auto">
               Learn more about how KPP technology works and explore its components.
             </p>
           </div>
