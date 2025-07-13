@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
@@ -27,7 +27,24 @@ const navigation = [
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [technologyDropdownOpen, setTechnologyDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        setTechnologyDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50" role="navigation" aria-label="Main navigation">
@@ -43,11 +60,11 @@ export default function Navbar() {
             {navigation.map((item) => (
               <li key={item.name} role="none" className="relative">
                 {item.submenu ? (
-                  <div className="relative">
+                  <div className="relative" ref={dropdownRef}>
                     <button
+                      ref={buttonRef}
                       onClick={() => setTechnologyDropdownOpen(!technologyDropdownOpen)}
                       onMouseEnter={() => setTechnologyDropdownOpen(true)}
-                      onMouseLeave={() => setTechnologyDropdownOpen(false)}
                       className="flex items-center space-x-1 text-gray-text hover:text-primary transition-colors duration-200 font-medium"
                       aria-expanded={technologyDropdownOpen}
                       aria-haspopup="true"
