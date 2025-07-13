@@ -11,6 +11,7 @@ const footerNavigation = {
     { name: 'Technical Specifications', href: '/technology/specifications' },
     { name: 'Economics', href: '/economics' },
     { name: 'Resources', href: '/resources' },
+    { name: 'Interactive Features', href: '/interactive-features' },
     { name: 'How It Works', href: '/technology/how-it-works' },
     { name: 'Components', href: '/technology/components' },
     { name: 'Performance', href: '/technology/performance' },

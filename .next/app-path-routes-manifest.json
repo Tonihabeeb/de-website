@@ -1,0 +1,20 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/cms-test/page": "/cms-test",
+  "/page": "/",
+  "/offline/page": "/offline",
+  "/contact/page": "/contact",
+  "/test/page": "/test",
+  "/style-guide/page": "/style-guide",
+  "/interactive-features/page": "/interactive-features",
+  "/about/page": "/about",
+  "/projects/page": "/projects",
+  "/economics/page": "/economics",
+  "/resources/page": "/resources",
+  "/technology/components/page": "/technology/components",
+  "/technology/page": "/technology",
+  "/team/page": "/team",
+  "/technology/performance/page": "/technology/performance",
+  "/technology/specifications/page": "/technology/specifications",
+  "/technology/how-it-works/page": "/technology/how-it-works"
+}

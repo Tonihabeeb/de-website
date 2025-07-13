@@ -5,6 +5,9 @@ import Footer from '@/components/layout/Footer'
 import HydrationSuppressor from '@/components/HydrationSuppressor'
 import BrowserExtensionHandler from '@/components/BrowserExtensionHandler'
 import PerformanceOptimizer from '@/components/PerformanceOptimizer'
+import MobileOptimizer from '@/components/MobileOptimizer'
+import MobileNavigation from '@/components/layout/MobileNavigation'
+import PWARegistration from '@/components/PWARegistration'
 
 export const metadata: Metadata = {
   title: {
@@ -80,6 +83,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2150FE" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Deep Engineering" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -130,6 +139,9 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <BrowserExtensionHandler />
+        <MobileOptimizer />
+        <MobileNavigation />
+        <PWARegistration />
         <PerformanceOptimizer>
           <HydrationSuppressor>
             {/* Skip to main content link for accessibility */}

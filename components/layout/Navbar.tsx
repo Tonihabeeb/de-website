@@ -17,6 +17,7 @@ const navigation = [
       { name: 'Technical Specifications', href: '/technology/specifications' },
       { name: 'Economics', href: '/economics' },
       { name: 'Resources', href: '/resources' },
+      { name: 'Interactive Features', href: '/interactive-features' },
     ]
   },
   { name: 'Projects', href: '/projects' },
