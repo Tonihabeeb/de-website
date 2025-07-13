@@ -10,7 +10,14 @@ const nextConfig = {
     // number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 2,
   },
-  
+
+  // Static export configuration for cPanel
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+
   // Experimental features for better hydration handling
   experimental: {
     // Note: suppressHydrationWarning is not a valid experimental option

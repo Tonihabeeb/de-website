@@ -79,6 +79,192 @@ export default defineType({
       title: 'Timeline',
       type: 'string',
     }),
+    // Enhanced fields for detailed project information
+    defineField({
+      name: 'constructionTimeline',
+      title: 'Construction Timeline',
+      type: 'object',
+      fields: [
+        {
+          name: 'startDate',
+          title: 'Start Date',
+          type: 'date',
+        },
+        {
+          name: 'expectedCompletion',
+          title: 'Expected Completion',
+          type: 'date',
+        },
+        {
+          name: 'currentPhase',
+          title: 'Current Phase',
+          type: 'string',
+        },
+        {
+          name: 'progressPercentage',
+          title: 'Progress (%)',
+          type: 'number',
+          validation: (Rule) => Rule.min(0).max(100),
+        },
+      ],
+    }),
+    defineField({
+      name: 'siteDetails',
+      title: 'Site Details',
+      type: 'object',
+      fields: [
+        {
+          name: 'coordinates',
+          title: 'Coordinates',
+          type: 'string',
+        },
+        {
+          name: 'landArea',
+          title: 'Land Area (hectares)',
+          type: 'number',
+        },
+        {
+          name: 'gridConnection',
+          title: 'Grid Connection Point',
+          type: 'string',
+        },
+        {
+          name: 'accessibility',
+          title: 'Accessibility',
+          type: 'text',
+          rows: 2,
+        },
+      ],
+    }),
+    defineField({
+      name: 'ppaInformation',
+      title: 'Power Purchase Agreement (PPA)',
+      type: 'object',
+      fields: [
+        {
+          name: 'status',
+          title: 'PPA Status',
+          type: 'string',
+          options: {
+            list: [
+              {title: 'Signed', value: 'signed'},
+              {title: 'Under Negotiation', value: 'under-negotiation'},
+              {title: 'Pending', value: 'pending'},
+            ],
+          },
+        },
+        {
+          name: 'counterparty',
+          title: 'Counterparty',
+          type: 'string',
+        },
+        {
+          name: 'duration',
+          title: 'Duration (years)',
+          type: 'number',
+        },
+        {
+          name: 'tariff',
+          title: 'Tariff ($/MWh)',
+          type: 'number',
+        },
+      ],
+    }),
+    defineField({
+      name: 'governmentEndorsements',
+      title: 'Government Endorsements',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'ministry',
+              title: 'Ministry',
+              type: 'string',
+            },
+            {
+              name: 'endorsementType',
+              title: 'Endorsement Type',
+              type: 'string',
+            },
+            {
+              name: 'date',
+              title: 'Date',
+              type: 'date',
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 2,
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: 'localImpact',
+      title: 'Local Impact',
+      type: 'object',
+      fields: [
+        {
+          name: 'jobsCreated',
+          title: 'Jobs Created',
+          type: 'number',
+        },
+        {
+          name: 'localProcurement',
+          title: 'Local Procurement (%)',
+          type: 'number',
+        },
+        {
+          name: 'communityBenefits',
+          title: 'Community Benefits',
+          type: 'array',
+          of: [{type: 'string'}],
+        },
+        {
+          name: 'environmentalImpact',
+          title: 'Environmental Impact',
+          type: 'text',
+          rows: 3,
+        },
+      ],
+    }),
+    defineField({
+      name: 'progressUpdates',
+      title: 'Progress Updates',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'date',
+              title: 'Update Date',
+              type: 'date',
+            },
+            {
+              name: 'title',
+              title: 'Update Title',
+              type: 'string',
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3,
+            },
+            {
+              name: 'image',
+              title: 'Update Image',
+              type: 'image',
+            },
+          ],
+        },
+      ],
+    }),
     defineField({
       name: 'image',
       title: 'Project Image',
@@ -86,6 +272,19 @@ export default defineType({
       options: {
         hotspot: true,
       },
+    }),
+    defineField({
+      name: 'gallery',
+      title: 'Project Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+        },
+      ],
     }),
     defineField({
       name: 'publishedAt',

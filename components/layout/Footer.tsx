@@ -8,6 +8,9 @@ const footerNavigation = {
   ],
   technology: [
     { name: 'KPP Overview', href: '/technology' },
+    { name: 'Technical Specifications', href: '/technology/specifications' },
+    { name: 'Economics', href: '/economics' },
+    { name: 'Resources', href: '/resources' },
     { name: 'How It Works', href: '/technology/how-it-works' },
     { name: 'Components', href: '/technology/components' },
     { name: 'Performance', href: '/technology/performance' },
@@ -23,7 +26,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-primary text-white" role="contentinfo">
-      <div className="container section-padding">
+      <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
@@ -74,7 +77,6 @@ export default function Footer() {
           </nav>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-white text-sm drop-shadow-lg">

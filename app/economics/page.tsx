@@ -1,0 +1,355 @@
+import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Economic Analysis - Deep Engineering',
+  description: 'Comprehensive economic analysis of KPP technology including LCOE comparisons, ROI projections, fuel savings calculations, and investment opportunities.',
+  keywords: 'economic analysis, LCOE, ROI, fuel savings, investment opportunities, cost comparison, renewable energy economics',
+};
+
+const costComparison = [
+  {
+    technology: 'KPP Technology',
+    lcoe: '€25/MWh',
+    fuelCost: '€0/MWh',
+    oamCost: '€7/MWh',
+    capitalCost: '€1,200/kW',
+    color: 'bg-green-500'
+  },
+  {
+    technology: 'Diesel Generators',
+    lcoe: '€180/MWh',
+    fuelCost: '€150/MWh',
+    oamCost: '€30/MWh',
+    capitalCost: '€800/kW',
+    color: 'bg-red-500'
+  },
+  {
+    technology: 'Solar PV',
+    lcoe: '€45/MWh',
+    fuelCost: '€0/MWh',
+    oamCost: '€15/MWh',
+    capitalCost: '€1,000/kW',
+    color: 'bg-yellow-500'
+  },
+  {
+    technology: 'Natural Gas',
+    lcoe: '€80/MWh',
+    fuelCost: '€60/MWh',
+    oamCost: '€20/MWh',
+    capitalCost: '€1,100/kW',
+    color: 'bg-orange-500'
+  }
+];
+
+const savingsData = [
+  { year: 1, savings: 155, cumulative: 155 },
+  { year: 2, savings: 155, cumulative: 310 },
+  { year: 3, savings: 155, cumulative: 465 },
+  { year: 4, savings: 155, cumulative: 620 },
+  { year: 5, savings: 155, cumulative: 775 },
+  { year: 6, savings: 155, cumulative: 930 },
+  { year: 7, savings: 155, cumulative: 1085 },
+  { year: 8, savings: 155, cumulative: 1240 },
+  { year: 9, savings: 155, cumulative: 1395 },
+  { year: 10, savings: 155, cumulative: 1550 }
+];
+
+const investmentOpportunities = [
+  {
+    title: 'Zakho 100MW Project',
+    location: 'Duhok Governorate',
+    investment: '€120M',
+    returns: '15-20%',
+    timeline: '24 months',
+    status: 'Open for Investment'
+  },
+  {
+    title: 'Soran 100MW Project',
+    location: 'Erbil Governorate',
+    investment: '€120M',
+    returns: '15-20%',
+    timeline: '24 months',
+    status: 'Open for Investment'
+  },
+  {
+    title: 'Raparin 50MW Project',
+    location: 'Sulaymaniyah Governorate',
+    investment: '€60M',
+    returns: '18-22%',
+    timeline: '18 months',
+    status: 'Under Development'
+  },
+  {
+    title: 'Garmian 50MW Project',
+    location: 'Sulaymaniyah Governorate',
+    investment: '€60M',
+    returns: '15-20%',
+    timeline: '24 months',
+    status: 'Open for Investment'
+  }
+];
+
+export default function EconomicsPage() {
+  return (
+    <div>
+      {/* Hero Section */}
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
+        <div className="container">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="mb-6 text-white drop-shadow-md">Economic Analysis</h1>
+            <p className="text-xl text-white leading-relaxed">
+              Comprehensive economic analysis demonstrating KPP technology's superior cost-effectiveness, 
+              impressive ROI, and significant fuel savings compared to traditional energy sources.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* LCOE Comparison */}
+      <section className="section-padding bg-white">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="mb-4">Levelized Cost of Energy (LCOE) Comparison</h2>
+            <p className="text-lg text-gray-text max-w-3xl mx-auto">
+              KPP technology delivers the lowest levelized cost of energy among all power generation 
+              technologies, making it the most economically viable solution for Iraq's energy needs.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gray-light rounded-lg p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Cost Comparison Table */}
+                <div>
+                  <h3 className="text-xl font-semibold text-primary mb-6">Cost Breakdown</h3>
+                  <div className="space-y-4">
+                    {costComparison.map((tech, index) => (
+                      <div key={index} className="bg-white rounded-lg p-4 border border-gray-200">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-semibold text-gray-800">{tech.technology}</h4>
+                          <div className={`w-4 h-4 rounded-full ${tech.color}`}></div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <span className="text-gray-600">LCOE:</span>
+                            <span className="font-semibold text-primary ml-2">{tech.lcoe}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">Fuel Cost:</span>
+                            <span className="font-semibold text-gray-800 ml-2">{tech.fuelCost}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">O&M Cost:</span>
+                            <span className="font-semibold text-gray-800 ml-2">{tech.oamCost}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">Capital Cost:</span>
+                            <span className="font-semibold text-gray-800 ml-2">{tech.capitalCost}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Visual Comparison */}
+                <div>
+                  <h3 className="text-xl font-semibold text-primary mb-6">Cost Comparison</h3>
+                  <div className="space-y-4">
+                    {costComparison.map((tech, index) => {
+                      const lcoeValue = parseInt(tech.lcoe.replace('€', '').replace('/MWh', ''));
+                      const maxLCOE = 180; // Diesel cost
+                      const percentage = (lcoeValue / maxLCOE) * 100;
+                      
+                      return (
+                        <div key={index} className="bg-white rounded-lg p-4 border border-gray-200">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium text-gray-800">{tech.technology}</span>
+                            <span className="font-bold text-primary">{tech.lcoe}</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-3">
+                            <div 
+                              className={`h-3 rounded-full ${tech.color} transition-all duration-1000`}
+                              style={{ width: `${percentage}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Fuel Savings Calculator */}
+      <section className="section-padding bg-gray-light">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="mb-4">Fuel Savings Analysis</h2>
+            <p className="text-lg text-gray-text max-w-3xl mx-auto">
+              Calculate the significant fuel savings achieved by replacing diesel generators with KPP technology. 
+              Based on a 100MW power plant operating 24/7.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="bg-primary text-white p-6">
+                <h3 className="text-xl font-semibold">Annual Fuel Savings: €155 Million</h3>
+                <p className="text-white/90">100MW KPP vs Diesel Generator Comparison</p>
+              </div>
+              <div className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">€155M</div>
+                    <div className="text-sm text-gray-600">Annual Savings</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-600 mb-2">85%</div>
+                    <div className="text-sm text-gray-600">Cost Reduction</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-blue-600 mb-2">0</div>
+                    <div className="text-sm text-gray-600">Fuel Required</div>
+                  </div>
+                </div>
+
+                {/* Cumulative Savings Chart */}
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-4">Cumulative Savings Over 10 Years</h4>
+                  <div className="space-y-2">
+                    {savingsData.map((data, index) => (
+                      <div key={index} className="flex items-center gap-4">
+                        <span className="w-16 text-sm text-gray-600">Year {data.year}</span>
+                        <div className="flex-1 bg-gray-200 rounded-full h-4">
+                          <div 
+                            className="bg-primary h-4 rounded-full transition-all duration-1000"
+                            style={{ width: `${(data.cumulative / 1550) * 100}%` }}
+                          ></div>
+                        </div>
+                        <span className="w-24 text-sm font-semibold text-primary">€{data.cumulative}M</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ROI Projections */}
+      <section className="section-padding bg-white">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="mb-4">Return on Investment (ROI) Analysis</h2>
+            <p className="text-lg text-gray-text max-w-3xl mx-auto">
+              KPP technology offers exceptional returns on investment with rapid payback periods 
+              and long-term profitability projections.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-gray-light rounded-lg p-6 text-center">
+                <div className="text-4xl font-bold text-primary mb-2">3-4 Years</div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Payback Period</h3>
+                <p className="text-sm text-gray-600">Time to recover initial investment</p>
+              </div>
+              <div className="bg-gray-light rounded-lg p-6 text-center">
+                <div className="text-4xl font-bold text-green-600 mb-2">15-25%</div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Annual ROI</h3>
+                <p className="text-sm text-gray-600">Return on investment rate</p>
+              </div>
+              <div className="bg-gray-light rounded-lg p-6 text-center">
+                <div className="text-4xl font-bold text-blue-600 mb-2">25+ Years</div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Service Life</h3>
+                <p className="text-sm text-gray-600">Extended operational lifetime</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Investment Opportunities */}
+      <section className="section-padding bg-gray-light">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="mb-4">Investment Opportunities</h2>
+            <p className="text-lg text-gray-text max-w-3xl mx-auto">
+              Join Deep Engineering in developing Iraq's renewable energy infrastructure. 
+              Multiple investment opportunities available across different project phases.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {investmentOpportunities.map((opportunity, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-semibold text-primary">{opportunity.title}</h3>
+                    <span className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full">
+                      {opportunity.status}
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-3 mb-4">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Location:</span>
+                      <span className="font-medium">{opportunity.location}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Investment:</span>
+                      <span className="font-bold text-primary">{opportunity.investment}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Expected Returns:</span>
+                      <span className="font-bold text-green-600">{opportunity.returns}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Timeline:</span>
+                      <span className="font-medium">{opportunity.timeline}</span>
+                    </div>
+                  </div>
+                  
+                  <button className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors">
+                    Learn More
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding bg-primary text-white">
+        <div className="container text-center">
+          <h2 className="mb-4">Ready to Invest in Clean Energy?</h2>
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
+            Join us in transforming Iraq's energy landscape with profitable, sustainable, 
+            and environmentally responsible power generation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/contact"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200"
+            >
+              Contact Investment Team
+            </Link>
+            <Link 
+              href="/projects"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200"
+            >
+              View Projects
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+} 

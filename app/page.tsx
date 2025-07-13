@@ -1,4 +1,4 @@
-import HeroSection from '@/components/sections/HeroSection';
+import EnhancedHeroSection from '@/components/sections/EnhancedHeroSection';
 import MiniAbout from '@/components/sections/MiniAbout';
 import MiniProjects from '@/components/sections/MiniProjects';
 import CTABanner from '@/components/sections/CTABanner';
@@ -8,7 +8,7 @@ import { BoltIcon, ClockIcon, MapPinIcon } from '@heroicons/react/24/outline';
 export default async function Home() {
   return (
     <div>
-      <HeroSection />
+      <EnhancedHeroSection />
       
       {/* Features Grid Section */}
       <section className="section-padding bg-gray-light">

@@ -5,6 +5,7 @@ import { getProjects } from '@/utils/sanity-data';
 import { urlForImage } from '@/lib/sanity';
 import { Fragment } from 'react';
 import Head from 'next/head';
+import ProjectMap from '@/components/maps/ProjectMap';
 
 export const metadata: Metadata = {
   title: 'Our Projects',
@@ -174,27 +175,18 @@ export default async function ProjectsPage() {
         </div>
       </section>
 
-      {/* Project Map Placeholder */}
+      {/* Interactive Project Map */}
       <section className="section-padding bg-gray-light">
         <div className="container">
           <div className="text-center mb-8">
             <h2 className="mb-4">Project Locations</h2>
             <p className="text-lg text-gray-text">
-              Our projects are strategically located across Iraq to maximize impact and accessibility.
+              Our projects are strategically located across Iraq to maximize impact and accessibility. 
+              Click on any project marker to view detailed information.
             </p>
           </div>
           
-          <div className="bg-white rounded-lg p-8 text-center">
-            <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center">
-              <div className="text-white text-center">
-                <svg className="w-1.5 h-1.5 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3" />
-                </svg>
-                <p className="text-lg font-semibold">Interactive Project Map</p>
-                <p className="text-sm opacity-90">Coming Soon</p>
-              </div>
-            </div>
-          </div>
+          <ProjectMap />
         </div>
       </section>
 

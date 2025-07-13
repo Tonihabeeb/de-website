@@ -31,6 +31,8 @@ export default function HeroSection() {
         ))}
       </div>
 
+
+
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div

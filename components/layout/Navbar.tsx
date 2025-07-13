@@ -2,14 +2,23 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
-  { name: 'Technology', href: '/technology' },
+  { 
+    name: 'Technology', 
+    href: '/technology',
+    submenu: [
+      { name: 'Overview', href: '/technology' },
+      { name: 'Technical Specifications', href: '/technology/specifications' },
+      { name: 'Economics', href: '/economics' },
+      { name: 'Resources', href: '/resources' },
+    ]
+  },
   { name: 'Projects', href: '/projects' },
   { name: 'Team', href: '/team' },
   { name: 'Contact', href: '/contact' },
@@ -17,6 +26,7 @@ const navigation = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [technologyDropdownOpen, setTechnologyDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -31,19 +41,52 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <ul className="hidden md:flex items-center space-x-8" role="menubar">
             {navigation.map((item) => (
-              <li key={item.name} role="none">
-                <Link
-                key={item.name}
-                href={item.href}
-                role="menuitem"
-                aria-current={pathname === item.href ? 'page' : undefined}
-                className={
-                  `text-gray-text hover:text-primary transition-colors duration-200 font-medium` +
-                  (pathname === item.href ? ' text-primary font-bold underline' : '')
-                }
-              >
-                {item.name}
-              </Link>
+              <li key={item.name} role="none" className="relative">
+                {item.submenu ? (
+                  <div className="relative">
+                    <button
+                      onClick={() => setTechnologyDropdownOpen(!technologyDropdownOpen)}
+                      onMouseEnter={() => setTechnologyDropdownOpen(true)}
+                      onMouseLeave={() => setTechnologyDropdownOpen(false)}
+                      className="flex items-center space-x-1 text-gray-text hover:text-primary transition-colors duration-200 font-medium"
+                      aria-expanded={technologyDropdownOpen}
+                      aria-haspopup="true"
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDownIcon className="w-4 h-4" />
+                    </button>
+                    
+                    {technologyDropdownOpen && (
+                      <div 
+                        className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2"
+                        onMouseEnter={() => setTechnologyDropdownOpen(true)}
+                        onMouseLeave={() => setTechnologyDropdownOpen(false)}
+                      >
+                        {item.submenu.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className="block px-4 py-2 text-gray-text hover:text-primary hover:bg-gray-50 transition-colors duration-200"
+                            onClick={() => setTechnologyDropdownOpen(false)}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href={item.href}
+                    role="menuitem"
+                    aria-current={pathname === item.href ? 'page' : undefined}
+                    className={`text-gray-text hover:text-primary transition-colors duration-200 font-medium ${
+                      pathname === item.href ? 'text-primary font-bold underline' : ''
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -71,16 +114,34 @@ export default function Navbar() {
             <ul className="px-2 pt-2 pb-3 space-y-1" role="menu">
               {navigation.map((item) => (
                 <li key={item.name} role="none">
-                  <Link
-                  key={item.name}
-                  href={item.href}
-                  role="menuitem"
-                  aria-current={pathname === item.href ? 'page' : undefined}
-                  className="block px-3 py-2 text-gray-text hover:text-primary transition-colors duration-200 font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                  {item.submenu ? (
+                    <div>
+                      <div className="px-3 py-2 text-gray-text font-medium">{item.name}</div>
+                      <ul className="pl-4 space-y-1">
+                        {item.submenu.map((subItem) => (
+                          <li key={subItem.name}>
+                            <Link
+                              href={subItem.href}
+                              className="block px-3 py-2 text-gray-text hover:text-primary transition-colors duration-200 text-sm"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {subItem.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      role="menuitem"
+                      aria-current={pathname === item.href ? 'page' : undefined}
+                      className="block px-3 py-2 text-gray-text hover:text-primary transition-colors duration-200 font-medium"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

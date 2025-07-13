@@ -127,6 +127,8 @@ export default async function TechnologyPage() {
         </div>
       </section>
 
+
+
       {/* Technology Overview */}
       <section className="section-padding bg-white">
         <div className="container">
