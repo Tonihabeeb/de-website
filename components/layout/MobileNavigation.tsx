@@ -124,6 +124,7 @@ export default function MobileNavigation() {
                         className={`w-full flex items-center justify-between p-4 rounded-lg transition-colors duration-200 touch-target min-w-[44px] min-h-[44px] ${
                           isActive(item.href) ? 'bg-primary text-white' : 'hover:bg-gray-100'
                         }`}
+                        aria-label={`Expand/collapse ${item.label} submenu`}
                       >
                         <div className="flex items-center">
                           <span className="text-xl mr-3">{item.icon}</span>
@@ -180,7 +181,7 @@ export default function MobileNavigation() {
           <div className="p-4 border-t border-gray-200">
             <div className="text-center">
               <p className="text-sm text-gray-600 mb-2">Deep Engineering</p>
-              <p className="text-xs text-gray-500">KPP Technology Solutions</p>
+              <p className="text-xs text-gray-600">KPP Technology Solutions</p>
             </div>
           </div>
         </div>

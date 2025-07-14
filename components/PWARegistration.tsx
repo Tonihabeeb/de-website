@@ -88,13 +88,14 @@ export default function PWARegistration() {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-base font-medium text-gray-900">Install Deep Engineering</h3>
-              <p className="text-base text-gray-500 mt-1">
+              <p className="text-base text-gray-600 mt-1">
                 Add to your home screen for quick access and offline features.
               </p>
             </div>
             <button
               onClick={handleDismissInstall}
               className="flex-shrink-0 text-gray-400 hover:text-gray-600 touch-target min-w-[44px] min-h-[44px]"
+              aria-label="Dismiss install prompt"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

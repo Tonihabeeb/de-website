@@ -263,7 +263,7 @@ export default function KPPDiagram({ className = '' }: KPPDiagramProps) {
         </AnimatePresence>
 
         {/* Instructions */}
-        <div className="mt-4 text-center text-base text-gray-500">
+        <div className="mt-4 text-center text-base text-gray-600">
           <p>Hover over components to see labels • Click for detailed information</p>
         </div>
       </div>

@@ -99,6 +99,7 @@ export default function Navbar() {
                       className="flex items-center space-x-1 text-gray-text hover:text-primary transition-colors duration-200 font-medium"
                       aria-expanded={item.name === 'Technology' ? technologyDropdownOpen : teamDropdownOpen}
                       aria-haspopup="true"
+                      aria-label={`Toggle ${item.name} menu`}
                     >
                       <span>{item.name}</span>
                       <ChevronDownIcon className="w-4 h-4" />

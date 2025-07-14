@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'KPP Components',
@@ -111,6 +112,8 @@ export default function ComponentsPage() {
           </div>
         </div>
       </section>
+
+      <div className="container"><Breadcrumbs /></div>
 
       {/* Components Overview */}
       <section className="section-padding bg-white">
@@ -296,6 +299,23 @@ export default function ComponentsPage() {
             >
               Performance Data
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Links Section */}
+      <section className="section-padding bg-gray-100 border-t border-gray-200">
+        <div className="container">
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-semibold text-primary mb-2">Related Links</h2>
+            <p className="text-base text-gray-600">Explore more about KPP technology and related topics:</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/technology" className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Technology Overview</Link>
+            <Link href="/technology/how-it-works" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">How It Works</Link>
+            <Link href="/technology/performance" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">Performance & Specs</Link>
+            <Link href="/technology/specifications" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">Technical Specifications</Link>
+            <Link href="/technology/animation-demo" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">Interactive Diagrams</Link>
           </div>
         </div>
       </section>

@@ -72,7 +72,7 @@ export default async function ProjectsPage() {
     <Fragment>
       <StructuredData data={projectsStructuredData} />
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white" aria-label="Projects overview">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="mb-6 text-white drop-shadow-md">Our Projects</h1>
@@ -85,7 +85,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* Projects Overview */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-white" aria-label="Project portfolio">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="mb-4">Project Portfolio</h2>
@@ -158,7 +158,7 @@ export default async function ProjectsPage() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="text-gray-400 mb-4">
+              <div className="text-gray-600 mb-4">
                 <svg className="w-1.5 h-1.5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
@@ -171,7 +171,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* Interactive Project Map */}
-      <section className="section-padding bg-gray-light">
+      <section className="section-padding bg-gray-light" aria-label="Project locations">
         <div className="container">
           <div className="text-center mb-8">
             <h2 className="mb-4">Project Locations</h2>
@@ -186,7 +186,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-primary text-white">
+      <section className="section-padding bg-primary text-white" aria-label="Contact call to action">
         <div className="container text-center">
           <h2 className="mb-4">Interested in Our Projects?</h2>
           <p className="text-xl text-white mb-8 max-w-3xl mx-auto">

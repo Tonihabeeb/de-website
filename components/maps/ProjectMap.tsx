@@ -211,7 +211,8 @@ export default function ProjectMap() {
                 <h3 className="text-lg font-semibold text-primary">{selectedProject.name}</h3>
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  className="text-gray-600 hover:text-gray-700 transition-colors"
+                  aria-label="Close project details"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

@@ -211,7 +211,7 @@ export default function ProjectTracker() {
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === tab.id
                 ? 'border-primary text-primary'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                : 'border-transparent text-gray-600 hover:text-gray-700'
             }`}
           >
             {tab.label}
@@ -252,7 +252,7 @@ export default function ProjectTracker() {
                 <div key={update.id} className="p-3 bg-white rounded-lg border border-gray-200">
                   <div className="flex justify-between items-start mb-1">
                     <span className="font-medium text-gray-800">{update.title}</span>
-                    <span className="text-xs text-gray-500">{new Date(update.date).toLocaleDateString()}</span>
+                    <span className="text-xs text-gray-600">{new Date(update.date).toLocaleDateString()}</span>
                   </div>
                   <p className="text-sm text-gray-600">{update.description}</p>
                 </div>
@@ -274,7 +274,7 @@ export default function ProjectTracker() {
               <div className="flex-1">
                 <div className="flex justify-between items-start mb-2">
                   <h4 className="font-semibold text-gray-800">{milestone.title}</h4>
-                  <span className="text-sm text-gray-500">{new Date(milestone.date).toLocaleDateString()}</span>
+                  <span className="text-sm text-gray-600">{new Date(milestone.date).toLocaleDateString()}</span>
                 </div>
                 <p className="text-gray-600 text-sm">{milestone.description}</p>
                 {milestone.completed && (
@@ -294,7 +294,7 @@ export default function ProjectTracker() {
             <div key={update.id} className="p-4 bg-white rounded-lg border border-gray-200">
               <div className="flex justify-between items-start mb-2">
                 <h4 className="font-semibold text-gray-800">{update.title}</h4>
-                <span className="text-sm text-gray-500">{new Date(update.date).toLocaleDateString()}</span>
+                <span className="text-sm text-gray-600">{new Date(update.date).toLocaleDateString()}</span>
               </div>
               <p className="text-gray-600 mb-2">{update.description}</p>
               <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${

@@ -20,12 +20,12 @@ export default async function CMSTestPage() {
                   <li key={project._id} className="border-b pb-2">
                     <h3 className="font-medium">{project.name}</h3>
                     <p className="text-base text-gray-600">{project.location}</p>
-                    <p className="text-base text-gray-500">Status: {project.status}</p>
+                    <p className="text-base text-gray-600">Status: {project.status}</p>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-gray-500">No projects found. Add some in Sanity Studio!</p>
+              <p className="text-gray-600">No projects found. Add some in Sanity Studio!</p>
             )}
           </div>
 
@@ -38,12 +38,12 @@ export default async function CMSTestPage() {
                   <li key={member._id} className="border-b pb-2">
                     <h3 className="font-medium">{member.name}</h3>
                     <p className="text-base text-gray-600">{member.role}</p>
-                    <p className="text-base text-gray-500">{member.expertise}</p>
+                    <p className="text-base text-gray-600">{member.expertise}</p>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-gray-500">No team members found. Add some in Sanity Studio!</p>
+              <p className="text-gray-600">No team members found. Add some in Sanity Studio!</p>
             )}
           </div>
         </div>

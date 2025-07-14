@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Careers at Deep Engineering - Join Our Team',
@@ -173,6 +175,8 @@ export default function CareersPage() {
         </div>
       </section>
 
+      <div className="container"><Breadcrumbs /></div>
+
       {/* Company Culture */}
       <section className="section-padding bg-white">
         <div className="container">
@@ -342,6 +346,22 @@ export default function CareersPage() {
             >
               Meet Our Team
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Links Section */}
+      <section className="section-padding bg-gray-100 border-t border-gray-200">
+        <div className="container">
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-semibold text-primary mb-2">Related Links</h2>
+            <p className="text-base text-gray-600">Explore more about Deep Engineering and our team:</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/team" className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Meet the Team</Link>
+            <Link href="/about" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">About Deep Engineering</Link>
+            <Link href="/projects" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">Our Projects</Link>
+            <Link href="/contact" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">Contact Us</Link>
           </div>
         </div>
       </section>

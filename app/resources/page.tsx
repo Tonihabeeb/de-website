@@ -141,8 +141,8 @@ export default function ResourcesPage() {
                   <p className="text-base text-gray-600 mb-4">{resource.description}</p>
                   
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-base text-gray-500">{resource.format} • {resource.size}</span>
-                    <span className="text-base text-gray-500">{resource.downloads} downloads</span>
+                    <span className="text-base text-gray-600">{resource.format} • {resource.size}</span>
+                    <span className="text-base text-gray-600">{resource.downloads} downloads</span>
                   </div>
                   
                   <button className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]">
@@ -189,7 +189,7 @@ export default function ResourcesPage() {
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-800 mb-1">{resource.name}</h4>
                             <p className="text-base text-gray-600 mb-2">{resource.description}</p>
-                            <span className="text-base text-gray-500">{resource.format} • {resource.size}</span>
+                            <span className="text-base text-gray-600">{resource.format} • {resource.size}</span>
                           </div>
                           <button className="ml-4 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors text-sm min-w-[44px] min-h-[44px]">
                             Download
@@ -226,7 +226,7 @@ export default function ResourcesPage() {
                   Subscribe
                 </button>
               </div>
-              <p className="text-base text-gray-500 mt-2">
+              <p className="text-base text-gray-600 mt-2">
                 We respect your privacy. Unsubscribe at any time.
               </p>
             </div>

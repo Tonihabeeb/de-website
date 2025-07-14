@@ -266,7 +266,7 @@ export default function MobileTestingChecklist({ className = '' }: MobileTesting
         <h3 className="text-lg font-semibold text-gray-800">Mobile Testing</h3>
         <button
           onClick={() => setIsVisible(false)}
-          className="text-gray-400 hover:text-gray-600"
+          className="text-gray-600 hover:text-gray-700"
         >
           ✕
         </button>
@@ -306,7 +306,7 @@ export default function MobileTestingChecklist({ className = '' }: MobileTesting
                 <h4 className="font-medium text-gray-800">{test.name}</h4>
                 <p className="text-sm text-gray-600 mt-1">{test.description}</p>
                 {test.details && (
-                  <p className="text-xs text-gray-500 mt-1">{test.details}</p>
+                  <p className="text-xs text-gray-600 mt-1">{test.details}</p>
                 )}
               </div>
             </div>

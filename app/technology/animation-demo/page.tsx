@@ -4,6 +4,7 @@ import KPPDiagram from '@/components/technical/KPPDiagram';
 import KPPAnimation from '@/components/animations/KPPAnimation';
 import KPPAnimationBlueprint from '@/components/animations/KPPAnimationBlueprint';
 import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'KPP Interactive Diagrams & Animations',
@@ -46,6 +47,8 @@ export default function AnimationDemoPage() {
           </div>
         </div>
       </section>
+
+      <div className="container"><Breadcrumbs /></div>
 
       {/* System Overview Diagram */}
       <section className="section-padding bg-white">
@@ -184,6 +187,23 @@ export default function AnimationDemoPage() {
                 Interactive Features
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Links Section */}
+      <section className="section-padding bg-gray-100 border-t border-gray-200">
+        <div className="container">
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-semibold text-primary mb-2">Related Links</h2>
+            <p className="text-base text-gray-600">Explore more about KPP technology and related topics:</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/technology" className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">Technology Overview</Link>
+            <Link href="/technology/how-it-works" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">How It Works</Link>
+            <Link href="/technology/components" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">KPP Components</Link>
+            <Link href="/technology/performance" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">Performance & Specs</Link>
+            <Link href="/technology/specifications" className="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors">Technical Specifications</Link>
           </div>
         </div>
       </section>

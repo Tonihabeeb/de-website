@@ -115,144 +115,124 @@ export default async function TechnologyPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white" aria-label="Technology overview">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">Kinetic Power Plant (KPP) Technology</h1>
+            <h1 className="mb-6 text-white drop-shadow-md">KPP Technology</h1>
             <p className="text-xl text-white leading-relaxed">
-              The revolutionary Kinetic Power Plant (KPP) technology delivers continuous, 
-              clean energy without fuel dependency or weather constraints.
+              Discover the revolutionary Kinetic Power Plant technology that's transforming 
+              energy generation with zero emissions and continuous operation.
             </p>
           </div>
         </div>
       </section>
 
-
-
-      {/* Technology Overview */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-white" aria-label="Technology overview content">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="mb-6">Revolutionary Energy Technology</h2>
-              {overviewSection ? (
-                <div className="prose prose-lg text-gray-text">
-                  {/* Render CMS content here when available */}
-                  <p className="text-lg text-gray-text mb-6 leading-relaxed">
-                    KPP technology represents a breakthrough in renewable energy generation. 
-                    Unlike solar or wind power, KPP plants operate continuously, providing 
-                    reliable baseload electricity 24 hours a day, 365 days a year.
-                  </p>
-                  <p className="text-lg text-gray-text mb-6 leading-relaxed">
-                    Developed by Rosch Innovations in Germany, this patented technology 
-                    harnesses kinetic energy through an innovative mechanical system that 
-                    generates electricity without combustion, fuel consumption, or harmful emissions.
-                  </p>
-                  <p className="text-lg text-gray-text leading-relaxed">
-                    As the exclusive KPP licensee for Iraq, Deep Engineering is bringing 
-                    this world-class technology to deliver clean, continuous power where 
-                    it's needed most.
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <p className="text-lg text-gray-text mb-6 leading-relaxed">
-                    KPP technology represents a breakthrough in renewable energy generation. 
-                    Unlike solar or wind power, KPP plants operate continuously, providing 
-                    reliable baseload electricity 24 hours a day, 365 days a year.
-                  </p>
-                  <p className="text-lg text-gray-text mb-6 leading-relaxed">
-                    Developed by Rosch Innovations in Germany, this patented technology 
-                    harnesses kinetic energy through an innovative mechanical system that 
-                    generates electricity without combustion, fuel consumption, or harmful emissions.
-                  </p>
-                  <p className="text-lg text-gray-text leading-relaxed">
-                    As the exclusive KPP licensee for Iraq, Deep Engineering is bringing 
-                    this world-class technology to deliver clean, continuous power where 
-                    it's needed most.
-                  </p>
-                </>
-              )}
-            </div>
-            <div className="bg-gray-light rounded-lg p-8 text-center">
-              <div className="flex items-center justify-center h-32">
-                <svg className="w-4 h-4 text-primary mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+              <h2 className="mb-6">Revolutionary Energy Generation</h2>
+              <p className="text-lg text-gray-text mb-6">
+                The Kinetic Power Plant (KPP) represents a breakthrough in renewable energy technology. 
+                By harnessing the principles of kinetic energy and advanced engineering, KPP systems 
+                generate clean, continuous power without the limitations of traditional renewable sources.
+              </p>
+              <p className="text-gray-text mb-6">
+                Our technology operates 24/7, requires no fuel, produces zero emissions, and can be 
+                deployed anywhere - from urban centers to remote locations. This makes KPP the ideal 
+                solution for Iraq's energy needs and global sustainability goals.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link 
+                  href="/technology/how-it-works"
+                  className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center"
+                >
+                  How It Works
+                </Link>
+                <Link 
+                  href="/technology/specifications"
+                  className="border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors duration-200 text-center"
+                >
+                  Technical Specs
+                </Link>
               </div>
-              <p className="text-lg font-semibold mt-2">KPP Power Plant</p>
-              <p className="text-sm opacity-90">Continuous Clean Energy</p>
+            </div>
+            <div className="relative">
+              <KPPDiagram />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Technology Features Grid */}
-      <section className="section-padding bg-gray-light">
+      <section className="section-padding bg-gray-light" aria-label="Key advantages">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="mb-4">Why KPP Technology?</h2>
+            <h2 className="mb-4">Why Choose KPP Technology?</h2>
             <p className="text-lg text-gray-text max-w-3xl mx-auto">
-              KPP technology offers unprecedented advantages over traditional and 
-              renewable energy sources, making it the ideal solution for Iraq's energy needs.
+              KPP technology offers unparalleled advantages over traditional energy sources, 
+              making it the ideal choice for sustainable power generation.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {advantages.map((advantage, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl text-white">{advantage.icon}</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{advantage.title}</h3>
+                <p className="text-gray-text">{advantage.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-white" aria-label="Technology components">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="mb-4">System Components</h2>
+            <p className="text-lg text-gray-text max-w-3xl mx-auto">
+              KPP systems consist of carefully engineered components that work together to 
+              generate clean, reliable power efficiently.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {technologyFeatures.map((feature, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mb-4">
-                  {feature.icon}
+            {components.map((component, index) => (
+              <div key={index} className="bg-gray-light p-6 rounded-lg">
+                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-white font-bold">{component.icon}</span>
                 </div>
-                <h3 className="text-xl font-semibold text-primary mb-3">{feature.title}</h3>
-                <p className="text-gray-text">{feature.description}</p>
+                <h3 className="text-lg font-semibold mb-2">{component.name}</h3>
+                <p className="text-gray-text">{component.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Technology Sections Navigation */}
-      <section className="section-padding bg-white">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="mb-4">Explore KPP Technology</h2>
-            <p className="text-lg text-gray-text max-w-3xl mx-auto">
-              Dive deeper into the technology that's revolutionizing energy generation 
-              in Iraq and beyond.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {technologySections.map((section, index) => (
-              <Link 
-                key={index}
-                href={section.href}
-                className="block bg-gray-light p-8 rounded-lg hover:shadow-lg transition-shadow text-center"
-              >
-                <div className="text-[16px] mb-4">{section.icon}</div>
-                <h3 className="text-xl font-semibold text-primary mb-3">{section.title}</h3>
-                <p className="text-gray-text">{section.description}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding bg-primary text-white">
+      <section className="section-padding bg-primary text-white" aria-label="Call to action">
         <div className="container text-center">
-          <h2 className="mb-4">Ready to Learn More?</h2>
+          <h2 className="mb-4">Ready to Explore KPP Technology?</h2>
           <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
-            Discover how KPP technology works and explore its components and performance 
-            specifications in detail.
+            Dive deeper into the science, specifications, and applications of our revolutionary 
+            Kinetic Power Plant technology.
           </p>
-          <Link 
-            href="/technology/how-it-works"
-            className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200"
-          >
-            How It Works
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/technology/how-it-works"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200"
+            >
+              Learn How It Works
+            </Link>
+            <Link 
+              href="/technology/specifications"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200"
+            >
+              View Specifications
+            </Link>
+          </div>
         </div>
       </section>
     </div>
