@@ -134,18 +134,18 @@ export default function ResourcesPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
-                    <span className="text-sm bg-primary text-white px-2 py-1 rounded">Featured</span>
+                    <span className="text-base bg-primary text-white px-2 py-1 rounded">Featured</span>
                   </div>
                   
                   <h3 className="text-lg font-semibold text-primary mb-2">{resource.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{resource.description}</p>
+                  <p className="text-base text-gray-600 mb-4">{resource.description}</p>
                   
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-xs text-gray-500">{resource.format} • {resource.size}</span>
-                    <span className="text-xs text-gray-500">{resource.downloads} downloads</span>
+                    <span className="text-base text-gray-500">{resource.format} • {resource.size}</span>
+                    <span className="text-base text-gray-500">{resource.downloads} downloads</span>
                   </div>
                   
-                  <button className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors">
+                  <button className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]">
                     Download
                   </button>
                 </div>
@@ -188,10 +188,10 @@ export default function ResourcesPage() {
                         <div key={resourceIndex} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-800 mb-1">{resource.name}</h4>
-                            <p className="text-sm text-gray-600 mb-2">{resource.description}</p>
-                            <span className="text-xs text-gray-500">{resource.format} • {resource.size}</span>
+                            <p className="text-base text-gray-600 mb-2">{resource.description}</p>
+                            <span className="text-base text-gray-500">{resource.format} • {resource.size}</span>
                           </div>
-                          <button className="ml-4 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors text-sm">
+                          <button className="ml-4 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors text-sm min-w-[44px] min-h-[44px]">
                             Download
                           </button>
                         </div>
@@ -222,11 +222,11 @@ export default function ResourcesPage() {
                   placeholder="Enter your email address"
                   className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
-                <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors">
+                <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]">
                   Subscribe
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-base text-gray-500 mt-2">
                 We respect your privacy. Unsubscribe at any time.
               </p>
             </div>
@@ -273,13 +273,13 @@ export default function ResourcesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/technology"
-              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center"
             >
               Explore Technology
             </Link>
             <Link 
               href="/projects"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center"
             >
               View Projects
             </Link>

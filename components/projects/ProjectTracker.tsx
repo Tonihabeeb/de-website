@@ -144,7 +144,7 @@ export default function ProjectTracker() {
           <button
             key={project.id}
             onClick={() => setSelectedProject(project)}
-            className={`p-4 rounded-lg border-2 transition-all duration-200 touch-target ${
+            className={`p-4 rounded-lg border-2 transition-all duration-200 touch-target min-w-[44px] min-h-[44px] ${
               selectedProject.id === project.id
                 ? 'border-primary bg-primary/5'
                 : 'border-gray-200 hover:border-primary/50'

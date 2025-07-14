@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { getTeamMembers } from '@/utils/sanity-data';
 import { urlForImage } from '@/lib/sanity';
 import { Fragment } from 'react';
-import Head from 'next/head';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Our Team',
@@ -62,12 +62,7 @@ export default async function TeamPage() {
   const teamMembers = await getTeamMembers();
   return (
     <Fragment>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(teamStructuredData) }}
-        />
-      </Head>
+      <StructuredData data={teamStructuredData} />
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
         <div className="container">
@@ -100,7 +95,7 @@ export default async function TeamPage() {
                   {member.image ? (
                     <div className="w-32 h-32 mx-auto mb-4">
                       <Image 
-                        src={urlForImage(member.image).url()} 
+                        src={member.image} 
                         alt={`Photo of ${member.name}, ${member.role}`}
                         width={128}
                         height={128}
@@ -114,14 +109,14 @@ export default async function TeamPage() {
                         <svg className="w-1.5 h-1.5 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <p className="text-xs opacity-90">Photo</p>
+                        <p className="text-base opacity-90">Photo</p>
                       </div>
                     </div>
                   )}
                   
                   <h3 className="text-xl font-semibold text-primary mb-2">{member.name}</h3>
                   <p className="text-accent-warm font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-text text-sm mb-4">{member.bio}</p>
+                  <p className="text-gray-text text-base mb-4">{member.bio}</p>
                   
                   {member.expertise && (
                     <div className="text-xs text-gray-text">
@@ -165,11 +160,11 @@ export default async function TeamPage() {
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-xl font-bold text-primary mb-2">35+</div>
-                  <div className="text-sm text-gray-text">Team Members</div>
+                  <div className="text-base text-gray-text">Team Members</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl font-bold text-primary mb-2">4</div>
-                  <div className="text-sm text-gray-text">Disciplines</div>
+                  <div className="text-base text-gray-text">Disciplines</div>
                 </div>
               </div>
             </div>
@@ -185,7 +180,7 @@ export default async function TeamPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Innovation</h4>
-                    <p className="text-sm text-gray-text">Embracing cutting-edge technology and creative solutions.</p>
+                    <p className="text-base text-gray-text">Embracing cutting-edge technology and creative solutions.</p>
                   </div>
                 </div>
                 
@@ -197,7 +192,7 @@ export default async function TeamPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Collaboration</h4>
-                    <p className="text-sm text-gray-text">Working together to achieve common goals and shared success.</p>
+                    <p className="text-base text-gray-text">Working together to achieve common goals and shared success.</p>
                   </div>
                 </div>
                 
@@ -209,7 +204,7 @@ export default async function TeamPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Sustainability</h4>
-                    <p className="text-sm text-gray-text">Committed to environmental responsibility and long-term impact.</p>
+                    <p className="text-base text-gray-text">Committed to environmental responsibility and long-term impact.</p>
                   </div>
                 </div>
               </div>

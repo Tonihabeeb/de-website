@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { getProjects } from '@/utils/sanity-data';
 import { urlForImage } from '@/lib/sanity';
 import { Fragment } from 'react';
-import Head from 'next/head';
+import StructuredData from '@/components/StructuredData';
 import ProjectMap from '@/components/maps/ProjectMap';
 
 export const metadata: Metadata = {
@@ -70,12 +70,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects();
   return (
     <Fragment>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsStructuredData) }}
-        />
-      </Head>
+      <StructuredData data={projectsStructuredData} />
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
         <div className="container">
@@ -107,7 +102,7 @@ export default async function ProjectsPage() {
                   {project.image && (
                     <div className="mb-4">
                       <Image 
-                        src={urlForImage(project.image).url()} 
+                        src={project.image} 
                         alt={project.name}
                         width={600}
                         height={192}
@@ -119,26 +114,26 @@ export default async function ProjectsPage() {
                   
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-2xl font-semibold text-primary">{project.name}</h3>
-                    <span className="text-sm bg-primary text-white px-3 py-1 rounded">
+                    <span className="text-base bg-primary text-white px-3 py-1 rounded">
                       {project.capacityMW} MW
                     </span>
                   </div>
                   
                   <div className="space-y-3 mb-4">
-                    <p className="text-sm text-gray-text">
+                    <p className="text-base text-gray-text">
                       <span className="font-medium">Location:</span> {project.location}
                     </p>
-                    <p className="text-sm text-gray-text">
+                    <p className="text-base text-gray-text">
                       <span className="font-medium">Status:</span> 
                       <span className="text-accent-warm ml-1">{project.status}</span>
                     </p>
                     {project.type && (
-                      <p className="text-sm text-gray-text">
+                      <p className="text-base text-gray-text">
                         <span className="font-medium">Type:</span> {project.type}
                       </p>
                     )}
                     {project.timeline && (
-                      <p className="text-sm text-gray-text">
+                      <p className="text-base text-gray-text">
                         <span className="font-medium">Timeline:</span> {project.timeline}
                       </p>
                     )}
@@ -148,10 +143,10 @@ export default async function ProjectsPage() {
                   
                   {project.partners && project.partners.length > 0 && (
                     <div className="mb-4">
-                      <p className="text-sm font-medium text-gray-text mb-2">Partners:</p>
+                      <p className="text-base font-medium text-gray-text mb-2">Partners:</p>
                       <div className="flex flex-wrap gap-2">
                         {project.partners.map((partner: string, pIndex: number) => (
-                          <span key={pIndex} className="text-xs bg-gray-light text-gray-text px-2 py-1 rounded">
+                          <span key={pIndex} className="text-base bg-gray-light text-gray-text px-2 py-1 rounded">
                             {partner}
                           </span>
                         ))}

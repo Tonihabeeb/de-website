@@ -19,8 +19,8 @@ export default async function CMSTestPage() {
                 {projects.map((project: any) => (
                   <li key={project._id} className="border-b pb-2">
                     <h3 className="font-medium">{project.name}</h3>
-                    <p className="text-sm text-gray-600">{project.location}</p>
-                    <p className="text-xs text-gray-500">Status: {project.status}</p>
+                    <p className="text-base text-gray-600">{project.location}</p>
+                    <p className="text-base text-gray-500">Status: {project.status}</p>
                   </li>
                 ))}
               </ul>
@@ -37,8 +37,8 @@ export default async function CMSTestPage() {
                 {teamMembers.map((member: any) => (
                   <li key={member._id} className="border-b pb-2">
                     <h3 className="font-medium">{member.name}</h3>
-                    <p className="text-sm text-gray-600">{member.role}</p>
-                    <p className="text-xs text-gray-500">{member.expertise}</p>
+                    <p className="text-base text-gray-600">{member.role}</p>
+                    <p className="text-base text-gray-500">{member.expertise}</p>
                   </li>
                 ))}
               </ul>
@@ -53,7 +53,7 @@ export default async function CMSTestPage() {
           You can now add content through the Sanity Studio and it will appear here.
         </div>
 
-        <div className="mt-4 text-sm text-gray-600">
+        <div className="mt-4 text-base text-gray-600">
           <p>• Sanity Studio should be running at: <a href="http://localhost:3333" className="text-blue-600 hover:underline">http://localhost:3333</a></p>
           <p>• Add projects and team members in the Studio to see them appear here</p>
         </div>
@@ -71,7 +71,7 @@ export default async function CMSTestPage() {
           <p className="mt-2">Error details: {error instanceof Error ? error.message : 'Unknown error'}</p>
         </div>
 
-        <div className="mt-4 text-sm text-gray-600">
+        <div className="mt-4 text-base text-gray-600">
           <p>Please check:</p>
           <ul className="list-disc list-inside mt-2">
             <li>Your API token is correct in .env.local</li>

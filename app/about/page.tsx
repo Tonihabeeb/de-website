@@ -73,19 +73,19 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary mb-2">2019</div>
-                  <div className="text-sm text-gray-text">Founded</div>
+                  <div className="text-base text-gray-text">Founded</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary mb-2">35+</div>
-                  <div className="text-sm text-gray-text">Team Members</div>
+                  <div className="text-base text-gray-text">Team Members</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary mb-2">390 MW</div>
-                  <div className="text-sm text-gray-text">Planned Capacity</div>
+                  <div className="text-base text-gray-text">Planned Capacity</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary mb-2">2</div>
-                  <div className="text-sm text-gray-text">Offices</div>
+                  <div className="text-base text-gray-text">Offices</div>
                 </div>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="font-semibold mb-2">Rosch Innovations</h3>
-              <p className="text-gray-text text-sm">Exclusive KPP technology provider from Germany</p>
+              <p className="text-gray-text text-base">Exclusive KPP technology provider from Germany</p>
             </div>
             
             <div className="text-center p-6 border border-gray-200 rounded-lg">
@@ -145,7 +145,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="font-semibold mb-2">KRG Ministry of Electricity</h3>
-              <p className="text-gray-text text-sm">Government partnership for regional projects</p>
+              <p className="text-gray-text text-base">Government partnership for regional projects</p>
             </div>
             
             <div className="text-center p-6 border border-gray-200 rounded-lg">
@@ -155,7 +155,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="font-semibold mb-2">Board of Investment</h3>
-              <p className="text-gray-text text-sm">Strategic partnership for national projects</p>
+              <p className="text-gray-text text-base">Strategic partnership for national projects</p>
             </div>
           </div>
         </div>

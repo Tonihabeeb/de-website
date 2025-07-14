@@ -39,7 +39,7 @@ export default function Footer() {
             <address className="space-y-2 text-sm text-white not-italic drop-shadow-lg">
               <p>📍 Roya Tower A 1-14, Erbil-44001, Iraq (HQ)</p>
               <p>📍 Al Muhendisen - Al Zubair Road, Basra, Iraq (Branch)</p>
-              <p>📧 <a href="mailto:info@deepengineering.co" className="underline">info@deepengineering.co</a></p>
+              <p>📧 <a href="mailto:info@deepengineering.co" className="underline min-w-[44px] min-h-[44px] inline-block text-center">info@deepengineering.co</a></p>
             </address>
           </div>
 

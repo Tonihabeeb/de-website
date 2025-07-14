@@ -15,13 +15,13 @@ export default function CTABanner() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link 
               href="/contact"
-              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 min-w-[44px] min-h-[44px]"
             >
               Get in Touch
             </Link>
             <Link 
               href="/technology"
-              className="border-4 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200"
+              className="border-4 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px]"
             >
               Learn About KPP
             </Link>
@@ -57,7 +57,7 @@ export default function CTABanner() {
               </div>
               <h3 className="font-semibold mb-2 text-white drop-shadow-lg">Call Us</h3>
               <p className="text-white drop-shadow-lg">
-                <a href="tel:+9647504663879" className="underline block">+964 750 466 3879</a>
+                <a href="tel:+9647504663879" className="underline block min-w-[44px] min-h-[44px] inline-block text-center">+964 750 466 3879</a>
               </p>
             </div>
           </div>

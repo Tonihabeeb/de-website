@@ -80,7 +80,7 @@ export default function MobileNavigation() {
       {/* Mobile Menu Toggle Button */}
       <button
         onClick={toggleMenu}
-        className="md:hidden fixed top-4 right-4 z-50 p-3 bg-primary text-white rounded-lg shadow-lg touch-target"
+        className="md:hidden fixed top-4 right-4 z-50 p-3 bg-primary text-white rounded-lg shadow-lg touch-target min-w-[44px] min-h-[44px]"
         aria-label="Toggle mobile menu"
       >
         <div className="w-6 h-6 flex flex-col justify-center items-center">
@@ -121,7 +121,7 @@ export default function MobileNavigation() {
                     <div>
                       <button
                         onClick={() => toggleExpanded(item.label)}
-                        className={`w-full flex items-center justify-between p-4 rounded-lg transition-colors duration-200 touch-target ${
+                        className={`w-full flex items-center justify-between p-4 rounded-lg transition-colors duration-200 touch-target min-w-[44px] min-h-[44px] ${
                           isActive(item.href) ? 'bg-primary text-white' : 'hover:bg-gray-100'
                         }`}
                       >
@@ -147,7 +147,7 @@ export default function MobileNavigation() {
                             <li key={child.href}>
                               <Link
                                 href={child.href}
-                                className={`block p-3 rounded-lg transition-colors duration-200 touch-target ${
+                                className={`block p-3 rounded-lg transition-colors duration-200 touch-target min-w-[44px] min-h-[44px] ${
                                   isActive(child.href) ? 'bg-primary/10 text-primary' : 'hover:bg-gray-50'
                                 }`}
                                 onClick={toggleMenu}
@@ -162,7 +162,7 @@ export default function MobileNavigation() {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`flex items-center p-4 rounded-lg transition-colors duration-200 touch-target ${
+                      className={`flex items-center p-4 rounded-lg transition-colors duration-200 touch-target min-w-[44px] min-h-[44px] ${
                         isActive(item.href) ? 'bg-primary text-white' : 'hover:bg-gray-100'
                       }`}
                       onClick={toggleMenu}

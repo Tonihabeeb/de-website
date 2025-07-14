@@ -32,36 +32,68 @@ jest.mock('next/link', () => {
 })
 
 // Mock Framer Motion
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }) => <div {...props}>{children}</div>,
-    h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
-    p: ({ children, ...props }) => <p {...props}>{children}</p>,
-    span: ({ children, ...props }) => <span {...props}>{children}</span>,
-  },
-  useInView: () => ({ ref: jest.fn(), isInView: true }),
-  AnimatePresence: ({ children }) => children,
-}))
+jest.mock('framer-motion', () => {
+  // Helper function to filter out Framer Motion props
+  const filterMotionProps = (props) => {
+    const {
+      initial,
+      animate,
+      exit,
+      transition,
+      variants,
+      whileHover,
+      whileTap,
+      whileInView,
+      whileFocus,
+      whileDrag,
+      drag,
+      dragConstraints,
+      dragElastic,
+      dragMomentum,
+      dragPropagation,
+      dragSnapToOrigin,
+      dragTransition,
+      layout,
+      layoutId,
+      layoutDependency,
+      layoutScroll,
+      layoutRoot,
+      onAnimationStart,
+      onAnimationComplete,
+      onUpdate,
+      onDragStart,
+      onDragEnd,
+      onDrag,
+      onHoverStart,
+      onHoverEnd,
+      onTap,
+      onTapStart,
+      onTapCancel,
+      onFocus,
+      onBlur,
+      onViewportEnter,
+      onViewportLeave,
+      viewport,
+      ...filteredProps
+    } = props;
+    return filteredProps;
+  };
 
-// Mock GSAP
-jest.mock('gsap', () => ({
-  gsap: {
-    to: jest.fn(),
-    from: jest.fn(),
-    fromTo: jest.fn(),
-    set: jest.fn(),
-    timeline: jest.fn(() => ({
-      to: jest.fn(),
-      from: jest.fn(),
-      fromTo: jest.fn(),
-    })),
-  },
-  ScrollTrigger: {
-    create: jest.fn(),
-    getAll: jest.fn(() => []),
-    refresh: jest.fn(),
-  },
-}))
+  return {
+    motion: {
+      div: ({ children, ...props }) => <div {...filterMotionProps(props)}>{children}</div>,
+      h1: ({ children, ...props }) => <h1 {...filterMotionProps(props)}>{children}</h1>,
+      p: ({ children, ...props }) => <p {...filterMotionProps(props)}>{children}</p>,
+      span: ({ children, ...props }) => <span {...filterMotionProps(props)}>{children}</span>,
+      button: ({ children, ...props }) => <button {...filterMotionProps(props)}>{children}</button>,
+    },
+    useInView: () => true,
+    useScroll: () => ({ scrollYProgress: 0 }),
+    useTransform: (value) => value,
+    AnimatePresence: ({ children }) => children,
+  };
+})
+
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {

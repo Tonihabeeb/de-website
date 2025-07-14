@@ -7,8 +7,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['Heebo', 'sans-serif'],
-      serif: ['Crimson Pro', 'serif'],
+      sans: ['var(--font-sans)', 'Heebo', 'sans-serif'],
+      serif: ['var(--font-serif)', 'Crimson Pro', 'serif'],
     },
     extend: {
       colors: {

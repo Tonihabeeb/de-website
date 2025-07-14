@@ -19,7 +19,7 @@ export default function Button({
   type = 'button',
   disabled = false,
 }: ButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const baseClasses = 'inline-flex items-center justify-center font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 min-w-[44px] min-h-[44px]';
   
   const variantClasses = {
     primary: 'bg-primary text-white hover:bg-primary-dark focus:ring-primary',

@@ -116,34 +116,34 @@ export default function StyleGuidePage() {
               <div>
                 <h3 className="text-xl font-serif text-primary mb-4">Button Variants</h3>
                 <div className="flex flex-wrap gap-4">
-                  <Button variant="primary" size="sm">Small Primary</Button>
-                  <Button variant="primary" size="md">Medium Primary</Button>
-                  <Button variant="primary" size="lg">Large Primary</Button>
+                  <Button variant="primary" size="sm" className="min-w-[44px] min-h-[44px]">Small Primary</Button>
+                  <Button variant="primary" size="md" className="min-w-[44px] min-h-[44px]">Medium Primary</Button>
+                  <Button variant="primary" size="lg" className="min-w-[44px] min-h-[44px]">Large Primary</Button>
                 </div>
               </div>
               
               <div>
                 <h3 className="text-xl font-serif text-primary mb-4">Secondary Buttons</h3>
                 <div className="flex flex-wrap gap-4">
-                  <Button variant="secondary" size="sm">Small Secondary</Button>
-                  <Button variant="secondary" size="md">Medium Secondary</Button>
-                  <Button variant="secondary" size="lg">Large Secondary</Button>
+                  <Button variant="secondary" size="sm" className="min-w-[44px] min-h-[44px]">Small Secondary</Button>
+                  <Button variant="secondary" size="md" className="min-w-[44px] min-h-[44px]">Medium Secondary</Button>
+                  <Button variant="secondary" size="lg" className="min-w-[44px] min-h-[44px]">Large Secondary</Button>
                 </div>
               </div>
               
               <div>
                 <h3 className="text-xl font-serif text-primary mb-4">Disabled States</h3>
                 <div className="flex flex-wrap gap-4">
-                  <Button variant="primary" disabled>Disabled Primary</Button>
-                  <Button variant="secondary" disabled>Disabled Secondary</Button>
+                  <Button variant="primary" disabled className="min-w-[44px] min-h-[44px]">Disabled Primary</Button>
+                  <Button variant="secondary" disabled className="min-w-[44px] min-h-[44px]">Disabled Secondary</Button>
                 </div>
               </div>
               
               <div>
                 <h3 className="text-xl font-serif text-primary mb-4">CSS Classes</h3>
                 <div className="flex flex-wrap gap-4">
-                  <button className="btn-primary">CSS Primary</button>
-                  <button className="btn-secondary">CSS Secondary</button>
+                  <button className="btn-primary min-w-[44px] min-h-[44px]">CSS Primary</button>
+                  <button className="btn-secondary min-w-[44px] min-h-[44px]">CSS Secondary</button>
                 </div>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function StyleGuidePage() {
                     <input 
                       type="text" 
                       placeholder="Enter text here"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
                     />
                   </div>
                   <div>
@@ -211,7 +211,7 @@ export default function StyleGuidePage() {
                     <input 
                       type="email" 
                       placeholder="email@example.com"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
                     />
                   </div>
                   <div>
@@ -219,7 +219,7 @@ export default function StyleGuidePage() {
                     <textarea 
                       placeholder="Enter your message"
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
                     />
                   </div>
                 </div>
@@ -347,12 +347,12 @@ export default function StyleGuidePage() {
               <div>
                 <h3 className="text-xl font-serif text-primary mb-4">Focus States</h3>
                 <div className="space-y-4">
-                  <button className="btn-primary">Primary Button (Tab to focus)</button>
-                  <button className="btn-secondary">Secondary Button (Tab to focus)</button>
+                  <button className="btn-primary min-w-[44px] min-h-[44px]">Primary Button (Tab to focus)</button>
+                  <button className="btn-secondary min-w-[44px] min-h-[44px]">Secondary Button (Tab to focus)</button>
                   <input 
                     type="text" 
                     placeholder="Input field (Tab to focus)"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
                   />
                 </div>
               </div>

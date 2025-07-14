@@ -22,7 +22,7 @@ export default function OfflinePage() {
         {/* Available Features */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
           <h2 className="font-semibold text-gray-800 mb-3">Available Offline:</h2>
-          <ul className="text-sm text-gray-600 space-y-2 text-left">
+          <ul className="text-base text-gray-600 space-y-2 text-left">
             <li className="flex items-center">
               <span className="text-green-500 mr-2">✓</span>
               Home page
@@ -63,7 +63,7 @@ export default function OfflinePage() {
         <div className="mt-6 pt-6 border-t border-gray-200">
           <div className="flex items-center justify-center space-x-2">
             <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-500">No internet connection</span>
+            <span className="text-base text-gray-500">No internet connection</span>
           </div>
         </div>
       </div>

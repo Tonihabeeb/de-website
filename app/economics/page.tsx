@@ -2,9 +2,32 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Economic Analysis - Deep Engineering',
-  description: 'Comprehensive economic analysis of KPP technology including LCOE comparisons, ROI projections, fuel savings calculations, and investment opportunities.',
-  keywords: 'economic analysis, LCOE, ROI, fuel savings, investment opportunities, cost comparison, renewable energy economics',
+  title: 'KPP Economic Analysis & ROI - Deep Engineering',
+  description: 'Comprehensive economic analysis of Kinetic Power Plant (KPP) technology. Cost comparisons vs diesel/solar/gas, ROI projections, fuel savings, and investment opportunities in Iraq.',
+  keywords: 'KPP economics, kinetic power plant cost analysis, renewable energy ROI, Iraq energy investment, fuel cost savings, LCOE comparison, clean energy economics',
+  openGraph: {
+    title: 'KPP Economic Analysis & ROI - Deep Engineering',
+    description: 'Comprehensive economic analysis of KPP technology with cost comparisons, ROI projections, and investment opportunities.',
+    type: 'website',
+    url: 'https://deepengineering.co/economics',
+    images: [
+      {
+        url: '/og-economics.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'KPP Economic Analysis - Deep Engineering',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'KPP Economic Analysis & ROI - Deep Engineering',
+    description: 'Comprehensive economic analysis of KPP technology with cost comparisons and ROI projections.',
+    images: ['/og-economics.jpg'],
+  },
+  alternates: {
+    canonical: '/economics',
+  },
 };
 
 const costComparison = [
@@ -316,7 +339,7 @@ export default function EconomicsPage() {
                     </div>
                   </div>
                   
-                  <button className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors">
+                  <button className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]">
                     Learn More
                   </button>
                 </div>
@@ -350,6 +373,59 @@ export default function EconomicsPage() {
           </div>
         </div>
       </section>
+
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'KPP Economic Analysis & ROI - Deep Engineering',
+            description: 'Comprehensive economic analysis of Kinetic Power Plant (KPP) technology with cost comparisons, ROI projections, and investment opportunities.',
+            author: {
+              '@type': 'Organization',
+              name: 'Deep Engineering'
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'Deep Engineering',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://deepengineering.co/logo.svg'
+              }
+            },
+            datePublished: '2024-01-01',
+            dateModified: new Date().toISOString().split('T')[0],
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://deepengineering.co/economics'
+            },
+            about: [
+              {
+                '@type': 'Thing',
+                name: 'Economic Analysis',
+                description: 'Cost comparison and ROI analysis of KPP technology'
+              },
+              {
+                '@type': 'Thing',
+                name: 'LCOE Comparison',
+                description: 'Levelized Cost of Energy comparison with traditional sources'
+              },
+              {
+                '@type': 'Thing',
+                name: 'Investment Opportunities',
+                description: 'Renewable energy investment opportunities in Iraq'
+              }
+            ],
+            offers: {
+              '@type': 'Offer',
+              description: 'KPP Technology Investment Opportunities',
+              url: 'https://deepengineering.co/contact'
+            }
+          })
+        }}
+      />
     </div>
   );
 } 

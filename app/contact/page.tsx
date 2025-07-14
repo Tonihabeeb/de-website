@@ -218,7 +218,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-text mb-2">
+                      <label htmlFor="name" className="block text-base font-medium text-gray-text mb-2">
                         Full Name *
                       </label>
                       <input
@@ -229,19 +229,19 @@ export default function ContactPage() {
                         onChange={handleInputChange}
                         className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                           errors.name ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        } min-h-[44px]`}
                         placeholder="Your full name"
                         aria-describedby={errors.name ? "name-error" : undefined}
                         aria-invalid={!!errors.name}
                         required
                       />
                       {errors.name && (
-                        <p id="name-error" className="mt-1 text-sm text-red-600" role="alert">{errors.name}</p>
+                        <p id="name-error" className="mt-1 text-base text-red-600" role="alert">{errors.name}</p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-text mb-2">
+                      <label htmlFor="email" className="block text-base font-medium text-gray-text mb-2">
                         Email Address *
                       </label>
                       <input
@@ -252,18 +252,18 @@ export default function ContactPage() {
                         onChange={handleInputChange}
                         className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                           errors.email ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        } min-h-[44px]`}
                         placeholder="your.email@example.com"
                       />
                       {errors.email && (
-                        <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                        <p className="mt-1 text-base text-red-600">{errors.email}</p>
                       )}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-gray-text mb-2">
+                      <label htmlFor="company" className="block text-base font-medium text-gray-text mb-2">
                         Company
                       </label>
                       <input
@@ -272,13 +272,13 @@ export default function ContactPage() {
                         name="company"
                         value={formData.company}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
                         placeholder="Your company name"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-text mb-2">
+                      <label htmlFor="phone" className="block text-base font-medium text-gray-text mb-2">
                         Phone Number
                       </label>
                       <input
@@ -287,14 +287,14 @@ export default function ContactPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
                         placeholder="+964 XXX XXX XXXX"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-text mb-2">
+                    <label htmlFor="subject" className="block text-base font-medium text-gray-text mb-2">
                       Subject *
                     </label>
                     <select
@@ -304,7 +304,7 @@ export default function ContactPage() {
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                         errors.subject ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      } min-h-[44px]`}
                     >
                       <option value="">Select a subject</option>
                       <option value="KPP Technology Inquiry">KPP Technology Inquiry</option>
@@ -314,12 +314,12 @@ export default function ContactPage() {
                       <option value="General Inquiry">General Inquiry</option>
                     </select>
                     {errors.subject && (
-                      <p className="mt-1 text-sm text-red-600">{errors.subject}</p>
+                      <p className="mt-1 text-base text-red-600">{errors.subject}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-text mb-2">
+                    <label htmlFor="message" className="block text-base font-medium text-gray-text mb-2">
                       Message *
                     </label>
                     <textarea
@@ -330,18 +330,18 @@ export default function ContactPage() {
                       rows={6}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                         errors.message ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      } min-h-[44px]`}
                       placeholder="Tell us about your inquiry..."
                     />
                     {errors.message && (
-                      <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                      <p className="mt-1 text-base text-red-600">{errors.message}</p>
                     )}
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]"
                     aria-describedby={isSubmitting ? "submitting-status" : undefined}
                   >
                     {isSubmitting ? (
@@ -392,9 +392,9 @@ export default function ContactPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
                           <div className="text-gray-text">
-                            <a href={`tel:${info.phone.replace(/\s+/g, '')}`} className="underline block">{info.phone}</a>
+                            <a href={`tel:${info.phone.replace(/\s+/g, '')}`} className="underline block min-w-[44px] min-h-[44px] inline-block text-center">{info.phone}</a>
                             {info.phone2 && (
-                              <a href={`tel:${info.phone2.replace(/\s+/g, '')}`} className="underline block">{info.phone2}</a>
+                              <a href={`tel:${info.phone2.replace(/\s+/g, '')}`} className="underline block min-w-[44px] min-h-[44px] inline-block text-center">{info.phone2}</a>
                             )}
                           </div>
                         </div>
@@ -402,7 +402,7 @@ export default function ContactPage() {
                           <svg className="w-1.5 h-1.5 text-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
-                          <a href={`mailto:${info.email}`} className="text-gray-text underline">{info.email}</a>
+                          <a href={`mailto:${info.email}`} className="text-gray-text underline min-w-[44px] min-h-[44px] inline-block text-center">{info.email}</a>
                         </div>
                       </div>
                     </div>
@@ -450,7 +450,7 @@ export default function ContactPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3" />
                 </svg>
                 <p className="text-lg font-semibold">Interactive Map</p>
-                <p className="text-sm opacity-90">Coming Soon</p>
+                <p className="text-base opacity-90">Coming Soon</p>
               </div>
             </div>
           </div>

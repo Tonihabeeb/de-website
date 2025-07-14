@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'Deep Engineering Web',
 
-  projectId: 'cgt1kxzl',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID || 'cgt1kxzl',
+  dataset: process.env.SANITY_DATASET || 'production',
 
   plugins: [structureTool(), visionTool()],
 

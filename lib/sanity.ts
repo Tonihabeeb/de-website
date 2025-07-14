@@ -1,20 +1,37 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
-export const sanity = createClient({
-  projectId: process.env.SANITY_PROJECT_ID,
-  dataset: process.env.SANITY_DATASET,
-  apiVersion: '2024-01-01',
-  useCdn: true,
-  token: process.env.SANITY_API_TOKEN,
+// Environment variables
+const projectId = process.env.SANITY_PROJECT_ID;
+const dataset = process.env.SANITY_DATASET || 'production';
+const token = process.env.SANITY_API_TOKEN;
+
+// Create a mock client for development when Sanity is not configured
+const createMockClient = () => ({
+  fetch: async () => [],
+  listen: () => ({ subscribe: () => ({ unsubscribe: () => {} }) }),
 });
 
-// Image URL builder
-const builder = imageUrlBuilder(sanity);
+// Create Sanity client only if projectId is available
+export const sanity = projectId 
+  ? createClient({
+      projectId,
+      dataset,
+      apiVersion: '2024-01-01',
+      useCdn: true,
+      token,
+    })
+  : createMockClient();
 
-export function urlForImage(source: any) {
-  return builder.image(source);
-}
+// Image URL builder - only create if sanity client is available
+export const urlFor = projectId
+  ? (source: any) => imageUrlBuilder({ projectId, dataset }).image(source)
+  : () => '';
+
+// Export urlForImage for compatibility with components expecting it
+export const urlForImage = projectId
+  ? (source: any) => imageUrlBuilder({ projectId, dataset }).image(source)
+  : () => '';
 
 // Helper functions for common queries
 export const queries = {

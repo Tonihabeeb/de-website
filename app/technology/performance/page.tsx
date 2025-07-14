@@ -161,7 +161,7 @@ export default function PerformancePage() {
                         <span className="font-medium text-gray-text">{metric.name}</span>
                         <span className="font-bold text-primary text-lg">{metric.value}</span>
                       </div>
-                      <p className="text-sm text-gray-text">{metric.description}</p>
+                      <p className="text-base text-gray-text">{metric.description}</p>
                     </div>
                   ))}
                 </div>
@@ -232,7 +232,7 @@ export default function PerformancePage() {
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-3">{benefit.title}</h3>
                     <p className="text-gray-text mb-3">{benefit.description}</p>
-                    <p className="text-sm text-accent-warm font-medium">{benefit.impact}</p>
+                    <p className="text-base text-accent-warm font-medium">{benefit.impact}</p>
                   </div>
                 </div>
               </div>
@@ -261,11 +261,11 @@ export default function PerformancePage() {
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-xl font-bold text-primary mb-2">0%</div>
-                  <div className="text-sm text-gray-text">Fuel Costs</div>
+                  <div className="text-base text-gray-text">Fuel Costs</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl font-bold text-primary mb-2">98%</div>
-                  <div className="text-sm text-gray-text">Availability</div>
+                  <div className="text-base text-gray-text">Availability</div>
                 </div>
               </div>
             </div>
@@ -313,7 +313,7 @@ export default function PerformancePage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                   <p className="text-lg font-semibold">Efficiency Trends</p>
-                  <p className="text-sm opacity-90">Coming Soon</p>
+                  <p className="text-base opacity-90">Coming Soon</p>
                 </div>
               </div>
             </div>
@@ -325,7 +325,7 @@ export default function PerformancePage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
                   <p className="text-lg font-semibold">Power Output</p>
-                  <p className="text-sm opacity-90">Coming Soon</p>
+                  <p className="text-base opacity-90">Coming Soon</p>
                 </div>
               </div>
             </div>

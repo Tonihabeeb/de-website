@@ -86,7 +86,7 @@ export default function EnergyCostCalculator() {
             type="number"
             value={energyNeeds}
             onChange={(e) => setEnergyNeeds(Number(e.target.value))}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent mobile-input touch-target"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent mobile-input touch-target min-h-[44px]"
             placeholder="1000"
             min="1"
           />
@@ -100,7 +100,7 @@ export default function EnergyCostCalculator() {
             type="number"
             value={operatingHours}
             onChange={(e) => setOperatingHours(Number(e.target.value))}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent mobile-input touch-target"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent mobile-input touch-target min-h-[44px]"
             placeholder="8760"
             min="1"
             max="8760"
@@ -116,7 +116,7 @@ export default function EnergyCostCalculator() {
             step="0.01"
             value={currentFuelCost}
             onChange={(e) => setCurrentFuelCost(Number(e.target.value))}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent mobile-input touch-target"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent mobile-input touch-target min-h-[44px]"
             placeholder="0.15"
             min="0"
           />
@@ -126,7 +126,7 @@ export default function EnergyCostCalculator() {
       <div className="text-center mb-8">
         <button
           onClick={calculateCosts}
-          className="bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 mobile-button touch-target w-full md:w-auto"
+          className="bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 mobile-button touch-target w-full md:w-auto min-h-[44px]"
         >
           Calculate Costs
         </button>

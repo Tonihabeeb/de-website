@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 
 interface ProcessStep {
@@ -17,6 +17,7 @@ interface ProcessDiagramProps {
 export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-200px" });
+  const shouldReduceMotion = useReducedMotion();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -59,14 +60,15 @@ export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        animate={shouldReduceMotion ? undefined : (isInView ? "visible" : "hidden")}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative"
+        style={{ willChange: 'transform, opacity' }}
       >
         {/* Connection Lines */}
         <motion.div
           variants={lineVariants}
           className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-primary transform -translate-y-1/2 z-0"
-          style={{ transformOrigin: "left" }}
+          style={{ transformOrigin: "left", willChange: 'transform, opacity' }}
         />
         
         {steps.map((step, index) => (
@@ -74,12 +76,14 @@ export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
             key={index}
             variants={stepVariants}
             className="relative z-10 text-center"
+            style={{ willChange: 'transform, opacity' }}
           >
             {/* Step Circle */}
             <motion.div
               className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-lg font-bold mx-auto mb-4 relative"
-              whileHover={{ scale: 1.1 }}
+              whileHover={shouldReduceMotion ? undefined : { scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
+              style={{ willChange: 'transform, opacity' }}
             >
               {step.step}
             </motion.div>
@@ -88,10 +92,11 @@ export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
             <motion.div 
               className="text-4xl mb-4"
               initial={{ rotate: 0 }}
-              animate={isInView ? { rotate: 360 } : { rotate: 0 }}
+              animate={shouldReduceMotion ? undefined : (isInView ? { rotate: 360 } : { rotate: 0 })}
               transition={{ duration: 0.8, delay: 0.5 + index * 0.2 }}
               role="img"
               aria-label={step.title + ' icon'}
+              style={{ willChange: 'transform, opacity' }}
             >
               {step.icon}
             </motion.div>

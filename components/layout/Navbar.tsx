@@ -21,23 +21,37 @@ const navigation = [
     ]
   },
   { name: 'Projects', href: '/projects' },
-  { name: 'Team', href: '/team' },
+  { 
+    name: 'Team', 
+    href: '/team',
+    submenu: [
+      { name: 'Our Team', href: '/team' },
+      { name: 'Careers', href: '/team/careers' },
+    ]
+  },
   { name: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [technologyDropdownOpen, setTechnologyDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [teamDropdownOpen, setTeamDropdownOpen] = useState(false);
+  const technologyDropdownRef = useRef<HTMLDivElement>(null);
+  const teamDropdownRef = useRef<HTMLDivElement>(null);
+  const technologyButtonRef = useRef<HTMLButtonElement>(null);
+  const teamButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
-          buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+      if (technologyDropdownRef.current && !technologyDropdownRef.current.contains(event.target as Node) &&
+          technologyButtonRef.current && !technologyButtonRef.current.contains(event.target as Node)) {
         setTechnologyDropdownOpen(false);
+      }
+      if (teamDropdownRef.current && !teamDropdownRef.current.contains(event.target as Node) &&
+          teamButtonRef.current && !teamButtonRef.current.contains(event.target as Node)) {
+        setTeamDropdownOpen(false);
       }
     }
 
@@ -61,31 +75,62 @@ export default function Navbar() {
             {navigation.map((item) => (
               <li key={item.name} role="none" className="relative">
                 {item.submenu ? (
-                  <div className="relative" ref={dropdownRef}>
+                  <div className="relative" ref={item.name === 'Technology' ? technologyDropdownRef : teamDropdownRef}>
                     <button
-                      ref={buttonRef}
-                      onClick={() => setTechnologyDropdownOpen(!technologyDropdownOpen)}
-                      onMouseEnter={() => setTechnologyDropdownOpen(true)}
+                      ref={item.name === 'Technology' ? technologyButtonRef : teamButtonRef}
+                      onClick={() => {
+                        if (item.name === 'Technology') {
+                          setTechnologyDropdownOpen(!technologyDropdownOpen);
+                          setTeamDropdownOpen(false);
+                        } else {
+                          setTeamDropdownOpen(!teamDropdownOpen);
+                          setTechnologyDropdownOpen(false);
+                        }
+                      }}
+                      onMouseEnter={() => {
+                        if (item.name === 'Technology') {
+                          setTechnologyDropdownOpen(true);
+                          setTeamDropdownOpen(false);
+                        } else {
+                          setTeamDropdownOpen(true);
+                          setTechnologyDropdownOpen(false);
+                        }
+                      }}
                       className="flex items-center space-x-1 text-gray-text hover:text-primary transition-colors duration-200 font-medium"
-                      aria-expanded={technologyDropdownOpen}
+                      aria-expanded={item.name === 'Technology' ? technologyDropdownOpen : teamDropdownOpen}
                       aria-haspopup="true"
                     >
                       <span>{item.name}</span>
                       <ChevronDownIcon className="w-4 h-4" />
                     </button>
                     
-                    {technologyDropdownOpen && (
+                    {(item.name === 'Technology' ? technologyDropdownOpen : teamDropdownOpen) && (
                       <div 
                         className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2"
-                        onMouseEnter={() => setTechnologyDropdownOpen(true)}
-                        onMouseLeave={() => setTechnologyDropdownOpen(false)}
+                        onMouseEnter={() => {
+                          if (item.name === 'Technology') {
+                            setTechnologyDropdownOpen(true);
+                          } else {
+                            setTeamDropdownOpen(true);
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (item.name === 'Technology') {
+                            setTechnologyDropdownOpen(false);
+                          } else {
+                            setTeamDropdownOpen(false);
+                          }
+                        }}
                       >
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
                             className="block px-4 py-2 text-gray-text hover:text-primary hover:bg-gray-50 transition-colors duration-200"
-                            onClick={() => setTechnologyDropdownOpen(false)}
+                            onClick={() => {
+                              setTechnologyDropdownOpen(false);
+                              setTeamDropdownOpen(false);
+                            }}
                           >
                             {subItem.name}
                           </Link>
@@ -98,7 +143,7 @@ export default function Navbar() {
                     href={item.href}
                     role="menuitem"
                     aria-current={pathname === item.href ? 'page' : undefined}
-                    className={`text-gray-text hover:text-primary transition-colors duration-200 font-medium ${
+                    className={`text-gray-text hover:text-primary transition-colors duration-200 font-medium min-w-[44px] min-h-[44px] ${
                       pathname === item.href ? 'text-primary font-bold underline' : ''
                     }`}
                   >
@@ -112,7 +157,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             type="button"
-            className="md:hidden p-2 text-gray-text hover:text-primary"
+            className="md:hidden p-2 text-gray-text hover:text-primary min-w-[44px] min-h-[44px]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
             aria-expanded={mobileMenuOpen}

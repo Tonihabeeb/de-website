@@ -53,21 +53,21 @@ export default function NotFound() {
                   className="block p-4 bg-white rounded-lg hover:shadow-md transition-shadow"
                 >
                   <div className="text-primary font-semibold mb-2">Technology</div>
-                  <div className="text-sm text-gray-text">Learn about KPP technology</div>
+                  <div className="text-base text-gray-text">Learn about KPP technology</div>
                 </Link>
                 <Link 
                   href="/projects"
                   className="block p-4 bg-white rounded-lg hover:shadow-md transition-shadow"
                 >
                   <div className="text-primary font-semibold mb-2">Projects</div>
-                  <div className="text-sm text-gray-text">View our current projects</div>
+                  <div className="text-base text-gray-text">View our current projects</div>
                 </Link>
                 <Link 
                   href="/about"
                   className="block p-4 bg-white rounded-lg hover:shadow-md transition-shadow"
                 >
                   <div className="text-primary font-semibold mb-2">About Us</div>
-                  <div className="text-sm text-gray-text">Learn about Deep Engineering</div>
+                  <div className="text-base text-gray-text">Learn about Deep Engineering</div>
                 </Link>
               </div>
             </div>

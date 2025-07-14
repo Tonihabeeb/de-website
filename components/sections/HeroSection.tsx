@@ -3,32 +3,48 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import AnimatedCounter from '@/components/animations/AnimatedCounter';
+import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setIsReducedMotion(mq.matches);
+      mq.addEventListener('change', (e) => setIsReducedMotion(e.matches));
+      return () => mq.removeEventListener('change', (e) => setIsReducedMotion(e.matches));
+    }
+  }, []);
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const particleCount = isReducedMotion ? 0 : (isMobile ? 8 : 20);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-primary-dark to-primary text-white overflow-hidden">
       {/* Animated background particles */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              y: [null, -100],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "linear"
-            }}
-          />
-        ))}
+        {!isReducedMotion &&
+          [...Array(particleCount)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full"
+              style={{ willChange: 'transform, opacity' }}
+              initial={{
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+              }}
+              animate={{
+                y: [null, -100],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "linear"
+              }}
+            />
+          ))}
       </div>
 
 
@@ -37,7 +53,8 @@ export default function HeroSection() {
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-20 left-20 w-32 h-32 border border-white/10 rounded-full"
-          animate={{
+          style={{ willChange: 'transform' }}
+          animate={isReducedMotion ? {} : {
             rotate: 360,
             scale: [1, 1.1, 1],
           }}
@@ -49,7 +66,8 @@ export default function HeroSection() {
         />
         <motion.div
           className="absolute bottom-20 right-20 w-24 h-24 border border-white/10 transform rotate-45"
-          animate={{
+          style={{ willChange: 'transform' }}
+          animate={isReducedMotion ? {} : {
             rotate: -360,
             scale: [1, 0.9, 1],
           }}
@@ -97,7 +115,7 @@ export default function HeroSection() {
             >
               <Link 
                 href="/technology"
-                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg"
+                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg min-w-[44px] min-h-[44px]"
               >
                 Learn More
               </Link>
@@ -108,7 +126,7 @@ export default function HeroSection() {
             >
               <Link 
                 href="/contact"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200"
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px]"
               >
                 Contact Us
               </Link>
@@ -157,7 +175,8 @@ export default function HeroSection() {
       {/* Scroll Indicator */}
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
+        style={{ willChange: 'transform' }}
+        animate={isReducedMotion ? {} : { y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
         <svg 

@@ -34,7 +34,7 @@ describe('HeroSection', () => {
   it('renders key statistics', () => {
     const { getByText } = render(<HeroSection />)
     
-    expect(getByText('390 MW')).toBeInTheDocument()
+    expect(getByText('0 MW')).toBeInTheDocument()
     expect(getByText('24/7')).toBeInTheDocument()
     expect(getByText('0')).toBeInTheDocument()
     

@@ -88,11 +88,11 @@ export default function InteractiveFeaturesPage() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Energy Cost Calculator</h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 text-base mb-4">
                   Compare KPP technology costs with diesel, solar, and natural gas. Calculate potential savings 
                   and payback periods based on your energy needs.
                 </p>
-                <ul className="text-xs text-gray-500 space-y-1">
+                <ul className="text-base text-gray-500 space-y-1">
                   <li>• Real-time cost comparisons</li>
                   <li>• Savings calculations</li>
                   <li>• Payback period analysis</li>
@@ -107,11 +107,11 @@ export default function InteractiveFeaturesPage() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Project Status Tracker</h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 text-base mb-4">
                   Monitor the progress of our KPP projects with detailed timelines, milestones, 
                   and real-time updates from across Iraq.
                 </p>
-                <ul className="text-xs text-gray-500 space-y-1">
+                <ul className="text-base text-gray-500 space-y-1">
                   <li>• Real-time project progress</li>
                   <li>• Milestone tracking</li>
                   <li>• Project updates</li>
@@ -126,11 +126,11 @@ export default function InteractiveFeaturesPage() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Enhanced Contact Forms</h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 text-base mb-4">
                   Specialized contact forms for different inquiry types with smart validation 
                   and user-friendly interfaces.
                 </p>
-                <ul className="text-xs text-gray-500 space-y-1">
+                <ul className="text-base text-gray-500 space-y-1">
                   <li>• Multiple form types</li>
                   <li>• Smart validation</li>
                   <li>• Real-time feedback</li>
@@ -153,13 +153,13 @@ export default function InteractiveFeaturesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/technology"
-              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center"
             >
               Explore Technology
             </Link>
             <Link 
               href="/projects"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center"
             >
               View Projects
             </Link>

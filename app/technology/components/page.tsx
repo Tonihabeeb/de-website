@@ -286,13 +286,13 @@ export default function ComponentsPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/technology/how-it-works"
-              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center"
             >
               How It Works
             </Link>
             <Link 
               href="/technology/performance"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center"
             >
               Performance Data
             </Link>

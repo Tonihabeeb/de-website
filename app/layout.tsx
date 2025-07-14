@@ -8,6 +8,15 @@ import PerformanceOptimizer from '@/components/PerformanceOptimizer'
 import MobileOptimizer from '@/components/MobileOptimizer'
 import MobileNavigation from '@/components/layout/MobileNavigation'
 import PWARegistration from '@/components/PWARegistration'
+import SEOOptimizer from '@/components/SEOOptimizer'
+import PerformanceMonitor from '@/components/PerformanceMonitor'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import Analytics from '@/components/Analytics'
+import MobileTestingChecklist from '@/components/MobileTestingChecklist'
+import { Crimson_Pro, Heebo } from 'next/font/google';
+
+const crimsonPro = Crimson_Pro({ subsets: ['latin'], variable: '--font-serif', display: 'swap' });
+const heebo = Heebo({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
 export const metadata: Metadata = {
   title: {
@@ -80,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${crimsonPro.variable} ${heebo.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
@@ -137,27 +146,33 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">
+      <body className={`antialiased font-sans text-gray-text bg-white`}>
         <BrowserExtensionHandler />
         <MobileOptimizer />
         <MobileNavigation />
         <PWARegistration />
-        <PerformanceOptimizer>
-          <HydrationSuppressor>
-            {/* Skip to main content link for accessibility */}
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded z-50"
-            >
-              Skip to main content
-            </a>
-            <Navbar />
-            <main id="main-content" className="pt-16">
-              {children}
-            </main>
-            <Footer />
-          </HydrationSuppressor>
-        </PerformanceOptimizer>
+        <SEOOptimizer />
+        <PerformanceMonitor />
+        <Analytics />
+        <ErrorBoundary>
+          <PerformanceOptimizer>
+            <HydrationSuppressor>
+              {/* Skip to main content link for accessibility */}
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded z-50"
+              >
+                Skip to main content
+              </a>
+              <Navbar />
+              <main id="main-content" className="pt-16">
+                {children}
+              </main>
+              <Footer />
+            </HydrationSuppressor>
+          </PerformanceOptimizer>
+        </ErrorBoundary>
+        {process.env.NODE_ENV === 'development' && <MobileTestingChecklist />}
       </body>
     </html>
   )
