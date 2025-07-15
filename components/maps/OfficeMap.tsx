@@ -35,7 +35,6 @@ export default function OfficeMap() {
       className="office-map w-full h-64 rounded-lg"
       keyboard={true}
       aria-label="Map showing Deep Engineering office locations"
-      role="application"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
