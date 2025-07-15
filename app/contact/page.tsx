@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
+import OfficeMap from '@/components/maps/OfficeMap';
 
 interface FormData {
   name: string;
@@ -430,29 +431,21 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map Placeholder */}
+      {/* Office Locations Map */}
       <section className="section-padding bg-gray-light">
         <div className="container">
           <FadeInWhenVisible>
             <div className="text-center mb-8">
               <h2 className="mb-4">Our Locations</h2>
               <p className="text-lg text-gray-text max-w-3xl mx-auto">
-                Deep Engineering operates from strategic locations across Iraq to serve 
+                Deep Engineering operates from strategic locations across Iraq to serve
                 our clients and partners effectively.
               </p>
             </div>
           </FadeInWhenVisible>
-          
-          <div className="bg-white rounded-lg p-8 text-center">
-            <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center">
-              <div className="text-white text-center">
-                <svg className="w-1.5 h-1.5 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3" />
-                </svg>
-                <p className="text-lg font-semibold">Interactive Map</p>
-                <p className="text-base opacity-90">Coming Soon</p>
-              </div>
-            </div>
+
+          <div className="bg-white rounded-lg p-4">
+            <OfficeMap />
           </div>
         </div>
       </section>
