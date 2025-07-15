@@ -1,4 +1,4 @@
-// File: G:\My Drive\DE-website\app\economics\page.tsx
+// File: /home/runner/work/de-website/de-website/app/economics/page.tsx
 import * as entry from '../../../../app/economics/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

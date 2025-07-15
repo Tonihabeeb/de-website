@@ -1,5 +1,26 @@
 {
-  "/technology/specifications/page": "app/technology/specifications/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/animation-demo/page": "app/animation-demo/page.js",
+  "/cms-test/page": "app/cms-test/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/offline/page": "app/offline/page.js",
+  "/page": "app/page.js",
+  "/style-guide/page": "app/style-guide/page.js",
+  "/test/page": "app/test/page.js",
+  "/about/page": "app/about/page.js",
+  "/interactive-features/page": "app/interactive-features/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/economics/page": "app/economics/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/technology/animation-demo/page": "app/technology/animation-demo/page.js",
+  "/team/page": "app/team/page.js",
+  "/team/careers/page": "app/team/careers/page.js",
+  "/technology/components/page": "app/technology/components/page.js",
   "/technology/page": "app/technology/page.js",
-  "/economics/page": "app/economics/page.js"
+  "/technology/how-it-works/page": "app/technology/how-it-works/page.js",
+  "/technology/performance/page": "app/technology/performance/page.js",
+  "/technology/specifications/page": "app/technology/specifications/page.js"
 }
