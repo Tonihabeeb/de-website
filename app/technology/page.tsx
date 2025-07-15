@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getTechSections } from '@/utils/sanity-data';
+import KPPDiagram from '@/components/technical/KPPDiagram';
 
 export const metadata: Metadata = {
   title: 'KPP Technology',
@@ -83,6 +84,24 @@ const technologyFeatures = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     )
+  }
+];
+
+const components = [
+  {
+    name: 'Kinetic Module',
+    icon: '⚡',
+    description: 'The core unit that converts kinetic energy into electricity.'
+  },
+  {
+    name: 'Control System',
+    icon: '🧠',
+    description: 'Advanced electronics for monitoring and optimizing performance.'
+  },
+  {
+    name: 'Power Electronics',
+    icon: '🔌',
+    description: 'Inverters and converters to deliver grid-ready power.'
   }
 ];
 
@@ -175,7 +194,7 @@ export default async function TechnologyPage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {advantages.map((advantage, index) => (
+            {technologyFeatures.map((advantage, index) => (
               <div key={index} className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl text-white">{advantage.icon}</span>

@@ -45,13 +45,20 @@ export default function MiniAbout() {
           
           {/* Visual/Image Placeholder */}
           <div className="bg-gray-light rounded-lg p-8 text-center">
-            <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center">
-              <div className="text-white text-center">
-                <svg className="w-8 h-8 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-                <p className="text-lg font-semibold">Deep Engineering HQ</p>
-                <p className="text-sm opacity-90">Erbil, Iraq</p>
+            <div className="w-full h-64 relative rounded-lg flex items-center justify-center overflow-hidden">
+              <video
+                className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                src="/hq-video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label="Deep Engineering HQ video background"
+              />
+              <div className="relative z-10 flex flex-col items-center justify-center w-full h-full pointer-events-none select-none">
+                <span className="text-4xl md:text-6xl font-extrabold tracking-widest text-white opacity-20 whitespace-pre-line text-center drop-shadow-lg">
+                  Deep Engineering HQ\nErbil, Iraq
+                </span>
               </div>
             </div>
           </div>

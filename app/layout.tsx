@@ -12,7 +12,6 @@ import SEOOptimizer from '@/components/SEOOptimizer'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import Analytics from '@/components/Analytics'
-import MobileTestingChecklist from '@/components/MobileTestingChecklist'
 import { Crimson_Pro, Heebo } from 'next/font/google';
 
 const crimsonPro = Crimson_Pro({ subsets: ['latin'], variable: '--font-serif', display: 'swap' });
@@ -172,7 +171,6 @@ export default function RootLayout({
             </HydrationSuppressor>
           </PerformanceOptimizer>
         </ErrorBoundary>
-        {process.env.NODE_ENV === 'development' && <MobileTestingChecklist />}
       </body>
     </html>
   )

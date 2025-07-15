@@ -31,10 +31,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/projects/page.js"
     ],
-    "/contact/page": [
+    "/technology/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/contact/page.js"
+      "static/chunks/app/technology/page.js"
+    ],
+    "/technology/specifications/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/technology/specifications/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ],
+    "/economics/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/economics/page.js"
     ]
   }
 }
