@@ -12,6 +12,7 @@ import SEOOptimizer from '@/components/SEOOptimizer'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import Analytics from '@/components/Analytics'
+import BrowserCompatibility from '@/components/BrowserCompatibility'
 import { Crimson_Pro, Heebo } from 'next/font/google';
 
 const crimsonPro = Crimson_Pro({ subsets: ['latin'], variable: '--font-serif', display: 'swap' });
@@ -153,6 +154,7 @@ export default function RootLayout({
         <SEOOptimizer />
         <PerformanceMonitor />
         <Analytics />
+        <BrowserCompatibility />
         <ErrorBoundary>
           <PerformanceOptimizer>
             <HydrationSuppressor>

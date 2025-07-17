@@ -2,12 +2,22 @@
 
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
+import { 
+  Zap, 
+  ArrowUp, 
+  RotateCcw, 
+  RefreshCw,
+  Lightbulb,
+  Settings,
+  BarChart3,
+  Cpu
+} from 'lucide-react';
 
 interface ProcessStep {
   step: string;
   title: string;
   description: string;
-  icon: string | React.ReactNode;
+  icon: React.ReactNode;
 }
 
 interface ProcessDiagramProps {

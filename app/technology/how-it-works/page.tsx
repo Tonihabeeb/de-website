@@ -3,6 +3,17 @@ import type { Metadata } from 'next';
 import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
 import ScrollTriggeredDiagram from '@/components/animations/ScrollTriggeredDiagram';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import HeroSection from '@/components/sections/HeroSection';
+import { 
+  Wind, 
+  ArrowUp, 
+  Zap, 
+  RotateCcw,
+  Fuel,
+  Sun,
+  Leaf,
+  TrendingUp
+} from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'How KPP Works',
@@ -35,25 +46,25 @@ const processSteps = [
     step: '01',
     title: 'Air Injection',
     description: 'Air is injected into underwater floaters, causing them to rise due to buoyancy forces.',
-    icon: <span role="img" aria-label="Air Injection">💨</span>
+    icon: <Wind className="w-8 h-8" />
   },
   {
     step: '02',
     title: 'Buoyancy-Driven Motion',
     description: 'The rising floaters drive a chain system that converts vertical motion into rotational energy.',
-    icon: <span role="img" aria-label="Buoyancy-Driven Motion">⬆️</span>
+    icon: <ArrowUp className="w-8 h-8" />
   },
   {
     step: '03',
     title: 'Energy Conversion',
     description: 'Rotational energy turns a generator to produce clean electrical power.',
-    icon: <span role="img" aria-label="Energy Conversion">⚡</span>
+    icon: <Zap className="w-8 h-8" />
   },
   {
     step: '04',
     title: 'Air Release & Cycle',
     description: 'At the top, air is released and the floater sinks back down to repeat the cycle continuously.',
-    icon: <span role="img" aria-label="Air Release and Cycle">🔄</span>
+    icon: <RotateCcw className="w-8 h-8" />
   }
 ];
 
@@ -61,40 +72,32 @@ const keyAdvantages = [
   {
     title: 'No Fuel Required',
     description: 'Operates entirely on kinetic energy, eliminating fuel costs and supply chain dependencies.',
-    icon: <span role="img" aria-label="No Fuel Required">🚫⛽</span>
+    icon: <Fuel className="w-8 h-8" />
   },
   {
     title: 'Weather Independent',
     description: 'Unlike solar or wind, KPP technology works continuously regardless of weather conditions.',
-    icon: <span role="img" aria-label="Weather Independent">🌤️</span>
+    icon: <Sun className="w-8 h-8" />
   },
   {
     title: 'Zero Emissions',
     description: 'Clean energy generation with no CO2, NOx, or particulate emissions.',
-    icon: <span role="img" aria-label="Zero Emissions">🌱</span>
+    icon: <Leaf className="w-8 h-8" />
   },
   {
     title: 'Baseload Capability',
     description: 'Provides reliable 24/7 power generation to meet continuous energy demands.',
-    icon: <span role="img" aria-label="Baseload Capability">📈</span>
+    icon: <TrendingUp className="w-8 h-8" />
   }
 ];
 
 export default function HowItWorksPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">How KPP Works</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Discover the innovative physics and engineering behind the Kinetic Power Plant 
-              technology that's revolutionizing energy generation.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="How KPP Works"
+        subtitle="Discover the innovative physics and engineering behind the Kinetic Power Plant technology that's revolutionizing energy generation."
+      />
 
       <div className="container"><Breadcrumbs /></div>
 

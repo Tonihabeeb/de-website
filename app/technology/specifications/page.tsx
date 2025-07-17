@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Link from 'next/link';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'KPP Technical Specifications - Deep Engineering',
@@ -34,18 +35,10 @@ export const metadata: Metadata = {
 export default function TechnologySpecificationsPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">KPP Technical Specifications</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Comprehensive technical specifications for our revolutionary Kinetic Power Plant (KPP) technology. 
-              Detailed component specifications, performance metrics, and operational parameters.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="KPP Technical Specifications"
+        subtitle="Comprehensive technical specifications for our revolutionary Kinetic Power Plant (KPP) technology. Detailed component specifications, performance metrics, and operational parameters."
+      />
 
       <div className="container"><Breadcrumbs /></div>
 

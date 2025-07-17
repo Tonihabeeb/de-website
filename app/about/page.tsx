@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { Sparkles, Landmark, BarChart3 } from 'lucide-react';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -30,18 +32,10 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white" aria-label="About overview">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">About Deep Engineering</h1>
-            <p className="text-xl text-white leading-relaxed">
-              We are Iraq's premier renewable energy company, dedicated to revolutionizing 
-              the country's energy landscape through innovative KPP technology.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="About Deep Engineering"
+        subtitle="We are Iraq's premier renewable energy company, dedicated to revolutionizing the country's energy landscape through innovative KPP technology."
+      />
 
       {/* Company Story */}
       <section className="section-padding bg-white" aria-label="Company story">
@@ -111,7 +105,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">R</span>
+                  <Sparkles className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-semibold mb-2">Rosch Innovations</h3>
                 <p className="text-gray-text text-sm">
@@ -122,7 +116,7 @@ export default function AboutPage() {
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">K</span>
+                  <Landmark className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-semibold mb-2">KRG Ministry of Electricity</h3>
                 <p className="text-gray-text text-sm">
@@ -133,7 +127,7 @@ export default function AboutPage() {
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">B</span>
+                  <BarChart3 className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="font-semibold mb-2">Board of Investment</h3>
                 <p className="text-gray-text text-sm">

@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Zap } from 'lucide-react';
 
 interface ProjectStatus {
   id: string;
@@ -172,7 +174,7 @@ export default function ProjectTracker() {
             <p className="text-gray-600 mb-2">{selectedProject.description}</p>
             <div className="flex items-center gap-4 text-sm text-gray-600">
               <span>📍 {selectedProject.location}</span>
-              <span>⚡ {selectedProject.capacity}</span>
+              <span><Zap className="w-4 h-4 inline mr-1" /> {selectedProject.capacity}</span>
               <span>📅 {new Date(selectedProject.completionDate).toLocaleDateString()}</span>
             </div>
           </div>

@@ -12,10 +12,31 @@ const nextConfig = {
   },
 
   // Static export configuration for cPanel
-  output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
+  },
+
+  // Development server configuration
+  allowedDevOrigins: [
+    '192.168.103.177',
+    'localhost',
+    '127.0.0.1'
+  ],
+
+  // Webpack configuration for better browser compatibility
+  webpack: (config, { dev, isServer }) => {
+    if (!isServer && dev) {
+      // Add fallbacks for browser APIs
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    
+    return config;
   },
 
   // Experimental features for better hydration handling

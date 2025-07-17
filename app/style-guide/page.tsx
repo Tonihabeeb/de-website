@@ -1,16 +1,16 @@
 import { 
-  BoltIcon, 
-  MapPinIcon, 
-  ClockIcon, 
-  SparklesIcon, 
-  CogIcon, 
-  ChartBarIcon,
-  UserIcon,
-  EnvelopeIcon,
-  PhoneIcon,
-  HomeIcon,
-  InformationCircleIcon
-} from '@heroicons/react/24/outline';
+  Zap, 
+  MapPin, 
+  Clock, 
+  Sparkles, 
+  Settings, 
+  BarChart3,
+  User,
+  Mail,
+  Phone,
+  Home,
+  Info
+} from 'lucide-react';
 import Button from '@/components/ui/Button';
 
 export default function StyleGuidePage() {
@@ -36,17 +36,17 @@ export default function StyleGuidePage() {
   ];
 
   const icons = [
-    { name: 'Bolt', icon: BoltIcon, description: 'Power/Energy' },
-    { name: 'Map Pin', icon: MapPinIcon, description: 'Location' },
-    { name: 'Clock', icon: ClockIcon, description: 'Time/Continuous' },
-    { name: 'Sparkles', icon: SparklesIcon, description: 'Clean/Green' },
-    { name: 'Cog', icon: CogIcon, description: 'Technology' },
-    { name: 'Chart Bar', icon: ChartBarIcon, description: 'Performance' },
-    { name: 'User', icon: UserIcon, description: 'Team/People' },
-    { name: 'Envelope', icon: EnvelopeIcon, description: 'Contact' },
-    { name: 'Phone', icon: PhoneIcon, description: 'Communication' },
-    { name: 'Home', icon: HomeIcon, description: 'Navigation' },
-    { name: 'Information', icon: InformationCircleIcon, description: 'Info' },
+    { name: 'Bolt', icon: Zap, description: 'Power/Energy' },
+    { name: 'Map Pin', icon: MapPin, description: 'Location' },
+    { name: 'Clock', icon: Clock, description: 'Time/Continuous' },
+    { name: 'Sparkles', icon: Sparkles, description: 'Clean/Green' },
+    { name: 'Cog', icon: Settings, description: 'Technology' },
+    { name: 'Chart Bar', icon: BarChart3, description: 'Performance' },
+    { name: 'User', icon: User, description: 'Team/People' },
+    { name: 'Envelope', icon: Mail, description: 'Contact' },
+    { name: 'Phone', icon: Phone, description: 'Communication' },
+    { name: 'Home', icon: Home, description: 'Navigation' },
+    { name: 'Information', icon: Info, description: 'Info' },
   ];
 
   return (
@@ -170,19 +170,19 @@ export default function StyleGuidePage() {
                 <div>
                   <h4 className="font-semibold text-primary mb-2">Sizes</h4>
                   <div className="flex items-center gap-4">
-                    <BoltIcon className="w-4 h-4 text-primary" />
-                    <BoltIcon className="w-6 h-6 text-primary" />
-                    <BoltIcon className="w-8 h-8 text-primary" />
-                    <BoltIcon className="w-12 h-12 text-primary" />
+                    <Zap className="w-4 h-4 text-primary" />
+                    <Zap className="w-6 h-6 text-primary" />
+                    <Zap className="w-8 h-8 text-primary" />
+                    <Zap className="w-12 h-12 text-primary" />
                   </div>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary mb-2">Colors</h4>
                   <div className="flex items-center gap-4">
-                    <BoltIcon className="w-6 h-6 text-primary" />
-                    <BoltIcon className="w-6 h-6 text-accent" />
-                    <BoltIcon className="w-6 h-6 text-gray-text" />
-                    <BoltIcon className="w-6 h-6 text-white bg-primary p-1 rounded" />
+                    <Zap className="w-6 h-6 text-primary" />
+                    <Zap className="w-6 h-6 text-accent" />
+                    <Zap className="w-6 h-6 text-gray-text" />
+                    <Zap className="w-6 h-6 text-white bg-primary p-1 rounded" />
                   </div>
                 </div>
               </div>
@@ -277,7 +277,7 @@ export default function StyleGuidePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-                <BoltIcon className="w-6 h-6 text-white" />
+                <Zap className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-primary mb-2">Feature Card</h3>
               <p className="text-gray-text">This is an example of a feature card with an icon, title, and description.</p>
@@ -285,7 +285,7 @@ export default function StyleGuidePage() {
             
             <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                <MapPinIcon className="w-6 h-6 text-white" />
+                <MapPin className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-primary mb-2">Location Card</h3>
               <p className="text-gray-text">Another example card showing different styling and content.</p>
@@ -293,7 +293,7 @@ export default function StyleGuidePage() {
             
             <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="w-12 h-12 bg-accent-warm rounded-lg flex items-center justify-center mb-4">
-                <ClockIcon className="w-6 h-6 text-white" />
+                <Clock className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-primary mb-2">Time Card</h3>
               <p className="text-gray-text">A third example demonstrating the card component system.</p>

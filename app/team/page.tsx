@@ -5,6 +5,7 @@ import { getTeamMembers } from '@/utils/sanity-data';
 import { urlForImage } from '@/lib/sanity';
 import { Fragment } from 'react';
 import StructuredData from '@/components/StructuredData';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'Our Team',
@@ -64,17 +65,10 @@ export default async function TeamPage() {
     <Fragment>
       <StructuredData data={teamStructuredData} />
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white" aria-label="Team overview">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">Meet Our Team</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Our diverse team of engineers, innovators, and energy experts is dedicated to 
-              bringing KPP technology to Iraq and building a sustainable energy future.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Meet Our Team"
+        subtitle="Our diverse team of engineers, innovators, and energy experts is dedicated to bringing KPP technology to Iraq and building a sustainable energy future."
+      />
 
       {/* Team Grid */}
       <section className="section-padding bg-white" aria-label="Team members">

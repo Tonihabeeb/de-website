@@ -1,19 +1,13 @@
 import Link from 'next/link';
+import HeroSection from '@/components/sections/HeroSection';
 
 export default function NotFound() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">Page Not Found</h1>
-            <p className="text-xl text-white leading-relaxed">
-              The page you're looking for doesn't exist or has been moved.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Page Not Found"
+        subtitle="The page you're looking for doesn't exist or has been moved."
+      />
 
       {/* Content */}
       <section className="section-padding bg-white">

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'KPP Economic Analysis & ROI - Deep Engineering',
@@ -116,18 +117,10 @@ const investmentOpportunities = [
 export default function EconomicsPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">Economic Analysis</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Comprehensive economic analysis demonstrating KPP technology's superior cost-effectiveness, 
-              impressive ROI, and significant fuel savings compared to traditional energy sources.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Economic Analysis"
+        subtitle="Comprehensive economic analysis demonstrating KPP technology's superior cost-effectiveness, impressive ROI, and significant fuel savings compared to traditional energy sources."
+      />
 
       {/* LCOE Comparison */}
       <section className="section-padding bg-white">

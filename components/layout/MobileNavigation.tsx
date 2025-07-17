@@ -3,34 +3,66 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { 
+  Home, 
+  Zap, 
+  Building2, 
+  DollarSign, 
+  BookOpen, 
+  Target, 
+  Info, 
+  Users, 
+  Phone,
+  ChevronDown,
+  X,
+  BarChart3
+} from 'lucide-react';
 
 interface MobileNavItem {
   label: string;
   href: string;
-  icon: string;
+  icon: React.ReactNode;
   children?: { label: string; href: string }[];
 }
 
 const mobileNavItems: MobileNavItem[] = [
-  { label: 'Home', href: '/', icon: '🏠' },
+  { label: 'Home', href: '/', icon: <Home className="w-5 h-5" /> },
   { 
     label: 'Technology', 
     href: '/technology', 
-    icon: '⚡',
+    icon: <Zap className="w-5 h-5" />,
     children: [
+      { label: 'Overview', href: '/technology' },
       { label: 'How It Works', href: '/technology/how-it-works' },
       { label: 'Components', href: '/technology/components' },
+      { label: 'Generator', href: '/technology/generator' },
+      { label: 'Floater', href: '/technology/floater' },
+      { label: 'Conveyor Chain', href: '/technology/conveyor-chain' },
+      { label: 'Pneumatic System', href: '/technology/pneumatic-system' },
+      { label: 'Gearbox', href: '/technology/gearbox' },
+      { label: 'Control System', href: '/technology/control-system' },
       { label: 'Performance', href: '/technology/performance' },
-      { label: 'Specifications', href: '/technology/specifications' }
+      { label: 'Specifications', href: '/technology/specifications' },
+      { label: 'KPP Technical Documentation', href: '/technology/kpp-documentation' },
     ]
   },
-  { label: 'Projects', href: '/projects', icon: '🏗️' },
-  { label: 'Economics', href: '/economics', icon: '💰' },
-  { label: 'Resources', href: '/resources', icon: '📚' },
-  { label: 'Interactive', href: '/interactive-features', icon: '🎯' },
-  { label: 'About', href: '/about', icon: 'ℹ️' },
-  { label: 'Team', href: '/team', icon: '👥' },
-  { label: 'Contact', href: '/contact', icon: '📞' }
+  {
+    label: 'Dashboards',
+    href: '/dashboard',
+    icon: <BarChart3 className="w-5 h-5" />,
+    children: [
+      { label: 'Project Progress', href: '/dashboard/project-progress' },
+      { label: 'Financial', href: '/dashboard/financial' },
+      { label: 'Resources', href: '/resources' },
+    ]
+  },
+  { label: 'Projects', href: '/projects', icon: <Building2 className="w-5 h-5" /> },
+  { label: 'Economics', href: '/economics', icon: <DollarSign className="w-5 h-5" /> },
+  { label: 'Resources', href: '/resources', icon: <BookOpen className="w-5 h-5" /> },
+  { label: 'Interactive', href: '/interactive-features', icon: <Target className="w-5 h-5" /> },
+  { label: 'About', href: '/about', icon: <Info className="w-5 h-5" /> },
+  { label: 'Team', href: '/team', icon: <Users className="w-5 h-5" /> },
+  { label: 'Contact', href: '/contact', icon: <Phone className="w-5 h-5" /> }
 ];
 
 export default function MobileNavigation() {
@@ -106,9 +138,7 @@ export default function MobileNavigation() {
               className="p-2 text-gray-500 hover:text-gray-700 touch-target"
               aria-label="Close menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="w-6 h-6" />
             </button>
           </div>
 
@@ -130,16 +160,11 @@ export default function MobileNavigation() {
                           <span className="text-xl mr-3">{item.icon}</span>
                           <span className="font-medium">{item.label}</span>
                         </div>
-                        <svg
+                        <ChevronDown
                           className={`w-5 h-5 transition-transform duration-200 ${
                             expandedItem === item.label ? 'rotate-180' : ''
                           }`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
+                        />
                       </button>
                       
                       {expandedItem === item.label && (

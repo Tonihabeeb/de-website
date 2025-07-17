@@ -3,6 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation, useReducedMotion } from 'framer-motion';
 import { trackDiagramInteraction } from '@/components/Analytics';
+import { 
+  Zap, 
+  Wind, 
+  ArrowUp, 
+  Settings
+} from 'lucide-react';
 
 interface KPPAnimationProps {
   className?: string;
@@ -152,11 +158,14 @@ export default function KPPAnimation({
           >
             <div className="w-16 h-16 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center">
               <div className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
-                <span className="text-white text-lg">💨</span>
+                <Wind className="w-8 h-8 text-white" />
               </div>
             </div>
             <div className="text-center mt-2">
-              <p className="text-xs font-semibold text-gray-700">Air Injection</p>
+              <div className="flex items-center justify-center space-x-2 text-white text-sm">
+                <Wind className="w-4 h-4" />
+                <span>Air Injection</span>
+              </div>
             </div>
           </motion.div>
 
@@ -192,11 +201,14 @@ export default function KPPAnimation({
           >
             <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                <span className="text-blue-600 text-2xl">⚡</span>
+                <Zap className="w-12 h-12 text-white" />
               </div>
             </div>
             <div className="text-center mt-2">
-              <p className="text-xs font-semibold text-gray-700">Floater</p>
+              <div className="flex items-center justify-center space-x-2 text-white text-sm">
+                <ArrowUp className="w-4 h-4" />
+                <span>Buoyancy</span>
+              </div>
             </div>
           </motion.div>
 
@@ -217,7 +229,10 @@ export default function KPPAnimation({
               <div className="w-8 h-8 bg-gray-600 rounded-full"></div>
             </div>
             <div className="text-center mt-2">
-              <p className="text-xs font-semibold text-gray-700">Chain</p>
+              <div className="flex items-center justify-center space-x-2 text-white text-sm">
+                <Settings className="w-4 h-4" />
+                <span>Conversion</span>
+              </div>
             </div>
           </motion.div>
 
@@ -235,10 +250,13 @@ export default function KPPAnimation({
             }}
           >
             <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center">
-              <span className="text-white text-2xl">⚡</span>
+              <Zap className="w-16 h-16 text-white" />
             </div>
             <div className="text-center mt-2">
-              <p className="text-xs font-semibold text-gray-700">Generator</p>
+              <div className="flex items-center justify-center space-x-2 text-white text-sm">
+                <Zap className="w-4 h-4" />
+                <span>Power</span>
+              </div>
             </div>
           </motion.div>
 
@@ -299,25 +317,25 @@ export default function KPPAnimation({
         <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
             <div className="w-8 h-8 bg-blue-400 rounded-full mx-auto mb-2 flex items-center justify-center">
-              <span className="text-white text-sm">💨</span>
+              <Wind className="w-8 h-8 text-white" />
             </div>
             <p className="text-xs text-gray-600">Air Injection</p>
           </div>
           <div className="text-center">
             <div className="w-8 h-8 bg-blue-500 rounded-full mx-auto mb-2 flex items-center justify-center">
-              <span className="text-white text-sm">⬆️</span>
+              <ArrowUp className="w-8 h-8 text-white" />
             </div>
             <p className="text-xs text-gray-600">Floater Rise</p>
           </div>
           <div className="text-center">
             <div className="w-8 h-8 bg-gray-400 rounded-full mx-auto mb-2 flex items-center justify-center">
-              <span className="text-white text-sm">⚙️</span>
+              <Settings className="w-8 h-8 text-white" />
             </div>
             <p className="text-xs text-gray-600">Chain Drive</p>
           </div>
           <div className="text-center">
             <div className="w-8 h-8 bg-green-500 rounded-lg mx-auto mb-2 flex items-center justify-center">
-              <span className="text-white text-sm">⚡</span>
+              <Zap className="w-8 h-8 text-white" />
             </div>
             <p className="text-xs text-gray-600">Power Output</p>
           </div>

@@ -3,9 +3,15 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import AnimatedCounter from '@/components/animations/AnimatedCounter';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  title: string;
+  subtitle: string;
+  children?: ReactNode;
+}
+
+export default function HeroSection({ title, subtitle, children }: HeroSectionProps) {
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -20,7 +26,7 @@ export default function HeroSection() {
   const particleCount = isReducedMotion ? 0 : (isMobile ? 8 : 20);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-primary-dark to-primary text-white overflow-hidden">
+    <section className="relative min-h-[40vh] flex items-center justify-center bg-gradient-to-br from-primary via-primary-dark to-primary text-white overflow-hidden">
       {/* Animated background particles */}
       <div className="absolute inset-0 pointer-events-none">
         {!isReducedMotion &&
@@ -30,8 +36,8 @@ export default function HeroSection() {
               className="absolute w-1 h-1 bg-white/20 rounded-full"
               style={{ willChange: 'transform, opacity' }}
               initial={{
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 400),
               }}
               animate={{
                 y: [null, -100],
@@ -46,9 +52,6 @@ export default function HeroSection() {
             />
           ))}
       </div>
-
-
-
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -78,7 +81,6 @@ export default function HeroSection() {
           }}
         />
       </div>
-
       <div className="container relative z-10 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Main Tagline */}
@@ -88,9 +90,8 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            Continuous Clean Energy, Anywhere
+            {title}
           </motion.h1>
-          
           {/* Subtagline */}
           <motion.p 
             className="text-xl lg:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed"
@@ -98,77 +99,9 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
-            Delivering 24/7 renewable power through the revolutionary Kinetic Power Plant (KPP) 
-            technology – no fuel, no emissions.
+            {subtitle}
           </motion.p>
-          
-          {/* Call to Action Buttons */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link 
-                href="/technology"
-                className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg min-w-[44px] min-h-[44px]"
-              >
-                Learn More
-              </Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link 
-                href="/contact"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px]"
-              >
-                Contact Us
-              </Link>
-            </motion.div>
-          </motion.div>
-          
-          {/* Key Stats */}
-          <motion.div 
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          >
-            <motion.div 
-              className="text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="text-2xl font-bold mb-2">
-                <span className="drop-shadow-sm"><AnimatedCounter end={390} suffix=" MW" /></span>
-              </div>
-              <div className="text-white drop-shadow-sm">Planned Capacity</div>
-            </motion.div>
-            <motion.div 
-              className="text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="text-2xl font-bold mb-2">24/7</div>
-              <div className="text-white drop-shadow-sm">Continuous Power</div>
-            </motion.div>
-            <motion.div 
-              className="text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="text-2xl font-bold mb-2">
-                <span className="drop-shadow-sm"><AnimatedCounter end={0} /></span>
-              </div>
-              <div className="text-white drop-shadow-sm">Emissions</div>
-            </motion.div>
-          </motion.div>
+          {children}
         </div>
       </div>
       

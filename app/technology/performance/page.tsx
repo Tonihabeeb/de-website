@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import { Leaf, Fuel, Mountain, Droplets } from 'lucide-react';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'KPP Performance & Specifications',
@@ -102,43 +104,35 @@ const environmentalBenefits = [
     title: 'Zero Emissions',
     description: 'KPP technology produces no CO2, NOx, or particulate emissions during operation.',
     impact: 'Eliminates air pollution and contributes to climate change mitigation.',
-    icon: '🌱'
+    icon: <Leaf className="w-8 h-8" />
   },
   {
     title: 'No Fuel Consumption',
     description: 'Operates entirely on kinetic energy, eliminating fuel extraction and transportation.',
     impact: 'Reduces environmental damage from fuel production and logistics.',
-    icon: '🚫⛽'
+    icon: <Fuel className="w-8 h-8" />
   },
   {
     title: 'Minimal Land Use',
     description: 'Compact design requires significantly less land than traditional power plants.',
     impact: 'Preserves natural habitats and reduces land use conflicts.',
-    icon: '🏞️'
+    icon: <Mountain className="w-8 h-8" />
   },
   {
     title: 'No Water Usage',
     description: 'Unlike thermal power plants, KPP technology doesn\'t require water for cooling.',
     impact: 'Conserves water resources and eliminates thermal pollution.',
-    icon: '💧'
+    icon: <Droplets className="w-8 h-8" />
   }
 ];
 
 export default function PerformancePage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6">Performance & Specifications</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Detailed performance data, efficiency metrics, and environmental impact 
-              analysis of KPP technology.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Performance & Specifications"
+        subtitle="Detailed performance data, efficiency metrics, and environmental impact analysis of KPP technology."
+      />
 
       <div className="container"><Breadcrumbs /></div>
 
@@ -231,7 +225,7 @@ export default function PerformancePage() {
             {environmentalBenefits.map((benefit, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="flex items-start">
-                  <div className="text-4xl mr-4">{benefit.icon}</div>
+                  <div className="mr-4">{benefit.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-3">{benefit.title}</h3>
                     <p className="text-gray-text mb-3">{benefit.description}</p>

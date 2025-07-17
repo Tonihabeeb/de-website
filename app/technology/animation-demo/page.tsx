@@ -5,6 +5,7 @@ import KPPAnimation from '@/components/animations/KPPAnimation';
 import KPPAnimationBlueprint from '@/components/animations/KPPAnimationBlueprint';
 import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'KPP Interactive Diagrams & Animations',
@@ -35,18 +36,10 @@ export const metadata: Metadata = {
 export default function AnimationDemoPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">Interactive KPP Diagrams</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Explore our comprehensive collection of interactive diagrams and animations 
-              that bring KPP technology to life through engaging visual experiences.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Interactive KPP Diagrams"
+        subtitle="Explore our comprehensive collection of interactive diagrams and animations that bring KPP technology to life through engaging visual experiences."
+      />
 
       <div className="container"><Breadcrumbs /></div>
 

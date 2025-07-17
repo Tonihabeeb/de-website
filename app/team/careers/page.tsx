@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import { DollarSign, TrendingUp, Lightbulb, Scale, Heart, Handshake, Check, ArrowRight, MapPin, Briefcase, Clock } from 'lucide-react';
 import Link from 'next/link';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'Careers at Deep Engineering - Join Our Team',
@@ -130,50 +132,42 @@ const benefits = [
   {
     title: 'Competitive Compensation',
     description: 'Attractive salary packages with performance-based bonuses and comprehensive benefits.',
-    icon: '💰'
+    icon: <DollarSign className="w-8 h-8" />
   },
   {
     title: 'Professional Growth',
     description: 'Continuous learning opportunities, training programs, and career advancement paths.',
-    icon: '📈'
+    icon: <TrendingUp className="w-8 h-8" />
   },
   {
     title: 'Innovation Culture',
     description: 'Work on cutting-edge renewable energy technology that\'s transforming Iraq\'s energy landscape.',
-    icon: '💡'
+    icon: <Lightbulb className="w-8 h-8" />
   },
   {
     title: 'Work-Life Balance',
     description: 'Flexible working arrangements and generous leave policies to support your well-being.',
-    icon: '⚖️'
+    icon: <Scale className="w-8 h-8" />
   },
   {
     title: 'Health & Wellness',
     description: 'Comprehensive health insurance and wellness programs for you and your family.',
-    icon: '🏥'
+    icon: <Heart className="w-8 h-8" />
   },
   {
     title: 'Team Environment',
     description: 'Collaborative, supportive work environment with passionate professionals.',
-    icon: '🤝'
+    icon: <Handshake className="w-8 h-8" />
   }
 ];
 
 export default function CareersPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">Join Our Mission</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Be part of the team revolutionizing Iraq's energy landscape with innovative KPP technology. 
-              Help us build a sustainable future for generations to come.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Join Our Mission"
+        subtitle="Be part of the team revolutionizing Iraq's energy landscape with innovative KPP technology. Help us build a sustainable future for generations to come."
+      />
 
       <div className="container"><Breadcrumbs /></div>
 
@@ -192,7 +186,7 @@ export default function CareersPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {benefits.map((benefit, index) => (
                 <div key={index} className="bg-gray-50 rounded-lg p-6 text-center">
-                  <div className="text-4xl mb-4">{benefit.icon}</div>
+                  <div className="mb-4">{benefit.icon}</div>
                   <h3 className="text-xl font-semibold text-primary mb-3">{benefit.title}</h3>
                   <p className="text-gray-600">{benefit.description}</p>
                 </div>
@@ -222,28 +216,19 @@ export default function CareersPage() {
                       <h3 className="text-xl font-semibold text-primary mb-2">{job.title}</h3>
                       <div className="flex flex-wrap gap-4 text-sm text-gray-600">
                         <span className="flex items-center">
-                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                          </svg>
+                          <Briefcase className="w-4 h-4 mr-1" />
                           {job.department}
                         </span>
                         <span className="flex items-center">
-                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
+                          <MapPin className="w-4 h-4 mr-1" />
                           {job.location}
                         </span>
                         <span className="flex items-center">
-                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
+                          <Clock className="w-4 h-4 mr-1" />
                           {job.type}
                         </span>
                         <span className="flex items-center">
-                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
-                          </svg>
+                          <TrendingUp className="w-4 h-4 mr-1" />
                           {job.experience}
                         </span>
                       </div>
@@ -261,9 +246,7 @@ export default function CareersPage() {
                       <ul className="space-y-2">
                         {job.requirements.map((req, index) => (
                           <li key={index} className="flex items-start">
-                            <svg className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
+                            <Check className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                             <span className="text-sm text-gray-600">{req}</span>
                           </li>
                         ))}
@@ -275,9 +258,7 @@ export default function CareersPage() {
                       <ul className="space-y-2">
                         {job.responsibilities.map((resp, index) => (
                           <li key={index} className="flex items-start">
-                            <svg className="w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+                            <ArrowRight className="w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
                             <span className="text-sm text-gray-600">{resp}</span>
                           </li>
                         ))}

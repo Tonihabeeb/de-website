@@ -1,5 +1,4 @@
 {
-  "/technology/specifications/page": "app/technology/specifications/page.js",
-  "/technology/page": "app/technology/page.js",
-  "/economics/page": "app/economics/page.js"
+  "/technology/components/full/page": "app/technology/components/full/page.js",
+  "/technology/components/page": "app/technology/components/page.js"
 }

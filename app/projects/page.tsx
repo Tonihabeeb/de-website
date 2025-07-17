@@ -6,6 +6,8 @@ import { urlForImage } from '@/lib/sanity';
 import { Fragment } from 'react';
 import StructuredData from '@/components/StructuredData';
 import ProjectMap from '@/components/maps/ProjectMap';
+import { FolderOpen } from 'lucide-react';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'Our Projects',
@@ -72,17 +74,10 @@ export default async function ProjectsPage() {
     <Fragment>
       <StructuredData data={projectsStructuredData} />
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white" aria-label="Projects overview">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">Our Projects</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Deep Engineering is currently developing 390 MW of KPP projects across Iraq 
-              to deliver clean energy where it's needed most.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Our Projects"
+        subtitle="Deep Engineering is currently developing 390 MW of KPP projects across Iraq to deliver clean energy where it's needed most."
+      />
 
       {/* Projects Overview */}
       <section className="section-padding bg-white" aria-label="Project portfolio">
@@ -159,9 +154,7 @@ export default async function ProjectsPage() {
           ) : (
             <div className="text-center py-12">
               <div className="text-gray-600 mb-4">
-                <svg className="w-1.5 h-1.5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+                <FolderOpen className="w-10 h-10 mx-auto" />
               </div>
               <h3 className="text-xl font-semibold text-gray-text mb-2">No Projects Found</h3>
               <p className="text-gray-text">Projects will appear here once they are added to the CMS.</p>

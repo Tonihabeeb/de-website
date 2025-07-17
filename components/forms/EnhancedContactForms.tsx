@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { MessageSquare, Building2, Settings, DollarSign } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -43,11 +44,11 @@ export default function EnhancedContactForms() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const formTypes = [
-    { id: 'general', label: 'General Inquiry', icon: '💬' },
-    { id: 'project', label: 'Project Inquiry', icon: '🏗️' },
-    { id: 'technical', label: 'Technical Support', icon: '⚙️' },
-    { id: 'investment', label: 'Investment', icon: '💰' }
+  const formTypes: { id: string; label: string; icon: React.ReactNode }[] = [
+    { id: 'general', label: 'General Inquiry', icon: <MessageSquare className="w-6 h-6" /> },
+    { id: 'project', label: 'Project Inquiry', icon: <Building2 className="w-6 h-6" /> },
+    { id: 'technical', label: 'Technical Support', icon: <Settings className="w-6 h-6" /> },
+    { id: 'investment', label: 'Investment', icon: <DollarSign className="w-6 h-6" /> }
   ];
 
   const validateForm = (): boolean => {

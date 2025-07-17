@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import EnergyCostCalculator from '@/components/calculators/EnergyCostCalculator';
 import ProjectTracker from '@/components/projects/ProjectTracker';
 import EnhancedContactForms from '@/components/forms/EnhancedContactForms';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
   title: 'Interactive Features - Deep Engineering',
@@ -13,18 +14,10 @@ export const metadata: Metadata = {
 export default function InteractiveFeaturesPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">Interactive Features</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Explore our interactive tools and calculators designed to help you understand KPP technology, 
-              track project progress, and connect with our team.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Interactive Features"
+        subtitle="Explore our interactive tools and calculators designed to help you understand KPP technology, track project progress, and connect with our team."
+      />
 
       {/* Energy Cost Calculator */}
       <section className="section-padding bg-white">

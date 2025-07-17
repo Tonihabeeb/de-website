@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { MonitorSmartphone, X as LucideX } from 'lucide-react';
 
 export default function PWARegistration() {
   const [isInstallable, setIsInstallable] = useState(false);
@@ -81,15 +82,13 @@ export default function PWARegistration() {
           <div className="flex items-start space-x-3">
             <div className="flex-shrink-0">
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
+                <MonitorSmartphone className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-base font-medium text-gray-900">Install Deep Engineering</h3>
               <p className="text-base text-gray-600 mt-1">
-                Add to your home screen for quick access and offline features.
+                Add to your home screen for quick access.
               </p>
             </div>
             <button
@@ -97,9 +96,7 @@ export default function PWARegistration() {
               className="flex-shrink-0 text-gray-400 hover:text-gray-600 touch-target min-w-[44px] min-h-[44px]"
               aria-label="Dismiss install prompt"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <LucideX className="w-5 h-5" />
             </button>
           </div>
           <div className="mt-3 flex space-x-2">

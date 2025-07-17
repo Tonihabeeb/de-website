@@ -2,6 +2,19 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getTechSections } from '@/utils/sanity-data';
 import KPPDiagram from '@/components/technical/KPPDiagram';
+import HeroSection from '@/components/sections/HeroSection';
+import { 
+  Heart, 
+  Clock, 
+  MapPin, 
+  Building2, 
+  Home, 
+  Zap,
+  Brain,
+  Plug,
+  Settings,
+  BarChart3
+} from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'KPP Technology',
@@ -33,74 +46,49 @@ const technologyFeatures = [
   {
     title: 'Clean Power',
     description: 'Operates without any fuel, water, wind or solar input – generating electricity with zero emissions (no CO₂, NOx, or other pollutants).',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-    )
+    icon: <Heart className="w-8 h-8" />
   },
   {
     title: 'Continuous Power',
     description: 'Provides stable baseload power 24/7, independent of weather conditions, with built-in redundancy ensuring near 100% uptime.',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
+    icon: <Clock className="w-8 h-8" />
   },
   {
     title: 'Decentralized',
     description: 'Can be installed at the point of need – even off-grid locations – reducing transmission losses.',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    )
+    icon: <MapPin className="w-8 h-8" />
   },
   {
     title: 'Scalable',
     description: 'Modular design allows capacity from a few megawatts to 100+ MW by paralleling units. Start with what you need and expand easily.',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-      </svg>
-    )
+    icon: <Building2 className="w-8 h-8" />
   },
   {
     title: 'Small Footprint',
     description: 'Requires far less land than solar or wind: ~300 m² per MW (vs. thousands for other sources).',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-      </svg>
-    )
+    icon: <Home className="w-8 h-8" />
   },
   {
     title: 'Competitive',
     description: 'Projected levelized cost ~€25/MWh – delivering affordable energy along with grid stability benefits.',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    )
+    icon: <Zap className="w-8 h-8" />
   }
 ];
 
 const components = [
   {
     name: 'Kinetic Module',
-    icon: '⚡',
+    icon: <Zap className="w-6 h-6" />,
     description: 'The core unit that converts kinetic energy into electricity.'
   },
   {
     name: 'Control System',
-    icon: '🧠',
+    icon: <Brain className="w-6 h-6" />,
     description: 'Advanced electronics for monitoring and optimizing performance.'
   },
   {
     name: 'Power Electronics',
-    icon: '🔌',
+    icon: <Plug className="w-6 h-6" />,
     description: 'Inverters and converters to deliver grid-ready power.'
   }
 ];
@@ -110,19 +98,19 @@ const technologySections = [
     title: 'How It Works',
     description: 'Understand the physics and engineering behind KPP technology.',
     href: '/technology/how-it-works',
-    icon: '⚙️'
+    icon: <Settings className="w-6 h-6" />
   },
   {
     title: 'Components',
     description: 'Explore the key components that make up a KPP power plant.',
     href: '/technology/components',
-    icon: '🔧'
+    icon: <Settings className="w-6 h-6" />
   },
   {
     title: 'Performance',
     description: 'View detailed specifications, efficiency data, and environmental impact.',
     href: '/technology/performance',
-    icon: '📊'
+    icon: <BarChart3 className="w-6 h-6" />
   }
 ];
 
@@ -133,18 +121,10 @@ export default async function TechnologyPage() {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white" aria-label="Technology overview">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-6 text-white drop-shadow-md">KPP Technology</h1>
-            <p className="text-xl text-white leading-relaxed">
-              Discover the revolutionary Kinetic Power Plant technology that's transforming 
-              energy generation with zero emissions and continuous operation.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Kinetic Power Plant Technology"
+        subtitle="Discover the revolutionary Kinetic Power Plant technology that's transforming renewable energy in Iraq and beyond. Clean, continuous, and deployable anywhere."
+      />
 
       <section className="section-padding bg-white" aria-label="Technology overview content">
         <div className="container">
@@ -197,7 +177,7 @@ export default async function TechnologyPage() {
             {technologyFeatures.map((advantage, index) => (
               <div key={index} className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl text-white">{advantage.icon}</span>
+                  <div className="text-white">{advantage.icon}</div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{advantage.title}</h3>
                 <p className="text-gray-text">{advantage.description}</p>
@@ -221,7 +201,7 @@ export default async function TechnologyPage() {
             {components.map((component, index) => (
               <div key={index} className="bg-gray-light p-6 rounded-lg">
                 <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-white font-bold">{component.icon}</span>
+                  <div className="text-white">{component.icon}</div>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{component.name}</h3>
                 <p className="text-gray-text">{component.description}</p>

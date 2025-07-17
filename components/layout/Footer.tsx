@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { MapPin, Mail } from 'lucide-react';
 
 const footerNavigation = {
   company: [
@@ -37,9 +38,9 @@ export default function Footer() {
               technology into sustainable power solutions.
             </p>
             <address className="space-y-2 text-sm text-white not-italic drop-shadow-lg">
-              <p>📍 Roya Tower A 1-14, Erbil-44001, Iraq (HQ)</p>
-              <p>📍 Al Muhendisen - Al Zubair Road, Basra, Iraq (Branch)</p>
-              <p>📧 <a href="mailto:info@deepengineering.co" className="underline min-w-[44px] min-h-[44px] inline-block text-center">info@deepengineering.co</a></p>
+              <p><MapPin className="inline w-5 h-5 mr-2 text-white align-text-bottom" />Roya Tower A 1-14, Erbil-44001, Iraq (HQ)</p>
+              <p><MapPin className="inline w-5 h-5 mr-2 text-white align-text-bottom" />Al Muhendisen - Al Zubair Road, Basra, Iraq (Branch)</p>
+              <p><Mail className="inline w-5 h-5 mr-2 text-white align-text-bottom" /><a href="mailto:info@deepengineering.co" className="underline min-w-[44px] min-h-[44px] inline-block text-center">info@deepengineering.co</a></p>
             </address>
           </div>
 

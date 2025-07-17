@@ -2,13 +2,27 @@
 
 import { useEffect, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { 
+  Zap, 
+  ArrowUp, 
+  RotateCcw, 
+  RefreshCw,
+  Lightbulb,
+  Settings,
+  BarChart3,
+  Cpu,
+  Gauge,
+  Target,
+  Shield,
+  Wrench
+} from 'lucide-react';
 
 interface ScrollTriggeredDiagramProps {
   steps: Array<{
     step: string;
     title: string;
     description: string;
-    icon: string | React.ReactNode;
+    icon: React.ReactNode;
   }>;
 }
 
