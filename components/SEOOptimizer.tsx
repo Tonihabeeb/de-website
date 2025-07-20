@@ -221,6 +221,7 @@ export default function SEOOptimizer() {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (!pathname) return;
     const config = seoConfigs[pathname];
     if (!config) return;
 

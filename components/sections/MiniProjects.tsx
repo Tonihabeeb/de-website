@@ -1,58 +1,217 @@
-import Link from 'next/link';
-import { getProjects } from '@/utils/sanity-data';
+'use client';
 
-export default async function MiniProjects() {
-  // Fetch projects from Sanity CMS (limit to 3 for mini display)
-  const allProjects = await getProjects();
-  const projects = allProjects ? allProjects.slice(0, 3) : [];
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { apiFetch } from '@/utils/api';
+import { useAuth } from '@/contexts/AuthContext';
+
+interface Project {
+  _id: string;
+  title: string;
+  description: string;
+  location: string;
+  status: string;
+  type?: string;
+  timeline?: string;
+  capacityMW?: number;
+  partners?: string[];
+  image?: string;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ProjectsResponse {
+  documents: Project[];
+}
+
+// Sample projects for unauthenticated users
+const sampleProjects = [
+  {
+    _id: 'sample-1',
+    title: 'KPP Power Plant - Erbil',
+    description: 'Our flagship Kinetic Power Plant project in Erbil, demonstrating 24/7 renewable energy generation with zero emissions.',
+    location: 'Erbil, Iraq',
+    status: 'In Progress',
+    capacityMW: 50,
+    image: '/hero-static.svg',
+    category: 'renewable-energy',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-01'
+  },
+  {
+    _id: 'sample-2',
+    title: 'Green Energy Initiative',
+    description: 'Comprehensive renewable energy solution providing sustainable power to industrial facilities.',
+    location: 'Baghdad, Iraq',
+    status: 'Planning',
+    capacityMW: 25,
+    image: '/hero-static.svg',
+    category: 'industrial',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-01'
+  },
+  {
+    _id: 'sample-3',
+    title: 'Community Power Project',
+    description: 'Local community power generation using KPP technology to provide reliable electricity.',
+    location: 'Basra, Iraq',
+    status: 'Completed',
+    capacityMW: 10,
+    image: '/hero-static.svg',
+    category: 'community',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-01'
+  }
+];
+
+export default function MiniProjects() {
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticatedUser, setIsAuthenticatedUser] = useState(false);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        
+        // Only try to fetch real projects if user is authenticated
+        if (isAuthenticated) {
+          const response = await apiFetch<ProjectsResponse>('/api/documents?type=project');
+          const allProjects = response.documents || [];
+          // Limit to 3 projects for mini display
+          setProjects(allProjects.slice(0, 3));
+          setIsAuthenticatedUser(true);
+        } else {
+          // Show sample projects for unauthenticated users
+          setProjects(sampleProjects);
+          setIsAuthenticatedUser(false);
+        }
+      } catch (err: any) {
+        console.error('Error fetching projects:', err);
+        
+        // If it's an authentication error or any other error, show sample projects
+        if (err.status === 401 || !isAuthenticated) {
+          setProjects(sampleProjects);
+          setIsAuthenticatedUser(false);
+        } else {
+          setError('Failed to load projects.');
+          setProjects(sampleProjects); // Fallback to sample projects
+          setIsAuthenticatedUser(false);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // Only fetch when auth state is determined
+    if (!authLoading) {
+      fetchProjects();
+    }
+  }, [isAuthenticated, authLoading]);
+
+  // Show loading while auth is being determined
+  if (authLoading || isLoading) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-primary mb-4">Featured Projects</h2>
+            <p className="text-lg text-gray-text max-w-3xl mx-auto">
+              Discover some of our most innovative engineering solutions and successful project implementations.
+            </p>
+          </div>
+          <div className="text-center py-8">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <p className="text-gray-600 mt-4">Loading projects...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="section-padding bg-gray-light">
-      <div className="container">
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="mb-4">Our Projects</h2>
+          <h2 className="text-3xl font-bold text-primary mb-4">Featured Projects</h2>
           <p className="text-lg text-gray-text max-w-3xl mx-auto">
-            Deep Engineering is currently developing 390 MW of KPP projects across Iraq 
-            to deliver clean energy where it's needed most.
+            Discover some of our most innovative engineering solutions and successful project implementations.
           </p>
+          {!isAuthenticatedUser && (
+            <p className="text-sm text-gray-500 mt-2">
+              Showing sample projects. <Link href="/login" className="text-primary hover:text-primary-dark">Login</Link> to view detailed project information.
+            </p>
+          )}
         </div>
         
-        {projects && projects.length > 0 ? (
+        {error ? (
+          <div className="text-center py-8">
+            <p className="text-gray-600">{error}</p>
+          </div>
+        ) : projects.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {projects.map((project: any) => (
-                <div key={project._id} className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              {projects.map((project) => (
+                <div key={project._id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow bg-white">
+                  {project.image && (
+                    <div className="mb-4">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                  
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-semibold text-primary">{project.name}</h3>
-                    <span className="text-sm bg-primary text-white px-2 py-1 rounded">
-                      {project.capacityMW} MW
-                    </span>
+                    <h3 className="text-xl font-semibold text-primary">{project.title}</h3>
+                    {project.capacityMW && (
+                      <span className="text-sm bg-primary text-white px-2 py-1 rounded">
+                        {project.capacityMW} MW
+                      </span>
+                    )}
                   </div>
-                  <p className="text-sm text-gray-text mb-2">{project.location}</p>
-                  <p className="text-sm font-medium text-accent-warm mb-3">{project.status}</p>
-                  <p className="text-gray-text mb-4">{project.description}</p>
+                  
+                  <div className="space-y-2 mb-4">
+                    <p className="text-sm text-gray-text">
+                      <span className="font-medium">Location:</span> {project.location}
+                    </p>
+                    <p className="text-sm text-gray-text">
+                      <span className="font-medium">Status:</span> 
+                      <span className="text-accent-warm ml-1">{project.status}</span>
+                    </p>
+                  </div>
+                  
+                  <p className="text-gray-text text-sm mb-4 line-clamp-3">{project.description}</p>
                 </div>
               ))}
             </div>
             
             <div className="text-center">
               <Link 
-                href="/projects"
-                className="btn-secondary"
+                href="/projects" 
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
               >
                 View All Projects
+                <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
               </Link>
             </div>
           </>
         ) : (
-          <div className="text-center py-12">
+          <div className="text-center py-8">
             <div className="text-gray-600 mb-4">
-              <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-text mb-2">No Projects Found</h3>
-            <p className="text-gray-text">Projects will appear here once they are added to the CMS.</p>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No Projects Available</h3>
+            <p className="text-gray-text">Featured projects will appear here once they are added to the system.</p>
           </div>
         )}
       </div>

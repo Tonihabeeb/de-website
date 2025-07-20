@@ -3,10 +3,11 @@ import SearchSystem from '@/components/documentation/SearchSystem';
 import DocumentViewer from '@/components/documentation/DocumentViewer';
 import UploadSystem from '@/components/documentation/UploadSystem';
 import HeroSection from '@/components/sections/HeroSection';
+import AuthGuard from '@/components/auth/AuthGuard';
 
 export default function ResourcesPage() {
   return (
-    <>
+    <AuthGuard>
       <HeroSection
         title="Project Document Management"
         subtitle="Centralized access to all technical, business, legal, and environmental documents for KPP projects. Search, filter, preview, and manage your project documentation here."
@@ -64,6 +65,6 @@ export default function ResourcesPage() {
           </div>
         </section>
       </main>
-    </>
+    </AuthGuard>
   );
 } 

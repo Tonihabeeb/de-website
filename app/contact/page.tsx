@@ -20,6 +20,9 @@ interface FormErrors {
   [key: string]: string;
 }
 
+// Formspree configuration
+const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xpzgqkqw';
+
 export default function ContactPage() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -33,6 +36,7 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -55,6 +59,22 @@ export default function ContactPage() {
       newErrors.message = 'Message is required';
     } else if (formData.message.length < 10) {
       newErrors.message = 'Message must be at least 10 characters long';
+    }
+
+    // Basic spam protection - check for suspicious patterns
+    const suspiciousPatterns = [
+      /buy.*viagra/i,
+      /casino.*online/i,
+      /loan.*quick/i,
+      /http:\/\/.*\.ru/i,
+      /click.*here/i
+    ];
+
+    const messageText = formData.message.toLowerCase();
+    const hasSuspiciousContent = suspiciousPatterns.some(pattern => pattern.test(messageText));
+    
+    if (hasSuspiciousContent) {
+      newErrors.message = 'Your message contains content that appears to be spam. Please revise and try again.';
     }
 
     setErrors(newErrors);
@@ -86,22 +106,69 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setSubmitMessage('');
 
     try {
-      // Simulate form submission (replace with actual API call)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Prepare form data for Formspree
+      const formPayload = new FormData();
+      formPayload.append('name', formData.name);
+      formPayload.append('email', formData.email);
+      formPayload.append('company', formData.company);
+      formPayload.append('phone', formData.phone);
+      formPayload.append('subject', formData.subject);
+      formPayload.append('message', formData.message);
       
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        subject: '',
-        message: ''
+      // Add additional metadata
+      formPayload.append('_subject', `Deep Engineering Contact: ${formData.subject}`);
+      formPayload.append('_format', 'plain');
+      formPayload.append('_captcha', 'false'); // Disable captcha for better UX
+      formPayload.append('_template', 'table');
+
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: formPayload,
+        headers: {
+          'Accept': 'application/json',
+        },
       });
+
+      if (response.ok) {
+        const result = await response.json();
+        
+        if (result.ok) {
+          setSubmitStatus('success');
+          setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
+          
+          // Reset form
+          setFormData({
+            name: '',
+            email: '',
+            company: '',
+            phone: '',
+            subject: '',
+            message: ''
+          });
+        } else {
+          throw new Error(result.error || 'Form submission failed');
+        }
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
     } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
+      
+      if (error instanceof Error) {
+        if (error.message.includes('429')) {
+          setSubmitMessage('Too many requests. Please wait a moment before trying again.');
+        } else if (error.message.includes('403')) {
+          setSubmitMessage('Access denied. Please check your form data and try again.');
+        } else {
+          setSubmitMessage('There was an error sending your message. Please try again or contact us directly.');
+        }
+      } else {
+        setSubmitMessage('An unexpected error occurred. Please try again later.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -190,7 +257,7 @@ export default function ContactPage() {
                   <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded" role="alert" aria-live="polite">
                     <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 mr-2" />
-                      Thank you for your message! We'll get back to you soon.
+                      {submitMessage}
                     </div>
                   </div>
                 )}
@@ -199,7 +266,7 @@ export default function ContactPage() {
                   <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded" role="alert" aria-live="assertive">
                     <div className="flex items-center">
                       <AlertCircle className="w-5 h-5 mr-2" />
-                      There was an error sending your message. Please try again.
+                      {submitMessage}
                     </div>
                   </div>
                 )}
@@ -243,9 +310,12 @@ export default function ContactPage() {
                           errors.email ? 'border-red-500' : 'border-gray-300'
                         } min-h-[44px]`}
                         placeholder="your.email@example.com"
+                        aria-describedby={errors.email ? "email-error" : undefined}
+                        aria-invalid={!!errors.email}
+                        required
                       />
                       {errors.email && (
-                        <p className="mt-1 text-base text-red-600">{errors.email}</p>
+                        <p id="email-error" className="mt-1 text-base text-red-600" role="alert">{errors.email}</p>
                       )}
                     </div>
                   </div>
@@ -294,6 +364,9 @@ export default function ContactPage() {
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                         errors.subject ? 'border-red-500' : 'border-gray-300'
                       } min-h-[44px]`}
+                      aria-describedby={errors.subject ? "subject-error" : undefined}
+                      aria-invalid={!!errors.subject}
+                      required
                     >
                       <option value="">Select a subject</option>
                       <option value="KPP Technology Inquiry">KPP Technology Inquiry</option>
@@ -303,7 +376,7 @@ export default function ContactPage() {
                       <option value="General Inquiry">General Inquiry</option>
                     </select>
                     {errors.subject && (
-                      <p className="mt-1 text-base text-red-600">{errors.subject}</p>
+                      <p id="subject-error" className="mt-1 text-base text-red-600" role="alert">{errors.subject}</p>
                     )}
                   </div>
 
@@ -321,9 +394,12 @@ export default function ContactPage() {
                         errors.message ? 'border-red-500' : 'border-gray-300'
                       } min-h-[44px]`}
                       placeholder="Tell us about your inquiry..."
+                      aria-describedby={errors.message ? "message-error" : undefined}
+                      aria-invalid={!!errors.message}
+                      required
                     />
                     {errors.message && (
-                      <p className="mt-1 text-base text-red-600">{errors.message}</p>
+                      <p id="message-error" className="mt-1 text-base text-red-600" role="alert">{errors.message}</p>
                     )}
                   </div>
 

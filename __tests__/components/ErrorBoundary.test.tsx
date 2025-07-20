@@ -60,7 +60,7 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     )
     
-    const refreshButton = screen.getByText('Refresh Page')
+    const refreshButton = screen.getByText('Try Again')
     expect(refreshButton).toBeInTheDocument()
   })
 

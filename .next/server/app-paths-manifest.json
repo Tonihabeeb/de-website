@@ -1,4 +1,4 @@
 {
-  "/technology/components/full/page": "app/technology/components/full/page.js",
-  "/technology/components/page": "app/technology/components/page.js"
+  "/dashboard/financial/page": "app/dashboard/financial/page.js",
+  "/admin/financial/page": "app/admin/financial/page.js"
 }

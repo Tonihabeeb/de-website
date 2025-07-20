@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname ? pathname.split('/').filter(Boolean) : [];
 
   // Build up the breadcrumb links
   const crumbs = [

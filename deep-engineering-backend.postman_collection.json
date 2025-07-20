@@ -1,0 +1,232 @@
+{
+    "info": {
+      "name": "Deep Engineering Backend",
+      "_postman_id": "deep-engineering-backend-collection",
+      "description": "Test all backend endpoints for authentication, documents, audit logs, and dashboards.",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Auth",
+        "item": [
+          {
+            "name": "Register",
+            "request": {
+              "method": "POST",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"test1234\",\n  \"role\": \"admin\"\n}"
+              },
+              "url": { "raw": "http://localhost:4000/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "auth", "register"] }
+            }
+          },
+          {
+            "name": "Login",
+            "request": {
+              "method": "POST",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"test1234\"\n}"
+              },
+              "url": { "raw": "http://localhost:4000/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "auth", "login"] }
+            }
+          },
+          {
+            "name": "Get Current User",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/auth/me", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "auth", "me"] }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Documents",
+        "item": [
+          {
+            "name": "Create Document",
+            "request": {
+              "method": "POST",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  { "key": "title", "value": "Sample Doc", "type": "text" },
+                  { "key": "type", "value": "pdf", "type": "text" },
+                  { "key": "category", "value": "technical", "type": "text" },
+                  { "key": "file", "type": "file" }
+                ]
+              },
+              "url": { "raw": "http://localhost:4000/api/documents/", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "documents", ""] }
+            }
+          },
+          {
+            "name": "List Documents",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/documents/", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "documents", ""] }
+            }
+          },
+          {
+            "name": "Get Document by ID",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/documents/{{docId}}", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "documents", "{{docId}}"] }
+            }
+          },
+          {
+            "name": "Update Document",
+            "request": {
+              "method": "PUT",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "body": {
+                "mode": "formdata",
+                "formdata": [
+                  { "key": "title", "value": "Updated Doc", "type": "text" },
+                  { "key": "type", "value": "pdf", "type": "text" },
+                  { "key": "category", "value": "technical", "type": "text" },
+                  { "key": "file", "type": "file" }
+                ]
+              },
+              "url": { "raw": "http://localhost:4000/api/documents/{{docId}}", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "documents", "{{docId}}"] }
+            }
+          },
+          {
+            "name": "Delete Document",
+            "request": {
+              "method": "DELETE",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/documents/{{docId}}", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "documents", "{{docId}}"] }
+            }
+          },
+          {
+            "name": "Download Document",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/documents/{{docId}}/download", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "documents", "{{docId}}", "download"] }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Audit Logs",
+        "item": [
+          {
+            "name": "Get Audit Logs (admin only)",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/audit/", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "audit", ""] }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dashboards",
+        "item": [
+          {
+            "name": "Get Project Dashboard",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/dashboards/project", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "project"] }
+            }
+          },
+          {
+            "name": "Update Project Dashboard",
+            "request": {
+              "method": "PUT",
+              "header": [
+                { "key": "Authorization", "value": "Bearer {{jwt}}" },
+                { "key": "Content-Type", "value": "application/json" }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"data\": { \"progress\": 80, \"milestones\": [\"Design\", \"Build\", \"Test\"] }\n}"
+              },
+              "url": { "raw": "http://localhost:4000/api/dashboards/project", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "project"] }
+            }
+          },
+          {
+            "name": "Get Financial Dashboard",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/dashboards/financial", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "financial"] }
+            }
+          },
+          {
+            "name": "Update Financial Dashboard",
+            "request": {
+              "method": "PUT",
+              "header": [
+                { "key": "Authorization", "value": "Bearer {{jwt}}" },
+                { "key": "Content-Type", "value": "application/json" }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"data\": { \"revenue\": 1000000, \"expenses\": 500000 }\n}"
+              },
+              "url": { "raw": "http://localhost:4000/api/dashboards/financial", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "financial"] }
+            }
+          },
+          {
+            "name": "Get Environmental Dashboard",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/dashboards/environmental", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "environmental"] }
+            }
+          },
+          {
+            "name": "Update Environmental Dashboard",
+            "request": {
+              "method": "PUT",
+              "header": [
+                { "key": "Authorization", "value": "Bearer {{jwt}}" },
+                { "key": "Content-Type", "value": "application/json" }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"data\": { \"co2\": 2500000, \"water\": \"zero\" }\n}"
+              },
+              "url": { "raw": "http://localhost:4000/api/dashboards/environmental", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "environmental"] }
+            }
+          },
+          {
+            "name": "Get Stakeholder Dashboard",
+            "request": {
+              "method": "GET",
+              "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+              "url": { "raw": "http://localhost:4000/api/dashboards/stakeholder", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "stakeholder"] }
+            }
+          },
+          {
+            "name": "Update Stakeholder Dashboard",
+            "request": {
+              "method": "PUT",
+              "header": [
+                { "key": "Authorization", "value": "Bearer {{jwt}}" },
+                { "key": "Content-Type", "value": "application/json" }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"data\": { \"stakeholders\": [\"Gov\", \"Investors\", \"Community\"] }\n}"
+              },
+              "url": { "raw": "http://localhost:4000/api/dashboards/stakeholder", "protocol": "http", "host": ["localhost"], "port": "4000", "path": ["api", "dashboards", "stakeholder"] }
+            }
+          }
+        ]
+      }
+    ],
+    "variable": [
+      { "key": "jwt", "value": "" },
+      { "key": "docId", "value": "" }
+    ]
+  }

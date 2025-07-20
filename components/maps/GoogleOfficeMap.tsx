@@ -5,7 +5,7 @@ const containerStyle = { width: '100%', height: '400px' };
 const center = { lat: 36.191856681457985, lng: 43.968337343201846 };
 
 export default function GoogleOfficeMap() {
-  const [icon, setIcon] = useState(null);
+  const [icon, setIcon] = useState<google.maps.Icon | null>(null);
 
   const handleMapLoad = () => {
     if (window.google) {

@@ -2,11 +2,26 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, User, LogOut, FileText, Settings } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import RoleGuard from '@/components/auth/RoleGuard';
 
-const navigation = [
+interface SubMenuItem {
+  name: string;
+  href: string;
+  submenu?: SubMenuItem[];
+}
+
+interface NavigationItem {
+  name: string;
+  href: string;
+  submenu?: SubMenuItem[];
+  requiresAuth?: boolean;
+}
+
+const navigation: NavigationItem[] = [
   { name: 'Home', href: '/' },
   { 
     name: 'About', 
@@ -52,8 +67,11 @@ const navigation = [
     submenu: [
       { name: 'Project Progress', href: '/dashboard/project-progress' },
       { name: 'Financial', href: '/dashboard/financial' },
+      { name: 'Environment Dashboard', href: '/dashboard/environmental' },
+      { name: 'Stakeholders', href: '/dashboard/stakeholders' },
       { name: 'Resources', href: '/resources' },
-    ]
+    ],
+    requiresAuth: true
   },
   { 
     name: 'Services', 
@@ -74,26 +92,43 @@ const navigation = [
     ]
   },
   { name: 'Contact', href: '/contact' },
+  { 
+    name: 'Admin Panel', 
+    href: '/admin',
+    requiresAuth: true
+  },
 ];
 
 export default function Navbar() {
+  const { user, isAuthenticated, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [technologyDropdownOpen, setTechnologyDropdownOpen] = useState(false);
   const [dashboardsDropdownOpen, setDashboardsDropdownOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [teamDropdownOpen, setTeamDropdownOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const aboutDropdownRef = useRef<HTMLDivElement>(null);
   const technologyDropdownRef = useRef<HTMLDivElement>(null);
   const dashboardsDropdownRef = useRef<HTMLDivElement>(null);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
   const teamDropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
   const aboutButtonRef = useRef<HTMLButtonElement>(null);
   const technologyButtonRef = useRef<HTMLButtonElement>(null);
   const dashboardsButtonRef = useRef<HTMLButtonElement>(null);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const teamButtonRef = useRef<HTMLButtonElement>(null);
+  const userButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
+
+  // Filter navigation items based on authentication
+  const filteredNavigation = navigation.filter(item => {
+    if (item.requiresAuth && !isAuthenticated) {
+      return false;
+    }
+    return true;
+  });
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -118,6 +153,10 @@ export default function Navbar() {
           teamButtonRef.current && !teamButtonRef.current.contains(event.target as Node)) {
         setTeamDropdownOpen(false);
       }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target as Node) &&
+          userButtonRef.current && !userButtonRef.current.contains(event.target as Node)) {
+        setUserDropdownOpen(false);
+      }
     }
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -127,17 +166,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50" role="navigation" aria-label="Main navigation">
+    <nav className="bg-white shadow-lg">
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" aria-label="Deep Engineering - Go to homepage">
+          <Link href="/" aria-label="Deep Engineering - Go to homepage" className="flex-shrink-0">
             <Image src="/logo.svg" alt="Deep Engineering company logo" height={40} width={120} priority />
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center space-x-8" role="menubar">
-            {navigation.map((item) => (
+          {/* Desktop Navigation - Centered */}
+          <ul className="hidden md:flex items-center space-x-8 mx-auto" role="menubar">
+            {filteredNavigation.map((item) => (
               <li key={item.name} role="none" className="relative">
                 {item.submenu ? (
                   <div className="relative" ref={
@@ -284,7 +323,7 @@ export default function Navbar() {
                                   <ChevronDown className="w-4 h-4 ml-auto" />
                                 </button>
                                 <div className="absolute top-0 left-full w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-30 hidden group-hover:block group-focus-within:block">
-                                  {sub.submenu.map((nested) => (
+                                  {sub.submenu.map((nested: SubMenuItem) => (
                                     <Link
                                       key={nested.name}
                                       href={nested.href}
@@ -324,10 +363,109 @@ export default function Navbar() {
             ))}
           </ul>
 
+          {/* User Avatar & Dropdown - Far Right */}
+          <div className="flex items-center space-x-4 flex-shrink-0">
+            {isAuthenticated ? (
+              <div className="relative" ref={userDropdownRef}>
+                <button
+                  ref={userButtonRef}
+                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                  className="flex items-center space-x-3 p-2 rounded-full hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-expanded={userDropdownOpen}
+                  aria-haspopup="true"
+                  aria-label="User menu"
+                >
+                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                    {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                  </div>
+                  <div className="hidden lg:block text-left">
+                    <div className="text-sm font-medium text-gray-900">
+                      {user?.name}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'User'}
+                    </div>
+                  </div>
+                  <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* User Dropdown Menu */}
+                {userDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-30">
+                    {/* User Info Header */}
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                          {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium text-gray-900">
+                            {user?.name}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'User'}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Menu Items */}
+                    <div className="py-1">
+                      <Link
+                        href="/documents"
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200"
+                        onClick={() => setUserDropdownOpen(false)}
+                      >
+                        <FileText className="w-4 h-4 mr-3" />
+                        Documents
+                      </Link>
+                      <RoleGuard roles={['admin', 'super_admin']}>
+                        <Link
+                          href="/admin"
+                          className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200"
+                          onClick={() => setUserDropdownOpen(false)}
+                        >
+                          <Settings className="w-4 h-4 mr-3" />
+                          Admin Panel
+                        </Link>
+                      </RoleGuard>
+                      <div className="border-t border-gray-100 my-1"></div>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setUserDropdownOpen(false);
+                        }}
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200"
+                      >
+                        <LogOut className="w-4 h-4 mr-3" />
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <Link 
+                  href="/login" 
+                  className="text-sm text-gray-700 hover:text-primary transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-gray-50"
+                >
+                  Login
+                </Link>
+                <Link 
+                  href="/register" 
+                  className="text-sm bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-200 font-medium shadow-sm hover:shadow-md"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
+
           {/* Mobile menu button */}
           <button
             type="button"
-            className="md:hidden p-2 text-gray-text hover:text-primary min-w-[44px] min-h-[44px]"
+            className="md:hidden p-3 text-gray-text hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 min-w-[48px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
             aria-expanded={mobileMenuOpen}
@@ -343,41 +481,149 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div id="mobile-menu" className="md:hidden border-t border-gray-200" role="navigation" aria-label="Mobile navigation">
-            <ul className="px-2 pt-2 pb-3 space-y-1" role="menu">
-              {navigation.map((item) => (
-                <li key={item.name} role="none">
-                  {item.submenu ? (
-                    <div>
-                      <div className="px-3 py-2 text-gray-text font-medium">{item.name}</div>
-                      <ul className="pl-4 space-y-1">
-                        {item.submenu.map((subItem) => (
-                          <li key={subItem.name}>
-                            <Link
-                              href={subItem.href}
-                              className="block px-3 py-2 text-gray-text hover:text-primary transition-colors duration-200 text-sm"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              {subItem.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+          <div id="mobile-menu" className="md:hidden border-t border-gray-200 bg-white shadow-lg" role="navigation" aria-label="Mobile navigation">
+            <div className="px-4 py-6 space-y-4">
+              <ul className="space-y-2" role="menu">
+                {filteredNavigation.map((item) => (
+                  <li key={item.name} role="none">
+                    {item.submenu ? (
+                      <div>
+                        <div className="px-3 py-3 text-primary font-semibold text-lg border-b border-gray-100">
+                          {item.name}
+                        </div>
+                        <ul className="pl-4 space-y-1 mt-2">
+                          {item.submenu.map((subItem) => (
+                            <li key={subItem.name}>
+                              <Link
+                                href={subItem.href}
+                                className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium ${
+                                  pathname === subItem.href 
+                                    ? 'bg-primary text-white shadow-md' 
+                                    : 'text-gray-text hover:bg-gray-50 hover:text-primary'
+                                }`}
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {subItem.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        role="menuitem"
+                        aria-current={pathname === item.href ? 'page' : undefined}
+                        className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium ${
+                          pathname === item.href 
+                            ? 'bg-primary text-white shadow-md' 
+                            : 'text-gray-text hover:bg-gray-50 hover:text-primary'
+                        }`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+              
+              {/* Mobile Authentication Section */}
+              <div className="border-t border-gray-200 pt-6 mt-6">
+                {isAuthenticated ? (
+                  <div className="space-y-4">
+                    {/* User Info */}
+                    <div className="flex items-center space-x-3 px-3 py-3 bg-gray-50 rounded-lg">
+                      <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                        {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {user?.name}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'User'}
+                        </div>
+                      </div>
                     </div>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      role="menuitem"
-                      aria-current={pathname === item.href ? 'page' : undefined}
-                      className="block px-3 py-2 text-gray-text hover:text-primary transition-colors duration-200 font-medium"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
+                    
+                    {/* Action Links */}
+                    <div className="space-y-2">
+                      <Link
+                        href="/documents"
+                        className="flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <FileText className="w-4 h-4 mr-3" />
+                        Documents
+                      </Link>
+                      <RoleGuard roles={['admin', 'super_admin']}>
+                        <Link
+                          href="/admin"
+                          className="flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <Settings className="w-4 h-4 mr-3" />
+                          Admin Panel
+                        </Link>
+                      </RoleGuard>
+                    </div>
+                    
+                    {/* Logout Button */}
+                    <div className="border-t border-gray-200 pt-2">
+                      <button
+                        onClick={() => {
+                          logout();
+                          setMobileMenuOpen(false);
+                        }}
+                        className="flex items-center w-full px-3 py-3 text-sm text-gray-700 hover:text-red-600 font-medium rounded-lg hover:bg-red-50 transition-all duration-200"
+                      >
+                        <LogOut className="w-4 h-4 mr-3" />
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="text-sm text-gray-600 font-medium px-3">
+                      Account
+                    </div>
+                    <div className="space-y-2">
+                      <Link
+                        href="/login"
+                        className="block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        href="/register"
+                        className="block px-3 py-3 text-sm bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-all duration-200 text-center"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Create Account
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              {/* Footer */}
+              <div className="border-t border-gray-200 pt-6 mt-6">
+                <div className="text-center space-y-2">
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-4 h-4 bg-primary rounded-full"></div>
+                    <p className="text-sm font-medium text-primary">Deep Engineering</p>
+                  </div>
+                  <p className="text-xs text-gray-500">KPP Technology Solutions</p>
+                  <div className="flex items-center justify-center space-x-4 text-xs text-gray-400">
+                    <span>Continuous Clean Energy</span>
+                    <span>•</span>
+                    <span>Anywhere</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>

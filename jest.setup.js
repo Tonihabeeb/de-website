@@ -1,5 +1,18 @@
 import '@testing-library/jest-dom'
 
+// Mock fetch globally
+global.fetch = jest.fn()
+
+// Add TextEncoder polyfill for backend tests
+if (typeof global.TextEncoder === 'undefined') {
+  const { TextEncoder, TextDecoder } = require('util')
+  global.TextEncoder = TextEncoder
+  global.TextDecoder = TextDecoder
+}
+
+// Mock window.alert to prevent console errors
+global.alert = jest.fn()
+
 // Mock Next.js router
 jest.mock('next/router', () => ({
   useRouter() {
@@ -26,73 +39,80 @@ jest.mock('next/router', () => ({
 
 // Mock Next.js Link component
 jest.mock('next/link', () => {
-  return ({ children, href }) => {
-    return <a href={href}>{children}</a>
+  return ({ children, href, ...props }) => {
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    )
   }
 })
 
 // Mock Framer Motion
-jest.mock('framer-motion', () => {
-  // Helper function to filter out Framer Motion props
-  const filterMotionProps = (props) => {
-    const {
-      initial,
-      animate,
-      exit,
-      transition,
-      variants,
-      whileHover,
-      whileTap,
-      whileInView,
-      whileFocus,
-      whileDrag,
-      drag,
-      dragConstraints,
-      dragElastic,
-      dragMomentum,
-      dragPropagation,
-      dragSnapToOrigin,
-      dragTransition,
-      layout,
-      layoutId,
-      layoutDependency,
-      layoutScroll,
-      layoutRoot,
-      onAnimationStart,
-      onAnimationComplete,
-      onUpdate,
-      onDragStart,
-      onDragEnd,
-      onDrag,
-      onHoverStart,
-      onHoverEnd,
-      onTap,
-      onTapStart,
-      onTapCancel,
-      onFocus,
-      onBlur,
-      onViewportEnter,
-      onViewportLeave,
-      viewport,
-      ...filteredProps
-    } = props;
-    return filteredProps;
-  };
-
-  return {
-    motion: {
-      div: ({ children, ...props }) => <div {...filterMotionProps(props)}>{children}</div>,
-      h1: ({ children, ...props }) => <h1 {...filterMotionProps(props)}>{children}</h1>,
-      p: ({ children, ...props }) => <p {...filterMotionProps(props)}>{children}</p>,
-      span: ({ children, ...props }) => <span {...filterMotionProps(props)}>{children}</span>,
-      button: ({ children, ...props }) => <button {...filterMotionProps(props)}>{children}</button>,
-    },
-    useInView: () => true,
-    useScroll: () => ({ scrollYProgress: 0 }),
-    useTransform: (value) => value,
-    AnimatePresence: ({ children }) => children,
-  };
-})
+jest.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
+    span: ({ children, ...props }) => <span {...props}>{children}</span>,
+    button: ({ children, ...props }) => <button {...props}>{children}</button>,
+    img: ({ ...props }) => <img {...props} />,
+    svg: ({ children, ...props }) => <svg {...props}>{children}</svg>,
+    path: ({ ...props }) => <path {...props} />,
+    circle: ({ ...props }) => <circle {...props} />,
+    rect: ({ ...props }) => <rect {...props} />,
+    line: ({ ...props }) => <line {...props} />,
+    polygon: ({ ...props }) => <polygon {...props} />,
+    g: ({ children, ...props }) => <g {...props}>{children}</g>,
+  },
+  AnimatePresence: ({ children }) => children,
+  useAnimation: () => ({
+    start: jest.fn(),
+    stop: jest.fn(),
+    set: jest.fn(),
+  }),
+  useMotionValue: (initial) => ({
+    get: () => initial,
+    set: jest.fn(),
+    on: jest.fn(),
+  }),
+  useTransform: () => ({
+    get: jest.fn(),
+    set: jest.fn(),
+  }),
+  useInView: () => ({
+    ref: jest.fn(),
+    inView: false,
+  }),
+  useScroll: () => ({
+    scrollX: { get: () => 0 },
+    scrollY: { get: () => 0 },
+  }),
+  useSpring: (value) => ({
+    get: () => value,
+    set: jest.fn(),
+  }),
+  useMotionValueEvent: jest.fn(),
+  animate: jest.fn(),
+  inView: jest.fn(),
+  scroll: jest.fn(),
+  transform: jest.fn(),
+  spring: jest.fn(),
+  tween: jest.fn(),
+  inertia: jest.fn(),
+  keyframes: jest.fn(),
+  stagger: jest.fn(),
+  delay: jest.fn(),
+  easeIn: jest.fn(),
+  easeOut: jest.fn(),
+  easeInOut: jest.fn(),
+  linear: jest.fn(),
+  circIn: jest.fn(),
+  circOut: jest.fn(),
+  circInOut: jest.fn(),
+  backIn: jest.fn(),
+  backOut: jest.fn(),
+  backInOut: jest.fn(),
+  anticipate: jest.fn(),
+}))
 
 
 // Mock window.matchMedia

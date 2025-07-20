@@ -16,25 +16,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/_not-found/page": [
+    "/api/admin/financial/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/api/admin/financial/route.js"
     ],
-    "/technology/components/page": [
+    "/admin/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/technology/components/page.js"
+      "static/chunks/app/admin/layout.js"
     ],
-    "/technology/components/full/page": [
+    "/admin/financial/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/technology/components/full/page.js"
+      "static/chunks/app/admin/financial/page.js"
     ],
-    "/technology/page": [
+    "/dashboard/financial/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/technology/page.js"
+      "static/chunks/app/dashboard/financial/page.js"
     ]
   }
 }

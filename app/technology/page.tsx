@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { getTechSections } from '@/utils/sanity-data';
 import KPPDiagram from '@/components/technical/KPPDiagram';
 import HeroSection from '@/components/sections/HeroSection';
 import { 
@@ -115,9 +114,8 @@ const technologySections = [
 ];
 
 export default async function TechnologyPage() {
-  // Fetch technology sections from CMS
-  const techSections = await getTechSections();
-  const overviewSection = techSections?.find((section: any) => section.category === 'overview');
+  // TODO: Refactor to fetch tech sections from backend API
+  const overviewSection = null; // Placeholder for now
 
   return (
     <div>
