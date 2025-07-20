@@ -6,8 +6,8 @@ import {
 
 const COLORS = ['#2563eb', '#22c55e', '#f59e42', '#e11d48', '#a21caf'];
 
-// Placeholder data
-const revenueData = [
+// Default sample data for fallback
+const defaultRevenueData = [
   { month: 'Jan', revenue: 120000, cost: 80000 },
   { month: 'Feb', revenue: 135000, cost: 90000 },
   { month: 'Mar', revenue: 150000, cost: 95000 },
@@ -16,7 +16,7 @@ const revenueData = [
   { month: 'Jun', revenue: 180000, cost: 120000 },
 ];
 
-const cashFlowData = [
+const defaultCashFlowData = [
   { month: 'Jan', cashFlow: 40000 },
   { month: 'Feb', cashFlow: 45000 },
   { month: 'Mar', cashFlow: 55000 },
@@ -25,7 +25,7 @@ const cashFlowData = [
   { month: 'Jun', cashFlow: 60000 },
 ];
 
-const costBreakdown = [
+const defaultCostBreakdown = [
   { name: 'O&M', value: 40000 },
   { name: 'Labor', value: 25000 },
   { name: 'Materials', value: 20000 },
@@ -33,10 +33,38 @@ const costBreakdown = [
   { name: 'Other', value: 5000 },
 ];
 
-export function RevenueBarChart() {
+interface RevenueData {
+  month: string;
+  revenue: number;
+  cost: number;
+}
+
+interface CashFlowData {
+  month: string;
+  cashFlow: number;
+}
+
+interface CostBreakdownData {
+  name: string;
+  value: number;
+}
+
+interface RevenueBarChartProps {
+  data?: RevenueData[];
+}
+
+interface CashFlowLineChartProps {
+  data?: CashFlowData[];
+}
+
+interface CostPieChartProps {
+  data?: CostBreakdownData[];
+}
+
+export function RevenueBarChart({ data = defaultRevenueData }: RevenueBarChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={revenueData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+      <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
         <XAxis dataKey="month" />
         <YAxis />
         <Tooltip />
@@ -48,10 +76,10 @@ export function RevenueBarChart() {
   );
 }
 
-export function CashFlowLineChart() {
+export function CashFlowLineChart({ data = defaultCashFlowData }: CashFlowLineChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={cashFlowData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+      <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
         <XAxis dataKey="month" />
         <YAxis />
         <Tooltip />
@@ -62,12 +90,12 @@ export function CashFlowLineChart() {
   );
 }
 
-export function CostPieChart() {
+export function CostPieChart({ data = defaultCostBreakdown }: CostPieChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <PieChart>
         <Pie
-          data={costBreakdown}
+          data={data}
           dataKey="value"
           nameKey="name"
           cx="50%"
@@ -75,7 +103,7 @@ export function CostPieChart() {
           outerRadius={100}
           label
         >
-          {costBreakdown.map((entry, index) => (
+          {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
