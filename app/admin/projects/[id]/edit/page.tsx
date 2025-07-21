@@ -13,6 +13,7 @@ import {
   CheckCircle,
   Loader2,
   History,
+  Eye,
 } from 'lucide-react';
 import { toast } from '@/components/ui/Toast';
 
@@ -77,6 +78,7 @@ export default function EditProject() {
   const [versionLoading, setVersionLoading] = useState(false);
   const [versionError, setVersionError] = useState<string | null>(null);
   const [selectedVersion, setSelectedVersion] = useState<any | null>(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
 
   useEffect(() => {
     if (projectId) {
@@ -263,6 +265,32 @@ export default function EditProject() {
     }
   };
 
+  const handlePreview = async () => {
+    if (!formData.title || !formData.description) return;
+    setPreviewLoading(true);
+    try {
+      const res = await fetch('/api/preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'project',
+          id: projectId,
+          draft: formData,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.redirect) {
+        window.open(data.redirect, '_blank', 'noopener');
+      } else {
+        alert(data.error || 'Failed to open preview');
+      }
+    } catch (err) {
+      alert('Failed to open preview');
+    } finally {
+      setPreviewLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className='p-6'>
@@ -329,6 +357,17 @@ export default function EditProject() {
                 <Save className='w-4 h-4 mr-2' />
               )}
               {saving ? 'Saving...' : 'Save Changes'}
+            </button>
+            <button
+              type='button'
+              onClick={handlePreview}
+              disabled={
+                !formData.title || !formData.description || previewLoading
+              }
+              className='px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 flex items-center space-x-2 disabled:opacity-50'
+            >
+              <Eye className='w-4 h-4 mr-2' />
+              {previewLoading ? 'Loading...' : 'Preview'}
             </button>
           </div>
         </div>

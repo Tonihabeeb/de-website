@@ -30,6 +30,7 @@ export default function NewPage() {
   const [activeTab, setActiveTab] = useState<'content' | 'seo' | 'settings'>(
     'content'
   );
+  const [previewLoading, setPreviewLoading] = useState(false);
 
   const generateSlug = (title: string) => {
     return title
@@ -76,6 +77,32 @@ export default function NewPage() {
     }
   };
 
+  const handlePreview = async () => {
+    if (!formData.title || !formData.content) return;
+    setPreviewLoading(true);
+    try {
+      const res = await fetch('/api/preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'page',
+          id: formData.slug || 'new',
+          draft: formData,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.redirect) {
+        window.open(data.redirect, '_blank', 'noopener');
+      } else {
+        alert(data.error || 'Failed to open preview');
+      }
+    } catch (err) {
+      alert('Failed to open preview');
+    } finally {
+      setPreviewLoading(false);
+    }
+  };
+
   return (
     <div className='space-y-6'>
       {/* Header */}
@@ -97,10 +124,12 @@ export default function NewPage() {
         <div className='flex items-center space-x-3'>
           <button
             type='button'
-            className='px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center space-x-2'
+            onClick={handlePreview}
+            disabled={!formData.title || !formData.content || previewLoading}
+            className='px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 flex items-center space-x-2 disabled:opacity-50'
           >
-            <Eye className='w-4 h-4' />
-            <span>Preview</span>
+            <Eye className='w-4 h-4 mr-2' />
+            {previewLoading ? 'Loading...' : 'Preview'}
           </button>
           <button
             type='submit'
