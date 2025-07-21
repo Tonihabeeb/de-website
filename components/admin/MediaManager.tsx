@@ -3,19 +3,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Upload,
-  Image,
+  ImageIcon,
   File,
   Folder,
   Search,
-  Filter,
   Grid,
   List,
-  Download,
-  Trash2,
   Edit,
   Eye,
-  Plus,
+  Trash2,
 } from 'lucide-react';
+import NextImage from 'next/image';
 
 interface MediaItem {
   id: string;
@@ -57,10 +55,30 @@ const MediaManager: React.FC<MediaManagerProps> = ({
   const [uploadFiles, setUploadFiles] = useState<File[]>([]);
   const [editingMedia, setEditingMedia] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [editForm, setEditForm] = useState({
+    alt_text: '',
+    caption: '',
+    tags: '',
+  });
+  const [editLoading, setEditLoading] = useState(false);
+  const [editError, setEditError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchMedia();
   }, [projectId]);
+
+  useEffect(() => {
+    if (editingMedia) {
+      const item = media.find(m => m.id === editingMedia);
+      if (item) {
+        setEditForm({
+          alt_text: item.alt_text || '',
+          caption: item.caption || '',
+          tags: item.tags ? item.tags.join(', ') : '',
+        });
+      }
+    }
+  }, [editingMedia]);
 
   const fetchMedia = async () => {
     try {
@@ -170,6 +188,40 @@ const MediaManager: React.FC<MediaManagerProps> = ({
     }
   };
 
+  const handleEditSave = async () => {
+    if (!editingMedia) return;
+    setEditLoading(true);
+    setEditError(null);
+    try {
+      const response = await fetch(`/api/admin/media?id=${editingMedia}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          alt_text: editForm.alt_text,
+          caption: editForm.caption,
+          tags: editForm.tags
+            .split(',')
+            .map(t => t.trim())
+            .filter(Boolean),
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setMedia(prev =>
+          prev.map(m => (m.id === editingMedia ? { ...m, ...data.media } : m))
+        );
+        setEditingMedia(null);
+        setEditForm({ alt_text: '', caption: '', tags: '' });
+      } else {
+        setEditError(data.error || 'Failed to update media');
+      }
+    } catch (err) {
+      setEditError('Failed to update media');
+    } finally {
+      setEditLoading(false);
+    }
+  };
+
   const filteredMedia = media.filter(item => {
     const matchesSearch =
       item.original_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -187,7 +239,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
 
   const getFileIcon = (mimeType: string) => {
     if (mimeType.startsWith('image/'))
-      return <Image className='w-6 h-6 text-blue-500' />;
+      return <ImageIcon className='w-6 h-6 text-blue-500' />;
     if (mimeType.startsWith('video/'))
       return <File className='w-6 h-6 text-purple-500' />;
     return <File className='w-6 h-6 text-gray-500' />;
@@ -351,10 +403,12 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                   <div className='relative group'>
                     <div className='aspect-square bg-gray-100 flex items-center justify-center'>
                       {item.mime_type.startsWith('image/') ? (
-                        <img
+                        <NextImage
                           src={item.file_path}
                           alt={item.alt_text || item.original_name}
-                          className='w-full h-full object-cover'
+                          width={64}
+                          height={64}
+                          className='object-cover'
                         />
                       ) : (
                         getFileIcon(item.mime_type)
@@ -412,10 +466,12 @@ const MediaManager: React.FC<MediaManagerProps> = ({
 
                     <div className='w-10 h-10 bg-gray-100 rounded flex items-center justify-center'>
                       {item.mime_type.startsWith('image/') ? (
-                        <img
+                        <NextImage
                           src={item.file_path}
                           alt={item.alt_text || item.original_name}
-                          className='w-full h-full object-cover rounded'
+                          width={64}
+                          height={64}
+                          className='object-cover rounded'
                         />
                       ) : (
                         getFileIcon(item.mime_type)
@@ -476,7 +532,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                 >
                   <div className='flex items-center space-x-3'>
                     {file.type.startsWith('image/') ? (
-                      <Image className='w-6 h-6 text-blue-500' />
+                      <ImageIcon className='w-6 h-6 text-blue-500' />
                     ) : (
                       <File className='w-6 h-6 text-gray-500' />
                     )}
@@ -514,6 +570,76 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                   setIsUploadModalOpen(false);
                   setUploadFiles([]);
                 }}
+                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Metadata Modal */}
+      {editingMedia && (
+        <div className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'>
+          <div className='bg-white rounded-lg p-6 w-full max-w-md'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+              Edit Media Metadata
+            </h3>
+            <div className='space-y-4'>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Alt Text
+                </label>
+                <input
+                  type='text'
+                  value={editForm.alt_text}
+                  onChange={e =>
+                    setEditForm(f => ({ ...f, alt_text: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Caption
+                </label>
+                <input
+                  type='text'
+                  value={editForm.caption}
+                  onChange={e =>
+                    setEditForm(f => ({ ...f, caption: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Tags (comma separated)
+                </label>
+                <input
+                  type='text'
+                  value={editForm.tags}
+                  onChange={e =>
+                    setEditForm(f => ({ ...f, tags: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+              </div>
+              {editError && (
+                <div className='text-red-600 text-sm'>{editError}</div>
+              )}
+            </div>
+            <div className='flex items-center space-x-3 mt-6'>
+              <button
+                onClick={handleEditSave}
+                disabled={editLoading}
+                className='flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+              >
+                {editLoading ? 'Saving...' : 'Save Changes'}
+              </button>
+              <button
+                onClick={() => setEditingMedia(null)}
                 className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
               >
                 Cancel
