@@ -74,6 +74,8 @@ export async function PUT(
       end_date,
       budget,
       budget_currency,
+      publish_at,
+      unpublish_at,
     } = body;
 
     // Check if project exists
@@ -117,6 +119,8 @@ export async function PUT(
       end_date: end_date ? new Date(end_date) : undefined,
       budget: budget ? parseFloat(budget) : undefined,
       budget_currency,
+      publish_at: publish_at ? new Date(publish_at) : null,
+      unpublish_at: unpublish_at ? new Date(unpublish_at) : null,
     });
 
     if (!updatedProject) {

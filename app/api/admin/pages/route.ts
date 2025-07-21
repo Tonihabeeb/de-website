@@ -58,6 +58,8 @@ export async function POST(request: NextRequest) {
       twitter_title,
       twitter_description,
       twitter_image,
+      publish_at,
+      unpublish_at,
     } = body;
 
     // Validate required fields
@@ -90,6 +92,8 @@ export async function POST(request: NextRequest) {
       twitter_title,
       twitter_description,
       twitter_image,
+      publish_at: publish_at ? new Date(publish_at) : null,
+      unpublish_at: unpublish_at ? new Date(unpublish_at) : null,
       created_by: 'admin', // Default user for now
     });
 
