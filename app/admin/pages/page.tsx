@@ -16,6 +16,7 @@ import {
   User,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { toast } from '@/components/ui/Toast';
 
 interface Page {
   id: string;
@@ -36,6 +37,13 @@ export default function PagesManagement() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedPages, setSelectedPages] = useState<string[]>([]);
+  const [versionModalPageId, setVersionModalPageId] = useState<string | null>(
+    null
+  );
+  const [versions, setVersions] = useState<any[]>([]);
+  const [versionLoading, setVersionLoading] = useState(false);
+  const [versionError, setVersionError] = useState<string | null>(null);
+  const [selectedVersion, setSelectedVersion] = useState<any | null>(null);
 
   useEffect(() => {
     // Temporarily fetch pages without authentication for development
@@ -226,6 +234,49 @@ export default function PagesManagement() {
     } catch (err) {
       alert('Failed to publish page');
       console.error('Error publishing page:', err);
+    }
+  };
+
+  const openVersionModal = async (pageId: string) => {
+    setVersionModalPageId(pageId);
+    setVersionLoading(true);
+    setVersionError(null);
+    setVersions([]);
+    setSelectedVersion(null);
+    try {
+      const res = await fetch(`/api/admin/pages/${pageId}/versions`);
+      const data = await res.json();
+      if (data.success) {
+        setVersions(data.versions || []);
+      } else {
+        setVersionError(data.error || 'Failed to load versions');
+      }
+    } catch (err) {
+      setVersionError('Failed to load versions');
+    } finally {
+      setVersionLoading(false);
+    }
+  };
+
+  const handleRestoreVersion = async (pageId: string, versionId: string) => {
+    try {
+      setVersionLoading(true);
+      const res = await fetch(
+        `/api/admin/pages/${pageId}/versions/${versionId}/restore`,
+        { method: 'POST' }
+      );
+      const data = await res.json();
+      if (data.success) {
+        toast.success('Page restored to selected version');
+        setVersionModalPageId(null);
+        fetchPages();
+      } else {
+        toast.error(data.error || 'Failed to restore version');
+      }
+    } catch (err) {
+      toast.error('Failed to restore version');
+    } finally {
+      setVersionLoading(false);
     }
   };
 
@@ -471,6 +522,13 @@ export default function PagesManagement() {
                       >
                         <Trash2 className='w-4 h-4' />
                       </button>
+                      <button
+                        onClick={() => openVersionModal(page.id)}
+                        className='text-gray-600 hover:text-blue-600'
+                        aria-label='View version history'
+                      >
+                        <History className='w-4 h-4' />
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -479,6 +537,96 @@ export default function PagesManagement() {
           </tbody>
         </table>
       </div>
+
+      {/* Version History Modal */}
+      {versionModalPageId && (
+        <div
+          className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'
+          role='dialog'
+          aria-modal='true'
+        >
+          <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+              Version History
+            </h3>
+            {versionLoading ? (
+              <div>Loading...</div>
+            ) : versionError ? (
+              <div className='text-red-600'>{versionError}</div>
+            ) : (
+              <>
+                {versions.length === 0 ? (
+                  <div className='text-gray-500'>
+                    No previous versions found.
+                  </div>
+                ) : (
+                  <table className='min-w-full mb-4'>
+                    <thead>
+                      <tr>
+                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                          Version
+                        </th>
+                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                          Created
+                        </th>
+                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                          User
+                        </th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {versions.map(v => (
+                        <tr key={v.id} className='hover:bg-gray-50'>
+                          <td className='px-2 py-1'>V{v.version_number}</td>
+                          <td className='px-2 py-1'>
+                            {new Date(v.created_at).toLocaleString()}
+                          </td>
+                          <td className='px-2 py-1'>
+                            {v.created_by || 'Unknown'}
+                          </td>
+                          <td className='px-2 py-1 text-right'>
+                            <button
+                              onClick={() => setSelectedVersion(v)}
+                              className='text-blue-600 hover:underline text-xs mr-2'
+                            >
+                              View
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleRestoreVersion(versionModalPageId, v.id)
+                              }
+                              className='text-green-600 hover:underline text-xs'
+                            >
+                              Restore
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                {selectedVersion && (
+                  <div className='mb-4 p-4 bg-gray-50 rounded border border-gray-200'>
+                    <h4 className='font-semibold mb-2'>Version Content</h4>
+                    <pre className='text-xs whitespace-pre-wrap'>
+                      {JSON.stringify(selectedVersion.content, null, 2)}
+                    </pre>
+                  </div>
+                )}
+              </>
+            )}
+            <div className='flex justify-end mt-4'>
+              <button
+                onClick={() => setVersionModalPageId(null)}
+                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
