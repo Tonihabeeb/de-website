@@ -12,10 +12,10 @@ import {
   AlertCircle,
   CheckCircle,
   Loader2,
-  History,
   Eye,
 } from 'lucide-react';
 import { toast } from '@/components/ui/Toast';
+import Image from 'next/image';
 
 interface Project {
   id: string;
@@ -69,6 +69,15 @@ export default function EditProject() {
     deliverables: '',
     risk_level: 'low',
     budget_status: 'on_budget',
+    meta_title: '',
+    meta_description: '',
+    meta_keywords: '',
+    og_title: '',
+    og_description: '',
+    og_image: '',
+    twitter_title: '',
+    twitter_description: '',
+    twitter_image: '',
   });
 
   const [newTag, setNewTag] = useState('');
@@ -79,6 +88,9 @@ export default function EditProject() {
   const [versionError, setVersionError] = useState<string | null>(null);
   const [selectedVersion, setSelectedVersion] = useState<any | null>(null);
   const [previewLoading, setPreviewLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<'content' | 'seo' | 'settings'>(
+    'content'
+  );
 
   useEffect(() => {
     if (projectId) {
@@ -126,6 +138,15 @@ export default function EditProject() {
           deliverables: projectData.deliverables || '',
           risk_level: projectData.risk_level || 'low',
           budget_status: projectData.budget_status || 'on_budget',
+          meta_title: projectData.meta_title || '',
+          meta_description: projectData.meta_description || '',
+          meta_keywords: projectData.meta_keywords || '',
+          og_title: projectData.og_title || '',
+          og_description: projectData.og_description || '',
+          og_image: projectData.og_image || '',
+          twitter_title: projectData.twitter_title || '',
+          twitter_description: projectData.twitter_description || '',
+          twitter_image: projectData.twitter_image || '',
         });
       } else {
         setError('Project not found');
@@ -219,27 +240,6 @@ export default function EditProject() {
   const handleCancel = () => {
     if (confirm('Are you sure you want to cancel? All changes will be lost.')) {
       router.push('/admin/projects');
-    }
-  };
-
-  const openVersionModal = async () => {
-    setVersionModalOpen(true);
-    setVersionLoading(true);
-    setVersionError(null);
-    setVersions([]);
-    setSelectedVersion(null);
-    try {
-      const res = await fetch(`/api/admin/projects/${projectId}/versions`);
-      const data = await res.json();
-      if (data.success) {
-        setVersions(data.versions || []);
-      } else {
-        setVersionError(data.error || 'Failed to load versions');
-      }
-    } catch (err) {
-      setVersionError('Failed to load versions');
-    } finally {
-      setVersionLoading(false);
     }
   };
 
@@ -836,6 +836,226 @@ export default function EditProject() {
             </div>
           </div>
         </div>
+
+        {/* SEO Tab */}
+        <div className='flex space-x-4 border-b mb-6'>
+          <button
+            type='button'
+            className={`py-2 px-4 ${activeTab === 'content' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('content')}
+          >
+            Content
+          </button>
+          <button
+            type='button'
+            className={`py-2 px-4 ${activeTab === 'seo' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('seo')}
+          >
+            SEO
+          </button>
+          <button
+            type='button'
+            className={`py-2 px-4 ${activeTab === 'settings' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-500'}`}
+            onClick={() => setActiveTab('settings')}
+          >
+            Settings
+          </button>
+        </div>
+        {activeTab === 'seo' && (
+          <div className='space-y-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Meta Title
+                </label>
+                <input
+                  type='text'
+                  value={formData.meta_title}
+                  onChange={e =>
+                    setFormData(f => ({ ...f, meta_title: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  maxLength={60}
+                  placeholder='Recommended: 50-60 characters'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Meta Description
+                </label>
+                <textarea
+                  value={formData.meta_description}
+                  onChange={e =>
+                    setFormData(f => ({
+                      ...f,
+                      meta_description: e.target.value,
+                    }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  maxLength={160}
+                  placeholder='Recommended: 120-160 characters'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Meta Keywords
+                </label>
+                <input
+                  type='text'
+                  value={formData.meta_keywords}
+                  onChange={e =>
+                    setFormData(f => ({ ...f, meta_keywords: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  placeholder='Comma-separated keywords'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  OG Title
+                </label>
+                <input
+                  type='text'
+                  value={formData.og_title}
+                  onChange={e =>
+                    setFormData(f => ({ ...f, og_title: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  maxLength={60}
+                  placeholder='Open Graph title for social sharing'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  OG Description
+                </label>
+                <textarea
+                  value={formData.og_description}
+                  onChange={e =>
+                    setFormData(f => ({ ...f, og_description: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  maxLength={160}
+                  placeholder='Open Graph description'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  OG Image URL
+                </label>
+                <input
+                  type='text'
+                  value={formData.og_image}
+                  onChange={e =>
+                    setFormData(f => ({ ...f, og_image: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  placeholder='https://example.com/og-image.jpg'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Twitter Title
+                </label>
+                <input
+                  type='text'
+                  value={formData.twitter_title}
+                  onChange={e =>
+                    setFormData(f => ({ ...f, twitter_title: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  maxLength={60}
+                  placeholder='Twitter card title'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Twitter Description
+                </label>
+                <textarea
+                  value={formData.twitter_description}
+                  onChange={e =>
+                    setFormData(f => ({
+                      ...f,
+                      twitter_description: e.target.value,
+                    }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  maxLength={160}
+                  placeholder='Twitter card description'
+                />
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  Twitter Image URL
+                </label>
+                <input
+                  type='text'
+                  value={formData.twitter_image}
+                  onChange={e =>
+                    setFormData(f => ({ ...f, twitter_image: e.target.value }))
+                  }
+                  className='w-full px-3 py-2 border rounded-lg'
+                  placeholder='https://example.com/twitter-image.jpg'
+                />
+              </div>
+            </div>
+            {/* Live Preview */}
+            <div className='mt-8'>
+              <h4 className='font-semibold mb-2'>SEO Preview</h4>
+              <div className='bg-gray-50 border rounded-lg p-4'>
+                <div className='mb-2 text-xs text-gray-500'>
+                  Google Search Result
+                </div>
+                <div className='font-bold text-blue-700'>
+                  {formData.meta_title || formData.title}
+                </div>
+                <div className='text-green-700'>
+                  https://deepengineering.co/project/{projectId}
+                </div>
+                <div className='text-gray-700'>{formData.meta_description}</div>
+              </div>
+              <div className='mt-4 flex flex-col md:flex-row gap-4'>
+                <div className='flex-1 bg-white border rounded-lg p-4'>
+                  <div className='mb-2 text-xs text-gray-500'>
+                    Open Graph Card
+                  </div>
+                  <div className='font-bold'>
+                    {formData.og_title || formData.title}
+                  </div>
+                  <div className='text-gray-700'>{formData.og_description}</div>
+                  {formData.og_image && (
+                    <Image
+                      src={formData.og_image}
+                      alt='OG'
+                      width={256}
+                      height={128}
+                      className='mt-2 max-h-32 rounded object-contain'
+                    />
+                  )}
+                </div>
+                <div className='flex-1 bg-white border rounded-lg p-4'>
+                  <div className='mb-2 text-xs text-gray-500'>Twitter Card</div>
+                  <div className='font-bold'>
+                    {formData.twitter_title || formData.title}
+                  </div>
+                  <div className='text-gray-700'>
+                    {formData.twitter_description}
+                  </div>
+                  {formData.twitter_image && (
+                    <Image
+                      src={formData.twitter_image}
+                      alt='Twitter'
+                      width={256}
+                      height={128}
+                      className='mt-2 max-h-32 rounded object-contain'
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Form Actions */}
         <div className='flex justify-end space-x-3'>

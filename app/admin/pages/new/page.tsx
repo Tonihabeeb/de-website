@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Save, Eye, ArrowLeft, Settings, FileText, Search } from 'lucide-react';
 import RichTextEditor from '@/components/admin/RichTextEditor';
+import Image from 'next/image';
 
 interface PageFormData {
   title: string;
@@ -12,6 +13,12 @@ interface PageFormData {
   meta_title: string;
   meta_description: string;
   meta_keywords: string;
+  og_title: string;
+  og_description: string;
+  og_image: string;
+  twitter_title: string;
+  twitter_description: string;
+  twitter_image: string;
   status: 'draft' | 'published';
 }
 
@@ -24,6 +31,12 @@ export default function NewPage() {
     meta_title: '',
     meta_description: '',
     meta_keywords: '',
+    og_title: '',
+    og_description: '',
+    og_image: '',
+    twitter_title: '',
+    twitter_description: '',
+    twitter_image: '',
     status: 'draft',
   });
   const [loading, setLoading] = useState(false);
@@ -64,7 +77,6 @@ export default function NewPage() {
       });
 
       if (response.ok) {
-        const result = await response.json();
         router.push('/admin/pages');
       } else {
         throw new Error('Failed to create page');
@@ -328,6 +340,172 @@ export default function NewPage() {
                   <p className='mt-1 text-sm text-gray-500'>
                     Separate keywords with commas
                   </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='og_title'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
+                    Open Graph Title
+                  </label>
+                  <input
+                    type='text'
+                    id='og_title'
+                    value={formData.og_title}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        og_title: e.target.value,
+                      }))
+                    }
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='Open Graph title for social media...'
+                    maxLength={60}
+                  />
+                  <p className='mt-1 text-sm text-gray-500'>
+                    {formData.og_title.length}/60 characters
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='og_description'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
+                    Open Graph Description
+                  </label>
+                  <textarea
+                    id='og_description'
+                    value={formData.og_description}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        og_description: e.target.value,
+                      }))
+                    }
+                    rows={3}
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='Brief description for Open Graph...'
+                    maxLength={160}
+                  />
+                  <p className='mt-1 text-sm text-gray-500'>
+                    {formData.og_description.length}/160 characters
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='og_image'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
+                    Open Graph Image
+                  </label>
+                  <input
+                    type='url'
+                    id='og_image'
+                    value={formData.og_image}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        og_image: e.target.value,
+                      }))
+                    }
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='https://example.com/og-image.jpg'
+                  />
+                  {formData.og_image && (
+                    <Image
+                      src={formData.og_image}
+                      alt='OG'
+                      width={256}
+                      height={128}
+                      className='mt-2 max-h-32 rounded object-contain'
+                    />
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='twitter_title'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
+                    Twitter Title
+                  </label>
+                  <input
+                    type='text'
+                    id='twitter_title'
+                    value={formData.twitter_title}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        twitter_title: e.target.value,
+                      }))
+                    }
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='Twitter title for social media...'
+                    maxLength={60}
+                  />
+                  <p className='mt-1 text-sm text-gray-500'>
+                    {formData.twitter_title.length}/60 characters
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='twitter_description'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
+                    Twitter Description
+                  </label>
+                  <textarea
+                    id='twitter_description'
+                    value={formData.twitter_description}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        twitter_description: e.target.value,
+                      }))
+                    }
+                    rows={3}
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='Brief description for Twitter...'
+                    maxLength={160}
+                  />
+                  <p className='mt-1 text-sm text-gray-500'>
+                    {formData.twitter_description.length}/160 characters
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='twitter_image'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
+                    Twitter Image
+                  </label>
+                  <input
+                    type='url'
+                    id='twitter_image'
+                    value={formData.twitter_image}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        twitter_image: e.target.value,
+                      }))
+                    }
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='https://example.com/twitter-image.jpg'
+                  />
+                  {formData.twitter_image && (
+                    <Image
+                      src={formData.twitter_image}
+                      alt='Twitter'
+                      width={256}
+                      height={128}
+                      className='mt-2 max-h-32 rounded object-contain'
+                    />
+                  )}
                 </div>
               </div>
             )}
