@@ -62,6 +62,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
   });
   const [editLoading, setEditLoading] = useState(false);
   const [editError, setEditError] = useState<string | null>(null);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   useEffect(() => {
     fetchMedia();
@@ -222,6 +223,9 @@ const MediaManager: React.FC<MediaManagerProps> = ({
     }
   };
 
+  // Extract all unique tags from media
+  const allTags = Array.from(new Set(media.flatMap(item => item.tags || [])));
+
   const filteredMedia = media.filter(item => {
     const matchesSearch =
       item.original_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -234,7 +238,10 @@ const MediaManager: React.FC<MediaManagerProps> = ({
       (selectedType === 'documents' &&
         item.mime_type.startsWith('application/'));
 
-    return matchesSearch && matchesType;
+    const matchesTag =
+      !selectedTag || (item.tags && item.tags.includes(selectedTag));
+
+    return matchesSearch && matchesType && matchesTag;
   });
 
   const getFileIcon = (mimeType: string) => {
@@ -350,6 +357,33 @@ const MediaManager: React.FC<MediaManagerProps> = ({
             </button>
           </div>
         </div>
+
+        {/* Tag Filter UI */}
+        {allTags.length > 0 && (
+          <div className='mb-4 flex flex-wrap gap-2'>
+            {allTags.map(tag => (
+              <button
+                key={tag}
+                onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                className={`px-3 py-1 rounded-full border text-sm transition-colors ${
+                  tag === selectedTag
+                    ? 'bg-blue-600 text-white border-blue-600'
+                    : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-blue-100 hover:text-blue-700'
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+            {selectedTag && (
+              <button
+                onClick={() => setSelectedTag(null)}
+                className='ml-2 px-3 py-1 rounded-full border border-gray-300 bg-gray-200 text-gray-700 text-sm hover:bg-gray-300 transition-colors'
+              >
+                Clear Tag Filter
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Bulk Actions */}
         {selectedMedia.length > 0 && (
