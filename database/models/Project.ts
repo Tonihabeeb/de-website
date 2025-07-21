@@ -25,6 +25,8 @@ export interface Project {
   budget_currency?: string;
   budget_status?: 'on_track' | 'over_budget' | 'under_budget' | 'unknown';
   risk_level?: 'low' | 'medium' | 'high' | 'critical';
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
   created_by?: string;
   created_at: Date;
   updated_at: Date;
@@ -50,6 +52,8 @@ export interface CreateProjectData {
   end_date?: Date;
   budget?: number;
   budget_currency?: string;
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
   created_by?: string;
 }
 
@@ -74,6 +78,8 @@ export interface UpdateProjectData {
   end_date?: Date;
   budget?: number;
   budget_currency?: string;
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
 }
 
 export class ProjectModel {
@@ -103,6 +109,8 @@ export class ProjectModel {
       end_date: data.end_date,
       budget: data.budget,
       budget_currency: data.budget_currency || 'USD',
+      publish_at: data.publish_at || null,
+      unpublish_at: data.unpublish_at || null,
       created_by: data.created_by,
       created_at: now,
       updated_at: now,
@@ -112,8 +120,8 @@ export class ProjectModel {
       INSERT INTO projects (
         id, name, slug, description, content, meta_title, meta_description, meta_keywords,
         og_title, og_description, og_image, twitter_title, twitter_description, twitter_image,
-        status, capacity_mw, location, start_date, end_date, budget, budget_currency, created_by, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        status, capacity_mw, location, start_date, end_date, budget, budget_currency, publish_at, unpublish_at, created_by, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
@@ -138,6 +146,8 @@ export class ProjectModel {
       project.end_date?.toISOString().split('T')[0],
       project.budget,
       project.budget_currency || 'USD',
+      project.publish_at ? project.publish_at.toISOString() : null,
+      project.unpublish_at ? project.unpublish_at.toISOString() : null,
       project.created_by,
       project.created_at.toISOString(),
       project.updated_at.toISOString()
@@ -157,6 +167,8 @@ export class ProjectModel {
       content: JSON.parse(row.content),
       start_date: row.start_date ? new Date(row.start_date) : undefined,
       end_date: row.end_date ? new Date(row.end_date) : undefined,
+      publish_at: row.publish_at ? new Date(row.publish_at) : null,
+      unpublish_at: row.unpublish_at ? new Date(row.unpublish_at) : null,
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
     };
@@ -173,6 +185,8 @@ export class ProjectModel {
       content: JSON.parse(row.content),
       start_date: row.start_date ? new Date(row.start_date) : undefined,
       end_date: row.end_date ? new Date(row.end_date) : undefined,
+      publish_at: row.publish_at ? new Date(row.publish_at) : null,
+      unpublish_at: row.unpublish_at ? new Date(row.unpublish_at) : null,
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
     };
@@ -228,6 +242,8 @@ export class ProjectModel {
       content: JSON.parse(row.content),
       start_date: row.start_date ? new Date(row.start_date) : undefined,
       end_date: row.end_date ? new Date(row.end_date) : undefined,
+      publish_at: row.publish_at ? new Date(row.publish_at) : null,
+      unpublish_at: row.unpublish_at ? new Date(row.unpublish_at) : null,
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
     }));
@@ -326,6 +342,14 @@ export class ProjectModel {
     if (data.budget_currency !== undefined) {
       updates.push('budget_currency = ?');
       params.push(data.budget_currency);
+    }
+    if (data.publish_at !== undefined) {
+      updates.push('publish_at = ?');
+      params.push(data.publish_at ? data.publish_at.toISOString() : null);
+    }
+    if (data.unpublish_at !== undefined) {
+      updates.push('unpublish_at = ?');
+      params.push(data.unpublish_at ? data.unpublish_at.toISOString() : null);
     }
 
     updates.push('updated_at = ?');

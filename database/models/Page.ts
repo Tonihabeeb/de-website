@@ -17,6 +17,8 @@ export interface Page {
   twitter_image?: string;
   status: 'draft' | 'published' | 'archived';
   published_at?: Date;
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
   created_by?: string;
   created_at: Date;
   updated_at: Date;
@@ -35,6 +37,8 @@ export interface CreatePageData {
   twitter_title?: string;
   twitter_description?: string;
   twitter_image?: string;
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
   created_by?: string;
 }
 
@@ -53,6 +57,8 @@ export interface UpdatePageData {
   twitter_image?: string;
   status?: 'draft' | 'published' | 'archived';
   published_at?: Date;
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
 }
 
 export class PageModel {
@@ -75,6 +81,8 @@ export class PageModel {
       twitter_description: data.twitter_description,
       twitter_image: data.twitter_image,
       status: 'draft',
+      publish_at: data.publish_at || null,
+      unpublish_at: data.unpublish_at || null,
       created_by: data.created_by,
       created_at: now,
       updated_at: now,
@@ -84,8 +92,8 @@ export class PageModel {
       INSERT INTO pages (
         id, slug, title, content, meta_title, meta_description, meta_keywords,
         og_title, og_description, og_image, twitter_title, twitter_description, twitter_image,
-        status, created_by, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        status, publish_at, unpublish_at, created_by, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
@@ -103,6 +111,8 @@ export class PageModel {
       page.twitter_description,
       page.twitter_image,
       page.status,
+      page.publish_at ? page.publish_at.toISOString() : null,
+      page.unpublish_at ? page.unpublish_at.toISOString() : null,
       page.created_by,
       page.created_at.toISOString(),
       page.updated_at.toISOString()
@@ -123,6 +133,8 @@ export class PageModel {
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
       published_at: row.published_at ? new Date(row.published_at) : undefined,
+      publish_at: row.publish_at ? new Date(row.publish_at) : null,
+      unpublish_at: row.unpublish_at ? new Date(row.unpublish_at) : null,
     };
   }
 
@@ -138,6 +150,8 @@ export class PageModel {
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
       published_at: row.published_at ? new Date(row.published_at) : undefined,
+      publish_at: row.publish_at ? new Date(row.publish_at) : null,
+      unpublish_at: row.unpublish_at ? new Date(row.unpublish_at) : null,
     };
   }
 
@@ -186,6 +200,8 @@ export class PageModel {
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
       published_at: row.published_at ? new Date(row.published_at) : undefined,
+      publish_at: row.publish_at ? new Date(row.publish_at) : null,
+      unpublish_at: row.unpublish_at ? new Date(row.unpublish_at) : null,
     }));
   }
 
@@ -259,6 +275,15 @@ export class PageModel {
         updates.push('published_at = ?');
         params.push(new Date().toISOString());
       }
+    }
+
+    if (data.publish_at !== undefined) {
+      updates.push('publish_at = ?');
+      params.push(data.publish_at ? data.publish_at.toISOString() : null);
+    }
+    if (data.unpublish_at !== undefined) {
+      updates.push('unpublish_at = ?');
+      params.push(data.unpublish_at ? data.unpublish_at.toISOString() : null);
     }
 
     updates.push('updated_at = ?');
