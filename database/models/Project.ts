@@ -7,6 +7,15 @@ export interface Project {
   slug: string;
   description?: string;
   content: any;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
   status: 'planning' | 'in-progress' | 'completed' | 'cancelled';
   capacity_mw?: number;
   location?: string;
@@ -26,6 +35,15 @@ export interface CreateProjectData {
   slug: string;
   description?: string;
   content: any;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
   capacity_mw?: number;
   location?: string;
   start_date?: Date;
@@ -40,6 +58,15 @@ export interface UpdateProjectData {
   slug?: string;
   description?: string;
   content?: any;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
   status?: 'planning' | 'in-progress' | 'completed' | 'cancelled';
   capacity_mw?: number;
   location?: string;
@@ -60,6 +87,15 @@ export class ProjectModel {
       slug: data.slug,
       description: data.description,
       content: data.content,
+      meta_title: data.meta_title,
+      meta_description: data.meta_description,
+      meta_keywords: data.meta_keywords,
+      og_title: data.og_title,
+      og_description: data.og_description,
+      og_image: data.og_image,
+      twitter_title: data.twitter_title,
+      twitter_description: data.twitter_description,
+      twitter_image: data.twitter_image,
       status: 'planning',
       capacity_mw: data.capacity_mw,
       location: data.location,
@@ -74,9 +110,10 @@ export class ProjectModel {
 
     const stmt = db.prepare(`
       INSERT INTO projects (
-        id, name, slug, description, content, status, capacity_mw, location,
-        start_date, end_date, budget, budget_currency, created_by, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        id, name, slug, description, content, meta_title, meta_description, meta_keywords,
+        og_title, og_description, og_image, twitter_title, twitter_description, twitter_image,
+        status, capacity_mw, location, start_date, end_date, budget, budget_currency, created_by, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
@@ -85,6 +122,15 @@ export class ProjectModel {
       project.slug,
       project.description,
       JSON.stringify(project.content),
+      project.meta_title,
+      project.meta_description,
+      project.meta_keywords,
+      project.og_title,
+      project.og_description,
+      project.og_image,
+      project.twitter_title,
+      project.twitter_description,
+      project.twitter_image,
       project.status,
       project.capacity_mw,
       project.location,
@@ -217,36 +263,66 @@ export class ProjectModel {
       params.push(JSON.stringify(data.content));
     }
 
+    if (data.meta_title !== undefined) {
+      updates.push('meta_title = ?');
+      params.push(data.meta_title);
+    }
+    if (data.meta_description !== undefined) {
+      updates.push('meta_description = ?');
+      params.push(data.meta_description);
+    }
+    if (data.meta_keywords !== undefined) {
+      updates.push('meta_keywords = ?');
+      params.push(data.meta_keywords);
+    }
+    if (data.og_title !== undefined) {
+      updates.push('og_title = ?');
+      params.push(data.og_title);
+    }
+    if (data.og_description !== undefined) {
+      updates.push('og_description = ?');
+      params.push(data.og_description);
+    }
+    if (data.og_image !== undefined) {
+      updates.push('og_image = ?');
+      params.push(data.og_image);
+    }
+    if (data.twitter_title !== undefined) {
+      updates.push('twitter_title = ?');
+      params.push(data.twitter_title);
+    }
+    if (data.twitter_description !== undefined) {
+      updates.push('twitter_description = ?');
+      params.push(data.twitter_description);
+    }
+    if (data.twitter_image !== undefined) {
+      updates.push('twitter_image = ?');
+      params.push(data.twitter_image);
+    }
     if (data.status !== undefined) {
       updates.push('status = ?');
       params.push(data.status);
     }
-
     if (data.capacity_mw !== undefined) {
       updates.push('capacity_mw = ?');
       params.push(data.capacity_mw);
     }
-
     if (data.location !== undefined) {
       updates.push('location = ?');
       params.push(data.location);
     }
-
     if (data.start_date !== undefined) {
       updates.push('start_date = ?');
       params.push(data.start_date?.toISOString().split('T')[0]);
     }
-
     if (data.end_date !== undefined) {
       updates.push('end_date = ?');
       params.push(data.end_date?.toISOString().split('T')[0]);
     }
-
     if (data.budget !== undefined) {
       updates.push('budget = ?');
       params.push(data.budget);
     }
-
     if (data.budget_currency !== undefined) {
       updates.push('budget_currency = ?');
       params.push(data.budget_currency);

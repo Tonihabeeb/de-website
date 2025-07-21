@@ -9,6 +9,12 @@ export interface Page {
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
   status: 'draft' | 'published' | 'archived';
   published_at?: Date;
   created_by?: string;
@@ -23,6 +29,12 @@ export interface CreatePageData {
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
   created_by?: string;
 }
 
@@ -33,6 +45,12 @@ export interface UpdatePageData {
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
   status?: 'draft' | 'published' | 'archived';
   published_at?: Date;
 }
@@ -50,6 +68,12 @@ export class PageModel {
       meta_title: data.meta_title,
       meta_description: data.meta_description,
       meta_keywords: data.meta_keywords,
+      og_title: data.og_title,
+      og_description: data.og_description,
+      og_image: data.og_image,
+      twitter_title: data.twitter_title,
+      twitter_description: data.twitter_description,
+      twitter_image: data.twitter_image,
       status: 'draft',
       created_by: data.created_by,
       created_at: now,
@@ -59,8 +83,9 @@ export class PageModel {
     const stmt = db.prepare(`
       INSERT INTO pages (
         id, slug, title, content, meta_title, meta_description, meta_keywords,
+        og_title, og_description, og_image, twitter_title, twitter_description, twitter_image,
         status, created_by, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
@@ -71,6 +96,12 @@ export class PageModel {
       page.meta_title,
       page.meta_description,
       page.meta_keywords,
+      page.og_title,
+      page.og_description,
+      page.og_image,
+      page.twitter_title,
+      page.twitter_description,
+      page.twitter_image,
       page.status,
       page.created_by,
       page.created_at.toISOString(),
@@ -195,6 +226,31 @@ export class PageModel {
       params.push(data.meta_keywords);
     }
 
+    if (data.og_title !== undefined) {
+      updates.push('og_title = ?');
+      params.push(data.og_title);
+    }
+    if (data.og_description !== undefined) {
+      updates.push('og_description = ?');
+      params.push(data.og_description);
+    }
+    if (data.og_image !== undefined) {
+      updates.push('og_image = ?');
+      params.push(data.og_image);
+    }
+    if (data.twitter_title !== undefined) {
+      updates.push('twitter_title = ?');
+      params.push(data.twitter_title);
+    }
+    if (data.twitter_description !== undefined) {
+      updates.push('twitter_description = ?');
+      params.push(data.twitter_description);
+    }
+    if (data.twitter_image !== undefined) {
+      updates.push('twitter_image = ?');
+      params.push(data.twitter_image);
+    }
+
     if (data.status !== undefined) {
       updates.push('status = ?');
       params.push(data.status);
@@ -249,6 +305,12 @@ export class PageModel {
       meta_title: original.meta_title,
       meta_description: original.meta_description,
       meta_keywords: original.meta_keywords,
+      og_title: original.og_title,
+      og_description: original.og_description,
+      og_image: original.og_image,
+      twitter_title: original.twitter_title,
+      twitter_description: original.twitter_description,
+      twitter_image: original.twitter_image,
       created_by,
     });
   }
