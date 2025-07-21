@@ -14,7 +14,14 @@ const nextConfig = {
   // Static export configuration for cPanel
   trailingSlash: true,
   images: {
-    unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'deepengineering.co',
+        pathname: '/**',
+      },
+    ],
   },
 
   // Development server configuration
