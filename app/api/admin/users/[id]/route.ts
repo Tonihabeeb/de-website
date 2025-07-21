@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { UserModel } from '@/database/models/User';
-import { requireAdmin, requireEditUsers, requireDeleteUsers } from '@/middleware/permissions';
+import {
+  requireAdmin,
+  requireEditUsers,
+  requireDeleteUsers,
+} from '@/middleware/permissions';
 
 // GET /api/admin/users/[id] - Get user by ID
 export async function GET(
@@ -9,13 +13,13 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireAdmin()(request);
     if (permissionCheck) return permissionCheck;
 
     const user = await UserModel.findById(id);
-    
+
     if (!user) {
       return NextResponse.json(
         { success: false, error: 'User not found' },
@@ -46,19 +50,13 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditUsers()(request);
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const {
-      name,
-      email,
-      password,
-      role,
-      is_active
-    } = body;
+    const { name, email, password, role, is_active } = body;
 
     // Check if user exists
     const existingUser = await UserModel.findById(id);
@@ -85,7 +83,7 @@ export async function PUT(
       email,
       password,
       role,
-      is_active
+      is_active,
     });
 
     if (!updatedUser) {
@@ -119,7 +117,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireDeleteUsers()(request);
     if (permissionCheck) return permissionCheck;
@@ -142,7 +140,7 @@ export async function DELETE(
     }
 
     const deleted = await UserModel.delete(id);
-    
+
     if (!deleted) {
       return NextResponse.json(
         { success: false, error: 'Failed to delete user' },
@@ -161,4 +159,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}

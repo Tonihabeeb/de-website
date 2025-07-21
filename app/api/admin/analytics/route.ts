@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     // Calculate date range
     const now = new Date();
     let startDate = new Date();
-    
+
     switch (range) {
       case '7d':
         startDate.setDate(now.getDate() - 7);
@@ -37,22 +37,30 @@ export async function GET(request: NextRequest) {
     const pagesStmt = db.prepare('SELECT COUNT(*) as count FROM pages');
     const totalPages = pagesStmt.get() as any;
 
-    const publishedPagesStmt = db.prepare('SELECT COUNT(*) as count FROM pages WHERE status = ?');
+    const publishedPagesStmt = db.prepare(
+      'SELECT COUNT(*) as count FROM pages WHERE status = ?'
+    );
     const publishedPages = publishedPagesStmt.get('published') as any;
 
-    const draftPagesStmt = db.prepare('SELECT COUNT(*) as count FROM pages WHERE status = ?');
+    const draftPagesStmt = db.prepare(
+      'SELECT COUNT(*) as count FROM pages WHERE status = ?'
+    );
     const draftPages = draftPagesStmt.get('draft') as any;
 
     const projectsStmt = db.prepare('SELECT COUNT(*) as count FROM projects');
     const totalProjects = projectsStmt.get() as any;
 
-    const activeProjectsStmt = db.prepare('SELECT COUNT(*) as count FROM projects WHERE status = ?');
+    const activeProjectsStmt = db.prepare(
+      'SELECT COUNT(*) as count FROM projects WHERE status = ?'
+    );
     const activeProjects = activeProjectsStmt.get('in-progress') as any;
 
     const usersStmt = db.prepare('SELECT COUNT(*) as count FROM users');
     const totalUsers = usersStmt.get() as any;
 
-    const activeUsersStmt = db.prepare('SELECT COUNT(*) as count FROM users WHERE is_active = ?');
+    const activeUsersStmt = db.prepare(
+      'SELECT COUNT(*) as count FROM users WHERE is_active = ?'
+    );
     const activeUsers = activeUsersStmt.get(1) as any;
 
     // Get user analytics
@@ -96,15 +104,15 @@ export async function GET(request: NextRequest) {
         type: 'page_created',
         description: 'New page "About Us" created',
         timestamp: new Date().toISOString(),
-        user: 'admin@example.com'
+        user: 'admin@example.com',
       },
       {
         id: '2',
         type: 'project_updated',
         description: 'Project "KPP Technology" updated',
         timestamp: new Date(Date.now() - 3600000).toISOString(),
-        user: 'editor@example.com'
-      }
+        user: 'editor@example.com',
+      },
     ];
 
     const analytics = {
@@ -116,7 +124,7 @@ export async function GET(request: NextRequest) {
         total_views: 0, // TODO: Implement view tracking
         total_downloads: 0, // TODO: Implement download tracking
       },
-      
+
       user_analytics: {
         new_users_this_month: newUsersThisMonth.count,
         active_users_this_week: Math.floor(activeUsers.count * 0.7), // Estimate
@@ -127,17 +135,17 @@ export async function GET(request: NextRequest) {
             username: 'admin@example.com',
             activity_count: 45,
             last_activity: new Date().toISOString(),
-          }
+          },
         ],
         user_activity_timeline: [
           {
             date: new Date().toISOString().split('T')[0],
             active_users: activeUsers.count,
             new_users: newUsersThisMonth.count,
-          }
+          },
         ],
       },
-      
+
       content_analytics: {
         most_viewed_pages: recentPages.map(page => ({
           page_id: page.id,
@@ -157,17 +165,17 @@ export async function GET(request: NextRequest) {
             pages_created: 2,
             projects_created: 1,
             media_uploaded: 0,
-          }
+          },
         ],
       },
-      
+
       media_analytics: {
         total_uploads: 0, // TODO: Implement media tracking
         storage_used: 0, // TODO: Implement storage tracking
         most_downloaded: [], // TODO: Implement download tracking
         media_usage_by_type: [], // TODO: Implement media type tracking
       },
-      
+
       system_analytics: {
         system_health: systemHealth,
         performance_metrics: performanceMetrics,
@@ -177,7 +185,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      analytics
+      analytics,
     });
   } catch (error) {
     console.error('Error fetching analytics:', error);
@@ -186,4 +194,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

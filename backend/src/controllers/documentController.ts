@@ -39,7 +39,14 @@ export async function listDocuments(req: Request, res: Response) {
   try {
     // @ts-ignore
     const userRole = req.user?.role || 'viewer';
-    const docs = await DocumentModel.find({ permissions: userRole }).sort({ createdAt: -1 });
+    const { type } = req.query;
+    
+    let query: any = { permissions: userRole };
+    if (type) {
+      query.type = type;
+    }
+    
+    const docs = await DocumentModel.find(query).sort({ createdAt: -1 });
     return res.json({ documents: docs });
   } catch (err) {
     return res.status(500).json({ error: 'Failed to fetch documents.' });

@@ -18,21 +18,27 @@ export default function OfficeMap() {
   const zoom = 6;
 
   return (
-    <div className="office-map w-full h-64 rounded-lg overflow-hidden relative">
+    <div className='office-map w-full h-64 rounded-lg overflow-hidden relative'>
       <MapContainer
         center={center}
         zoom={zoom}
-        style={{ width: '100%', height: '100%', minHeight: '220px', borderRadius: '0.5rem' }}
-        aria-label="Map showing Deep Engineering office locations"
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: '220px',
+          borderRadius: '0.5rem',
+        }}
+        aria-label='Map showing Deep Engineering office locations'
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
-        {offices.map((office) => (
+        {offices.map(office => (
           <Marker key={office.id} position={office.position} icon={customIcon}>
             <Popup>
-              <strong>{office.name}</strong><br />
+              <strong>{office.name}</strong>
+              <br />
               {office.address}
             </Popup>
           </Marker>

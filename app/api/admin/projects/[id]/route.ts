@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ProjectModel } from '@/database/models/Project';
-import { requireAuthor, requireEditProjects, requireDeleteProjects } from '@/middleware/permissions';
+import {
+  requireAuthor,
+  requireEditProjects,
+  requireDeleteProjects,
+} from '@/middleware/permissions';
 
 // GET /api/admin/projects/[id] - Get project by ID
 export async function GET(
@@ -9,13 +13,13 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireAuthor()(request);
     if (permissionCheck) return permissionCheck;
 
     const project = await ProjectModel.findById(id);
-    
+
     if (!project) {
       return NextResponse.json(
         { success: false, error: 'Project not found' },
@@ -43,7 +47,7 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
@@ -59,7 +63,7 @@ export async function PUT(
       location,
       start_date,
       end_date,
-      budget
+      budget,
     } = body;
 
     // Check if project exists
@@ -92,7 +96,7 @@ export async function PUT(
       location,
       start_date: start_date ? new Date(start_date) : undefined,
       end_date: end_date ? new Date(end_date) : undefined,
-      budget: budget ? parseFloat(budget) : undefined
+      budget: budget ? parseFloat(budget) : undefined,
     });
 
     if (!updatedProject) {
@@ -123,7 +127,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireDeleteProjects()(request);
     if (permissionCheck) return permissionCheck;
@@ -138,7 +142,7 @@ export async function DELETE(
     }
 
     const deleted = await ProjectModel.delete(id);
-    
+
     if (!deleted) {
       return NextResponse.json(
         { success: false, error: 'Failed to delete project' },
@@ -157,4 +161,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}

@@ -86,8 +86,8 @@ export async function GET(request: NextRequest) {
         unique_users: uniqueUsers.count,
         event_types: eventTypeSummary,
         top_pages: pageViewsSummary,
-        top_users: userActivitySummary
-      }
+        top_users: userActivitySummary,
+      },
     });
   } catch (error) {
     console.error('Error fetching analytics summary:', error);
@@ -96,4 +96,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

@@ -8,19 +8,19 @@ import Button from '@/components/ui/Button';
 import FormField from '@/components/ui/forms/FormField';
 import Modal from '@/components/ui/Modal';
 import { toast } from '@/components/ui/Toast';
-import { 
-  Settings, 
-  Shield, 
-  Mail, 
-  Database, 
-  Bell, 
-  Globe, 
-  Save, 
+import {
+  Settings,
+  Shield,
+  Mail,
+  Database,
+  Bell,
+  Globe,
+  Save,
   RotateCcw,
   Eye,
   EyeOff,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
 
 // Validation schemas
@@ -64,8 +64,12 @@ interface SystemSettingsProps {
   className?: string;
 }
 
-export default function SystemSettings({ className = '' }: SystemSettingsProps) {
-  const [activeTab, setActiveTab] = useState<'general' | 'security' | 'email' | 'advanced'>('general');
+export default function SystemSettings({
+  className = '',
+}: SystemSettingsProps) {
+  const [activeTab, setActiveTab] = useState<
+    'general' | 'security' | 'email' | 'advanced'
+  >('general');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showTestEmailModal, setShowTestEmailModal] = useState(false);
@@ -141,8 +145,10 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} settings saved successfully`);
+
+      toast.success(
+        `${type.charAt(0).toUpperCase() + type.slice(1)} settings saved successfully`
+      );
     } catch (error) {
       toast.error('Failed to save settings');
     } finally {
@@ -160,7 +166,7 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       toast.success(`Test email sent to ${testEmailAddress}`);
       setShowTestEmailModal(false);
       setTestEmailAddress('');
@@ -171,8 +177,14 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
     }
   };
 
-  const handleResetSettings = async (type: 'general' | 'security' | 'email') => {
-    if (!confirm('Are you sure you want to reset these settings to default values?')) {
+  const handleResetSettings = async (
+    type: 'general' | 'security' | 'email'
+  ) => {
+    if (
+      !confirm(
+        'Are you sure you want to reset these settings to default values?'
+      )
+    ) {
       return;
     }
 
@@ -180,7 +192,7 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Reset form to default values
       switch (type) {
         case 'general':
@@ -193,8 +205,10 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
           emailForm.reset();
           break;
       }
-      
-      toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} settings reset to defaults`);
+
+      toast.success(
+        `${type.charAt(0).toUpperCase() + type.slice(1)} settings reset to defaults`
+      );
     } catch (error) {
       toast.error('Failed to reset settings');
     } finally {
@@ -212,17 +226,17 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
   return (
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-xl font-semibold text-gray-900">System Settings</h2>
-        <p className="text-sm text-gray-600 mt-1">
+      <div className='px-6 py-4 border-b border-gray-200'>
+        <h2 className='text-xl font-semibold text-gray-900'>System Settings</h2>
+        <p className='text-sm text-gray-600 mt-1'>
           Configure system-wide settings and preferences
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
-        <nav className="flex space-x-8 px-6">
-          {tabs.map((tab) => {
+      <div className='border-b border-gray-200'>
+        <nav className='flex space-x-8 px-6'>
+          {tabs.map(tab => {
             const Icon = tab.icon;
             return (
               <button
@@ -234,7 +248,7 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className='w-4 h-4' />
                 <span>{tab.label}</span>
               </button>
             );
@@ -243,27 +257,31 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className='p-6'>
         {/* General Settings */}
         {activeTab === 'general' && (
           <FormProvider {...generalForm}>
-            <form onSubmit={generalForm.handleSubmit(() => handleSaveSettings('general'))}>
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form
+              onSubmit={generalForm.handleSubmit(() =>
+                handleSaveSettings('general')
+              )}
+            >
+              <div className='space-y-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                   <FormField
-                    name="siteName"
-                    label="Site Name"
-                    placeholder="Enter site name"
+                    name='siteName'
+                    label='Site Name'
+                    placeholder='Enter site name'
                   />
                   <FormField
-                    name="siteDescription"
-                    label="Site Description"
-                    placeholder="Enter site description"
+                    name='siteDescription'
+                    label='Site Description'
+                    placeholder='Enter site description'
                   />
                   <FormField
-                    name="timezone"
-                    label="Timezone"
-                    type="select"
+                    name='timezone'
+                    label='Timezone'
+                    type='select'
                     options={[
                       { value: 'UTC', label: 'UTC' },
                       { value: 'America/New_York', label: 'Eastern Time' },
@@ -273,9 +291,9 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
                     ]}
                   />
                   <FormField
-                    name="dateFormat"
-                    label="Date Format"
-                    type="select"
+                    name='dateFormat'
+                    label='Date Format'
+                    type='select'
                     options={[
                       { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY' },
                       { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY' },
@@ -283,9 +301,9 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
                     ]}
                   />
                   <FormField
-                    name="language"
-                    label="Language"
-                    type="select"
+                    name='language'
+                    label='Language'
+                    type='select'
                     options={[
                       { value: 'en', label: 'English' },
                       { value: 'es', label: 'Spanish' },
@@ -295,54 +313,59 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
                   />
                 </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium text-gray-900">System Options</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
+                <div className='space-y-4'>
+                  <h3 className='text-lg font-medium text-gray-900'>
+                    System Options
+                  </h3>
+                  <div className='space-y-3'>
+                    <div className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         {...generalForm.register('maintenanceMode')}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className="ml-2 text-sm text-gray-700">
-                        Maintenance Mode - Enable maintenance mode to restrict access
+                      <label className='ml-2 text-sm text-gray-700'>
+                        Maintenance Mode - Enable maintenance mode to restrict
+                        access
                       </label>
                     </div>
-                    <div className="flex items-center">
+                    <div className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         {...generalForm.register('allowRegistration')}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className="ml-2 text-sm text-gray-700">
-                        Allow User Registration - Allow new users to register accounts
+                      <label className='ml-2 text-sm text-gray-700'>
+                        Allow User Registration - Allow new users to register
+                        accounts
                       </label>
                     </div>
-                    <div className="flex items-center">
+                    <div className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         {...generalForm.register('requireEmailVerification')}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className="ml-2 text-sm text-gray-700">
-                        Require Email Verification - Require email verification for new accounts
+                      <label className='ml-2 text-sm text-gray-700'>
+                        Require Email Verification - Require email verification
+                        for new accounts
                       </label>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex justify-end space-x-3">
+                <div className='flex justify-end space-x-3'>
                   <Button
-                    type="button"
-                    variant="secondary"
+                    type='button'
+                    variant='secondary'
                     onClick={() => handleResetSettings('general')}
                     disabled={isLoading}
                   >
-                    <RotateCcw className="w-4 h-4 mr-2" />
+                    <RotateCcw className='w-4 h-4 mr-2' />
                     Reset to Defaults
                   </Button>
-                  <Button type="submit" disabled={isLoading}>
-                    <Save className="w-4 h-4 mr-2" />
+                  <Button type='submit' disabled={isLoading}>
+                    <Save className='w-4 h-4 mr-2' />
                     {isLoading ? 'Saving...' : 'Save Settings'}
                   </Button>
                 </div>
@@ -354,88 +377,99 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
         {/* Security Settings */}
         {activeTab === 'security' && (
           <FormProvider {...securityForm}>
-            <form onSubmit={securityForm.handleSubmit(() => handleSaveSettings('security'))}>
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form
+              onSubmit={securityForm.handleSubmit(() =>
+                handleSaveSettings('security')
+              )}
+            >
+              <div className='space-y-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                   <FormField
-                    name="sessionTimeout"
-                    label="Session Timeout (minutes)"
-                    type="number"
+                    name='sessionTimeout'
+                    label='Session Timeout (minutes)'
+                    type='number'
                   />
                   <FormField
-                    name="maxLoginAttempts"
-                    label="Max Login Attempts"
-                    type="number"
+                    name='maxLoginAttempts'
+                    label='Max Login Attempts'
+                    type='number'
                   />
                   <FormField
-                    name="passwordMinLength"
-                    label="Minimum Password Length"
-                    type="number"
+                    name='passwordMinLength'
+                    label='Minimum Password Length'
+                    type='number'
                   />
                   <FormField
-                    name="maxFileSize"
-                    label="Max File Size (MB)"
-                    type="number"
+                    name='maxFileSize'
+                    label='Max File Size (MB)'
+                    type='number'
                   />
                 </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium text-gray-900">Security Options</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
+                <div className='space-y-4'>
+                  <h3 className='text-lg font-medium text-gray-900'>
+                    Security Options
+                  </h3>
+                  <div className='space-y-3'>
+                    <div className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         {...securityForm.register('requireStrongPassword')}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className="ml-2 text-sm text-gray-700">
-                        Require Strong Password - Enforce password complexity requirements
+                      <label className='ml-2 text-sm text-gray-700'>
+                        Require Strong Password - Enforce password complexity
+                        requirements
                       </label>
                     </div>
-                    <div className="flex items-center">
+                    <div className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         {...securityForm.register('enableTwoFactor')}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className="ml-2 text-sm text-gray-700">
-                        Enable Two-Factor Authentication - Allow users to enable 2FA for their accounts
+                      <label className='ml-2 text-sm text-gray-700'>
+                        Enable Two-Factor Authentication - Allow users to enable
+                        2FA for their accounts
                       </label>
                     </div>
-                    <div className="flex items-center">
+                    <div className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         {...securityForm.register('enableAuditLog')}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className="ml-2 text-sm text-gray-700">
-                        Enable Audit Logging - Log all system activities for security monitoring
+                      <label className='ml-2 text-sm text-gray-700'>
+                        Enable Audit Logging - Log all system activities for
+                        security monitoring
                       </label>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium text-gray-900">File Upload Security</h3>
+                <div className='space-y-4'>
+                  <h3 className='text-lg font-medium text-gray-900'>
+                    File Upload Security
+                  </h3>
                   <FormField
-                    name="allowedFileTypes"
-                    label="Allowed File Types"
-                    placeholder="jpg,jpeg,png,gif,pdf,doc,docx"
+                    name='allowedFileTypes'
+                    label='Allowed File Types'
+                    placeholder='jpg,jpeg,png,gif,pdf,doc,docx'
                   />
                 </div>
 
-                <div className="flex justify-end space-x-3">
+                <div className='flex justify-end space-x-3'>
                   <Button
-                    type="button"
-                    variant="secondary"
+                    type='button'
+                    variant='secondary'
                     onClick={() => handleResetSettings('security')}
                     disabled={isLoading}
                   >
-                    <RotateCcw className="w-4 h-4 mr-2" />
+                    <RotateCcw className='w-4 h-4 mr-2' />
                     Reset to Defaults
                   </Button>
-                  <Button type="submit" disabled={isLoading}>
-                    <Save className="w-4 h-4 mr-2" />
+                  <Button type='submit' disabled={isLoading}>
+                    <Save className='w-4 h-4 mr-2' />
                     {isLoading ? 'Saving...' : 'Save Settings'}
                   </Button>
                 </div>
@@ -447,87 +481,94 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
         {/* Email Settings */}
         {activeTab === 'email' && (
           <FormProvider {...emailForm}>
-            <form onSubmit={emailForm.handleSubmit(() => handleSaveSettings('email'))}>
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form
+              onSubmit={emailForm.handleSubmit(() =>
+                handleSaveSettings('email')
+              )}
+            >
+              <div className='space-y-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                   <FormField
-                    name="smtpHost"
-                    label="SMTP Host"
-                    placeholder="smtp.gmail.com"
+                    name='smtpHost'
+                    label='SMTP Host'
+                    placeholder='smtp.gmail.com'
                   />
+                  <FormField name='smtpPort' label='SMTP Port' type='number' />
                   <FormField
-                    name="smtpPort"
-                    label="SMTP Port"
-                    type="number"
+                    name='smtpUsername'
+                    label='SMTP Username'
+                    placeholder='your-email@gmail.com'
                   />
-                  <FormField
-                    name="smtpUsername"
-                    label="SMTP Username"
-                    placeholder="your-email@gmail.com"
-                  />
-                  <div className="relative">
+                  <div className='relative'>
                     <FormField
-                      name="smtpPassword"
-                      label="SMTP Password"
+                      name='smtpPassword'
+                      label='SMTP Password'
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="Enter SMTP password"
+                      placeholder='Enter SMTP password'
                     />
                     <button
-                      type="button"
+                      type='button'
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-8 text-gray-400 hover:text-gray-600"
+                      className='absolute right-3 top-8 text-gray-400 hover:text-gray-600'
                     >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      {showPassword ? (
+                        <EyeOff className='w-4 h-4' />
+                      ) : (
+                        <Eye className='w-4 h-4' />
+                      )}
                     </button>
                   </div>
                   <FormField
-                    name="fromEmail"
-                    label="From Email"
-                    type="email"
-                    placeholder="noreply@yourdomain.com"
+                    name='fromEmail'
+                    label='From Email'
+                    type='email'
+                    placeholder='noreply@yourdomain.com'
                   />
                   <FormField
-                    name="fromName"
-                    label="From Name"
-                    placeholder="Your Company Name"
+                    name='fromName'
+                    label='From Name'
+                    placeholder='Your Company Name'
                   />
                 </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium text-gray-900">Email Options</h3>
-                  <div className="flex items-center">
+                <div className='space-y-4'>
+                  <h3 className='text-lg font-medium text-gray-900'>
+                    Email Options
+                  </h3>
+                  <div className='flex items-center'>
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       {...emailForm.register('enableEmailNotifications')}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                     />
-                    <label className="ml-2 text-sm text-gray-700">
-                      Enable Email Notifications - Send email notifications for system events
+                    <label className='ml-2 text-sm text-gray-700'>
+                      Enable Email Notifications - Send email notifications for
+                      system events
                     </label>
                   </div>
                 </div>
 
-                <div className="flex justify-end space-x-3">
+                <div className='flex justify-end space-x-3'>
                   <Button
-                    type="button"
-                    variant="secondary"
+                    type='button'
+                    variant='secondary'
                     onClick={() => setShowTestEmailModal(true)}
                     disabled={isLoading}
                   >
-                    <Mail className="w-4 h-4 mr-2" />
+                    <Mail className='w-4 h-4 mr-2' />
                     Test Email
                   </Button>
                   <Button
-                    type="button"
-                    variant="secondary"
+                    type='button'
+                    variant='secondary'
                     onClick={() => handleResetSettings('email')}
                     disabled={isLoading}
                   >
-                    <RotateCcw className="w-4 h-4 mr-2" />
+                    <RotateCcw className='w-4 h-4 mr-2' />
                     Reset to Defaults
                   </Button>
-                  <Button type="submit" disabled={isLoading}>
-                    <Save className="w-4 h-4 mr-2" />
+                  <Button type='submit' disabled={isLoading}>
+                    <Save className='w-4 h-4 mr-2' />
                     {isLoading ? 'Saving...' : 'Save Settings'}
                   </Button>
                 </div>
@@ -538,43 +579,46 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
 
         {/* Advanced Settings */}
         {activeTab === 'advanced' && (
-          <div className="space-y-6">
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <div className="flex">
-                <AlertCircle className="w-5 h-5 text-yellow-400 mr-3 mt-0.5" />
+          <div className='space-y-6'>
+            <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-4'>
+              <div className='flex'>
+                <AlertCircle className='w-5 h-5 text-yellow-400 mr-3 mt-0.5' />
                 <div>
-                  <h3 className="text-sm font-medium text-yellow-800">
+                  <h3 className='text-sm font-medium text-yellow-800'>
                     Advanced Settings
                   </h3>
-                  <p className="text-sm text-yellow-700 mt-1">
-                    These settings are for advanced users. Incorrect configuration may affect system performance.
+                  <p className='text-sm text-yellow-700 mt-1'>
+                    These settings are for advanced users. Incorrect
+                    configuration may affect system performance.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium text-gray-900">System Performance</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+            <div className='space-y-4'>
+              <h3 className='text-lg font-medium text-gray-900'>
+                System Performance
+              </h3>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                <div className='space-y-2'>
+                  <label className='block text-sm font-medium text-gray-700'>
                     Cache Duration (seconds)
                   </label>
                   <input
-                    type="number"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type='number'
+                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     defaultValue={3600}
                     min={60}
                     max={86400}
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                <div className='space-y-2'>
+                  <label className='block text-sm font-medium text-gray-700'>
                     Max Concurrent Users
                   </label>
                   <input
-                    type="number"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type='number'
+                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     defaultValue={100}
                     min={10}
                     max={1000}
@@ -583,28 +627,30 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
               </div>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium text-gray-900">Database Settings</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+            <div className='space-y-4'>
+              <h3 className='text-lg font-medium text-gray-900'>
+                Database Settings
+              </h3>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                <div className='space-y-2'>
+                  <label className='block text-sm font-medium text-gray-700'>
                     Connection Pool Size
                   </label>
                   <input
-                    type="number"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type='number'
+                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     defaultValue={10}
                     min={5}
                     max={50}
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                <div className='space-y-2'>
+                  <label className='block text-sm font-medium text-gray-700'>
                     Query Timeout (seconds)
                   </label>
                   <input
-                    type="number"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type='number'
+                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     defaultValue={30}
                     min={5}
                     max={300}
@@ -613,16 +659,16 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
               </div>
             </div>
 
-                          <div className="flex justify-end space-x-3">
-                <Button variant="secondary">
-                  <RotateCcw className="w-4 h-4 mr-2" />
-                  Reset to Defaults
-                </Button>
-                <Button>
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Advanced Settings
-                </Button>
-              </div>
+            <div className='flex justify-end space-x-3'>
+              <Button variant='secondary'>
+                <RotateCcw className='w-4 h-4 mr-2' />
+                Reset to Defaults
+              </Button>
+              <Button>
+                <Save className='w-4 h-4 mr-2' />
+                Save Advanced Settings
+              </Button>
+            </div>
           </div>
         )}
       </div>
@@ -631,27 +677,28 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
       <Modal
         isOpen={showTestEmailModal}
         onClose={() => setShowTestEmailModal(false)}
-        title="Send Test Email"
+        title='Send Test Email'
       >
-        <div className="space-y-4">
-          <p className="text-sm text-gray-600">
-            Enter an email address to send a test email and verify your SMTP configuration.
+        <div className='space-y-4'>
+          <p className='text-sm text-gray-600'>
+            Enter an email address to send a test email and verify your SMTP
+            configuration.
           </p>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className='space-y-2'>
+            <label className='block text-sm font-medium text-gray-700'>
               Email Address
             </label>
             <input
-              type="email"
+              type='email'
               value={testEmailAddress}
-              onChange={(e) => setTestEmailAddress(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="test@example.com"
+              onChange={e => setTestEmailAddress(e.target.value)}
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              placeholder='test@example.com'
             />
           </div>
-          <div className="flex justify-end space-x-3">
+          <div className='flex justify-end space-x-3'>
             <Button
-              variant="secondary"
+              variant='secondary'
               onClick={() => setShowTestEmailModal(false)}
               disabled={isLoading}
             >
@@ -665,4 +712,4 @@ export default function SystemSettings({ className = '' }: SystemSettingsProps) 
       </Modal>
     </div>
   );
-} 
+}

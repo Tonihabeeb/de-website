@@ -8,7 +8,7 @@ export default function PerformanceMonitor() {
     // Track Core Web Vitals
     if ('PerformanceObserver' in window) {
       // Largest Contentful Paint (LCP)
-      const lcpObserver = new PerformanceObserver((list) => {
+      const lcpObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
         if (lastEntry) {
@@ -18,7 +18,7 @@ export default function PerformanceMonitor() {
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
 
       // First Input Delay (FID)
-      const fidObserver = new PerformanceObserver((list) => {
+      const fidObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach((entry: any) => {
           if (entry.processingStart && entry.startTime) {
@@ -30,7 +30,7 @@ export default function PerformanceMonitor() {
 
       // Cumulative Layout Shift (CLS)
       let clsValue = 0;
-      const clsObserver = new PerformanceObserver((list) => {
+      const clsObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach((entry: any) => {
           if (!entry.hadRecentInput) {
@@ -42,7 +42,7 @@ export default function PerformanceMonitor() {
       clsObserver.observe({ entryTypes: ['layout-shift'] });
 
       // First Contentful Paint (FCP)
-      const fcpObserver = new PerformanceObserver((list) => {
+      const fcpObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const firstEntry = entries[0];
         if (firstEntry) {
@@ -52,7 +52,7 @@ export default function PerformanceMonitor() {
       fcpObserver.observe({ entryTypes: ['first-contentful-paint'] });
 
       // Time to First Byte (TTFB)
-      const navigationObserver = new PerformanceObserver((list) => {
+      const navigationObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach((entry: any) => {
           if (entry.responseStart > 0) {
@@ -71,8 +71,9 @@ export default function PerformanceMonitor() {
 
         // Track resource loading times
         const resources = performance.getEntriesByType('resource');
-        resources.forEach((resource) => {
-          if (resource.duration > 1000) { // Only track slow resources
+        resources.forEach(resource => {
+          if (resource.duration > 1000) {
+            // Only track slow resources
             trackPerformance('SlowResource', resource.duration);
           }
         });
@@ -91,11 +92,11 @@ export default function PerformanceMonitor() {
     }
 
     // Track errors
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', event => {
       trackError(new Error(event.message), 'runtime');
     });
 
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', event => {
       trackError(new Error(event.reason), 'promise');
     });
 
@@ -106,17 +107,17 @@ export default function PerformanceMonitor() {
         const tagName = target.tagName.toLowerCase();
         const className = target.className || '';
         const id = target.id || '';
-        
+
         // Track button clicks
         if (tagName === 'button' || target.closest('button')) {
           trackPerformance('ButtonClick', performance.now());
         }
-        
+
         // Track form submissions
         if (tagName === 'form' || target.closest('form')) {
           trackPerformance('FormSubmission', performance.now());
         }
-        
+
         // Track navigation
         if (tagName === 'a' && target.getAttribute('href')) {
           trackPerformance('Navigation', performance.now());
@@ -180,7 +181,10 @@ export const measurePerformance = (name: string, fn: () => void) => {
   trackPerformance(name, end - start);
 };
 
-export const measureAsyncPerformance = async (name: string, fn: () => Promise<void>) => {
+export const measureAsyncPerformance = async (
+  name: string,
+  fn: () => Promise<void>
+) => {
   const start = performance.now();
   await fn();
   const end = performance.now();
@@ -198,7 +202,8 @@ export const preloadResource = (href: string, as: string) => {
 
 // Image optimization tracking
 export const trackImageLoad = (src: string, loadTime: number) => {
-  if (loadTime > 1000) { // Track slow image loads
+  if (loadTime > 1000) {
+    // Track slow image loads
     trackPerformance('SlowImageLoad', loadTime);
   }
 };
@@ -206,4 +211,4 @@ export const trackImageLoad = (src: string, loadTime: number) => {
 // Bundle size tracking
 export const trackBundleSize = (bundleName: string, size: number) => {
   trackPerformance(`BundleSize_${bundleName}`, size);
-}; 
+};

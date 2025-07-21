@@ -30,8 +30,12 @@ export async function GET(request: NextRequest) {
     const action = searchParams.get('action');
     const startDate = searchParams.get('start_date');
     const endDate = searchParams.get('end_date');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 100;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : 0;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : 100;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : 0;
 
     // Build query conditions
     let conditions = [];
@@ -62,7 +66,8 @@ export async function GET(request: NextRequest) {
       params.push(endDate);
     }
 
-    const whereClause = conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
+    const whereClause =
+      conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
 
     // Get total count
     const countQuery = `SELECT COUNT(*) as count FROM content_contributions cc ${whereClause}`;
@@ -81,25 +86,29 @@ export async function GET(request: NextRequest) {
       ORDER BY cc.created_at DESC
       LIMIT ? OFFSET ?
     `;
-    
+
     const stmt = db.prepare(query);
     const contributions = stmt.all(...params, limit, offset) as any[];
 
     // Format the response
-    const formattedContributions: ContentContribution[] = contributions.map(contribution => ({
-      id: contribution.id,
-      user_id: contribution.user_id,
-      content_type: contribution.content_type,
-      content_id: contribution.content_id,
-      action: contribution.action,
-      title: contribution.title,
-      created_at: new Date(contribution.created_at),
-      user: contribution.user_id ? {
-        id: contribution.user_id,
-        name: contribution.user_name,
-        email: contribution.user_email
-      } : undefined
-    }));
+    const formattedContributions: ContentContribution[] = contributions.map(
+      contribution => ({
+        id: contribution.id,
+        user_id: contribution.user_id,
+        content_type: contribution.content_type,
+        content_id: contribution.content_id,
+        action: contribution.action,
+        title: contribution.title,
+        created_at: new Date(contribution.created_at),
+        user: contribution.user_id
+          ? {
+              id: contribution.user_id,
+              name: contribution.user_name,
+              email: contribution.user_email,
+            }
+          : undefined,
+      })
+    );
 
     return NextResponse.json({
       success: true,
@@ -108,8 +117,8 @@ export async function GET(request: NextRequest) {
         page: Math.floor(offset / limit) + 1,
         limit,
         total: totalResult.count,
-        totalPages: Math.ceil(totalResult.count / limit)
-      }
+        totalPages: Math.ceil(totalResult.count / limit),
+      },
     });
   } catch (error) {
     console.error('Error fetching content contributions:', error);
@@ -124,13 +133,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const {
-      user_id,
-      content_type,
-      content_id,
-      action,
-      title
-    } = body;
+    const { user_id, content_type, content_id, action, title } = body;
 
     // Validate required fields
     if (!user_id || !content_type || !content_id || !action) {
@@ -176,11 +179,14 @@ export async function POST(request: NextRequest) {
       new Date().toISOString()
     );
 
-    return NextResponse.json({
-      success: true,
-      message: 'Content contribution tracked successfully',
-      contribution_id: contributionId
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Content contribution tracked successfully',
+        contribution_id: contributionId,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error tracking content contribution:', error);
     return NextResponse.json(
@@ -188,4 +194,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

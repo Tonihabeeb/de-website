@@ -20,8 +20,8 @@ const defaultConfig: MobileOptimizationConfig = {
   breakpoints: {
     mobile: 768,
     tablet: 1024,
-    desktop: 1200
-  }
+    desktop: 1200,
+  },
 };
 
 export default function MobileOptimizer() {
@@ -34,23 +34,26 @@ export default function MobileOptimizer() {
     const checkDeviceCapabilities = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-      
+
       setScreenSize({ width, height });
       setIsMobile(width < defaultConfig.breakpoints.mobile);
-      setIsTablet(width >= defaultConfig.breakpoints.mobile && width < defaultConfig.breakpoints.tablet);
+      setIsTablet(
+        width >= defaultConfig.breakpoints.mobile &&
+          width < defaultConfig.breakpoints.tablet
+      );
       setTouchSupport('ontouchstart' in window || navigator.maxTouchPoints > 0);
     };
 
     checkDeviceCapabilities();
     window.addEventListener('resize', checkDeviceCapabilities);
-    
+
     return () => window.removeEventListener('resize', checkDeviceCapabilities);
   }, []);
 
   // Apply mobile-specific CSS classes
   useEffect(() => {
     const root = document.documentElement;
-    
+
     if (isMobile) {
       root.classList.add('mobile-device');
       root.classList.remove('tablet-device', 'desktop-device');
@@ -81,7 +84,10 @@ export const mobileUtils = {
 
   // Get responsive font size
   getResponsiveFontSize: (baseSize: number, mobileMultiplier: number = 0.9) => {
-    if (typeof window !== 'undefined' && window.innerWidth < defaultConfig.breakpoints.mobile) {
+    if (
+      typeof window !== 'undefined' &&
+      window.innerWidth < defaultConfig.breakpoints.mobile
+    ) {
       return Math.max(baseSize * mobileMultiplier, defaultConfig.minFontSize);
     }
     return baseSize;
@@ -97,7 +103,7 @@ export const mobileUtils = {
   getDeviceType: () => {
     if (typeof window === 'undefined') return 'desktop';
     const width = window.innerWidth;
-    
+
     if (width < defaultConfig.breakpoints.mobile) return 'mobile';
     if (width < defaultConfig.breakpoints.tablet) return 'tablet';
     return 'desktop';
@@ -106,7 +112,7 @@ export const mobileUtils = {
   // Optimize images for mobile
   getOptimizedImageSize: (originalSize: number) => {
     const deviceType = mobileUtils.getDeviceType();
-    
+
     switch (deviceType) {
       case 'mobile':
         return Math.min(originalSize, 400);
@@ -115,5 +121,5 @@ export const mobileUtils = {
       default:
         return originalSize;
     }
-  }
-}; 
+  },
+};

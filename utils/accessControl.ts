@@ -68,4 +68,4 @@ export function enforceSecurityProtocols() {
 // Example usage (to be replaced with real integration in app):
 // const user = users[0];
 // if (hasAccess(user, 'doc1')) { /* allow access */ }
-// logAuditEntry({ userId: user.id, documentId: 'doc1', action: 'view', timestamp: new Date() }); 
+// logAuditEntry({ userId: user.id, documentId: 'doc1', action: 'view', timestamp: new Date() });

@@ -85,14 +85,14 @@ export async function GET(request: NextRequest) {
       user_analytics: await getUserAnalytics(period),
       content_analytics: await getContentAnalytics(period),
       system_analytics: await getSystemAnalytics(period),
-      recent_activity: await getRecentActivity()
+      recent_activity: await getRecentActivity(),
     };
 
     return NextResponse.json({
       success: true,
       timestamp: new Date().toISOString(),
       period,
-      data: dashboardData
+      data: dashboardData,
     });
   } catch (error) {
     console.error('Error fetching dashboard data:', error);
@@ -140,7 +140,7 @@ async function getOverviewMetrics() {
       total_projects: projects.count || 0,
       total_media: media.count || 0,
       active_users_today: activeUsers.count || 0,
-      total_requests_today: requests.count || 0
+      total_requests_today: requests.count || 0,
     };
   } catch (error) {
     console.error('Error getting overview metrics:', error);
@@ -150,7 +150,7 @@ async function getOverviewMetrics() {
       total_projects: 0,
       total_media: 0,
       active_users_today: 0,
-      total_requests_today: 0
+      total_requests_today: 0,
     };
   }
 }
@@ -158,7 +158,7 @@ async function getOverviewMetrics() {
 async function getUserAnalytics(period: string) {
   try {
     const days = period === '30d' ? 30 : period === '90d' ? 90 : 7;
-    
+
     // Get new users this week
     const newUsersStmt = db.prepare(`
       SELECT COUNT(*) as count 
@@ -211,13 +211,13 @@ async function getUserAnalytics(period: string) {
       user_activity_trend: trend.map(item => ({
         date: item.date,
         active_users: item.active_users || 0,
-        new_users: item.new_users || 0
+        new_users: item.new_users || 0,
       })),
       top_active_users: topUsers.map(user => ({
         user_id: user.user_id,
         user_name: user.user_name || 'Unknown User',
-        activity_count: user.activity_count
-      }))
+        activity_count: user.activity_count,
+      })),
     };
   } catch (error) {
     console.error('Error getting user analytics:', error);
@@ -225,7 +225,7 @@ async function getUserAnalytics(period: string) {
       new_users_this_week: 0,
       active_users_this_week: 0,
       user_activity_trend: [],
-      top_active_users: []
+      top_active_users: [],
     };
   }
 }
@@ -233,7 +233,7 @@ async function getUserAnalytics(period: string) {
 async function getContentAnalytics(period: string) {
   try {
     const days = period === '30d' ? 30 : period === '90d' ? 90 : 7;
-    
+
     // Get total page views
     const pageViewsStmt = db.prepare(`
       SELECT COUNT(*) as count 
@@ -277,13 +277,13 @@ async function getContentAnalytics(period: string) {
       top_performing_pages: topPages.map(page => ({
         page_url: page.page_url,
         views: page.views,
-        engagement_rate: page.engagement_rate
+        engagement_rate: page.engagement_rate,
       })),
       content_creation_trend: creationTrend.map(item => ({
         date: item.date,
         pages_created: item.pages_created || 0,
-        projects_created: item.projects_created || 0
-      }))
+        projects_created: item.projects_created || 0,
+      })),
     };
   } catch (error) {
     console.error('Error getting content analytics:', error);
@@ -291,7 +291,7 @@ async function getContentAnalytics(period: string) {
       total_page_views: 0,
       average_engagement_time: 0,
       top_performing_pages: [],
-      content_creation_trend: []
+      content_creation_trend: [],
     };
   }
 }
@@ -299,7 +299,7 @@ async function getContentAnalytics(period: string) {
 async function getSystemAnalytics(period: string) {
   try {
     const days = period === '30d' ? 30 : period === '90d' ? 90 : 7;
-    
+
     // Get current system health
     const healthStmt = db.prepare(`
       SELECT 
@@ -354,21 +354,23 @@ async function getSystemAnalytics(period: string) {
         cpu_usage: health?.cpu_usage || 0,
         memory_usage: health?.memory_usage || 0,
         disk_usage: health?.disk_usage || 0,
-        error_rate: health?.error_rate || 0
+        error_rate: health?.error_rate || 0,
       },
       performance_metrics: {
-        average_response_time: Math.round((perf?.avg_response_time || 0) * 100) / 100,
-        requests_per_minute: Math.round((perf?.total_requests || 0) / 60 * 100) / 100,
+        average_response_time:
+          Math.round((perf?.avg_response_time || 0) * 100) / 100,
+        requests_per_minute:
+          Math.round(((perf?.total_requests || 0) / 60) * 100) / 100,
         slowest_endpoints: slowEndpoints.map(endpoint => ({
           endpoint: endpoint.endpoint,
-          avg_response_time: Math.round(endpoint.avg_response_time * 100) / 100
-        }))
+          avg_response_time: Math.round(endpoint.avg_response_time * 100) / 100,
+        })),
       },
       system_usage_trend: usageTrend.map(item => ({
         timestamp: item.timestamp,
         cpu_usage: item.cpu_usage,
-        memory_usage: item.memory_usage
-      }))
+        memory_usage: item.memory_usage,
+      })),
     };
   } catch (error) {
     console.error('Error getting system analytics:', error);
@@ -377,14 +379,14 @@ async function getSystemAnalytics(period: string) {
         cpu_usage: 0,
         memory_usage: 0,
         disk_usage: 0,
-        error_rate: 0
+        error_rate: 0,
       },
       performance_metrics: {
         average_response_time: 0,
         requests_per_minute: 0,
-        slowest_endpoints: []
+        slowest_endpoints: [],
       },
-      system_usage_trend: []
+      system_usage_trend: [],
     };
   }
 }
@@ -410,10 +412,10 @@ async function getRecentActivity() {
       type: activity.type,
       description: activity.description || `${activity.type} activity`,
       user_name: activity.user_name || 'Unknown User',
-      timestamp: new Date(activity.timestamp)
+      timestamp: new Date(activity.timestamp),
     }));
   } catch (error) {
     console.error('Error getting recent activity:', error);
     return [];
   }
-} 
+}

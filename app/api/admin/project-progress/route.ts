@@ -15,20 +15,21 @@ export async function GET(request: NextRequest) {
           status: 'completed',
           progress: 100,
           created_at: '2024-01-01T00:00:00.000Z',
-          updated_at: '2024-01-15T00:00:00.000Z'
+          updated_at: '2024-01-15T00:00:00.000Z',
         },
         {
           id: 'milestone-002',
           project_id: 'project-001',
           name: 'Engineering Design',
-          description: 'Complete detailed engineering design and specifications',
+          description:
+            'Complete detailed engineering design and specifications',
           start_date: '2024-02-11',
           end_date: '2024-03-05',
           status: 'in-progress',
           progress: 75,
           created_at: '2024-02-11T00:00:00.000Z',
-          updated_at: '2024-07-20T00:00:00.000Z'
-        }
+          updated_at: '2024-07-20T00:00:00.000Z',
+        },
       ],
       activity: [
         {
@@ -36,21 +37,22 @@ export async function GET(request: NextRequest) {
           project_id: 'project-001',
           type: 'milestone_completed',
           title: 'Site Assessment Completed',
-          description: 'Site assessment and feasibility study completed successfully',
+          description:
+            'Site assessment and feasibility study completed successfully',
           timestamp: '2024-01-15T10:30:00.000Z',
-          user: 'John Smith'
-        }
+          user: 'John Smith',
+        },
       ],
       metrics: {
         revenue: [
           { month: 'Jan', revenue: 120000, cost: 80000 },
-          { month: 'Feb', revenue: 135000, cost: 90000 }
+          { month: 'Feb', revenue: 135000, cost: 90000 },
         ],
         cashFlow: [
           { month: 'Jan', cashFlow: 40000 },
-          { month: 'Feb', cashFlow: 45000 }
-        ]
-      }
+          { month: 'Feb', cashFlow: 45000 },
+        ],
+      },
     };
 
     return NextResponse.json({
@@ -60,8 +62,8 @@ export async function GET(request: NextRequest) {
       metrics: sampleData.metrics,
       total: {
         milestones: sampleData.milestones.length,
-        activity: sampleData.activity.length
-      }
+        activity: sampleData.activity.length,
+      },
     });
   } catch (error) {
     console.error('Error fetching project progress:', error);
@@ -70,4 +72,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

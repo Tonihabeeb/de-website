@@ -22,21 +22,22 @@ export function initializeDatabase() {
     // Read and execute migration files
     const fs = require('fs');
     const migrationsPath = path.join(process.cwd(), 'database', 'migrations');
-    
+
     if (fs.existsSync(migrationsPath)) {
-      const migrationFiles = fs.readdirSync(migrationsPath)
+      const migrationFiles = fs
+        .readdirSync(migrationsPath)
         .filter((file: string) => file.endsWith('.sql'))
         .sort();
-      
+
       for (const file of migrationFiles) {
         const migrationPath = path.join(migrationsPath, file);
         const migrationSQL = fs.readFileSync(migrationPath, 'utf8');
-        
+
         console.log(`Executing migration: ${file}`);
         db.exec(migrationSQL);
       }
     }
-    
+
     console.log('Database initialized successfully');
   } catch (error) {
     console.error('Error initializing database:', error);
@@ -50,4 +51,4 @@ export function closeDatabase() {
 }
 
 // Export database instance
-export default db; 
+export default db;

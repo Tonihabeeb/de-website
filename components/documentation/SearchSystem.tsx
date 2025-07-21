@@ -3,19 +3,29 @@
 import { useState } from 'react';
 import { Search } from 'lucide-react';
 
-const categories = [
-  'All',
-  'Technical',
-  'Business',
-  'Legal',
-  'Environmental',
-];
+const categories = ['All', 'Technical', 'Business', 'Legal', 'Environmental'];
 
 const placeholderResults = [
-  { title: 'KPP Technical Datasheet', category: 'Technical', description: 'Complete technical specifications and performance data' },
-  { title: 'Environmental Impact Assessment', category: 'Environmental', description: 'Comprehensive environmental impact analysis' },
-  { title: 'Investment Prospectus 2024', category: 'Business', description: 'Comprehensive investment opportunity overview' },
-  { title: 'Government Contract', category: 'Legal', description: 'Official government contract for KPP project' },
+  {
+    title: 'KPP Technical Datasheet',
+    category: 'Technical',
+    description: 'Complete technical specifications and performance data',
+  },
+  {
+    title: 'Environmental Impact Assessment',
+    category: 'Environmental',
+    description: 'Comprehensive environmental impact analysis',
+  },
+  {
+    title: 'Investment Prospectus 2024',
+    category: 'Business',
+    description: 'Comprehensive investment opportunity overview',
+  },
+  {
+    title: 'Government Contract',
+    category: 'Legal',
+    description: 'Official government contract for KPP project',
+  },
 ];
 
 export default function SearchSystem() {
@@ -31,45 +41,51 @@ export default function SearchSystem() {
   });
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <form className="flex gap-2 mb-4" onSubmit={e => e.preventDefault()}>
-        <div className="relative flex-1">
+    <div className='w-full max-w-2xl mx-auto'>
+      <form className='flex gap-2 mb-4' onSubmit={e => e.preventDefault()}>
+        <div className='relative flex-1'>
           <input
-            type="text"
-            className="w-full border border-gray-300 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="Search documents..."
+            type='text'
+            className='w-full border border-gray-300 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary'
+            placeholder='Search documents...'
             value={query}
             onChange={e => setQuery(e.target.value)}
-            aria-label="Search documents"
+            aria-label='Search documents'
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5' />
         </div>
         <select
-          className="border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary"
+          className='border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary'
           value={category}
           onChange={e => setCategory(e.target.value)}
-          aria-label="Filter by category"
+          aria-label='Filter by category'
         >
           {categories.map(cat => (
-            <option key={cat} value={cat}>{cat}</option>
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
           ))}
         </select>
       </form>
-      <div className="space-y-4">
+      <div className='space-y-4'>
         {filteredResults.length === 0 ? (
-          <div className="text-gray-500 text-center py-8">No documents found.</div>
+          <div className='text-gray-500 text-center py-8'>
+            No documents found.
+          </div>
         ) : (
           filteredResults.map((doc, i) => (
-            <div key={i} className="bg-white border rounded-lg p-4 shadow-sm">
-              <div className="flex items-center justify-between mb-1">
-                <span className="font-semibold text-primary">{doc.title}</span>
-                <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{doc.category}</span>
+            <div key={i} className='bg-white border rounded-lg p-4 shadow-sm'>
+              <div className='flex items-center justify-between mb-1'>
+                <span className='font-semibold text-primary'>{doc.title}</span>
+                <span className='text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded'>
+                  {doc.category}
+                </span>
               </div>
-              <p className="text-gray-700 text-sm">{doc.description}</p>
+              <p className='text-gray-700 text-sm'>{doc.description}</p>
             </div>
           ))
         )}
       </div>
     </div>
   );
-} 
+}

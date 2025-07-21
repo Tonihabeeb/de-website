@@ -9,7 +9,11 @@ interface RoleGuardProps {
   fallback?: ReactNode;
 }
 
-export default function RoleGuard({ children, roles, fallback = null }: RoleGuardProps) {
+export default function RoleGuard({
+  children,
+  roles,
+  fallback = null,
+}: RoleGuardProps) {
   const { hasAnyRole, isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
@@ -21,4 +25,4 @@ export default function RoleGuard({ children, roles, fallback = null }: RoleGuar
   }
 
   return <>{children}</>;
-} 
+}

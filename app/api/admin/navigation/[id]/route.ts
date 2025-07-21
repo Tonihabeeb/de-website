@@ -9,14 +9,14 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireAdmin()(request);
     if (permissionCheck) return permissionCheck;
 
     const stmt = db.prepare('SELECT * FROM navigation_menus WHERE id = ?');
     const menu = stmt.get(id) as any;
-    
+
     if (!menu) {
       return NextResponse.json(
         { success: false, error: 'Navigation menu not found' },
@@ -32,8 +32,8 @@ export async function GET(
         location: menu.location,
         items: JSON.parse(menu.items),
         created_at: menu.created_at,
-        updated_at: menu.updated_at
-      }
+        updated_at: menu.updated_at,
+      },
     });
   } catch (error) {
     console.error('Error fetching navigation menu:', error);
@@ -51,7 +51,7 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireAdmin()(request);
     if (permissionCheck) return permissionCheck;
@@ -60,9 +60,11 @@ export async function PUT(
     const { name, location, items } = body;
 
     // Check if menu exists
-    const existingStmt = db.prepare('SELECT * FROM navigation_menus WHERE id = ?');
+    const existingStmt = db.prepare(
+      'SELECT * FROM navigation_menus WHERE id = ?'
+    );
     const existingMenu = existingStmt.get(id) as any;
-    
+
     if (!existingMenu) {
       return NextResponse.json(
         { success: false, error: 'Navigation menu not found' },
@@ -75,24 +77,35 @@ export async function PUT(
       const validLocations = ['header', 'footer', 'sidebar'];
       if (!validLocations.includes(location)) {
         return NextResponse.json(
-          { success: false, error: 'Invalid location. Must be one of: header, footer, sidebar' },
+          {
+            success: false,
+            error: 'Invalid location. Must be one of: header, footer, sidebar',
+          },
           { status: 400 }
         );
       }
     }
 
     // Check if name and location combination already exists (if changed)
-    if ((name && name !== existingMenu.name) || (location && location !== existingMenu.location)) {
-      const checkStmt = db.prepare('SELECT id FROM navigation_menus WHERE name = ? AND location = ? AND id != ?');
+    if (
+      (name && name !== existingMenu.name) ||
+      (location && location !== existingMenu.location)
+    ) {
+      const checkStmt = db.prepare(
+        'SELECT id FROM navigation_menus WHERE name = ? AND location = ? AND id != ?'
+      );
       const duplicate = checkStmt.get(
-        name || existingMenu.name, 
-        location || existingMenu.location, 
+        name || existingMenu.name,
+        location || existingMenu.location,
         id
       );
-      
+
       if (duplicate) {
         return NextResponse.json(
-          { success: false, error: 'Navigation menu with this name and location already exists' },
+          {
+            success: false,
+            error: 'Navigation menu with this name and location already exists',
+          },
           { status: 409 }
         );
       }
@@ -120,7 +133,9 @@ export async function PUT(
     }
 
     // Get updated menu
-    const updatedStmt = db.prepare('SELECT * FROM navigation_menus WHERE id = ?');
+    const updatedStmt = db.prepare(
+      'SELECT * FROM navigation_menus WHERE id = ?'
+    );
     const updatedMenu = updatedStmt.get(id) as any;
 
     return NextResponse.json({
@@ -131,7 +146,7 @@ export async function PUT(
         location: updatedMenu.location,
         items: JSON.parse(updatedMenu.items),
         created_at: updatedMenu.created_at,
-        updated_at: updatedMenu.updated_at
+        updated_at: updatedMenu.updated_at,
       },
       message: 'Navigation menu updated successfully',
     });
@@ -151,15 +166,17 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireAdmin()(request);
     if (permissionCheck) return permissionCheck;
 
     // Check if menu exists
-    const existingStmt = db.prepare('SELECT * FROM navigation_menus WHERE id = ?');
+    const existingStmt = db.prepare(
+      'SELECT * FROM navigation_menus WHERE id = ?'
+    );
     const existingMenu = existingStmt.get(id) as any;
-    
+
     if (!existingMenu) {
       return NextResponse.json(
         { success: false, error: 'Navigation menu not found' },
@@ -189,4 +206,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}

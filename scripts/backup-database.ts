@@ -16,7 +16,9 @@ interface BackupInfo {
   record_count: number;
 }
 
-async function createBackup(type: 'full' | 'incremental' = 'full'): Promise<BackupInfo> {
+async function createBackup(
+  type: 'full' | 'incremental' = 'full'
+): Promise<BackupInfo> {
   try {
     console.log(`Starting ${type} database backup...`);
 
@@ -34,7 +36,7 @@ async function createBackup(type: 'full' | 'incremental' = 'full'): Promise<Back
 
     // Get database path
     const dbPath = path.join(process.cwd(), 'database', 'cms.db');
-    
+
     if (!existsSync(dbPath)) {
       throw new Error('Database file not found');
     }
@@ -73,28 +75,32 @@ async function createBackup(type: 'full' | 'incremental' = 'full'): Promise<Back
   }
 }
 
-async function getBackupStatistics(backupPath: string): Promise<{ tables: string[], recordCount: number }> {
+async function getBackupStatistics(
+  backupPath: string
+): Promise<{ tables: string[]; recordCount: number }> {
   try {
     // Create a temporary connection to the backup database
     const backupDb = require('better-sqlite3')(backupPath);
-    
+
     // Get all tables
     const tablesStmt = backupDb.prepare(`
       SELECT name FROM sqlite_master 
       WHERE type='table' AND name NOT LIKE 'sqlite_%'
     `);
     const tables = tablesStmt.all() as { name: string }[];
-    
+
     // Count total records
     let recordCount = 0;
     for (const table of tables) {
-      const countStmt = backupDb.prepare(`SELECT COUNT(*) as count FROM ${table.name}`);
+      const countStmt = backupDb.prepare(
+        `SELECT COUNT(*) as count FROM ${table.name}`
+      );
       const result = countStmt.get() as { count: number };
       recordCount += result.count;
     }
-    
+
     backupDb.close();
-    
+
     return {
       tables: tables.map(t => t.name),
       recordCount,
@@ -111,7 +117,7 @@ async function getBackupStatistics(backupPath: string): Promise<{ tables: string
 async function listBackups(): Promise<BackupInfo[]> {
   try {
     const backupDir = path.join(process.cwd(), 'backups');
-    
+
     if (!existsSync(backupDir)) {
       return [];
     }
@@ -121,7 +127,7 @@ async function listBackups(): Promise<BackupInfo[]> {
     const backupFiles = files.filter((file: string) => file.endsWith('.json'));
 
     const backups: BackupInfo[] = [];
-    
+
     for (const file of backupFiles) {
       try {
         const metadataPath = path.join(backupDir, file);
@@ -133,7 +139,10 @@ async function listBackups(): Promise<BackupInfo[]> {
       }
     }
 
-    return backups.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    return backups.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
   } catch (error) {
     console.error('Error listing backups:', error);
     return [];
@@ -153,7 +162,10 @@ async function restoreBackup(backupId: string): Promise<boolean> {
     }
 
     // Create a backup of current database before restoring
-    const currentBackupPath = path.join(backupDir, `pre-restore-${Date.now()}.sqlite`);
+    const currentBackupPath = path.join(
+      backupDir,
+      `pre-restore-${Date.now()}.sqlite`
+    );
     if (existsSync(dbPath)) {
       const currentDbContent = await readFile(dbPath);
       await writeFile(currentBackupPath, currentDbContent);
@@ -188,10 +200,10 @@ async function main() {
   try {
     switch (command) {
       case 'create':
-        const type = arg as 'full' | 'incremental' || 'full';
+        const type = (arg as 'full' | 'incremental') || 'full';
         await createBackup(type);
         break;
-        
+
       case 'list':
         const backups = await listBackups();
         console.log('\n📋 Available Backups:');
@@ -201,13 +213,15 @@ async function main() {
           console.log(`File: ${backup.filename}`);
           console.log(`Size: ${formatFileSize(backup.size)}`);
           console.log(`Type: ${backup.type}`);
-          console.log(`Created: ${new Date(backup.created_at).toLocaleString()}`);
+          console.log(
+            `Created: ${new Date(backup.created_at).toLocaleString()}`
+          );
           console.log(`Tables: ${backup.tables.length}`);
           console.log(`Records: ${backup.record_count}`);
           console.log('─'.repeat(80));
         });
         break;
-        
+
       case 'restore':
         if (!arg) {
           console.error('❌ Backup ID is required for restore');
@@ -221,7 +235,7 @@ async function main() {
           process.exit(1);
         }
         break;
-        
+
       default:
         console.log(`
 🗄️  Database Backup Tool
@@ -249,4 +263,4 @@ if (require.main === module) {
   main();
 }
 
-export { createBackup, listBackups, restoreBackup }; 
+export { createBackup, listBackups, restoreBackup };

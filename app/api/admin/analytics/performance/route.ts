@@ -49,8 +49,12 @@ export async function GET(request: NextRequest) {
     const statusCode = searchParams.get('status_code');
     const startDate = searchParams.get('start_date');
     const endDate = searchParams.get('end_date');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 100;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : 0;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : 100;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : 0;
 
     // Build query conditions
     let conditions = [];
@@ -81,7 +85,8 @@ export async function GET(request: NextRequest) {
       params.push(endDate);
     }
 
-    const whereClause = conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
+    const whereClause =
+      conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
 
     // Get total count
     const countQuery = `SELECT COUNT(*) as count FROM performance_metrics ${whereClause}`;
@@ -95,7 +100,7 @@ export async function GET(request: NextRequest) {
       ORDER BY timestamp DESC
       LIMIT ? OFFSET ?
     `;
-    
+
     const stmt = db.prepare(query);
     const metrics = stmt.all(...params, limit, offset) as any[];
 
@@ -110,7 +115,7 @@ export async function GET(request: NextRequest) {
       ip_address: metric.ip_address,
       user_agent: metric.user_agent,
       timestamp: new Date(metric.timestamp),
-      error_message: metric.error_message
+      error_message: metric.error_message,
     }));
 
     // Get performance summary
@@ -124,8 +129,8 @@ export async function GET(request: NextRequest) {
         page: Math.floor(offset / limit) + 1,
         limit,
         total: totalResult.count,
-        totalPages: Math.ceil(totalResult.count / limit)
-      }
+        totalPages: Math.ceil(totalResult.count / limit),
+      },
     });
   } catch (error) {
     console.error('Error fetching performance metrics:', error);
@@ -148,7 +153,7 @@ export async function POST(request: NextRequest) {
       user_id,
       ip_address,
       user_agent,
-      error_message
+      error_message,
     } = body;
 
     // Validate required fields
@@ -181,11 +186,14 @@ export async function POST(request: NextRequest) {
       error_message || null
     );
 
-    return NextResponse.json({
-      success: true,
-      message: 'Performance metric recorded successfully',
-      metric_id: metricId
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Performance metric recorded successfully',
+        metric_id: metricId,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error recording performance metric:', error);
     return NextResponse.json(
@@ -196,7 +204,10 @@ export async function POST(request: NextRequest) {
 }
 
 // Helper function to get performance summary
-async function getPerformanceSummary(startDate?: string | null, endDate?: string | null): Promise<PerformanceSummary> {
+async function getPerformanceSummary(
+  startDate?: string | null,
+  endDate?: string | null
+): Promise<PerformanceSummary> {
   try {
     // Build date filter
     let dateFilter = '';
@@ -268,24 +279,29 @@ async function getPerformanceSummary(startDate?: string | null, endDate?: string
 
     return {
       total_requests: totalResult.total_requests,
-      average_response_time: Math.round(totalResult.avg_response_time * 100) / 100,
-      error_rate: totalResult.total_requests > 0 ? 
-        Math.round((totalResult.error_count / totalResult.total_requests) * 10000) / 100 : 0,
+      average_response_time:
+        Math.round(totalResult.avg_response_time * 100) / 100,
+      error_rate:
+        totalResult.total_requests > 0
+          ? Math.round(
+              (totalResult.error_count / totalResult.total_requests) * 10000
+            ) / 100
+          : 0,
       slowest_endpoints: slowestEndpoints.map(endpoint => ({
         endpoint: endpoint.endpoint,
         avg_response_time: Math.round(endpoint.avg_response_time * 100) / 100,
-        request_count: endpoint.request_count
+        request_count: endpoint.request_count,
       })),
       error_endpoints: errorEndpoints.map(endpoint => ({
         endpoint: endpoint.endpoint,
         error_count: endpoint.error_count,
-        error_rate: endpoint.error_rate
+        error_rate: endpoint.error_rate,
       })),
       hourly_traffic: hourlyTraffic.map(hour => ({
         hour: hour.hour,
         request_count: hour.request_count,
-        avg_response_time: Math.round(hour.avg_response_time * 100) / 100
-      }))
+        avg_response_time: Math.round(hour.avg_response_time * 100) / 100,
+      })),
     };
   } catch (error) {
     console.error('Error getting performance summary:', error);
@@ -295,7 +311,7 @@ async function getPerformanceSummary(startDate?: string | null, endDate?: string
       error_rate: 0,
       slowest_endpoints: [],
       error_endpoints: [],
-      hourly_traffic: []
+      hourly_traffic: [],
     };
   }
-} 
+}

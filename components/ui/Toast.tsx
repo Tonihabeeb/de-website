@@ -12,7 +12,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     <>
       {children}
       <SonnerToaster
-        position="top-right"
+        position='top-right'
         toastOptions={{
           style: {
             background: 'white',
@@ -49,4 +49,4 @@ export const toast = {
   },
 };
 
-export default ToastProvider; 
+export default ToastProvider;

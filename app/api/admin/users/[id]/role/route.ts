@@ -9,7 +9,7 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireAdmin()(request);
     if (permissionCheck) return permissionCheck;
@@ -21,7 +21,10 @@ export async function PATCH(
     const validRoles = Object.values(UserRole);
     if (!validRoles.includes(role)) {
       return NextResponse.json(
-        { success: false, error: `Invalid role. Must be one of: ${validRoles.join(', ')}` },
+        {
+          success: false,
+          error: `Invalid role. Must be one of: ${validRoles.join(', ')}`,
+        },
         { status: 400 }
       );
     }
@@ -45,7 +48,7 @@ export async function PATCH(
 
     // Update user role
     const updatedUser = await UserModel.update(id, { role });
-    
+
     if (!updatedUser) {
       return NextResponse.json(
         { success: false, error: 'Failed to update user role' },
@@ -68,4 +71,4 @@ export async function PATCH(
       { status: 500 }
     );
   }
-} 
+}

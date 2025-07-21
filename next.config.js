@@ -2,7 +2,7 @@
 const nextConfig = {
   // App Router is now default in Next.js 15
   reactStrictMode: true,
-  
+
   // Suppress hydration warnings in development
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer
@@ -18,11 +18,7 @@ const nextConfig = {
   },
 
   // Development server configuration
-  allowedDevOrigins: [
-    '192.168.103.177',
-    'localhost',
-    '127.0.0.1'
-  ],
+  allowedDevOrigins: ['192.168.103.177', 'localhost', '127.0.0.1'],
 
   // Webpack configuration for better browser compatibility
   webpack: (config, { dev, isServer }) => {
@@ -35,7 +31,7 @@ const nextConfig = {
         tls: false,
       };
     }
-    
+
     return config;
   },
 
@@ -44,6 +40,6 @@ const nextConfig = {
     // Note: suppressHydrationWarning is not a valid experimental option
     // Hydration warnings are handled by our custom components instead
   },
-}
+};
 
-module.exports = nextConfig 
+module.exports = nextConfig;

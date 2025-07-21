@@ -9,7 +9,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditPages()(request);
     if (permissionCheck) return permissionCheck;
@@ -29,7 +29,10 @@ export async function POST(
     // Validate required fields
     if (!title || !slug) {
       return NextResponse.json(
-        { success: false, error: 'Title and slug are required for duplication' },
+        {
+          success: false,
+          error: 'Title and slug are required for duplication',
+        },
         { status: 400 }
       );
     }
@@ -51,7 +54,7 @@ export async function POST(
       meta_title: originalPage.meta_title,
       meta_description: originalPage.meta_description,
       meta_keywords: originalPage.meta_keywords,
-      created_by: originalPage.created_by
+      created_by: originalPage.created_by,
     });
 
     if (!duplicatedPage) {
@@ -66,16 +69,19 @@ export async function POST(
       await PageModel.update(duplicatedPage.id, { status });
     }
 
-    return NextResponse.json({
-      success: true,
-      page: duplicatedPage,
-      original_page: {
-        id: originalPage.id,
-        title: originalPage.title,
-        slug: originalPage.slug
+    return NextResponse.json(
+      {
+        success: true,
+        page: duplicatedPage,
+        original_page: {
+          id: originalPage.id,
+          title: originalPage.title,
+          slug: originalPage.slug,
+        },
+        message: 'Page duplicated successfully',
       },
-      message: 'Page duplicated successfully',
-    }, { status: 201 });
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error duplicating page:', error);
     return NextResponse.json(
@@ -83,4 +89,4 @@ export async function POST(
       { status: 500 }
     );
   }
-} 
+}

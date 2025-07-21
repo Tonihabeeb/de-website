@@ -38,18 +38,20 @@ export async function POST(request: NextRequest) {
       success: 0,
       failed: 0,
       errors: [],
-      users: []
+      users: [],
     };
 
     // Process each user
     for (let i = 0; i < users.length; i++) {
       const userData = users[i];
-      
+
       try {
         // Validate required fields
         if (!userData.name || !userData.email || !userData.role) {
           result.failed++;
-          result.errors.push(`Row ${i + 1}: Missing required fields (name, email, role)`);
+          result.errors.push(
+            `Row ${i + 1}: Missing required fields (name, email, role)`
+          );
           continue;
         }
 
@@ -73,19 +75,23 @@ export async function POST(request: NextRequest) {
         const existingUser = await UserModel.findByEmail(userData.email);
         if (existingUser) {
           result.failed++;
-          result.errors.push(`Row ${i + 1}: User with email ${userData.email} already exists`);
+          result.errors.push(
+            `Row ${i + 1}: User with email ${userData.email} already exists`
+          );
           continue;
         }
 
         // Generate random password for imported users
-        const randomPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+        const randomPassword =
+          Math.random().toString(36).slice(-8) +
+          Math.random().toString(36).slice(-8);
 
         // Create user
         const user = await UserModel.create({
           email: userData.email,
           password: randomPassword,
           name: userData.name,
-          role: userData.role
+          role: userData.role,
         });
 
         if (user) {
@@ -96,7 +102,7 @@ export async function POST(request: NextRequest) {
             email: user.email,
             role: user.role,
             is_active: user.is_active,
-            temporary_password: randomPassword // Include for admin reference
+            temporary_password: randomPassword, // Include for admin reference
           });
         } else {
           result.failed++;
@@ -104,14 +110,16 @@ export async function POST(request: NextRequest) {
         }
       } catch (error) {
         result.failed++;
-        result.errors.push(`Row ${i + 1}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        result.errors.push(
+          `Row ${i + 1}: ${error instanceof Error ? error.message : 'Unknown error'}`
+        );
       }
     }
 
     return NextResponse.json({
       success: true,
       result,
-      message: `Import completed: ${result.success} successful, ${result.failed} failed`
+      message: `Import completed: ${result.success} successful, ${result.failed} failed`,
     });
   } catch (error) {
     console.error('Error importing users:', error);
@@ -120,4 +128,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

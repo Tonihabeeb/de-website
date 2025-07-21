@@ -20,9 +20,16 @@ export async function GET(request: NextRequest) {
     const sort_order = searchParams.get('sort_order') || 'desc';
 
     // Validate sort parameters
-    const validSortFields = ['title', 'slug', 'status', 'created_at', 'updated_at', 'published_at'];
+    const validSortFields = [
+      'title',
+      'slug',
+      'status',
+      'created_at',
+      'updated_at',
+      'published_at',
+    ];
     const validSortOrders = ['asc', 'desc'];
-    
+
     if (!validSortFields.includes(sort_by)) {
       return NextResponse.json(
         { success: false, error: 'Invalid sort_by parameter' },
@@ -44,7 +51,9 @@ export async function GET(request: NextRequest) {
 
     // Text search
     if (query.trim()) {
-      conditions.push('(title LIKE ? OR slug LIKE ? OR meta_title LIKE ? OR meta_description LIKE ?)');
+      conditions.push(
+        '(title LIKE ? OR slug LIKE ? OR meta_title LIKE ? OR meta_description LIKE ?)'
+      );
       const searchTerm = `%${query.trim()}%`;
       params.push(searchTerm, searchTerm, searchTerm, searchTerm);
     }
@@ -99,7 +108,7 @@ export async function GET(request: NextRequest) {
       published_at: page.published_at,
       created_by: page.created_by,
       created_at: page.created_at,
-      updated_at: page.updated_at
+      updated_at: page.updated_at,
     }));
 
     return NextResponse.json({
@@ -110,15 +119,15 @@ export async function GET(request: NextRequest) {
         limit,
         offset,
         has_more: offset + limit < total,
-        total_pages: Math.ceil(total / limit)
+        total_pages: Math.ceil(total / limit),
       },
       search: {
         query,
         status,
         created_by,
         sort_by,
-        sort_order
-      }
+        sort_order,
+      },
     });
   } catch (error) {
     console.error('Error searching pages:', error);
@@ -127,4 +136,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

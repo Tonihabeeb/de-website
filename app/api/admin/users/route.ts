@@ -10,7 +10,7 @@ const sampleUsers = [
     role: 'super_admin',
     is_active: true,
     created_at: '2024-01-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
+    updated_at: '2024-07-20T00:00:00.000Z',
   },
   {
     id: 'user-001',
@@ -19,7 +19,7 @@ const sampleUsers = [
     role: 'admin',
     is_active: true,
     created_at: '2024-02-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
+    updated_at: '2024-07-20T00:00:00.000Z',
   },
   {
     id: 'user-002',
@@ -28,7 +28,7 @@ const sampleUsers = [
     role: 'editor',
     is_active: true,
     created_at: '2024-03-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
+    updated_at: '2024-07-20T00:00:00.000Z',
   },
   {
     id: 'user-003',
@@ -37,7 +37,7 @@ const sampleUsers = [
     role: 'user',
     is_active: true,
     created_at: '2024-04-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
+    updated_at: '2024-07-20T00:00:00.000Z',
   },
   {
     id: 'user-004',
@@ -46,8 +46,8 @@ const sampleUsers = [
     role: 'viewer',
     is_active: false,
     created_at: '2024-05-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
-  }
+    updated_at: '2024-07-20T00:00:00.000Z',
+  },
 ];
 
 // GET /api/admin/users - Get all users
@@ -56,8 +56,12 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const role = searchParams.get('role');
     const is_active = searchParams.get('is_active');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : undefined;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : undefined;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : undefined;
 
     let filteredUsers = [...sampleUsers];
 
@@ -130,11 +134,14 @@ export async function POST(request: NextRequest) {
     // In a real implementation, this would be saved to the database
     sampleUsers.push(newUser);
 
-    return NextResponse.json({
-      success: true,
-      user: newUser,
-      message: 'User created successfully',
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        user: newUser,
+        message: 'User created successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error creating user:', error);
     return NextResponse.json(
@@ -142,4 +149,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

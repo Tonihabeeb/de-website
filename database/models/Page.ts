@@ -41,7 +41,7 @@ export class PageModel {
   static async create(data: CreatePageData): Promise<Page> {
     const id = uuidv4();
     const now = new Date();
-    
+
     const page: Page = {
       id,
       slug: data.slug,
@@ -83,9 +83,9 @@ export class PageModel {
   static async findById(id: string): Promise<Page | null> {
     const stmt = db.prepare('SELECT * FROM pages WHERE id = ?');
     const row = stmt.get(id) as any;
-    
+
     if (!row) return null;
-    
+
     return {
       ...row,
       content: JSON.parse(row.content),
@@ -98,9 +98,9 @@ export class PageModel {
   static async findBySlug(slug: string): Promise<Page | null> {
     const stmt = db.prepare('SELECT * FROM pages WHERE slug = ?');
     const row = stmt.get(slug) as any;
-    
+
     if (!row) return null;
-    
+
     return {
       ...row,
       content: JSON.parse(row.content),
@@ -148,7 +148,7 @@ export class PageModel {
 
     const stmt = db.prepare(query);
     const rows = stmt.all(...params) as any[];
-    
+
     return rows.map(row => ({
       ...row,
       content: JSON.parse(row.content),
@@ -198,7 +198,7 @@ export class PageModel {
     if (data.status !== undefined) {
       updates.push('status = ?');
       params.push(data.status);
-      
+
       if (data.status === 'published') {
         updates.push('published_at = ?');
         params.push(new Date().toISOString());
@@ -223,9 +223,9 @@ export class PageModel {
   }
 
   static async publish(id: string): Promise<Page | null> {
-    return this.update(id, { 
+    return this.update(id, {
       status: 'published',
-      published_at: new Date()
+      published_at: new Date(),
     });
   }
 
@@ -233,12 +233,15 @@ export class PageModel {
     return this.update(id, { status: 'draft' });
   }
 
-  static async duplicate(id: string, created_by?: string): Promise<Page | null> {
+  static async duplicate(
+    id: string,
+    created_by?: string
+  ): Promise<Page | null> {
     const original = await this.findById(id);
     if (!original) return null;
 
     const newSlug = `${original.slug}-copy-${Date.now()}`;
-    
+
     return this.create({
       slug: newSlug,
       title: `${original.title} (Copy)`,
@@ -249,4 +252,4 @@ export class PageModel {
       created_by,
     });
   }
-} 
+}

@@ -22,11 +22,12 @@ const colors = {
 };
 
 const log = {
-  info: (msg) => console.log(`${colors.blue}ℹ${colors.reset} ${msg}`),
-  success: (msg) => console.log(`${colors.green}✓${colors.reset} ${msg}`),
-  warning: (msg) => console.log(`${colors.yellow}⚠${colors.reset} ${msg}`),
-  error: (msg) => console.log(`${colors.red}✗${colors.reset} ${msg}`),
-  header: (msg) => console.log(`\n${colors.bright}${colors.cyan}${msg}${colors.reset}`),
+  info: msg => console.log(`${colors.blue}ℹ${colors.reset} ${msg}`),
+  success: msg => console.log(`${colors.green}✓${colors.reset} ${msg}`),
+  warning: msg => console.log(`${colors.yellow}⚠${colors.reset} ${msg}`),
+  error: msg => console.log(`${colors.red}✗${colors.reset} ${msg}`),
+  header: msg =>
+    console.log(`\n${colors.bright}${colors.cyan}${msg}${colors.reset}`),
 };
 
 class IntegrationTester {
@@ -38,7 +39,7 @@ class IntegrationTester {
 
   async run() {
     log.header('🚀 Starting Frontend-Backend Integration Tests');
-    
+
     try {
       await this.checkPrerequisites();
       await this.startBackend();
@@ -55,10 +56,12 @@ class IntegrationTester {
 
   async checkPrerequisites() {
     log.header('📋 Checking Prerequisites');
-    
+
     // Check if backend exists
     if (!fs.existsSync(path.join(__dirname, '../backend'))) {
-      throw new Error('Backend directory not found. Please ensure backend is set up.');
+      throw new Error(
+        'Backend directory not found. Please ensure backend is set up.'
+      );
     }
 
     // Check if .env.local exists
@@ -88,20 +91,19 @@ class IntegrationTester {
 
   async startBackend() {
     log.header('🔧 Starting Backend Server');
-    
+
     try {
       // Start backend in background
       const backendProcess = execSync('cd backend && npm start', {
         stdio: 'pipe',
         encoding: 'utf8',
       });
-      
+
       this.backendRunning = true;
       log.success('Backend server started');
-      
+
       // Wait for backend to be ready
       await this.waitForBackend();
-      
     } catch (error) {
       throw new Error(`Failed to start backend: ${error.message}`);
     }
@@ -109,10 +111,10 @@ class IntegrationTester {
 
   async waitForBackend() {
     log.info('Waiting for backend to be ready...');
-    
+
     const maxAttempts = 30;
     let attempts = 0;
-    
+
     while (attempts < maxAttempts) {
       try {
         const response = await fetch('http://localhost:4000/health');
@@ -123,30 +125,29 @@ class IntegrationTester {
       } catch (error) {
         // Continue waiting
       }
-      
+
       attempts++;
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
-    
+
     throw new Error('Backend failed to start within 30 seconds');
   }
 
   async startFrontend() {
     log.header('🌐 Starting Frontend Development Server');
-    
+
     try {
       // Start frontend in background
       const frontendProcess = execSync('npm run dev', {
         stdio: 'pipe',
         encoding: 'utf8',
       });
-      
+
       this.frontendRunning = true;
       log.success('Frontend server started');
-      
+
       // Wait for frontend to be ready
       await this.waitForFrontend();
-      
     } catch (error) {
       throw new Error(`Failed to start frontend: ${error.message}`);
     }
@@ -154,10 +155,10 @@ class IntegrationTester {
 
   async waitForFrontend() {
     log.info('Waiting for frontend to be ready...');
-    
+
     const maxAttempts = 30;
     let attempts = 0;
-    
+
     while (attempts < maxAttempts) {
       try {
         const response = await fetch('http://localhost:3000');
@@ -168,22 +169,31 @@ class IntegrationTester {
       } catch (error) {
         // Continue waiting
       }
-      
+
       attempts++;
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
-    
+
     throw new Error('Frontend failed to start within 30 seconds');
   }
 
   async runTests() {
     log.header('🧪 Running Integration Tests');
-    
+
     const tests = [
       { name: 'API Connection Test', fn: this.testApiConnection.bind(this) },
-      { name: 'Authentication Flow Test', fn: this.testAuthentication.bind(this) },
-      { name: 'Document Management Test', fn: this.testDocumentManagement.bind(this) },
-      { name: 'Role-Based Access Test', fn: this.testRoleBasedAccess.bind(this) },
+      {
+        name: 'Authentication Flow Test',
+        fn: this.testAuthentication.bind(this),
+      },
+      {
+        name: 'Document Management Test',
+        fn: this.testDocumentManagement.bind(this),
+      },
+      {
+        name: 'Role-Based Access Test',
+        fn: this.testRoleBasedAccess.bind(this),
+      },
       { name: 'Error Handling Test', fn: this.testErrorHandling.bind(this) },
       { name: 'SSR/SSG Test', fn: this.testSSR.bind(this) },
     ];
@@ -195,7 +205,11 @@ class IntegrationTester {
         this.results.push({ name: test.name, status: 'PASS' });
         log.success(`${test.name} passed`);
       } catch (error) {
-        this.results.push({ name: test.name, status: 'FAIL', error: error.message });
+        this.results.push({
+          name: test.name,
+          status: 'FAIL',
+          error: error.message,
+        });
         log.error(`${test.name} failed: ${error.message}`);
       }
     }
@@ -206,7 +220,7 @@ class IntegrationTester {
     if (!response.ok) {
       throw new Error(`API connection failed: ${response.status}`);
     }
-    
+
     const data = await response.json();
     if (!data.message) {
       throw new Error('Invalid API response format');
@@ -215,16 +229,19 @@ class IntegrationTester {
 
   async testAuthentication() {
     // Test registration
-    const registerResponse = await fetch('http://localhost:4000/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: 'Test User',
-        email: 'test@example.com',
-        password: 'password123',
-        role: 'user'
-      })
-    });
+    const registerResponse = await fetch(
+      'http://localhost:4000/api/auth/register',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Test User',
+          email: 'test@example.com',
+          password: 'password123',
+          role: 'user',
+        }),
+      }
+    );
 
     if (!registerResponse.ok) {
       throw new Error(`Registration failed: ${registerResponse.status}`);
@@ -236,8 +253,8 @@ class IntegrationTester {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: 'test@example.com',
-        password: 'password123'
-      })
+        password: 'password123',
+      }),
     });
 
     if (!loginResponse.ok) {
@@ -265,9 +282,12 @@ class IntegrationTester {
 
   async testRoleBasedAccess() {
     // Test protected endpoint without auth
-    const protectedResponse = await fetch('http://localhost:4000/api/documents', {
-      headers: { 'Authorization': 'Bearer invalid-token' }
-    });
+    const protectedResponse = await fetch(
+      'http://localhost:4000/api/documents',
+      {
+        headers: { Authorization: 'Bearer invalid-token' },
+      }
+    );
 
     if (protectedResponse.status !== 401) {
       throw new Error('Protected endpoint should return 401 for invalid token');
@@ -276,7 +296,9 @@ class IntegrationTester {
 
   async testErrorHandling() {
     // Test 404 endpoint
-    const notFoundResponse = await fetch('http://localhost:4000/api/nonexistent');
+    const notFoundResponse = await fetch(
+      'http://localhost:4000/api/nonexistent'
+    );
     if (notFoundResponse.status !== 404) {
       throw new Error('Non-existent endpoint should return 404');
     }
@@ -285,7 +307,7 @@ class IntegrationTester {
   async testSSR() {
     // Test that frontend pages load
     const pages = ['/', '/projects', '/team', '/technology'];
-    
+
     for (const page of pages) {
       const response = await fetch(`http://localhost:3000${page}`);
       if (!response.ok) {
@@ -296,37 +318,45 @@ class IntegrationTester {
 
   async generateReport() {
     log.header('📊 Integration Test Report');
-    
+
     const passed = this.results.filter(r => r.status === 'PASS').length;
     const failed = this.results.filter(r => r.status === 'FAIL').length;
     const total = this.results.length;
-    
+
     console.log(`\n${colors.bright}Test Results:${colors.reset}`);
     console.log(`${colors.green}Passed: ${passed}${colors.reset}`);
     console.log(`${colors.red}Failed: ${failed}${colors.reset}`);
     console.log(`${colors.blue}Total: ${total}${colors.reset}`);
-    
+
     console.log(`\n${colors.bright}Detailed Results:${colors.reset}`);
     this.results.forEach(result => {
-      const status = result.status === 'PASS' 
-        ? `${colors.green}✓${colors.reset}` 
-        : `${colors.red}✗${colors.reset}`;
+      const status =
+        result.status === 'PASS'
+          ? `${colors.green}✓${colors.reset}`
+          : `${colors.red}✗${colors.reset}`;
       console.log(`${status} ${result.name}`);
       if (result.error) {
         console.log(`   ${colors.red}Error: ${result.error}${colors.reset}`);
       }
     });
-    
+
     // Save report to file
     const reportPath = path.join(__dirname, '../integration-test-report.json');
-    fs.writeFileSync(reportPath, JSON.stringify({
-      timestamp: new Date().toISOString(),
-      results: this.results,
-      summary: { passed, failed, total }
-    }, null, 2));
-    
+    fs.writeFileSync(
+      reportPath,
+      JSON.stringify(
+        {
+          timestamp: new Date().toISOString(),
+          results: this.results,
+          summary: { passed, failed, total },
+        },
+        null,
+        2
+      )
+    );
+
     log.success(`Report saved to ${reportPath}`);
-    
+
     if (failed > 0) {
       throw new Error(`${failed} tests failed`);
     }
@@ -334,7 +364,7 @@ class IntegrationTester {
 
   async cleanup() {
     log.header('🧹 Cleaning Up');
-    
+
     // Stop servers
     if (this.backendRunning) {
       try {
@@ -344,7 +374,7 @@ class IntegrationTester {
         log.warning('Could not stop backend server');
       }
     }
-    
+
     if (this.frontendRunning) {
       try {
         execSync('pkill -f "next.*dev"', { stdio: 'ignore' });
@@ -365,4 +395,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = IntegrationTester; 
+module.exports = IntegrationTester;

@@ -29,8 +29,12 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const startDate = searchParams.get('start_date');
     const endDate = searchParams.get('end_date');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 100;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : 0;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : 100;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : 0;
 
     // Build date filter
     let dateFilter = '';
@@ -59,7 +63,7 @@ export async function GET(request: NextRequest) {
       ORDER BY timestamp DESC
       LIMIT ? OFFSET ?
     `;
-    
+
     const stmt = db.prepare(query);
     const metrics = stmt.all(...params, limit, offset) as any[];
 
@@ -73,7 +77,7 @@ export async function GET(request: NextRequest) {
       database_connections: metric.database_connections,
       api_requests_per_minute: metric.api_requests_per_minute,
       error_rate: metric.error_rate,
-      response_time_avg: metric.response_time_avg
+      response_time_avg: metric.response_time_avg,
     }));
 
     // Get current system stats
@@ -87,8 +91,8 @@ export async function GET(request: NextRequest) {
         page: Math.floor(offset / limit) + 1,
         limit,
         total: totalResult.count,
-        totalPages: Math.ceil(totalResult.count / limit)
-      }
+        totalPages: Math.ceil(totalResult.count / limit),
+      },
     });
   } catch (error) {
     console.error('Error fetching system usage analytics:', error);
@@ -111,7 +115,7 @@ export async function POST(request: NextRequest) {
       database_connections,
       api_requests_per_minute,
       error_rate,
-      response_time_avg
+      response_time_avg,
     } = body;
 
     // Validate required fields
@@ -144,11 +148,14 @@ export async function POST(request: NextRequest) {
       response_time_avg || 0
     );
 
-    return NextResponse.json({
-      success: true,
-      message: 'System usage metric recorded successfully',
-      metric_id: metricId
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'System usage metric recorded successfully',
+        metric_id: metricId,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error recording system usage metric:', error);
     return NextResponse.json(
@@ -197,8 +204,10 @@ async function getCurrentSystemStats() {
       total_users: totalUsers.count,
       api_requests_last_hour: recentRequests.count,
       errors_last_hour: errorCount.count,
-      error_rate_percent: recentRequests.count > 0 ? 
-        ((errorCount.count / recentRequests.count) * 100).toFixed(2) : '0.00'
+      error_rate_percent:
+        recentRequests.count > 0
+          ? ((errorCount.count / recentRequests.count) * 100).toFixed(2)
+          : '0.00',
     };
   } catch (error) {
     console.error('Error getting current system stats:', error);
@@ -208,7 +217,7 @@ async function getCurrentSystemStats() {
       total_users: 0,
       api_requests_last_hour: 0,
       errors_last_hour: 0,
-      error_rate_percent: '0.00'
+      error_rate_percent: '0.00',
     };
   }
-} 
+}

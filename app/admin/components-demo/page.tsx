@@ -78,13 +78,16 @@ const columns: ColumnDef<DemoUser>[] = [
   {
     accessorKey: 'lastLogin',
     header: 'Last Login',
-    cell: ({ row }) => format(new Date(row.getValue('lastLogin')), 'MMM dd, yyyy'),
+    cell: ({ row }) =>
+      format(new Date(row.getValue('lastLogin')), 'MMM dd, yyyy'),
   },
 ];
 
 const ComponentsDemoPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [richTextContent, setRichTextContent] = useState('<p>This is a demo of the rich text editor...</p>');
+  const [richTextContent, setRichTextContent] = useState(
+    '<p>This is a demo of the rich text editor...</p>'
+  );
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const handleToastDemo = () => {
@@ -100,73 +103,86 @@ const ComponentsDemoPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+    <div className='min-h-screen bg-gray-50 py-8'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='mb-8'>
+          <h1 className='text-4xl font-bold text-gray-900 mb-4'>
             Professional Components Demo
           </h1>
-          <p className="text-lg text-gray-600">
-            Showcase of the new professional UI components implemented with open-source libraries.
+          <p className='text-lg text-gray-600'>
+            Showcase of the new professional UI components implemented with
+            open-source libraries.
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className='space-y-12'>
           {/* Toast Notifications Demo */}
-          <section className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Toast Notifications</h2>
-            <p className="text-gray-600 mb-6">
+          <section className='bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+              Toast Notifications
+            </h2>
+            <p className='text-gray-600 mb-6'>
               Professional toast notifications using Sonner library.
             </p>
-            <div className="flex space-x-4">
-              <Button onClick={handleToastDemo}>
-                Show All Toast Types
-              </Button>
-              <Button variant="secondary" onClick={() => toast.success('Success!')}>
+            <div className='flex space-x-4'>
+              <Button onClick={handleToastDemo}>Show All Toast Types</Button>
+              <Button
+                variant='secondary'
+                onClick={() => toast.success('Success!')}
+              >
                 Success
               </Button>
-              <Button variant="secondary" onClick={() => toast.error('Error!')}>
+              <Button variant='secondary' onClick={() => toast.error('Error!')}>
                 Error
               </Button>
-              <Button variant="secondary" onClick={() => toast.warning('Warning!')}>
+              <Button
+                variant='secondary'
+                onClick={() => toast.warning('Warning!')}
+              >
                 Warning
               </Button>
-              <Button variant="secondary" onClick={() => toast.info('Info!')}>
+              <Button variant='secondary' onClick={() => toast.info('Info!')}>
                 Info
               </Button>
             </div>
           </section>
 
           {/* Modal Demo */}
-          <section className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Modal Dialog</h2>
-            <p className="text-gray-600 mb-6">
+          <section className='bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+              Modal Dialog
+            </h2>
+            <p className='text-gray-600 mb-6'>
               Accessible modal dialogs using Radix UI.
             </p>
-            <div className="flex space-x-4">
-              <Button onClick={() => setIsModalOpen(true)}>
-                Open Modal
-              </Button>
+            <div className='flex space-x-4'>
+              <Button onClick={() => setIsModalOpen(true)}>Open Modal</Button>
             </div>
 
             <Modal
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
-              title="Demo Modal"
-              size="md"
+              title='Demo Modal'
+              size='md'
             >
-              <div className="space-y-4">
-                <p className="text-gray-600">
-                  This is a professional modal dialog with proper accessibility features.
+              <div className='space-y-4'>
+                <p className='text-gray-600'>
+                  This is a professional modal dialog with proper accessibility
+                  features.
                 </p>
-                <div className="flex justify-end space-x-3">
-                  <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+                <div className='flex justify-end space-x-3'>
+                  <Button
+                    variant='secondary'
+                    onClick={() => setIsModalOpen(false)}
+                  >
                     Cancel
                   </Button>
-                  <Button onClick={() => {
-                    setIsModalOpen(false);
-                    toast.success('Action completed!');
-                  }}>
+                  <Button
+                    onClick={() => {
+                      setIsModalOpen(false);
+                      toast.success('Action completed!');
+                    }}
+                  >
                     Confirm
                   </Button>
                 </div>
@@ -175,43 +191,50 @@ const ComponentsDemoPage: React.FC = () => {
           </section>
 
           {/* Data Table Demo */}
-          <section className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Data Table</h2>
-            <p className="text-gray-600 mb-6">
-              Professional data table with sorting, filtering, and pagination using TanStack Table.
+          <section className='bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+              Data Table
+            </h2>
+            <p className='text-gray-600 mb-6'>
+              Professional data table with sorting, filtering, and pagination
+              using TanStack Table.
             </p>
             <DataTable
               columns={columns}
               data={demoUsers}
-              searchKey="name"
-              searchPlaceholder="Search users..."
+              searchKey='name'
+              searchPlaceholder='Search users...'
               pageSize={5}
             />
           </section>
 
           {/* Rich Text Editor Demo */}
-          <section className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Rich Text Editor</h2>
-            <p className="text-gray-600 mb-6">
+          <section className='bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+              Rich Text Editor
+            </h2>
+            <p className='text-gray-600 mb-6'>
               Professional rich text editor using TipTap with formatting tools.
             </p>
             <RichTextEditor
               content={richTextContent}
               onChange={setRichTextContent}
-              placeholder="Start writing your content..."
+              placeholder='Start writing your content...'
             />
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <h4 className="font-medium text-gray-900 mb-2">HTML Output:</h4>
-              <pre className="text-sm text-gray-600 overflow-x-auto">
+            <div className='mt-4 p-4 bg-gray-50 rounded-lg'>
+              <h4 className='font-medium text-gray-900 mb-2'>HTML Output:</h4>
+              <pre className='text-sm text-gray-600 overflow-x-auto'>
                 {richTextContent}
               </pre>
             </div>
           </section>
 
           {/* File Upload Demo */}
-          <section className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">File Upload</h2>
-            <p className="text-gray-600 mb-6">
+          <section className='bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+              File Upload
+            </h2>
+            <p className='text-gray-600 mb-6'>
               Drag and drop file upload with preview using React Dropzone.
             </p>
             <FileUpload
@@ -227,9 +250,11 @@ const ComponentsDemoPage: React.FC = () => {
           </section>
 
           {/* Professional Form Demo */}
-          <section className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Professional Form</h2>
-            <p className="text-gray-600 mb-6">
+          <section className='bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
+              Professional Form
+            </h2>
+            <p className='text-gray-600 mb-6'>
               Complete form with validation using React Hook Form and Zod.
             </p>
             <ProfessionalForm />
@@ -240,4 +265,4 @@ const ComponentsDemoPage: React.FC = () => {
   );
 };
 
-export default ComponentsDemoPage; 
+export default ComponentsDemoPage;

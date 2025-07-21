@@ -9,7 +9,7 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
       await navigator.clipboard.writeText(text);
       return true;
     }
-    
+
     // Fallback for older browsers or non-secure contexts
     const textArea = document.createElement('textarea');
     textArea.value = text;
@@ -19,7 +19,7 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    
+
     try {
       const successful = document.execCommand('copy');
       document.body.removeChild(textArea);
@@ -36,4 +36,4 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
 
 export const isClipboardSupported = (): boolean => {
   return !!(navigator.clipboard || document.queryCommandSupported?.('copy'));
-}; 
+};

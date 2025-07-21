@@ -21,24 +21,42 @@ Object.defineProperty(window, 'localStorage', {
 });
 
 // Test component to access auth context
-const TestComponent = ({ email = 'admin@example.com', password = 'wrong-password' }: { email?: string, password?: string }) => {
+const TestComponent = ({
+  email = 'admin@example.com',
+  password = 'wrong-password',
+}: {
+  email?: string;
+  password?: string;
+}) => {
   const { user, isAuthenticated, login, logout, hasRole } = useAuth();
   const [error, setError] = React.useState<string | null>(null);
 
   return (
     <div>
-      <div data-testid="auth-status">{isAuthenticated ? 'authenticated' : 'unauthenticated'}</div>
-      <div data-testid="user-info">{user ? `${user.name} (${user.role})` : 'no user'}</div>
-      <div data-testid="admin-access">{hasRole('admin') ? 'admin-yes' : 'admin-no'}</div>
-      <div data-testid="editor-access">{hasRole('editor') ? 'editor-yes' : 'editor-no'}</div>
-      {error && <div data-testid="auth-error">{error}</div>}
-      <button onClick={async () => {
-        try {
-          await login(email, password);
-        } catch (e: any) {
-          setError(e.message);
-        }
-      }}>Login</button>
+      <div data-testid='auth-status'>
+        {isAuthenticated ? 'authenticated' : 'unauthenticated'}
+      </div>
+      <div data-testid='user-info'>
+        {user ? `${user.name} (${user.role})` : 'no user'}
+      </div>
+      <div data-testid='admin-access'>
+        {hasRole('admin') ? 'admin-yes' : 'admin-no'}
+      </div>
+      <div data-testid='editor-access'>
+        {hasRole('editor') ? 'editor-yes' : 'editor-no'}
+      </div>
+      {error && <div data-testid='auth-error'>{error}</div>}
+      <button
+        onClick={async () => {
+          try {
+            await login(email, password);
+          } catch (e: any) {
+            setError(e.message);
+          }
+        }}
+      >
+        Login
+      </button>
       <button onClick={logout}>Logout</button>
     </div>
   );
@@ -60,10 +78,14 @@ describe('Authentication Integration Tests', () => {
         </AuthProvider>
       );
 
-      expect(screen.getByTestId('auth-status')).toHaveTextContent('unauthenticated');
+      expect(screen.getByTestId('auth-status')).toHaveTextContent(
+        'unauthenticated'
+      );
       expect(screen.getByTestId('user-info')).toHaveTextContent('no user');
       expect(screen.getByTestId('admin-access')).toHaveTextContent('admin-no');
-      expect(screen.getByTestId('editor-access')).toHaveTextContent('editor-no');
+      expect(screen.getByTestId('editor-access')).toHaveTextContent(
+        'editor-no'
+      );
     });
 
     it('should handle successful login', async () => {
@@ -83,7 +105,7 @@ describe('Authentication Integration Tests', () => {
 
       render(
         <AuthProvider>
-          <TestComponent email="test@example.com" password="password" />
+          <TestComponent email='test@example.com' password='password' />
         </AuthProvider>
       );
 
@@ -100,13 +122,22 @@ describe('Authentication Integration Tests', () => {
       });
 
       await waitFor(() => {
-        expect(mockLocalStorage.setItem).toHaveBeenCalledWith('token', 'test-token');
+        expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
+          'token',
+          'test-token'
+        );
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId('auth-status')).toHaveTextContent('authenticated');
-        expect(screen.getByTestId('user-info')).toHaveTextContent('Test User (admin)');
-        expect(screen.getByTestId('admin-access')).toHaveTextContent('admin-yes');
+        expect(screen.getByTestId('auth-status')).toHaveTextContent(
+          'authenticated'
+        );
+        expect(screen.getByTestId('user-info')).toHaveTextContent(
+          'Test User (admin)'
+        );
+        expect(screen.getByTestId('admin-access')).toHaveTextContent(
+          'admin-yes'
+        );
       });
     });
 
@@ -127,7 +158,9 @@ describe('Authentication Integration Tests', () => {
         expect(screen.getByText(/invalid credentials/i)).toBeInTheDocument();
       });
 
-      expect(screen.getByTestId('auth-status')).toHaveTextContent('unauthenticated');
+      expect(screen.getByTestId('auth-status')).toHaveTextContent(
+        'unauthenticated'
+      );
       expect(mockLocalStorage.setItem).not.toHaveBeenCalled();
     });
 
@@ -154,7 +187,9 @@ describe('Authentication Integration Tests', () => {
       fireEvent.click(screen.getByText('Login'));
 
       await waitFor(() => {
-        expect(screen.getByTestId('auth-status')).toHaveTextContent('authenticated');
+        expect(screen.getByTestId('auth-status')).toHaveTextContent(
+          'authenticated'
+        );
       });
 
       // Then logout
@@ -165,7 +200,9 @@ describe('Authentication Integration Tests', () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId('auth-status')).toHaveTextContent('unauthenticated');
+        expect(screen.getByTestId('auth-status')).toHaveTextContent(
+          'unauthenticated'
+        );
         expect(screen.getByTestId('user-info')).toHaveTextContent('no user');
       });
     });
@@ -182,7 +219,7 @@ describe('Authentication Integration Tests', () => {
       mockLocalStorage.getItem
         .mockReturnValueOnce('test-token') // for 'token'
         .mockReturnValueOnce(JSON.stringify(mockUser)); // for 'user'
-      
+
       mockApiFetch.mockResolvedValueOnce({ user: mockUser });
 
       render(
@@ -192,18 +229,28 @@ describe('Authentication Integration Tests', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId('auth-status')).toHaveTextContent('authenticated');
-        expect(screen.getByTestId('user-info')).toHaveTextContent('Test User (editor)');
-        expect(screen.getByTestId('editor-access')).toHaveTextContent('editor-yes');
+        expect(screen.getByTestId('auth-status')).toHaveTextContent(
+          'authenticated'
+        );
+        expect(screen.getByTestId('user-info')).toHaveTextContent(
+          'Test User (editor)'
+        );
+        expect(screen.getByTestId('editor-access')).toHaveTextContent(
+          'editor-yes'
+        );
       });
     });
   });
 
   describe('RoleGuard Component', () => {
-    const TestRoleGuard = ({ roles }: { roles: ("user" | "admin" | "editor" | "viewer")[] }) => (
+    const TestRoleGuard = ({
+      roles,
+    }: {
+      roles: ('user' | 'admin' | 'editor' | 'viewer')[];
+    }) => (
       <AuthProvider>
         <RoleGuard roles={roles}>
-          <div data-testid="protected-content">Protected Content</div>
+          <div data-testid='protected-content'>Protected Content</div>
         </RoleGuard>
       </AuthProvider>
     );
@@ -244,7 +291,9 @@ describe('Authentication Integration Tests', () => {
       render(<TestRoleGuard roles={['admin']} />);
 
       await waitFor(() => {
-        expect(screen.queryByTestId('protected-content')).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId('protected-content')
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -279,7 +328,9 @@ describe('Authentication Integration Tests', () => {
     const TestProtectedRoute = () => (
       <AuthProvider>
         <ProtectedRoute>
-          <div data-testid="protected-route-content">Protected Route Content</div>
+          <div data-testid='protected-route-content'>
+            Protected Route Content
+          </div>
         </ProtectedRoute>
       </AuthProvider>
     );
@@ -300,7 +351,9 @@ describe('Authentication Integration Tests', () => {
       render(<TestProtectedRoute />);
 
       await waitFor(() => {
-        expect(screen.getByTestId('protected-route-content')).toBeInTheDocument();
+        expect(
+          screen.getByTestId('protected-route-content')
+        ).toBeInTheDocument();
       });
     });
 
@@ -314,7 +367,9 @@ describe('Authentication Integration Tests', () => {
 
       render(<TestProtectedRoute />);
 
-      expect(screen.queryByTestId('protected-route-content')).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('protected-route-content')
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -340,10 +395,18 @@ describe('Authentication Integration Tests', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId('auth-status')).toHaveTextContent('authenticated');
-        expect(screen.getByTestId('user-info')).toHaveTextContent('Admin User (admin)');
-        expect(screen.getByTestId('admin-access')).toHaveTextContent('admin-yes');
-        expect(screen.getByTestId('editor-access')).toHaveTextContent('editor-yes'); // Admin has editor access
+        expect(screen.getByTestId('auth-status')).toHaveTextContent(
+          'authenticated'
+        );
+        expect(screen.getByTestId('user-info')).toHaveTextContent(
+          'Admin User (admin)'
+        );
+        expect(screen.getByTestId('admin-access')).toHaveTextContent(
+          'admin-yes'
+        );
+        expect(screen.getByTestId('editor-access')).toHaveTextContent(
+          'editor-yes'
+        ); // Admin has editor access
       });
     });
 
@@ -367,8 +430,12 @@ describe('Authentication Integration Tests', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId('admin-access')).toHaveTextContent('admin-no');
-        expect(screen.getByTestId('editor-access')).toHaveTextContent('editor-yes');
+        expect(screen.getByTestId('admin-access')).toHaveTextContent(
+          'admin-no'
+        );
+        expect(screen.getByTestId('editor-access')).toHaveTextContent(
+          'editor-yes'
+        );
       });
     });
 
@@ -392,9 +459,13 @@ describe('Authentication Integration Tests', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId('admin-access')).toHaveTextContent('admin-no');
-        expect(screen.getByTestId('editor-access')).toHaveTextContent('editor-no');
+        expect(screen.getByTestId('admin-access')).toHaveTextContent(
+          'admin-no'
+        );
+        expect(screen.getByTestId('editor-access')).toHaveTextContent(
+          'editor-no'
+        );
       });
     });
   });
-}); 
+});

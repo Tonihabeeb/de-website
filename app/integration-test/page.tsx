@@ -4,19 +4,23 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/components/ui/Toast';
 import { apiFetch, ApiException } from '@/utils/api';
-import { PageLoader, InlineLoader, ButtonLoader } from '@/components/ui/LoadingSpinner';
+import {
+  PageLoader,
+  InlineLoader,
+  ButtonLoader,
+} from '@/components/ui/LoadingSpinner';
 import DocumentUpload from '@/components/documents/DocumentUpload';
 import DocumentList from '@/components/documents/DocumentList';
 import RoleGuard from '@/components/auth/RoleGuard';
-import { 
-  CheckCircle, 
-  AlertCircle, 
-  Info, 
-  User, 
-  FileText, 
+import {
+  CheckCircle,
+  AlertCircle,
+  Info,
+  User,
+  FileText,
   Database,
   Server,
-  Globe
+  Globe,
 } from 'lucide-react';
 
 interface TestResult {
@@ -43,7 +47,7 @@ export default function IntegrationTestPage() {
     tests.push({
       name: 'Authentication Context',
       status: 'pending',
-      message: 'Testing authentication context...'
+      message: 'Testing authentication context...',
     });
 
     if (isAuthenticated && user) {
@@ -51,13 +55,13 @@ export default function IntegrationTestPage() {
         name: 'Authentication Context',
         status: 'success',
         message: `Authenticated as ${user.name} (${user.role})`,
-        details: { user }
+        details: { user },
       };
     } else {
       tests[0] = {
         name: 'Authentication Context',
         status: 'error',
-        message: 'Not authenticated'
+        message: 'Not authenticated',
       };
     }
 
@@ -65,7 +69,7 @@ export default function IntegrationTestPage() {
     tests.push({
       name: 'Backend API Connection',
       status: 'pending',
-      message: 'Testing API connection...'
+      message: 'Testing API connection...',
     });
 
     try {
@@ -74,14 +78,17 @@ export default function IntegrationTestPage() {
         name: 'Backend API Connection',
         status: 'success',
         message: 'API connection successful',
-        details: response
+        details: response,
       };
     } catch (error: any) {
       tests[1] = {
         name: 'Backend API Connection',
         status: 'error',
-        message: error instanceof ApiException ? error.message : 'API connection failed',
-        details: error
+        message:
+          error instanceof ApiException
+            ? error.message
+            : 'API connection failed',
+        details: error,
       };
     }
 
@@ -89,7 +96,7 @@ export default function IntegrationTestPage() {
     tests.push({
       name: 'Documents API',
       status: 'pending',
-      message: 'Testing documents API...'
+      message: 'Testing documents API...',
     });
 
     try {
@@ -98,14 +105,17 @@ export default function IntegrationTestPage() {
         name: 'Documents API',
         status: 'success',
         message: `Found ${response.documents?.length || 0} documents`,
-        details: response
+        details: response,
       };
     } catch (error: any) {
       tests[2] = {
         name: 'Documents API',
         status: 'error',
-        message: error instanceof ApiException ? error.message : 'Documents API failed',
-        details: error
+        message:
+          error instanceof ApiException
+            ? error.message
+            : 'Documents API failed',
+        details: error,
       };
     }
 
@@ -113,28 +123,28 @@ export default function IntegrationTestPage() {
     tests.push({
       name: 'Role-Based Access Control',
       status: 'pending',
-      message: 'Testing role-based access...'
+      message: 'Testing role-based access...',
     });
 
     const roleTests = {
       admin: hasRole('admin'),
       editor: hasRole('editor'),
       viewer: hasRole('viewer'),
-      user: hasRole('user')
+      user: hasRole('user'),
     };
 
     tests[3] = {
       name: 'Role-Based Access Control',
       status: 'success',
       message: 'Role checks working',
-      details: roleTests
+      details: roleTests,
     };
 
     // Test 5: Toast System
     tests.push({
       name: 'Toast Notification System',
       status: 'pending',
-      message: 'Testing toast notifications...'
+      message: 'Testing toast notifications...',
     });
 
     // Test toast system
@@ -144,26 +154,28 @@ export default function IntegrationTestPage() {
       name: 'Toast Notification System',
       status: 'success',
       message: 'Toast notifications working',
-      details: 'Toast sent successfully'
+      details: 'Toast sent successfully',
     };
 
     setTestResults(tests);
     setIsRunningTests(false);
 
     // Show success toast
-    toast.success(`${tests.filter(t => t.status === 'success').length}/${tests.length} tests passed`);
+    toast.success(
+      `${tests.filter(t => t.status === 'success').length}/${tests.length} tests passed`
+    );
   };
 
   const getStatusIcon = (status: TestResult['status']) => {
     switch (status) {
       case 'success':
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
+        return <CheckCircle className='h-5 w-5 text-green-500' />;
       case 'error':
-        return <AlertCircle className="h-5 w-5 text-red-500" />;
+        return <AlertCircle className='h-5 w-5 text-red-500' />;
       case 'pending':
         return <InlineLoader />;
       default:
-        return <Info className="h-5 w-5 text-gray-500" />;
+        return <Info className='h-5 w-5 text-gray-500' />;
     }
   };
 
@@ -181,74 +193,97 @@ export default function IntegrationTestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
+    <div className='min-h-screen bg-gray-50 py-8'>
+      <div className='container mx-auto px-4'>
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        <div className='text-center mb-8'>
+          <h1 className='text-3xl font-bold text-gray-900 mb-4'>
             Frontend-Backend Integration Test
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            This page tests all the integrations from previous stages to ensure everything is working together properly.
+          <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
+            This page tests all the integrations from previous stages to ensure
+            everything is working together properly.
           </p>
         </div>
 
         {/* Authentication Status */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-            <User className="h-5 w-5 mr-2" />
+        <div className='bg-white rounded-lg shadow p-6 mb-8'>
+          <h2 className='text-xl font-semibold text-gray-900 mb-4 flex items-center'>
+            <User className='h-5 w-5 mr-2' />
             Authentication Status
           </h2>
-          
+
           {isAuthenticated ? (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
+            <div className='space-y-4'>
+              <div className='flex items-center justify-between'>
                 <div>
-                  <p className="text-sm font-medium text-gray-700">Logged in as:</p>
-                  <p className="text-lg text-gray-900">{user?.name}</p>
-                  <p className="text-sm text-gray-500">{user?.email} • Role: {user?.role}</p>
+                  <p className='text-sm font-medium text-gray-700'>
+                    Logged in as:
+                  </p>
+                  <p className='text-lg text-gray-900'>{user?.name}</p>
+                  <p className='text-sm text-gray-500'>
+                    {user?.email} • Role: {user?.role}
+                  </p>
                 </div>
                 <button
                   onClick={logout}
-                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                  className='px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors'
                 >
                   Logout
                 </button>
               </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center p-3 bg-gray-50 rounded">
-                  <p className="text-sm font-medium text-gray-700">Admin Access</p>
-                  <p className={`text-lg font-bold ${hasRole('admin') ? 'text-green-600' : 'text-red-600'}`}>
+
+              <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+                <div className='text-center p-3 bg-gray-50 rounded'>
+                  <p className='text-sm font-medium text-gray-700'>
+                    Admin Access
+                  </p>
+                  <p
+                    className={`text-lg font-bold ${hasRole('admin') ? 'text-green-600' : 'text-red-600'}`}
+                  >
                     {hasRole('admin') ? 'Yes' : 'No'}
                   </p>
                 </div>
-                <div className="text-center p-3 bg-gray-50 rounded">
-                  <p className="text-sm font-medium text-gray-700">Editor Access</p>
-                  <p className={`text-lg font-bold ${hasRole('editor') ? 'text-green-600' : 'text-red-600'}`}>
+                <div className='text-center p-3 bg-gray-50 rounded'>
+                  <p className='text-sm font-medium text-gray-700'>
+                    Editor Access
+                  </p>
+                  <p
+                    className={`text-lg font-bold ${hasRole('editor') ? 'text-green-600' : 'text-red-600'}`}
+                  >
                     {hasRole('editor') ? 'Yes' : 'No'}
                   </p>
                 </div>
-                <div className="text-center p-3 bg-gray-50 rounded">
-                  <p className="text-sm font-medium text-gray-700">Viewer Access</p>
-                  <p className={`text-lg font-bold ${hasRole('viewer') ? 'text-green-600' : 'text-red-600'}`}>
+                <div className='text-center p-3 bg-gray-50 rounded'>
+                  <p className='text-sm font-medium text-gray-700'>
+                    Viewer Access
+                  </p>
+                  <p
+                    className={`text-lg font-bold ${hasRole('viewer') ? 'text-green-600' : 'text-red-600'}`}
+                  >
                     {hasRole('viewer') ? 'Yes' : 'No'}
                   </p>
                 </div>
-                <div className="text-center p-3 bg-gray-50 rounded">
-                  <p className="text-sm font-medium text-gray-700">User Access</p>
-                  <p className={`text-lg font-bold ${hasRole('user') ? 'text-green-600' : 'text-red-600'}`}>
+                <div className='text-center p-3 bg-gray-50 rounded'>
+                  <p className='text-sm font-medium text-gray-700'>
+                    User Access
+                  </p>
+                  <p
+                    className={`text-lg font-bold ${hasRole('user') ? 'text-green-600' : 'text-red-600'}`}
+                  >
                     {hasRole('user') ? 'Yes' : 'No'}
                   </p>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="text-center py-8">
-              <p className="text-gray-600 mb-4">You need to be logged in to run integration tests.</p>
+            <div className='text-center py-8'>
+              <p className='text-gray-600 mb-4'>
+                You need to be logged in to run integration tests.
+              </p>
               <button
-                onClick={() => window.location.href = '/login'}
-                className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+                onClick={() => (window.location.href = '/login')}
+                className='px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors'
               >
                 Go to Login
               </button>
@@ -258,25 +293,25 @@ export default function IntegrationTestPage() {
 
         {/* Integration Tests */}
         {isAuthenticated && (
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                <Database className="h-5 w-5 mr-2" />
+          <div className='bg-white rounded-lg shadow p-6 mb-8'>
+            <div className='flex items-center justify-between mb-6'>
+              <h2 className='text-xl font-semibold text-gray-900 flex items-center'>
+                <Database className='h-5 w-5 mr-2' />
                 Integration Tests
               </h2>
               <button
                 onClick={runIntegrationTests}
                 disabled={isRunningTests}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
               >
                 {isRunningTests ? (
                   <>
-                    <ButtonLoader size="sm" />
-                    <span className="ml-2">Running Tests...</span>
+                    <ButtonLoader size='sm' />
+                    <span className='ml-2'>Running Tests...</span>
                   </>
                 ) : (
                   <>
-                    <Server className="h-4 w-4 mr-2" />
+                    <Server className='h-4 w-4 mr-2' />
                     Run Tests
                   </>
                 )}
@@ -284,24 +319,28 @@ export default function IntegrationTestPage() {
             </div>
 
             {testResults.length > 0 && (
-              <div className="space-y-4">
+              <div className='space-y-4'>
                 {testResults.map((test, index) => (
                   <div
                     key={index}
                     className={`border rounded-lg p-4 ${getStatusColor(test.status)}`}
                   >
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-start space-x-3">
+                    <div className='flex items-start justify-between'>
+                      <div className='flex items-start space-x-3'>
                         {getStatusIcon(test.status)}
-                        <div className="flex-1">
-                          <h3 className="text-sm font-medium text-gray-900">{test.name}</h3>
-                          <p className="text-sm text-gray-600 mt-1">{test.message}</p>
+                        <div className='flex-1'>
+                          <h3 className='text-sm font-medium text-gray-900'>
+                            {test.name}
+                          </h3>
+                          <p className='text-sm text-gray-600 mt-1'>
+                            {test.message}
+                          </p>
                           {test.details && (
-                            <details className="mt-2">
-                              <summary className="cursor-pointer text-xs text-gray-500 hover:text-gray-700">
+                            <details className='mt-2'>
+                              <summary className='cursor-pointer text-xs text-gray-500 hover:text-gray-700'>
                                 View Details
                               </summary>
-                              <pre className="mt-2 text-xs bg-white p-2 rounded border overflow-auto max-h-32">
+                              <pre className='mt-2 text-xs bg-white p-2 rounded border overflow-auto max-h-32'>
                                 {JSON.stringify(test.details, null, 2)}
                               </pre>
                             </details>
@@ -318,16 +357,16 @@ export default function IntegrationTestPage() {
 
         {/* Document Management Test */}
         {isAuthenticated && (
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                <FileText className="h-5 w-5 mr-2" />
+          <div className='bg-white rounded-lg shadow p-6 mb-8'>
+            <div className='flex items-center justify-between mb-6'>
+              <h2 className='text-xl font-semibold text-gray-900 flex items-center'>
+                <FileText className='h-5 w-5 mr-2' />
                 Document Management Test
               </h2>
               <RoleGuard roles={['admin', 'editor']}>
                 <button
                   onClick={() => setShowDocumentUpload(!showDocumentUpload)}
-                  className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition-colors"
+                  className='px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition-colors'
                 >
                   {showDocumentUpload ? 'Hide Upload' : 'Test Upload'}
                 </button>
@@ -335,12 +374,14 @@ export default function IntegrationTestPage() {
             </div>
 
             {showDocumentUpload && (
-              <div className="mb-6">
+              <div className='mb-6'>
                 <DocumentUpload
-                  onUploadSuccess={(document) => {
-                    toast.success('Document uploaded successfully during integration test!');
+                  onUploadSuccess={document => {
+                    toast.success(
+                      'Document uploaded successfully during integration test!'
+                    );
                   }}
-                  onUploadError={(error) => {
+                  onUploadError={error => {
                     toast.error(`Upload failed: ${error}`);
                   }}
                   multiple={false}
@@ -350,7 +391,7 @@ export default function IntegrationTestPage() {
 
             <DocumentList
               showActions={false}
-              onDocumentSelect={(document) => {
+              onDocumentSelect={document => {
                 toast.info(`Selected: ${document.title}`);
               }}
             />
@@ -359,33 +400,33 @@ export default function IntegrationTestPage() {
 
         {/* Toast Test */}
         {isAuthenticated && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-              <Globe className="h-5 w-5 mr-2" />
+          <div className='bg-white rounded-lg shadow p-6'>
+            <h2 className='text-xl font-semibold text-gray-900 mb-4 flex items-center'>
+              <Globe className='h-5 w-5 mr-2' />
               Toast Notification Test
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
               <button
                 onClick={() => toast.success('This is a success notification!')}
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+                className='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors'
               >
                 Success Toast
               </button>
               <button
                 onClick={() => toast.error('This is an error notification!')}
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                className='px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors'
               >
                 Error Toast
               </button>
               <button
                 onClick={() => toast.warning('This is a warning notification!')}
-                className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition-colors"
+                className='px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition-colors'
               >
                 Warning Toast
               </button>
               <button
                 onClick={() => toast.info('This is an info notification!')}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
               >
                 Info Toast
               </button>
@@ -395,4 +436,4 @@ export default function IntegrationTestPage() {
       </div>
     </div>
   );
-} 
+}

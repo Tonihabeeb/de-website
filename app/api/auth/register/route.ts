@@ -15,7 +15,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUser = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
+    const existingUser = db
+      .prepare('SELECT id FROM users WHERE email = ?')
+      .get(email);
     if (existingUser) {
       return NextResponse.json(
         { success: false, error: 'User with this email already exists' },
@@ -35,16 +37,7 @@ export async function POST(request: NextRequest) {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
-    insertStmt.run(
-      userId,
-      name,
-      email,
-      hashedPassword,
-      role,
-      1,
-      now,
-      now
-    );
+    insertStmt.run(userId, name, email, hashedPassword, role, 1, now, now);
 
     // Return user data (without password)
     const userData = {
@@ -54,12 +47,14 @@ export async function POST(request: NextRequest) {
       role,
     };
 
-    return NextResponse.json({
-      success: true,
-      user: userData,
-      message: 'User registered successfully'
-    }, { status: 201 });
-
+    return NextResponse.json(
+      {
+        success: true,
+        user: userData,
+        message: 'User registered successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
@@ -67,4 +62,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -21,5 +21,5 @@ export default function robots(): MetadataRoute.Robots {
     },
     sitemap: 'https://deepengineering.co/sitemap.xml',
     host: 'https://deepengineering.co',
-  }
-} 
+  };
+}

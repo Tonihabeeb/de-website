@@ -49,13 +49,13 @@ export async function GET(request: NextRequest) {
       system_health: await getSystemHealth(),
       recent_events: includeEvents ? await getRecentEvents() : [],
       top_pages: await getTopPages(),
-      top_users: await getTopUsers()
+      top_users: await getTopUsers(),
     };
 
     return NextResponse.json({
       success: true,
       timestamp: new Date().toISOString(),
-      metrics
+      metrics,
     });
   } catch (error) {
     console.error('Error fetching real-time analytics:', error);
@@ -141,7 +141,11 @@ async function getErrorRate(): Promise<number> {
   }
 }
 
-async function getSystemHealth(): Promise<{ cpu_usage: number; memory_usage: number; disk_usage: number }> {
+async function getSystemHealth(): Promise<{
+  cpu_usage: number;
+  memory_usage: number;
+  disk_usage: number;
+}> {
   try {
     const stmt = db.prepare(`
       SELECT 
@@ -153,23 +157,25 @@ async function getSystemHealth(): Promise<{ cpu_usage: number; memory_usage: num
       LIMIT 1
     `);
     const result = stmt.get() as any;
-    
+
     return {
       cpu_usage: result?.cpu_usage || 0,
       memory_usage: result?.memory_usage || 0,
-      disk_usage: result?.disk_usage || 0
+      disk_usage: result?.disk_usage || 0,
     };
   } catch (error) {
     console.error('Error getting system health:', error);
     return {
       cpu_usage: 0,
       memory_usage: 0,
-      disk_usage: 0
+      disk_usage: 0,
     };
   }
 }
 
-async function getRecentEvents(): Promise<Array<{ id: string; type: string; message: string; timestamp: Date }>> {
+async function getRecentEvents(): Promise<
+  Array<{ id: string; type: string; message: string; timestamp: Date }>
+> {
   try {
     const stmt = db.prepare(`
       SELECT 
@@ -182,12 +188,12 @@ async function getRecentEvents(): Promise<Array<{ id: string; type: string; mess
       LIMIT 10
     `);
     const events = stmt.all() as any[];
-    
+
     return events.map(event => ({
       id: event.id,
       type: event.type,
       message: event.message || 'Page view',
-      timestamp: new Date(event.timestamp)
+      timestamp: new Date(event.timestamp),
     }));
   } catch (error) {
     console.error('Error getting recent events:', error);
@@ -195,7 +201,9 @@ async function getRecentEvents(): Promise<Array<{ id: string; type: string; mess
   }
 }
 
-async function getTopPages(): Promise<Array<{ page_url: string; views: number }>> {
+async function getTopPages(): Promise<
+  Array<{ page_url: string; views: number }>
+> {
   try {
     const stmt = db.prepare(`
       SELECT 
@@ -209,10 +217,10 @@ async function getTopPages(): Promise<Array<{ page_url: string; views: number }>
       LIMIT 5
     `);
     const pages = stmt.all() as any[];
-    
+
     return pages.map(page => ({
       page_url: page.page_url,
-      views: page.views
+      views: page.views,
     }));
   } catch (error) {
     console.error('Error getting top pages:', error);
@@ -220,7 +228,9 @@ async function getTopPages(): Promise<Array<{ page_url: string; views: number }>
   }
 }
 
-async function getTopUsers(): Promise<Array<{ user_id: string; user_name: string; activity_count: number }>> {
+async function getTopUsers(): Promise<
+  Array<{ user_id: string; user_name: string; activity_count: number }>
+> {
   try {
     const stmt = db.prepare(`
       SELECT 
@@ -236,11 +246,11 @@ async function getTopUsers(): Promise<Array<{ user_id: string; user_name: string
       LIMIT 5
     `);
     const users = stmt.all() as any[];
-    
+
     return users.map(user => ({
       user_id: user.user_id,
       user_name: user.user_name || 'Unknown User',
-      activity_count: user.activity_count
+      activity_count: user.activity_count,
     }));
   } catch (error) {
     console.error('Error getting top users:', error);
@@ -282,11 +292,14 @@ export async function POST(request: NextRequest) {
       new Date().toISOString()
     );
 
-    return NextResponse.json({
-      success: true,
-      message: 'Real-time metric updated successfully',
-      metric_id: metricId
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Real-time metric updated successfully',
+        metric_id: metricId,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error updating real-time metric:', error);
     return NextResponse.json(
@@ -294,4 +307,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

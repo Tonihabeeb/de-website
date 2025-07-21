@@ -5,19 +5,22 @@ import { useEffect } from 'react';
 
 // Google Analytics 4 Measurement ID
 // Replace with your actual GA4 Measurement ID
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
 
 // Web Vitals tracking
 export function reportWebVitals(metric: any) {
   // Send to Google Analytics
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', metric.name, {
-      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+      value: Math.round(
+        metric.name === 'CLS' ? metric.value * 1000 : metric.value
+      ),
       event_label: metric.id,
       non_interaction: true,
     });
   }
-  
+
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
     console.log('Web Vital:', metric);
@@ -25,7 +28,10 @@ export function reportWebVitals(metric: any) {
 }
 
 // Utility functions for tracking
-export const trackEvent = (eventName: string, parameters: Record<string, any> = {}) => {
+export const trackEvent = (
+  eventName: string,
+  parameters: Record<string, any> = {}
+) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', eventName, {
       ...parameters,
@@ -50,7 +56,11 @@ export const trackFeatureUsage = (featureName: string, action: string) => {
   });
 };
 
-export const trackCalculatorUsage = (calculatorType: string, inputs: any, results: any) => {
+export const trackCalculatorUsage = (
+  calculatorType: string,
+  inputs: any,
+  results: any
+) => {
   trackEvent('calculator_usage', {
     calculator_type: calculatorType,
     input_values: JSON.stringify(inputs),
@@ -65,14 +75,20 @@ export const trackFormSubmission = (formType: string, success: boolean) => {
   });
 };
 
-export const trackContentEngagement = (contentType: string, engagementLevel: string) => {
+export const trackContentEngagement = (
+  contentType: string,
+  engagementLevel: string
+) => {
   trackEvent('content_engagement', {
     content_type: contentType,
     engagement_level: engagementLevel,
   });
 };
 
-export const trackDiagramInteraction = (diagramType: string, interactionType: string) => {
+export const trackDiagramInteraction = (
+  diagramType: string,
+  interactionType: string
+) => {
   trackEvent('diagram_interaction', {
     diagram_type: diagramType,
     interaction_type: interactionType,
@@ -80,8 +96,9 @@ export const trackDiagramInteraction = (diagramType: string, interactionType: st
 };
 
 export const trackMobilePerformance = () => {
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
-  
+  const isMobile =
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
   if (isMobile && typeof window !== 'undefined') {
     trackEvent('mobile_performance', {
       load_time: performance.now(),
@@ -94,7 +111,7 @@ export const trackMobilePerformance = () => {
 // Helper functions
 const getDeviceType = (): string => {
   if (typeof window === 'undefined') return 'unknown';
-  
+
   const userAgent = navigator.userAgent;
   if (/Android/i.test(userAgent)) return 'android';
   if (/iPhone|iPad|iPod/i.test(userAgent)) return 'ios';
@@ -117,10 +134,10 @@ export default function Analytics() {
   useEffect(() => {
     // Track initial page load
     trackPageView(window.location.pathname);
-    
+
     // Track mobile performance
     trackMobilePerformance();
-    
+
     // Track page visibility changes
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
@@ -129,28 +146,31 @@ export default function Analytics() {
         trackEvent('page_hidden');
       }
     };
-    
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    
+
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
   // Only render analytics in production or when GA_MEASUREMENT_ID is set
-  if (process.env.NODE_ENV === 'development' && GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+  if (
+    process.env.NODE_ENV === 'development' &&
+    GA_MEASUREMENT_ID === 'G-XXXXXXXXXX'
+  ) {
     return null;
   }
 
   return (
     <>
       <Script
-        strategy="afterInteractive"
+        strategy='afterInteractive'
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
       <Script
-        id="google-analytics"
-        strategy="afterInteractive"
+        id='google-analytics'
+        strategy='afterInteractive'
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
@@ -176,4 +196,4 @@ declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
   }
-} 
+}

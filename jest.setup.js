@@ -1,17 +1,17 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 
 // Mock fetch globally
-global.fetch = jest.fn()
+global.fetch = jest.fn();
 
 // Add TextEncoder polyfill for backend tests
 if (typeof global.TextEncoder === 'undefined') {
-  const { TextEncoder, TextDecoder } = require('util')
-  global.TextEncoder = TextEncoder
-  global.TextDecoder = TextDecoder
+  const { TextEncoder, TextDecoder } = require('util');
+  global.TextEncoder = TextEncoder;
+  global.TextDecoder = TextDecoder;
 }
 
 // Mock window.alert to prevent console errors
-global.alert = jest.fn()
+global.alert = jest.fn();
 
 // Mock Next.js router
 jest.mock('next/router', () => ({
@@ -33,9 +33,9 @@ jest.mock('next/router', () => ({
         emit: jest.fn(),
       },
       isFallback: false,
-    }
+    };
   },
-}))
+}));
 
 // Mock Next.js Link component
 jest.mock('next/link', () => {
@@ -44,9 +44,9 @@ jest.mock('next/link', () => {
       <a href={href} {...props}>
         {children}
       </a>
-    )
-  }
-})
+    );
+  };
+});
 
 // Mock Framer Motion
 jest.mock('framer-motion', () => ({
@@ -69,7 +69,7 @@ jest.mock('framer-motion', () => ({
     stop: jest.fn(),
     set: jest.fn(),
   }),
-  useMotionValue: (initial) => ({
+  useMotionValue: initial => ({
     get: () => initial,
     set: jest.fn(),
     on: jest.fn(),
@@ -86,7 +86,7 @@ jest.mock('framer-motion', () => ({
     scrollX: { get: () => 0 },
     scrollY: { get: () => 0 },
   }),
-  useSpring: (value) => ({
+  useSpring: value => ({
     get: () => value,
     set: jest.fn(),
   }),
@@ -112,8 +112,7 @@ jest.mock('framer-motion', () => ({
   backOut: jest.fn(),
   backInOut: jest.fn(),
   anticipate: jest.fn(),
-}))
-
+}));
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -128,7 +127,7 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
   })),
-})
+});
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
@@ -136,7 +135,7 @@ global.IntersectionObserver = class IntersectionObserver {
   disconnect() {}
   observe() {}
   unobserve() {}
-}
+};
 
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
@@ -144,7 +143,7 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() {}
   observe() {}
   unobserve() {}
-}
+};
 
 // Mock PerformanceObserver
 global.PerformanceObserver = class PerformanceObserver {
@@ -152,4 +151,4 @@ global.PerformanceObserver = class PerformanceObserver {
   disconnect() {}
   observe() {}
   unobserve() {}
-} 
+};

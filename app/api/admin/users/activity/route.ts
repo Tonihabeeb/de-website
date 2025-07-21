@@ -79,14 +79,14 @@ export async function GET(request: NextRequest) {
         details: JSON.parse(log.details || '{}'),
         ip_address: log.ip_address,
         user_agent: log.user_agent,
-        created_at: log.created_at
+        created_at: log.created_at,
       })),
       pagination: {
         total,
         limit,
         offset,
-        has_more: offset + limit < total
-      }
+        has_more: offset + limit < total,
+      },
     });
   } catch (error) {
     console.error('Error fetching user activity logs:', error);
@@ -116,9 +116,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Get IP address and user agent
-    const ip_address = request.headers.get('x-forwarded-for') || 
-                      request.headers.get('x-real-ip') || 
-                      'unknown';
+    const ip_address =
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
     const user_agent = request.headers.get('user-agent') || 'unknown';
 
     // Create activity log
@@ -140,21 +141,24 @@ export async function POST(request: NextRequest) {
       user_agent
     );
 
-    return NextResponse.json({
-      success: true,
-      log: {
-        id: logId,
-        user_id,
-        action,
-        resource,
-        resource_id,
-        details,
-        ip_address,
-        user_agent,
-        created_at: new Date().toISOString()
+    return NextResponse.json(
+      {
+        success: true,
+        log: {
+          id: logId,
+          user_id,
+          action,
+          resource,
+          resource_id,
+          details,
+          ip_address,
+          user_agent,
+          created_at: new Date().toISOString(),
+        },
+        message: 'Activity logged successfully',
       },
-      message: 'Activity logged successfully',
-    }, { status: 201 });
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error logging user activity:', error);
     return NextResponse.json(
@@ -162,4 +166,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

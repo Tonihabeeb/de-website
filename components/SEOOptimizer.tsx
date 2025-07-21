@@ -15,8 +15,19 @@ interface SEOConfig {
 const seoConfigs: Record<string, SEOConfig> = {
   '/': {
     title: 'Deep Engineering - Continuous Clean Energy, Anywhere',
-    description: 'Delivering 24/7 renewable power through the revolutionary Kinetic Power Plant (KPP) technology – no fuel, no emissions. Iraq\'s pioneer in renewable energy project development.',
-    keywords: ['renewable energy', 'kinetic power plant', 'KPP', 'clean energy', 'Iraq', 'sustainable power', 'green energy', '24/7 power', 'fuel-free energy'],
+    description:
+      "Delivering 24/7 renewable power through the revolutionary Kinetic Power Plant (KPP) technology – no fuel, no emissions. Iraq's pioneer in renewable energy project development.",
+    keywords: [
+      'renewable energy',
+      'kinetic power plant',
+      'KPP',
+      'clean energy',
+      'Iraq',
+      'sustainable power',
+      'green energy',
+      '24/7 power',
+      'fuel-free energy',
+    ],
     ogImage: '/og-home.jpg',
     canonical: 'https://deepengineering.co/',
     structuredData: {
@@ -25,99 +36,128 @@ const seoConfigs: Record<string, SEOConfig> = {
       name: 'Deep Engineering',
       url: 'https://deepengineering.co',
       logo: 'https://deepengineering.co/logo.svg',
-      description: 'Iraq\'s pioneer in renewable energy project development. Exclusive KPP licensee.',
-      sameAs: [
-        'https://www.linkedin.com/company/deepengineering/'
-      ],
+      description:
+        "Iraq's pioneer in renewable energy project development. Exclusive KPP licensee.",
+      sameAs: ['https://www.linkedin.com/company/deepengineering/'],
       contactPoint: [
         {
           '@type': 'ContactPoint',
           telephone: '+964 750 466 3879',
           contactType: 'customer support',
           areaServed: 'IQ',
-          availableLanguage: ['English', 'Arabic']
-        }
-      ]
-    }
+          availableLanguage: ['English', 'Arabic'],
+        },
+      ],
+    },
   },
   '/technology/specifications': {
     title: 'KPP Technical Specifications - Deep Engineering',
-    description: 'Comprehensive technical specifications for Kinetic Power Plant (KPP) technology. Generator specs, air compressor details, water consumption, dimensions, and performance metrics.',
-    keywords: ['KPP technical specifications', 'kinetic power plant specs', 'generator specifications', 'air compressor details', 'water consumption', 'performance metrics', 'renewable energy technology'],
+    description:
+      'Comprehensive technical specifications for Kinetic Power Plant (KPP) technology. Generator specs, air compressor details, water consumption, dimensions, and performance metrics.',
+    keywords: [
+      'KPP technical specifications',
+      'kinetic power plant specs',
+      'generator specifications',
+      'air compressor details',
+      'water consumption',
+      'performance metrics',
+      'renewable energy technology',
+    ],
     ogImage: '/og-kpp-specs.jpg',
     canonical: 'https://deepengineering.co/technology/specifications',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'TechArticle',
       headline: 'KPP Technical Specifications - Deep Engineering',
-      description: 'Comprehensive technical specifications for Kinetic Power Plant (KPP) technology including generator specs, air compressor details, and performance metrics.',
+      description:
+        'Comprehensive technical specifications for Kinetic Power Plant (KPP) technology including generator specs, air compressor details, and performance metrics.',
       author: {
         '@type': 'Organization',
-        name: 'Deep Engineering'
+        name: 'Deep Engineering',
       },
       publisher: {
         '@type': 'Organization',
         name: 'Deep Engineering',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://deepengineering.co/logo.svg'
-        }
+          url: 'https://deepengineering.co/logo.svg',
+        },
       },
       about: [
         {
           '@type': 'Thing',
           name: 'Kinetic Power Plant',
-          description: 'Revolutionary renewable energy technology'
+          description: 'Revolutionary renewable energy technology',
         },
         {
           '@type': 'Thing',
           name: 'Generator Specifications',
-          description: '500 kW generator with 95.2% efficiency'
-        }
-      ]
-    }
+          description: '500 kW generator with 95.2% efficiency',
+        },
+      ],
+    },
   },
   '/economics': {
     title: 'KPP Economic Analysis & ROI - Deep Engineering',
-    description: 'Comprehensive economic analysis of Kinetic Power Plant (KPP) technology. Cost comparisons vs diesel/solar/gas, ROI projections, fuel savings, and investment opportunities in Iraq.',
-    keywords: ['KPP economics', 'kinetic power plant cost analysis', 'renewable energy ROI', 'Iraq energy investment', 'fuel cost savings', 'LCOE comparison', 'clean energy economics'],
+    description:
+      'Comprehensive economic analysis of Kinetic Power Plant (KPP) technology. Cost comparisons vs diesel/solar/gas, ROI projections, fuel savings, and investment opportunities in Iraq.',
+    keywords: [
+      'KPP economics',
+      'kinetic power plant cost analysis',
+      'renewable energy ROI',
+      'Iraq energy investment',
+      'fuel cost savings',
+      'LCOE comparison',
+      'clean energy economics',
+    ],
     ogImage: '/og-economics.jpg',
     canonical: 'https://deepengineering.co/economics',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'Article',
       headline: 'KPP Economic Analysis & ROI - Deep Engineering',
-      description: 'Comprehensive economic analysis of Kinetic Power Plant (KPP) technology with cost comparisons, ROI projections, and investment opportunities.',
+      description:
+        'Comprehensive economic analysis of Kinetic Power Plant (KPP) technology with cost comparisons, ROI projections, and investment opportunities.',
       author: {
         '@type': 'Organization',
-        name: 'Deep Engineering'
+        name: 'Deep Engineering',
       },
       publisher: {
         '@type': 'Organization',
         name: 'Deep Engineering',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://deepengineering.co/logo.svg'
-        }
+          url: 'https://deepengineering.co/logo.svg',
+        },
       },
       about: [
         {
           '@type': 'Thing',
           name: 'Economic Analysis',
-          description: 'Cost comparison and ROI analysis of KPP technology'
+          description: 'Cost comparison and ROI analysis of KPP technology',
         },
         {
           '@type': 'Thing',
           name: 'LCOE Comparison',
-          description: 'Levelized Cost of Energy comparison with traditional sources'
-        }
-      ]
-    }
+          description:
+            'Levelized Cost of Energy comparison with traditional sources',
+        },
+      ],
+    },
   },
   '/projects': {
     title: 'KPP Projects in Iraq - Deep Engineering',
-    description: 'Explore our Kinetic Power Plant (KPP) projects across Iraq including Zakho 100MW, Soran 100MW, Raparin 50MW, and Garmian 50MW installations.',
-    keywords: ['KPP projects', 'Iraq renewable energy', 'Zakho project', 'Soran project', 'Raparin project', 'Garmian project', 'renewable energy Iraq'],
+    description:
+      'Explore our Kinetic Power Plant (KPP) projects across Iraq including Zakho 100MW, Soran 100MW, Raparin 50MW, and Garmian 50MW installations.',
+    keywords: [
+      'KPP projects',
+      'Iraq renewable energy',
+      'Zakho project',
+      'Soran project',
+      'Raparin project',
+      'Garmian project',
+      'renewable energy Iraq',
+    ],
     ogImage: '/og-projects.jpg',
     canonical: 'https://deepengineering.co/projects',
     structuredData: {
@@ -135,9 +175,9 @@ const seoConfigs: Record<string, SEOConfig> = {
             description: '100MW KPP installation in Duhok Governorate',
             location: {
               '@type': 'Place',
-              name: 'Duhok Governorate, Iraq'
-            }
-          }
+              name: 'Duhok Governorate, Iraq',
+            },
+          },
         },
         {
           '@type': 'ListItem',
@@ -148,73 +188,100 @@ const seoConfigs: Record<string, SEOConfig> = {
             description: '100MW KPP installation in Erbil Governorate',
             location: {
               '@type': 'Place',
-              name: 'Erbil Governorate, Iraq'
-            }
-          }
-        }
-      ]
-    }
+              name: 'Erbil Governorate, Iraq',
+            },
+          },
+        },
+      ],
+    },
   },
   '/interactive-features': {
     title: 'Interactive Features - Deep Engineering',
-    description: 'Explore our interactive tools including energy cost calculator, project tracker, and enhanced contact forms for KPP technology.',
-    keywords: ['interactive features', 'energy calculator', 'project tracker', 'contact forms', 'KPP tools', 'renewable energy calculator'],
+    description:
+      'Explore our interactive tools including energy cost calculator, project tracker, and enhanced contact forms for KPP technology.',
+    keywords: [
+      'interactive features',
+      'energy calculator',
+      'project tracker',
+      'contact forms',
+      'KPP tools',
+      'renewable energy calculator',
+    ],
     ogImage: '/og-interactive.jpg',
     canonical: 'https://deepengineering.co/interactive-features',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       name: 'Deep Engineering Interactive Tools',
-      description: 'Interactive tools for KPP technology analysis and project tracking',
+      description:
+        'Interactive tools for KPP technology analysis and project tracking',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web Browser',
       offers: {
         '@type': 'Offer',
         price: '0',
-        priceCurrency: 'USD'
-      }
-    }
+        priceCurrency: 'USD',
+      },
+    },
   },
   '/team': {
     title: 'Our Team - Deep Engineering',
-    description: 'Meet the passionate professionals behind Deep Engineering\'s mission to revolutionize Iraq\'s energy landscape with KPP technology.',
-    keywords: ['team', 'leadership', 'engineers', 'Deep Engineering team', 'KPP experts', 'renewable energy professionals'],
+    description:
+      "Meet the passionate professionals behind Deep Engineering's mission to revolutionize Iraq's energy landscape with KPP technology.",
+    keywords: [
+      'team',
+      'leadership',
+      'engineers',
+      'Deep Engineering team',
+      'KPP experts',
+      'renewable energy professionals',
+    ],
     ogImage: '/og-team.jpg',
     canonical: 'https://deepengineering.co/team',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'Deep Engineering Team',
-      description: 'Professional team leading renewable energy innovation in Iraq',
-      url: 'https://deepengineering.co/team'
-    }
+      description:
+        'Professional team leading renewable energy innovation in Iraq',
+      url: 'https://deepengineering.co/team',
+    },
   },
   '/team/careers': {
     title: 'Careers at Deep Engineering - Join Our Team',
-    description: 'Join Deep Engineering\'s mission to revolutionize Iraq\'s energy landscape. Explore career opportunities in renewable energy, engineering, and project management.',
-    keywords: ['careers', 'jobs', 'renewable energy careers', 'engineering jobs Iraq', 'KPP technology careers', 'Deep Engineering jobs'],
+    description:
+      "Join Deep Engineering's mission to revolutionize Iraq's energy landscape. Explore career opportunities in renewable energy, engineering, and project management.",
+    keywords: [
+      'careers',
+      'jobs',
+      'renewable energy careers',
+      'engineering jobs Iraq',
+      'KPP technology careers',
+      'Deep Engineering jobs',
+    ],
     ogImage: '/og-careers.jpg',
     canonical: 'https://deepengineering.co/team/careers',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'JobPosting',
       title: 'Careers at Deep Engineering',
-      description: 'Join Deep Engineering\'s mission to revolutionize Iraq\'s energy landscape with innovative KPP technology.',
+      description:
+        "Join Deep Engineering's mission to revolutionize Iraq's energy landscape with innovative KPP technology.",
       hiringOrganization: {
         '@type': 'Organization',
         name: 'Deep Engineering',
-        url: 'https://deepengineering.co'
+        url: 'https://deepengineering.co',
       },
       jobLocation: {
         '@type': 'Place',
         addressCountry: 'IQ',
-        addressRegion: 'Kurdistan Region'
+        addressRegion: 'Kurdistan Region',
       },
       employmentType: 'FULL_TIME',
       industry: 'Renewable Energy',
-      datePosted: new Date().toISOString().split('T')[0]
-    }
-  }
+      datePosted: new Date().toISOString().split('T')[0],
+    },
+  },
 };
 
 export default function SEOOptimizer() {
@@ -222,7 +289,7 @@ export default function SEOOptimizer() {
 
   useEffect(() => {
     if (!pathname) return;
-    const config = seoConfigs[pathname];
+    const config = seoConfigs[pathname as keyof typeof seoConfigs];
     if (!config) return;
 
     // Update meta tags
@@ -292,7 +359,7 @@ export default function SEOOptimizer() {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('config', 'GA_MEASUREMENT_ID', {
         page_path: pathname,
-        page_title: config.title
+        page_title: config.title,
       });
     }
   }, [pathname]);
@@ -301,12 +368,17 @@ export default function SEOOptimizer() {
 }
 
 // Analytics tracking
-export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
+export const trackEvent = (
+  action: string,
+  category: string,
+  label?: string,
+  value?: number
+) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,
-      value: value
+      value: value,
     });
   }
 };
@@ -316,7 +388,7 @@ export const trackPerformance = (metric: string, value: number) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'timing_complete', {
       name: metric,
-      value: Math.round(value)
+      value: Math.round(value),
     });
   }
 };
@@ -328,8 +400,8 @@ export const trackError = (error: Error, context?: string) => {
       description: error.message,
       fatal: false,
       custom_map: {
-        context: context || 'unknown'
-      }
+        context: context || 'unknown',
+      },
     });
   }
 };
@@ -338,4 +410,4 @@ declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
   }
-} 
+}

@@ -12,13 +12,13 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
 
     const project = await ProjectModel.findById(id);
-    
+
     if (!project) {
       return NextResponse.json(
         { success: false, error: 'Project not found' },
@@ -41,7 +41,7 @@ export async function GET(
         tags: ['overview', 'visualization'],
         uploaded_by: 'admin@example.com',
         created_at: new Date().toISOString(),
-      }
+      },
     ];
 
     return NextResponse.json({
@@ -65,13 +65,13 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
 
     const project = await ProjectModel.findById(id);
-    
+
     if (!project) {
       return NextResponse.json(
         { success: false, error: 'Project not found' },
@@ -93,7 +93,13 @@ export async function POST(
     }
 
     // Create project-specific uploads directory
-    const projectUploadsDir = path.join(process.cwd(), 'public', 'uploads', 'projects', id);
+    const projectUploadsDir = path.join(
+      process.cwd(),
+      'public',
+      'uploads',
+      'projects',
+      id
+    );
     if (!existsSync(projectUploadsDir)) {
       mkdirSync(projectUploadsDir, { recursive: true });
     }
@@ -127,11 +133,14 @@ export async function POST(
       project_id: id,
     };
 
-    return NextResponse.json({
-      success: true,
-      media,
-      message: 'Project media uploaded successfully'
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        media,
+        message: 'Project media uploaded successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error uploading project media:', error);
     return NextResponse.json(
@@ -148,7 +157,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
@@ -164,7 +173,7 @@ export async function DELETE(
     }
 
     const project = await ProjectModel.findById(id);
-    
+
     if (!project) {
       return NextResponse.json(
         { success: false, error: 'Project not found' },
@@ -176,7 +185,7 @@ export async function DELETE(
     // TODO: Implement actual media deletion from database and file system
     return NextResponse.json({
       success: true,
-      message: 'Project media deleted successfully'
+      message: 'Project media deleted successfully',
     });
   } catch (error) {
     console.error('Error deleting project media:', error);
@@ -185,4 +194,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}

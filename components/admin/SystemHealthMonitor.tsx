@@ -1,21 +1,21 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { 
-  Activity, 
-  Server, 
-  Database, 
-  HardDrive, 
-  Cpu, 
-  Network, 
-  AlertTriangle, 
-  CheckCircle, 
-  Clock, 
+import {
+  Activity,
+  Server,
+  Database,
+  HardDrive,
+  Cpu,
+  Network,
+  AlertTriangle,
+  CheckCircle,
+  Clock,
   RefreshCw,
   TrendingUp,
   TrendingDown,
   AlertCircle,
-  Info
+  Info,
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
@@ -57,7 +57,11 @@ interface SystemHealth {
   }[];
 }
 
-export default function SystemHealthMonitor({ className = '' }: { className?: string }) {
+export default function SystemHealthMonitor({
+  className = '',
+}: {
+  className?: string;
+}) {
   const [systemHealth, setSystemHealth] = useState<SystemHealth | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
@@ -79,7 +83,7 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
         status: 'healthy',
         trend: 'up',
         lastUpdated: new Date(),
-        threshold: { warning: 70, critical: 90 }
+        threshold: { warning: 70, critical: 90 },
       },
       {
         id: 'memory',
@@ -89,7 +93,7 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
         status: 'warning',
         trend: 'up',
         lastUpdated: new Date(),
-        threshold: { warning: 60, critical: 85 }
+        threshold: { warning: 60, critical: 85 },
       },
       {
         id: 'disk',
@@ -99,7 +103,7 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
         status: 'warning',
         trend: 'stable',
         lastUpdated: new Date(),
-        threshold: { warning: 75, critical: 90 }
+        threshold: { warning: 75, critical: 90 },
       },
       {
         id: 'network',
@@ -109,7 +113,7 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
         status: 'healthy',
         trend: 'down',
         lastUpdated: new Date(),
-        threshold: { warning: 50, critical: 80 }
+        threshold: { warning: 50, critical: 80 },
       },
       {
         id: 'database',
@@ -119,7 +123,7 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
         status: 'healthy',
         trend: 'stable',
         lastUpdated: new Date(),
-        threshold: { warning: 20, critical: 30 }
+        threshold: { warning: 20, critical: 30 },
       },
       {
         id: 'response',
@@ -129,47 +133,50 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
         status: 'healthy',
         trend: 'down',
         lastUpdated: new Date(),
-        threshold: { warning: 500, critical: 1000 }
-      }
+        threshold: { warning: 500, critical: 1000 },
+      },
     ],
     alerts: [
       {
         id: '1',
         type: 'warning',
         title: 'High Memory Usage',
-        message: 'Memory usage has exceeded 60% threshold. Consider optimizing application memory usage.',
+        message:
+          'Memory usage has exceeded 60% threshold. Consider optimizing application memory usage.',
         timestamp: new Date(Date.now() - 300000), // 5 minutes ago
-        resolved: false
+        resolved: false,
       },
       {
         id: '2',
         type: 'info',
         title: 'Database Backup Completed',
-        message: 'Scheduled database backup completed successfully at 02:00 AM.',
+        message:
+          'Scheduled database backup completed successfully at 02:00 AM.',
         timestamp: new Date(Date.now() - 3600000), // 1 hour ago
-        resolved: true
+        resolved: true,
       },
       {
         id: '3',
         type: 'critical',
         title: 'Disk Space Warning',
-        message: 'Disk usage is approaching critical threshold. Immediate action required.',
+        message:
+          'Disk usage is approaching critical threshold. Immediate action required.',
         timestamp: new Date(Date.now() - 600000), // 10 minutes ago
-        resolved: false
-      }
+        resolved: false,
+      },
     ],
     services: [
       { name: 'Web Server', status: 'running', responseTime: 45 },
       { name: 'Database', status: 'running', responseTime: 120 },
       { name: 'File Storage', status: 'running', responseTime: 89 },
       { name: 'Email Service', status: 'running', responseTime: 234 },
-      { name: 'Backup Service', status: 'running', responseTime: 156 }
-    ]
+      { name: 'Backup Service', status: 'running', responseTime: 156 },
+    ],
   };
 
   useEffect(() => {
     loadSystemHealth();
-    
+
     if (autoRefresh) {
       const interval = setInterval(loadSystemHealth, refreshInterval * 1000);
       return () => clearInterval(interval);
@@ -203,14 +210,18 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 500));
-      
-      setSystemHealth(prev => prev ? {
-        ...prev,
-        alerts: prev.alerts.map(alert => 
-          alert.id === alertId ? { ...alert, resolved: true } : alert
-        )
-      } : null);
-      
+
+      setSystemHealth(prev =>
+        prev
+          ? {
+              ...prev,
+              alerts: prev.alerts.map(alert =>
+                alert.id === alertId ? { ...alert, resolved: true } : alert
+              ),
+            }
+          : null
+      );
+
       toast.success('Alert resolved successfully');
     } catch (error) {
       toast.error('Failed to resolve alert');
@@ -219,39 +230,50 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'healthy': return 'text-green-600 bg-green-50';
-      case 'warning': return 'text-yellow-600 bg-yellow-50';
-      case 'critical': return 'text-red-600 bg-red-50';
-      default: return 'text-gray-600 bg-gray-50';
+      case 'healthy':
+        return 'text-green-600 bg-green-50';
+      case 'warning':
+        return 'text-yellow-600 bg-yellow-50';
+      case 'critical':
+        return 'text-red-600 bg-red-50';
+      default:
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'healthy': return <CheckCircle className="w-4 h-4" />;
-      case 'warning': return <AlertTriangle className="w-4 h-4" />;
-      case 'critical': return <AlertCircle className="w-4 h-4" />;
-      default: return <Info className="w-4 h-4" />;
+      case 'healthy':
+        return <CheckCircle className='w-4 h-4' />;
+      case 'warning':
+        return <AlertTriangle className='w-4 h-4' />;
+      case 'critical':
+        return <AlertCircle className='w-4 h-4' />;
+      default:
+        return <Info className='w-4 h-4' />;
     }
   };
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
-      case 'up': return <TrendingUp className="w-4 h-4 text-red-500" />;
-      case 'down': return <TrendingDown className="w-4 h-4 text-green-500" />;
-      default: return <div className="w-4 h-4" />;
+      case 'up':
+        return <TrendingUp className='w-4 h-4 text-red-500' />;
+      case 'down':
+        return <TrendingDown className='w-4 h-4 text-green-500' />;
+      default:
+        return <div className='w-4 h-4' />;
     }
   };
 
   if (isLoading && !systemHealth) {
     return (
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-        <div className="p-6">
-          <div className="animate-pulse">
-            <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className='p-6'>
+          <div className='animate-pulse'>
+            <div className='h-6 bg-gray-200 rounded w-1/4 mb-4'></div>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-24 bg-gray-200 rounded"></div>
+                <div key={i} className='h-24 bg-gray-200 rounded'></div>
               ))}
             </div>
           </div>
@@ -263,11 +285,15 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
   if (!systemHealth) {
     return (
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-        <div className="p-6 text-center">
-          <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Unable to Load System Health</h3>
-          <p className="text-gray-600 mb-4">Failed to connect to system monitoring service.</p>
-          <Button onClick={loadSystemHealth} variant="primary">
+        <div className='p-6 text-center'>
+          <AlertCircle className='w-12 h-12 text-gray-400 mx-auto mb-4' />
+          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+            Unable to Load System Health
+          </h3>
+          <p className='text-gray-600 mb-4'>
+            Failed to connect to system monitoring service.
+          </p>
+          <Button onClick={loadSystemHealth} variant='primary'>
             Retry
           </Button>
         </div>
@@ -276,86 +302,102 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
   }
 
   const activeAlerts = systemHealth.alerts.filter(alert => !alert.resolved);
-  const criticalAlerts = activeAlerts.filter(alert => alert.type === 'critical');
+  const criticalAlerts = activeAlerts.filter(
+    alert => alert.type === 'critical'
+  );
 
   return (
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className='px-6 py-4 border-b border-gray-200'>
+        <div className='flex items-center justify-between'>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">System Health Monitor</h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <h2 className='text-xl font-semibold text-gray-900'>
+              System Health Monitor
+            </h2>
+            <p className='text-sm text-gray-600 mt-1'>
               Real-time system monitoring and alerts
             </p>
           </div>
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2">
+          <div className='flex items-center space-x-3'>
+            <div className='flex items-center space-x-2'>
               <input
-                type="checkbox"
-                id="autoRefresh"
+                type='checkbox'
+                id='autoRefresh'
                 checked={autoRefresh}
-                onChange={(e) => setAutoRefresh(e.target.checked)}
-                className="rounded border-gray-300"
+                onChange={e => setAutoRefresh(e.target.checked)}
+                className='rounded border-gray-300'
               />
-              <label htmlFor="autoRefresh" className="text-sm text-gray-600">
+              <label htmlFor='autoRefresh' className='text-sm text-gray-600'>
                 Auto refresh
               </label>
             </div>
             <Button
               onClick={handleRefresh}
-              variant="secondary"
-              size="sm"
+              variant='secondary'
+              size='sm'
               disabled={isLoading}
             >
-              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
-              <span className="ml-2">Refresh</span>
+              <RefreshCw
+                className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`}
+              />
+              <span className='ml-2'>Refresh</span>
             </Button>
           </div>
         </div>
       </div>
 
       {/* System Status Overview */}
-      <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="flex items-center space-x-3">
-            <div className={`p-2 rounded-full ${getStatusColor(systemHealth.overall)}`}>
+      <div className='px-6 py-4 bg-gray-50 border-b border-gray-200'>
+        <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
+          <div className='flex items-center space-x-3'>
+            <div
+              className={`p-2 rounded-full ${getStatusColor(systemHealth.overall)}`}
+            >
               {getStatusIcon(systemHealth.overall)}
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-900">Overall Status</p>
-              <p className="text-sm text-gray-600 capitalize">{systemHealth.overall}</p>
+              <p className='text-sm font-medium text-gray-900'>
+                Overall Status
+              </p>
+              <p className='text-sm text-gray-600 capitalize'>
+                {systemHealth.overall}
+              </p>
             </div>
           </div>
-          
-          <div className="flex items-center space-x-3">
-            <div className="p-2 rounded-full bg-blue-50">
-              <Server className="w-4 h-4 text-blue-600" />
+
+          <div className='flex items-center space-x-3'>
+            <div className='p-2 rounded-full bg-blue-50'>
+              <Server className='w-4 h-4 text-blue-600' />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-900">Uptime</p>
-              <p className="text-sm text-gray-600">{systemHealth.uptime}%</p>
+              <p className='text-sm font-medium text-gray-900'>Uptime</p>
+              <p className='text-sm text-gray-600'>{systemHealth.uptime}%</p>
             </div>
           </div>
-          
-          <div className="flex items-center space-x-3">
-            <div className="p-2 rounded-full bg-red-50">
-              <AlertTriangle className="w-4 h-4 text-red-600" />
+
+          <div className='flex items-center space-x-3'>
+            <div className='p-2 rounded-full bg-red-50'>
+              <AlertTriangle className='w-4 h-4 text-red-600' />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-900">Active Alerts</p>
-              <p className="text-sm text-gray-600">{activeAlerts.length}</p>
+              <p className='text-sm font-medium text-gray-900'>Active Alerts</p>
+              <p className='text-sm text-gray-600'>{activeAlerts.length}</p>
             </div>
           </div>
-          
-          <div className="flex items-center space-x-3">
-            <div className="p-2 rounded-full bg-green-50">
-              <CheckCircle className="w-4 h-4 text-green-600" />
+
+          <div className='flex items-center space-x-3'>
+            <div className='p-2 rounded-full bg-green-50'>
+              <CheckCircle className='w-4 h-4 text-green-600' />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-900">Services</p>
-              <p className="text-sm text-gray-600">
-                {systemHealth.services.filter(s => s.status === 'running').length}/{systemHealth.services.length} Running
+              <p className='text-sm font-medium text-gray-900'>Services</p>
+              <p className='text-sm text-gray-600'>
+                {
+                  systemHealth.services.filter(s => s.status === 'running')
+                    .length
+                }
+                /{systemHealth.services.length} Running
               </p>
             </div>
           </div>
@@ -364,25 +406,30 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
 
       {/* Critical Alerts */}
       {criticalAlerts.length > 0 && (
-        <div className="px-6 py-4 bg-red-50 border-b border-red-200">
-          <div className="flex items-center space-x-2 mb-3">
-            <AlertCircle className="w-5 h-5 text-red-600" />
-            <h3 className="text-lg font-medium text-red-900">Critical Alerts</h3>
+        <div className='px-6 py-4 bg-red-50 border-b border-red-200'>
+          <div className='flex items-center space-x-2 mb-3'>
+            <AlertCircle className='w-5 h-5 text-red-600' />
+            <h3 className='text-lg font-medium text-red-900'>
+              Critical Alerts
+            </h3>
           </div>
-          <div className="space-y-2">
+          <div className='space-y-2'>
             {criticalAlerts.map(alert => (
-              <div key={alert.id} className="flex items-center justify-between p-3 bg-red-100 rounded-lg">
+              <div
+                key={alert.id}
+                className='flex items-center justify-between p-3 bg-red-100 rounded-lg'
+              >
                 <div>
-                  <p className="font-medium text-red-900">{alert.title}</p>
-                  <p className="text-sm text-red-700">{alert.message}</p>
-                  <p className="text-xs text-red-600 mt-1">
+                  <p className='font-medium text-red-900'>{alert.title}</p>
+                  <p className='text-sm text-red-700'>{alert.message}</p>
+                  <p className='text-xs text-red-600 mt-1'>
                     {alert.timestamp.toLocaleString()}
                   </p>
                 </div>
                 <Button
                   onClick={() => resolveAlert(alert.id)}
-                  variant="primary"
-                  size="sm"
+                  variant='primary'
+                  size='sm'
                 >
                   Resolve
                 </Button>
@@ -393,39 +440,53 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
       )}
 
       {/* Metrics Grid */}
-      <div className="p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">System Metrics</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+      <div className='p-6'>
+        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          System Metrics
+        </h3>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6'>
           {systemHealth.metrics.map(metric => (
-            <div key={metric.id} className="bg-gray-50 rounded-lg p-4">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-gray-900">{metric.name}</h4>
-                <div className="flex items-center space-x-1">
+            <div key={metric.id} className='bg-gray-50 rounded-lg p-4'>
+              <div className='flex items-center justify-between mb-2'>
+                <h4 className='font-medium text-gray-900'>{metric.name}</h4>
+                <div className='flex items-center space-x-1'>
                   {getTrendIcon(metric.trend)}
-                  <div className={`p-1 rounded-full ${getStatusColor(metric.status)}`}>
+                  <div
+                    className={`p-1 rounded-full ${getStatusColor(metric.status)}`}
+                  >
                     {getStatusIcon(metric.status)}
                   </div>
                 </div>
               </div>
-              <div className="flex items-baseline space-x-2">
-                <span className="text-2xl font-bold text-gray-900">
+              <div className='flex items-baseline space-x-2'>
+                <span className='text-2xl font-bold text-gray-900'>
                   {metric.value}
                 </span>
-                <span className="text-sm text-gray-600">{metric.unit}</span>
+                <span className='text-sm text-gray-600'>{metric.unit}</span>
               </div>
-              <div className="mt-2">
-                <div className="flex justify-between text-xs text-gray-500 mb-1">
-                  <span>Warning: {metric.threshold.warning}{metric.unit}</span>
-                  <span>Critical: {metric.threshold.critical}{metric.unit}</span>
+              <div className='mt-2'>
+                <div className='flex justify-between text-xs text-gray-500 mb-1'>
+                  <span>
+                    Warning: {metric.threshold.warning}
+                    {metric.unit}
+                  </span>
+                  <span>
+                    Critical: {metric.threshold.critical}
+                    {metric.unit}
+                  </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className='w-full bg-gray-200 rounded-full h-2'>
                   <div
                     className={`h-2 rounded-full ${
-                      metric.value >= metric.threshold.critical ? 'bg-red-500' :
-                      metric.value >= metric.threshold.warning ? 'bg-yellow-500' :
-                      'bg-green-500'
+                      metric.value >= metric.threshold.critical
+                        ? 'bg-red-500'
+                        : metric.value >= metric.threshold.warning
+                          ? 'bg-yellow-500'
+                          : 'bg-green-500'
                     }`}
-                    style={{ width: `${Math.min((metric.value / metric.threshold.critical) * 100, 100)}%` }}
+                    style={{
+                      width: `${Math.min((metric.value / metric.threshold.critical) * 100, 100)}%`,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -434,32 +495,46 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
         </div>
 
         {/* Service Status */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Service Status</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className='mb-6'>
+          <h3 className='text-lg font-medium text-gray-900 mb-4'>
+            Service Status
+          </h3>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
             {systemHealth.services.map(service => (
-              <div key={service.name} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <div className={`p-2 rounded-full ${
-                    service.status === 'running' ? 'bg-green-50' :
-                    service.status === 'error' ? 'bg-red-50' : 'bg-yellow-50'
-                  }`}>
+              <div
+                key={service.name}
+                className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'
+              >
+                <div className='flex items-center space-x-3'>
+                  <div
+                    className={`p-2 rounded-full ${
+                      service.status === 'running'
+                        ? 'bg-green-50'
+                        : service.status === 'error'
+                          ? 'bg-red-50'
+                          : 'bg-yellow-50'
+                    }`}
+                  >
                     {service.status === 'running' ? (
-                      <CheckCircle className="w-4 h-4 text-green-600" />
+                      <CheckCircle className='w-4 h-4 text-green-600' />
                     ) : service.status === 'error' ? (
-                      <AlertCircle className="w-4 h-4 text-red-600" />
+                      <AlertCircle className='w-4 h-4 text-red-600' />
                     ) : (
-                      <Clock className="w-4 h-4 text-yellow-600" />
+                      <Clock className='w-4 h-4 text-yellow-600' />
                     )}
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{service.name}</p>
-                    <p className="text-sm text-gray-600 capitalize">{service.status}</p>
+                    <p className='font-medium text-gray-900'>{service.name}</p>
+                    <p className='text-sm text-gray-600 capitalize'>
+                      {service.status}
+                    </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">{service.responseTime}ms</p>
-                  <p className="text-xs text-gray-600">Response</p>
+                <div className='text-right'>
+                  <p className='text-sm font-medium text-gray-900'>
+                    {service.responseTime}ms
+                  </p>
+                  <p className='text-xs text-gray-600'>Response</p>
                 </div>
               </div>
             ))}
@@ -468,58 +543,68 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
 
         {/* Recent Alerts */}
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-gray-900">Recent Alerts</h3>
-            <Button variant="secondary" size="sm">
+          <div className='flex items-center justify-between mb-4'>
+            <h3 className='text-lg font-medium text-gray-900'>Recent Alerts</h3>
+            <Button variant='secondary' size='sm'>
               View All
             </Button>
           </div>
-          <div className="space-y-3">
+          <div className='space-y-3'>
             {systemHealth.alerts.slice(0, 5).map(alert => (
               <div
                 key={alert.id}
                 onClick={() => handleAlertClick(alert)}
                 className={`p-3 rounded-lg border cursor-pointer transition-colors ${
-                  alert.resolved ? 'bg-gray-50 border-gray-200' :
-                  alert.type === 'critical' ? 'bg-red-50 border-red-200' :
-                  alert.type === 'warning' ? 'bg-yellow-50 border-yellow-200' :
-                  'bg-blue-50 border-blue-200'
+                  alert.resolved
+                    ? 'bg-gray-50 border-gray-200'
+                    : alert.type === 'critical'
+                      ? 'bg-red-50 border-red-200'
+                      : alert.type === 'warning'
+                        ? 'bg-yellow-50 border-yellow-200'
+                        : 'bg-blue-50 border-blue-200'
                 }`}
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start space-x-3">
-                    <div className={`p-1 rounded-full ${
-                      alert.resolved ? 'bg-gray-200' :
-                      alert.type === 'critical' ? 'bg-red-200' :
-                      alert.type === 'warning' ? 'bg-yellow-200' :
-                      'bg-blue-200'
-                    }`}>
+                <div className='flex items-start justify-between'>
+                  <div className='flex items-start space-x-3'>
+                    <div
+                      className={`p-1 rounded-full ${
+                        alert.resolved
+                          ? 'bg-gray-200'
+                          : alert.type === 'critical'
+                            ? 'bg-red-200'
+                            : alert.type === 'warning'
+                              ? 'bg-yellow-200'
+                              : 'bg-blue-200'
+                      }`}
+                    >
                       {alert.type === 'critical' ? (
-                        <AlertCircle className="w-4 h-4 text-red-600" />
+                        <AlertCircle className='w-4 h-4 text-red-600' />
                       ) : alert.type === 'warning' ? (
-                        <AlertTriangle className="w-4 h-4 text-yellow-600" />
+                        <AlertTriangle className='w-4 h-4 text-yellow-600' />
                       ) : (
-                        <Info className="w-4 h-4 text-blue-600" />
+                        <Info className='w-4 h-4 text-blue-600' />
                       )}
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">{alert.title}</p>
-                      <p className="text-sm text-gray-600 mt-1">{alert.message}</p>
-                      <p className="text-xs text-gray-500 mt-2">
+                      <p className='font-medium text-gray-900'>{alert.title}</p>
+                      <p className='text-sm text-gray-600 mt-1'>
+                        {alert.message}
+                      </p>
+                      <p className='text-xs text-gray-500 mt-2'>
                         {alert.timestamp.toLocaleString()}
                         {alert.resolved && ' • Resolved'}
                       </p>
                     </div>
                   </div>
-                                     {!alert.resolved && (
-                     <Button
-                       onClick={() => resolveAlert(alert.id)}
-                       variant="primary"
-                       size="sm"
-                     >
-                       Resolve
-                     </Button>
-                   )}
+                  {!alert.resolved && (
+                    <Button
+                      onClick={() => resolveAlert(alert.id)}
+                      variant='primary'
+                      size='sm'
+                    >
+                      Resolve
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}
@@ -531,41 +616,47 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
       <Modal
         isOpen={showAlertModal}
         onClose={() => setShowAlertModal(false)}
-        title="Alert Details"
+        title='Alert Details'
       >
         {selectedAlert && (
-          <div className="space-y-4">
-            <div className={`p-4 rounded-lg ${
-              selectedAlert.type === 'critical' ? 'bg-red-50' :
-              selectedAlert.type === 'warning' ? 'bg-yellow-50' :
-              'bg-blue-50'
-            }`}>
-              <div className="flex items-center space-x-2 mb-2">
+          <div className='space-y-4'>
+            <div
+              className={`p-4 rounded-lg ${
+                selectedAlert.type === 'critical'
+                  ? 'bg-red-50'
+                  : selectedAlert.type === 'warning'
+                    ? 'bg-yellow-50'
+                    : 'bg-blue-50'
+              }`}
+            >
+              <div className='flex items-center space-x-2 mb-2'>
                 {selectedAlert.type === 'critical' ? (
-                  <AlertCircle className="w-5 h-5 text-red-600" />
+                  <AlertCircle className='w-5 h-5 text-red-600' />
                 ) : selectedAlert.type === 'warning' ? (
-                  <AlertTriangle className="w-5 h-5 text-yellow-600" />
+                  <AlertTriangle className='w-5 h-5 text-yellow-600' />
                 ) : (
-                  <Info className="w-5 h-5 text-blue-600" />
+                  <Info className='w-5 h-5 text-blue-600' />
                 )}
-                <h3 className="text-lg font-medium text-gray-900">{selectedAlert.title}</h3>
+                <h3 className='text-lg font-medium text-gray-900'>
+                  {selectedAlert.title}
+                </h3>
               </div>
-              <p className="text-gray-700">{selectedAlert.message}</p>
-              <p className="text-sm text-gray-600 mt-2">
+              <p className='text-gray-700'>{selectedAlert.message}</p>
+              <p className='text-sm text-gray-600 mt-2'>
                 {selectedAlert.timestamp.toLocaleString()}
               </p>
             </div>
-            
-            <div className="flex justify-end space-x-3">
+
+            <div className='flex justify-end space-x-3'>
               <Button
-                variant="secondary"
+                variant='secondary'
                 onClick={() => setShowAlertModal(false)}
               >
                 Close
               </Button>
               {!selectedAlert.resolved && (
                 <Button
-                  variant="primary"
+                  variant='primary'
                   onClick={() => {
                     resolveAlert(selectedAlert.id);
                     setShowAlertModal(false);
@@ -580,4 +671,4 @@ export default function SystemHealthMonitor({ className = '' }: { className?: st
       </Modal>
     </div>
   );
-} 
+}

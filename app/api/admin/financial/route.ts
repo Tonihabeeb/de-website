@@ -3,27 +3,141 @@ import { NextRequest, NextResponse } from 'next/server';
 // Sample financial data for development
 const sampleFinancialData = {
   revenue: [
-    { id: 'rev-001', month: 'Jan', year: 2024, revenue: 120000, cost: 80000, profit: 40000, project_id: 'project-001' },
-    { id: 'rev-002', month: 'Feb', year: 2024, revenue: 135000, cost: 90000, profit: 45000, project_id: 'project-001' },
-    { id: 'rev-003', month: 'Mar', year: 2024, revenue: 150000, cost: 95000, profit: 55000, project_id: 'project-001' },
-    { id: 'rev-004', month: 'Apr', year: 2024, revenue: 160000, cost: 100000, profit: 60000, project_id: 'project-001' },
-    { id: 'rev-005', month: 'May', year: 2024, revenue: 170000, cost: 110000, profit: 60000, project_id: 'project-001' },
-    { id: 'rev-006', month: 'Jun', year: 2024, revenue: 180000, cost: 120000, profit: 60000, project_id: 'project-001' }
+    {
+      id: 'rev-001',
+      month: 'Jan',
+      year: 2024,
+      revenue: 120000,
+      cost: 80000,
+      profit: 40000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'rev-002',
+      month: 'Feb',
+      year: 2024,
+      revenue: 135000,
+      cost: 90000,
+      profit: 45000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'rev-003',
+      month: 'Mar',
+      year: 2024,
+      revenue: 150000,
+      cost: 95000,
+      profit: 55000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'rev-004',
+      month: 'Apr',
+      year: 2024,
+      revenue: 160000,
+      cost: 100000,
+      profit: 60000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'rev-005',
+      month: 'May',
+      year: 2024,
+      revenue: 170000,
+      cost: 110000,
+      profit: 60000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'rev-006',
+      month: 'Jun',
+      year: 2024,
+      revenue: 180000,
+      cost: 120000,
+      profit: 60000,
+      project_id: 'project-001',
+    },
   ],
   cashFlow: [
-    { id: 'cf-001', month: 'Jan', year: 2024, cashFlow: 40000, project_id: 'project-001' },
-    { id: 'cf-002', month: 'Feb', year: 2024, cashFlow: 45000, project_id: 'project-001' },
-    { id: 'cf-003', month: 'Mar', year: 2024, cashFlow: 55000, project_id: 'project-001' },
-    { id: 'cf-004', month: 'Apr', year: 2024, cashFlow: 60000, project_id: 'project-001' },
-    { id: 'cf-005', month: 'May', year: 2024, cashFlow: 60000, project_id: 'project-001' },
-    { id: 'cf-006', month: 'Jun', year: 2024, cashFlow: 60000, project_id: 'project-001' }
+    {
+      id: 'cf-001',
+      month: 'Jan',
+      year: 2024,
+      cashFlow: 40000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cf-002',
+      month: 'Feb',
+      year: 2024,
+      cashFlow: 45000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cf-003',
+      month: 'Mar',
+      year: 2024,
+      cashFlow: 55000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cf-004',
+      month: 'Apr',
+      year: 2024,
+      cashFlow: 60000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cf-005',
+      month: 'May',
+      year: 2024,
+      cashFlow: 60000,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cf-006',
+      month: 'Jun',
+      year: 2024,
+      cashFlow: 60000,
+      project_id: 'project-001',
+    },
   ],
   costBreakdown: [
-    { id: 'cost-001', category: 'O&M', value: 40000, percentage: 40, project_id: 'project-001' },
-    { id: 'cost-002', category: 'Labor', value: 25000, percentage: 25, project_id: 'project-001' },
-    { id: 'cost-003', category: 'Materials', value: 20000, percentage: 20, project_id: 'project-001' },
-    { id: 'cost-004', category: 'Insurance', value: 10000, percentage: 10, project_id: 'project-001' },
-    { id: 'cost-005', category: 'Other', value: 5000, percentage: 5, project_id: 'project-001' }
+    {
+      id: 'cost-001',
+      category: 'O&M',
+      value: 40000,
+      percentage: 40,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cost-002',
+      category: 'Labor',
+      value: 25000,
+      percentage: 25,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cost-003',
+      category: 'Materials',
+      value: 20000,
+      percentage: 20,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cost-004',
+      category: 'Insurance',
+      value: 10000,
+      percentage: 10,
+      project_id: 'project-001',
+    },
+    {
+      id: 'cost-005',
+      category: 'Other',
+      value: 5000,
+      percentage: 5,
+      project_id: 'project-001',
+    },
   ],
   investmentMetrics: [
     {
@@ -35,7 +149,7 @@ const sampleFinancialData = {
       description: 'Return on Investment',
       target: 20,
       status: 'above_target',
-      updated_at: '2024-07-20T00:00:00.000Z'
+      updated_at: '2024-07-20T00:00:00.000Z',
     },
     {
       id: 'inv-002',
@@ -46,7 +160,7 @@ const sampleFinancialData = {
       description: 'Time to recover initial investment',
       target: 4,
       status: 'above_target',
-      updated_at: '2024-07-20T00:00:00.000Z'
+      updated_at: '2024-07-20T00:00:00.000Z',
     },
     {
       id: 'inv-003',
@@ -57,7 +171,7 @@ const sampleFinancialData = {
       description: 'Net Present Value',
       target: 2000000,
       status: 'above_target',
-      updated_at: '2024-07-20T00:00:00.000Z'
+      updated_at: '2024-07-20T00:00:00.000Z',
     },
     {
       id: 'inv-004',
@@ -68,8 +182,8 @@ const sampleFinancialData = {
       description: 'Internal Rate of Return',
       target: 15,
       status: 'above_target',
-      updated_at: '2024-07-20T00:00:00.000Z'
-    }
+      updated_at: '2024-07-20T00:00:00.000Z',
+    },
   ],
   transactions: [
     {
@@ -80,7 +194,7 @@ const sampleFinancialData = {
       description: 'Monthly revenue for January 2024',
       date: '2024-01-31',
       category: 'Energy Sales',
-      user: 'John Smith'
+      user: 'John Smith',
     },
     {
       id: 'txn-002',
@@ -90,7 +204,7 @@ const sampleFinancialData = {
       description: 'Monthly operational costs for January 2024',
       date: '2024-01-31',
       category: 'Operations',
-      user: 'Sarah Johnson'
+      user: 'Sarah Johnson',
     },
     {
       id: 'txn-003',
@@ -100,7 +214,7 @@ const sampleFinancialData = {
       description: 'Monthly revenue for February 2024',
       date: '2024-02-29',
       category: 'Energy Sales',
-      user: 'John Smith'
+      user: 'John Smith',
     },
     {
       id: 'txn-004',
@@ -110,9 +224,9 @@ const sampleFinancialData = {
       description: 'Monthly operational costs for February 2024',
       date: '2024-02-29',
       category: 'Operations',
-      user: 'Sarah Johnson'
-    }
-  ]
+      user: 'Sarah Johnson',
+    },
+  ],
 };
 
 // GET /api/admin/financial - Get all financial data
@@ -148,14 +262,18 @@ export async function GET(request: NextRequest) {
     } else if (type === 'costBreakdown') {
       let costBreakdown = sampleFinancialData.costBreakdown;
       if (project_id) {
-        costBreakdown = costBreakdown.filter(cb => cb.project_id === project_id);
+        costBreakdown = costBreakdown.filter(
+          cb => cb.project_id === project_id
+        );
       }
       response.costBreakdown = costBreakdown;
       response.total = costBreakdown.length;
     } else if (type === 'investmentMetrics') {
       let investmentMetrics = sampleFinancialData.investmentMetrics;
       if (project_id) {
-        investmentMetrics = investmentMetrics.filter(im => im.project_id === project_id);
+        investmentMetrics = investmentMetrics.filter(
+          im => im.project_id === project_id
+        );
       }
       response.investmentMetrics = investmentMetrics;
       response.total = investmentMetrics.length;
@@ -180,8 +298,8 @@ export async function GET(request: NextRequest) {
           cashFlow: sampleFinancialData.cashFlow.length,
           costBreakdown: sampleFinancialData.costBreakdown.length,
           investmentMetrics: sampleFinancialData.investmentMetrics.length,
-          transactions: sampleFinancialData.transactions.length
-        }
+          transactions: sampleFinancialData.transactions.length,
+        },
       };
     }
 
@@ -203,10 +321,13 @@ export async function POST(request: NextRequest) {
 
     if (type === 'revenue') {
       const { month, year, revenue, cost, project_id } = data;
-      
+
       if (!month || !year || !revenue || !cost || !project_id) {
         return NextResponse.json(
-          { success: false, error: 'Month, year, revenue, cost, and project_id are required' },
+          {
+            success: false,
+            error: 'Month, year, revenue, cost, and project_id are required',
+          },
           { status: 400 }
         );
       }
@@ -218,25 +339,47 @@ export async function POST(request: NextRequest) {
         revenue: parseFloat(revenue),
         cost: parseFloat(cost),
         profit: parseFloat(revenue) - parseFloat(cost),
-        project_id
+        project_id,
       };
 
       // In a real implementation, this would be saved to the database
       sampleFinancialData.revenue.push(newRevenue);
 
-      return NextResponse.json({
-        success: true,
-        revenue: newRevenue,
-        message: 'Revenue record created successfully',
-      }, { status: 201 });
+      return NextResponse.json(
+        {
+          success: true,
+          revenue: newRevenue,
+          message: 'Revenue record created successfully',
+        },
+        { status: 201 }
+      );
     }
 
     if (type === 'transaction') {
-      const { project_id, type: transactionType, amount, description, date, category, user } = data;
-      
-      if (!project_id || !transactionType || !amount || !description || !date || !user) {
+      const {
+        project_id,
+        type: transactionType,
+        amount,
+        description,
+        date,
+        category,
+        user,
+      } = data;
+
+      if (
+        !project_id ||
+        !transactionType ||
+        !amount ||
+        !description ||
+        !date ||
+        !user
+      ) {
         return NextResponse.json(
-          { success: false, error: 'Project ID, type, amount, description, date, and user are required' },
+          {
+            success: false,
+            error:
+              'Project ID, type, amount, description, date, and user are required',
+          },
           { status: 400 }
         );
       }
@@ -249,30 +392,41 @@ export async function POST(request: NextRequest) {
         description,
         date,
         category: category || 'General',
-        user
+        user,
       };
 
       // In a real implementation, this would be saved to the database
       sampleFinancialData.transactions.push(newTransaction);
 
-      return NextResponse.json({
-        success: true,
-        transaction: newTransaction,
-        message: 'Transaction logged successfully',
-      }, { status: 201 });
+      return NextResponse.json(
+        {
+          success: true,
+          transaction: newTransaction,
+          message: 'Transaction logged successfully',
+        },
+        { status: 201 }
+      );
     }
 
     if (type === 'investmentMetric') {
       const { project_id, metric, value, unit, description, target } = data;
-      
+
       if (!project_id || !metric || !value || !unit || !description) {
         return NextResponse.json(
-          { success: false, error: 'Project ID, metric, value, unit, and description are required' },
+          {
+            success: false,
+            error:
+              'Project ID, metric, value, unit, and description are required',
+          },
           { status: 400 }
         );
       }
 
-      const status = target ? (parseFloat(value) >= parseFloat(target) ? 'above_target' : 'below_target') : 'neutral';
+      const status = target
+        ? parseFloat(value) >= parseFloat(target)
+          ? 'above_target'
+          : 'below_target'
+        : 'neutral';
 
       const newMetric = {
         id: `inv-${Date.now()}`,
@@ -281,23 +435,30 @@ export async function POST(request: NextRequest) {
         value: parseFloat(value),
         unit,
         description,
-        target: target ? parseFloat(target) : null,
+        target: target ? parseFloat(target) : 0,
         status,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
 
       // In a real implementation, this would be saved to the database
       sampleFinancialData.investmentMetrics.push(newMetric);
 
-      return NextResponse.json({
-        success: true,
-        investmentMetric: newMetric,
-        message: 'Investment metric created successfully',
-      }, { status: 201 });
+      return NextResponse.json(
+        {
+          success: true,
+          investmentMetric: newMetric,
+          message: 'Investment metric created successfully',
+        },
+        { status: 201 }
+      );
     }
 
     return NextResponse.json(
-      { success: false, error: 'Invalid type. Use "revenue", "transaction", or "investmentMetric"' },
+      {
+        success: false,
+        error:
+          'Invalid type. Use "revenue", "transaction", or "investmentMetric"',
+      },
       { status: 400 }
     );
   } catch (error) {
@@ -307,4 +468,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

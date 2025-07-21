@@ -1,7 +1,18 @@
 'use client';
 
 import {
-  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
 } from 'recharts';
 
 const COLORS = ['#2563eb', '#22c55e', '#f59e42', '#e11d48', '#a21caf'];
@@ -61,45 +72,60 @@ interface CostPieChartProps {
   data?: CostBreakdownData[];
 }
 
-export function RevenueBarChart({ data = defaultRevenueData }: RevenueBarChartProps) {
+export function RevenueBarChart({
+  data = defaultRevenueData,
+}: RevenueBarChartProps) {
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width='100%' height={300}>
       <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-        <XAxis dataKey="month" />
+        <XAxis dataKey='month' />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="revenue" fill="#2563eb" name="Revenue" />
-        <Bar dataKey="cost" fill="#f59e42" name="Cost" />
+        <Bar dataKey='revenue' fill='#2563eb' name='Revenue' />
+        <Bar dataKey='cost' fill='#f59e42' name='Cost' />
       </BarChart>
     </ResponsiveContainer>
   );
 }
 
-export function CashFlowLineChart({ data = defaultCashFlowData }: CashFlowLineChartProps) {
+export function CashFlowLineChart({
+  data = defaultCashFlowData,
+}: CashFlowLineChartProps) {
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-        <XAxis dataKey="month" />
+    <ResponsiveContainer width='100%' height={300}>
+      <LineChart
+        data={data}
+        margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+      >
+        <XAxis dataKey='month' />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="cashFlow" stroke="#22c55e" strokeWidth={3} name="Cash Flow" />
+        <Line
+          type='monotone'
+          dataKey='cashFlow'
+          stroke='#22c55e'
+          strokeWidth={3}
+          name='Cash Flow'
+        />
       </LineChart>
     </ResponsiveContainer>
   );
 }
 
-export function CostPieChart({ data = defaultCostBreakdown }: CostPieChartProps) {
+export function CostPieChart({
+  data = defaultCostBreakdown,
+}: CostPieChartProps) {
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width='100%' height={300}>
       <PieChart>
         <Pie
           data={data}
-          dataKey="value"
-          nameKey="name"
-          cx="50%"
-          cy="50%"
+          dataKey='value'
+          nameKey='name'
+          cx='50%'
+          cy='50%'
           outerRadius={100}
           label
         >
@@ -112,4 +138,4 @@ export function CostPieChart({ data = defaultCostBreakdown }: CostPieChartProps)
       </PieChart>
     </ResponsiveContainer>
   );
-} 
+}

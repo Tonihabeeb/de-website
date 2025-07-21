@@ -18,7 +18,7 @@ export default function RichTextEditor({
   placeholder = 'Enter your content here...',
   height = 400,
   className = '',
-  disabled = false
+  disabled = false,
 }: RichTextEditorProps) {
   const editorRef = useRef<any>(null);
 
@@ -40,15 +40,32 @@ export default function RichTextEditor({
           height: height,
           menubar: false,
           plugins: [
-            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+            'advlist',
+            'autolink',
+            'lists',
+            'link',
+            'image',
+            'charmap',
+            'preview',
+            'anchor',
+            'searchreplace',
+            'visualblocks',
+            'code',
+            'fullscreen',
+            'insertdatetime',
+            'media',
+            'table',
+            'code',
+            'help',
+            'wordcount',
           ],
-          toolbar: 'undo redo | blocks | ' +
+          toolbar:
+            'undo redo | blocks | ' +
             'bold italic forecolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | table | help',
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+          content_style:
+            'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
           placeholder: placeholder,
           branding: false,
           elementpath: false,
@@ -60,22 +77,22 @@ export default function RichTextEditor({
             return new Promise((resolve, reject) => {
               const formData = new FormData();
               formData.append('file', blobInfo.blob(), blobInfo.filename());
-              
+
               fetch('/api/admin/upload/image', {
                 method: 'POST',
                 body: formData,
               })
-              .then(response => response.json())
-              .then(result => {
-                if (result.success) {
-                  resolve(result.url);
-                } else {
-                  reject('Upload failed');
-                }
-              })
-              .catch(error => {
-                reject('Upload failed: ' + error);
-              });
+                .then(response => response.json())
+                .then(result => {
+                  if (result.success) {
+                    resolve(result.url);
+                  } else {
+                    reject('Upload failed');
+                  }
+                })
+                .catch(error => {
+                  reject('Upload failed: ' + error);
+                });
             });
           },
           setup: (editor: any) => {
@@ -88,16 +105,16 @@ export default function RichTextEditor({
                 window.dispatchEvent(saveEvent);
               }
             });
-          }
+          },
         }}
         disabled={disabled}
       />
-      
+
       {/* Editor Help */}
-      <div className="mt-2 text-xs text-gray-500">
+      <div className='mt-2 text-xs text-gray-500'>
         <p>Use Ctrl+S to save, Ctrl+B for bold, Ctrl+I for italic</p>
         <p>Drag and drop images or use the image button to upload</p>
       </div>
     </div>
   );
-} 
+}

@@ -2,14 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
-  Save, 
-  Eye, 
-  ArrowLeft,
-  Settings,
-  FileText,
-  Search
-} from 'lucide-react';
+import { Save, Eye, ArrowLeft, Settings, FileText, Search } from 'lucide-react';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 
 interface PageFormData {
@@ -31,10 +24,12 @@ export default function NewPage() {
     meta_title: '',
     meta_description: '',
     meta_keywords: '',
-    status: 'draft'
+    status: 'draft',
   });
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'content' | 'seo' | 'settings'>('content');
+  const [activeTab, setActiveTab] = useState<'content' | 'seo' | 'settings'>(
+    'content'
+  );
 
   const generateSlug = (title: string) => {
     return title
@@ -49,7 +44,7 @@ export default function NewPage() {
     setFormData(prev => ({
       ...prev,
       title,
-      slug: generateSlug(title)
+      slug: generateSlug(title),
     }));
   };
 
@@ -82,44 +77,46 @@ export default function NewPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-4">
+      <div className='flex justify-between items-center'>
+        <div className='flex items-center space-x-4'>
           <button
             onClick={() => router.back()}
-            className="text-gray-600 hover:text-gray-900"
+            className='text-gray-600 hover:text-gray-900'
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className='w-5 h-5' />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Create New Page</h1>
-            <p className="text-gray-600">Add a new page to your website</p>
+            <h1 className='text-2xl font-bold text-gray-900'>
+              Create New Page
+            </h1>
+            <p className='text-gray-600'>Add a new page to your website</p>
           </div>
         </div>
-        <div className="flex items-center space-x-3">
+        <div className='flex items-center space-x-3'>
           <button
-            type="button"
-            className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center space-x-2"
+            type='button'
+            className='px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center space-x-2'
           >
-            <Eye className="w-4 h-4" />
+            <Eye className='w-4 h-4' />
             <span>Preview</span>
           </button>
           <button
-            type="submit"
-            form="page-form"
+            type='submit'
+            form='page-form'
             disabled={loading}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center space-x-2"
+            className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center space-x-2'
           >
-            <Save className="w-4 h-4" />
+            <Save className='w-4 h-4' />
             <span>{loading ? 'Saving...' : 'Save Page'}</span>
           </button>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8">
+      <div className='border-b border-gray-200'>
+        <nav className='-mb-px flex space-x-8'>
           <button
             onClick={() => setActiveTab('content')}
             className={`py-2 px-1 border-b-2 font-medium text-sm ${
@@ -128,7 +125,7 @@ export default function NewPage() {
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
-            <FileText className="w-4 h-4 inline mr-2" />
+            <FileText className='w-4 h-4 inline mr-2' />
             Content
           </button>
           <button
@@ -139,7 +136,7 @@ export default function NewPage() {
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
-            <Search className="w-4 h-4 inline mr-2" />
+            <Search className='w-4 h-4 inline mr-2' />
             SEO
           </button>
           <button
@@ -150,62 +147,75 @@ export default function NewPage() {
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
-            <Settings className="w-4 h-4 inline mr-2" />
+            <Settings className='w-4 h-4 inline mr-2' />
             Settings
           </button>
         </nav>
       </div>
 
       {/* Form */}
-      <form id="page-form" onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <form id='page-form' onSubmit={handleSubmit} className='space-y-6'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className='lg:col-span-2 space-y-6'>
             {activeTab === 'content' && (
               <>
                 <div>
-                  <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor='title'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
                     Page Title *
                   </label>
                   <input
-                    type="text"
-                    id="title"
+                    type='text'
+                    id='title'
                     value={formData.title}
-                    onChange={(e) => handleTitleChange(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Enter page title..."
+                    onChange={e => handleTitleChange(e.target.value)}
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='Enter page title...'
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="slug" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor='slug'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
                     URL Slug *
                   </label>
-                  <div className="flex">
-                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                  <div className='flex'>
+                    <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
                       /
                     </span>
                     <input
-                      type="text"
-                      id="slug"
+                      type='text'
+                      id='slug'
                       value={formData.slug}
-                      onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="page-url-slug"
+                      onChange={e =>
+                        setFormData(prev => ({ ...prev, slug: e.target.value }))
+                      }
+                      className='flex-1 px-3 py-2 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                      placeholder='page-url-slug'
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor='content'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
                     Page Content *
                   </label>
                   <RichTextEditor
                     value={formData.content}
-                    onChange={(content) => setFormData(prev => ({ ...prev, content }))}
-                    placeholder="Enter your page content here..."
+                    onChange={content =>
+                      setFormData(prev => ({ ...prev, content }))
+                    }
+                    placeholder='Enter your page content here...'
                     height={400}
                   />
                 </div>
@@ -213,56 +223,80 @@ export default function NewPage() {
             )}
 
             {activeTab === 'seo' && (
-              <div className="space-y-6">
+              <div className='space-y-6'>
                 <div>
-                  <label htmlFor="meta_title" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor='meta_title'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
                     Meta Title
                   </label>
                   <input
-                    type="text"
-                    id="meta_title"
+                    type='text'
+                    id='meta_title'
                     value={formData.meta_title}
-                    onChange={(e) => setFormData(prev => ({ ...prev, meta_title: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="SEO title for search engines..."
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        meta_title: e.target.value,
+                      }))
+                    }
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='SEO title for search engines...'
                     maxLength={60}
                   />
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className='mt-1 text-sm text-gray-500'>
                     {formData.meta_title.length}/60 characters
                   </p>
                 </div>
 
                 <div>
-                  <label htmlFor="meta_description" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor='meta_description'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
                     Meta Description
                   </label>
                   <textarea
-                    id="meta_description"
+                    id='meta_description'
                     value={formData.meta_description}
-                    onChange={(e) => setFormData(prev => ({ ...prev, meta_description: e.target.value }))}
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        meta_description: e.target.value,
+                      }))
+                    }
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Brief description for search results..."
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='Brief description for search results...'
                     maxLength={160}
                   />
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className='mt-1 text-sm text-gray-500'>
                     {formData.meta_description.length}/160 characters
                   </p>
                 </div>
 
                 <div>
-                  <label htmlFor="meta_keywords" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor='meta_keywords'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
                     Meta Keywords
                   </label>
                   <input
-                    type="text"
-                    id="meta_keywords"
+                    type='text'
+                    id='meta_keywords'
                     value={formData.meta_keywords}
-                    onChange={(e) => setFormData(prev => ({ ...prev, meta_keywords: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="keyword1, keyword2, keyword3..."
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        meta_keywords: e.target.value,
+                      }))
+                    }
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                    placeholder='keyword1, keyword2, keyword3...'
                   />
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className='mt-1 text-sm text-gray-500'>
                     Separate keywords with commas
                   </p>
                 </div>
@@ -270,26 +304,38 @@ export default function NewPage() {
             )}
 
             {activeTab === 'settings' && (
-              <div className="space-y-6">
+              <div className='space-y-6'>
                 <div>
-                  <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor='status'
+                    className='block text-sm font-medium text-gray-700 mb-2'
+                  >
                     Page Status
                   </label>
                   <select
-                    id="status"
+                    id='status'
                     value={formData.status}
-                    onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as 'draft' | 'published' }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    onChange={e =>
+                      setFormData(prev => ({
+                        ...prev,
+                        status: e.target.value as 'draft' | 'published',
+                      }))
+                    }
+                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                   >
-                    <option value="draft">Draft</option>
-                    <option value="published">Published</option>
+                    <option value='draft'>Draft</option>
+                    <option value='published'>Published</option>
                   </select>
                 </div>
 
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <h3 className="text-sm font-medium text-yellow-800">Additional Settings</h3>
-                  <p className="mt-1 text-sm text-yellow-700">
-                    Advanced page settings like navigation order, template selection, and custom CSS will be available in the next phase.
+                <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-4'>
+                  <h3 className='text-sm font-medium text-yellow-800'>
+                    Additional Settings
+                  </h3>
+                  <p className='mt-1 text-sm text-yellow-700'>
+                    Advanced page settings like navigation order, template
+                    selection, and custom CSS will be available in the next
+                    phase.
                   </p>
                 </div>
               </div>
@@ -297,53 +343,61 @@ export default function NewPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className='space-y-6'>
             {/* Page Info */}
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Page Information</h3>
-              <div className="space-y-2 text-sm">
+            <div className='bg-white border border-gray-200 rounded-lg p-4'>
+              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+                Page Information
+              </h3>
+              <div className='space-y-2 text-sm'>
                 <div>
-                  <span className="text-gray-500">Status:</span>
-                  <span className={`ml-2 px-2 py-1 rounded-full text-xs font-medium ${
-                    formData.status === 'published' 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-yellow-100 text-yellow-800'
-                  }`}>
+                  <span className='text-gray-500'>Status:</span>
+                  <span
+                    className={`ml-2 px-2 py-1 rounded-full text-xs font-medium ${
+                      formData.status === 'published'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}
+                  >
                     {formData.status === 'published' ? 'Published' : 'Draft'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-500">URL:</span>
-                  <span className="ml-2 text-gray-900">/{formData.slug || 'page-slug'}</span>
+                  <span className='text-gray-500'>URL:</span>
+                  <span className='ml-2 text-gray-900'>
+                    /{formData.slug || 'page-slug'}
+                  </span>
                 </div>
                 <div>
-                  <span className="text-gray-500">Created:</span>
-                  <span className="ml-2 text-gray-900">Just now</span>
+                  <span className='text-gray-500'>Created:</span>
+                  <span className='ml-2 text-gray-900'>Just now</span>
                 </div>
               </div>
             </div>
 
             {/* Actions */}
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Actions</h3>
-              <div className="space-y-2">
+            <div className='bg-white border border-gray-200 rounded-lg p-4'>
+              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+                Actions
+              </h3>
+              <div className='space-y-2'>
                 <button
-                  type="submit"
+                  type='submit'
                   disabled={loading}
-                  className="w-full bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm"
+                  className='w-full bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm'
                 >
                   {loading ? 'Saving...' : 'Save Page'}
                 </button>
                 <button
-                  type="button"
-                  className="w-full bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 text-sm"
+                  type='button'
+                  className='w-full bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 text-sm'
                 >
                   Save as Draft
                 </button>
                 <button
-                  type="button"
+                  type='button'
                   onClick={() => router.back()}
-                  className="w-full border border-gray-300 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 text-sm"
+                  className='w-full border border-gray-300 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 text-sm'
                 >
                   Cancel
                 </button>
@@ -354,4 +408,4 @@ export default function NewPage() {
       </form>
     </div>
   );
-} 
+}

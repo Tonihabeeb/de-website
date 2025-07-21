@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { IncomingForm, Fields, Files, File as FormidableFile } from 'formidable';
+import {
+  IncomingForm,
+  Fields,
+  Files,
+  File as FormidableFile,
+} from 'formidable';
 
 function getAvailableFileName(dir: string, originalName: string): string {
   const ext = path.extname(originalName);
@@ -15,7 +20,12 @@ function getAvailableFileName(dir: string, originalName: string): string {
   return candidate;
 }
 
-const METADATA_PATH = path.join(process.cwd(), 'public', 'uploads', 'metadata.json');
+const METADATA_PATH = path.join(
+  process.cwd(),
+  'public',
+  'uploads',
+  'metadata.json'
+);
 
 function readMetadata(): Array<{ name: string; tag: string }> {
   try {
@@ -40,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     // Parse the form data
     const formData = await request.formData();
-    const tag = formData.get('tag') as string || 'Untagged';
+    const tag = (formData.get('tag') as string) || 'Untagged';
     const files = formData.getAll('files') as File[];
 
     if (!files || files.length === 0) {
@@ -86,4 +96,4 @@ export async function GET() {
     { success: false, error: 'Method not allowed' },
     { status: 405 }
   );
-} 
+}

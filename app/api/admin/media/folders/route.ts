@@ -9,7 +9,7 @@ const sampleFolders = [
     parent_id: null,
     created_by: 'admin-001',
     created_at: '2024-01-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
+    updated_at: '2024-07-20T00:00:00.000Z',
   },
   {
     id: 'folder-002',
@@ -18,7 +18,7 @@ const sampleFolders = [
     parent_id: null,
     created_by: 'admin-001',
     created_at: '2024-01-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
+    updated_at: '2024-07-20T00:00:00.000Z',
   },
   {
     id: 'folder-003',
@@ -27,7 +27,7 @@ const sampleFolders = [
     parent_id: 'folder-001',
     created_by: 'admin-001',
     created_at: '2024-02-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
+    updated_at: '2024-07-20T00:00:00.000Z',
   },
   {
     id: 'folder-004',
@@ -36,8 +36,8 @@ const sampleFolders = [
     parent_id: 'folder-002',
     created_by: 'admin-001',
     created_at: '2024-03-01T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
-  }
+    updated_at: '2024-07-20T00:00:00.000Z',
+  },
 ];
 
 // GET /api/admin/media/folders - Get all folders
@@ -50,7 +50,9 @@ export async function GET(request: NextRequest) {
 
     // Apply parent filter
     if (parent_id) {
-      filteredFolders = filteredFolders.filter(folder => folder.parent_id === parent_id);
+      filteredFolders = filteredFolders.filter(
+        folder => folder.parent_id === parent_id
+      );
     }
 
     return NextResponse.json({
@@ -65,4 +67,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

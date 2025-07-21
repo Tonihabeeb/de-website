@@ -3,7 +3,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { db } from '@/database/connection';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET =
+  process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,7 +18,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user by email
-    const stmt = db.prepare('SELECT * FROM users WHERE email = ? AND is_active = 1');
+    const stmt = db.prepare(
+      'SELECT * FROM users WHERE email = ? AND is_active = 1'
+    );
     const user = stmt.get(email) as any;
 
     if (!user) {
@@ -38,10 +41,10 @@ export async function POST(request: NextRequest) {
 
     // Generate JWT token
     const token = jwt.sign(
-      { 
-        userId: user.id, 
-        email: user.email, 
-        role: user.role 
+      {
+        userId: user.id,
+        email: user.email,
+        role: user.role,
       },
       JWT_SECRET,
       { expiresIn: '24h' }
@@ -59,9 +62,8 @@ export async function POST(request: NextRequest) {
       success: true,
       token,
       user: userData,
-      message: 'Login successful'
+      message: 'Login successful',
     });
-
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
@@ -69,4 +71,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

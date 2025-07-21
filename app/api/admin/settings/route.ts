@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     const settings: Record<string, any> = {};
     rows.forEach(row => {
       let value = row.setting_value;
-      
+
       // Parse value based on type
       switch (row.setting_type) {
         case 'number':
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
           }
           break;
       }
-      
+
       settings[row.setting_key] = value;
     });
 
@@ -87,7 +87,9 @@ export async function PUT(request: NextRequest) {
       }
 
       // Check if setting exists
-      const existingStmt = db.prepare('SELECT id FROM site_settings WHERE setting_key = ?');
+      const existingStmt = db.prepare(
+        'SELECT id FROM site_settings WHERE setting_key = ?'
+      );
       const existing = existingStmt.get(key);
 
       if (existing) {
@@ -104,8 +106,15 @@ export async function PUT(request: NextRequest) {
           INSERT INTO site_settings (id, setting_key, setting_value, setting_type, description)
           VALUES (?, ?, ?, ?, ?)
         `);
-        const id = Date.now().toString() + Math.random().toString(36).substr(2, 9);
-        insertStmt.run(id, key, settingValue, settingType, `Setting for ${key}`);
+        const id =
+          Date.now().toString() + Math.random().toString(36).substr(2, 9);
+        insertStmt.run(
+          id,
+          key,
+          settingValue,
+          settingType,
+          `Setting for ${key}`
+        );
       }
 
       // Store the parsed value for response
@@ -155,8 +164,9 @@ export async function POST(request: NextRequest) {
 
     for (const setting of settings) {
       const { key, value, type = 'string', description = '' } = setting;
-      const id = Date.now().toString() + Math.random().toString(36).substr(2, 9);
-      
+      const id =
+        Date.now().toString() + Math.random().toString(36).substr(2, 9);
+
       let settingValue = value;
       if (type === 'json') {
         settingValue = JSON.stringify(value);
@@ -178,4 +188,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

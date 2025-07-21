@@ -11,13 +11,13 @@ interface ProtectedRouteProps {
   redirectTo?: string;
 }
 
-export default function ProtectedRoute({ 
-  children, 
-  requiredRoles = [], 
-  redirectTo = '/login' 
+export default function ProtectedRoute({
+  children,
+  requiredRoles = [],
+  redirectTo = '/login',
 }: ProtectedRouteProps) {
   const { isAuthenticated, isLoading, user, hasAnyRole } = useAuth();
-  
+
   // Conditionally use router to handle test environment
   let router: any = null;
   try {
@@ -39,12 +39,20 @@ export default function ProtectedRoute({
         return;
       }
     }
-  }, [isAuthenticated, isLoading, user, requiredRoles, hasAnyRole, router, redirectTo]);
+  }, [
+    isAuthenticated,
+    isLoading,
+    user,
+    requiredRoles,
+    hasAnyRole,
+    router,
+    redirectTo,
+  ]);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      <div className='min-h-screen flex items-center justify-center'>
+        <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-primary'></div>
       </div>
     );
   }
@@ -58,4 +66,4 @@ export default function ProtectedRoute({
   }
 
   return <>{children}</>;
-} 
+}

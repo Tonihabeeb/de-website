@@ -25,13 +25,8 @@ export default function GoogleOfficeMap() {
         zoom={18}
         onLoad={handleMapLoad}
       >
-        {icon && (
-          <Marker
-            position={center}
-            icon={icon}
-          />
-        )}
+        {icon && <Marker position={center} icon={icon} />}
       </GoogleMap>
     </LoadScript>
   );
-} 
+}

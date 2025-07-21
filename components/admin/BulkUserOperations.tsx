@@ -6,13 +6,13 @@ import DataTable from '@/components/ui/DataTable';
 import Modal from '@/components/ui/Modal';
 import { toast } from '@/components/ui/Toast';
 import FileUpload from '@/components/ui/FileUpload';
-import { 
-  Users, 
-  UserPlus, 
-  UserMinus, 
-  Shield, 
-  Mail, 
-  Download, 
+import {
+  Users,
+  UserPlus,
+  UserMinus,
+  Shield,
+  Mail,
+  Download,
   Upload,
   CheckSquare,
   Square,
@@ -20,7 +20,7 @@ import {
   Edit,
   Eye,
   Filter,
-  RefreshCw
+  RefreshCw,
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
@@ -49,10 +49,12 @@ const BulkUserOperations: React.FC = () => {
   const [filters, setFilters] = useState({
     role: '',
     status: '',
-    department: ''
+    department: '',
   });
   const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
-  const [bulkOperation, setBulkOperation] = useState<BulkOperation | null>(null);
+  const [bulkOperation, setBulkOperation] = useState<BulkOperation | null>(
+    null
+  );
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [importFile, setImportFile] = useState<File | null>(null);
 
@@ -67,7 +69,7 @@ const BulkUserOperations: React.FC = () => {
       lastLogin: new Date(Date.now() - 3600000).toISOString(),
       createdAt: new Date(Date.now() - 86400000 * 30).toISOString(),
       department: 'Engineering',
-      permissions: ['read', 'write', 'delete']
+      permissions: ['read', 'write', 'delete'],
     },
     {
       id: '2',
@@ -78,7 +80,7 @@ const BulkUserOperations: React.FC = () => {
       lastLogin: new Date(Date.now() - 7200000).toISOString(),
       createdAt: new Date(Date.now() - 86400000 * 15).toISOString(),
       department: 'Marketing',
-      permissions: ['read', 'write']
+      permissions: ['read', 'write'],
     },
     {
       id: '3',
@@ -89,7 +91,7 @@ const BulkUserOperations: React.FC = () => {
       lastLogin: new Date(Date.now() - 86400000 * 7).toISOString(),
       createdAt: new Date(Date.now() - 86400000 * 60).toISOString(),
       department: 'Sales',
-      permissions: ['read']
+      permissions: ['read'],
     },
     {
       id: '4',
@@ -99,7 +101,7 @@ const BulkUserOperations: React.FC = () => {
       status: 'pending',
       createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
       department: 'Content',
-      permissions: ['read', 'write']
+      permissions: ['read', 'write'],
     },
     {
       id: '5',
@@ -110,8 +112,8 @@ const BulkUserOperations: React.FC = () => {
       lastLogin: new Date(Date.now() - 3600000).toISOString(),
       createdAt: new Date(Date.now() - 86400000 * 45).toISOString(),
       department: 'Support',
-      permissions: ['read']
-    }
+      permissions: ['read'],
+    },
   ];
 
   useEffect(() => {
@@ -139,8 +141,8 @@ const BulkUserOperations: React.FC = () => {
   };
 
   const handleSelectUser = (userId: string) => {
-    setSelectedUsers(prev => 
-      prev.includes(userId) 
+    setSelectedUsers(prev =>
+      prev.includes(userId)
         ? prev.filter(id => id !== userId)
         : [...prev, userId]
     );
@@ -154,7 +156,7 @@ const BulkUserOperations: React.FC = () => {
 
     setBulkOperation({
       type: operation,
-      selectedUsers
+      selectedUsers,
     });
     setIsBulkModalOpen(true);
   };
@@ -164,13 +166,19 @@ const BulkUserOperations: React.FC = () => {
 
     try {
       setLoading(true);
-      
+
       switch (bulkOperation.type) {
         case 'role_update':
-          await updateUserRoles(bulkOperation.selectedUsers, bulkOperation.data.role);
+          await updateUserRoles(
+            bulkOperation.selectedUsers,
+            bulkOperation.data.role
+          );
           break;
         case 'status_update':
-          await updateUserStatuses(bulkOperation.selectedUsers, bulkOperation.data.status);
+          await updateUserStatuses(
+            bulkOperation.selectedUsers,
+            bulkOperation.data.status
+          );
           break;
         case 'delete':
           await deleteUsers(bulkOperation.selectedUsers);
@@ -195,17 +203,25 @@ const BulkUserOperations: React.FC = () => {
   const updateUserRoles = async (userIds: string[], role: string) => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
-    setUsers(prev => prev.map(user => 
-      userIds.includes(user.id) ? { ...user, role: role as User['role'] } : user
-    ));
+    setUsers(prev =>
+      prev.map(user =>
+        userIds.includes(user.id)
+          ? { ...user, role: role as User['role'] }
+          : user
+      )
+    );
   };
 
   const updateUserStatuses = async (userIds: string[], status: string) => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
-    setUsers(prev => prev.map(user => 
-      userIds.includes(user.id) ? { ...user, status: status as User['status'] } : user
-    ));
+    setUsers(prev =>
+      prev.map(user =>
+        userIds.includes(user.id)
+          ? { ...user, status: status as User['status'] }
+          : user
+      )
+    );
   };
 
   const deleteUsers = async (userIds: string[]) => {
@@ -223,16 +239,23 @@ const BulkUserOperations: React.FC = () => {
   };
 
   const generateCSV = (users: User[]) => {
-    const headers = ['Name', 'Email', 'Role', 'Status', 'Department', 'Created At'];
+    const headers = [
+      'Name',
+      'Email',
+      'Role',
+      'Status',
+      'Department',
+      'Created At',
+    ];
     const rows = users.map(user => [
       user.name,
       user.email,
       user.role,
       user.status,
       user.department || '',
-      new Date(user.createdAt).toLocaleDateString()
+      new Date(user.createdAt).toLocaleDateString(),
     ]);
-    
+
     return [headers, ...rows].map(row => row.join(',')).join('\n');
   };
 
@@ -256,7 +279,7 @@ const BulkUserOperations: React.FC = () => {
       setLoading(true);
       // Simulate file processing
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // Simulate adding new users
       const newUsers: User[] = [
         {
@@ -266,7 +289,7 @@ const BulkUserOperations: React.FC = () => {
           role: 'user',
           status: 'pending',
           createdAt: new Date().toISOString(),
-          permissions: ['read']
+          permissions: ['read'],
         },
         {
           id: (Date.now() + 1).toString(),
@@ -275,8 +298,8 @@ const BulkUserOperations: React.FC = () => {
           role: 'editor',
           status: 'active',
           createdAt: new Date().toISOString(),
-          permissions: ['read', 'write']
-        }
+          permissions: ['read', 'write'],
+        },
       ];
 
       setUsers(prev => [...prev, ...newUsers]);
@@ -324,23 +347,23 @@ const BulkUserOperations: React.FC = () => {
     {
       id: 'select',
       header: () => (
-        <button onClick={handleSelectAll} className="p-1">
+        <button onClick={handleSelectAll} className='p-1'>
           {selectedUsers.length === filteredUsers.length ? (
-            <CheckSquare className="w-4 h-4 text-blue-600" />
+            <CheckSquare className='w-4 h-4 text-blue-600' />
           ) : (
-            <Square className="w-4 h-4 text-gray-400" />
+            <Square className='w-4 h-4 text-gray-400' />
           )}
         </button>
       ),
       cell: ({ row }) => (
-        <button 
+        <button
           onClick={() => handleSelectUser(row.original.id)}
-          className="p-1"
+          className='p-1'
         >
           {selectedUsers.includes(row.original.id) ? (
-            <CheckSquare className="w-4 h-4 text-blue-600" />
+            <CheckSquare className='w-4 h-4 text-blue-600' />
           ) : (
-            <Square className="w-4 h-4 text-gray-400" />
+            <Square className='w-4 h-4 text-gray-400' />
           )}
         </button>
       ),
@@ -350,8 +373,10 @@ const BulkUserOperations: React.FC = () => {
       header: 'User',
       cell: ({ row }) => (
         <div>
-          <p className="text-sm font-medium text-gray-900">{row.getValue('name')}</p>
-          <p className="text-xs text-gray-500">{row.original.email}</p>
+          <p className='text-sm font-medium text-gray-900'>
+            {row.getValue('name')}
+          </p>
+          <p className='text-xs text-gray-500'>{row.original.email}</p>
         </div>
       ),
     },
@@ -359,7 +384,9 @@ const BulkUserOperations: React.FC = () => {
       accessorKey: 'role',
       header: 'Role',
       cell: ({ row }) => (
-        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(row.getValue('role') as string)}`}>
+        <span
+          className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(row.getValue('role') as string)}`}
+        >
           {(row.getValue('role') as string).replace('_', ' ')}
         </span>
       ),
@@ -368,7 +395,9 @@ const BulkUserOperations: React.FC = () => {
       accessorKey: 'status',
       header: 'Status',
       cell: ({ row }) => (
-        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(row.getValue('status') as string)}`}>
+        <span
+          className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(row.getValue('status') as string)}`}
+        >
           {row.getValue('status') as string}
         </span>
       ),
@@ -377,18 +406,19 @@ const BulkUserOperations: React.FC = () => {
       accessorKey: 'department',
       header: 'Department',
       cell: ({ row }) => (
-        <span className="text-sm text-gray-900">{row.original.department || '-'}</span>
+        <span className='text-sm text-gray-900'>
+          {row.original.department || '-'}
+        </span>
       ),
     },
     {
       accessorKey: 'lastLogin',
       header: 'Last Login',
       cell: ({ row }) => (
-        <span className="text-sm text-gray-600">
-          {row.original.lastLogin 
+        <span className='text-sm text-gray-600'>
+          {row.original.lastLogin
             ? new Date(row.original.lastLogin).toLocaleDateString()
-            : 'Never'
-          }
+            : 'Never'}
         </span>
       ),
     },
@@ -396,12 +426,12 @@ const BulkUserOperations: React.FC = () => {
       id: 'actions',
       header: 'Actions',
       cell: ({ row }) => (
-        <div className="flex space-x-1">
-          <Button variant="secondary" size="sm">
-            <Eye className="w-4 h-4" />
+        <div className='flex space-x-1'>
+          <Button variant='secondary' size='sm'>
+            <Eye className='w-4 h-4' />
           </Button>
-          <Button variant="secondary" size="sm">
-            <Edit className="w-4 h-4" />
+          <Button variant='secondary' size='sm'>
+            <Edit className='w-4 h-4' />
           </Button>
         </div>
       ),
@@ -411,62 +441,67 @@ const BulkUserOperations: React.FC = () => {
   const filteredUsers = users.filter(user => {
     if (filters.role && user.role !== filters.role) return false;
     if (filters.status && user.status !== filters.status) return false;
-    if (filters.department && user.department !== filters.department) return false;
+    if (filters.department && user.department !== filters.department)
+      return false;
     return true;
   });
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Users className="w-6 h-6 text-blue-600" />
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-blue-100 rounded-lg'>
+              <Users className='w-6 h-6 text-blue-600' />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Users</p>
-              <p className="text-2xl font-bold text-gray-900">{users.length}</p>
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>Total Users</p>
+              <p className='text-2xl font-bold text-gray-900'>{users.length}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <UserPlus className="w-6 h-6 text-green-600" />
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-green-100 rounded-lg'>
+              <UserPlus className='w-6 h-6 text-green-600' />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Active Users</p>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>Active Users</p>
+              <p className='text-2xl font-bold text-gray-900'>
                 {users.filter(u => u.status === 'active').length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-yellow-100 rounded-lg">
-              <Shield className="w-6 h-6 text-yellow-600" />
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-yellow-100 rounded-lg'>
+              <Shield className='w-6 h-6 text-yellow-600' />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Admins</p>
-              <p className="text-2xl font-bold text-gray-900">
-                {users.filter(u => u.role === 'admin' || u.role === 'super_admin').length}
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>Admins</p>
+              <p className='text-2xl font-bold text-gray-900'>
+                {
+                  users.filter(
+                    u => u.role === 'admin' || u.role === 'super_admin'
+                  ).length
+                }
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-purple-100 rounded-lg">
-              <Mail className="w-6 h-6 text-purple-600" />
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-purple-100 rounded-lg'>
+              <Mail className='w-6 h-6 text-purple-600' />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Pending</p>
-              <p className="text-2xl font-bold text-gray-900">
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>Pending</p>
+              <p className='text-2xl font-bold text-gray-900'>
                 {users.filter(u => u.status === 'pending').length}
               </p>
             </div>
@@ -475,58 +510,70 @@ const BulkUserOperations: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Filters</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className='bg-white rounded-lg shadow p-6'>
+        <h3 className='text-lg font-medium text-gray-900 mb-4'>Filters</h3>
+        <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              Role
+            </label>
             <select
               value={filters.role}
-              onChange={(e) => setFilters(prev => ({ ...prev, role: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e =>
+                setFilters(prev => ({ ...prev, role: e.target.value }))
+              }
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >
-              <option value="">All Roles</option>
-              <option value="super_admin">Super Admin</option>
-              <option value="admin">Admin</option>
-              <option value="editor">Editor</option>
-              <option value="author">Author</option>
-              <option value="user">User</option>
+              <option value=''>All Roles</option>
+              <option value='super_admin'>Super Admin</option>
+              <option value='admin'>Admin</option>
+              <option value='editor'>Editor</option>
+              <option value='author'>Author</option>
+              <option value='user'>User</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              Status
+            </label>
             <select
               value={filters.status}
-              onChange={(e) => setFilters(prev => ({ ...prev, status: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e =>
+                setFilters(prev => ({ ...prev, status: e.target.value }))
+              }
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >
-              <option value="">All Statuses</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-              <option value="pending">Pending</option>
+              <option value=''>All Statuses</option>
+              <option value='active'>Active</option>
+              <option value='inactive'>Inactive</option>
+              <option value='pending'>Pending</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              Department
+            </label>
             <select
               value={filters.department}
-              onChange={(e) => setFilters(prev => ({ ...prev, department: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e =>
+                setFilters(prev => ({ ...prev, department: e.target.value }))
+              }
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >
-              <option value="">All Departments</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Sales">Sales</option>
-              <option value="Content">Content</option>
-              <option value="Support">Support</option>
+              <option value=''>All Departments</option>
+              <option value='Engineering'>Engineering</option>
+              <option value='Marketing'>Marketing</option>
+              <option value='Sales'>Sales</option>
+              <option value='Content'>Content</option>
+              <option value='Support'>Support</option>
             </select>
           </div>
 
-          <div className="flex items-end">
-            <Button variant="secondary" onClick={loadUsers}>
-              <RefreshCw className="w-4 h-4 mr-2" />
+          <div className='flex items-end'>
+            <Button variant='secondary' onClick={loadUsers}>
+              <RefreshCw className='w-4 h-4 mr-2' />
               Refresh
             </Button>
           </div>
@@ -534,71 +581,71 @@ const BulkUserOperations: React.FC = () => {
       </div>
 
       {/* Bulk Actions */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium text-gray-900">Bulk Operations</h3>
-          <div className="text-sm text-gray-500">
+      <div className='bg-white rounded-lg shadow p-6'>
+        <div className='flex justify-between items-center mb-4'>
+          <h3 className='text-lg font-medium text-gray-900'>Bulk Operations</h3>
+          <div className='text-sm text-gray-500'>
             {selectedUsers.length} user(s) selected
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        <div className='flex flex-wrap gap-3'>
           <Button
-            variant="secondary"
+            variant='secondary'
             onClick={() => handleBulkOperation('role_update')}
             disabled={selectedUsers.length === 0}
           >
-            <Shield className="w-4 h-4 mr-2" />
+            <Shield className='w-4 h-4 mr-2' />
             Update Role
           </Button>
 
           <Button
-            variant="secondary"
+            variant='secondary'
             onClick={() => handleBulkOperation('status_update')}
             disabled={selectedUsers.length === 0}
           >
-            <UserPlus className="w-4 h-4 mr-2" />
+            <UserPlus className='w-4 h-4 mr-2' />
             Update Status
           </Button>
 
           <Button
-            variant="secondary"
+            variant='secondary'
             onClick={() => handleBulkOperation('export')}
             disabled={selectedUsers.length === 0}
           >
-            <Download className="w-4 h-4 mr-2" />
+            <Download className='w-4 h-4 mr-2' />
             Export Selected
           </Button>
 
           <Button
-            variant="secondary"
+            variant='secondary'
             onClick={() => setIsImportModalOpen(true)}
           >
-            <Upload className="w-4 h-4 mr-2" />
+            <Upload className='w-4 h-4 mr-2' />
             Import Users
           </Button>
 
           <Button
             onClick={() => handleBulkOperation('delete')}
             disabled={selectedUsers.length === 0}
-            className="bg-red-600 hover:bg-red-700"
+            className='bg-red-600 hover:bg-red-700'
           >
-            <Trash2 className="w-4 h-4 mr-2" />
+            <Trash2 className='w-4 h-4 mr-2' />
             Delete Selected
           </Button>
         </div>
       </div>
 
       {/* Users Table */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-gray-900">User Management</h2>
+      <div className='bg-white rounded-lg shadow'>
+        <div className='px-6 py-4 border-b border-gray-200'>
+          <h2 className='text-xl font-bold text-gray-900'>User Management</h2>
         </div>
         <DataTable
           columns={columns}
           data={filteredUsers}
-          searchKey="name"
-          searchPlaceholder="Search users..."
+          searchKey='name'
+          searchPlaceholder='Search users...'
           pageSize={10}
         />
       </div>
@@ -608,62 +655,87 @@ const BulkUserOperations: React.FC = () => {
         isOpen={isBulkModalOpen}
         onClose={() => setIsBulkModalOpen(false)}
         title={`Bulk ${bulkOperation?.type.replace('_', ' ')}`}
-        size="md"
+        size='md'
       >
         {bulkOperation && (
-          <div className="space-y-4">
-            <p className="text-gray-600">
-              You are about to perform a bulk operation on {bulkOperation.selectedUsers.length} user(s).
+          <div className='space-y-4'>
+            <p className='text-gray-600'>
+              You are about to perform a bulk operation on{' '}
+              {bulkOperation.selectedUsers.length} user(s).
             </p>
 
             {bulkOperation.type === 'role_update' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">New Role</label>
+                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  New Role
+                </label>
                 <select
-                  onChange={(e) => setBulkOperation(prev => prev ? { ...prev, data: { role: e.target.value } } : null)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={e =>
+                    setBulkOperation(prev =>
+                      prev ? { ...prev, data: { role: e.target.value } } : null
+                    )
+                  }
+                  className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                 >
-                  <option value="">Select Role</option>
-                  <option value="admin">Admin</option>
-                  <option value="editor">Editor</option>
-                  <option value="author">Author</option>
-                  <option value="user">User</option>
+                  <option value=''>Select Role</option>
+                  <option value='admin'>Admin</option>
+                  <option value='editor'>Editor</option>
+                  <option value='author'>Author</option>
+                  <option value='user'>User</option>
                 </select>
               </div>
             )}
 
             {bulkOperation.type === 'status_update' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">New Status</label>
+                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  New Status
+                </label>
                 <select
-                  onChange={(e) => setBulkOperation(prev => prev ? { ...prev, data: { status: e.target.value } } : null)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={e =>
+                    setBulkOperation(prev =>
+                      prev
+                        ? { ...prev, data: { status: e.target.value } }
+                        : null
+                    )
+                  }
+                  className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                 >
-                  <option value="">Select Status</option>
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                  <option value="pending">Pending</option>
+                  <option value=''>Select Status</option>
+                  <option value='active'>Active</option>
+                  <option value='inactive'>Inactive</option>
+                  <option value='pending'>Pending</option>
                 </select>
               </div>
             )}
 
             {bulkOperation.type === 'delete' && (
-              <div className="bg-red-50 border border-red-200 rounded-md p-4">
-                <p className="text-red-800 font-medium">Warning: This action cannot be undone!</p>
-                <p className="text-red-600 text-sm mt-1">
-                  All selected users will be permanently deleted from the system.
+              <div className='bg-red-50 border border-red-200 rounded-md p-4'>
+                <p className='text-red-800 font-medium'>
+                  Warning: This action cannot be undone!
+                </p>
+                <p className='text-red-600 text-sm mt-1'>
+                  All selected users will be permanently deleted from the
+                  system.
                 </p>
               </div>
             )}
 
-            <div className="flex justify-end space-x-3">
-              <Button variant="secondary" onClick={() => setIsBulkModalOpen(false)}>
+            <div className='flex justify-end space-x-3'>
+              <Button
+                variant='secondary'
+                onClick={() => setIsBulkModalOpen(false)}
+              >
                 Cancel
               </Button>
-              <Button 
+              <Button
                 onClick={executeBulkOperation}
                 disabled={!bulkOperation.data || loading}
-                className={bulkOperation.type === 'delete' ? 'bg-red-600 hover:bg-red-700' : ''}
+                className={
+                  bulkOperation.type === 'delete'
+                    ? 'bg-red-600 hover:bg-red-700'
+                    : ''
+                }
               >
                 {loading ? 'Processing...' : 'Confirm'}
               </Button>
@@ -676,34 +748,43 @@ const BulkUserOperations: React.FC = () => {
       <Modal
         isOpen={isImportModalOpen}
         onClose={() => setIsImportModalOpen(false)}
-        title="Import Users"
-        size="lg"
+        title='Import Users'
+        size='lg'
       >
-        <div className="space-y-4">
-          <p className="text-gray-600">
-            Upload a CSV file with user data. The file should contain columns: Name, Email, Role, Department.
+        <div className='space-y-4'>
+          <p className='text-gray-600'>
+            Upload a CSV file with user data. The file should contain columns:
+            Name, Email, Role, Department.
           </p>
 
           <FileUpload
-            onFilesSelected={(files) => setImportFile(files[0])}
+            onFilesSelected={files => setImportFile(files[0])}
             maxFiles={1}
             accept={{
               'text/csv': ['.csv'],
               'application/vnd.ms-excel': ['.xls'],
-              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx']
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                ['.xlsx'],
             }}
           />
 
           {importFile && (
-            <div className="bg-gray-50 p-4 rounded-md">
-              <p className="text-sm font-medium text-gray-900">Selected File:</p>
-              <p className="text-sm text-gray-600">{importFile.name}</p>
-              <p className="text-xs text-gray-500">{(importFile.size / 1024).toFixed(2)} KB</p>
+            <div className='bg-gray-50 p-4 rounded-md'>
+              <p className='text-sm font-medium text-gray-900'>
+                Selected File:
+              </p>
+              <p className='text-sm text-gray-600'>{importFile.name}</p>
+              <p className='text-xs text-gray-500'>
+                {(importFile.size / 1024).toFixed(2)} KB
+              </p>
             </div>
           )}
 
-          <div className="flex justify-end space-x-3">
-            <Button variant="secondary" onClick={() => setIsImportModalOpen(false)}>
+          <div className='flex justify-end space-x-3'>
+            <Button
+              variant='secondary'
+              onClick={() => setIsImportModalOpen(false)}
+            >
               Cancel
             </Button>
             <Button onClick={handleImport} disabled={!importFile || loading}>
@@ -716,4 +797,4 @@ const BulkUserOperations: React.FC = () => {
   );
 };
 
-export default BulkUserOperations; 
+export default BulkUserOperations;

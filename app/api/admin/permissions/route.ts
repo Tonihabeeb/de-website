@@ -33,8 +33,8 @@ export async function GET(request: NextRequest) {
         role_id: permission.role_id,
         resource: permission.resource,
         action: permission.action,
-        created_at: permission.created_at
-      }))
+        created_at: permission.created_at,
+      })),
     });
   } catch (error) {
     console.error('Error fetching permissions:', error);
@@ -64,8 +64,22 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate resource and action
-    const validResources = ['pages', 'projects', 'users', 'media', 'settings', 'navigation'];
-    const validActions = ['create', 'read', 'update', 'delete', 'publish', 'manage'];
+    const validResources = [
+      'pages',
+      'projects',
+      'users',
+      'media',
+      'settings',
+      'navigation',
+    ];
+    const validActions = [
+      'create',
+      'read',
+      'update',
+      'delete',
+      'publish',
+      'manage',
+    ];
 
     if (!validResources.includes(resource)) {
       return NextResponse.json(
@@ -84,7 +98,7 @@ export async function POST(request: NextRequest) {
     // Check if role exists
     const roleStmt = db.prepare('SELECT id FROM roles WHERE id = ?');
     const role = roleStmt.get(role_id);
-    
+
     if (!role) {
       return NextResponse.json(
         { success: false, error: 'Role not found' },
@@ -93,12 +107,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if permission already exists
-    const existingStmt = db.prepare('SELECT id FROM permissions WHERE role_id = ? AND resource = ? AND action = ?');
+    const existingStmt = db.prepare(
+      'SELECT id FROM permissions WHERE role_id = ? AND resource = ? AND action = ?'
+    );
     const existing = existingStmt.get(role_id, resource, action);
-    
+
     if (existing) {
       return NextResponse.json(
-        { success: false, error: 'Permission already exists for this role, resource, and action' },
+        {
+          success: false,
+          error:
+            'Permission already exists for this role, resource, and action',
+        },
         { status: 409 }
       );
     }
@@ -117,14 +137,17 @@ export async function POST(request: NextRequest) {
       role_id,
       resource,
       action,
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
     };
 
-    return NextResponse.json({
-      success: true,
-      permission: newPermission,
-      message: 'Permission created successfully',
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        permission: newPermission,
+        message: 'Permission created successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error creating permission:', error);
     return NextResponse.json(
@@ -154,7 +177,7 @@ export async function DELETE(request: NextRequest) {
     // Check if permission exists
     const existingStmt = db.prepare('SELECT * FROM permissions WHERE id = ?');
     const existing = existingStmt.get(id) as any;
-    
+
     if (!existing) {
       return NextResponse.json(
         { success: false, error: 'Permission not found' },
@@ -184,4 +207,4 @@ export async function DELETE(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

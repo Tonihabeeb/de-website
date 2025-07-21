@@ -6,7 +6,9 @@ interface PerformanceOptimizerProps {
   children: React.ReactNode;
 }
 
-export default function PerformanceOptimizer({ children }: PerformanceOptimizerProps) {
+export default function PerformanceOptimizer({
+  children,
+}: PerformanceOptimizerProps) {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isLowPerformance, setIsLowPerformance] = useState(false);
 
@@ -25,17 +27,20 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
     const detectPerformance = () => {
       // Check for low-end devices
       const connection = (navigator as any).connection;
-      const isSlowConnection = connection && (
-        connection.effectiveType === 'slow-2g' ||
-        connection.effectiveType === '2g' ||
-        connection.effectiveType === '3g'
-      );
+      const isSlowConnection =
+        connection &&
+        (connection.effectiveType === 'slow-2g' ||
+          connection.effectiveType === '2g' ||
+          connection.effectiveType === '3g');
 
       // Check for low memory devices
-      const isLowMemory = (navigator as any).deviceMemory && (navigator as any).deviceMemory < 4;
+      const isLowMemory =
+        (navigator as any).deviceMemory && (navigator as any).deviceMemory < 4;
 
       // Check for low-end CPUs
-      const isLowCPU = (navigator as any).hardwareConcurrency && (navigator as any).hardwareConcurrency < 4;
+      const isLowCPU =
+        (navigator as any).hardwareConcurrency &&
+        (navigator as any).hardwareConcurrency < 4;
 
       setIsLowPerformance(isSlowConnection || isLowMemory || isLowCPU);
     };
@@ -56,7 +61,7 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
   useEffect(() => {
     if (typeof window !== 'undefined' && 'performance' in window) {
       // Monitor Core Web Vitals
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           if (entry.entryType === 'largest-contentful-paint') {
             if (process.env.NODE_ENV === 'development') {
@@ -66,21 +71,28 @@ export default function PerformanceOptimizer({ children }: PerformanceOptimizerP
           if (entry.entryType === 'first-input') {
             const firstInputEntry = entry as PerformanceEventTiming;
             if (process.env.NODE_ENV === 'development') {
-              console.log('FID:', firstInputEntry.processingStart - firstInputEntry.startTime);
+              console.log(
+                'FID:',
+                firstInputEntry.processingStart - firstInputEntry.startTime
+              );
             }
           }
         }
       });
 
-      observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input'] });
+      observer.observe({
+        entryTypes: ['largest-contentful-paint', 'first-input'],
+      });
 
       return () => observer.disconnect();
     }
   }, []);
 
   return (
-    <div className={`performance-optimizer ${prefersReducedMotion ? 'reduced-motion' : ''} ${isLowPerformance ? 'low-performance' : ''}`}>
+    <div
+      className={`performance-optimizer ${prefersReducedMotion ? 'reduced-motion' : ''} ${isLowPerformance ? 'low-performance' : ''}`}
+    >
       {children}
     </div>
   );
-} 
+}

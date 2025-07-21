@@ -30,11 +30,13 @@ export async function POST(
     }
 
     const backupsDir = path.join(process.cwd(), 'backups');
-    
+
     // Find backup file by ID
     const backupFiles = fs.readdirSync(backupsDir);
-    const backupFile = backupFiles.find(file => file.replace(/\.[^/.]+$/, '') === id);
-    
+    const backupFile = backupFiles.find(
+      file => file.replace(/\.[^/.]+$/, '') === id
+    );
+
     if (!backupFile) {
       return NextResponse.json(
         { success: false, error: 'Backup not found' },
@@ -44,7 +46,7 @@ export async function POST(
 
     const backupPath = path.join(backupsDir, backupFile);
     const dbPath = path.join(process.cwd(), 'database', 'cms.db');
-    
+
     // Check if backup file exists
     if (!fs.existsSync(backupPath)) {
       return NextResponse.json(
@@ -54,10 +56,19 @@ export async function POST(
     }
 
     // Create a backup of current database before restore
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0] + '-' + 
-                     new Date().toISOString().replace(/[:.]/g, '-').split('T')[1].split('.')[0];
-    const preRestoreBackupPath = path.join(backupsDir, `pre-restore-backup-${timestamp}.db`);
-    
+    const timestamp =
+      new Date().toISOString().replace(/[:.]/g, '-').split('T')[0] +
+      '-' +
+      new Date()
+        .toISOString()
+        .replace(/[:.]/g, '-')
+        .split('T')[1]
+        .split('.')[0];
+    const preRestoreBackupPath = path.join(
+      backupsDir,
+      `pre-restore-backup-${timestamp}.db`
+    );
+
     if (fs.existsSync(dbPath)) {
       await copyFile(dbPath, preRestoreBackupPath);
     }
@@ -76,8 +87,8 @@ export async function POST(
         filename: backupFile,
         size: backupStats.size,
         restoredAt: new Date().toISOString(),
-        preRestoreBackup: `pre-restore-backup-${timestamp}.db`
-      }
+        preRestoreBackup: `pre-restore-backup-${timestamp}.db`,
+      },
     });
   } catch (error) {
     console.error('Error restoring backup:', error);
@@ -86,4 +97,4 @@ export async function POST(
       { status: 500 }
     );
   }
-} 
+}

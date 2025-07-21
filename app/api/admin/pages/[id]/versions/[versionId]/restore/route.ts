@@ -10,7 +10,7 @@ export async function POST(
 ) {
   try {
     const { id, versionId } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditPages()(request);
     if (permissionCheck) return permissionCheck;
@@ -49,7 +49,7 @@ export async function POST(
       meta_title: versionContent.meta_title,
       meta_description: versionContent.meta_description,
       meta_keywords: versionContent.meta_keywords,
-      status: versionContent.status
+      status: versionContent.status,
     });
 
     if (!updatedPage) {
@@ -66,7 +66,7 @@ export async function POST(
         id: version.id,
         version_number: version.version_number,
         content: versionContent,
-        created_at: version.created_at
+        created_at: version.created_at,
       },
       message: `Page restored to version ${version.version_number} successfully`,
     });
@@ -77,4 +77,4 @@ export async function POST(
       { status: 500 }
     );
   }
-} 
+}

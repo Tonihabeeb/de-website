@@ -8,7 +8,8 @@ export async function GET(request: NextRequest) {
         id: 'project-001',
         name: 'KPP Power Plant - Phase 1',
         slug: 'kpp-power-plant-phase-1',
-        description: 'First phase of the Kinetic Power Plant implementation with 50MW capacity',
+        description:
+          'First phase of the Kinetic Power Plant implementation with 50MW capacity',
         status: 'in-progress',
         capacity_mw: 50,
         location: 'Erbil, Iraq',
@@ -18,13 +19,14 @@ export async function GET(request: NextRequest) {
         budget_currency: 'USD',
         created_by: 'admin-001',
         created_at: '2024-01-01T00:00:00.000Z',
-        updated_at: '2024-07-20T00:00:00.000Z'
+        updated_at: '2024-07-20T00:00:00.000Z',
       },
       {
         id: 'project-002',
         name: 'Renewable Energy Research Center',
         slug: 'renewable-energy-research-center',
-        description: 'Advanced research facility for renewable energy technologies and KPP optimization',
+        description:
+          'Advanced research facility for renewable energy technologies and KPP optimization',
         status: 'planning',
         capacity_mw: 10,
         location: 'Baghdad, Iraq',
@@ -34,8 +36,8 @@ export async function GET(request: NextRequest) {
         budget_currency: 'USD',
         created_by: 'admin-001',
         created_at: '2024-06-01T00:00:00.000Z',
-        updated_at: '2024-07-20T00:00:00.000Z'
-      }
+        updated_at: '2024-07-20T00:00:00.000Z',
+      },
     ];
 
     return NextResponse.json({
@@ -50,4 +52,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

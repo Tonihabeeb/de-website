@@ -24,12 +24,12 @@ export async function GET(
         dateRange: '30d',
         format: 'csv',
         includeCharts: false,
-        filters: {}
+        filters: {},
       },
       status: 'completed',
       progress: 100,
       createdAt: new Date(Date.now() - 3600000).toISOString(),
-      completedAt: new Date(Date.now() - 3500000).toISOString()
+      completedAt: new Date(Date.now() - 3500000).toISOString(),
     };
 
     if (exportJob.status !== 'completed') {
@@ -53,25 +53,26 @@ export async function GET(
         contentType = 'text/csv';
         filename = `analytics-${exportJob.config.dataType}-${new Date().toISOString().split('T')[0]}.csv`;
         break;
-      
+
       case 'json':
         fileContent = JSON.stringify(exportData, null, 2);
         contentType = 'application/json';
         filename = `analytics-${exportJob.config.dataType}-${new Date().toISOString().split('T')[0]}.json`;
         break;
-      
+
       case 'excel':
         fileContent = generateExcel(exportData);
-        contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        contentType =
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         filename = `analytics-${exportJob.config.dataType}-${new Date().toISOString().split('T')[0]}.xlsx`;
         break;
-      
+
       case 'pdf':
         fileContent = generatePDF(exportData);
         contentType = 'application/pdf';
         filename = `analytics-${exportJob.config.dataType}-${new Date().toISOString().split('T')[0]}.pdf`;
         break;
-      
+
       default:
         return NextResponse.json(
           { success: false, error: 'Unsupported format' },
@@ -82,7 +83,10 @@ export async function GET(
     // Create response with file
     const response = new NextResponse(fileContent);
     response.headers.set('Content-Type', contentType);
-    response.headers.set('Content-Disposition', `attachment; filename="${filename}"`);
+    response.headers.set(
+      'Content-Disposition',
+      `attachment; filename="${filename}"`
+    );
     response.headers.set('Cache-Control', 'no-cache');
 
     return response;
@@ -103,7 +107,7 @@ async function generateExportData(config: any) {
   const now = new Date();
   let startDateObj = new Date();
   let endDateObj = new Date();
-  
+
   switch (dateRange) {
     case '7d':
       startDateObj.setDate(now.getDate() - 7);
@@ -127,19 +131,19 @@ async function generateExportData(config: any) {
   switch (dataType) {
     case 'overview':
       return generateOverviewData(startDateObj, endDateObj);
-    
+
     case 'users':
       return generateUserData(startDateObj, endDateObj, filters);
-    
+
     case 'content':
       return generateContentData(startDateObj, endDateObj, filters);
-    
+
     case 'projects':
       return generateProjectData(startDateObj, endDateObj, filters);
-    
+
     case 'system':
       return generateSystemData(startDateObj, endDateObj);
-    
+
     default:
       return generateOverviewData(startDateObj, endDateObj);
   }
@@ -167,29 +171,31 @@ async function generateOverviewData(startDate: Date, endDate: Date) {
     exportType: 'overview',
     dateRange: {
       start: startDate.toISOString(),
-      end: endDate.toISOString()
+      end: endDate.toISOString(),
     },
     generatedAt: new Date().toISOString(),
     summary: {
       totalPages: totalPages.count,
       totalProjects: totalProjects.count,
       totalUsers: totalUsers.count,
-      newUsers: newUsers.count
+      newUsers: newUsers.count,
     },
     dailyStats: [
       {
         date: startDate.toISOString().split('T')[0],
         newUsers: Math.floor(Math.random() * 10),
         activeUsers: Math.floor(Math.random() * 50) + 20,
-        pageViews: Math.floor(Math.random() * 1000) + 500
+        pageViews: Math.floor(Math.random() * 1000) + 500,
       },
       {
-        date: new Date(startDate.getTime() + 86400000).toISOString().split('T')[0],
+        date: new Date(startDate.getTime() + 86400000)
+          .toISOString()
+          .split('T')[0],
         newUsers: Math.floor(Math.random() * 10),
         activeUsers: Math.floor(Math.random() * 50) + 20,
-        pageViews: Math.floor(Math.random() * 1000) + 500
-      }
-    ]
+        pageViews: Math.floor(Math.random() * 1000) + 500,
+      },
+    ],
   };
 }
 
@@ -207,7 +213,7 @@ async function generateUserData(startDate: Date, endDate: Date, filters: any) {
     exportType: 'users',
     dateRange: {
       start: startDate.toISOString(),
-      end: endDate.toISOString()
+      end: endDate.toISOString(),
     },
     generatedAt: new Date().toISOString(),
     filters,
@@ -218,22 +224,31 @@ async function generateUserData(startDate: Date, endDate: Date, filters: any) {
       role: user.role,
       createdAt: user.created_at,
       lastLogin: user.last_login,
-      isActive: user.last_login ? new Date(user.last_login) > startDate : false
+      isActive: user.last_login ? new Date(user.last_login) > startDate : false,
     })),
     summary: {
       totalUsers: users.length,
-      activeUsers: users.filter(u => u.last_login && new Date(u.last_login) > startDate).length,
+      activeUsers: users.filter(
+        u => u.last_login && new Date(u.last_login) > startDate
+      ).length,
       newUsers: users.length,
-      roleDistribution: users.reduce((acc, user) => {
-        acc[user.role] = (acc[user.role] || 0) + 1;
-        return acc;
-      }, {} as Record<string, number>)
-    }
+      roleDistribution: users.reduce(
+        (acc, user) => {
+          acc[user.role] = (acc[user.role] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>
+      ),
+    },
   };
 }
 
 // Generate content data
-async function generateContentData(startDate: Date, endDate: Date, filters: any) {
+async function generateContentData(
+  startDate: Date,
+  endDate: Date,
+  filters: any
+) {
   const pagesStmt = db.prepare(`
     SELECT id, title, slug, status, created_at, updated_at 
     FROM pages 
@@ -254,7 +269,7 @@ async function generateContentData(startDate: Date, endDate: Date, filters: any)
     exportType: 'content',
     dateRange: {
       start: startDate.toISOString(),
-      end: endDate.toISOString()
+      end: endDate.toISOString(),
     },
     generatedAt: new Date().toISOString(),
     filters,
@@ -264,7 +279,7 @@ async function generateContentData(startDate: Date, endDate: Date, filters: any)
       slug: page.slug,
       status: page.status,
       createdAt: page.created_at,
-      updatedAt: page.updated_at
+      updatedAt: page.updated_at,
     })),
     projects: projects.map(project => ({
       id: project.id,
@@ -272,19 +287,23 @@ async function generateContentData(startDate: Date, endDate: Date, filters: any)
       slug: project.slug,
       status: project.status,
       createdAt: project.created_at,
-      updatedAt: project.updated_at
+      updatedAt: project.updated_at,
     })),
     summary: {
       totalPages: pages.length,
       totalProjects: projects.length,
       publishedPages: pages.filter(p => p.status === 'published').length,
-      activeProjects: projects.filter(p => p.status === 'in-progress').length
-    }
+      activeProjects: projects.filter(p => p.status === 'in-progress').length,
+    },
   };
 }
 
 // Generate project data
-async function generateProjectData(startDate: Date, endDate: Date, filters: any) {
+async function generateProjectData(
+  startDate: Date,
+  endDate: Date,
+  filters: any
+) {
   const projectsStmt = db.prepare(`
     SELECT id, name, slug, description, status, capacity_mw, location, 
            start_date, end_date, budget, created_at, updated_at 
@@ -298,7 +317,7 @@ async function generateProjectData(startDate: Date, endDate: Date, filters: any)
     exportType: 'projects',
     dateRange: {
       start: startDate.toISOString(),
-      end: endDate.toISOString()
+      end: endDate.toISOString(),
     },
     generatedAt: new Date().toISOString(),
     filters,
@@ -314,17 +333,20 @@ async function generateProjectData(startDate: Date, endDate: Date, filters: any)
       endDate: project.end_date,
       budget: project.budget,
       createdAt: project.created_at,
-      updatedAt: project.updated_at
+      updatedAt: project.updated_at,
     })),
     summary: {
       totalProjects: projects.length,
       totalCapacity: projects.reduce((sum, p) => sum + (p.capacity_mw || 0), 0),
       totalBudget: projects.reduce((sum, p) => sum + (p.budget || 0), 0),
-      statusDistribution: projects.reduce((acc, project) => {
-        acc[project.status] = (acc[project.status] || 0) + 1;
-        return acc;
-      }, {} as Record<string, number>)
-    }
+      statusDistribution: projects.reduce(
+        (acc, project) => {
+          acc[project.status] = (acc[project.status] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>
+      ),
+    },
   };
 }
 
@@ -334,19 +356,19 @@ async function generateSystemData(startDate: Date, endDate: Date) {
     exportType: 'system',
     dateRange: {
       start: startDate.toISOString(),
-      end: endDate.toISOString()
+      end: endDate.toISOString(),
     },
     generatedAt: new Date().toISOString(),
     systemHealth: {
       databaseStatus: 'healthy',
       storageStatus: 'healthy',
-      performanceStatus: 'healthy'
+      performanceStatus: 'healthy',
     },
     performanceMetrics: {
       averageResponseTime: 150,
       memoryUsage: 45,
       cpuUsage: 25,
-      errorRate: 0.1
+      errorRate: 0.1,
     },
     dailyMetrics: [
       {
@@ -354,16 +376,18 @@ async function generateSystemData(startDate: Date, endDate: Date) {
         responseTime: 145,
         memoryUsage: 42,
         cpuUsage: 23,
-        errorRate: 0.08
+        errorRate: 0.08,
       },
       {
-        date: new Date(startDate.getTime() + 86400000).toISOString().split('T')[0],
+        date: new Date(startDate.getTime() + 86400000)
+          .toISOString()
+          .split('T')[0],
         responseTime: 155,
         memoryUsage: 48,
         cpuUsage: 27,
-        errorRate: 0.12
-      }
-    ]
+        errorRate: 0.12,
+      },
+    ],
   };
 }
 
@@ -371,44 +395,51 @@ async function generateSystemData(startDate: Date, endDate: Date) {
 function generateCSV(data: any): string {
   const flattenObject = (obj: any, prefix = ''): Record<string, any> => {
     const flattened: Record<string, any> = {};
-    
+
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         const newKey = prefix ? `${prefix}.${key}` : key;
-        
-        if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+
+        if (
+          typeof obj[key] === 'object' &&
+          obj[key] !== null &&
+          !Array.isArray(obj[key])
+        ) {
           Object.assign(flattened, flattenObject(obj[key], newKey));
         } else {
           flattened[newKey] = obj[key];
         }
       }
     }
-    
+
     return flattened;
   };
 
   // Convert data to CSV format
   if (Array.isArray(data)) {
     if (data.length === 0) return '';
-    
+
     const headers = Object.keys(flattenObject(data[0]));
     const csvRows = [headers.join(',')];
-    
+
     for (const row of data) {
       const flattened = flattenObject(row);
       const values = headers.map(header => {
         const value = flattened[header];
-        return typeof value === 'string' ? `"${value.replace(/"/g, '""')}"` : value;
+        return typeof value === 'string'
+          ? `"${value.replace(/"/g, '""')}"`
+          : value;
       });
       csvRows.push(values.join(','));
     }
-    
+
     return csvRows.join('\n');
   } else {
     // Single object - convert to key-value pairs
     const flattened = flattenObject(data);
-    const rows = Object.entries(flattened).map(([key, value]) => 
-      `"${key}","${typeof value === 'string' ? value.replace(/"/g, '""') : value}"`
+    const rows = Object.entries(flattened).map(
+      ([key, value]) =>
+        `"${key}","${typeof value === 'string' ? value.replace(/"/g, '""') : value}"`
     );
     return 'Key,Value\n' + rows.join('\n');
   }
@@ -424,4 +455,4 @@ function generateExcel(data: any): Buffer {
 function generatePDF(data: any): Buffer {
   const textContent = JSON.stringify(data, null, 2);
   return Buffer.from(textContent, 'utf-8');
-} 
+}

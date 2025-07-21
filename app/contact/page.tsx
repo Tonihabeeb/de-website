@@ -21,7 +21,9 @@ interface FormErrors {
 }
 
 // Formspree configuration
-const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xpzgqkqw';
+const FORMSPREE_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ||
+  'https://formspree.io/f/xpzgqkqw';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState<FormData>({
@@ -30,12 +32,14 @@ export default function ContactPage() {
     company: '',
     phone: '',
     subject: '',
-    message: ''
+    message: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
   const [submitMessage, setSubmitMessage] = useState('');
 
   const validateForm = (): boolean => {
@@ -67,39 +71,46 @@ export default function ContactPage() {
       /casino.*online/i,
       /loan.*quick/i,
       /http:\/\/.*\.ru/i,
-      /click.*here/i
+      /click.*here/i,
     ];
 
     const messageText = formData.message.toLowerCase();
-    const hasSuspiciousContent = suspiciousPatterns.some(pattern => pattern.test(messageText));
-    
+    const hasSuspiciousContent = suspiciousPatterns.some(pattern =>
+      pattern.test(messageText)
+    );
+
     if (hasSuspiciousContent) {
-      newErrors.message = 'Your message contains content that appears to be spam. Please revise and try again.';
+      newErrors.message =
+        'Your message contains content that appears to be spam. Please revise and try again.';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -117,9 +128,12 @@ export default function ContactPage() {
       formPayload.append('phone', formData.phone);
       formPayload.append('subject', formData.subject);
       formPayload.append('message', formData.message);
-      
+
       // Add additional metadata
-      formPayload.append('_subject', `Deep Engineering Contact: ${formData.subject}`);
+      formPayload.append(
+        '_subject',
+        `Deep Engineering Contact: ${formData.subject}`
+      );
       formPayload.append('_format', 'plain');
       formPayload.append('_captcha', 'false'); // Disable captcha for better UX
       formPayload.append('_template', 'table');
@@ -128,17 +142,19 @@ export default function ContactPage() {
         method: 'POST',
         body: formPayload,
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
       });
 
       if (response.ok) {
         const result = await response.json();
-        
+
         if (result.ok) {
           setSubmitStatus('success');
-          setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
-          
+          setSubmitMessage(
+            "Thank you for your message! We'll get back to you within 24 hours."
+          );
+
           // Reset form
           setFormData({
             name: '',
@@ -146,7 +162,7 @@ export default function ContactPage() {
             company: '',
             phone: '',
             subject: '',
-            message: ''
+            message: '',
           });
         } else {
           throw new Error(result.error || 'Form submission failed');
@@ -157,17 +173,25 @@ export default function ContactPage() {
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
-      
+
       if (error instanceof Error) {
         if (error.message.includes('429')) {
-          setSubmitMessage('Too many requests. Please wait a moment before trying again.');
+          setSubmitMessage(
+            'Too many requests. Please wait a moment before trying again.'
+          );
         } else if (error.message.includes('403')) {
-          setSubmitMessage('Access denied. Please check your form data and try again.');
+          setSubmitMessage(
+            'Access denied. Please check your form data and try again.'
+          );
         } else {
-          setSubmitMessage('There was an error sending your message. Please try again or contact us directly.');
+          setSubmitMessage(
+            'There was an error sending your message. Please try again or contact us directly.'
+          );
         }
       } else {
-        setSubmitMessage('An unexpected error occurred. Please try again later.');
+        setSubmitMessage(
+          'An unexpected error occurred. Please try again later.'
+        );
       }
     } finally {
       setIsSubmitting(false);
@@ -180,14 +204,14 @@ export default function ContactPage() {
       address: 'Roya Tower A 1-14, Erbil-44001, Iraq',
       phone: '+964 750 466 3879',
       phone2: '+964 751 235 3179',
-      email: 'info@deepengineering.co'
+      email: 'info@deepengineering.co',
     },
     {
       title: 'Basra Office',
       address: 'Al Muhendisen - Al Zubair Road, Basra, Iraq',
       phone: '+964 773 033 3879',
-      email: 'basra@deepengineering.co'
-    }
+      email: 'basra@deepengineering.co',
+    },
   ];
 
   useEffect(() => {
@@ -222,14 +246,14 @@ export default function ContactPage() {
           areaServed: 'IQ',
           availableLanguage: ['English', 'Arabic'],
           email: 'basra@deepengineering.co',
-        }
+        },
       ],
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Erbil, Kurdistan Region',
         addressLocality: 'Erbil',
-        addressCountry: 'IQ'
-      }
+        addressCountry: 'IQ',
+      },
     });
     document.head.appendChild(script);
     return () => {
@@ -240,180 +264,264 @@ export default function ContactPage() {
   return (
     <div>
       <HeroSection
-        title="Contact Us"
-        subtitle="Get in touch with our team to learn more about KPP technology, discuss partnership opportunities, or explore project collaboration."
+        title='Contact Us'
+        subtitle='Get in touch with our team to learn more about KPP technology, discuss partnership opportunities, or explore project collaboration.'
       />
 
       {/* Contact Form & Info */}
-      <section className="section-padding bg-white">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className='section-padding bg-white'>
+        <div className='container'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
             {/* Contact Form */}
             <FadeInWhenVisible>
               <div>
-                <h2 className="mb-6">Send us a Message</h2>
-                
+                <h2 className='mb-6'>Send us a Message</h2>
+
                 {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded" role="alert" aria-live="polite">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 mr-2" />
+                  <div
+                    className='mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded'
+                    role='alert'
+                    aria-live='polite'
+                  >
+                    <div className='flex items-center'>
+                      <CheckCircle className='w-5 h-5 mr-2' />
                       {submitMessage}
                     </div>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded" role="alert" aria-live="assertive">
-                    <div className="flex items-center">
-                      <AlertCircle className="w-5 h-5 mr-2" />
+                  <div
+                    className='mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded'
+                    role='alert'
+                    aria-live='assertive'
+                  >
+                    <div className='flex items-center'>
+                      <AlertCircle className='w-5 h-5 mr-2' />
                       {submitMessage}
                     </div>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className='space-y-6'>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     <div>
-                      <label htmlFor="name" className="block text-base font-medium text-gray-text mb-2">
+                      <label
+                        htmlFor='name'
+                        className='block text-base font-medium text-gray-text mb-2'
+                      >
                         Full Name *
                       </label>
                       <input
-                        type="text"
-                        id="name"
-                        name="name"
+                        type='text'
+                        id='name'
+                        name='name'
                         value={formData.name}
                         onChange={handleInputChange}
                         className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                           errors.name ? 'border-red-500' : 'border-gray-300'
                         } min-h-[44px]`}
-                        placeholder="Your full name"
-                        aria-describedby={errors.name ? "name-error" : undefined}
+                        placeholder='Your full name'
+                        aria-describedby={
+                          errors.name ? 'name-error' : undefined
+                        }
                         aria-invalid={!!errors.name}
                         required
                       />
                       {errors.name && (
-                        <p id="name-error" className="mt-1 text-base text-red-600" role="alert">{errors.name}</p>
+                        <p
+                          id='name-error'
+                          className='mt-1 text-base text-red-600'
+                          role='alert'
+                        >
+                          {errors.name}
+                        </p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-base font-medium text-gray-text mb-2">
+                      <label
+                        htmlFor='email'
+                        className='block text-base font-medium text-gray-text mb-2'
+                      >
                         Email Address *
                       </label>
                       <input
-                        type="email"
-                        id="email"
-                        name="email"
+                        type='email'
+                        id='email'
+                        name='email'
                         value={formData.email}
                         onChange={handleInputChange}
                         className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                           errors.email ? 'border-red-500' : 'border-gray-300'
                         } min-h-[44px]`}
-                        placeholder="your.email@example.com"
-                        aria-describedby={errors.email ? "email-error" : undefined}
+                        placeholder='your.email@example.com'
+                        aria-describedby={
+                          errors.email ? 'email-error' : undefined
+                        }
                         aria-invalid={!!errors.email}
                         required
                       />
                       {errors.email && (
-                        <p id="email-error" className="mt-1 text-base text-red-600" role="alert">{errors.email}</p>
+                        <p
+                          id='email-error'
+                          className='mt-1 text-base text-red-600'
+                          role='alert'
+                        >
+                          {errors.email}
+                        </p>
                       )}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     <div>
-                      <label htmlFor="company" className="block text-base font-medium text-gray-text mb-2">
+                      <label
+                        htmlFor='company'
+                        className='block text-base font-medium text-gray-text mb-2'
+                      >
                         Company
                       </label>
                       <input
-                        type="text"
-                        id="company"
-                        name="company"
+                        type='text'
+                        id='company'
+                        name='company'
                         value={formData.company}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
-                        placeholder="Your company name"
+                        className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]'
+                        placeholder='Your company name'
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-base font-medium text-gray-text mb-2">
+                      <label
+                        htmlFor='phone'
+                        className='block text-base font-medium text-gray-text mb-2'
+                      >
                         Phone Number
                       </label>
                       <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
+                        type='tel'
+                        id='phone'
+                        name='phone'
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]"
-                        placeholder="+964 XXX XXX XXXX"
+                        className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-[44px]'
+                        placeholder='+964 XXX XXX XXXX'
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-base font-medium text-gray-text mb-2">
+                    <label
+                      htmlFor='subject'
+                      className='block text-base font-medium text-gray-text mb-2'
+                    >
                       Subject *
                     </label>
                     <select
-                      id="subject"
-                      name="subject"
+                      id='subject'
+                      name='subject'
                       value={formData.subject}
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                         errors.subject ? 'border-red-500' : 'border-gray-300'
                       } min-h-[44px]`}
-                      aria-describedby={errors.subject ? "subject-error" : undefined}
+                      aria-describedby={
+                        errors.subject ? 'subject-error' : undefined
+                      }
                       aria-invalid={!!errors.subject}
                       required
                     >
-                      <option value="">Select a subject</option>
-                      <option value="KPP Technology Inquiry">KPP Technology Inquiry</option>
-                      <option value="Project Partnership">Project Partnership</option>
-                      <option value="Investment Opportunities">Investment Opportunities</option>
-                      <option value="Technical Support">Technical Support</option>
-                      <option value="General Inquiry">General Inquiry</option>
+                      <option value=''>Select a subject</option>
+                      <option value='KPP Technology Inquiry'>
+                        KPP Technology Inquiry
+                      </option>
+                      <option value='Project Partnership'>
+                        Project Partnership
+                      </option>
+                      <option value='Investment Opportunities'>
+                        Investment Opportunities
+                      </option>
+                      <option value='Technical Support'>
+                        Technical Support
+                      </option>
+                      <option value='General Inquiry'>General Inquiry</option>
                     </select>
                     {errors.subject && (
-                      <p id="subject-error" className="mt-1 text-base text-red-600" role="alert">{errors.subject}</p>
+                      <p
+                        id='subject-error'
+                        className='mt-1 text-base text-red-600'
+                        role='alert'
+                      >
+                        {errors.subject}
+                      </p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-base font-medium text-gray-text mb-2">
+                    <label
+                      htmlFor='message'
+                      className='block text-base font-medium text-gray-text mb-2'
+                    >
                       Message *
                     </label>
                     <textarea
-                      id="message"
-                      name="message"
+                      id='message'
+                      name='message'
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={6}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
                         errors.message ? 'border-red-500' : 'border-gray-300'
                       } min-h-[44px]`}
-                      placeholder="Tell us about your inquiry..."
-                      aria-describedby={errors.message ? "message-error" : undefined}
+                      placeholder='Tell us about your inquiry...'
+                      aria-describedby={
+                        errors.message ? 'message-error' : undefined
+                      }
                       aria-invalid={!!errors.message}
                       required
                     />
                     {errors.message && (
-                      <p id="message-error" className="mt-1 text-base text-red-600" role="alert">{errors.message}</p>
+                      <p
+                        id='message-error'
+                        className='mt-1 text-base text-red-600'
+                        role='alert'
+                      >
+                        {errors.message}
+                      </p>
                     )}
                   </div>
 
                   <button
-                    type="submit"
+                    type='submit'
                     disabled={isSubmitting}
-                    className="w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]"
-                    aria-describedby={isSubmitting ? "submitting-status" : undefined}
+                    className='w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]'
+                    aria-describedby={
+                      isSubmitting ? 'submitting-status' : undefined
+                    }
                   >
                     {isSubmitting ? (
                       <>
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg
+                          className='animate-spin -ml-1 mr-3 h-5 w-5 text-white inline'
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                        >
+                          <circle
+                            className='opacity-25'
+                            cx='12'
+                            cy='12'
+                            r='10'
+                            stroke='currentColor'
+                            strokeWidth='4'
+                          ></circle>
+                          <path
+                            className='opacity-75'
+                            fill='currentColor'
+                            d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                          ></path>
                         </svg>
                         Sending...
                       </>
@@ -422,7 +530,11 @@ export default function ContactPage() {
                     )}
                   </button>
                   {isSubmitting && (
-                    <p id="submitting-status" className="sr-only" aria-live="polite">
+                    <p
+                      id='submitting-status'
+                      className='sr-only'
+                      aria-live='polite'
+                    >
                       Form is being submitted, please wait.
                     </p>
                   )}
@@ -433,34 +545,51 @@ export default function ContactPage() {
             {/* Contact Information */}
             <FadeInWhenVisible delay={0.2}>
               <div>
-                <h2 className="mb-6">Get in Touch</h2>
-                <p className="text-lg text-gray-text mb-8 leading-relaxed">
-                  We're here to help you understand KPP technology and explore 
-                  how it can benefit your energy projects. Reach out to us through 
-                  any of the channels below.
+                <h2 className='mb-6'>Get in Touch</h2>
+                <p className='text-lg text-gray-text mb-8 leading-relaxed'>
+                  We're here to help you understand KPP technology and explore
+                  how it can benefit your energy projects. Reach out to us
+                  through any of the channels below.
                 </p>
 
-                <div className="space-y-8">
+                <div className='space-y-8'>
                   {contactInfo.map((info, index) => (
-                    <div key={index} className="bg-gray-light p-6 rounded-lg">
-                      <h3 className="text-xl font-semibold text-primary mb-4">{info.title}</h3>
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3">
-                          <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                          <span className="text-gray-text">{info.address}</span>
+                    <div key={index} className='bg-gray-light p-6 rounded-lg'>
+                      <h3 className='text-xl font-semibold text-primary mb-4'>
+                        {info.title}
+                      </h3>
+                      <div className='space-y-4'>
+                        <div className='flex items-start gap-3'>
+                          <MapPin className='w-5 h-5 text-primary mt-1 flex-shrink-0' />
+                          <span className='text-gray-text'>{info.address}</span>
                         </div>
-                        <div className="flex items-start gap-3">
-                          <Phone className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                          <div className="text-gray-text space-y-1">
-                            <a href={`tel:${info.phone.replace(/\s+/g, '')}`} className="underline block min-w-[44px] min-h-[44px]">{info.phone}</a>
+                        <div className='flex items-start gap-3'>
+                          <Phone className='w-5 h-5 text-primary mt-1 flex-shrink-0' />
+                          <div className='text-gray-text space-y-1'>
+                            <a
+                              href={`tel:${info.phone.replace(/\s+/g, '')}`}
+                              className='underline block min-w-[44px] min-h-[44px]'
+                            >
+                              {info.phone}
+                            </a>
                             {info.phone2 && (
-                              <a href={`tel:${info.phone2.replace(/\s+/g, '')}`} className="underline block min-w-[44px] min-h-[44px]">{info.phone2}</a>
+                              <a
+                                href={`tel:${info.phone2.replace(/\s+/g, '')}`}
+                                className='underline block min-w-[44px] min-h-[44px]'
+                              >
+                                {info.phone2}
+                              </a>
                             )}
                           </div>
                         </div>
-                        <div className="flex items-start gap-3">
-                          <Mail className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                          <a href={`mailto:${info.email}`} className="text-gray-text underline min-w-[44px] min-h-[44px]">{info.email}</a>
+                        <div className='flex items-start gap-3'>
+                          <Mail className='w-5 h-5 text-primary mt-1 flex-shrink-0' />
+                          <a
+                            href={`mailto:${info.email}`}
+                            className='text-gray-text underline min-w-[44px] min-h-[44px]'
+                          >
+                            {info.email}
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -468,16 +597,25 @@ export default function ContactPage() {
                 </div>
 
                 {/* Quick Links */}
-                <div className="mt-8 bg-primary text-white p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
-                  <div className="space-y-2">
-                    <Link href="/technology" className="block text-gray-200 hover:text-white transition-colors">
+                <div className='mt-8 bg-primary text-white p-6 rounded-lg'>
+                  <h3 className='text-xl font-semibold mb-4'>Quick Links</h3>
+                  <div className='space-y-2'>
+                    <Link
+                      href='/technology'
+                      className='block text-gray-200 hover:text-white transition-colors'
+                    >
                       Learn About KPP Technology
                     </Link>
-                    <Link href="/projects" className="block text-gray-200 hover:text-white transition-colors">
+                    <Link
+                      href='/projects'
+                      className='block text-gray-200 hover:text-white transition-colors'
+                    >
                       View Our Projects
                     </Link>
-                    <Link href="/team" className="block text-gray-200 hover:text-white transition-colors">
+                    <Link
+                      href='/team'
+                      className='block text-gray-200 hover:text-white transition-colors'
+                    >
                       Meet Our Team
                     </Link>
                   </div>
@@ -489,25 +627,25 @@ export default function ContactPage() {
       </section>
 
       {/* Office Locations Map */}
-      <section className="section-padding bg-gray-light">
-        <div className="container">
+      <section className='section-padding bg-gray-light'>
+        <div className='container'>
           <FadeInWhenVisible>
-            <div className="text-center mb-8">
-              <h2 className="mb-4">Our Locations</h2>
-              <p className="text-lg text-gray-text max-w-3xl mx-auto">
-                Deep Engineering operates from strategic locations across Iraq to serve
-                our clients and partners effectively.
+            <div className='text-center mb-8'>
+              <h2 className='mb-4'>Our Locations</h2>
+              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+                Deep Engineering operates from strategic locations across Iraq
+                to serve our clients and partners effectively.
               </p>
             </div>
           </FadeInWhenVisible>
 
-          <div className="bg-white rounded-lg p-4 flex flex-col items-center justify-center min-h-[220px]">
+          <div className='bg-white rounded-lg p-4 flex flex-col items-center justify-center min-h-[220px]'>
             <GoogleOfficeMap />
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=36.191856681457985,43.968337343201846"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 min-w-[44px] min-h-[44px]"
+              href='https://www.google.com/maps/dir/?api=1&destination=36.191856681457985,43.968337343201846'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='mt-4 inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 min-w-[44px] min-h-[44px]'
             >
               Get Directions
             </a>
@@ -516,4 +654,4 @@ export default function ContactPage() {
       </section>
     </div>
   );
-} 
+}

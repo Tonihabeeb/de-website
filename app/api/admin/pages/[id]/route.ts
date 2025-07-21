@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PageModel } from '@/database/models/Page';
-import { requireAuthor, requireEditPages, requireDeletePages } from '@/middleware/permissions';
+import {
+  requireAuthor,
+  requireEditPages,
+  requireDeletePages,
+} from '@/middleware/permissions';
 
 // GET /api/admin/pages/[id] - Get page by ID
 export async function GET(
@@ -9,13 +13,13 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireAuthor()(request);
     if (permissionCheck) return permissionCheck;
 
     const page = await PageModel.findById(id);
-    
+
     if (!page) {
       return NextResponse.json(
         { success: false, error: 'Page not found' },
@@ -43,13 +47,21 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditPages()(request);
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const { slug, title, content, meta_title, meta_description, meta_keywords, status } = body;
+    const {
+      slug,
+      title,
+      content,
+      meta_title,
+      meta_description,
+      meta_keywords,
+      status,
+    } = body;
 
     // Check if page exists
     const existingPage = await PageModel.findById(id);
@@ -109,7 +121,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireDeletePages()(request);
     if (permissionCheck) return permissionCheck;
@@ -124,7 +136,7 @@ export async function DELETE(
     }
 
     const deleted = await PageModel.delete(id);
-    
+
     if (!deleted) {
       return NextResponse.json(
         { success: false, error: 'Failed to delete page' },
@@ -143,4 +155,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}

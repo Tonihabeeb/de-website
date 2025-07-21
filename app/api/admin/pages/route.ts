@@ -6,12 +6,16 @@ export async function GET(request: NextRequest) {
   try {
     // Temporarily remove authentication check for development
     // TODO: Re-enable authentication once auth system is properly set up
-    
+
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
     const created_by = searchParams.get('created_by');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : undefined;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : undefined;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : undefined;
 
     const pages = await PageModel.findAll({
       status: status || undefined,
@@ -39,9 +43,16 @@ export async function POST(request: NextRequest) {
   try {
     // Temporarily remove authentication check for development
     // TODO: Re-enable authentication once auth system is properly set up
-    
+
     const body = await request.json();
-    const { slug, title, content, meta_title, meta_description, meta_keywords } = body;
+    const {
+      slug,
+      title,
+      content,
+      meta_title,
+      meta_description,
+      meta_keywords,
+    } = body;
 
     // Validate required fields
     if (!slug || !title || !content) {
@@ -70,11 +81,14 @@ export async function POST(request: NextRequest) {
       created_by: 'admin', // Default user for now
     });
 
-    return NextResponse.json({
-      success: true,
-      page,
-      message: 'Page created successfully',
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        page,
+        message: 'Page created successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error creating page:', error);
     return NextResponse.json(
@@ -82,4 +96,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

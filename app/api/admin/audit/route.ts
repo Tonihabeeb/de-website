@@ -38,8 +38,12 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status');
     const startDate = searchParams.get('start_date');
     const endDate = searchParams.get('end_date');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 50;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : 0;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : 50;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : 0;
 
     // Build query conditions
     let conditions = [];
@@ -80,7 +84,8 @@ export async function GET(request: NextRequest) {
       params.push(endDate);
     }
 
-    const whereClause = conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
+    const whereClause =
+      conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
 
     // Get total count
     const countQuery = `SELECT COUNT(*) as count FROM audit_logs ${whereClause}`;
@@ -99,7 +104,7 @@ export async function GET(request: NextRequest) {
       ORDER BY al.created_at DESC
       LIMIT ? OFFSET ?
     `;
-    
+
     const stmt = db.prepare(query);
     const logs = stmt.all(...params, limit, offset) as any[];
 
@@ -117,11 +122,13 @@ export async function GET(request: NextRequest) {
       status: log.status,
       severity: log.severity,
       created_at: new Date(log.created_at),
-      user: log.user_id ? {
-        id: log.user_id,
-        name: log.user_name,
-        email: log.user_email
-      } : undefined
+      user: log.user_id
+        ? {
+            id: log.user_id,
+            name: log.user_name,
+            email: log.user_email,
+          }
+        : undefined,
     }));
 
     return NextResponse.json({
@@ -131,8 +138,8 @@ export async function GET(request: NextRequest) {
         page: Math.floor(offset / limit) + 1,
         limit,
         total: totalResult.count,
-        totalPages: Math.ceil(totalResult.count / limit)
-      }
+        totalPages: Math.ceil(totalResult.count / limit),
+      },
     });
   } catch (error) {
     console.error('Error fetching audit logs:', error);
@@ -161,7 +168,7 @@ export async function POST(request: NextRequest) {
       ip_address,
       user_agent,
       status = 'success',
-      severity = 'info'
+      severity = 'info',
     } = body;
 
     // Validate required fields
@@ -173,11 +180,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Get IP address from request if not provided
-    const clientIP = ip_address || request.headers.get('x-forwarded-for') || 
-                    request.headers.get('x-real-ip') || 'unknown';
+    const clientIP =
+      ip_address ||
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
 
     // Get user agent from request if not provided
-    const clientUserAgent = user_agent || request.headers.get('user-agent') || 'unknown';
+    const clientUserAgent =
+      user_agent || request.headers.get('user-agent') || 'unknown';
 
     // Create audit log entry
     const auditLogId = uuidv4();
@@ -219,14 +230,17 @@ export async function POST(request: NextRequest) {
       user_agent: log.user_agent,
       status: log.status,
       severity: log.severity,
-      created_at: new Date(log.created_at)
+      created_at: new Date(log.created_at),
     };
 
-    return NextResponse.json({
-      success: true,
-      audit_log: auditLog,
-      message: 'Audit log created successfully'
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        audit_log: auditLog,
+        message: 'Audit log created successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error creating audit log:', error);
     return NextResponse.json(
@@ -244,20 +258,24 @@ export async function DELETE(request: NextRequest) {
     if (permissionCheck) return permissionCheck;
 
     const { searchParams } = new URL(request.url);
-    const days = searchParams.get('days') ? parseInt(searchParams.get('days')!) : 90;
+    const days = searchParams.get('days')
+      ? parseInt(searchParams.get('days')!)
+      : 90;
 
     // Calculate cutoff date
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - days);
 
     // Delete old audit logs
-    const deleteStmt = db.prepare('DELETE FROM audit_logs WHERE created_at < ?');
+    const deleteStmt = db.prepare(
+      'DELETE FROM audit_logs WHERE created_at < ?'
+    );
     const result = deleteStmt.run(cutoffDate.toISOString());
 
     return NextResponse.json({
       success: true,
       message: `Deleted ${result.changes} audit logs older than ${days} days`,
-      deletedCount: result.changes
+      deletedCount: result.changes,
     });
   } catch (error) {
     console.error('Error clearing audit logs:', error);
@@ -266,4 +284,4 @@ export async function DELETE(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

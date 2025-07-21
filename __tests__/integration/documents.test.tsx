@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from '@testing-library/react';
 
 // Mock the AuthContext to provide authenticated user
 jest.mock('@/contexts/AuthContext', () => ({
@@ -9,25 +15,30 @@ jest.mock('@/contexts/AuthContext', () => ({
       id: 'test-user-id',
       name: 'Test User',
       email: 'test@example.com',
-      role: 'user'
+      role: 'user',
     },
     login: jest.fn(),
     logout: jest.fn(),
     hasRole: jest.fn(() => true),
     hasAnyRole: jest.fn(() => true),
   }),
-  AuthProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>
+  AuthProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 
 // Mock the API utility BEFORE importing the components
 jest.mock('@/utils/api', () => ({
   apiFetch: jest.fn(),
   ApiException: class ApiException extends Error {
-    constructor(message: string, public status: number) {
+    constructor(
+      message: string,
+      public status: number
+    ) {
       super(message);
       this.name = 'ApiException';
     }
-  }
+  },
 }));
 
 // Import after mocking
@@ -78,10 +89,10 @@ const mockDocuments = [
     uploadedBy: {
       _id: 'user1',
       name: 'Test User',
-      email: 'test@example.com'
+      email: 'test@example.com',
     },
     createdAt: '2024-01-01T00:00:00.000Z',
-    updatedAt: '2024-01-01T00:00:00.000Z'
+    updatedAt: '2024-01-01T00:00:00.000Z',
   },
   {
     _id: '2',
@@ -89,25 +100,24 @@ const mockDocuments = [
     description: 'System specifications',
     filename: 'tech-specs.docx',
     originalName: 'Technical Specs.docx',
-    mimetype: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    mimetype:
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     size: 2048000,
     category: 'technical',
     type: 'document',
     uploadedBy: {
       _id: 'user1',
       name: 'Test User',
-      email: 'test@example.com'
+      email: 'test@example.com',
     },
     createdAt: '2024-01-02T00:00:00.000Z',
-    updatedAt: '2024-01-02T00:00:00.000Z'
-  }
+    updatedAt: '2024-01-02T00:00:00.000Z',
+  },
 ];
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <AuthProvider>
-    <ToastProvider>
-      {children}
-    </ToastProvider>
+    <ToastProvider>{children}</ToastProvider>
   </AuthProvider>
 );
 
@@ -127,10 +137,10 @@ describe('Document Management Integration Tests', () => {
     mockLocalStorage.getItem.mockClear();
     mockLocalStorage.setItem.mockClear();
     mockLocalStorage.removeItem.mockClear();
-    
+
     // Mock successful authentication
     mockLocalStorage.getItem.mockReturnValue('mock-token');
-    
+
     // Reset fetch mock to prevent real API calls
     mockFetch.mockImplementation(() => {
       throw new Error('Real fetch calls are not allowed in tests');
@@ -160,10 +170,14 @@ describe('Document Management Integration Tests', () => {
       expect(screen.getByLabelText(/description/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/category/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/type/i)).toBeInTheDocument();
-      
+
       // Check for upload area
-      expect(screen.getByText('Drop files here or click to browse')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /choose files/i })).toBeInTheDocument();
+      expect(
+        screen.getByText('Drop files here or click to browse')
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /choose files/i })
+      ).toBeInTheDocument();
     });
 
     it('should handle file selection', async () => {
@@ -173,12 +187,16 @@ describe('Document Management Integration Tests', () => {
         </TestWrapper>
       );
 
-      const chooseFilesButton = screen.getByRole('button', { name: /choose files/i });
+      const chooseFilesButton = screen.getByRole('button', {
+        name: /choose files/i,
+      });
       const file = createMockFile('test.pdf', 1024, 'application/pdf');
 
       await act(async () => {
         fireEvent.click(chooseFilesButton);
-        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        const fileInput = document.querySelector(
+          'input[type="file"]'
+        ) as HTMLInputElement;
         if (fileInput) {
           fireEvent.change(fileInput, { target: { files: [file] } });
         }
@@ -193,7 +211,7 @@ describe('Document Management Integration Tests', () => {
       // Mock successful upload response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ message: 'Document uploaded successfully' })
+        json: async () => ({ message: 'Document uploaded successfully' }),
       });
 
       render(
@@ -204,17 +222,23 @@ describe('Document Management Integration Tests', () => {
 
       const titleInput = screen.getByLabelText(/document title/i);
       const descriptionInput = screen.getByLabelText(/description/i);
-      const chooseFilesButton = screen.getByRole('button', { name: /choose files/i });
+      const chooseFilesButton = screen.getByRole('button', {
+        name: /choose files/i,
+      });
       const file = createMockFile('test.pdf', 1024, 'application/pdf');
 
       await act(async () => {
         // Fill in form fields
         fireEvent.change(titleInput, { target: { value: 'Test Document' } });
-        fireEvent.change(descriptionInput, { target: { value: 'Test description' } });
-        
+        fireEvent.change(descriptionInput, {
+          target: { value: 'Test description' },
+        });
+
         // Select file
         fireEvent.click(chooseFilesButton);
-        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        const fileInput = document.querySelector(
+          'input[type="file"]'
+        ) as HTMLInputElement;
         if (fileInput) {
           fireEvent.change(fileInput, { target: { files: [file] } });
         }
@@ -226,14 +250,19 @@ describe('Document Management Integration Tests', () => {
       });
 
       // Click the upload button
-      const uploadButton = screen.getByRole('button', { name: /upload documents/i });
-      
+      const uploadButton = screen.getByRole('button', {
+        name: /upload documents/i,
+      });
+
       await act(async () => {
         fireEvent.click(uploadButton);
       });
 
       await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledWith('http://localhost:3000/api/documents', expect.any(Object));
+        expect(mockFetch).toHaveBeenCalledWith(
+          'http://localhost:3000/api/documents',
+          expect.any(Object)
+        );
       });
     });
 
@@ -247,13 +276,17 @@ describe('Document Management Integration Tests', () => {
         </TestWrapper>
       );
 
-      const chooseFilesButton = screen.getByRole('button', { name: /choose files/i });
+      const chooseFilesButton = screen.getByRole('button', {
+        name: /choose files/i,
+      });
       const file = createMockFile('test.pdf', 1024, 'application/pdf');
 
       await act(async () => {
         // Select file
         fireEvent.click(chooseFilesButton);
-        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        const fileInput = document.querySelector(
+          'input[type="file"]'
+        ) as HTMLInputElement;
         if (fileInput) {
           fireEvent.change(fileInput, { target: { files: [file] } });
         }
@@ -265,8 +298,10 @@ describe('Document Management Integration Tests', () => {
       });
 
       // Click the upload button
-      const uploadButton = screen.getByRole('button', { name: /upload documents/i });
-      
+      const uploadButton = screen.getByRole('button', {
+        name: /upload documents/i,
+      });
+
       await act(async () => {
         fireEvent.click(uploadButton);
       });
@@ -292,7 +327,9 @@ describe('Document Management Integration Tests', () => {
 
       await waitFor(() => {
         expect(screen.getByText('Project Report')).toBeInTheDocument();
-        expect(screen.getByText('Technical Specifications')).toBeInTheDocument();
+        expect(
+          screen.getByText('Technical Specifications')
+        ).toBeInTheDocument();
       });
     });
 
@@ -313,14 +350,16 @@ describe('Document Management Integration Tests', () => {
       });
 
       const searchInput = screen.getByPlaceholderText(/search documents/i);
-      
+
       await act(async () => {
         fireEvent.change(searchInput, { target: { value: 'Project' } });
       });
 
       await waitFor(() => {
         expect(screen.getByText('Project Report')).toBeInTheDocument();
-        expect(screen.queryByText('Technical Specifications')).not.toBeInTheDocument();
+        expect(
+          screen.queryByText('Technical Specifications')
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -343,7 +382,9 @@ describe('Document Management Integration Tests', () => {
 
     it('should handle error state', async () => {
       // Mock failed documents fetch
-      mockApiFetch.mockRejectedValueOnce(new Error('Failed to fetch documents'));
+      mockApiFetch.mockRejectedValueOnce(
+        new Error('Failed to fetch documents')
+      );
 
       await act(async () => {
         render(
@@ -354,7 +395,9 @@ describe('Document Management Integration Tests', () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByText(/error loading documents/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/error loading documents/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -365,7 +408,7 @@ describe('Document Management Integration Tests', () => {
       // Mock successful download
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        blob: async () => new Blob(['test content'])
+        blob: async () => new Blob(['test content']),
       });
 
       await act(async () => {
@@ -380,15 +423,20 @@ describe('Document Management Integration Tests', () => {
         expect(screen.getByText('Project Report')).toBeInTheDocument();
       });
 
-      const downloadButton = screen.getAllByRole('button', { name: /download/i })[0];
-      
+      const downloadButton = screen.getAllByRole('button', {
+        name: /download/i,
+      })[0];
+
       await act(async () => {
         fireEvent.click(downloadButton);
       });
 
       await waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledWith('http://localhost:3000/api/documents/1/download', expect.any(Object));
+        expect(mockFetch).toHaveBeenCalledWith(
+          'http://localhost:3000/api/documents/1/download',
+          expect.any(Object)
+        );
       });
     });
   });
-}); 
+});

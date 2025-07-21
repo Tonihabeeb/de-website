@@ -9,7 +9,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requirePublishPages()(request);
     if (permissionCheck) return permissionCheck;
@@ -25,7 +25,7 @@ export async function POST(
 
     // Publish the page
     const publishedPage = await PageModel.publish(id);
-    
+
     if (!publishedPage) {
       return NextResponse.json(
         { success: false, error: 'Failed to publish page' },
@@ -45,4 +45,4 @@ export async function POST(
       { status: 500 }
     );
   }
-} 
+}

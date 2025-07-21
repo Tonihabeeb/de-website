@@ -12,7 +12,7 @@ let sampleMilestones = [
     status: 'completed',
     progress: 100,
     created_at: '2024-01-01T00:00:00.000Z',
-    updated_at: '2024-01-15T00:00:00.000Z'
+    updated_at: '2024-01-15T00:00:00.000Z',
   },
   {
     id: 'milestone-002',
@@ -24,8 +24,8 @@ let sampleMilestones = [
     status: 'in-progress',
     progress: 75,
     created_at: '2024-02-11T00:00:00.000Z',
-    updated_at: '2024-07-20T00:00:00.000Z'
-  }
+    updated_at: '2024-07-20T00:00:00.000Z',
+  },
 ];
 
 // GET /api/admin/project-progress/milestones/[id] - Get specific milestone
@@ -36,7 +36,7 @@ export async function GET(
   try {
     const { id } = await params;
     const milestone = sampleMilestones.find(m => m.id === id);
-    
+
     if (!milestone) {
       return NextResponse.json(
         { success: false, error: 'Milestone not found' },
@@ -46,7 +46,7 @@ export async function GET(
 
     return NextResponse.json({
       success: true,
-      milestone
+      milestone,
     });
   } catch (error) {
     console.error('Error fetching milestone:', error);
@@ -65,10 +65,18 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { project_id, name, description, start_date, end_date, status, progress } = body;
+    const {
+      project_id,
+      name,
+      description,
+      start_date,
+      end_date,
+      status,
+      progress,
+    } = body;
 
     const milestoneIndex = sampleMilestones.findIndex(m => m.id === id);
-    
+
     if (milestoneIndex === -1) {
       return NextResponse.json(
         { success: false, error: 'Milestone not found' },
@@ -85,14 +93,17 @@ export async function PUT(
       start_date: start_date || sampleMilestones[milestoneIndex].start_date,
       end_date: end_date || sampleMilestones[milestoneIndex].end_date,
       status: status || sampleMilestones[milestoneIndex].status,
-      progress: progress !== undefined ? progress : sampleMilestones[milestoneIndex].progress,
-      updated_at: new Date().toISOString()
+      progress:
+        progress !== undefined
+          ? progress
+          : sampleMilestones[milestoneIndex].progress,
+      updated_at: new Date().toISOString(),
     };
 
     return NextResponse.json({
       success: true,
       milestone: sampleMilestones[milestoneIndex],
-      message: 'Milestone updated successfully'
+      message: 'Milestone updated successfully',
     });
   } catch (error) {
     console.error('Error updating milestone:', error);
@@ -111,7 +122,7 @@ export async function DELETE(
   try {
     const { id } = await params;
     const milestoneIndex = sampleMilestones.findIndex(m => m.id === id);
-    
+
     if (milestoneIndex === -1) {
       return NextResponse.json(
         { success: false, error: 'Milestone not found' },
@@ -125,7 +136,7 @@ export async function DELETE(
     return NextResponse.json({
       success: true,
       message: 'Milestone deleted successfully',
-      deletedMilestone
+      deletedMilestone,
     });
   } catch (error) {
     console.error('Error deleting milestone:', error);
@@ -134,4 +145,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}

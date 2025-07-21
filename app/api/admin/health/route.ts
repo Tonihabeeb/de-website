@@ -52,41 +52,42 @@ export async function GET(request: NextRequest) {
 
     // Get database metrics
     const dbMetrics = await getDatabaseMetrics();
-    
+
     // Get storage metrics
     const storageMetrics = await getStorageMetrics();
-    
+
     // Get performance metrics
     const performanceMetrics = await getPerformanceMetrics();
-    
+
     // Get service status
     const serviceStatus = await getServiceStatus();
-    
+
     // Get system alerts
     const alerts = await getSystemAlerts();
-    
+
     // Calculate overall health status
-    const overallStatus = calculateOverallHealth(dbMetrics, storageMetrics, performanceMetrics, serviceStatus);
-    
+    const overallStatus = calculateOverallHealth(
+      dbMetrics,
+      storageMetrics,
+      performanceMetrics,
+      serviceStatus
+    );
+
     // Calculate uptime (mock for now - in production, track actual uptime)
     const uptime = 99.8; // Mock uptime percentage
-    
+
     const systemHealth: SystemHealth = {
       overall: overallStatus,
       uptime,
       lastCheck: new Date(),
-      metrics: [
-        ...dbMetrics,
-        ...storageMetrics,
-        ...performanceMetrics
-      ],
+      metrics: [...dbMetrics, ...storageMetrics, ...performanceMetrics],
       alerts,
-      services: serviceStatus
+      services: serviceStatus,
     };
 
     return NextResponse.json({
       success: true,
-      health: systemHealth
+      health: systemHealth,
     });
   } catch (error) {
     console.error('Error fetching system health:', error);
@@ -104,21 +105,25 @@ async function getDatabaseMetrics(): Promise<SystemMetric[]> {
     const dbPath = path.join(process.cwd(), 'database', 'cms.db');
     const dbStats = await stat(dbPath);
     const dbSizeMB = dbStats.size / (1024 * 1024);
-    
+
     // Get table counts
-    const tablesStmt = db.prepare("SELECT name FROM sqlite_master WHERE type='table'");
+    const tablesStmt = db.prepare(
+      "SELECT name FROM sqlite_master WHERE type='table'"
+    );
     const tables = tablesStmt.all() as any[];
-    
+
     // Get total records
     const totalRecords = tables.reduce((total, table) => {
-      const countStmt = db.prepare(`SELECT COUNT(*) as count FROM ${table.name}`);
+      const countStmt = db.prepare(
+        `SELECT COUNT(*) as count FROM ${table.name}`
+      );
       const result = countStmt.get() as any;
       return total + result.count;
     }, 0);
-    
+
     // Get active connections (mock for SQLite)
     const activeConnections = 1; // SQLite typically has one connection
-    
+
     return [
       {
         id: 'database-size',
@@ -128,7 +133,7 @@ async function getDatabaseMetrics(): Promise<SystemMetric[]> {
         status: dbSizeMB > 100 ? 'warning' : 'healthy',
         trend: 'stable',
         lastUpdated: new Date(),
-        threshold: { warning: 100, critical: 500 }
+        threshold: { warning: 100, critical: 500 },
       },
       {
         id: 'database-tables',
@@ -138,7 +143,7 @@ async function getDatabaseMetrics(): Promise<SystemMetric[]> {
         status: 'healthy',
         trend: 'stable',
         lastUpdated: new Date(),
-        threshold: { warning: 50, critical: 100 }
+        threshold: { warning: 50, critical: 100 },
       },
       {
         id: 'database-records',
@@ -148,7 +153,7 @@ async function getDatabaseMetrics(): Promise<SystemMetric[]> {
         status: 'healthy',
         trend: 'up',
         lastUpdated: new Date(),
-        threshold: { warning: 10000, critical: 50000 }
+        threshold: { warning: 10000, critical: 50000 },
       },
       {
         id: 'database-connections',
@@ -158,8 +163,8 @@ async function getDatabaseMetrics(): Promise<SystemMetric[]> {
         status: 'healthy',
         trend: 'stable',
         lastUpdated: new Date(),
-        threshold: { warning: 20, critical: 30 }
-      }
+        threshold: { warning: 20, critical: 30 },
+      },
     ];
   } catch (error) {
     console.error('Error getting database metrics:', error);
@@ -173,21 +178,21 @@ async function getStorageMetrics(): Promise<SystemMetric[]> {
     // Get uploads directory size
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
     let uploadsSize = 0;
-    
+
     if (fs.existsSync(uploadsDir)) {
       uploadsSize = await getDirectorySize(uploadsDir);
     }
-    
+
     // Get backups directory size
     const backupsDir = path.join(process.cwd(), 'backups');
     let backupsSize = 0;
-    
+
     if (fs.existsSync(backupsDir)) {
       backupsSize = await getDirectorySize(backupsDir);
     }
-    
+
     const totalStorageMB = (uploadsSize + backupsSize) / (1024 * 1024);
-    
+
     return [
       {
         id: 'storage-usage',
@@ -197,28 +202,28 @@ async function getStorageMetrics(): Promise<SystemMetric[]> {
         status: totalStorageMB > 1000 ? 'warning' : 'healthy',
         trend: 'up',
         lastUpdated: new Date(),
-        threshold: { warning: 1000, critical: 5000 }
+        threshold: { warning: 1000, critical: 5000 },
       },
       {
         id: 'uploads-size',
         name: 'Uploads Size',
-        value: Math.round(uploadsSize / (1024 * 1024) * 100) / 100,
+        value: Math.round((uploadsSize / (1024 * 1024)) * 100) / 100,
         unit: 'MB',
         status: 'healthy',
         trend: 'up',
         lastUpdated: new Date(),
-        threshold: { warning: 500, critical: 2000 }
+        threshold: { warning: 500, critical: 2000 },
       },
       {
         id: 'backups-size',
         name: 'Backups Size',
-        value: Math.round(backupsSize / (1024 * 1024) * 100) / 100,
+        value: Math.round((backupsSize / (1024 * 1024)) * 100) / 100,
         unit: 'MB',
         status: 'healthy',
         trend: 'up',
         lastUpdated: new Date(),
-        threshold: { warning: 500, critical: 2000 }
-      }
+        threshold: { warning: 500, critical: 2000 },
+      },
     ];
   } catch (error) {
     console.error('Error getting storage metrics:', error);
@@ -233,7 +238,7 @@ async function getPerformanceMetrics(): Promise<SystemMetric[]> {
     const responseTime = Math.floor(Math.random() * 200) + 100; // 100-300ms
     const memoryUsage = Math.floor(Math.random() * 30) + 40; // 40-70%
     const cpuUsage = Math.floor(Math.random() * 20) + 20; // 20-40%
-    
+
     return [
       {
         id: 'response-time',
@@ -243,7 +248,7 @@ async function getPerformanceMetrics(): Promise<SystemMetric[]> {
         status: responseTime > 500 ? 'warning' : 'healthy',
         trend: responseTime > 400 ? 'up' : 'down',
         lastUpdated: new Date(),
-        threshold: { warning: 500, critical: 1000 }
+        threshold: { warning: 500, critical: 1000 },
       },
       {
         id: 'memory-usage',
@@ -253,7 +258,7 @@ async function getPerformanceMetrics(): Promise<SystemMetric[]> {
         status: memoryUsage > 70 ? 'warning' : 'healthy',
         trend: memoryUsage > 60 ? 'up' : 'down',
         lastUpdated: new Date(),
-        threshold: { warning: 70, critical: 90 }
+        threshold: { warning: 70, critical: 90 },
       },
       {
         id: 'cpu-usage',
@@ -263,8 +268,8 @@ async function getPerformanceMetrics(): Promise<SystemMetric[]> {
         status: cpuUsage > 80 ? 'warning' : 'healthy',
         trend: cpuUsage > 60 ? 'up' : 'down',
         lastUpdated: new Date(),
-        threshold: { warning: 80, critical: 95 }
-      }
+        threshold: { warning: 80, critical: 95 },
+      },
     ];
   } catch (error) {
     console.error('Error getting performance metrics:', error);
@@ -280,28 +285,28 @@ async function getServiceStatus(): Promise<SystemHealth['services']> {
       {
         name: 'Web Server',
         status: 'running',
-        responseTime: Math.floor(Math.random() * 50) + 20
+        responseTime: Math.floor(Math.random() * 50) + 20,
       },
       {
         name: 'Database',
         status: 'running',
-        responseTime: Math.floor(Math.random() * 100) + 50
+        responseTime: Math.floor(Math.random() * 100) + 50,
       },
       {
         name: 'File Storage',
         status: 'running',
-        responseTime: Math.floor(Math.random() * 80) + 30
+        responseTime: Math.floor(Math.random() * 80) + 30,
       },
       {
         name: 'Email Service',
         status: 'running',
-        responseTime: Math.floor(Math.random() * 200) + 100
+        responseTime: Math.floor(Math.random() * 200) + 100,
       },
       {
         name: 'Backup Service',
         status: 'running',
-        responseTime: Math.floor(Math.random() * 150) + 50
-      }
+        responseTime: Math.floor(Math.random() * 150) + 50,
+      },
     ];
   } catch (error) {
     console.error('Error getting service status:', error);
@@ -314,12 +319,12 @@ async function getSystemAlerts(): Promise<SystemAlert[]> {
   try {
     // Mock system alerts (in production, these would be real alerts)
     const alerts: SystemAlert[] = [];
-    
+
     // Check for potential issues
     const dbPath = path.join(process.cwd(), 'database', 'cms.db');
     const dbStats = await stat(dbPath);
     const dbSizeMB = dbStats.size / (1024 * 1024);
-    
+
     if (dbSizeMB > 50) {
       alerts.push({
         id: 'db-size-warning',
@@ -327,10 +332,10 @@ async function getSystemAlerts(): Promise<SystemAlert[]> {
         title: 'Database Size Warning',
         message: `Database size is ${Math.round(dbSizeMB)}MB. Consider optimization.`,
         timestamp: new Date(),
-        resolved: false
+        resolved: false,
       });
     }
-    
+
     // Add some mock alerts for demonstration
     if (Math.random() > 0.7) {
       alerts.push({
@@ -339,10 +344,10 @@ async function getSystemAlerts(): Promise<SystemAlert[]> {
         title: 'High Memory Usage',
         message: 'Memory usage has exceeded 60% threshold.',
         timestamp: new Date(Date.now() - 300000), // 5 minutes ago
-        resolved: false
+        resolved: false,
       });
     }
-    
+
     return alerts;
   } catch (error) {
     console.error('Error getting system alerts:', error);
@@ -362,7 +367,7 @@ function calculateOverallHealth(
   const warningCount = allMetrics.filter(m => m.status === 'warning').length;
   const stoppedServices = services.filter(s => s.status === 'stopped').length;
   const errorServices = services.filter(s => s.status === 'error').length;
-  
+
   if (criticalCount > 0 || errorServices > 0) {
     return 'critical';
   } else if (warningCount > 0 || stoppedServices > 0) {
@@ -377,21 +382,21 @@ async function getDirectorySize(dirPath: string): Promise<number> {
   try {
     const files = fs.readdirSync(dirPath);
     let totalSize = 0;
-    
+
     for (const file of files) {
       const filePath = path.join(dirPath, file);
       const stats = fs.statSync(filePath);
-      
+
       if (stats.isFile()) {
         totalSize += stats.size;
       } else if (stats.isDirectory()) {
         totalSize += await getDirectorySize(filePath);
       }
     }
-    
+
     return totalSize;
   } catch (error) {
     console.error('Error calculating directory size:', error);
     return 0;
   }
-} 
+}

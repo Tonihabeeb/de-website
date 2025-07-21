@@ -12,23 +12,23 @@ interface AnimatedCounterProps {
   delay?: number;
 }
 
-export default function AnimatedCounter({ 
-  end, 
-  duration = 2, 
-  suffix = '', 
+export default function AnimatedCounter({
+  end,
+  duration = 2,
+  suffix = '',
   prefix = '',
   className = '',
-  delay = 0
+  delay = 0,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
   const hasAnimated = useRef(false);
 
   useEffect(() => {
     if (isInView && !hasAnimated.current) {
       hasAnimated.current = true;
-      
+
       // Delay the start of animation
       const timer = setTimeout(() => {
         let startTime: number;
@@ -36,14 +36,17 @@ export default function AnimatedCounter({
 
         const animate = (currentTime: number) => {
           if (!startTime) startTime = currentTime;
-          const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
-          
+          const progress = Math.min(
+            (currentTime - startTime) / (duration * 1000),
+            1
+          );
+
           // Easing function for smooth animation
           const easeOutQuart = 1 - Math.pow(1 - progress, 4);
           const currentCount = Math.floor(easeOutQuart * end);
-          
+
           setCount(currentCount);
-          
+
           if (progress < 1) {
             animationFrame = requestAnimationFrame(animate);
           }
@@ -64,7 +67,9 @@ export default function AnimatedCounter({
 
   return (
     <span ref={ref} className={className}>
-      {prefix}{count}{suffix}
+      {prefix}
+      {count}
+      {suffix}
     </span>
   );
-} 
+}

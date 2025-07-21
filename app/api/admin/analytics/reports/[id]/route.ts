@@ -13,7 +13,7 @@ export async function GET(
   try {
     const { id } = await params;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    
+
     if (!token) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -33,11 +33,14 @@ export async function GET(
     return NextResponse.json({
       ...report,
       filters: JSON.parse((report as any).config || '{}'),
-      recipients: JSON.parse((report as any).schedule || '{}').recipients || []
+      recipients: JSON.parse((report as any).schedule || '{}').recipients || [],
     });
   } catch (error) {
     console.error('Error fetching report:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
@@ -48,7 +51,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    
+
     if (!token) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -59,7 +62,16 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { name, description, type, schedule, format, filters, recipients, is_active } = body;
+    const {
+      name,
+      description,
+      type,
+      schedule,
+      format,
+      filters,
+      recipients,
+      is_active,
+    } = body;
 
     // Check if report exists
     const checkStmt = db.prepare('SELECT id FROM custom_reports WHERE id = ?');
@@ -71,11 +83,11 @@ export async function PUT(
 
     const config = JSON.stringify({
       ...filters,
-      format: format || 'json'
+      format: format || 'json',
     });
     const scheduleConfig = JSON.stringify({
       frequency: schedule || 'manual',
-      recipients: recipients || []
+      recipients: recipients || [],
     });
 
     const stmt = db.prepare(`
@@ -98,7 +110,10 @@ export async function PUT(
     return NextResponse.json({ message: 'Report updated successfully' });
   } catch (error) {
     console.error('Error updating report:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
@@ -109,7 +124,7 @@ export async function DELETE(
   try {
     const { id } = await params;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    
+
     if (!token) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -133,6 +148,9 @@ export async function DELETE(
     return NextResponse.json({ message: 'Report deleted successfully' });
   } catch (error) {
     console.error('Error deleting report:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
-} 
+}

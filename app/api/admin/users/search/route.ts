@@ -17,8 +17,12 @@ export async function GET(request: NextRequest) {
     const endDate = searchParams.get('end_date');
     const sortBy = searchParams.get('sort_by') || 'created_at';
     const sortOrder = searchParams.get('sort_order') || 'desc';
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 20;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : 0;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : 20;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : 0;
 
     // Build query conditions
     let conditions = [];
@@ -50,12 +54,20 @@ export async function GET(request: NextRequest) {
       params.push(endDate);
     }
 
-    const whereClause = conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
+    const whereClause =
+      conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
 
     // Validate sort parameters
-    const validSortFields = ['name', 'email', 'role', 'is_active', 'created_at', 'updated_at'];
+    const validSortFields = [
+      'name',
+      'email',
+      'role',
+      'is_active',
+      'created_at',
+      'updated_at',
+    ];
     const validSortOrders = ['asc', 'desc'];
-    
+
     if (!validSortFields.includes(sortBy)) {
       return NextResponse.json(
         { success: false, error: 'Invalid sort field' },
@@ -82,7 +94,7 @@ export async function GET(request: NextRequest) {
       ORDER BY ${sortBy} ${sortOrder.toUpperCase()}
       LIMIT ? OFFSET ?
     `;
-    
+
     const stmt = db.prepare(userQuery);
     const users = stmt.all(...params, limit, offset) as any[];
 
@@ -94,7 +106,7 @@ export async function GET(request: NextRequest) {
       role: user.role,
       is_active: Boolean(user.is_active),
       created_at: new Date(user.created_at),
-      updated_at: new Date(user.updated_at)
+      updated_at: new Date(user.updated_at),
     }));
 
     return NextResponse.json({
@@ -104,8 +116,8 @@ export async function GET(request: NextRequest) {
         page: Math.floor(offset / limit) + 1,
         limit,
         total: totalResult.count,
-        totalPages: Math.ceil(totalResult.count / limit)
-      }
+        totalPages: Math.ceil(totalResult.count / limit),
+      },
     });
   } catch (error) {
     console.error('Error searching users:', error);
@@ -114,4 +126,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

@@ -35,8 +35,12 @@ export async function GET(request: NextRequest) {
     const pageUrl = searchParams.get('page_url');
     const startDate = searchParams.get('start_date');
     const endDate = searchParams.get('end_date');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 100;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : 0;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : 100;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : 0;
 
     // Build query conditions
     let conditions = [];
@@ -72,7 +76,8 @@ export async function GET(request: NextRequest) {
       params.push(endDate);
     }
 
-    const whereClause = conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
+    const whereClause =
+      conditions.length > 0 ? 'WHERE ' + conditions.join(' AND ') : '';
 
     // Get total count
     const countQuery = `SELECT COUNT(*) as count FROM analytics_events ${whereClause}`;
@@ -91,7 +96,7 @@ export async function GET(request: NextRequest) {
       ORDER BY ae.created_at DESC
       LIMIT ? OFFSET ?
     `;
-    
+
     const stmt = db.prepare(query);
     const events = stmt.all(...params, limit, offset) as any[];
 
@@ -107,11 +112,13 @@ export async function GET(request: NextRequest) {
       ip_address: event.ip_address,
       event_data: event.event_data ? JSON.parse(event.event_data) : undefined,
       created_at: new Date(event.created_at),
-      user: event.user_id ? {
-        id: event.user_id,
-        name: event.user_name,
-        email: event.user_email
-      } : undefined
+      user: event.user_id
+        ? {
+            id: event.user_id,
+            name: event.user_name,
+            email: event.user_email,
+          }
+        : undefined,
     }));
 
     return NextResponse.json({
@@ -121,8 +128,8 @@ export async function GET(request: NextRequest) {
         page: Math.floor(offset / limit) + 1,
         limit,
         total: totalResult.count,
-        totalPages: Math.ceil(totalResult.count / limit)
-      }
+        totalPages: Math.ceil(totalResult.count / limit),
+      },
     });
   } catch (error) {
     console.error('Error fetching analytics events:', error);
@@ -148,7 +155,7 @@ export async function POST(request: NextRequest) {
       referrer_url,
       user_agent,
       ip_address,
-      event_data
+      event_data,
     } = body;
 
     // Validate required fields
@@ -160,14 +167,19 @@ export async function POST(request: NextRequest) {
     }
 
     // Get IP address from request if not provided
-    const clientIP = ip_address || request.headers.get('x-forwarded-for') || 
-                    request.headers.get('x-real-ip') || 'unknown';
+    const clientIP =
+      ip_address ||
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
 
     // Get user agent from request if not provided
-    const clientUserAgent = user_agent || request.headers.get('user-agent') || 'unknown';
+    const clientUserAgent =
+      user_agent || request.headers.get('user-agent') || 'unknown';
 
     // Get referrer from request if not provided
-    const clientReferrer = referrer_url || request.headers.get('referer') || null;
+    const clientReferrer =
+      referrer_url || request.headers.get('referer') || null;
 
     // Create analytics event
     const eventId = uuidv4();
@@ -205,14 +217,17 @@ export async function POST(request: NextRequest) {
       user_agent: event.user_agent,
       ip_address: event.ip_address,
       event_data: event.event_data ? JSON.parse(event.event_data) : undefined,
-      created_at: new Date(event.created_at)
+      created_at: new Date(event.created_at),
     };
 
-    return NextResponse.json({
-      success: true,
-      event: analyticsEvent,
-      message: 'Analytics event tracked successfully'
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        event: analyticsEvent,
+        message: 'Analytics event tracked successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error tracking analytics event:', error);
     return NextResponse.json(
@@ -220,4 +235,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

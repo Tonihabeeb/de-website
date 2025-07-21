@@ -9,13 +9,13 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
 
     const project = await ProjectModel.findById(id);
-    
+
     if (!project) {
       return NextResponse.json(
         { success: false, error: 'Project not found' },
@@ -36,8 +36,8 @@ export async function GET(
         name: project.name,
         start_date: project.start_date,
         end_date: project.end_date,
-        status: project.status
-      }
+        status: project.status,
+      },
     });
   } catch (error) {
     console.error('Error fetching project timeline:', error);
@@ -55,7 +55,7 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
@@ -76,13 +76,15 @@ export async function PUT(
     const updatedContent = {
       ...existingProject.content,
       timeline: timeline || [],
-      milestones: milestones || []
+      milestones: milestones || [],
     };
 
     const updatedProject = await ProjectModel.update(id, {
       content: updatedContent,
-      start_date: start_date ? new Date(start_date) : existingProject.start_date,
-      end_date: end_date ? new Date(end_date) : existingProject.end_date
+      start_date: start_date
+        ? new Date(start_date)
+        : existingProject.start_date,
+      end_date: end_date ? new Date(end_date) : existingProject.end_date,
     });
 
     if (!updatedProject) {
@@ -115,7 +117,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
@@ -149,18 +151,18 @@ export async function POST(
       status,
       assignee,
       created_at: new Date(),
-      updated_at: new Date()
+      updated_at: new Date(),
     };
 
     // Update project with new milestone
     const existingMilestones = existingProject.content?.milestones || [];
     const updatedContent = {
       ...existingProject.content,
-      milestones: [...existingMilestones, newMilestone]
+      milestones: [...existingMilestones, newMilestone],
     };
 
     const updatedProject = await ProjectModel.update(id, {
-      content: updatedContent
+      content: updatedContent,
     });
 
     if (!updatedProject) {
@@ -170,12 +172,15 @@ export async function POST(
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      milestone: newMilestone,
-      project: updatedProject,
-      message: 'Milestone added successfully',
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        milestone: newMilestone,
+        project: updatedProject,
+        message: 'Milestone added successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error adding milestone:', error);
     return NextResponse.json(
@@ -183,4 +188,4 @@ export async function POST(
       { status: 500 }
     );
   }
-} 
+}

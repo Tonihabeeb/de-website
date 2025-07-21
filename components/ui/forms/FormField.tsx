@@ -25,9 +25,12 @@ const FormField: React.FC<FormFieldProps> = ({
   options = [],
   rows = 3,
   className = '',
-  disabled = false
+  disabled = false,
 }) => {
-  const { control, formState: { errors } } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
   const error = errors[name];
 
   const renderField = (field: any) => {
@@ -54,8 +57,8 @@ const FormField: React.FC<FormFieldProps> = ({
               error ? 'border-red-500' : 'border-gray-300'
             } ${disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'} ${className}`}
           >
-            <option value="">Select an option</option>
-            {options.map((option) => (
+            <option value=''>Select an option</option>
+            {options.map(option => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -79,21 +82,21 @@ const FormField: React.FC<FormFieldProps> = ({
   };
 
   return (
-    <div className="space-y-2">
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+    <div className='space-y-2'>
+      <label htmlFor={name} className='block text-sm font-medium text-gray-700'>
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && <span className='text-red-500 ml-1'>*</span>}
       </label>
-      
+
       <Controller
         name={name}
         control={control}
         render={({ field }) => renderField(field)}
       />
-      
+
       {error && (
-        <div className="flex items-center space-x-1 text-sm text-red-600">
-          <AlertTriangle className="w-4 h-4" />
+        <div className='flex items-center space-x-1 text-sm text-red-600'>
+          <AlertTriangle className='w-4 h-4' />
           <span>{error.message as string}</span>
         </div>
       )}
@@ -101,4 +104,4 @@ const FormField: React.FC<FormFieldProps> = ({
   );
 };
 
-export default FormField; 
+export default FormField;

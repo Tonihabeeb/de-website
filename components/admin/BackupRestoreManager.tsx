@@ -8,15 +8,15 @@ import Button from '@/components/ui/Button';
 import FormField from '@/components/ui/forms/FormField';
 import Modal from '@/components/ui/Modal';
 import { toast } from '@/components/ui/Toast';
-import { 
-  Download, 
-  Upload, 
-  Clock, 
-  Calendar, 
-  HardDrive, 
-  CheckCircle, 
-  AlertTriangle, 
-  Trash2, 
+import {
+  Download,
+  Upload,
+  Clock,
+  Calendar,
+  HardDrive,
+  CheckCircle,
+  AlertTriangle,
+  Trash2,
   RefreshCw,
   Play,
   Pause,
@@ -24,7 +24,7 @@ import {
   FileText,
   Database,
   Archive,
-  RotateCcw
+  RotateCcw,
 } from 'lucide-react';
 
 interface BackupInfo {
@@ -74,7 +74,11 @@ const backupScheduleSchema = z.object({
 
 type BackupScheduleForm = z.infer<typeof backupScheduleSchema>;
 
-export default function BackupRestoreManager({ className = '' }: { className?: string }) {
+export default function BackupRestoreManager({
+  className = '',
+}: {
+  className?: string;
+}) {
   const [backups, setBackups] = useState<BackupInfo[]>([]);
   const [schedules, setSchedules] = useState<BackupSchedule[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -82,7 +86,8 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [showRestoreModal, setShowRestoreModal] = useState(false);
   const [selectedBackup, setSelectedBackup] = useState<BackupInfo | null>(null);
-  const [selectedSchedule, setSelectedSchedule] = useState<BackupSchedule | null>(null);
+  const [selectedSchedule, setSelectedSchedule] =
+    useState<BackupSchedule | null>(null);
   const [isCreatingBackup, setIsCreatingBackup] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
 
@@ -199,7 +204,7 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 3000));
-      
+
       const newBackup: BackupInfo = {
         id: Date.now().toString(),
         name: `Manual Backup - ${new Date().toISOString().split('T')[0]}`,
@@ -213,7 +218,7 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
         encryption: false,
         retentionDays: 30,
       };
-      
+
       setBackups(prev => [newBackup, ...prev]);
       toast.success('Backup created successfully');
     } catch (error) {
@@ -234,14 +239,18 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
   };
 
   const deleteBackup = async (backupId: string) => {
-    if (!confirm('Are you sure you want to delete this backup? This action cannot be undone.')) {
+    if (
+      !confirm(
+        'Are you sure you want to delete this backup? This action cannot be undone.'
+      )
+    ) {
       return;
     }
 
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       setBackups(prev => prev.filter(backup => backup.id !== backupId));
       toast.success('Backup deleted successfully');
     } catch (error) {
@@ -254,7 +263,7 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
     try {
       // Simulate restore process
       await new Promise(resolve => setTimeout(resolve, 5000));
-      
+
       toast.success('Backup restored successfully');
       setShowRestoreModal(false);
       setSelectedBackup(null);
@@ -269,7 +278,7 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       const newSchedule: BackupSchedule = {
         id: Date.now().toString(),
         name: data.name,
@@ -285,7 +294,7 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
         compression: data.compression,
         encryption: data.encryption,
       };
-      
+
       setSchedules(prev => [...prev, newSchedule]);
       toast.success('Backup schedule created successfully');
       setShowScheduleModal(false);
@@ -299,13 +308,15 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 500));
-      
-      setSchedules(prev => prev.map(schedule => 
-        schedule.id === scheduleId 
-          ? { ...schedule, isActive: !schedule.isActive }
-          : schedule
-      ));
-      
+
+      setSchedules(prev =>
+        prev.map(schedule =>
+          schedule.id === scheduleId
+            ? { ...schedule, isActive: !schedule.isActive }
+            : schedule
+        )
+      );
+
       toast.success('Schedule status updated');
     } catch (error) {
       toast.error('Failed to update schedule status');
@@ -320,7 +331,7 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       setSchedules(prev => prev.filter(schedule => schedule.id !== scheduleId));
       toast.success('Schedule deleted successfully');
     } catch (error) {
@@ -338,31 +349,39 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-green-600 bg-green-50';
-      case 'in-progress': return 'text-blue-600 bg-blue-50';
-      case 'failed': return 'text-red-600 bg-red-50';
-      default: return 'text-gray-600 bg-gray-50';
+      case 'completed':
+        return 'text-green-600 bg-green-50';
+      case 'in-progress':
+        return 'text-blue-600 bg-blue-50';
+      case 'failed':
+        return 'text-red-600 bg-red-50';
+      default:
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'completed': return <CheckCircle className="w-4 h-4" />;
-      case 'in-progress': return <RefreshCw className="w-4 h-4 animate-spin" />;
-      case 'failed': return <AlertTriangle className="w-4 h-4" />;
-      default: return <Clock className="w-4 h-4" />;
+      case 'completed':
+        return <CheckCircle className='w-4 h-4' />;
+      case 'in-progress':
+        return <RefreshCw className='w-4 h-4 animate-spin' />;
+      case 'failed':
+        return <AlertTriangle className='w-4 h-4' />;
+      default:
+        return <Clock className='w-4 h-4' />;
     }
   };
 
   if (isLoading) {
     return (
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-        <div className="p-6">
-          <div className="animate-pulse">
-            <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
-            <div className="space-y-4">
+        <div className='p-6'>
+          <div className='animate-pulse'>
+            <div className='h-6 bg-gray-200 rounded w-1/4 mb-4'></div>
+            <div className='space-y-4'>
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="h-20 bg-gray-200 rounded"></div>
+                <div key={i} className='h-20 bg-gray-200 rounded'></div>
               ))}
             </div>
           </div>
@@ -374,33 +393,35 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
   return (
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className='px-6 py-4 border-b border-gray-200'>
+        <div className='flex items-center justify-between'>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">Backup & Restore</h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <h2 className='text-xl font-semibold text-gray-900'>
+              Backup & Restore
+            </h2>
+            <p className='text-sm text-gray-600 mt-1'>
               Manage database backups and restoration
             </p>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className='flex items-center space-x-3'>
             <Button
               onClick={() => setShowScheduleModal(true)}
-              variant="secondary"
-              size="sm"
+              variant='secondary'
+              size='sm'
             >
-              <Settings className="w-4 h-4 mr-2" />
+              <Settings className='w-4 h-4 mr-2' />
               Schedules
             </Button>
             <Button
               onClick={createBackup}
-              variant="primary"
-              size="sm"
+              variant='primary'
+              size='sm'
               disabled={isCreatingBackup}
             >
               {isCreatingBackup ? (
-                <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                <RefreshCw className='w-4 h-4 animate-spin mr-2' />
               ) : (
-                <Archive className="w-4 h-4 mr-2" />
+                <Archive className='w-4 h-4 mr-2' />
               )}
               {isCreatingBackup ? 'Creating...' : 'Create Backup'}
             </Button>
@@ -409,44 +430,52 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
       </div>
 
       {/* Backup Schedules */}
-      <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Backup Schedules</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className='px-6 py-4 bg-gray-50 border-b border-gray-200'>
+        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          Backup Schedules
+        </h3>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
           {schedules.map(schedule => (
-            <div key={schedule.id} className="bg-white rounded-lg p-4 border">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="font-medium text-gray-900">{schedule.name}</h4>
-                <div className="flex items-center space-x-2">
+            <div key={schedule.id} className='bg-white rounded-lg p-4 border'>
+              <div className='flex items-center justify-between mb-3'>
+                <h4 className='font-medium text-gray-900'>{schedule.name}</h4>
+                <div className='flex items-center space-x-2'>
                   <button
                     onClick={() => toggleSchedule(schedule.id)}
                     className={`p-1 rounded-full ${
-                      schedule.isActive ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'
+                      schedule.isActive
+                        ? 'bg-green-100 text-green-600'
+                        : 'bg-gray-100 text-gray-600'
                     }`}
                   >
-                    {schedule.isActive ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
+                    {schedule.isActive ? (
+                      <Play className='w-3 h-3' />
+                    ) : (
+                      <Pause className='w-3 h-3' />
+                    )}
                   </button>
                   <button
                     onClick={() => deleteSchedule(schedule.id)}
-                    className="p-1 rounded-full bg-red-100 text-red-600 hover:bg-red-200"
+                    className='p-1 rounded-full bg-red-100 text-red-600 hover:bg-red-200'
                   >
-                    <Trash2 className="w-3 h-3" />
+                    <Trash2 className='w-3 h-3' />
                   </button>
                 </div>
               </div>
-              <div className="space-y-2 text-sm text-gray-600">
-                <div className="flex justify-between">
+              <div className='space-y-2 text-sm text-gray-600'>
+                <div className='flex justify-between'>
                   <span>Frequency:</span>
-                  <span className="capitalize">{schedule.frequency}</span>
+                  <span className='capitalize'>{schedule.frequency}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className='flex justify-between'>
                   <span>Time:</span>
                   <span>{schedule.time}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className='flex justify-between'>
                   <span>Retention:</span>
                   <span>{schedule.retentionDays} days</span>
                 </div>
-                <div className="flex justify-between">
+                <div className='flex justify-between'>
                   <span>Next Run:</span>
                   <span>{schedule.nextRun?.toLocaleDateString()}</span>
                 </div>
@@ -457,40 +486,47 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
       </div>
 
       {/* Backup List */}
-      <div className="p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Recent Backups</h3>
-        <div className="space-y-4">
+      <div className='p-6'>
+        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          Recent Backups
+        </h3>
+        <div className='space-y-4'>
           {backups.map(backup => (
-            <div key={backup.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-              <div className="flex items-center space-x-4">
-                <div className={`p-2 rounded-full ${getStatusColor(backup.status)}`}>
+            <div
+              key={backup.id}
+              className='flex items-center justify-between p-4 bg-gray-50 rounded-lg'
+            >
+              <div className='flex items-center space-x-4'>
+                <div
+                  className={`p-2 rounded-full ${getStatusColor(backup.status)}`}
+                >
                   {getStatusIcon(backup.status)}
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900">{backup.name}</h4>
-                  <div className="flex items-center space-x-4 text-sm text-gray-600 mt-1">
-                    <span className="flex items-center">
-                      <Database className="w-3 h-3 mr-1" />
+                  <h4 className='font-medium text-gray-900'>{backup.name}</h4>
+                  <div className='flex items-center space-x-4 text-sm text-gray-600 mt-1'>
+                    <span className='flex items-center'>
+                      <Database className='w-3 h-3 mr-1' />
                       {backup.tables.length} tables
                     </span>
-                    <span className="flex items-center">
-                      <HardDrive className="w-3 h-3 mr-1" />
+                    <span className='flex items-center'>
+                      <HardDrive className='w-3 h-3 mr-1' />
                       {formatFileSize(backup.size)}
                     </span>
-                    <span className="flex items-center">
-                      <Clock className="w-3 h-3 mr-1" />
+                    <span className='flex items-center'>
+                      <Clock className='w-3 h-3 mr-1' />
                       {backup.createdAt.toLocaleDateString()}
                     </span>
                   </div>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className='flex items-center space-x-2'>
                 <Button
                   onClick={() => downloadBackup(backup.id)}
-                  variant="secondary"
-                  size="sm"
+                  variant='secondary'
+                  size='sm'
                 >
-                  <Download className="w-4 h-4 mr-1" />
+                  <Download className='w-4 h-4 mr-1' />
                   Download
                 </Button>
                 <Button
@@ -498,18 +534,18 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
                     setSelectedBackup(backup);
                     setShowRestoreModal(true);
                   }}
-                  variant="secondary"
-                  size="sm"
+                  variant='secondary'
+                  size='sm'
                 >
-                  <RotateCcw className="w-4 h-4 mr-1" />
+                  <RotateCcw className='w-4 h-4 mr-1' />
                   Restore
                 </Button>
                 <Button
                   onClick={() => deleteBackup(backup.id)}
-                  variant="secondary"
-                  size="sm"
+                  variant='secondary'
+                  size='sm'
                 >
-                  <Trash2 className="w-4 h-4 mr-1" />
+                  <Trash2 className='w-4 h-4 mr-1' />
                   Delete
                 </Button>
               </div>
@@ -522,82 +558,89 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
       <Modal
         isOpen={showScheduleModal}
         onClose={() => setShowScheduleModal(false)}
-        title="Create Backup Schedule"
+        title='Create Backup Schedule'
       >
         <FormProvider {...form}>
-          <form onSubmit={form.handleSubmit(createSchedule)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(createSchedule)}
+            className='space-y-4'
+          >
             <FormField
-              name="name"
-              label="Schedule Name"
-              placeholder="Daily Full Backup"
+              name='name'
+              label='Schedule Name'
+              placeholder='Daily Full Backup'
             />
-            
-            <div className="grid grid-cols-2 gap-4">
+
+            <div className='grid grid-cols-2 gap-4'>
               <FormField
-                name="frequency"
-                label="Frequency"
-                type="select"
+                name='frequency'
+                label='Frequency'
+                type='select'
                 options={[
                   { value: 'daily', label: 'Daily' },
                   { value: 'weekly', label: 'Weekly' },
                   { value: 'monthly', label: 'Monthly' },
                 ]}
               />
-                             <FormField
-                 name="time"
-                 label="Time"
-                 type="text"
-                 placeholder="02:00"
-               />
+              <FormField
+                name='time'
+                label='Time'
+                type='text'
+                placeholder='02:00'
+              />
             </div>
-            
+
             <FormField
-              name="retentionDays"
-              label="Retention Days"
-              type="number"
-              placeholder="30"
+              name='retentionDays'
+              label='Retention Days'
+              type='number'
+              placeholder='30'
             />
-            
-            <div className="space-y-3">
-              <div className="flex items-center">
+
+            <div className='space-y-3'>
+              <div className='flex items-center'>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   {...form.register('compression')}
-                  className="rounded border-gray-300"
+                  className='rounded border-gray-300'
                 />
-                <label className="ml-2 text-sm text-gray-700">Enable compression</label>
+                <label className='ml-2 text-sm text-gray-700'>
+                  Enable compression
+                </label>
               </div>
-              <div className="flex items-center">
+              <div className='flex items-center'>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   {...form.register('encryption')}
-                  className="rounded border-gray-300"
+                  className='rounded border-gray-300'
                 />
-                <label className="ml-2 text-sm text-gray-700">Enable encryption</label>
+                <label className='ml-2 text-sm text-gray-700'>
+                  Enable encryption
+                </label>
               </div>
             </div>
-            
+
             <FormField
-              name="includeTables"
-              label="Include Tables (comma-separated)"
-              placeholder="users,pages,projects"
+              name='includeTables'
+              label='Include Tables (comma-separated)'
+              placeholder='users,pages,projects'
             />
-            
+
             <FormField
-              name="excludeTables"
-              label="Exclude Tables (comma-separated)"
-              placeholder="temp_logs,session_data"
+              name='excludeTables'
+              label='Exclude Tables (comma-separated)'
+              placeholder='temp_logs,session_data'
             />
-            
-            <div className="flex justify-end space-x-3">
+
+            <div className='flex justify-end space-x-3'>
               <Button
-                type="button"
-                variant="secondary"
+                type='button'
+                variant='secondary'
                 onClick={() => setShowScheduleModal(false)}
               >
                 Cancel
               </Button>
-              <Button type="submit" variant="primary">
+              <Button type='submit' variant='primary'>
                 Create Schedule
               </Button>
             </div>
@@ -609,63 +652,64 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
       <Modal
         isOpen={showRestoreModal}
         onClose={() => setShowRestoreModal(false)}
-        title="Restore Backup"
+        title='Restore Backup'
       >
         {selectedBackup && (
-          <div className="space-y-4">
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <AlertTriangle className="w-5 h-5 text-yellow-600" />
-                <h3 className="text-lg font-medium text-yellow-900">Warning</h3>
+          <div className='space-y-4'>
+            <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-4'>
+              <div className='flex items-center space-x-2 mb-2'>
+                <AlertTriangle className='w-5 h-5 text-yellow-600' />
+                <h3 className='text-lg font-medium text-yellow-900'>Warning</h3>
               </div>
-              <p className="text-yellow-700">
-                Restoring this backup will overwrite all current data. This action cannot be undone.
-                Make sure you have a current backup before proceeding.
+              <p className='text-yellow-700'>
+                Restoring this backup will overwrite all current data. This
+                action cannot be undone. Make sure you have a current backup
+                before proceeding.
               </p>
             </div>
-            
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="font-medium text-gray-900 mb-2">Backup Details</h4>
-              <div className="space-y-2 text-sm text-gray-600">
-                <div className="flex justify-between">
+
+            <div className='bg-gray-50 rounded-lg p-4'>
+              <h4 className='font-medium text-gray-900 mb-2'>Backup Details</h4>
+              <div className='space-y-2 text-sm text-gray-600'>
+                <div className='flex justify-between'>
                   <span>Name:</span>
                   <span>{selectedBackup.name}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className='flex justify-between'>
                   <span>Size:</span>
                   <span>{formatFileSize(selectedBackup.size)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className='flex justify-between'>
                   <span>Created:</span>
                   <span>{selectedBackup.createdAt.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className='flex justify-between'>
                   <span>Tables:</span>
                   <span>{selectedBackup.tables.length}</span>
                 </div>
               </div>
             </div>
-            
-            <div className="flex justify-end space-x-3">
+
+            <div className='flex justify-end space-x-3'>
               <Button
-                variant="secondary"
+                variant='secondary'
                 onClick={() => setShowRestoreModal(false)}
               >
                 Cancel
               </Button>
               <Button
-                variant="primary"
+                variant='primary'
                 onClick={() => restoreBackup(selectedBackup.id)}
                 disabled={isRestoring}
               >
                 {isRestoring ? (
                   <>
-                    <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                    <RefreshCw className='w-4 h-4 animate-spin mr-2' />
                     Restoring...
                   </>
                 ) : (
                   <>
-                    <RotateCcw className="w-4 h-4 mr-2" />
+                    <RotateCcw className='w-4 h-4 mr-2' />
                     Restore Backup
                   </>
                 )}
@@ -676,4 +720,4 @@ export default function BackupRestoreManager({ className = '' }: { className?: s
       </Modal>
     </div>
   );
-} 
+}

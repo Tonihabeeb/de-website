@@ -1,5 +1,5 @@
-"use client";
-import { useEffect } from "react";
+'use client';
+import { useEffect } from 'react';
 
 interface StructuredDataProps {
   data: object;
@@ -7,8 +7,8 @@ interface StructuredDataProps {
 
 export default function StructuredData({ data }: StructuredDataProps) {
   useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
     script.text = JSON.stringify(data);
     document.head.appendChild(script);
     return () => {
@@ -16,4 +16,4 @@ export default function StructuredData({ data }: StructuredDataProps) {
     };
   }, [data]);
   return null;
-} 
+}

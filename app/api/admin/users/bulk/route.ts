@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     const results = {
       success: 0,
       failed: 0,
-      errors: [] as string[]
+      errors: [] as string[],
     };
 
     switch (operation) {
@@ -57,7 +57,9 @@ export async function POST(request: NextRequest) {
         // Bulk deactivate users
         for (const userId of user_ids) {
           try {
-            const updated = await UserModel.update(userId, { is_active: false });
+            const updated = await UserModel.update(userId, {
+              is_active: false,
+            });
             if (updated) {
               results.success++;
             } else {
@@ -75,14 +77,19 @@ export async function POST(request: NextRequest) {
         // Bulk assign role
         if (!data?.role_id) {
           return NextResponse.json(
-            { success: false, error: 'Role ID is required for assign_role operation' },
+            {
+              success: false,
+              error: 'Role ID is required for assign_role operation',
+            },
             { status: 400 }
           );
         }
 
         for (const userId of user_ids) {
           try {
-            const updated = await UserModel.update(userId, { role: data.role_id });
+            const updated = await UserModel.update(userId, {
+              role: data.role_id,
+            });
             if (updated) {
               results.success++;
             } else {
@@ -91,7 +98,9 @@ export async function POST(request: NextRequest) {
             }
           } catch (error) {
             results.failed++;
-            results.errors.push(`Error assigning role to user ${userId}: ${error}`);
+            results.errors.push(
+              `Error assigning role to user ${userId}: ${error}`
+            );
           }
         }
         break;
@@ -100,7 +109,10 @@ export async function POST(request: NextRequest) {
         // Bulk delete users (with confirmation)
         if (!data?.confirm) {
           return NextResponse.json(
-            { success: false, error: 'Confirmation required for bulk delete operation' },
+            {
+              success: false,
+              error: 'Confirmation required for bulk delete operation',
+            },
             { status: 400 }
           );
         }
@@ -123,7 +135,11 @@ export async function POST(request: NextRequest) {
 
       default:
         return NextResponse.json(
-          { success: false, error: 'Invalid operation. Supported operations: activate, deactivate, assign_role, delete' },
+          {
+            success: false,
+            error:
+              'Invalid operation. Supported operations: activate, deactivate, assign_role, delete',
+          },
           { status: 400 }
         );
     }
@@ -141,4 +157,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

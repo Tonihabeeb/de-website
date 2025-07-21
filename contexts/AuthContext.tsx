@@ -1,6 +1,12 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import { useRouter } from 'next/navigation';
 import { apiFetch } from '@/utils/api';
 
@@ -46,7 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // Conditionally use router to handle test environment
   let router: any = null;
   try {
@@ -122,19 +128,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const hasRole = (role: User['role']): boolean => {
     if (!user) return false;
-    
+
     // Role hierarchy: super_admin > admin > editor > user > viewer
     const roleHierarchy = {
-      'super_admin': 5,
-      'admin': 4,
-      'editor': 3,
-      'user': 2,
-      'viewer': 1,
+      super_admin: 5,
+      admin: 4,
+      editor: 3,
+      user: 2,
+      viewer: 1,
     };
-    
+
     const userRoleLevel = roleHierarchy[user.role];
     const requiredRoleLevel = roleHierarchy[role];
-    
+
     return userRoleLevel >= requiredRoleLevel;
   };
 
@@ -163,4 +169,4 @@ export function useAuth() {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
-} 
+}

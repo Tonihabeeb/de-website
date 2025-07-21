@@ -25,14 +25,14 @@ export async function GET(request: NextRequest) {
           dateRange: '30d',
           format: 'csv',
           includeCharts: false,
-          filters: {}
+          filters: {},
         },
         status: 'completed',
         progress: 100,
         createdAt: new Date(Date.now() - 3600000).toISOString(),
         completedAt: new Date(Date.now() - 3500000).toISOString(),
         downloadUrl: '/api/admin/analytics/export/download/1',
-        fileSize: 245760 // 240KB
+        fileSize: 245760, // 240KB
       },
       {
         id: '2',
@@ -41,12 +41,12 @@ export async function GET(request: NextRequest) {
           dateRange: '7d',
           format: 'excel',
           includeCharts: true,
-          filters: { userType: 'active' }
+          filters: { userType: 'active' },
         },
         status: 'processing',
         progress: 65,
-        createdAt: new Date(Date.now() - 1800000).toISOString()
-      }
+        createdAt: new Date(Date.now() - 1800000).toISOString(),
+      },
     ];
 
     return NextResponse.json({
@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
       exportJobs: exportJobs.slice(offset, offset + limit),
       total: exportJobs.length,
       limit,
-      offset
+      offset,
     });
   } catch (error) {
     console.error('Error fetching export jobs:', error);
@@ -73,7 +73,15 @@ export async function POST(request: NextRequest) {
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const { dataType, dateRange, startDate, endDate, format, includeCharts, filters } = body;
+    const {
+      dataType,
+      dateRange,
+      startDate,
+      endDate,
+      format,
+      includeCharts,
+      filters,
+    } = body;
 
     // Validate required fields
     if (!dataType || !dateRange || !format) {
@@ -87,7 +95,7 @@ export async function POST(request: NextRequest) {
     const now = new Date();
     let startDateObj = new Date();
     let endDateObj = new Date();
-    
+
     switch (dateRange) {
       case '7d':
         startDateObj.setDate(now.getDate() - 7);
@@ -104,7 +112,10 @@ export async function POST(request: NextRequest) {
           endDateObj = new Date(endDate);
         } else {
           return NextResponse.json(
-            { success: false, error: 'Custom date range requires start and end dates' },
+            {
+              success: false,
+              error: 'Custom date range requires start and end dates',
+            },
             { status: 400 }
           );
         }
@@ -123,13 +134,13 @@ export async function POST(request: NextRequest) {
         endDate,
         format,
         includeCharts: includeCharts || false,
-        filters: filters || {}
+        filters: filters || {},
       },
       status: 'pending' as const,
       progress: 0,
       createdAt: new Date().toISOString(),
       estimatedSize: 0,
-      estimatedTime: 0
+      estimatedTime: 0,
     };
 
     // Estimate file size and processing time based on data type
@@ -177,7 +188,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       exportJob,
-      message: 'Export job created successfully'
+      message: 'Export job created successfully',
     });
   } catch (error) {
     console.error('Error creating export job:', error);
@@ -208,7 +219,7 @@ export async function DELETE(request: NextRequest) {
     // Mock deletion - in real implementation, delete from database
     return NextResponse.json({
       success: true,
-      message: 'Export job deleted successfully'
+      message: 'Export job deleted successfully',
     });
   } catch (error) {
     console.error('Error deleting export job:', error);
@@ -217,4 +228,4 @@ export async function DELETE(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

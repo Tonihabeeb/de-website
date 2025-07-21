@@ -56,7 +56,7 @@ describe('API Integration Tests', () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer test-token',
+          Authorization: 'Bearer test-token',
         },
       });
     });
@@ -75,7 +75,9 @@ describe('API Integration Tests', () => {
         json: async () => ({ error: 'Not found' }),
       } as Response);
 
-      await expect(apiFetch('/test')).rejects.toThrow('HTTP error! status: 404');
+      await expect(apiFetch('/test')).rejects.toThrow(
+        'HTTP error! status: 404'
+      );
     });
   });
 
@@ -106,7 +108,9 @@ describe('API Integration Tests', () => {
         json: async () => ({ error: 'Server error' }),
       } as Response);
 
-      await expect(serverApiFetch('/test')).rejects.toThrow('HTTP error! status: 500');
+      await expect(serverApiFetch('/test')).rejects.toThrow(
+        'HTTP error! status: 500'
+      );
     });
   });
-}); 
+});

@@ -1,4 +1,5 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
 
 export interface ApiError {
   message: string;
@@ -23,14 +24,14 @@ export class ServerApiException extends Error {
  * This version doesn't use localStorage or browser-specific APIs
  */
 export async function serverApiFetch<T>(
-  path: string, 
+  path: string,
   options: RequestInit = {},
   token?: string
 ): Promise<T> {
   try {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...(options.headers as Record<string, string> || {}),
+      ...((options.headers as Record<string, string>) || {}),
     };
 
     // Add authorization header if token is provided
@@ -38,14 +39,14 @@ export async function serverApiFetch<T>(
       headers.Authorization = `Bearer ${token}`;
     }
 
-    const res = await fetch(`${API_BASE}${path}`, { 
-      ...options, 
-      headers 
+    const res = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers,
     });
-    
+
     if (!res.ok) {
       let errorMessage = `HTTP ${res.status}: ${res.statusText}`;
-      
+
       try {
         const errorData = await res.json();
         errorMessage = errorData.message || errorData.error || errorMessage;
@@ -66,21 +67,25 @@ export async function serverApiFetch<T>(
     if (contentType && contentType.includes('application/json')) {
       return res.json() as Promise<T>;
     }
-    
+
     return res.text() as Promise<T>;
   } catch (error) {
     if (error instanceof ServerApiException) {
       throw error;
     }
-    
+
     // Network errors or other issues
     if (error instanceof TypeError && error.message.includes('fetch')) {
-      throw new ServerApiException('Network error: Unable to connect to server', 0, 'NETWORK_ERROR');
+      throw new ServerApiException(
+        'Network error: Unable to connect to server',
+        0,
+        'NETWORK_ERROR'
+      );
     }
-    
+
     throw new ServerApiException(
-      error instanceof Error ? error.message : 'Unknown error occurred', 
-      0, 
+      error instanceof Error ? error.message : 'Unknown error occurred',
+      0,
       'UNKNOWN_ERROR'
     );
   }
@@ -89,25 +94,45 @@ export async function serverApiFetch<T>(
 // Convenience functions for common HTTP methods
 export const serverApi = {
   get: <T>(path: string, token?: string) => serverApiFetch<T>(path, {}, token),
-  
-  post: <T>(path: string, data?: any, token?: string) => serverApiFetch<T>(path, {
-    method: 'POST',
-    body: data ? JSON.stringify(data) : undefined,
-  }, token),
-  
-  put: <T>(path: string, data?: any, token?: string) => serverApiFetch<T>(path, {
-    method: 'PUT',
-    body: data ? JSON.stringify(data) : undefined,
-  }, token),
-  
-  patch: <T>(path: string, data?: any, token?: string) => serverApiFetch<T>(path, {
-    method: 'PATCH',
-    body: data ? JSON.stringify(data) : undefined,
-  }, token),
-  
-  delete: <T>(path: string, token?: string) => serverApiFetch<T>(path, {
-    method: 'DELETE',
-  }, token),
+
+  post: <T>(path: string, data?: any, token?: string) =>
+    serverApiFetch<T>(
+      path,
+      {
+        method: 'POST',
+        body: data ? JSON.stringify(data) : undefined,
+      },
+      token
+    ),
+
+  put: <T>(path: string, data?: any, token?: string) =>
+    serverApiFetch<T>(
+      path,
+      {
+        method: 'PUT',
+        body: data ? JSON.stringify(data) : undefined,
+      },
+      token
+    ),
+
+  patch: <T>(path: string, data?: any, token?: string) =>
+    serverApiFetch<T>(
+      path,
+      {
+        method: 'PATCH',
+        body: data ? JSON.stringify(data) : undefined,
+      },
+      token
+    ),
+
+  delete: <T>(path: string, token?: string) =>
+    serverApiFetch<T>(
+      path,
+      {
+        method: 'DELETE',
+      },
+      token
+    ),
 };
 
 /**
@@ -130,4 +155,4 @@ export async function authenticatedServerFetch<T>(
 ): Promise<T> {
   const token = getAuthTokenFromCookies(cookies);
   return serverApiFetch<T>(path, options, token);
-} 
+}

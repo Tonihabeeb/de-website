@@ -14,7 +14,10 @@ import Button from '@/components/ui/Button';
 
 // Form validation schema
 const formSchema = z.object({
-  title: z.string().min(1, 'Title is required').max(100, 'Title must be less than 100 characters'),
+  title: z
+    .string()
+    .min(1, 'Title is required')
+    .max(100, 'Title must be less than 100 characters'),
   email: z.string().email('Invalid email address'),
   category: z.string().min(1, 'Please select a category'),
   description: z.string().min(10, 'Description must be at least 10 characters'),
@@ -29,7 +32,9 @@ type FormData = z.infer<typeof formSchema>;
 const ProfessionalForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedFiles, setSelectedFiles] = React.useState<File[]>([]);
-  const [richTextContent, setRichTextContent] = React.useState('<p>Start writing your content...</p>');
+  const [richTextContent, setRichTextContent] = React.useState(
+    '<p>Start writing your content...</p>'
+  );
 
   const {
     register,
@@ -56,10 +61,10 @@ const ProfessionalForm: React.FC = () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       console.log('Form data:', data);
       console.log('Selected files:', selectedFiles);
-      
+
       toast.success('Form submitted successfully!');
       reset();
       setSelectedFiles([]);
@@ -80,40 +85,43 @@ const ProfessionalForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Professional Form Example</h2>
-          <p className="text-gray-600">
-            This form demonstrates the new professional components with validation and enhanced UX.
+    <div className='max-w-4xl mx-auto p-6'>
+      <div className='bg-white rounded-lg shadow-lg p-8'>
+        <div className='mb-8'>
+          <h2 className='text-3xl font-bold text-gray-900 mb-2'>
+            Professional Form Example
+          </h2>
+          <p className='text-gray-600'>
+            This form demonstrates the new professional components with
+            validation and enhanced UX.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
           {/* Basic Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <FormField
-              name="title"
-              label="Project Title"
-              type="text"
-              placeholder="Enter project title"
+              name='title'
+              label='Project Title'
+              type='text'
+              placeholder='Enter project title'
               required
             />
-            
+
             <FormField
-              name="email"
-              label="Email Address"
-              type="email"
-              placeholder="Enter email address"
+              name='email'
+              label='Email Address'
+              type='email'
+              placeholder='Enter email address'
               required
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             <FormField
-              name="category"
-              label="Category"
-              type="select"
+              name='category'
+              label='Category'
+              type='select'
               required
               options={[
                 { value: 'technology', label: 'Technology' },
@@ -122,27 +130,27 @@ const ProfessionalForm: React.FC = () => {
                 { value: 'research', label: 'Research' },
               ]}
             />
-            
+
             <FormField
-              name="startDate"
-              label="Start Date"
-              type="text"
+              name='startDate'
+              label='Start Date'
+              type='text'
               required
             />
-            
+
             <FormField
-              name="budget"
-              label="Budget (USD)"
-              type="number"
-              placeholder="0"
+              name='budget'
+              label='Budget (USD)'
+              type='number'
+              placeholder='0'
               required
             />
           </div>
 
           <FormField
-            name="priority"
-            label="Priority"
-            type="select"
+            name='priority'
+            label='Priority'
+            type='select'
             required
             options={[
               { value: 'low', label: 'Low' },
@@ -152,34 +160,34 @@ const ProfessionalForm: React.FC = () => {
           />
 
           <FormField
-            name="description"
-            label="Description"
-            type="textarea"
-            placeholder="Enter project description"
+            name='description'
+            label='Description'
+            type='textarea'
+            placeholder='Enter project description'
             rows={4}
             required
           />
 
           {/* Rich Text Editor */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-              Content <span className="text-red-500">*</span>
+          <div className='space-y-2'>
+            <label className='block text-sm font-medium text-gray-700'>
+              Content <span className='text-red-500'>*</span>
             </label>
             <RichTextEditor
               content={richTextContent}
               onChange={handleContentChange}
-              placeholder="Start writing your content..."
+              placeholder='Start writing your content...'
             />
             {errors.content && (
-              <div className="flex items-center space-x-1 text-sm text-red-600">
+              <div className='flex items-center space-x-1 text-sm text-red-600'>
                 <span>{errors.content.message}</span>
               </div>
             )}
           </div>
 
           {/* File Upload */}
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className='space-y-2'>
+            <label className='block text-sm font-medium text-gray-700'>
               Attachments
             </label>
             <FileUpload
@@ -195,19 +203,19 @@ const ProfessionalForm: React.FC = () => {
           </div>
 
           {/* Form Actions */}
-          <div className="flex items-center justify-between pt-6 border-t border-gray-200">
-            <div className="flex space-x-4">
+          <div className='flex items-center justify-between pt-6 border-t border-gray-200'>
+            <div className='flex space-x-4'>
               <Button
-                type="button"
-                variant="secondary"
+                type='button'
+                variant='secondary'
                 onClick={() => setIsModalOpen(true)}
               >
                 Preview Form
               </Button>
-              
+
               <Button
-                type="button"
-                variant="secondary"
+                type='button'
+                variant='secondary'
                 onClick={() => {
                   reset();
                   setSelectedFiles([]);
@@ -220,9 +228,9 @@ const ProfessionalForm: React.FC = () => {
             </div>
 
             <Button
-              type="submit"
+              type='submit'
               disabled={isSubmitting}
-              className="min-w-[120px]"
+              className='min-w-[120px]'
             >
               {isSubmitting ? 'Submitting...' : 'Submit Form'}
             </Button>
@@ -233,49 +241,60 @@ const ProfessionalForm: React.FC = () => {
         <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          title="Form Preview"
-          size="lg"
+          title='Form Preview'
+          size='lg'
         >
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className='space-y-4'>
+            <div className='grid grid-cols-2 gap-4 text-sm'>
               <div>
-                <span className="font-medium">Title:</span>
-                <p className="text-gray-600">{watch('title') || 'Not provided'}</p>
+                <span className='font-medium'>Title:</span>
+                <p className='text-gray-600'>
+                  {watch('title') || 'Not provided'}
+                </p>
               </div>
               <div>
-                <span className="font-medium">Email:</span>
-                <p className="text-gray-600">{watch('email') || 'Not provided'}</p>
+                <span className='font-medium'>Email:</span>
+                <p className='text-gray-600'>
+                  {watch('email') || 'Not provided'}
+                </p>
               </div>
               <div>
-                <span className="font-medium">Category:</span>
-                <p className="text-gray-600">{watch('category') || 'Not provided'}</p>
+                <span className='font-medium'>Category:</span>
+                <p className='text-gray-600'>
+                  {watch('category') || 'Not provided'}
+                </p>
               </div>
               <div>
-                <span className="font-medium">Priority:</span>
-                <p className="text-gray-600">{watch('priority') || 'Not provided'}</p>
+                <span className='font-medium'>Priority:</span>
+                <p className='text-gray-600'>
+                  {watch('priority') || 'Not provided'}
+                </p>
               </div>
             </div>
-            
+
             <div>
-              <span className="font-medium">Description:</span>
-              <p className="text-gray-600 mt-1">{watch('description') || 'Not provided'}</p>
+              <span className='font-medium'>Description:</span>
+              <p className='text-gray-600 mt-1'>
+                {watch('description') || 'Not provided'}
+              </p>
             </div>
-            
+
             <div>
-              <span className="font-medium">Content:</span>
-              <div 
-                className="mt-1 text-gray-600 prose prose-sm max-w-none"
-                dangerouslySetInnerHTML={{ __html: watch('content') || 'Not provided' }}
+              <span className='font-medium'>Content:</span>
+              <div
+                className='mt-1 text-gray-600 prose prose-sm max-w-none'
+                dangerouslySetInnerHTML={{
+                  __html: watch('content') || 'Not provided',
+                }}
               />
             </div>
-            
+
             <div>
-              <span className="font-medium">Files:</span>
-              <p className="text-gray-600 mt-1">
-                {selectedFiles.length > 0 
+              <span className='font-medium'>Files:</span>
+              <p className='text-gray-600 mt-1'>
+                {selectedFiles.length > 0
                   ? `${selectedFiles.length} file(s) selected`
-                  : 'No files selected'
-                }
+                  : 'No files selected'}
               </p>
             </div>
           </div>
@@ -285,4 +304,4 @@ const ProfessionalForm: React.FC = () => {
   );
 };
 
-export default ProfessionalForm; 
+export default ProfessionalForm;

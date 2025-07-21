@@ -35,8 +35,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         templates: templateReports.map(report => ({
           ...(report as any),
-          default_filters: JSON.parse((report as any).default_filters || '{}')
-        }))
+          default_filters: JSON.parse((report as any).default_filters || '{}'),
+        })),
       });
     }
 
@@ -52,12 +52,16 @@ export async function GET(request: NextRequest) {
       reports: reports.map(report => ({
         ...(report as any),
         filters: JSON.parse((report as any).config || '{}'),
-        recipients: JSON.parse((report as any).schedule || '{}').recipients || []
-      }))
+        recipients:
+          JSON.parse((report as any).schedule || '{}').recipients || [],
+      })),
     });
   } catch (error) {
     console.error('Error fetching reports:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }
 
@@ -74,20 +78,24 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { name, description, type, schedule, format, filters, recipients } = body;
+    const { name, description, type, schedule, format, filters, recipients } =
+      body;
 
     if (!name || !type) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
     }
 
     const reportId = uuidv4();
     const config = JSON.stringify({
       ...filters,
-      format: format || 'json'
+      format: format || 'json',
     });
     const scheduleConfig = JSON.stringify({
       frequency: schedule || 'manual',
-      recipients: recipients || []
+      recipients: recipients || [],
     });
 
     const stmt = db.prepare(`
@@ -106,12 +114,15 @@ export async function POST(request: NextRequest) {
       user.id
     );
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       message: 'Report created successfully',
-      reportId 
+      reportId,
     });
   } catch (error) {
     console.error('Error creating report:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
-} 
+}

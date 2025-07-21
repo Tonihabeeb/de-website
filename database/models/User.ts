@@ -7,7 +7,7 @@ export enum UserRole {
   ADMIN = 'admin',
   EDITOR = 'editor',
   AUTHOR = 'author',
-  USER = 'user'
+  USER = 'user',
 }
 
 export interface User {
@@ -44,19 +44,19 @@ export interface UserPermissions {
   canViewPages: boolean;
   canDeletePages: boolean;
   canPublishPages: boolean;
-  
+
   // Project Management
   canCreateProjects: boolean;
   canEditProjects: boolean;
   canViewProjects: boolean;
   canDeleteProjects: boolean;
-  
+
   // User Management
   canCreateUsers: boolean;
   canEditUsers: boolean;
   canDeleteUsers: boolean;
   canAssignRoles: boolean;
-  
+
   // System Management
   canManageSettings: boolean;
   canManageNavigation: boolean;
@@ -69,7 +69,7 @@ export class UserModel {
     const id = uuidv4();
     const now = new Date();
     const hashedPassword = await bcrypt.hash(data.password, 12);
-    
+
     const user: User = {
       id,
       name: data.name,
@@ -104,9 +104,9 @@ export class UserModel {
   static async findById(id: string): Promise<User | null> {
     const stmt = db.prepare('SELECT * FROM users WHERE id = ?');
     const row = stmt.get(id) as any;
-    
+
     if (!row) return null;
-    
+
     return {
       ...row,
       is_active: Boolean(row.is_active),
@@ -119,9 +119,9 @@ export class UserModel {
   static async findByEmail(email: string): Promise<User | null> {
     const stmt = db.prepare('SELECT * FROM users WHERE email = ?');
     const row = stmt.get(email.toLowerCase()) as any;
-    
+
     if (!row) return null;
-    
+
     return {
       ...row,
       is_active: Boolean(row.is_active),
@@ -169,7 +169,7 @@ export class UserModel {
 
     const stmt = db.prepare(query);
     const rows = stmt.all(...params) as any[];
-    
+
     return rows.map(row => ({
       ...row,
       is_active: Boolean(row.is_active),
@@ -237,9 +237,14 @@ export class UserModel {
     return bcrypt.compare(password, user.password);
   }
 
-  static async changePassword(id: string, newPassword: string): Promise<boolean> {
+  static async changePassword(
+    id: string,
+    newPassword: string
+  ): Promise<boolean> {
     const hashedPassword = await bcrypt.hash(newPassword, 12);
-    const stmt = db.prepare('UPDATE users SET password = ?, updated_at = ? WHERE id = ?');
+    const stmt = db.prepare(
+      'UPDATE users SET password = ?, updated_at = ? WHERE id = ?'
+    );
     const result = stmt.run(hashedPassword, new Date().toISOString(), id);
     return result.changes > 0;
   }
@@ -252,35 +257,83 @@ export class UserModel {
 
     const permissions: UserPermissions = {
       // Content Management
-      canCreatePages: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR, UserRole.AUTHOR].includes(user.role),
-      canEditPages: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR, UserRole.AUTHOR].includes(user.role),
-      canViewPages: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR, UserRole.AUTHOR].includes(user.role),
-      canDeletePages: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(user.role),
-      canPublishPages: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR].includes(user.role),
-      
+      canCreatePages: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+        UserRole.AUTHOR,
+      ].includes(user.role),
+      canEditPages: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+        UserRole.AUTHOR,
+      ].includes(user.role),
+      canViewPages: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+        UserRole.AUTHOR,
+      ].includes(user.role),
+      canDeletePages: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(
+        user.role
+      ),
+      canPublishPages: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+      ].includes(user.role),
+
       // Project Management
-      canCreateProjects: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR].includes(user.role),
-      canEditProjects: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR].includes(user.role),
-      canViewProjects: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR].includes(user.role),
-      canDeleteProjects: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(user.role),
-      
+      canCreateProjects: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+      ].includes(user.role),
+      canEditProjects: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+      ].includes(user.role),
+      canViewProjects: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+      ].includes(user.role),
+      canDeleteProjects: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(
+        user.role
+      ),
+
       // User Management
-      canCreateUsers: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(user.role),
+      canCreateUsers: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(
+        user.role
+      ),
       canEditUsers: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(user.role),
       canDeleteUsers: [UserRole.SUPER_ADMIN].includes(user.role),
       canAssignRoles: [UserRole.SUPER_ADMIN].includes(user.role),
-      
+
       // System Management
       canManageSettings: [UserRole.SUPER_ADMIN].includes(user.role),
-      canManageNavigation: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(user.role),
-      canManageMedia: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR].includes(user.role),
-      canViewAnalytics: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(user.role),
+      canManageNavigation: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(
+        user.role
+      ),
+      canManageMedia: [
+        UserRole.SUPER_ADMIN,
+        UserRole.ADMIN,
+        UserRole.EDITOR,
+      ].includes(user.role),
+      canViewAnalytics: [UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(
+        user.role
+      ),
     };
 
     return permissions;
   }
 
-  static async hasPermission(userId: string, permission: keyof UserPermissions): Promise<boolean> {
+  static async hasPermission(
+    userId: string,
+    permission: keyof UserPermissions
+  ): Promise<boolean> {
     const permissions = await this.getPermissions(userId);
     return permissions[permission];
   }
@@ -290,9 +343,15 @@ export class UserModel {
     return user?.role === role;
   }
 
-  static async createSuperAdmin(data: { name: string; email: string; password: string }): Promise<User> {
+  static async createSuperAdmin(data: {
+    name: string;
+    email: string;
+    password: string;
+  }): Promise<User> {
     // Check if super admin already exists
-    const existingSuperAdmin = await this.findAll({ role: UserRole.SUPER_ADMIN });
+    const existingSuperAdmin = await this.findAll({
+      role: UserRole.SUPER_ADMIN,
+    });
     if (existingSuperAdmin.length > 0) {
       throw new Error('Super admin already exists');
     }
@@ -321,7 +380,7 @@ export class UserModel {
         SUM(CASE WHEN role = 'user' THEN 1 ELSE 0 END) as user
       FROM users
     `);
-    
+
     const result = stmt.get() as any;
     return {
       total: result.total,
@@ -336,4 +395,4 @@ export class UserModel {
       },
     };
   }
-} 
+}

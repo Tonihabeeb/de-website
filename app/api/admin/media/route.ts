@@ -14,7 +14,7 @@ const sampleMedia = [
     caption: 'Technical schematic showing the KPP system components and flow',
     tags: ['technical', 'schematic', 'kpp', 'diagram'],
     uploaded_by: 'admin-001',
-    created_at: '2024-07-01T00:00:00.000Z'
+    created_at: '2024-07-01T00:00:00.000Z',
   },
   {
     id: 'media-002',
@@ -24,10 +24,11 @@ const sampleMedia = [
     file_size: 3145728,
     mime_type: 'image/jpeg',
     alt_text: 'Power plant construction site',
-    caption: 'Construction site showing the foundation work for the new power plant',
+    caption:
+      'Construction site showing the foundation work for the new power plant',
     tags: ['construction', 'site', 'power-plant', 'foundation'],
     uploaded_by: 'admin-001',
-    created_at: '2024-07-05T00:00:00.000Z'
+    created_at: '2024-07-05T00:00:00.000Z',
   },
   {
     id: 'media-003',
@@ -40,7 +41,7 @@ const sampleMedia = [
     caption: 'Comprehensive technical specifications for the KPP system',
     tags: ['technical', 'specifications', 'document', 'pdf'],
     uploaded_by: 'admin-001',
-    created_at: '2024-07-10T00:00:00.000Z'
+    created_at: '2024-07-10T00:00:00.000Z',
   },
   {
     id: 'media-004',
@@ -53,7 +54,7 @@ const sampleMedia = [
     caption: 'Our dedicated engineering team working on the KPP implementation',
     tags: ['team', 'engineering', 'kpp', 'project'],
     uploaded_by: 'admin-001',
-    created_at: '2024-07-15T00:00:00.000Z'
+    created_at: '2024-07-15T00:00:00.000Z',
   },
   {
     id: 'media-005',
@@ -66,8 +67,8 @@ const sampleMedia = [
     caption: 'Visual representation of energy flow through the KPP system',
     tags: ['diagram', 'energy-flow', 'kpp', 'visual'],
     uploaded_by: 'admin-001',
-    created_at: '2024-07-18T00:00:00.000Z'
-  }
+    created_at: '2024-07-18T00:00:00.000Z',
+  },
 ];
 
 // GET /api/admin/media - Get all media
@@ -76,18 +77,26 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const mime_type = searchParams.get('mime_type');
     const uploaded_by = searchParams.get('uploaded_by');
-    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined;
-    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : undefined;
+    const limit = searchParams.get('limit')
+      ? parseInt(searchParams.get('limit')!)
+      : undefined;
+    const offset = searchParams.get('offset')
+      ? parseInt(searchParams.get('offset')!)
+      : undefined;
 
     let filteredMedia = [...sampleMedia];
 
     // Apply filters
     if (mime_type) {
-      filteredMedia = filteredMedia.filter(media => media.mime_type === mime_type);
+      filteredMedia = filteredMedia.filter(
+        media => media.mime_type === mime_type
+      );
     }
 
     if (uploaded_by) {
-      filteredMedia = filteredMedia.filter(media => media.uploaded_by === uploaded_by);
+      filteredMedia = filteredMedia.filter(
+        media => media.uploaded_by === uploaded_by
+      );
     }
 
     // Apply pagination
@@ -117,12 +126,25 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { filename, original_name, file_path, file_size, mime_type, alt_text, caption, tags } = body;
+    const {
+      filename,
+      original_name,
+      file_path,
+      file_size,
+      mime_type,
+      alt_text,
+      caption,
+      tags,
+    } = body;
 
     // Validate required fields
     if (!filename || !original_name || !file_path || !file_size || !mime_type) {
       return NextResponse.json(
-        { success: false, error: 'Filename, original name, file path, file size, and mime type are required' },
+        {
+          success: false,
+          error:
+            'Filename, original name, file path, file size, and mime type are required',
+        },
         { status: 400 }
       );
     }
@@ -144,11 +166,14 @@ export async function POST(request: NextRequest) {
     // In a real implementation, this would be saved to the database
     sampleMedia.push(newMedia);
 
-    return NextResponse.json({
-      success: true,
-      media: newMedia,
-      message: 'Media uploaded successfully',
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        media: newMedia,
+        message: 'Media uploaded successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error uploading media:', error);
     return NextResponse.json(
@@ -199,7 +224,7 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: `Deleted ${deletedCount} media items`,
-      deletedCount
+      deletedCount,
     });
   } catch (error) {
     console.error('Error deleting media items:', error);
@@ -208,4 +233,4 @@ export async function DELETE(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

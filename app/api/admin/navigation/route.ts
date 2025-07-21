@@ -35,8 +35,8 @@ export async function GET(request: NextRequest) {
         location: menu.location,
         items: JSON.parse(menu.items),
         created_at: menu.created_at,
-        updated_at: menu.updated_at
-      }))
+        updated_at: menu.updated_at,
+      })),
     });
   } catch (error) {
     console.error('Error fetching navigation menus:', error);
@@ -69,18 +69,26 @@ export async function POST(request: NextRequest) {
     const validLocations = ['header', 'footer', 'sidebar'];
     if (!validLocations.includes(location)) {
       return NextResponse.json(
-        { success: false, error: 'Invalid location. Must be one of: header, footer, sidebar' },
+        {
+          success: false,
+          error: 'Invalid location. Must be one of: header, footer, sidebar',
+        },
         { status: 400 }
       );
     }
 
     // Check if menu with same name and location already exists
-    const existingStmt = db.prepare('SELECT id FROM navigation_menus WHERE name = ? AND location = ?');
+    const existingStmt = db.prepare(
+      'SELECT id FROM navigation_menus WHERE name = ? AND location = ?'
+    );
     const existing = existingStmt.get(name, location);
-    
+
     if (existing) {
       return NextResponse.json(
-        { success: false, error: 'Navigation menu with this name and location already exists' },
+        {
+          success: false,
+          error: 'Navigation menu with this name and location already exists',
+        },
         { status: 409 }
       );
     }
@@ -100,14 +108,17 @@ export async function POST(request: NextRequest) {
       location,
       items,
       created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+      updated_at: new Date().toISOString(),
     };
 
-    return NextResponse.json({
-      success: true,
-      menu: newMenu,
-      message: 'Navigation menu created successfully',
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        menu: newMenu,
+        message: 'Navigation menu created successfully',
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error creating navigation menu:', error);
     return NextResponse.json(
@@ -115,4 +126,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

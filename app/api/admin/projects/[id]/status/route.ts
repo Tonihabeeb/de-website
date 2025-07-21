@@ -9,7 +9,7 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
@@ -21,7 +21,11 @@ export async function PATCH(
     const validStatuses = ['planning', 'in-progress', 'completed', 'cancelled'];
     if (!validStatuses.includes(status)) {
       return NextResponse.json(
-        { success: false, error: 'Invalid status. Must be one of: planning, in-progress, completed, cancelled' },
+        {
+          success: false,
+          error:
+            'Invalid status. Must be one of: planning, in-progress, completed, cancelled',
+        },
         { status: 400 }
       );
     }
@@ -37,7 +41,7 @@ export async function PATCH(
 
     // Update project status
     const updatedProject = await ProjectModel.updateStatus(id, status);
-    
+
     if (!updatedProject) {
       return NextResponse.json(
         { success: false, error: 'Failed to update project status' },
@@ -57,4 +61,4 @@ export async function PATCH(
       { status: 500 }
     );
   }
-} 
+}

@@ -9,15 +9,15 @@ export async function GET(request: NextRequest) {
         name: 'Super Administrator',
         description: 'Full system access with all permissions',
         permissions: ['canCreatePages', 'canEditPages', 'canViewPages'],
-        created_at: '2024-01-01T00:00:00.000Z'
+        created_at: '2024-01-01T00:00:00.000Z',
       },
       {
         id: 'admin',
         name: 'Administrator',
         description: 'Administrative access with most permissions',
         permissions: ['canCreatePages', 'canEditPages', 'canViewPages'],
-        created_at: '2024-01-01T00:00:00.000Z'
-      }
+        created_at: '2024-01-01T00:00:00.000Z',
+      },
     ];
 
     return NextResponse.json({
@@ -32,4 +32,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

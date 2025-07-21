@@ -1,12 +1,13 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-static';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Deep Engineering - Continuous Clean Energy, Anywhere',
     short_name: 'Deep Engineering',
-    description: 'Iraq\'s pioneer in renewable energy project development. Exclusive KPP licensee delivering 24/7 renewable power.',
+    description:
+      "Iraq's pioneer in renewable energy project development. Exclusive KPP licensee delivering 24/7 renewable power.",
     start_url: '/',
     display: 'standalone',
     background_color: '#1e40af',
@@ -114,5 +115,5 @@ export default function manifest(): MetadataRoute.Manifest {
       },
     ],
     prefer_related_applications: false,
-  }
-} 
+  };
+}

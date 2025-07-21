@@ -1,10 +1,10 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://deepengineering.co'
-  
+  const baseUrl = 'https://deepengineering.co';
+
   return [
     // Main Pages (High Priority)
     {
@@ -111,26 +111,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // Development/Test Pages (Low Priority - Exclude from production)
-    ...(process.env.NODE_ENV === 'development' ? [
-      {
-        url: `${baseUrl}/test`,
-        lastModified: new Date(),
-        changeFrequency: 'yearly' as const,
-        priority: 0.1,
-      },
-      {
-        url: `${baseUrl}/cms-test`,
-        lastModified: new Date(),
-        changeFrequency: 'yearly' as const,
-        priority: 0.1,
-      },
-      {
-        url: `${baseUrl}/offline`,
-        lastModified: new Date(),
-        changeFrequency: 'yearly' as const,
-        priority: 0.1,
-      },
-    ] : []),
+    ...(process.env.NODE_ENV === 'development'
+      ? [
+          {
+            url: `${baseUrl}/test`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly' as const,
+            priority: 0.1,
+          },
+          {
+            url: `${baseUrl}/cms-test`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly' as const,
+            priority: 0.1,
+          },
+          {
+            url: `${baseUrl}/offline`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly' as const,
+            priority: 0.1,
+          },
+        ]
+      : []),
 
     // Style Guide (Low Priority - Internal)
     {
@@ -139,5 +141,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
-  ]
-} 
+  ];
+}

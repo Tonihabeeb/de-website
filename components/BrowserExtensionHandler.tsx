@@ -30,10 +30,10 @@ export default function BrowserExtensionHandler() {
     removeExtensionElements();
 
     // Set up a mutation observer to watch for new injections
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
         if (mutation.type === 'childList') {
-          mutation.addedNodes.forEach((node) => {
+          mutation.addedNodes.forEach(node => {
             if (node.nodeType === Node.ELEMENT_NODE) {
               const element = node as Element;
               const extensionSelectors = [
@@ -46,7 +46,10 @@ export default function BrowserExtensionHandler() {
               ];
 
               extensionSelectors.forEach(selector => {
-                if (element.matches(selector) || element.querySelector(selector)) {
+                if (
+                  element.matches(selector) ||
+                  element.querySelector(selector)
+                ) {
                   if (element.parentNode) {
                     element.parentNode.removeChild(element);
                   }
@@ -71,4 +74,4 @@ export default function BrowserExtensionHandler() {
   }, []);
 
   return null; // This component doesn't render anything
-} 
+}

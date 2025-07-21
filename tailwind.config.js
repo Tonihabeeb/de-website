@@ -24,15 +24,15 @@ module.exports = {
         gray: {
           text: '#4C4C4D',
           light: '#F0F0F1',
-        }
+        },
       },
       fontSize: {
-        'hero': ['4rem', { lineHeight: '1.1' }],
+        hero: ['4rem', { lineHeight: '1.1' }],
         'hero-lg': ['6rem', { lineHeight: '1.1' }],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
+        18: '4.5rem',
+        88: '22rem',
       },
       maxWidth: {
         '8xl': '88rem',
@@ -70,8 +70,8 @@ module.exports = {
           '50%': { transform: 'scale(3)', opacity: '0.1' },
           '100%': { transform: 'scale(1)', opacity: '0.3' },
         },
-      }
+      },
     },
   },
   plugins: [],
-} 
+};

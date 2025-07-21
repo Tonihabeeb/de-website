@@ -31,16 +31,19 @@ const FileUpload: React.FC<FileUploadProps> = ({
 }) => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
-  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: any[]) => {
-    if (rejectedFiles.length > 0) {
-      console.log('Rejected files:', rejectedFiles);
-      // You can show toast notifications here for rejected files
-    }
+  const onDrop = useCallback(
+    (acceptedFiles: File[], rejectedFiles: any[]) => {
+      if (rejectedFiles.length > 0) {
+        console.log('Rejected files:', rejectedFiles);
+        // You can show toast notifications here for rejected files
+      }
 
-    const newFiles = [...uploadedFiles, ...acceptedFiles].slice(0, maxFiles);
-    setUploadedFiles(newFiles);
-    onFilesSelected(newFiles);
-  }, [uploadedFiles, maxFiles, onFilesSelected]);
+      const newFiles = [...uploadedFiles, ...acceptedFiles].slice(0, maxFiles);
+      setUploadedFiles(newFiles);
+      onFilesSelected(newFiles);
+    },
+    [uploadedFiles, maxFiles, onFilesSelected]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -58,15 +61,15 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   const getFileIcon = (file: File) => {
     if (file.type.startsWith('image/')) {
-      return <Image className="w-6 h-6 text-blue-500" />;
+      return <Image className='w-6 h-6 text-blue-500' />;
     } else if (file.type === 'application/pdf') {
-      return <FileText className="w-6 h-6 text-red-500" />;
+      return <FileText className='w-6 h-6 text-red-500' />;
     } else if (file.type.startsWith('video/')) {
-      return <Video className="w-6 h-6 text-purple-500" />;
+      return <Video className='w-6 h-6 text-purple-500' />;
     } else if (file.type.startsWith('audio/')) {
-      return <Music className="w-6 h-6 text-green-500" />;
+      return <Music className='w-6 h-6 text-green-500' />;
     } else {
-      return <File className="w-6 h-6 text-gray-500" />;
+      return <File className='w-6 h-6 text-gray-500' />;
     }
   };
 
@@ -90,15 +93,15 @@ const FileUpload: React.FC<FileUploadProps> = ({
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
       >
         <input {...getInputProps()} />
-        <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+        <Upload className='w-12 h-12 text-gray-400 mx-auto mb-4' />
         {isDragActive ? (
-          <p className="text-blue-600 font-medium">Drop the files here...</p>
+          <p className='text-blue-600 font-medium'>Drop the files here...</p>
         ) : (
           <div>
-            <p className="text-gray-600 font-medium mb-2">
+            <p className='text-gray-600 font-medium mb-2'>
               Drag & drop files here, or click to select files
             </p>
-            <p className="text-sm text-gray-500">
+            <p className='text-sm text-gray-500'>
               Max {maxFiles} files, up to {formatFileSize(maxSize)} each
             </p>
           </div>
@@ -107,32 +110,32 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
       {/* File Preview */}
       {showPreview && uploadedFiles.length > 0 && (
-        <div className="space-y-2">
-          <h4 className="text-sm font-medium text-gray-700">
+        <div className='space-y-2'>
+          <h4 className='text-sm font-medium text-gray-700'>
             Selected Files ({uploadedFiles.length}/{maxFiles})
           </h4>
-          <div className="space-y-2">
+          <div className='space-y-2'>
             {uploadedFiles.map((file, index) => (
               <div
                 key={`${file.name}-${index}`}
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'
               >
-                <div className="flex items-center space-x-3">
+                <div className='flex items-center space-x-3'>
                   {getFileIcon(file)}
                   <div>
-                    <p className="text-sm font-medium text-gray-900 truncate max-w-xs">
+                    <p className='text-sm font-medium text-gray-900 truncate max-w-xs'>
                       {file.name}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className='text-xs text-gray-500'>
                       {formatFileSize(file.size)}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => removeFile(index)}
-                  className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                  className='p-1 text-gray-400 hover:text-red-500 transition-colors'
                 >
-                  <X className="w-4 h-4" />
+                  <X className='w-4 h-4' />
                 </button>
               </div>
             ))}
@@ -143,4 +146,4 @@ const FileUpload: React.FC<FileUploadProps> = ({
   );
 };
 
-export default FileUpload; 
+export default FileUpload;

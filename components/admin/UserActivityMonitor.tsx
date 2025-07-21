@@ -6,17 +6,17 @@ import { ColumnDef } from '@tanstack/react-table';
 import DataTable from '@/components/ui/DataTable';
 import Modal from '@/components/ui/Modal';
 import { toast } from '@/components/ui/Toast';
-import { 
-  User, 
-  Clock, 
-  Activity, 
-  Eye, 
-  FileText, 
-  Settings, 
+import {
+  User,
+  Clock,
+  Activity,
+  Eye,
+  FileText,
+  Settings,
   Calendar,
   Filter,
   Download,
-  RefreshCw
+  RefreshCw,
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
@@ -47,13 +47,15 @@ const UserActivityMonitor: React.FC = () => {
   const [activities, setActivities] = useState<UserActivity[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<ActivityFilter>({});
-  const [selectedActivity, setSelectedActivity] = useState<UserActivity | null>(null);
+  const [selectedActivity, setSelectedActivity] = useState<UserActivity | null>(
+    null
+  );
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [stats, setStats] = useState({
     totalActivities: 0,
     todayActivities: 0,
     activeUsers: 0,
-    topActions: [] as { action: string; count: number }[]
+    topActions: [] as { action: string; count: number }[],
   });
 
   // Mock data for demonstration
@@ -70,7 +72,7 @@ const UserActivityMonitor: React.FC = () => {
       ipAddress: '192.168.1.100',
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
       sessionId: 'sess_123456',
-      details: { browser: 'Chrome', os: 'Windows 10' }
+      details: { browser: 'Chrome', os: 'Windows 10' },
     },
     {
       id: '2',
@@ -84,7 +86,7 @@ const UserActivityMonitor: React.FC = () => {
       ipAddress: '192.168.1.100',
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
       sessionId: 'sess_123456',
-      details: { projectId: 'proj_001', projectName: 'Project Alpha' }
+      details: { projectId: 'proj_001', projectName: 'Project Alpha' },
     },
     {
       id: '3',
@@ -98,7 +100,10 @@ const UserActivityMonitor: React.FC = () => {
       ipAddress: '192.168.1.101',
       userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
       sessionId: 'sess_789012',
-      details: { pageId: 'page_001', changes: ['Updated content', 'Modified meta tags'] }
+      details: {
+        pageId: 'page_001',
+        changes: ['Updated content', 'Modified meta tags'],
+      },
     },
     {
       id: '4',
@@ -112,7 +117,7 @@ const UserActivityMonitor: React.FC = () => {
       ipAddress: '192.168.1.102',
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
       sessionId: 'sess_345678',
-      details: { fileName: 'tech_doc.pdf', fileSize: '2.5MB' }
+      details: { fileName: 'tech_doc.pdf', fileSize: '2.5MB' },
     },
     {
       id: '5',
@@ -126,8 +131,8 @@ const UserActivityMonitor: React.FC = () => {
       ipAddress: '192.168.1.100',
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
       sessionId: 'sess_123456',
-      details: { projectId: 'proj_002', reason: 'Archived' }
-    }
+      details: { projectId: 'proj_002', reason: 'Archived' },
+    },
   ];
 
   useEffect(() => {
@@ -153,16 +158,17 @@ const UserActivityMonitor: React.FC = () => {
       // Simulate API call for stats
       const mockStats = {
         totalActivities: mockActivities.length,
-        todayActivities: mockActivities.filter(a => 
-          new Date(a.timestamp).toDateString() === new Date().toDateString()
+        todayActivities: mockActivities.filter(
+          a =>
+            new Date(a.timestamp).toDateString() === new Date().toDateString()
         ).length,
         activeUsers: new Set(mockActivities.map(a => a.userId)).size,
         topActions: [
           { action: 'login', count: 15 },
           { action: 'edit', count: 12 },
           { action: 'create', count: 8 },
-          { action: 'upload', count: 5 }
-        ]
+          { action: 'upload', count: 5 },
+        ],
       };
       setStats(mockStats);
     } catch (error) {
@@ -187,17 +193,17 @@ const UserActivityMonitor: React.FC = () => {
   const getActionIcon = (action: string) => {
     switch (action) {
       case 'login':
-        return <User className="w-4 h-4 text-green-600" />;
+        return <User className='w-4 h-4 text-green-600' />;
       case 'create':
-        return <FileText className="w-4 h-4 text-blue-600" />;
+        return <FileText className='w-4 h-4 text-blue-600' />;
       case 'edit':
-        return <Settings className="w-4 h-4 text-yellow-600" />;
+        return <Settings className='w-4 h-4 text-yellow-600' />;
       case 'delete':
-        return <FileText className="w-4 h-4 text-red-600" />;
+        return <FileText className='w-4 h-4 text-red-600' />;
       case 'upload':
-        return <FileText className="w-4 h-4 text-purple-600" />;
+        return <FileText className='w-4 h-4 text-purple-600' />;
       default:
-        return <Activity className="w-4 h-4 text-gray-600" />;
+        return <Activity className='w-4 h-4 text-gray-600' />;
     }
   };
 
@@ -223,11 +229,13 @@ const UserActivityMonitor: React.FC = () => {
       accessorKey: 'userName',
       header: 'User',
       cell: ({ row }) => (
-        <div className="flex items-center space-x-2">
-          <User className="w-4 h-4 text-gray-400" />
+        <div className='flex items-center space-x-2'>
+          <User className='w-4 h-4 text-gray-400' />
           <div>
-            <p className="text-sm font-medium text-gray-900">{row.getValue('userName')}</p>
-            <p className="text-xs text-gray-500">{row.original.userEmail}</p>
+            <p className='text-sm font-medium text-gray-900'>
+              {row.getValue('userName')}
+            </p>
+            <p className='text-xs text-gray-500'>{row.original.userEmail}</p>
           </div>
         </div>
       ),
@@ -236,9 +244,11 @@ const UserActivityMonitor: React.FC = () => {
       accessorKey: 'action',
       header: 'Action',
       cell: ({ row }) => (
-        <div className="flex items-center space-x-2">
+        <div className='flex items-center space-x-2'>
           {getActionIcon(row.getValue('action'))}
-          <span className="text-sm font-medium capitalize">{row.getValue('action')}</span>
+          <span className='text-sm font-medium capitalize'>
+            {row.getValue('action')}
+          </span>
         </div>
       ),
     },
@@ -247,8 +257,10 @@ const UserActivityMonitor: React.FC = () => {
       header: 'Resource',
       cell: ({ row }) => (
         <div>
-          <p className="text-sm text-gray-900">{row.getValue('resource')}</p>
-          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getResourceTypeColor(row.original.resourceType)}`}>
+          <p className='text-sm text-gray-900'>{row.getValue('resource')}</p>
+          <span
+            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getResourceTypeColor(row.original.resourceType)}`}
+          >
             {row.original.resourceType}
           </span>
         </div>
@@ -258,9 +270,9 @@ const UserActivityMonitor: React.FC = () => {
       accessorKey: 'timestamp',
       header: 'Timestamp',
       cell: ({ row }) => (
-        <div className="flex items-center space-x-2">
-          <Clock className="w-4 h-4 text-gray-400" />
-          <span className="text-sm text-gray-900">
+        <div className='flex items-center space-x-2'>
+          <Clock className='w-4 h-4 text-gray-400' />
+          <span className='text-sm text-gray-900'>
             {format(new Date(row.getValue('timestamp')), 'MMM dd, yyyy HH:mm')}
           </span>
         </div>
@@ -270,7 +282,9 @@ const UserActivityMonitor: React.FC = () => {
       accessorKey: 'ipAddress',
       header: 'IP Address',
       cell: ({ row }) => (
-        <span className="text-sm text-gray-600 font-mono">{row.getValue('ipAddress')}</span>
+        <span className='text-sm text-gray-600 font-mono'>
+          {row.getValue('ipAddress')}
+        </span>
       ),
     },
     {
@@ -278,14 +292,14 @@ const UserActivityMonitor: React.FC = () => {
       header: 'Actions',
       cell: ({ row }) => (
         <Button
-          variant="secondary"
-          size="sm"
+          variant='secondary'
+          size='sm'
           onClick={() => {
             setSelectedActivity(row.original);
             setIsDetailModalOpen(true);
           }}
         >
-          <Eye className="w-4 h-4" />
+          <Eye className='w-4 h-4' />
         </Button>
       ),
     },
@@ -294,60 +308,79 @@ const UserActivityMonitor: React.FC = () => {
   const filteredActivities = activities.filter(activity => {
     if (filters.userId && activity.userId !== filters.userId) return false;
     if (filters.action && activity.action !== filters.action) return false;
-    if (filters.resourceType && activity.resourceType !== filters.resourceType) return false;
-    if (filters.dateFrom && new Date(activity.timestamp) < new Date(filters.dateFrom)) return false;
-    if (filters.dateTo && new Date(activity.timestamp) > new Date(filters.dateTo)) return false;
+    if (filters.resourceType && activity.resourceType !== filters.resourceType)
+      return false;
+    if (
+      filters.dateFrom &&
+      new Date(activity.timestamp) < new Date(filters.dateFrom)
+    )
+      return false;
+    if (
+      filters.dateTo &&
+      new Date(activity.timestamp) > new Date(filters.dateTo)
+    )
+      return false;
     return true;
   });
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Activity className="w-6 h-6 text-blue-600" />
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-blue-100 rounded-lg'>
+              <Activity className='w-6 h-6 text-blue-600' />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Activities</p>
-              <p className="text-2xl font-bold text-gray-900">{stats.totalActivities}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <Calendar className="w-6 h-6 text-green-600" />
-            </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Today's Activities</p>
-              <p className="text-2xl font-bold text-gray-900">{stats.todayActivities}</p>
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>
+                Total Activities
+              </p>
+              <p className='text-2xl font-bold text-gray-900'>
+                {stats.totalActivities}
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-purple-100 rounded-lg">
-              <User className="w-6 h-6 text-purple-600" />
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-green-100 rounded-lg'>
+              <Calendar className='w-6 h-6 text-green-600' />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Active Users</p>
-              <p className="text-2xl font-bold text-gray-900">{stats.activeUsers}</p>
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>
+                Today's Activities
+              </p>
+              <p className='text-2xl font-bold text-gray-900'>
+                {stats.todayActivities}
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center">
-            <div className="p-2 bg-orange-100 rounded-lg">
-              <Filter className="w-6 h-6 text-orange-600" />
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-purple-100 rounded-lg'>
+              <User className='w-6 h-6 text-purple-600' />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Top Action</p>
-              <p className="text-lg font-bold text-gray-900 capitalize">
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>Active Users</p>
+              <p className='text-2xl font-bold text-gray-900'>
+                {stats.activeUsers}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className='bg-white rounded-lg shadow p-6'>
+          <div className='flex items-center'>
+            <div className='p-2 bg-orange-100 rounded-lg'>
+              <Filter className='w-6 h-6 text-orange-600' />
+            </div>
+            <div className='ml-4'>
+              <p className='text-sm font-medium text-gray-600'>Top Action</p>
+              <p className='text-lg font-bold text-gray-900 capitalize'>
                 {stats.topActions[0]?.action || 'N/A'}
               </p>
             </div>
@@ -356,92 +389,104 @@ const UserActivityMonitor: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Filters</h3>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className='bg-white rounded-lg shadow p-6'>
+        <h3 className='text-lg font-medium text-gray-900 mb-4'>Filters</h3>
+        <div className='grid grid-cols-1 md:grid-cols-5 gap-4'>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">User</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              User
+            </label>
             <select
               value={filters.userId || ''}
-              onChange={(e) => handleFilterChange('userId', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e => handleFilterChange('userId', e.target.value)}
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >
-              <option value="">All Users</option>
-              {Array.from(new Set(activities.map(a => a.userId))).map(userId => {
-                const user = activities.find(a => a.userId === userId);
-                return (
-                  <option key={userId} value={userId}>
-                    {user?.userName}
-                  </option>
-                );
-              })}
+              <option value=''>All Users</option>
+              {Array.from(new Set(activities.map(a => a.userId))).map(
+                userId => {
+                  const user = activities.find(a => a.userId === userId);
+                  return (
+                    <option key={userId} value={userId}>
+                      {user?.userName}
+                    </option>
+                  );
+                }
+              )}
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Action</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              Action
+            </label>
             <select
               value={filters.action || ''}
-              onChange={(e) => handleFilterChange('action', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e => handleFilterChange('action', e.target.value)}
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >
-              <option value="">All Actions</option>
-              <option value="login">Login</option>
-              <option value="create">Create</option>
-              <option value="edit">Edit</option>
-              <option value="delete">Delete</option>
-              <option value="upload">Upload</option>
+              <option value=''>All Actions</option>
+              <option value='login'>Login</option>
+              <option value='create'>Create</option>
+              <option value='edit'>Edit</option>
+              <option value='delete'>Delete</option>
+              <option value='upload'>Upload</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Resource Type</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              Resource Type
+            </label>
             <select
               value={filters.resourceType || ''}
-              onChange={(e) => handleFilterChange('resourceType', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e => handleFilterChange('resourceType', e.target.value)}
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >
-              <option value="">All Types</option>
-              <option value="page">Page</option>
-              <option value="project">Project</option>
-              <option value="document">Document</option>
-              <option value="user">User</option>
-              <option value="system">System</option>
+              <option value=''>All Types</option>
+              <option value='page'>Page</option>
+              <option value='project'>Project</option>
+              <option value='document'>Document</option>
+              <option value='user'>User</option>
+              <option value='system'>System</option>
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">From Date</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              From Date
+            </label>
             <input
-              type="date"
+              type='date'
               value={filters.dateFrom || ''}
-              onChange={(e) => handleFilterChange('dateFrom', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e => handleFilterChange('dateFrom', e.target.value)}
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">To Date</label>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              To Date
+            </label>
             <input
-              type="date"
+              type='date'
               value={filters.dateTo || ''}
-              onChange={(e) => handleFilterChange('dateTo', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={e => handleFilterChange('dateTo', e.target.value)}
+              className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
         </div>
       </div>
 
       {/* Actions */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold text-gray-900">User Activity Log</h2>
-        <div className="flex space-x-3">
-          <Button variant="secondary" onClick={handleRefresh}>
-            <RefreshCw className="w-4 h-4 mr-2" />
+      <div className='flex justify-between items-center'>
+        <h2 className='text-xl font-bold text-gray-900'>User Activity Log</h2>
+        <div className='flex space-x-3'>
+          <Button variant='secondary' onClick={handleRefresh}>
+            <RefreshCw className='w-4 h-4 mr-2' />
             Refresh
           </Button>
-          <Button variant="secondary" onClick={handleExport}>
-            <Download className="w-4 h-4 mr-2" />
+          <Button variant='secondary' onClick={handleExport}>
+            <Download className='w-4 h-4 mr-2' />
             Export
           </Button>
         </div>
@@ -451,8 +496,8 @@ const UserActivityMonitor: React.FC = () => {
       <DataTable
         columns={columns}
         data={filteredActivities}
-        searchKey="userName"
-        searchPlaceholder="Search by user name..."
+        searchKey='userName'
+        searchPlaceholder='Search by user name...'
         pageSize={10}
       />
 
@@ -460,59 +505,94 @@ const UserActivityMonitor: React.FC = () => {
       <Modal
         isOpen={isDetailModalOpen}
         onClose={() => setIsDetailModalOpen(false)}
-        title="Activity Details"
-        size="lg"
+        title='Activity Details'
+        size='lg'
       >
         {selectedActivity && (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+          <div className='space-y-4'>
+            <div className='grid grid-cols-2 gap-4'>
               <div>
-                <label className="block text-sm font-medium text-gray-700">User</label>
-                <p className="text-sm text-gray-900">{selectedActivity.userName}</p>
-                <p className="text-xs text-gray-500">{selectedActivity.userEmail}</p>
+                <label className='block text-sm font-medium text-gray-700'>
+                  User
+                </label>
+                <p className='text-sm text-gray-900'>
+                  {selectedActivity.userName}
+                </p>
+                <p className='text-xs text-gray-500'>
+                  {selectedActivity.userEmail}
+                </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Action</label>
-                <div className="flex items-center space-x-2">
+                <label className='block text-sm font-medium text-gray-700'>
+                  Action
+                </label>
+                <div className='flex items-center space-x-2'>
                   {getActionIcon(selectedActivity.action)}
-                  <span className="text-sm font-medium capitalize">{selectedActivity.action}</span>
+                  <span className='text-sm font-medium capitalize'>
+                    {selectedActivity.action}
+                  </span>
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Resource</label>
-                <p className="text-sm text-gray-900">{selectedActivity.resource}</p>
-                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getResourceTypeColor(selectedActivity.resourceType)}`}>
+                <label className='block text-sm font-medium text-gray-700'>
+                  Resource
+                </label>
+                <p className='text-sm text-gray-900'>
+                  {selectedActivity.resource}
+                </p>
+                <span
+                  className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getResourceTypeColor(selectedActivity.resourceType)}`}
+                >
                   {selectedActivity.resourceType}
                 </span>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Timestamp</label>
-                <p className="text-sm text-gray-900">
-                  {format(new Date(selectedActivity.timestamp), 'MMM dd, yyyy HH:mm:ss')}
+                <label className='block text-sm font-medium text-gray-700'>
+                  Timestamp
+                </label>
+                <p className='text-sm text-gray-900'>
+                  {format(
+                    new Date(selectedActivity.timestamp),
+                    'MMM dd, yyyy HH:mm:ss'
+                  )}
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">IP Address</label>
-                <p className="text-sm font-mono text-gray-900">{selectedActivity.ipAddress}</p>
+                <label className='block text-sm font-medium text-gray-700'>
+                  IP Address
+                </label>
+                <p className='text-sm font-mono text-gray-900'>
+                  {selectedActivity.ipAddress}
+                </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Session ID</label>
-                <p className="text-sm font-mono text-gray-900">{selectedActivity.sessionId}</p>
+                <label className='block text-sm font-medium text-gray-700'>
+                  Session ID
+                </label>
+                <p className='text-sm font-mono text-gray-900'>
+                  {selectedActivity.sessionId}
+                </p>
               </div>
             </div>
 
             {selectedActivity.details && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Details</label>
-                <pre className="bg-gray-50 p-3 rounded text-sm overflow-auto max-h-32">
+                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  Details
+                </label>
+                <pre className='bg-gray-50 p-3 rounded text-sm overflow-auto max-h-32'>
                   {JSON.stringify(selectedActivity.details, null, 2)}
                 </pre>
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">User Agent</label>
-              <p className="text-xs text-gray-600 break-all">{selectedActivity.userAgent}</p>
+              <label className='block text-sm font-medium text-gray-700 mb-2'>
+                User Agent
+              </label>
+              <p className='text-xs text-gray-600 break-all'>
+                {selectedActivity.userAgent}
+              </p>
             </div>
           </div>
         )}
@@ -521,4 +601,4 @@ const UserActivityMonitor: React.FC = () => {
   );
 };
 
-export default UserActivityMonitor; 
+export default UserActivityMonitor;

@@ -18,11 +18,13 @@ export async function GET(
 
     const { id } = await params;
     const backupsDir = path.join(process.cwd(), 'backups');
-    
+
     // Find backup file by ID
     const backupFiles = fs.readdirSync(backupsDir);
-    const backupFile = backupFiles.find(file => file.replace(/\.[^/.]+$/, '') === id);
-    
+    const backupFile = backupFiles.find(
+      file => file.replace(/\.[^/.]+$/, '') === id
+    );
+
     if (!backupFile) {
       return NextResponse.json(
         { success: false, error: 'Backup not found' },
@@ -31,7 +33,7 @@ export async function GET(
     }
 
     const backupPath = path.join(backupsDir, backupFile);
-    
+
     // Check if file exists
     if (!fs.existsSync(backupPath)) {
       return NextResponse.json(
@@ -42,16 +44,19 @@ export async function GET(
 
     // Get file stats
     const fileStats = await stat(backupPath);
-    
+
     // Read file
     const fileBuffer = fs.readFileSync(backupPath);
-    
+
     // Create response with file download headers
     const response = new NextResponse(fileBuffer);
     response.headers.set('Content-Type', 'application/octet-stream');
-    response.headers.set('Content-Disposition', `attachment; filename="${backupFile}"`);
+    response.headers.set(
+      'Content-Disposition',
+      `attachment; filename="${backupFile}"`
+    );
     response.headers.set('Content-Length', fileStats.size.toString());
-    
+
     return response;
   } catch (error) {
     console.error('Error downloading backup:', error);
@@ -60,4 +65,4 @@ export async function GET(
       { status: 500 }
     );
   }
-} 
+}

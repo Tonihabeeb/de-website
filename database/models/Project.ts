@@ -53,7 +53,7 @@ export class ProjectModel {
   static async create(data: CreateProjectData): Promise<Project> {
     const id = uuidv4();
     const now = new Date();
-    
+
     const project: Project = {
       id,
       name: data.name,
@@ -103,9 +103,9 @@ export class ProjectModel {
   static async findById(id: string): Promise<Project | null> {
     const stmt = db.prepare('SELECT * FROM projects WHERE id = ?');
     const row = stmt.get(id) as any;
-    
+
     if (!row) return null;
-    
+
     return {
       ...row,
       content: JSON.parse(row.content),
@@ -119,9 +119,9 @@ export class ProjectModel {
   static async findBySlug(slug: string): Promise<Project | null> {
     const stmt = db.prepare('SELECT * FROM projects WHERE slug = ?');
     const row = stmt.get(slug) as any;
-    
+
     if (!row) return null;
-    
+
     return {
       ...row,
       content: JSON.parse(row.content),
@@ -176,7 +176,7 @@ export class ProjectModel {
 
     const stmt = db.prepare(query);
     const rows = stmt.all(...params) as any[];
-    
+
     return rows.map(row => ({
       ...row,
       content: JSON.parse(row.content),
@@ -187,7 +187,10 @@ export class ProjectModel {
     }));
   }
 
-  static async update(id: string, data: UpdateProjectData): Promise<Project | null> {
+  static async update(
+    id: string,
+    data: UpdateProjectData
+  ): Promise<Project | null> {
     const existing = await this.findById(id);
     if (!existing) return null;
 
@@ -266,7 +269,10 @@ export class ProjectModel {
     return result.changes > 0;
   }
 
-  static async updateStatus(id: string, status: Project['status']): Promise<Project | null> {
+  static async updateStatus(
+    id: string,
+    status: Project['status']
+  ): Promise<Project | null> {
     return this.update(id, { status });
   }
 
@@ -286,7 +292,7 @@ export class ProjectModel {
         SUM(CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) as cancelled
       FROM projects
     `);
-    
+
     const result = stmt.get() as any;
     return {
       total: result.total,
@@ -296,4 +302,4 @@ export class ProjectModel {
       cancelled: result.cancelled,
     };
   }
-} 
+}

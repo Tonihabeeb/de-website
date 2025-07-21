@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       projects,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
     console.error('Error fetching project analytics:', error);
@@ -61,11 +61,21 @@ export async function GET(request: NextRequest) {
 }
 
 // Helper function to get project analytics
-async function getProjectAnalytics(projectId?: string | null, timeRange: string = '30d'): Promise<ProjectAnalytics[]> {
+async function getProjectAnalytics(
+  projectId?: string | null,
+  timeRange: string = '30d'
+): Promise<ProjectAnalytics[]> {
   try {
     // Build date filter
-    const days = timeRange === '7d' ? 7 : timeRange === '90d' ? 90 : timeRange === '1y' ? 365 : 30;
-    
+    const days =
+      timeRange === '7d'
+        ? 7
+        : timeRange === '90d'
+          ? 90
+          : timeRange === '1y'
+            ? 365
+            : 30;
+
     // Build project filter
     let projectFilter = '';
     let params: any[] = [];
@@ -89,7 +99,7 @@ async function getProjectAnalytics(projectId?: string | null, timeRange: string 
       ${projectFilter}
       ORDER BY p.created_at DESC
     `;
-    
+
     const projectsStmt = db.prepare(projectsQuery);
     const projects = projectsStmt.all(...params) as any[];
 
@@ -141,22 +151,33 @@ async function getProjectAnalytics(projectId?: string | null, timeRange: string 
       const timeline = timelineStmt.all(project.project_id) as any[];
 
       // Calculate performance metrics
-      const performanceMetrics = calculatePerformanceMetrics(project, milestones);
+      const performanceMetrics = calculatePerformanceMetrics(
+        project,
+        milestones
+      );
 
       // Calculate budget usage
       const budgetUsed = project.budget ? Math.round(project.budget * 0.75) : 0; // Mock data
       const budgetTotal = project.budget || 100000;
 
       // Calculate timeline progress
-      const timelineProgress = calculateTimelineProgress(project.start_date, project.end_date);
+      const timelineProgress = calculateTimelineProgress(
+        project.start_date,
+        project.end_date
+      );
 
       projectAnalytics.push({
         project_id: project.project_id,
         name: project.name,
         status: project.status,
-        completion_rate: milestones.total_milestones > 0 
-          ? Math.round((milestones.completed_milestones / milestones.total_milestones) * 100)
-          : 0,
+        completion_rate:
+          milestones.total_milestones > 0
+            ? Math.round(
+                (milestones.completed_milestones /
+                  milestones.total_milestones) *
+                  100
+              )
+            : 0,
         total_milestones: milestones.total_milestones || 0,
         completed_milestones: milestones.completed_milestones || 0,
         team_size: project.team_size || 0,
@@ -169,13 +190,17 @@ async function getProjectAnalytics(projectId?: string | null, timeRange: string 
           type: activity.type,
           description: activity.description || `${activity.type} activity`,
           user: activity.user || 'Unknown User',
-          timestamp: activity.timestamp
+          timestamp: activity.timestamp,
         })),
         timeline_data: timeline.map(item => ({
           date: item.date,
-          progress: Math.round((item.milestones_completed / Math.max(milestones.total_milestones, 1)) * 100),
-          milestones_completed: item.milestones_completed
-        }))
+          progress: Math.round(
+            (item.milestones_completed /
+              Math.max(milestones.total_milestones, 1)) *
+              100
+          ),
+          milestones_completed: item.milestones_completed,
+        })),
       });
     }
 
@@ -188,32 +213,36 @@ async function getProjectAnalytics(projectId?: string | null, timeRange: string 
 
 // Helper function to calculate performance metrics
 function calculatePerformanceMetrics(project: any, milestones: any) {
-  const completionRate = milestones.total_milestones > 0 
-    ? (milestones.completed_milestones / milestones.total_milestones) * 100
-    : 0;
+  const completionRate =
+    milestones.total_milestones > 0
+      ? (milestones.completed_milestones / milestones.total_milestones) * 100
+      : 0;
 
   // Mock performance calculations based on project data
-  const efficiencyScore = Math.min(100, Math.max(0, 
-    completionRate + (Math.random() * 20 - 10)
-  ));
-  
-  const qualityScore = Math.min(100, Math.max(0, 
-    85 + (Math.random() * 15 - 7.5)
-  ));
-  
-  const riskScore = Math.min(100, Math.max(0, 
-    20 + (Math.random() * 30 - 15)
-  ));
+  const efficiencyScore = Math.min(
+    100,
+    Math.max(0, completionRate + (Math.random() * 20 - 10))
+  );
+
+  const qualityScore = Math.min(
+    100,
+    Math.max(0, 85 + (Math.random() * 15 - 7.5))
+  );
+
+  const riskScore = Math.min(100, Math.max(0, 20 + (Math.random() * 30 - 15)));
 
   return {
     efficiency_score: Math.round(efficiencyScore),
     quality_score: Math.round(qualityScore),
-    risk_score: Math.round(riskScore)
+    risk_score: Math.round(riskScore),
   };
 }
 
 // Helper function to calculate timeline progress
-function calculateTimelineProgress(startDate: string | null, endDate: string | null): number {
+function calculateTimelineProgress(
+  startDate: string | null,
+  endDate: string | null
+): number {
   if (!startDate || !endDate) return 0;
 
   const start = new Date(startDate);
@@ -227,4 +256,4 @@ function calculateTimelineProgress(startDate: string | null, endDate: string | n
   const elapsed = now.getTime() - start.getTime();
 
   return Math.round((elapsed / totalDuration) * 100);
-} 
+}

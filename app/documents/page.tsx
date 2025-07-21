@@ -37,7 +37,9 @@ export default function DocumentsPage() {
   const { isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState('all');
   const [showUpload, setShowUpload] = useState(false);
-  const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
+  const [selectedDocument, setSelectedDocument] = useState<Document | null>(
+    null
+  );
 
   const handleUploadSuccess = (document: any) => {
     setShowUpload(false);
@@ -57,24 +59,26 @@ export default function DocumentsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
+    <div className='min-h-screen bg-gray-50'>
+      <div className='container mx-auto px-4 py-8'>
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+        <div className='mb-8'>
+          <div className='flex items-center justify-between'>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Document Management</h1>
-              <p className="text-gray-600 mt-2">
+              <h1 className='text-3xl font-bold text-gray-900'>
+                Document Management
+              </h1>
+              <p className='text-gray-600 mt-2'>
                 Upload, organize, and manage your documents and files
               </p>
             </div>
-            
+
             <RoleGuard roles={['admin', 'editor']}>
               <button
                 onClick={() => setShowUpload(!showUpload)}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
               >
-                <Upload className="h-4 w-4 mr-2" />
+                <Upload className='h-4 w-4 mr-2' />
                 {showUpload ? 'Cancel Upload' : 'Upload Document'}
               </button>
             </RoleGuard>
@@ -83,9 +87,11 @@ export default function DocumentsPage() {
 
         {/* Upload Section */}
         {showUpload && (
-          <div className="mb-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Upload New Document</h2>
+          <div className='mb-8'>
+            <div className='bg-white rounded-lg shadow p-6'>
+              <h2 className='text-xl font-semibold text-gray-900 mb-4'>
+                Upload New Document
+              </h2>
               <DocumentUpload
                 onUploadSuccess={handleUploadSuccess}
                 onUploadError={handleUploadError}
@@ -96,10 +102,10 @@ export default function DocumentsPage() {
         )}
 
         {/* Tabs */}
-        <div className="bg-white rounded-lg shadow mb-6">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8 px-6">
-              {tabs.map((tab) => {
+        <div className='bg-white rounded-lg shadow mb-6'>
+          <div className='border-b border-gray-200'>
+            <nav className='-mb-px flex space-x-8 px-6'>
+              {tabs.map(tab => {
                 const Icon = tab.icon;
                 return (
                   <button
@@ -111,7 +117,7 @@ export default function DocumentsPage() {
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className='h-4 w-4' />
                     <span>{tab.name}</span>
                   </button>
                 );
@@ -121,7 +127,7 @@ export default function DocumentsPage() {
         </div>
 
         {/* Document List */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className='bg-white rounded-lg shadow p-6'>
           <DocumentList
             type={activeTab === 'all' ? undefined : activeTab}
             showActions={true}
@@ -131,40 +137,60 @@ export default function DocumentsPage() {
 
         {/* Document Details Modal (placeholder) */}
         {selectedDocument && (
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-              <div className="mt-3">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
+          <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
+            <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+              <div className='mt-3'>
+                <h3 className='text-lg font-medium text-gray-900 mb-4'>
                   Document Details
                 </h3>
-                <div className="space-y-3">
+                <div className='space-y-3'>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Title:</label>
-                    <p className="text-sm text-gray-900">{selectedDocument.title}</p>
+                    <label className='text-sm font-medium text-gray-700'>
+                      Title:
+                    </label>
+                    <p className='text-sm text-gray-900'>
+                      {selectedDocument.title}
+                    </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Description:</label>
-                    <p className="text-sm text-gray-900">{selectedDocument.description}</p>
+                    <label className='text-sm font-medium text-gray-700'>
+                      Description:
+                    </label>
+                    <p className='text-sm text-gray-900'>
+                      {selectedDocument.description}
+                    </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Category:</label>
-                    <p className="text-sm text-gray-900">{selectedDocument.category}</p>
+                    <label className='text-sm font-medium text-gray-700'>
+                      Category:
+                    </label>
+                    <p className='text-sm text-gray-900'>
+                      {selectedDocument.category}
+                    </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Uploaded by:</label>
-                    <p className="text-sm text-gray-900">{selectedDocument.uploadedBy.name}</p>
+                    <label className='text-sm font-medium text-gray-700'>
+                      Uploaded by:
+                    </label>
+                    <p className='text-sm text-gray-900'>
+                      {selectedDocument.uploadedBy.name}
+                    </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Upload date:</label>
-                    <p className="text-sm text-gray-900">
-                      {new Date(selectedDocument.createdAt).toLocaleDateString()}
+                    <label className='text-sm font-medium text-gray-700'>
+                      Upload date:
+                    </label>
+                    <p className='text-sm text-gray-900'>
+                      {new Date(
+                        selectedDocument.createdAt
+                      ).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
-                <div className="flex justify-end space-x-3 mt-6">
+                <div className='flex justify-end space-x-3 mt-6'>
                   <button
                     onClick={() => setSelectedDocument(null)}
-                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+                    className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200'
                   >
                     Close
                   </button>
@@ -176,4 +202,4 @@ export default function DocumentsPage() {
       </div>
     </div>
   );
-} 
+}

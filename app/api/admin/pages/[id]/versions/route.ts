@@ -11,7 +11,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditPages()(request);
     if (permissionCheck) return permissionCheck;
@@ -40,7 +40,7 @@ export async function GET(
         version_number: v.version_number,
         content: JSON.parse(v.content),
         created_by: v.created_by,
-        created_at: v.created_at
+        created_at: v.created_at,
       })),
       current_version: {
         id: page.id,
@@ -52,10 +52,10 @@ export async function GET(
           meta_title: page.meta_title,
           meta_description: page.meta_description,
           meta_keywords: page.meta_keywords,
-          status: page.status
+          status: page.status,
         },
-        created_at: page.updated_at
-      }
+        created_at: page.updated_at,
+      },
     });
   } catch (error) {
     console.error('Error fetching page versions:', error);
@@ -73,7 +73,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    
+
     // Check permissions
     const permissionCheck = await requireEditPages()(request);
     if (permissionCheck) return permissionCheck;
@@ -104,7 +104,7 @@ export async function POST(
       meta_title: page.meta_title,
       meta_description: page.meta_description,
       meta_keywords: page.meta_keywords,
-      status: page.status
+      status: page.status,
     };
 
     // Insert new version
@@ -112,7 +112,7 @@ export async function POST(
       INSERT INTO content_versions (id, content_type, content_id, version_number, content, created_by)
       VALUES (?, ?, ?, ?, ?, ?)
     `);
-    
+
     const versionId = uuidv4();
     insertStmt.run(
       versionId,
@@ -123,16 +123,19 @@ export async function POST(
       page.created_by
     );
 
-    return NextResponse.json({
-      success: true,
-      version: {
-        id: versionId,
-        version_number: nextVersion,
-        content: versionContent,
-        created_at: new Date().toISOString()
+    return NextResponse.json(
+      {
+        success: true,
+        version: {
+          id: versionId,
+          version_number: nextVersion,
+          content: versionContent,
+          created_at: new Date().toISOString(),
+        },
+        message: 'Page version created successfully',
       },
-      message: 'Page version created successfully',
-    }, { status: 201 });
+      { status: 201 }
+    );
   } catch (error) {
     console.error('Error creating page version:', error);
     return NextResponse.json(
@@ -140,4 +143,4 @@ export async function POST(
       { status: 500 }
     );
   }
-} 
+}
