@@ -10,6 +10,7 @@ import authRoutes from './routes/auth';
 import documentRoutes from './routes/document';
 import auditRoutes from './routes/audit';
 import dashboardRoutes from './routes/dashboard';
+import rateLimit from 'express-rate-limit';
 
 // Load .env.local if it exists, otherwise .env
 const envPath = fs.existsSync(path.join(__dirname, '../.env.local'))
@@ -21,6 +22,12 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Middleware
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true, // Return rate limit info in the RateLimit-* headers
+  legacyHeaders: false, // Disable the X-RateLimit-* headers
+}));
 app.use(cors({
   origin: [
     'http://localhost:3000',
