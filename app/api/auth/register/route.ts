@@ -2,10 +2,29 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 import { db } from '@/database/connection';
+import { z } from 'zod';
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, password, role = 'user' } = await request.json();
+    const body = await request.json();
+    const schema = z.object({
+      name: z.string().min(2).max(100),
+      email: z.string().email(),
+      password: z.string().min(8).max(100),
+      role: z.string().optional(),
+    });
+    const result = schema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid input',
+          details: result.error.issues,
+        },
+        { status: 400 }
+      );
+    }
+    const { name, email, password, role = 'user' } = result.data;
 
     if (!name || !email || !password) {
       return NextResponse.json(
