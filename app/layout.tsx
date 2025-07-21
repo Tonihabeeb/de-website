@@ -2,19 +2,44 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import HydrationSuppressor from '@/components/HydrationSuppressor';
-import BrowserExtensionHandler from '@/components/BrowserExtensionHandler';
-import PerformanceOptimizer from '@/components/PerformanceOptimizer';
-import MobileOptimizer from '@/components/MobileOptimizer';
-import PWARegistration from '@/components/PWARegistration';
-import SEOOptimizer from '@/components/SEOOptimizer';
-import PerformanceMonitor from '@/components/PerformanceMonitor';
-import ErrorBoundary from '@/components/ErrorBoundary';
-import Analytics from '@/components/Analytics';
-import BrowserCompatibility from '@/components/BrowserCompatibility';
+import dynamic from 'next/dynamic';
 import { Crimson_Pro, Heebo } from 'next/font/google';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ToastProvider } from '@/components/ui/Toast';
+import ErrorBoundary from '@/components/ErrorBoundary';
+
+const BrowserExtensionHandler = dynamic(
+  () => import('@/components/BrowserExtensionHandler'),
+  { ssr: false }
+);
+const MobileOptimizer = dynamic(() => import('@/components/MobileOptimizer'), {
+  ssr: false,
+});
+const PWARegistration = dynamic(() => import('@/components/PWARegistration'), {
+  ssr: false,
+});
+const SEOOptimizer = dynamic(() => import('@/components/SEOOptimizer'), {
+  ssr: false,
+});
+const PerformanceMonitor = dynamic(
+  () => import('@/components/PerformanceMonitor'),
+  { ssr: false }
+);
+const Analytics = dynamic(() => import('@/components/Analytics'), {
+  ssr: false,
+});
+const BrowserCompatibility = dynamic(
+  () => import('@/components/BrowserCompatibility'),
+  { ssr: false }
+);
+const PerformanceOptimizer = dynamic(
+  () => import('@/components/PerformanceOptimizer'),
+  { ssr: false }
+);
+const HydrationSuppressor = dynamic(
+  () => import('@/components/HydrationSuppressor'),
+  { ssr: false }
+);
 
 const crimsonPro = Crimson_Pro({
   subsets: ['latin'],
