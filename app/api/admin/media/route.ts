@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
+import { z } from 'zod';
 
 // Sample media data for development
 const sampleMedia = [
@@ -126,6 +127,31 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const schema = z.object({
+      filename: z.string().min(1),
+      original_name: z.string().min(1),
+      file_path: z.string().min(1),
+      file_size: z
+        .number()
+        .int()
+        .positive()
+        .max(50 * 1024 * 1024), // max 50MB
+      mime_type: z.string().min(1),
+      alt_text: z.string().optional(),
+      caption: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+    });
+    const result = schema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid input',
+          details: result.error.issues,
+        },
+        { status: 400 }
+      );
+    }
     const {
       filename,
       original_name,
@@ -135,19 +161,7 @@ export async function POST(request: NextRequest) {
       alt_text,
       caption,
       tags,
-    } = body;
-
-    // Validate required fields
-    if (!filename || !original_name || !file_path || !file_size || !mime_type) {
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            'Filename, original name, file path, file size, and mime type are required',
-        },
-        { status: 400 }
-      );
-    }
+    } = result.data;
 
     const newMedia = {
       id: uuidv4(),
@@ -156,8 +170,8 @@ export async function POST(request: NextRequest) {
       file_path,
       file_size,
       mime_type,
-      alt_text,
-      caption,
+      alt_text: alt_text || '',
+      caption: caption || '',
       tags: tags || [],
       uploaded_by: 'admin-001',
       created_at: new Date().toISOString(),
