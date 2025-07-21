@@ -52,6 +52,12 @@ export async function POST(request: NextRequest) {
       meta_title,
       meta_description,
       meta_keywords,
+      og_title,
+      og_description,
+      og_image,
+      twitter_title,
+      twitter_description,
+      twitter_image,
     } = body;
 
     // Validate required fields
@@ -78,6 +84,12 @@ export async function POST(request: NextRequest) {
       meta_title,
       meta_description,
       meta_keywords,
+      og_title,
+      og_description,
+      og_image,
+      twitter_title,
+      twitter_description,
+      twitter_image,
       created_by: 'admin', // Default user for now
     });
 
