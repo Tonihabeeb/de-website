@@ -84,6 +84,9 @@ export async function GET(request: NextRequest) {
     const offset = searchParams.get('offset')
       ? parseInt(searchParams.get('offset')!)
       : undefined;
+    const tags = searchParams.get('tags');
+    const alt_text = searchParams.get('alt_text');
+    const caption = searchParams.get('caption');
 
     let filteredMedia = [...sampleMedia];
 
@@ -93,10 +96,29 @@ export async function GET(request: NextRequest) {
         media => media.mime_type === mime_type
       );
     }
-
     if (uploaded_by) {
       filteredMedia = filteredMedia.filter(
         media => media.uploaded_by === uploaded_by
+      );
+    }
+    if (tags) {
+      const tagList = tags.split(',').map(t => t.trim().toLowerCase());
+      filteredMedia = filteredMedia.filter(media =>
+        media.tags.some((tag: string) => tagList.includes(tag.toLowerCase()))
+      );
+    }
+    if (alt_text) {
+      filteredMedia = filteredMedia.filter(
+        media =>
+          media.alt_text &&
+          media.alt_text.toLowerCase().includes(alt_text.toLowerCase())
+      );
+    }
+    if (caption) {
+      filteredMedia = filteredMedia.filter(
+        media =>
+          media.caption &&
+          media.caption.toLowerCase().includes(caption.toLowerCase())
       );
     }
 
