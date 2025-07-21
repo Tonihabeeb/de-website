@@ -248,3 +248,52 @@ export async function DELETE(request: NextRequest) {
     );
   }
 }
+
+export async function PATCH(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json(
+        { success: false, error: 'Media ID is required' },
+        { status: 400 }
+      );
+    }
+    const body = await request.json();
+    const schema = z.object({
+      alt_text: z.string().optional(),
+      caption: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+    });
+    const result = schema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid input',
+          details: result.error.issues,
+        },
+        { status: 400 }
+      );
+    }
+    const mediaItem = sampleMedia.find(item => item.id === id);
+    if (!mediaItem) {
+      return NextResponse.json(
+        { success: false, error: 'Media not found' },
+        { status: 404 }
+      );
+    }
+    if (result.data.alt_text !== undefined)
+      mediaItem.alt_text = result.data.alt_text;
+    if (result.data.caption !== undefined)
+      mediaItem.caption = result.data.caption;
+    if (result.data.tags !== undefined) mediaItem.tags = result.data.tags;
+    return NextResponse.json({ success: true, media: mediaItem });
+  } catch (error) {
+    console.error('Error updating media:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to update media' },
+      { status: 500 }
+    );
+  }
+}
