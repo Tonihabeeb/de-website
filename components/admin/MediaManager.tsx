@@ -14,6 +14,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import NextImage from 'next/image';
+import { toast } from '../ui/Toast';
 
 interface MediaItem {
   id: string;
@@ -138,8 +139,10 @@ const MediaManager: React.FC<MediaManagerProps> = ({
         setMedia(prev => [...(data.media || []), ...prev]);
         setUploadFiles([]);
         setIsUploadModalOpen(false);
+        toast.success('Media uploaded successfully');
       } else {
         setError('Upload failed');
+        toast.error('Upload failed');
       }
     } catch (err) {
       setError('Upload failed');
@@ -165,8 +168,10 @@ const MediaManager: React.FC<MediaManagerProps> = ({
 
       if (data.success) {
         setMedia(prev => prev.filter(item => item.id !== mediaId));
+        toast.success('Media deleted');
       } else {
         setError('Delete failed');
+        toast.error('Delete failed');
       }
     } catch (err) {
       setError('Delete failed');
@@ -186,6 +191,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
         await handleDeleteMedia(mediaId);
       }
       setSelectedMedia([]);
+      toast.success('Selected media deleted');
     } catch (err) {
       setError('Bulk delete failed');
     }
@@ -215,8 +221,10 @@ const MediaManager: React.FC<MediaManagerProps> = ({
         );
         setEditingMedia(null);
         setEditForm({ alt_text: '', caption: '', tags: '' });
+        toast.success('Media metadata updated');
       } else {
         setEditError(data.error || 'Failed to update media');
+        toast.error(data.error || 'Failed to update media');
       }
     } catch (err) {
       setEditError('Failed to update media');
