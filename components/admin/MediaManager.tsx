@@ -63,6 +63,8 @@ const MediaManager: React.FC<MediaManagerProps> = ({
   const [editLoading, setEditLoading] = useState(false);
   const [editError, setEditError] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [altTextSearch, setAltTextSearch] = useState('');
+  const [captionSearch, setCaptionSearch] = useState('');
 
   useEffect(() => {
     fetchMedia();
@@ -227,21 +229,29 @@ const MediaManager: React.FC<MediaManagerProps> = ({
   const allTags = Array.from(new Set(media.flatMap(item => item.tags || [])));
 
   const filteredMedia = media.filter(item => {
-    const matchesSearch =
-      item.original_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.alt_text.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.caption.toLowerCase().includes(searchTerm.toLowerCase());
-
+    const matchesFileName = item.original_name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesAltText =
+      !altTextSearch ||
+      item.alt_text.toLowerCase().includes(altTextSearch.toLowerCase());
+    const matchesCaption =
+      !captionSearch ||
+      item.caption.toLowerCase().includes(captionSearch.toLowerCase());
     const matchesType =
       selectedType === 'all' ||
       (selectedType === 'images' && item.mime_type.startsWith('image/')) ||
       (selectedType === 'documents' &&
         item.mime_type.startsWith('application/'));
-
     const matchesTag =
       !selectedTag || (item.tags && item.tags.includes(selectedTag));
-
-    return matchesSearch && matchesType && matchesTag;
+    return (
+      matchesFileName &&
+      matchesAltText &&
+      matchesCaption &&
+      matchesType &&
+      matchesTag
+    );
   });
 
   const getFileIcon = (mimeType: string) => {
@@ -355,6 +365,62 @@ const MediaManager: React.FC<MediaManagerProps> = ({
             >
               <List className='w-4 h-4' />
             </button>
+          </div>
+        </div>
+
+        {/* Advanced Search UI */}
+        <div className='flex flex-wrap gap-4 mb-4'>
+          <div className='relative'>
+            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400' />
+            <input
+              type='text'
+              placeholder='Search by file name...'
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              className='pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+              >
+                ×
+              </button>
+            )}
+          </div>
+          <div className='relative'>
+            <input
+              type='text'
+              placeholder='Search by alt text...'
+              value={altTextSearch}
+              onChange={e => setAltTextSearch(e.target.value)}
+              className='pl-4 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            />
+            {altTextSearch && (
+              <button
+                onClick={() => setAltTextSearch('')}
+                className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+              >
+                ×
+              </button>
+            )}
+          </div>
+          <div className='relative'>
+            <input
+              type='text'
+              placeholder='Search by caption...'
+              value={captionSearch}
+              onChange={e => setCaptionSearch(e.target.value)}
+              className='pl-4 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            />
+            {captionSearch && (
+              <button
+                onClick={() => setCaptionSearch('')}
+                className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+              >
+                ×
+              </button>
+            )}
           </div>
         </div>
 
