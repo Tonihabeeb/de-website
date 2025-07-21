@@ -528,18 +528,21 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                         <button
                           onClick={() => onMediaSelect?.(item)}
                           className='p-2 bg-white rounded-full hover:bg-gray-100 transition-colors'
+                          aria-label='View media'
                         >
                           <Eye className='w-4 h-4 text-gray-600' />
                         </button>
                         <button
                           onClick={() => setEditingMedia(item.id)}
                           className='p-2 bg-white rounded-full hover:bg-gray-100 transition-colors'
+                          aria-label='Edit media'
                         >
                           <Edit className='w-4 h-4 text-gray-600' />
                         </button>
                         <button
                           onClick={() => handleDeleteMedia(item.id)}
                           className='p-2 bg-white rounded-full hover:bg-red-100 transition-colors'
+                          aria-label='Delete media'
                         >
                           <Trash2 className='w-4 h-4 text-red-600' />
                         </button>
@@ -600,18 +603,21 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                       <button
                         onClick={() => onMediaSelect?.(item)}
                         className='p-1 text-gray-400 hover:text-gray-600'
+                        aria-label='View media'
                       >
                         <Eye className='w-4 h-4' />
                       </button>
                       <button
                         onClick={() => setEditingMedia(item.id)}
                         className='p-1 text-gray-400 hover:text-gray-600'
+                        aria-label='Edit media'
                       >
                         <Edit className='w-4 h-4' />
                       </button>
                       <button
                         onClick={() => handleDeleteMedia(item.id)}
                         className='p-1 text-gray-400 hover:text-red-600'
+                        aria-label='Delete media'
                       >
                         <Trash2 className='w-4 h-4' />
                       </button>
@@ -626,9 +632,21 @@ const MediaManager: React.FC<MediaManagerProps> = ({
 
       {/* Upload Modal */}
       {isUploadModalOpen && (
-        <div className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'>
-          <div className='bg-white rounded-lg p-6 w-full max-w-md'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+        <div
+          className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'
+          role='dialog'
+          aria-modal='true'
+          aria-labelledby='upload-media-modal-title'
+          tabIndex={-1}
+          onKeyDown={e => {
+            if (e.key === 'Escape') setIsUploadModalOpen(false);
+          }}
+        >
+          <div className='bg-white rounded-lg p-6 w-full max-w-md' tabIndex={0}>
+            <h3
+              id='upload-media-modal-title'
+              className='text-lg font-semibold text-gray-900 mb-4'
+            >
               Upload Media
             </h3>
 
@@ -689,9 +707,21 @@ const MediaManager: React.FC<MediaManagerProps> = ({
 
       {/* Edit Metadata Modal */}
       {editingMedia && (
-        <div className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'>
-          <div className='bg-white rounded-lg p-6 w-full max-w-md'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+        <div
+          className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'
+          role='dialog'
+          aria-modal='true'
+          aria-labelledby='edit-media-modal-title'
+          tabIndex={-1}
+          onKeyDown={e => {
+            if (e.key === 'Escape') setEditingMedia(null);
+          }}
+        >
+          <div className='bg-white rounded-lg p-6 w-full max-w-md' tabIndex={0}>
+            <h3
+              id='edit-media-modal-title'
+              className='text-lg font-semibold text-gray-900 mb-4'
+            >
               Edit Media Metadata
             </h3>
             <div className='space-y-4'>
@@ -748,6 +778,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
               </button>
               <button
                 onClick={() => setEditingMedia(null)}
+                aria-label='Cancel edit'
                 className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
               >
                 Cancel
