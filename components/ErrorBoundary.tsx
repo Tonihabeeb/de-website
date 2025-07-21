@@ -67,6 +67,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
     console.log('Error Report:', errorReport);
 
+    // TODO: Connect to a real error reporting service (e.g., Sentry, LogRocket, or your backend API)
     // Example: Send to your backend API
     // fetch('/api/errors', {
     //   method: 'POST',
