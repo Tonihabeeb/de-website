@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
+import formidable from 'formidable';
+import fs from 'fs';
+import path from 'path';
 
 // Sample media data for development
 const sampleMedia = [
@@ -71,6 +74,12 @@ const sampleMedia = [
     created_at: '2024-07-18T00:00:00.000Z',
   },
 ];
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 // GET /api/admin/media - Get all media
 export async function GET(request: NextRequest) {
@@ -148,68 +157,112 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/media - Upload new media
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const schema = z.object({
-      filename: z.string().min(1),
-      original_name: z.string().min(1),
-      file_path: z.string().min(1),
-      file_size: z
-        .number()
-        .int()
-        .positive()
-        .max(50 * 1024 * 1024), // max 50MB
-      mime_type: z.string().min(1),
-      alt_text: z.string().optional(),
-      caption: z.string().optional(),
-      tags: z.array(z.string()).optional(),
-    });
-    const result = schema.safeParse(body);
-    if (!result.success) {
+    const contentType = request.headers.get('content-type') || '';
+    if (contentType.includes('multipart/form-data')) {
+      // Handle file upload
+      const form = formidable({
+        multiples: true,
+        uploadDir: path.join(process.cwd(), 'public', 'uploads'),
+        keepExtensions: true,
+      });
+      const req = (request as any).req || request;
+      const [fields, files] = await new Promise<[any, any]>(
+        (resolve, reject) => {
+          form.parse(req, (err, fields, files) => {
+            if (err) reject(err);
+            else resolve([fields, files]);
+          });
+        }
+      );
+      let uploadedFiles: any[] = [];
+      if (Array.isArray((files as any).files)) {
+        uploadedFiles = (files as any).files;
+      } else if ((files as any).files) {
+        uploadedFiles = [(files as any).files];
+      }
+      const newMedia = uploadedFiles.map(file => ({
+        id: uuidv4(),
+        filename: path.basename(file.filepath),
+        original_name: file.originalFilename,
+        file_path: `/uploads/${path.basename(file.filepath)}`,
+        file_size: file.size,
+        mime_type: file.mimetype,
+        alt_text: '',
+        caption: '',
+        tags: [],
+        uploaded_by: 'admin-001',
+        created_at: new Date().toISOString(),
+      }));
+      sampleMedia.push(...newMedia);
       return NextResponse.json(
         {
-          success: false,
-          error: 'Invalid input',
-          details: result.error.issues,
+          success: true,
+          media: newMedia,
+          message: 'Media uploaded successfully',
         },
-        { status: 400 }
+        { status: 201 }
+      );
+    } else {
+      // Fallback: JSON upload (for tests)
+      const body = await request.json();
+      const schema = z.object({
+        filename: z.string().min(1),
+        original_name: z.string().min(1),
+        file_path: z.string().min(1),
+        file_size: z
+          .number()
+          .int()
+          .positive()
+          .max(50 * 1024 * 1024), // max 50MB
+        mime_type: z.string().min(1),
+        alt_text: z.string().optional(),
+        caption: z.string().optional(),
+        tags: z.array(z.string()).optional(),
+      });
+      const result = schema.safeParse(body);
+      if (!result.success) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Invalid input',
+            details: result.error.issues,
+          },
+          { status: 400 }
+        );
+      }
+      const {
+        filename,
+        original_name,
+        file_path,
+        file_size,
+        mime_type,
+        alt_text,
+        caption,
+        tags,
+      } = result.data;
+      const newMedia = {
+        id: uuidv4(),
+        filename,
+        original_name,
+        file_path,
+        file_size,
+        mime_type,
+        alt_text: alt_text || '',
+        caption: caption || '',
+        tags: tags || [],
+        uploaded_by: 'admin-001',
+        created_at: new Date().toISOString(),
+      };
+      sampleMedia.push(newMedia);
+      return NextResponse.json(
+        {
+          success: true,
+          media: newMedia,
+          message: 'Media uploaded successfully',
+        },
+        { status: 201 }
       );
     }
-    const {
-      filename,
-      original_name,
-      file_path,
-      file_size,
-      mime_type,
-      alt_text,
-      caption,
-      tags,
-    } = result.data;
-
-    const newMedia = {
-      id: uuidv4(),
-      filename,
-      original_name,
-      file_path,
-      file_size,
-      mime_type,
-      alt_text: alt_text || '',
-      caption: caption || '',
-      tags: tags || [],
-      uploaded_by: 'admin-001',
-      created_at: new Date().toISOString(),
-    };
-
-    // In a real implementation, this would be saved to the database
-    sampleMedia.push(newMedia);
-
-    return NextResponse.json(
-      {
-        success: true,
-        media: newMedia,
-        message: 'Media uploaded successfully',
-      },
-      { status: 201 }
-    );
   } catch (error) {
     console.error('Error uploading media:', error);
     return NextResponse.json(
