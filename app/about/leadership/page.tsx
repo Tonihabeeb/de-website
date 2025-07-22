@@ -19,6 +19,7 @@ import {
   Activity,
 } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Leadership & Stakeholders | Deep Engineering',
@@ -522,12 +523,12 @@ export default function LeadershipPage() {
             governance, and collaborative stakeholder engagement.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-            <a
+            <Link
               href='/projects/kpp-project'
               className='bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200'
             >
               KPP Project
-            </a>
+            </Link>
             <a
               href='/contact'
               className='border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors duration-200'

@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Wrench, TrendingUp, Leaf, Settings, Zap, Shield } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Services | Deep Engineering',
@@ -65,12 +66,12 @@ export default function ServicesPage() {
                   </div>
                 </div>
                 <div className='mt-6'>
-                  <a
+                  <Link
                     href='/services/supply'
                     className='text-blue-600 font-semibold hover:text-blue-800 transition-colors'
                   >
                     Learn More →
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -111,12 +112,12 @@ export default function ServicesPage() {
                   </div>
                 </div>
                 <div className='mt-6'>
-                  <a
+                  <Link
                     href='/services/epc'
                     className='text-green-600 font-semibold hover:text-green-800 transition-colors'
                   >
                     Learn More →
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -158,12 +159,12 @@ export default function ServicesPage() {
                   </div>
                 </div>
                 <div className='mt-6'>
-                  <a
+                  <Link
                     href='/services/om'
                     className='text-purple-600 font-semibold hover:text-purple-800 transition-colors'
                   >
                     Learn More →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -301,18 +302,18 @@ export default function ServicesPage() {
               sustainable energy goals.
             </p>
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              <a
+              <Link
                 href='/contact'
                 className='bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200'
               >
                 Contact Us
-              </a>
-              <a
+              </Link>
+              <Link
                 href='/projects'
                 className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
               >
                 View Projects
-              </a>
+              </Link>
             </div>
           </div>
         </div>

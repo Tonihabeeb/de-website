@@ -4,6 +4,7 @@ import React from 'react';
 import KPPHeroAnimation from '../animations/KPPHeroAnimation';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 export default function EnhancedHeroSection() {
   const [showAnimation, setShowAnimation] = useState(false);
@@ -81,24 +82,24 @@ export default function EnhancedHeroSection() {
 
         {/* CTAs */}
         <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-          <a
+          <Link
             href='/technology'
             className='bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold shadow hover:bg-blue-700 transition-colors min-w-[44px] min-h-[44px]'
           >
             Learn More
-          </a>
-          <a
+          </Link>
+          <Link
             href='/contact'
             className='bg-white border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold shadow hover:bg-blue-50 transition-colors min-w-[44px] min-h-[44px]'
           >
             Contact Us
-          </a>
-          <a
+          </Link>
+          <Link
             href='/projects'
             className='bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold shadow hover:bg-indigo-700 transition-colors min-w-[44px] min-h-[44px]'
           >
             View Projects
-          </a>
+          </Link>
         </div>
       </div>
     </section>

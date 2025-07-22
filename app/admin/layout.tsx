@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import AdminNavigation from '@/components/admin/AdminNavigation';
 
@@ -62,12 +63,12 @@ export default function AdminLayout({
                 Admin Panel -{' '}
                 {user.role === 'super_admin' ? 'Super Admin' : 'Admin'}
               </span>
-              <a
+              <Link
                 href='/'
                 className='text-sm text-blue-600 hover:text-blue-800 transition-colors'
               >
                 View Site
-              </a>
+              </Link>
             </div>
           </div>
         </div>
