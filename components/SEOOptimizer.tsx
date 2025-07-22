@@ -289,7 +289,9 @@ export default function SEOOptimizer() {
 
   useEffect(() => {
     if (!pathname) return;
-    const config = seoConfigs[pathname as keyof typeof seoConfigs];
+    const config = pathname
+      ? seoConfigs[pathname as keyof typeof seoConfigs]
+      : undefined;
     if (!config) return;
 
     // Update meta tags
