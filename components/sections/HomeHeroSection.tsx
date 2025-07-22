@@ -1,8 +1,40 @@
 'use client';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function HomeHeroSection() {
+  // Generate deterministic random positions for particles and animated elements
+  const energyParticles = useMemo(
+    () =>
+      Array.from({ length: 15 }, () => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        x: Math.random() * 20 - 10,
+        duration: 3 + Math.random() * 2,
+        delay: Math.random() * 2,
+      })),
+    []
+  );
+  const floatingPlatforms = useMemo(
+    () =>
+      Array.from({ length: 4 }, (_, i) => ({
+        left: `${20 + i * 20}%`,
+        top: `${30 + (i % 2) * 20}%`,
+        duration: 6 + i,
+        delay: i * 0.5,
+      })),
+    []
+  );
+  const energyFlowLines = useMemo(
+    () =>
+      Array.from({ length: 5 }, (_, i) => ({
+        left: `${15 + i * 15}%`,
+        delay: i * 0.3,
+      })),
+    []
+  );
+
   return (
     <section className='relative min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-white to-green-100 text-primary overflow-hidden'>
       {/* KPP-inspired mechanical background animations */}
@@ -29,24 +61,21 @@ export default function HomeHeroSection() {
         </motion.div>
 
         {/* Floating energy particles - representing power generation */}
-        {[...Array(15)].map((_, i) => (
+        {energyParticles.map((pos, i) => (
           <motion.div
             key={i}
             className='absolute w-3 h-3 bg-green-400/40 rounded-full'
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
+            style={{ left: pos.left, top: pos.top }}
             animate={{
               y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
+              x: [0, pos.x, 0],
               scale: [1, 1.5, 1],
               opacity: [0.3, 1, 0.3],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: pos.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: pos.delay,
               ease: 'easeInOut',
             }}
           />
@@ -118,36 +147,30 @@ export default function HomeHeroSection() {
         ))}
 
         {/* Floating platform elements - representing KPP's buoyancy system */}
-        {[...Array(4)].map((_, i) => (
+        {floatingPlatforms.map((pos, i) => (
           <motion.div
             key={i}
             className='absolute w-16 h-8 bg-white/20 rounded-full border border-sky-200/30'
-            style={{
-              left: `${20 + i * 20}%`,
-              top: `${30 + (i % 2) * 20}%`,
-            }}
+            style={{ left: pos.left, top: pos.top }}
             animate={{
               y: [0, -15, 0],
               rotate: [0, 5, 0],
             }}
             transition={{
-              duration: 6 + i,
+              duration: pos.duration,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: i * 0.5,
+              delay: pos.delay,
             }}
           />
         ))}
 
         {/* Energy flow lines - representing power transmission */}
-        {[...Array(5)].map((_, i) => (
+        {energyFlowLines.map((pos, i) => (
           <motion.div
             key={i}
             className='absolute w-1 h-16 bg-gradient-to-b from-transparent via-green-400/30 to-transparent'
-            style={{
-              left: `${15 + i * 15}%`,
-              top: '20%',
-            }}
+            style={{ left: pos.left, top: '20%' }}
             animate={{
               scaleY: [0, 1, 0],
               opacity: [0, 1, 0],
@@ -156,7 +179,7 @@ export default function HomeHeroSection() {
               duration: 3,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: i * 0.3,
+              delay: pos.delay,
             }}
           />
         ))}

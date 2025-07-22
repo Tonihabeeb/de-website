@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Mail } from 'lucide-react';
 
 const footerNavigation = {
@@ -32,9 +33,19 @@ export default function Footer() {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
           {/* Company Info */}
           <div className='lg:col-span-2'>
-            <h3 className='text-2xl font-serif font-semibold mb-4 text-white drop-shadow-lg'>
-              Deep Engineering
-            </h3>
+            <div className='flex flex-col items-start mb-4'>
+              <Image
+                src='/output-onlinepngtools.png'
+                alt='Deep Engineering company logo'
+                height={60}
+                width={240}
+                priority
+                className='h-12 w-auto object-contain mb-3 filter brightness-0 invert opacity-95 hover:opacity-100 transition-opacity duration-200'
+              />
+              <h3 className='text-2xl font-serif font-semibold text-white drop-shadow-lg'>
+                Deep Engineering
+              </h3>
+            </div>
             <p className='text-white mb-4 max-w-md drop-shadow-lg'>
               Iraq's pioneer in renewable energy project development, turning
               innovative technology into sustainable power solutions.
