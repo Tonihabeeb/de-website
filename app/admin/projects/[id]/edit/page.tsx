@@ -157,7 +157,6 @@ export default function EditProject() {
       }
     } catch (err) {
       setError('Failed to load project');
-      console.error('Error fetching project:', err);
     } finally {
       setLoading(false);
     }
@@ -235,7 +234,6 @@ export default function EditProject() {
       }
     } catch (err) {
       setError('Failed to update project');
-      console.error('Error updating project:', err);
     } finally {
       setSaving(false);
     }

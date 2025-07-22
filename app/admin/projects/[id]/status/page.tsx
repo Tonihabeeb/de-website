@@ -77,7 +77,6 @@ export default function ProjectStatusManagement() {
       }
     } catch (err) {
       setError('Failed to load project');
-      console.error('Error fetching project:', err);
     }
   };
 
@@ -108,7 +107,7 @@ export default function ProjectStatusManagement() {
       ];
       setStatusHistory(mockHistory);
     } catch (err) {
-      console.error('Error fetching status history:', err);
+      setError('Error fetching status history');
     } finally {
       setLoading(false);
     }
@@ -141,8 +140,7 @@ export default function ProjectStatusManagement() {
         setError(data.error || 'Failed to update status');
       }
     } catch (err) {
-      setError('Failed to update status');
-      console.error('Error updating status:', err);
+      setError('Error updating status');
     } finally {
       setSaving(false);
     }

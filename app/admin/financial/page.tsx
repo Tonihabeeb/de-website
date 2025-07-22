@@ -3,17 +3,10 @@
 import { useState, useEffect } from 'react';
 import {
   Plus,
-  Edit,
-  Trash2,
   DollarSign,
-  TrendingUp,
-  PieChart,
-  BarChart3,
   Activity,
   AlertCircle,
   Save,
-  X,
-  Calendar,
   Target,
   CheckCircle,
   AlertTriangle,
@@ -26,22 +19,6 @@ interface Revenue {
   revenue: number;
   cost: number;
   profit: number;
-  project_id: string;
-}
-
-interface CashFlow {
-  id: string;
-  month: string;
-  year: number;
-  cashFlow: number;
-  project_id: string;
-}
-
-interface CostBreakdown {
-  id: string;
-  category: string;
-  value: number;
-  percentage: number;
   project_id: string;
 }
 
@@ -70,8 +47,6 @@ interface Transaction {
 
 export default function FinancialManagement() {
   const [revenue, setRevenue] = useState<Revenue[]>([]);
-  const [cashFlow, setCashFlow] = useState<CashFlow[]>([]);
-  const [costBreakdown, setCostBreakdown] = useState<CostBreakdown[]>([]);
   const [investmentMetrics, setInvestmentMetrics] = useState<
     InvestmentMetric[]
   >([]);
@@ -84,13 +59,6 @@ export default function FinancialManagement() {
   const [showTransactionForm, setShowTransactionForm] = useState(false);
   const [showMetricForm, setShowMetricForm] = useState(false);
   const [editingRevenue, setEditingRevenue] = useState<Revenue | null>(null);
-  const [editingTransaction, setEditingTransaction] =
-    useState<Transaction | null>(null);
-  const [editingMetric, setEditingMetric] = useState<InvestmentMetric | null>(
-    null
-  );
-
-  // Form data
   const [revenueForm, setRevenueForm] = useState({
     project_id: 'project-001',
     month: '',
@@ -138,8 +106,6 @@ export default function FinancialManagement() {
 
       if (data.success) {
         setRevenue(data.revenue || []);
-        setCashFlow(data.cashFlow || []);
-        setCostBreakdown(data.costBreakdown || []);
         setInvestmentMetrics(data.investmentMetrics || []);
         setTransactions(data.transactions || []);
       } else {
@@ -147,7 +113,6 @@ export default function FinancialManagement() {
       }
     } catch (err) {
       setError('Failed to load financial data');
-      console.error('Error fetching financial data:', err);
     } finally {
       setLoading(false);
     }
@@ -175,7 +140,6 @@ export default function FinancialManagement() {
       }
     } catch (err) {
       alert('Failed to save revenue');
-      console.error('Error saving revenue:', err);
     }
   };
 
@@ -200,7 +164,6 @@ export default function FinancialManagement() {
       }
     } catch (err) {
       alert('Failed to log transaction');
-      console.error('Error logging transaction:', err);
     }
   };
 
@@ -225,7 +188,6 @@ export default function FinancialManagement() {
       }
     } catch (err) {
       alert('Failed to save metric');
-      console.error('Error saving metric:', err);
     }
   };
 

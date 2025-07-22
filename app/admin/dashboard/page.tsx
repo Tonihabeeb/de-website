@@ -10,7 +10,6 @@ import {
   BarChart3,
   Activity,
   Plus,
-  Search,
   Clock,
   AlertCircle,
   CheckCircle,
@@ -92,29 +91,41 @@ export default function AdminDashboard() {
         setStats({
           pages: {
             total: pages.length,
-            published: pages.filter((p: any) => p.status === 'published')
+            published: pages.filter(
+              (p: { status: string }) => p.status === 'published'
+            ).length,
+            draft: pages.filter((p: { status: string }) => p.status === 'draft')
               .length,
-            draft: pages.filter((p: any) => p.status === 'draft').length,
-            archived: pages.filter((p: any) => p.status === 'archived').length,
+            archived: pages.filter(
+              (p: { status: string }) => p.status === 'archived'
+            ).length,
           },
           projects: {
             total: projects.length,
-            active: projects.filter((p: any) => p.status === 'active').length,
-            completed: projects.filter((p: any) => p.status === 'completed')
-              .length,
-            on_hold: projects.filter((p: any) => p.status === 'on_hold').length,
+            active: projects.filter(
+              (p: { status: string }) => p.status === 'active'
+            ).length,
+            completed: projects.filter(
+              (p: { status: string }) => p.status === 'completed'
+            ).length,
+            on_hold: projects.filter(
+              (p: { status: string }) => p.status === 'on_hold'
+            ).length,
           },
           users: {
             total: users.length,
-            active: users.filter((u: any) => u.status === 'active').length,
-            inactive: users.filter((u: any) => u.status === 'inactive').length,
+            active: users.filter(
+              (u: { status: string }) => u.status === 'active'
+            ).length,
+            inactive: users.filter(
+              (u: { status: string }) => u.status === 'inactive'
+            ).length,
           },
           recent_activity: activity,
         });
       }
     } catch (err) {
-      setError('Failed to load dashboard statistics');
-      console.error('Dashboard error:', err);
+      setError('Error loading dashboard');
     } finally {
       setLoading(false);
     }

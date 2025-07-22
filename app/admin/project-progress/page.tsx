@@ -105,7 +105,6 @@ export default function ProjectProgressManagement() {
       }
     } catch (err) {
       setError('Failed to load project progress data');
-      console.error('Error fetching project progress:', err);
     } finally {
       setLoading(false);
     }
@@ -142,7 +141,6 @@ export default function ProjectProgressManagement() {
       }
     } catch (err) {
       alert('Failed to save milestone');
-      console.error('Error saving milestone:', err);
     }
   };
 
@@ -167,7 +165,6 @@ export default function ProjectProgressManagement() {
       }
     } catch (err) {
       alert('Failed to log activity');
-      console.error('Error logging activity:', err);
     }
   };
 
@@ -190,7 +187,6 @@ export default function ProjectProgressManagement() {
       }
     } catch (err) {
       alert('Failed to delete milestone');
-      console.error('Error deleting milestone:', err);
     }
   };
 
@@ -557,7 +553,10 @@ export default function ProjectProgressManagement() {
                       onChange={e =>
                         setMilestoneForm({
                           ...milestoneForm,
-                          status: e.target.value as any,
+                          status: e.target.value as
+                            | 'completed'
+                            | 'in-progress'
+                            | 'upcoming',
                         })
                       }
                       className='mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500'

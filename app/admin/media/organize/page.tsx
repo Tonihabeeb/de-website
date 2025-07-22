@@ -7,17 +7,11 @@ import {
   Tag,
   Edit,
   Trash2,
-  Move,
-  Copy,
-  Download,
   Search,
-  Filter,
   Grid,
   List,
   CheckSquare,
   Square,
-  MoreHorizontal,
-  Plus,
   RefreshCw,
   Save,
   X,
@@ -73,7 +67,6 @@ export default function MediaOrganize() {
   const [showCreateFolder, setShowCreateFolder] = useState(false);
   const [showCreateTag, setShowCreateTag] = useState(false);
   const [showBulkEdit, setShowBulkEdit] = useState(false);
-  const [showMoveModal, setShowMoveModal] = useState(false);
 
   // Form states
   const [newFolderName, setNewFolderName] = useState('');
@@ -102,7 +95,6 @@ export default function MediaOrganize() {
       }
     } catch (err) {
       setError('Failed to load media');
-      console.error('Error fetching media:', err);
     } finally {
       setLoading(false);
     }
@@ -117,7 +109,7 @@ export default function MediaOrganize() {
         setFolders(data.folders || []);
       }
     } catch (err) {
-      console.error('Error fetching folders:', err);
+      // console.error('Error fetching folders:', err);
     }
   };
 
@@ -130,7 +122,7 @@ export default function MediaOrganize() {
         setTags(data.tags || []);
       }
     } catch (err) {
-      console.error('Error fetching tags:', err);
+      // console.error('Error fetching tags:', err);
     }
   };
 
@@ -157,7 +149,6 @@ export default function MediaOrganize() {
       }
     } catch (err) {
       setError('Failed to create folder');
-      console.error('Error creating folder:', err);
     }
   };
 
@@ -188,33 +179,6 @@ export default function MediaOrganize() {
       }
     } catch (err) {
       setError('Failed to create tag');
-      console.error('Error creating tag:', err);
-    }
-  };
-
-  const updateMediaItem = async (
-    itemId: string,
-    updates: Partial<MediaItem>
-  ) => {
-    try {
-      const response = await fetch(`/api/admin/media/${itemId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updates),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSuccess('Media updated successfully!');
-        fetchMedia();
-        setTimeout(() => setSuccess(null), 3000);
-      } else {
-        setError(data.error || 'Failed to update media');
-      }
-    } catch (err) {
-      setError('Failed to update media');
-      console.error('Error updating media:', err);
     }
   };
 
@@ -222,7 +186,7 @@ export default function MediaOrganize() {
     if (selectedItems.length === 0) return;
 
     try {
-      const updates: any = {};
+      const updates: Record<string, unknown> = {};
       if (bulkTags.length > 0) updates.tags = bulkTags;
       if (bulkFolder) updates.folder = bulkFolder;
 
@@ -250,38 +214,6 @@ export default function MediaOrganize() {
       }
     } catch (err) {
       setError('Failed to update media');
-      console.error('Error bulk updating media:', err);
-    }
-  };
-
-  const moveToFolder = async () => {
-    if (selectedItems.length === 0 || !moveTargetFolder) return;
-
-    try {
-      const response = await fetch('/api/admin/media/bulk-update', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          item_ids: selectedItems,
-          updates: { folder: moveTargetFolder },
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSuccess('Files moved successfully!');
-        setSelectedItems([]);
-        setShowMoveModal(false);
-        setMoveTargetFolder('');
-        fetchMedia();
-        setTimeout(() => setSuccess(null), 3000);
-      } else {
-        setError(data.error || 'Failed to move files');
-      }
-    } catch (err) {
-      setError('Failed to move files');
-      console.error('Error moving files:', err);
     }
   };
 
@@ -304,7 +236,6 @@ export default function MediaOrganize() {
       }
     } catch (err) {
       setError('Failed to delete file');
-      console.error('Error deleting file:', err);
     }
   };
 

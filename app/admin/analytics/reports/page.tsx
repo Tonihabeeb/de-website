@@ -27,7 +27,7 @@ interface Report {
   type: 'content' | 'user' | 'system' | 'performance' | 'custom';
   schedule: 'daily' | 'weekly' | 'monthly' | 'manual';
   format: 'json' | 'csv' | 'excel' | 'pdf';
-  filters: Record<string, any>;
+  filters: Record<string, unknown>;
   recipients: string[];
   is_active: boolean;
   last_run?: string;
@@ -41,7 +41,7 @@ interface ReportTemplate {
   name: string;
   description: string;
   type: string;
-  default_filters: Record<string, any>;
+  default_filters: Record<string, unknown>;
 }
 
 export default function CustomReportsPage() {
@@ -57,10 +57,10 @@ export default function CustomReportsPage() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    type: 'content' as 'content' | 'user' | 'system' | 'performance' | 'custom',
-    schedule: 'manual' as 'daily' | 'weekly' | 'monthly' | 'manual',
-    format: 'json' as 'json' | 'csv' | 'excel' | 'pdf',
-    filters: {} as Record<string, any>,
+    type: 'content' as Report['type'],
+    schedule: 'manual' as Report['schedule'],
+    format: 'json' as Report['format'],
+    filters: {} as Record<string, unknown>,
     recipients: [] as string[],
   });
 
@@ -77,7 +77,6 @@ export default function CustomReportsPage() {
         setReports(data.reports || []);
       }
     } catch (error) {
-      console.error('Error fetching reports:', error);
       toast.error('Failed to fetch reports');
     } finally {
       setLoading(false);
@@ -94,7 +93,7 @@ export default function CustomReportsPage() {
         setTemplates(data.templates || []);
       }
     } catch (error) {
-      console.error('Error fetching templates:', error);
+      toast.error('Failed to fetch templates');
     }
   };
 
@@ -311,7 +310,7 @@ export default function CustomReportsPage() {
                     setFormData({
                       name: template.name,
                       description: template.description,
-                      type: template.type as any,
+                      type: template.type as Report['type'],
                       schedule: 'manual',
                       format: 'json',
                       filters: template.default_filters,
@@ -488,7 +487,10 @@ export default function CustomReportsPage() {
               <select
                 value={formData.type}
                 onChange={e =>
-                  setFormData({ ...formData, type: e.target.value as any })
+                  setFormData({
+                    ...formData,
+                    type: e.target.value as Report['type'],
+                  })
                 }
                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               >
@@ -507,7 +509,10 @@ export default function CustomReportsPage() {
               <select
                 value={formData.schedule}
                 onChange={e =>
-                  setFormData({ ...formData, schedule: e.target.value as any })
+                  setFormData({
+                    ...formData,
+                    schedule: e.target.value as Report['schedule'],
+                  })
                 }
                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               >
@@ -526,7 +531,10 @@ export default function CustomReportsPage() {
             <select
               value={formData.format}
               onChange={e =>
-                setFormData({ ...formData, format: e.target.value as any })
+                setFormData({
+                  ...formData,
+                  format: e.target.value as Report['format'],
+                })
               }
               className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >

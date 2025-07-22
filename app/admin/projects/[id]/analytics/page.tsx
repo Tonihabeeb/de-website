@@ -47,8 +47,7 @@ export default function ProjectAnalyticsPage() {
         setError('Failed to load project');
       }
     } catch (err) {
-      setError('Failed to load project data');
-      console.error('Error fetching project data:', err);
+      setError('Error fetching project data');
     } finally {
       setLoading(false);
     }

@@ -89,7 +89,6 @@ export default function UserActivity() {
       }
     } catch (err) {
       setError('Failed to load user');
-      console.error('Error fetching user:', err);
     } finally {
       setLoading(false);
     }
@@ -109,7 +108,6 @@ export default function UserActivity() {
       }
     } catch (err) {
       setError('Failed to load activity logs');
-      console.error('Error fetching activity logs:', err);
     }
   };
 
@@ -124,7 +122,7 @@ export default function UserActivity() {
         setActivityStats(data.stats);
       }
     } catch (err) {
-      console.error('Error fetching activity stats:', err);
+      setError('Error fetching activity stats');
     }
   };
 

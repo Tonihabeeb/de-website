@@ -86,8 +86,7 @@ export default function NewPage() {
         throw new Error('Failed to create page');
       }
     } catch (error) {
-      console.error('Error creating page:', error);
-      alert('Failed to create page. Please try again.');
+      setError('Error creating page');
     } finally {
       setLoading(false);
     }

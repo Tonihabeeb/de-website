@@ -119,8 +119,7 @@ export default function ProjectTimelinePage() {
 
       setMilestones(mockMilestones);
     } catch (err) {
-      setError('Failed to load project data');
-      console.error('Error fetching project data:', err);
+      setError('Error fetching project data');
     } finally {
       setLoading(false);
     }
@@ -132,7 +131,6 @@ export default function ProjectTimelinePage() {
   ) => {
     try {
       // TODO: Implement actual API call to update milestone
-      console.log('Updating milestone:', milestoneId, updates);
 
       // For now, update local state
       setMilestones(prev =>
@@ -143,7 +141,7 @@ export default function ProjectTimelinePage() {
         )
       );
     } catch (err) {
-      console.error('Error updating milestone:', err);
+      setError('Error updating milestone');
     }
   };
 
@@ -152,7 +150,6 @@ export default function ProjectTimelinePage() {
   ) => {
     try {
       // TODO: Implement actual API call to add milestone
-      console.log('Adding milestone:', milestone);
 
       const newMilestone: Milestone = {
         ...milestone,
@@ -162,20 +159,19 @@ export default function ProjectTimelinePage() {
 
       setMilestones(prev => [...prev, newMilestone]);
     } catch (err) {
-      console.error('Error adding milestone:', err);
+      setError('Error adding milestone');
     }
   };
 
   const handleMilestoneDelete = async (milestoneId: string) => {
     try {
       // TODO: Implement actual API call to delete milestone
-      console.log('Deleting milestone:', milestoneId);
 
       setMilestones(prev =>
         prev.filter(milestone => milestone.id !== milestoneId)
       );
     } catch (err) {
-      console.error('Error deleting milestone:', err);
+      setError('Error deleting milestone');
     }
   };
 

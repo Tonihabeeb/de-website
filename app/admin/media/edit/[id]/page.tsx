@@ -10,9 +10,7 @@ import {
   Trash2,
   Tag,
   Folder,
-  Calendar,
   FileText,
-  Image,
   Video,
   Music,
   Archive,
@@ -20,12 +18,10 @@ import {
   CheckCircle,
   AlertCircle,
   Loader2,
-  RefreshCw,
-  Copy,
   ExternalLink,
   Edit3,
-  Info,
 } from 'lucide-react';
+import Image from 'next/image';
 
 interface MediaItem {
   id: string;
@@ -103,7 +99,6 @@ export default function MediaEdit() {
       }
     } catch (err) {
       setError('Failed to load media item');
-      console.error('Error fetching media item:', err);
     } finally {
       setLoading(false);
     }
@@ -126,8 +121,8 @@ export default function MediaEdit() {
         setAvailableTags(Array.from(tags));
         setAvailableFolders(Array.from(folders));
       }
-    } catch (err) {
-      console.error('Error fetching available options:', err);
+    } catch {
+      // Intentionally left blank: silently ignore errors when fetching available options
     }
   };
 
@@ -155,7 +150,6 @@ export default function MediaEdit() {
       }
     } catch (err) {
       setError('Failed to save metadata');
-      console.error('Error saving metadata:', err);
     } finally {
       setSaving(false);
     }
@@ -184,7 +178,6 @@ export default function MediaEdit() {
       }
     } catch (err) {
       setError('Failed to delete file');
-      console.error('Error deleting file:', err);
     }
   };
 
@@ -219,7 +212,9 @@ export default function MediaEdit() {
 
   const getFileIcon = (mimeType: string) => {
     if (mimeType.startsWith('image/'))
-      return <Image className='w-8 h-8 text-blue-500' />;
+      return (
+        <Image src='/icons/image.svg' alt='Image' width={32} height={32} />
+      );
     if (mimeType.startsWith('video/'))
       return <Video className='w-8 h-8 text-purple-500' />;
     if (mimeType.startsWith('audio/'))
@@ -349,9 +344,11 @@ export default function MediaEdit() {
               {/* File Display */}
               <div className='aspect-square bg-gray-100 rounded-lg flex items-center justify-center'>
                 {mediaItem.mime_type.startsWith('image/') ? (
-                  <img
+                  <Image
                     src={mediaItem.thumbnail_url || mediaItem.file_path}
                     alt={mediaItem.alt_text || mediaItem.filename}
+                    width={400}
+                    height={400}
                     className='w-full h-full object-cover rounded-lg'
                   />
                 ) : (

@@ -72,11 +72,11 @@ export default function NewUser() {
         setRoles(data.roles || []);
       }
     } catch (err) {
-      console.error('Error fetching roles:', err);
+      setError('Error fetching roles');
     }
   };
 
-  const handleInputChange = (field: keyof UserFormData, value: any) => {
+  const handleInputChange = (field: keyof UserFormData, value: unknown) => {
     setFormData(prev => ({
       ...prev,
       [field]: value,
@@ -154,8 +154,7 @@ export default function NewUser() {
         setError(data.error || 'Failed to create user');
       }
     } catch (err) {
-      setError('Failed to create user');
-      console.error('Error creating user:', err);
+      setError('Error creating user');
     } finally {
       setLoading(false);
     }

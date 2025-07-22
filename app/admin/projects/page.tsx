@@ -89,7 +89,6 @@ export default function ProjectsManagement() {
       }
     } catch (err) {
       setError('Failed to load projects');
-      console.error('Error fetching projects:', err);
     } finally {
       setLoading(false);
     }
@@ -130,7 +129,6 @@ export default function ProjectsManagement() {
       }
     } catch (err) {
       setError('Search failed');
-      console.error('Error searching projects:', err);
     } finally {
       setLoading(false);
     }
@@ -158,7 +156,6 @@ export default function ProjectsManagement() {
       }
     } catch (err) {
       alert('Failed to delete project');
-      console.error('Error deleting project:', err);
     }
   };
 

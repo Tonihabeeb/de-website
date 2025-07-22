@@ -24,6 +24,7 @@ import {
   Plus,
   RefreshCw,
 } from 'lucide-react';
+import Image from 'next/image'; // Add this import
 
 interface MediaItem {
   id: string;
@@ -79,7 +80,6 @@ export default function MediaUpload() {
       }
     } catch (err) {
       setError('Failed to load media');
-      console.error('Error fetching media:', err);
     } finally {
       setLoading(false);
     }
@@ -170,7 +170,6 @@ export default function MediaUpload() {
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError('Failed to upload files');
-      console.error('Error uploading files:', err);
     } finally {
       setUploading(false);
     }
@@ -200,7 +199,6 @@ export default function MediaUpload() {
       }
     } catch (err) {
       setError('Failed to delete file');
-      console.error('Error deleting file:', err);
     }
   };
 
@@ -456,9 +454,11 @@ export default function MediaUpload() {
                 >
                   <div className='aspect-square flex items-center justify-center mb-2'>
                     {item.mime_type.startsWith('image/') ? (
-                      <img
+                      <Image
                         src={item.thumbnail_url || item.file_path}
                         alt={item.alt_text || item.filename}
+                        width={200}
+                        height={200}
                         className='w-full h-full object-cover rounded'
                       />
                     ) : (

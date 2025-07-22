@@ -29,6 +29,15 @@ interface Page {
   published_at?: string;
 }
 
+interface Version {
+  id: string;
+  version_number: number;
+  created_at: string;
+  created_by?: string;
+  content: any; // Keep as any for now, as content is dynamic JSON
+  [key: string]: any;
+}
+
 export default function PagesManagement() {
   const { token, isAuthenticated } = useAuth();
   const [pages, setPages] = useState<Page[]>([]);
@@ -40,10 +49,10 @@ export default function PagesManagement() {
   const [versionModalPageId, setVersionModalPageId] = useState<string | null>(
     null
   );
-  const [versions, setVersions] = useState<any[]>([]);
+  const [versions, setVersions] = useState<Version[]>([]);
   const [versionLoading, setVersionLoading] = useState(false);
   const [versionError, setVersionError] = useState<string | null>(null);
-  const [selectedVersion, setSelectedVersion] = useState<any | null>(null);
+  const [selectedVersion, setSelectedVersion] = useState<Version | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importResults, setImportResults] = useState<any[] | null>(null);
   const [importing, setImporting] = useState(false);
@@ -91,7 +100,7 @@ export default function PagesManagement() {
       }
     } catch (err) {
       setError('Failed to load pages');
-      console.error('Error fetching pages:', err);
+      // console.error('Error fetching pages:', err);
     } finally {
       setLoading(false);
     }
@@ -137,7 +146,7 @@ export default function PagesManagement() {
       }
     } catch (err) {
       setError('Search failed');
-      console.error('Error searching pages:', err);
+      // console.error('Error searching pages:', err);
     } finally {
       setLoading(false);
     }
@@ -176,7 +185,7 @@ export default function PagesManagement() {
       }
     } catch (err) {
       alert('Failed to duplicate page');
-      console.error('Error duplicating page:', err);
+      // console.error('Error duplicating page:', err);
     }
   };
 
@@ -207,7 +216,7 @@ export default function PagesManagement() {
       }
     } catch (err) {
       alert('Failed to delete page');
-      console.error('Error deleting page:', err);
+      // console.error('Error deleting page:', err);
     }
   };
 
@@ -236,7 +245,7 @@ export default function PagesManagement() {
       }
     } catch (err) {
       alert('Failed to publish page');
-      console.error('Error publishing page:', err);
+      // console.error('Error publishing page:', err);
     }
   };
 

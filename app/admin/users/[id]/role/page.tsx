@@ -79,7 +79,6 @@ export default function UserRoleAssignment() {
       }
     } catch (err) {
       setError('Failed to load user');
-      console.error('Error fetching user:', err);
     } finally {
       setLoading(false);
     }
@@ -94,7 +93,7 @@ export default function UserRoleAssignment() {
         setRoles(data.roles || []);
       }
     } catch (err) {
-      console.error('Error fetching roles:', err);
+      setError('Error fetching roles');
     }
   };
 
@@ -107,7 +106,7 @@ export default function UserRoleAssignment() {
         setPermissions(data.permissions || []);
       }
     } catch (err) {
-      console.error('Error fetching permissions:', err);
+      setError('Error fetching permissions');
     }
   };
 
@@ -158,7 +157,6 @@ export default function UserRoleAssignment() {
       }
     } catch (err) {
       setError('Failed to update user role');
-      console.error('Error updating user role:', err);
     } finally {
       setSaving(false);
     }

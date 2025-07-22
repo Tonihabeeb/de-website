@@ -67,7 +67,7 @@ export default function UserManagement() {
       }
     } catch (err) {
       setError('Failed to load users');
-      console.error('Error fetching users:', err);
+      // console.error('Error fetching users:', err);
     } finally {
       setLoading(false);
     }
@@ -82,7 +82,7 @@ export default function UserManagement() {
         setRoles(data.roles || []);
       }
     } catch (err) {
-      console.error('Error fetching roles:', err);
+      // console.error('Error fetching roles:', err);
     }
   };
 
@@ -103,7 +103,7 @@ export default function UserManagement() {
       }
     } catch (err) {
       setError('Failed to delete user');
-      console.error('Error deleting user:', err);
+      // console.error('Error deleting user:', err);
     }
   };
 
@@ -136,7 +136,7 @@ export default function UserManagement() {
       }
     } catch (err) {
       setError('Failed to delete users');
-      console.error('Error deleting users:', err);
+      // console.error('Error deleting users:', err);
     }
   };
 
@@ -171,7 +171,7 @@ export default function UserManagement() {
       }
     } catch (err) {
       setError('Failed to update user roles');
-      console.error('Error updating user roles:', err);
+      // console.error('Error updating user roles:', err);
     }
   };
 

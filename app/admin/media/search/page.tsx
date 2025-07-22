@@ -9,22 +9,10 @@ import {
   Eye,
   Download,
   Trash2,
-  Edit,
-  Tag,
-  Folder,
-  Calendar,
-  FileText,
-  Image,
-  Video,
-  Music,
-  Archive,
-  X,
-  SlidersHorizontal,
-  SortAsc,
-  SortDesc,
   RefreshCw,
   Save,
 } from 'lucide-react';
+import Image from 'next/image';
 
 interface MediaItem {
   id: string;
@@ -129,7 +117,6 @@ export default function MediaSearch() {
       }
     } catch (err) {
       setError('Failed to load media');
-      console.error('Error fetching media:', err);
     } finally {
       setLoading(false);
     }
@@ -200,7 +187,8 @@ export default function MediaSearch() {
 
     // Sort
     filtered.sort((a, b) => {
-      let aValue: any, bValue: any;
+      let aValue: string | number | Date | null,
+        bValue: string | number | Date | null;
 
       switch (sortOption.field) {
         case 'filename':
@@ -223,11 +211,16 @@ export default function MediaSearch() {
           return 0;
       }
 
-      if (sortOption.direction === 'asc') {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return aValue < bValue ? 1 : -1;
-      }
+      // Convert Date to number for comparison
+      if (aValue instanceof Date) aValue = aValue.getTime();
+      if (bValue instanceof Date) bValue = bValue.getTime();
+      // Default nulls to 0 for numbers, '' for strings
+      if (aValue === null) aValue = typeof bValue === 'number' ? 0 : '';
+      if (bValue === null) bValue = typeof aValue === 'number' ? 0 : '';
+
+      if (aValue < bValue) return sortOption.direction === 'asc' ? -1 : 1;
+      if (aValue > bValue) return sortOption.direction === 'asc' ? 1 : -1;
+      return 0;
     });
 
     setFilteredItems(filtered);
@@ -245,7 +238,7 @@ export default function MediaSearch() {
     });
   };
 
-  const updateFilter = (key: keyof SearchFilters, value: any) => {
+  const updateFilter = (key: keyof SearchFilters, value: unknown) => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
@@ -278,20 +271,59 @@ export default function MediaSearch() {
       }
     } catch (err) {
       setError('Failed to delete file');
-      console.error('Error deleting file:', err);
     }
   };
 
   const getFileIcon = (mimeType: string) => {
     if (mimeType.startsWith('image/'))
-      return <Image className='w-6 h-6 text-blue-500' />;
+      return (
+        <Image
+          src='/icons/image.svg'
+          fill={false}
+          width={24}
+          height={24}
+          alt='Image'
+        />
+      );
     if (mimeType.startsWith('video/'))
-      return <Video className='w-6 h-6 text-purple-500' />;
+      return (
+        <Image
+          src='/icons/video.svg'
+          fill={false}
+          width={24}
+          height={24}
+          alt='Video'
+        />
+      );
     if (mimeType.startsWith('audio/'))
-      return <Music className='w-6 h-6 text-green-500' />;
+      return (
+        <Image
+          src='/icons/audio.svg'
+          fill={false}
+          width={24}
+          height={24}
+          alt='Audio'
+        />
+      );
     if (mimeType.includes('zip') || mimeType.includes('rar'))
-      return <Archive className='w-6 h-6 text-orange-500' />;
-    return <FileText className='w-6 h-6 text-gray-500' />;
+      return (
+        <Image
+          src='/icons/archive.svg'
+          fill={false}
+          width={24}
+          height={24}
+          alt='Archive'
+        />
+      );
+    return (
+      <Image
+        src='/icons/file.svg'
+        fill={false}
+        width={24}
+        height={24}
+        alt='File'
+      />
+    );
   };
 
   const formatFileSize = (bytes: number) => {
@@ -340,7 +372,12 @@ export default function MediaSearch() {
               onClick={() => setShowFilters(!showFilters)}
               className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
             >
-              <SlidersHorizontal className='w-4 h-4 mr-2' />
+              <Image
+                src='/icons/filter.svg'
+                width={16}
+                height={16}
+                alt='Filter'
+              />
               {showFilters ? 'Hide' : 'Show'} Filters
             </button>
             <button
@@ -367,7 +404,7 @@ export default function MediaSearch() {
       {error && (
         <div className='mb-6 bg-red-50 border border-red-200 rounded-lg p-4'>
           <div className='flex items-center'>
-            <X className='w-5 h-5 text-red-400 mr-2' />
+            <Image src='/icons/error.svg' width={20} height={20} alt='Error' />
             <span className='text-red-800'>{error}</span>
           </div>
         </div>
@@ -616,10 +653,13 @@ export default function MediaSearch() {
                 >
                   <div className='aspect-square flex items-center justify-center mb-2'>
                     {item.mime_type.startsWith('image/') ? (
-                      <img
+                      <Image
                         src={item.thumbnail_url || item.file_path}
                         alt={item.alt_text || item.filename}
                         className='w-full h-full object-cover rounded'
+                        fill={false}
+                        width={100}
+                        height={100}
                       />
                     ) : (
                       getFileIcon(item.mime_type)

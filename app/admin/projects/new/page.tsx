@@ -133,8 +133,7 @@ export default function NewProject() {
         setError(data.error || 'Failed to create project');
       }
     } catch (err) {
-      setError('Failed to create project');
-      console.error('Error creating project:', err);
+      setError('Error creating project');
     } finally {
       setLoading(false);
     }
