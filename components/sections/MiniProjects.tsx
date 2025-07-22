@@ -4,67 +4,65 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '@/utils/api';
 import { useAuth } from '@/contexts/AuthContext';
+import Image from 'next/image';
 
 interface Project {
-  _id: string;
-  title: string;
+  id: string;
+  name: string;
   description: string;
   location: string;
   status: string;
-  type?: string;
-  timeline?: string;
-  capacityMW?: number;
-  partners?: string[];
-  image?: string;
-  category: string;
-  createdAt: string;
-  updatedAt: string;
+  capacity_mw?: number;
+  og_image?: string;
+  meta_keywords?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface ProjectsResponse {
-  documents: Project[];
+  projects: Project[];
 }
 
 // Sample projects for unauthenticated users
 const sampleProjects = [
   {
-    _id: 'sample-1',
-    title: 'KPP Power Plant - Erbil',
+    id: 'sample-1',
+    name: 'KPP Power Plant - Erbil',
     description:
       'Our flagship Kinetic Power Plant project in Erbil, demonstrating 24/7 renewable energy generation with zero emissions.',
     location: 'Erbil, Iraq',
     status: 'In Progress',
-    capacityMW: 50,
-    image: '/hero-static.svg',
-    category: 'renewable-energy',
-    createdAt: '2024-01-01',
-    updatedAt: '2024-01-01',
+    capacity_mw: 50,
+    og_image: '/hero-static.svg',
+    meta_keywords: 'renewable-energy',
+    created_at: '2024-01-01',
+    updated_at: '2024-01-01',
   },
   {
-    _id: 'sample-2',
-    title: 'Green Energy Initiative',
+    id: 'sample-2',
+    name: 'Green Energy Initiative',
     description:
       'Comprehensive renewable energy solution providing sustainable power to industrial facilities.',
     location: 'Baghdad, Iraq',
     status: 'Planning',
-    capacityMW: 25,
-    image: '/hero-static.svg',
-    category: 'industrial',
-    createdAt: '2024-01-01',
-    updatedAt: '2024-01-01',
+    capacity_mw: 25,
+    og_image: '/hero-static.svg',
+    meta_keywords: 'industrial',
+    created_at: '2024-01-01',
+    updated_at: '2024-01-01',
   },
   {
-    _id: 'sample-3',
-    title: 'Community Power Project',
+    id: 'sample-3',
+    name: 'Community Power Project',
     description:
       'Local community power generation using KPP technology to provide reliable electricity.',
     location: 'Basra, Iraq',
     status: 'Completed',
-    capacityMW: 10,
-    image: '/hero-static.svg',
-    category: 'community',
-    createdAt: '2024-01-01',
-    updatedAt: '2024-01-01',
+    capacity_mw: 10,
+    og_image: '/hero-static.svg',
+    meta_keywords: 'community',
+    created_at: '2024-01-01',
+    updated_at: '2024-01-01',
   },
 ];
 
@@ -80,39 +78,25 @@ export default function MiniProjects() {
       try {
         setIsLoading(true);
         setError(null);
-
-        // Only try to fetch real projects if user is authenticated
         if (isAuthenticated) {
-          const response = await apiFetch<ProjectsResponse>(
-            '/api/documents?type=project'
+          const response = await apiFetch<{ projects: Project[] }>(
+            '/api/admin/projects'
           );
-          const allProjects = response.documents || [];
-          // Limit to 3 projects for mini display
+          const allProjects = response.projects || [];
           setProjects(allProjects.slice(0, 3));
           setIsAuthenticatedUser(true);
         } else {
-          // Show sample projects for unauthenticated users
           setProjects(sampleProjects);
           setIsAuthenticatedUser(false);
         }
       } catch (err: any) {
         console.error('Error fetching projects:', err);
-
-        // If it's an authentication error or any other error, show sample projects
-        if (err.status === 401 || !isAuthenticated) {
-          setProjects(sampleProjects);
-          setIsAuthenticatedUser(false);
-        } else {
-          setError('Failed to load projects.');
-          setProjects(sampleProjects); // Fallback to sample projects
-          setIsAuthenticatedUser(false);
-        }
+        setProjects(sampleProjects);
+        setIsAuthenticatedUser(false);
       } finally {
         setIsLoading(false);
       }
     };
-
-    // Only fetch when auth state is determined
     if (!authLoading) {
       fetchProjects();
     }
@@ -175,26 +159,26 @@ export default function MiniProjects() {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-8'>
               {projects.map(project => (
                 <div
-                  key={project._id}
+                  key={project.id}
                   className='border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow bg-white'
                 >
-                  {project.image && (
-                    <div className='mb-4'>
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className='w-full h-48 object-cover rounded-lg'
-                      />
-                    </div>
+                  {project.og_image && (
+                    <Image
+                      src={project.og_image}
+                      alt={`${project.name} project image`}
+                      width={400}
+                      height={200}
+                      className='w-full h-48 object-cover rounded-t-lg'
+                    />
                   )}
 
                   <div className='flex justify-between items-start mb-4'>
                     <h3 className='text-xl font-semibold text-primary'>
-                      {project.title}
+                      {project.name}
                     </h3>
-                    {project.capacityMW && (
+                    {project.capacity_mw && (
                       <span className='text-sm bg-primary text-white px-2 py-1 rounded'>
-                        {project.capacityMW} MW
+                        {project.capacity_mw} MW
                       </span>
                     )}
                   </div>

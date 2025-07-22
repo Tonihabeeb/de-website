@@ -35,12 +35,8 @@ const navigation: NavigationItem[] = [
     name: 'About',
     href: '/about',
     submenu: [
-      { name: 'Overview', href: '/about' },
+      { name: 'Learn more', href: '/about/learn-more' },
       { name: 'Leadership', href: '/about/leadership' },
-      { name: 'ESG', href: '/about/esg' },
-      { name: 'HSE', href: '/about/hse' },
-      { name: 'Vision & Mission', href: '/about/vision-mission' },
-      { name: 'CSR', href: '/about/csr' },
     ],
   },
   {
@@ -73,18 +69,6 @@ const navigation: NavigationItem[] = [
     ],
   },
   {
-    name: 'Dashboards',
-    href: '/dashboard',
-    submenu: [
-      { name: 'Project Progress', href: '/dashboard/project-progress' },
-      { name: 'Financial', href: '/dashboard/financial' },
-      { name: 'Environment Dashboard', href: '/dashboard/environmental' },
-      { name: 'Stakeholders', href: '/dashboard/stakeholders' },
-      { name: 'Resources', href: '/resources' },
-    ],
-    requiresAuth: true,
-  },
-  {
     name: 'Services',
     href: '/services',
     submenu: [
@@ -103,11 +87,6 @@ const navigation: NavigationItem[] = [
     ],
   },
   { name: 'Contact', href: '/contact' },
-  {
-    name: 'Admin Panel',
-    href: '/admin',
-    requiresAuth: true,
-  },
 ];
 
 export default function Navbar() {
@@ -201,9 +180,9 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className='bg-white shadow-lg'>
-      <div className='container'>
-        <div className='flex items-center justify-between h-16'>
+    <nav className='sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex justify-between items-center h-16'>
           {/* Logo */}
           <Link
             href='/'
@@ -219,9 +198,9 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop Navigation - Centered */}
+          {/* Centered Navigation */}
           <ul
-            className='hidden md:flex items-center space-x-8 mx-auto'
+            className='flex-grow flex items-center justify-center space-x-8 mx-auto'
             role='menubar'
           >
             {filteredNavigation.map(item => (
@@ -234,11 +213,9 @@ export default function Navbar() {
                         ? aboutDropdownRef
                         : item.name === 'Technology'
                           ? technologyDropdownRef
-                          : item.name === 'Dashboards'
-                            ? dashboardsDropdownRef
-                            : item.name === 'Services'
-                              ? servicesDropdownRef
-                              : teamDropdownRef
+                          : item.name === 'Services'
+                            ? servicesDropdownRef
+                            : teamDropdownRef
                     }
                   >
                     <button
@@ -247,11 +224,9 @@ export default function Navbar() {
                           ? aboutButtonRef
                           : item.name === 'Technology'
                             ? technologyButtonRef
-                            : item.name === 'Dashboards'
-                              ? dashboardsButtonRef
-                              : item.name === 'Services'
-                                ? servicesButtonRef
-                                : teamButtonRef
+                            : item.name === 'Services'
+                              ? servicesButtonRef
+                              : teamButtonRef
                       }
                       onClick={() => {
                         if (item.name === 'About') {
@@ -264,12 +239,6 @@ export default function Navbar() {
                           setTechnologyDropdownOpen(!technologyDropdownOpen);
                           setAboutDropdownOpen(false);
                           setDashboardsDropdownOpen(false);
-                          setServicesDropdownOpen(false);
-                          setTeamDropdownOpen(false);
-                        } else if (item.name === 'Dashboards') {
-                          setDashboardsDropdownOpen(!dashboardsDropdownOpen);
-                          setAboutDropdownOpen(false);
-                          setTechnologyDropdownOpen(false);
                           setServicesDropdownOpen(false);
                           setTeamDropdownOpen(false);
                         } else if (item.name === 'Services') {
@@ -299,12 +268,6 @@ export default function Navbar() {
                           setDashboardsDropdownOpen(false);
                           setServicesDropdownOpen(false);
                           setTeamDropdownOpen(false);
-                        } else if (item.name === 'Dashboards') {
-                          setDashboardsDropdownOpen(true);
-                          setAboutDropdownOpen(false);
-                          setTechnologyDropdownOpen(false);
-                          setServicesDropdownOpen(false);
-                          setTeamDropdownOpen(false);
                         } else if (item.name === 'Services') {
                           setServicesDropdownOpen(true);
                           setAboutDropdownOpen(false);
@@ -325,11 +288,9 @@ export default function Navbar() {
                           ? aboutDropdownOpen
                           : item.name === 'Technology'
                             ? technologyDropdownOpen
-                            : item.name === 'Dashboards'
-                              ? dashboardsDropdownOpen
-                              : item.name === 'Services'
-                                ? servicesDropdownOpen
-                                : teamDropdownOpen
+                            : item.name === 'Services'
+                              ? servicesDropdownOpen
+                              : teamDropdownOpen
                       }
                       aria-haspopup='true'
                       aria-label={`Toggle ${item.name} menu`}
@@ -341,11 +302,9 @@ export default function Navbar() {
                       ? aboutDropdownOpen
                       : item.name === 'Technology'
                         ? technologyDropdownOpen
-                        : item.name === 'Dashboards'
-                          ? dashboardsDropdownOpen
-                          : item.name === 'Services'
-                            ? servicesDropdownOpen
-                            : teamDropdownOpen) && (
+                        : item.name === 'Services'
+                          ? servicesDropdownOpen
+                          : teamDropdownOpen) && (
                       <div
                         className='absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20'
                         onMouseEnter={() => {
@@ -353,8 +312,6 @@ export default function Navbar() {
                             setAboutDropdownOpen(true);
                           } else if (item.name === 'Technology') {
                             setTechnologyDropdownOpen(true);
-                          } else if (item.name === 'Dashboards') {
-                            setDashboardsDropdownOpen(true);
                           } else if (item.name === 'Services') {
                             setServicesDropdownOpen(true);
                           } else {
@@ -366,8 +323,6 @@ export default function Navbar() {
                             setAboutDropdownOpen(false);
                           } else if (item.name === 'Technology') {
                             setTechnologyDropdownOpen(false);
-                          } else if (item.name === 'Dashboards') {
-                            setDashboardsDropdownOpen(false);
                           } else if (item.name === 'Services') {
                             setServicesDropdownOpen(false);
                           } else {
@@ -503,6 +458,26 @@ export default function Navbar() {
                           Admin Panel
                         </Link>
                       </RoleGuard>
+                      <Link
+                        href='/dashboard'
+                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
+                        onClick={() => setUserDropdownOpen(false)}
+                      >
+                        <svg
+                          className='w-4 h-4 mr-3'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 8h2v-2H7v2zm0-4h2v-2H7v2zm0-4h2V7H7v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z'
+                          />
+                        </svg>
+                        Dashboard
+                      </Link>
                       <div className='border-t border-gray-100 my-1'></div>
                       <button
                         onClick={() => {
@@ -554,169 +529,167 @@ export default function Navbar() {
             )}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div
-            id='mobile-menu'
-            className='md:hidden border-t border-gray-200 bg-white shadow-lg'
-            role='navigation'
-            aria-label='Mobile navigation'
-          >
-            <div className='px-4 py-6 space-y-4'>
-              <ul className='space-y-2' role='menu'>
-                {filteredNavigation.map(item => (
-                  <li key={item.name} role='none'>
-                    {item.submenu ? (
-                      <div>
-                        <div className='px-3 py-3 text-primary font-semibold text-lg border-b border-gray-100'>
-                          {item.name}
-                        </div>
-                        <ul className='pl-4 space-y-1 mt-2'>
-                          {item.submenu.map(subItem => (
-                            <li key={subItem.name}>
-                              <Link
-                                href={subItem.href}
-                                className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium ${
-                                  pathname === subItem.href
-                                    ? 'bg-primary text-white shadow-md'
-                                    : 'text-gray-text hover:bg-gray-50 hover:text-primary'
-                                }`}
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                {subItem.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        role='menuitem'
-                        aria-current={
-                          pathname === item.href ? 'page' : undefined
-                        }
-                        className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium ${
-                          pathname === item.href
-                            ? 'bg-primary text-white shadow-md'
-                            : 'text-gray-text hover:bg-gray-50 hover:text-primary'
-                        }`}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <div
+          id='mobile-menu'
+          className='md:hidden border-t border-gray-200 bg-white shadow-lg'
+          role='navigation'
+          aria-label='Mobile navigation'
+        >
+          <div className='px-4 py-6 space-y-4'>
+            <ul className='space-y-2' role='menu'>
+              {filteredNavigation.map(item => (
+                <li key={item.name} role='none'>
+                  {item.submenu ? (
+                    <div>
+                      <div className='px-3 py-3 text-primary font-semibold text-lg border-b border-gray-100'>
                         {item.name}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Mobile Authentication Section */}
-              <div className='border-t border-gray-200 pt-6 mt-6'>
-                {isAuthenticated ? (
-                  <div className='space-y-4'>
-                    {/* User Info */}
-                    <div className='flex items-center space-x-3 px-3 py-3 bg-gray-50 rounded-lg'>
-                      <div className='w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-sm font-semibold'>
-                        {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                       </div>
-                      <div>
-                        <div className='text-sm font-medium text-gray-900'>
-                          {user?.name}
-                        </div>
-                        <div className='text-xs text-gray-500'>
-                          {user?.role
-                            ? user.role.charAt(0).toUpperCase() +
-                              user.role.slice(1)
-                            : 'User'}
-                        </div>
+                      <ul className='pl-4 space-y-1 mt-2'>
+                        {item.submenu.map(subItem => (
+                          <li key={subItem.name}>
+                            <Link
+                              href={subItem.href}
+                              className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium ${
+                                pathname === subItem.href
+                                  ? 'bg-primary text-white shadow-md'
+                                  : 'text-gray-text hover:bg-gray-50 hover:text-primary'
+                              }`}
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {subItem.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      role='menuitem'
+                      aria-current={pathname === item.href ? 'page' : undefined}
+                      className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium ${
+                        pathname === item.href
+                          ? 'bg-primary text-white shadow-md'
+                          : 'text-gray-text hover:bg-gray-50 hover:text-primary'
+                      }`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile Authentication Section */}
+            <div className='border-t border-gray-200 pt-6 mt-6'>
+              {isAuthenticated ? (
+                <div className='space-y-4'>
+                  {/* User Info */}
+                  <div className='flex items-center space-x-3 px-3 py-3 bg-gray-50 rounded-lg'>
+                    <div className='w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-sm font-semibold'>
+                      {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                    </div>
+                    <div>
+                      <div className='text-sm font-medium text-gray-900'>
+                        {user?.name}
+                      </div>
+                      <div className='text-xs text-gray-500'>
+                        {user?.role
+                          ? user.role.charAt(0).toUpperCase() +
+                            user.role.slice(1)
+                          : 'User'}
                       </div>
                     </div>
+                  </div>
 
-                    {/* Action Links */}
-                    <div className='space-y-2'>
+                  {/* Action Links */}
+                  <div className='space-y-2'>
+                    <Link
+                      href='/documents'
+                      className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <FileText className='w-4 h-4 mr-3' />
+                      Documents
+                    </Link>
+                    <RoleGuard roles={['admin', 'super_admin']}>
                       <Link
-                        href='/documents'
+                        href='/admin'
                         className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        <FileText className='w-4 h-4 mr-3' />
-                        Documents
+                        <Settings className='w-4 h-4 mr-3' />
+                        Admin Panel
                       </Link>
-                      <RoleGuard roles={['admin', 'super_admin']}>
-                        <Link
-                          href='/admin'
-                          className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <Settings className='w-4 h-4 mr-3' />
-                          Admin Panel
-                        </Link>
-                      </RoleGuard>
-                    </div>
+                    </RoleGuard>
+                  </div>
 
-                    {/* Logout Button */}
-                    <div className='border-t border-gray-200 pt-2'>
-                      <button
-                        onClick={() => {
-                          logout();
-                          setMobileMenuOpen(false);
-                        }}
-                        className='flex items-center w-full px-3 py-3 text-sm text-gray-700 hover:text-red-600 font-medium rounded-lg hover:bg-red-50 transition-all duration-200'
-                      >
-                        <LogOut className='w-4 h-4 mr-3' />
-                        Logout
-                      </button>
-                    </div>
+                  {/* Logout Button */}
+                  <div className='border-t border-gray-200 pt-2'>
+                    <button
+                      onClick={() => {
+                        logout();
+                        setMobileMenuOpen(false);
+                      }}
+                      className='flex items-center w-full px-3 py-3 text-sm text-gray-700 hover:text-red-600 font-medium rounded-lg hover:bg-red-50 transition-all duration-200'
+                    >
+                      <LogOut className='w-4 h-4 mr-3' />
+                      Logout
+                    </button>
                   </div>
-                ) : (
-                  <div className='space-y-3'>
-                    <div className='text-sm text-gray-600 font-medium px-3'>
-                      Account
-                    </div>
-                    <div className='space-y-2'>
-                      <Link
-                        href='/login'
-                        className='block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Login
-                      </Link>
-                      <Link
-                        href='/register'
-                        className='block px-3 py-3 text-sm bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-all duration-200 text-center'
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Create Account
-                      </Link>
-                    </div>
+                </div>
+              ) : (
+                <div className='space-y-3'>
+                  <div className='text-sm text-gray-600 font-medium px-3'>
+                    Account
                   </div>
-                )}
-              </div>
+                  <div className='space-y-2'>
+                    <Link
+                      href='/login'
+                      className='block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href='/register'
+                      className='block px-3 py-3 text-sm bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-all duration-200 text-center'
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Create Account
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
-              {/* Footer */}
-              <div className='border-t border-gray-200 pt-6 mt-6'>
-                <div className='text-center space-y-2'>
-                  <div className='flex items-center justify-center space-x-2'>
-                    <div className='w-4 h-4 bg-primary rounded-full'></div>
-                    <p className='text-sm font-medium text-primary'>
-                      Deep Engineering
-                    </p>
-                  </div>
-                  <p className='text-xs text-gray-500'>
-                    KPP Technology Solutions
+            {/* Footer */}
+            <div className='border-t border-gray-200 pt-6 mt-6'>
+              <div className='text-center space-y-2'>
+                <div className='flex items-center justify-center space-x-2'>
+                  <div className='w-4 h-4 bg-primary rounded-full'></div>
+                  <p className='text-sm font-medium text-primary'>
+                    Deep Engineering
                   </p>
-                  <div className='flex items-center justify-center space-x-4 text-xs text-gray-400'>
-                    <span>Continuous Clean Energy</span>
-                    <span>•</span>
-                    <span>Anywhere</span>
-                  </div>
+                </div>
+                <p className='text-xs text-gray-500'>
+                  KPP Technology Solutions
+                </p>
+                <div className='flex items-center justify-center space-x-4 text-xs text-gray-400'>
+                  <span>Continuous Clean Energy</span>
+                  <span>•</span>
+                  <span>Anywhere</span>
                 </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   );
 }

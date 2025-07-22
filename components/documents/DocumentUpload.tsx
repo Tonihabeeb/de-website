@@ -117,47 +117,37 @@ export default function DocumentUpload({
 
   const uploadFile = async (file: File, fileId: string) => {
     const formDataToSend = new FormData();
-    formDataToSend.append('file', file);
-    formDataToSend.append('title', formData.title || file.name);
-    formDataToSend.append('description', formData.description);
-    formDataToSend.append('category', formData.category);
-    formDataToSend.append('type', formData.type);
+    formDataToSend.append('files', file); // 'files' is the field expected by formidable
+    formDataToSend.append('alt_text', formData.title || file.name);
+    formDataToSend.append('caption', formData.description);
+    // Optionally, add tags if you want: formDataToSend.append('tags', ...);
 
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/documents`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formDataToSend,
-        }
-      );
-
+      const response = await fetch('/api/admin/media', {
+        method: 'POST',
+        body: formDataToSend,
+      });
       if (!response.ok) {
         throw new Error(await response.text());
       }
-
       const result = await response.json();
-
       setFiles(prev =>
         prev.map(f => (f.id === fileId ? { ...f, status: 'success' } : f))
       );
-
       toast.success(`${file.name} has been uploaded successfully.`);
-
-      onUploadSuccess?.(result.document);
+      // result.media is an array if multiple files, or a single object
+      if (Array.isArray(result.media)) {
+        onUploadSuccess?.(result.media[0]);
+      } else {
+        onUploadSuccess?.(result.media);
+      }
     } catch (error: any) {
       setFiles(prev =>
         prev.map(f =>
           f.id === fileId ? { ...f, status: 'error', error: error.message } : f
         )
       );
-
       toast.error(`Failed to upload ${file.name}: ${error.message}`);
-
       onUploadError?.(error.message);
     }
   };

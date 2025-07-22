@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   Plus,
@@ -48,6 +48,9 @@ export default function ProjectsManagement() {
   const [versionLoading, setVersionLoading] = useState(false);
   const [versionError, setVersionError] = useState<string | null>(null);
   const [selectedVersion, setSelectedVersion] = useState<any | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [importResults, setImportResults] = useState<any[] | null>(null);
+  const [importing, setImporting] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -202,6 +205,42 @@ export default function ProjectsManagement() {
     }
   };
 
+  const handleExport = () => {
+    window.open('/api/admin/projects/export', '_blank');
+  };
+
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImporting(true);
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      const res = await fetch('/api/admin/projects/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      setImportResults(result.results || []);
+      if (result.success) {
+        toast.success('Import completed');
+        fetchProjects();
+      } else {
+        toast.error(result.error || 'Import failed');
+      }
+    } catch (err) {
+      toast.error('Failed to import: Invalid file or server error');
+    } finally {
+      setImporting(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
   const filteredProjects = projects.filter(project => {
     const matchesSearch =
       project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -257,23 +296,29 @@ export default function ProjectsManagement() {
   return (
     <div className='p-6'>
       {/* Header */}
-      <div className='mb-6'>
-        <div className='flex justify-between items-center'>
-          <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
-              Projects Management
-            </h1>
-            <p className='text-gray-600 mt-1'>
-              Manage your engineering projects and timelines
-            </p>
-          </div>
-          <Link
-            href='/admin/projects/new'
-            className='inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+      <div className='flex items-center justify-between mb-6'>
+        <h1 className='text-2xl font-bold'>Projects</h1>
+        <div className='flex items-center gap-2'>
+          <button
+            onClick={handleExport}
+            className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'
           >
-            <Plus className='w-4 h-4 mr-2' />
-            New Project
-          </Link>
+            Export
+          </button>
+          <button
+            onClick={handleImportClick}
+            className='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700'
+            disabled={importing}
+          >
+            Import
+          </button>
+          <input
+            type='file'
+            accept='.json'
+            ref={fileInputRef}
+            onChange={handleImportFile}
+            className='hidden'
+          />
         </div>
       </div>
 
@@ -543,6 +588,34 @@ export default function ProjectsManagement() {
               <button
                 onClick={() => setVersionModalProjectId(null)}
                 className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Import Results Modal/Alert */}
+      {importResults && (
+        <div className='fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center'>
+          <div className='bg-white rounded-lg p-6 w-full max-w-lg'>
+            <h3 className='text-lg font-semibold mb-4'>Import Results</h3>
+            <ul className='max-h-64 overflow-y-auto mb-4'>
+              {importResults.map((r, i) => (
+                <li
+                  key={i}
+                  className={r.success ? 'text-green-700' : 'text-red-600'}
+                >
+                  {r.success ? '✔' : '✖'} {r.slug || r.id}:{' '}
+                  {r.success ? 'Imported' : r.error}
+                </li>
+              ))}
+            </ul>
+            <div className='flex justify-end'>
+              <button
+                onClick={() => setImportResults(null)}
+                className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400'
               >
                 Close
               </button>

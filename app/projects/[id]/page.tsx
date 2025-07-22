@@ -4,21 +4,35 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
 import { serverApiFetch, ServerApiException } from '@/utils/server-api';
+import Image from 'next/image';
 
 interface Project {
-  _id: string;
-  title: string;
-  description: string;
-  location: string;
-  status: string;
-  type?: string;
-  timeline?: string;
-  capacityMW?: number;
-  partners?: string[];
-  image?: string;
-  category: string;
-  createdAt: string;
-  updatedAt: string;
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  content: any;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
+  status: 'planning' | 'in-progress' | 'completed' | 'cancelled';
+  capacity_mw?: number;
+  location?: string;
+  start_date?: Date;
+  end_date?: Date;
+  budget?: number;
+  budget_currency?: string;
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
+  created_by?: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 interface ProjectResponse {
@@ -43,13 +57,13 @@ export async function generateMetadata({
     const project = response.document;
 
     return {
-      title: `${project.title} | Deep Engineering`,
+      title: `${project.name} | Deep Engineering`,
       description: project.description,
-      keywords: `project, ${project.category}, ${project.location}, deep engineering`,
+      keywords: `project, ${project.meta_keywords}, ${project.location}, deep engineering`,
       openGraph: {
-        title: project.title,
+        title: project.name,
         description: project.description,
-        images: project.image ? [project.image] : [],
+        images: project.og_image ? [project.og_image] : [],
       },
     };
   } catch (error) {
@@ -65,46 +79,19 @@ async function getProjectData(
   id: string
 ): Promise<{ project: Project | null; error: string | null }> {
   try {
-    const response = await serverApiFetch<ProjectResponse>(
-      `/api/documents/${id}`
+    const response = await serverApiFetch<{ project: Project }>(
+      `/api/admin/projects/${id}`
     );
     return {
-      project: response.document,
+      project: response.project,
       error: null,
     };
   } catch (err: any) {
     console.error('Error fetching project:', err);
-
-    if (err instanceof ServerApiException) {
-      if (err.status === 404) {
-        return { project: null, error: 'Project not found.' };
-      } else if (err.status === 401) {
-        return {
-          project: null,
-          error: 'Authentication required to view this project.',
-        };
-      } else if (err.status === 403) {
-        return {
-          project: null,
-          error: 'You do not have permission to view this project.',
-        };
-      } else if (err.status >= 500) {
-        return {
-          project: null,
-          error: 'Server error. Please try again later.',
-        };
-      } else {
-        return {
-          project: null,
-          error: err.message || 'Failed to load project.',
-        };
-      }
-    } else {
-      return {
-        project: null,
-        error: 'Failed to load project. Please try again later.',
-      };
-    }
+    return {
+      project: null,
+      error: err.message || 'Failed to load project.',
+    };
   }
 }
 
@@ -123,15 +110,15 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         data={{
           '@context': 'https://schema.org',
           '@type': 'CreativeWork',
-          name: project.title,
+          name: project.name,
           description: project.description,
           location: {
             '@type': 'Place',
             name: project.location,
           },
-          dateCreated: project.createdAt,
-          dateModified: project.updatedAt,
-          category: project.category,
+          dateCreated: project.created_at,
+          dateModified: project.updated_at,
+          category: project.meta_keywords,
         }}
       />
 
@@ -151,7 +138,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 Projects
               </Link>
               <span>/</span>
-              <span className='text-gray-900 font-medium'>{project.title}</span>
+              <span className='text-gray-900 font-medium'>{project.name}</span>
             </div>
           </div>
         </nav>
@@ -162,7 +149,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <div className='max-w-4xl mx-auto'>
               <div className='mb-8'>
                 <h1 className='text-4xl font-bold text-primary mb-4'>
-                  {project.title}
+                  {project.name}
                 </h1>
                 <p className='text-xl text-gray-text leading-relaxed'>
                   {project.description}
@@ -170,12 +157,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </div>
 
               {/* Project Image */}
-              {project.image && (
-                <div className='mb-8'>
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className='w-full h-64 md:h-96 object-cover rounded-lg shadow-lg'
+              {project.og_image && (
+                <div className='mb-6'>
+                  <Image
+                    src={project.og_image}
+                    alt={`${project.name} project image`}
+                    width={800}
+                    height={400}
+                    className='w-full h-64 object-cover rounded-lg'
                   />
                 </div>
               )}
@@ -199,33 +188,31 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                     </span>
                   </div>
 
-                  {project.type && (
-                    <div>
-                      <h3 className='text-lg font-semibold text-gray-900 mb-2'>
-                        Type
-                      </h3>
-                      <p className='text-gray-text'>{project.type}</p>
-                    </div>
-                  )}
-
-                  {project.timeline && (
-                    <div>
-                      <h3 className='text-lg font-semibold text-gray-900 mb-2'>
-                        Timeline
-                      </h3>
-                      <p className='text-gray-text'>{project.timeline}</p>
-                    </div>
-                  )}
+                  <div>
+                    <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                      Last Updated
+                    </h3>
+                    <p className='text-gray-text'>
+                      {new Date(project.updated_at).toLocaleDateString(
+                        'en-US',
+                        {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        }
+                      )}
+                    </p>
+                  </div>
                 </div>
 
                 <div className='space-y-4'>
-                  {project.capacityMW && (
+                  {project.capacity_mw && (
                     <div>
                       <h3 className='text-lg font-semibold text-gray-900 mb-2'>
                         Capacity
                       </h3>
                       <p className='text-2xl font-bold text-primary'>
-                        {project.capacityMW} MW
+                        {project.capacity_mw} MW
                       </p>
                     </div>
                   )}
@@ -235,40 +222,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                       Category
                     </h3>
                     <span className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800'>
-                      {project.category}
+                      {project.meta_keywords}
                     </span>
                   </div>
-
-                  <div>
-                    <h3 className='text-lg font-semibold text-gray-900 mb-2'>
-                      Last Updated
-                    </h3>
-                    <p className='text-gray-text'>
-                      {new Date(project.updatedAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </p>
-                  </div>
-
-                  {project.partners && project.partners.length > 0 && (
-                    <div>
-                      <h3 className='text-lg font-semibold text-gray-900 mb-2'>
-                        Partners
-                      </h3>
-                      <div className='flex flex-wrap gap-2'>
-                        {project.partners.map((partner, index) => (
-                          <span
-                            key={index}
-                            className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800'
-                          >
-                            {partner}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
 

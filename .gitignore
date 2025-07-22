@@ -155,10 +155,6 @@ lighthouse-*.html
 *.backup
 *.bak
 
-# Sanity Studio (if still present)
-/studio
-.sanity
-
 # Backend specific
 backend/node_modules/
 backend/logs/

@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
-import HeroSection from '@/components/sections/HeroSection';
+import HomeHeroSection from '@/components/sections/HomeHeroSection';
 import MiniProjects from '@/components/sections/MiniProjects';
 import MiniAbout from '@/components/sections/MiniAbout';
 
@@ -116,33 +116,8 @@ export default function HomePage() {
         }}
       />
 
-      {/* Hero Section */}
-      <HeroSection
-        title='Continuous Clean Energy, Anywhere'
-        subtitle='Delivering 24/7 renewable power through the revolutionary Kinetic Power Plant (KPP) technology – no fuel, no emissions.'
-      >
-        <div>
-          <Link
-            href='/technology'
-            className='inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl'
-          >
-            Explore Our Technology
-            <svg
-              className='ml-2 w-5 h-5'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M17 8l4 4m0 0l-4 4m4-4H3'
-              />
-            </svg>
-          </Link>
-        </div>
-      </HeroSection>
+      {/* Home Hero Section */}
+      <HomeHeroSection />
 
       {/* Mini About Section */}
       <MiniAbout />

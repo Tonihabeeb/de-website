@@ -15,6 +15,10 @@ jest.mock('@/contexts/AuthContext', () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import DocumentList from '@/components/documents/DocumentList';
+
 const mockMedia = [
   {
     id: '1',
@@ -52,14 +56,14 @@ jest.mock('@/utils/api', () => ({
   ApiException: class ApiException extends Error {},
 }));
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import DocumentList from '@/components/documents/DocumentList';
-
-describe('DocumentList Integration', () => {
-  it('renders and waits for document names to appear', async () => {
-    render(<DocumentList />);
-    await screen.findByText('Project Report.pdf');
-    await screen.findByText('Technical Specs.docx');
+test('renders DocumentList and waits for loading spinner to disappear', async () => {
+  render(<DocumentList />);
+  await waitFor(() => {
+    expect(screen.queryByText('Loading documents...')).not.toBeInTheDocument();
   });
+  // Debug the DOM after loading
+  screen.debug();
+  // Try to find the document names
+  expect(screen.getByText('Project Report.pdf')).toBeInTheDocument();
+  expect(screen.getByText('Technical Specs.docx')).toBeInTheDocument();
 });

@@ -9,65 +9,74 @@ import { useAuth } from '@/contexts/AuthContext';
 import AuthGuard from '@/components/auth/AuthGuard';
 
 interface Project {
-  _id: string;
-  title: string;
-  description: string;
-  location: string;
-  status: string;
-  type?: string;
-  timeline?: string;
-  capacityMW?: number;
-  partners?: string[];
-  image?: string;
-  category: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface ProjectsResponse {
-  documents: Project[];
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  content: any;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+  og_title?: string;
+  og_description?: string;
+  og_image?: string;
+  twitter_title?: string;
+  twitter_description?: string;
+  twitter_image?: string;
+  status: 'planning' | 'in-progress' | 'completed' | 'cancelled';
+  capacity_mw?: number;
+  location?: string;
+  start_date?: Date;
+  end_date?: Date;
+  budget?: number;
+  budget_currency?: string;
+  publish_at?: Date | null;
+  unpublish_at?: Date | null;
+  created_by?: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 // Sample projects for unauthenticated users
-const sampleProjects = [
+const sampleProjects: Project[] = [
   {
-    _id: 'sample-1',
-    title: 'KPP Power Plant - Erbil',
+    id: 'sample-1',
+    name: 'KPP Power Plant - Erbil',
+    slug: 'kpp-power-plant-erbil',
     description:
       'Our flagship Kinetic Power Plant project in Erbil, demonstrating 24/7 renewable energy generation with zero emissions.',
+    content: {},
+    status: 'in-progress',
+    capacity_mw: 50,
     location: 'Erbil, Iraq',
-    status: 'In Progress',
-    capacityMW: 50,
-    image: '/hero-static.svg',
-    category: 'renewable-energy',
-    createdAt: '2024-01-01',
-    updatedAt: '2024-01-01',
+    created_at: new Date('2024-01-01'),
+    updated_at: new Date('2024-01-01'),
   },
   {
-    _id: 'sample-2',
-    title: 'Green Energy Initiative',
+    id: 'sample-2',
+    name: 'Green Energy Initiative',
+    slug: 'green-energy-initiative',
     description:
       'Comprehensive renewable energy solution providing sustainable power to industrial facilities.',
+    content: {},
+    status: 'planning',
+    capacity_mw: 25,
     location: 'Baghdad, Iraq',
-    status: 'Planning',
-    capacityMW: 25,
-    image: '/hero-static.svg',
-    category: 'industrial',
-    createdAt: '2024-01-01',
-    updatedAt: '2024-01-01',
+    created_at: new Date('2024-01-01'),
+    updated_at: new Date('2024-01-01'),
   },
   {
-    _id: 'sample-3',
-    title: 'Community Power Project',
+    id: 'sample-3',
+    name: 'Community Power Project',
+    slug: 'community-power-project',
     description:
       'Local community power generation using KPP technology to provide reliable electricity.',
+    content: {},
+    status: 'completed',
+    capacity_mw: 10,
     location: 'Basra, Iraq',
-    status: 'Completed',
-    capacityMW: 10,
-    image: '/hero-static.svg',
-    category: 'community',
-    createdAt: '2024-01-01',
-    updatedAt: '2024-01-01',
+    created_at: new Date('2024-01-01'),
+    updated_at: new Date('2024-01-01'),
   },
 ];
 
@@ -83,55 +92,25 @@ export default function ProjectsPage() {
       try {
         setIsLoading(true);
         setError(null);
-
-        // Only try to fetch real projects if user is authenticated
         if (isAuthenticated) {
-          const response = await apiFetch<ProjectsResponse>(
-            '/api/documents?type=project'
+          const response = await apiFetch<{ projects: Project[] }>(
+            '/api/admin/projects'
           );
-          setProjects(response.documents || []);
+          setProjects(response.projects || []);
           setIsAuthenticatedUser(true);
         } else {
-          // Show sample projects for unauthenticated users
           setProjects(sampleProjects);
           setIsAuthenticatedUser(false);
         }
       } catch (err: any) {
         console.error('Error fetching projects:', err);
-
-        // Handle different types of errors
-        if (err instanceof ApiException) {
-          if (err.status === 401) {
-            setProjects(sampleProjects);
-            setIsAuthenticatedUser(false);
-          } else if (err.status === 403) {
-            setError('You do not have permission to view projects.');
-            setProjects(sampleProjects);
-            setIsAuthenticatedUser(false);
-          } else if (err.status === 404) {
-            setError('Projects not found.');
-            setProjects(sampleProjects);
-            setIsAuthenticatedUser(false);
-          } else if (err.status >= 500) {
-            setError('Server error. Please try again later.');
-            setProjects(sampleProjects);
-            setIsAuthenticatedUser(false);
-          } else {
-            setError(err.message || 'Failed to load projects.');
-            setProjects(sampleProjects);
-            setIsAuthenticatedUser(false);
-          }
-        } else {
-          setError('Failed to load projects. Please try again later.');
-          setProjects(sampleProjects);
-          setIsAuthenticatedUser(false);
-        }
+        setError(err.message || 'Failed to load projects.');
+        setProjects(sampleProjects);
+        setIsAuthenticatedUser(false);
       } finally {
         setIsLoading(false);
       }
     };
-
-    // Only fetch when auth state is determined
     if (!authLoading) {
       fetchProjects();
     }
@@ -157,7 +136,7 @@ export default function ProjectsPage() {
               position: index + 1,
               item: {
                 '@type': 'CreativeWork',
-                name: project.title,
+                name: project.name,
                 description: project.description,
                 location: {
                   '@type': 'Place',
@@ -219,26 +198,16 @@ export default function ProjectsPage() {
               <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
                 {projects.map(project => (
                   <div
-                    key={project._id}
+                    key={project.id}
                     className='border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow bg-white'
                   >
-                    {project.image && (
-                      <div className='mb-4'>
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className='w-full h-48 object-cover rounded-lg'
-                        />
-                      </div>
-                    )}
-
                     <div className='flex justify-between items-start mb-4'>
                       <h3 className='text-2xl font-semibold text-primary'>
-                        {project.title}
+                        {project.name}
                       </h3>
-                      {project.capacityMW && (
+                      {project.capacity_mw && (
                         <span className='text-base bg-primary text-white px-3 py-1 rounded'>
-                          {project.capacityMW} MW
+                          {project.capacity_mw} MW
                         </span>
                       )}
                     </div>
@@ -254,45 +223,15 @@ export default function ProjectsPage() {
                           {project.status}
                         </span>
                       </p>
-                      {project.type && (
-                        <p className='text-base text-gray-text'>
-                          <span className='font-medium'>Type:</span>{' '}
-                          {project.type}
-                        </p>
-                      )}
-                      {project.timeline && (
-                        <p className='text-base text-gray-text'>
-                          <span className='font-medium'>Timeline:</span>{' '}
-                          {project.timeline}
-                        </p>
-                      )}
                     </div>
 
                     <p className='text-gray-text mb-4'>{project.description}</p>
 
-                    {project.partners && project.partners.length > 0 && (
-                      <div className='mb-4'>
-                        <p className='text-base font-medium text-gray-text mb-2'>
-                          Partners:
-                        </p>
-                        <div className='flex flex-wrap gap-2'>
-                          {project.partners.map((partner, pIndex) => (
-                            <span
-                              key={pIndex}
-                              className='text-base bg-gray-light text-gray-text px-2 py-1 rounded'
-                            >
-                              {partner}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
                     <div className='text-xs text-gray-500 mt-4'>
-                      <p>Category: {project.category}</p>
+                      <p>Category: {project.meta_keywords}</p>
                       <p>
                         Last updated:{' '}
-                        {new Date(project.updatedAt).toLocaleDateString()}
+                        {new Date(project.updated_at).toLocaleDateString()}
                       </p>
                     </div>
                   </div>

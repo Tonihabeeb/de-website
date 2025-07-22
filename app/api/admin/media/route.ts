@@ -4,76 +4,7 @@ import { z } from 'zod';
 import formidable from 'formidable';
 import fs from 'fs';
 import path from 'path';
-
-// Sample media data for development
-const sampleMedia = [
-  {
-    id: 'media-001',
-    filename: 'kpp-schematic.jpg',
-    original_name: 'KPP Schematic Diagram.jpg',
-    file_path: '/uploads/kpp-schematic.jpg',
-    file_size: 2048576,
-    mime_type: 'image/jpeg',
-    alt_text: 'Kinetic Power Plant schematic diagram',
-    caption: 'Technical schematic showing the KPP system components and flow',
-    tags: ['technical', 'schematic', 'kpp', 'diagram'],
-    uploaded_by: 'admin-001',
-    created_at: '2024-07-01T00:00:00.000Z',
-  },
-  {
-    id: 'media-002',
-    filename: 'power-plant-site.jpg',
-    original_name: 'Power Plant Site.jpg',
-    file_path: '/uploads/power-plant-site.jpg',
-    file_size: 3145728,
-    mime_type: 'image/jpeg',
-    alt_text: 'Power plant construction site',
-    caption:
-      'Construction site showing the foundation work for the new power plant',
-    tags: ['construction', 'site', 'power-plant', 'foundation'],
-    uploaded_by: 'admin-001',
-    created_at: '2024-07-05T00:00:00.000Z',
-  },
-  {
-    id: 'media-003',
-    filename: 'technical-specs.pdf',
-    original_name: 'Technical Specifications.pdf',
-    file_path: '/uploads/technical-specs.pdf',
-    file_size: 5242880,
-    mime_type: 'application/pdf',
-    alt_text: 'Technical specifications document',
-    caption: 'Comprehensive technical specifications for the KPP system',
-    tags: ['technical', 'specifications', 'document', 'pdf'],
-    uploaded_by: 'admin-001',
-    created_at: '2024-07-10T00:00:00.000Z',
-  },
-  {
-    id: 'media-004',
-    filename: 'team-photo.jpg',
-    original_name: 'Engineering Team.jpg',
-    file_path: '/uploads/team-photo.jpg',
-    file_size: 1572864,
-    mime_type: 'image/jpeg',
-    alt_text: 'Engineering team working on KPP project',
-    caption: 'Our dedicated engineering team working on the KPP implementation',
-    tags: ['team', 'engineering', 'kpp', 'project'],
-    uploaded_by: 'admin-001',
-    created_at: '2024-07-15T00:00:00.000Z',
-  },
-  {
-    id: 'media-005',
-    filename: 'energy-flow-diagram.png',
-    original_name: 'Energy Flow Diagram.png',
-    file_path: '/uploads/energy-flow-diagram.png',
-    file_size: 1048576,
-    mime_type: 'image/png',
-    alt_text: 'Energy flow diagram for KPP system',
-    caption: 'Visual representation of energy flow through the KPP system',
-    tags: ['diagram', 'energy-flow', 'kpp', 'visual'],
-    uploaded_by: 'admin-001',
-    created_at: '2024-07-18T00:00:00.000Z',
-  },
-];
+import { MediaModel } from '@/database/models/Media';
 
 export const config = {
   api: {
@@ -85,65 +16,37 @@ export const config = {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const mime_type = searchParams.get('mime_type');
-    const uploaded_by = searchParams.get('uploaded_by');
+    const mime_type = searchParams.get('mime_type') || undefined;
+    const uploaded_by = searchParams.get('uploaded_by') || undefined;
     const limit = searchParams.get('limit')
       ? parseInt(searchParams.get('limit')!)
       : undefined;
     const offset = searchParams.get('offset')
       ? parseInt(searchParams.get('offset')!)
       : undefined;
-    const tags = searchParams.get('tags');
-    const alt_text = searchParams.get('alt_text');
-    const caption = searchParams.get('caption');
+    const tags = searchParams.get('tags')
+      ? searchParams
+          .get('tags')!
+          .split(',')
+          .map(t => t.trim())
+      : undefined;
+    const alt_text = searchParams.get('alt_text') || undefined;
+    const caption = searchParams.get('caption') || undefined;
 
-    let filteredMedia = [...sampleMedia];
-
-    // Apply filters
-    if (mime_type) {
-      filteredMedia = filteredMedia.filter(
-        media => media.mime_type === mime_type
-      );
-    }
-    if (uploaded_by) {
-      filteredMedia = filteredMedia.filter(
-        media => media.uploaded_by === uploaded_by
-      );
-    }
-    if (tags) {
-      const tagList = tags.split(',').map(t => t.trim().toLowerCase());
-      filteredMedia = filteredMedia.filter(media =>
-        media.tags.some((tag: string) => tagList.includes(tag.toLowerCase()))
-      );
-    }
-    if (alt_text) {
-      filteredMedia = filteredMedia.filter(
-        media =>
-          media.alt_text &&
-          media.alt_text.toLowerCase().includes(alt_text.toLowerCase())
-      );
-    }
-    if (caption) {
-      filteredMedia = filteredMedia.filter(
-        media =>
-          media.caption &&
-          media.caption.toLowerCase().includes(caption.toLowerCase())
-      );
-    }
-
-    // Apply pagination
-    if (offset) {
-      filteredMedia = filteredMedia.slice(offset);
-    }
-
-    if (limit) {
-      filteredMedia = filteredMedia.slice(0, limit);
-    }
+    const media = MediaModel.findAll({
+      mime_type,
+      uploaded_by,
+      tags,
+      alt_text,
+      caption,
+      limit,
+      offset,
+    });
 
     return NextResponse.json({
       success: true,
-      media: filteredMedia,
-      total: sampleMedia.length,
+      media,
+      total: media.length,
     });
   } catch (error) {
     console.error('Error fetching media:', error);
@@ -180,20 +83,24 @@ export async function POST(request: NextRequest) {
       } else if ((files as any).files) {
         uploadedFiles = [(files as any).files];
       }
-      const newMedia = uploadedFiles.map(file => ({
-        id: uuidv4(),
-        filename: path.basename(file.filepath),
-        original_name: file.originalFilename,
-        file_path: `/uploads/${path.basename(file.filepath)}`,
-        file_size: file.size,
-        mime_type: file.mimetype,
-        alt_text: '',
-        caption: '',
-        tags: [],
-        uploaded_by: 'admin-001',
-        created_at: new Date().toISOString(),
-      }));
-      sampleMedia.push(...newMedia);
+      const newMedia = uploadedFiles.map(file => {
+        const media = MediaModel.create({
+          filename: path.basename(file.filepath),
+          original_name: file.originalFilename,
+          file_path: `/uploads/${path.basename(file.filepath)}`,
+          file_size: file.size,
+          mime_type: file.mimetype,
+          alt_text: fields.alt_text || '',
+          caption: fields.caption || '',
+          tags: fields.tags
+            ? Array.isArray(fields.tags)
+              ? fields.tags
+              : [fields.tags]
+            : [],
+          uploaded_by: 'admin-001', // TODO: Use real user ID from auth
+        });
+        return media;
+      });
       return NextResponse.json(
         {
           success: true,
@@ -240,8 +147,7 @@ export async function POST(request: NextRequest) {
         caption,
         tags,
       } = result.data;
-      const newMedia = {
-        id: uuidv4(),
+      const newMedia = MediaModel.create({
         filename,
         original_name,
         file_path,
@@ -250,10 +156,8 @@ export async function POST(request: NextRequest) {
         alt_text: alt_text || '',
         caption: caption || '',
         tags: tags || [],
-        uploaded_by: 'admin-001',
-        created_at: new Date().toISOString(),
-      };
-      sampleMedia.push(newMedia);
+        uploaded_by: 'admin-001', // TODO: Use real user ID from auth
+      });
       return NextResponse.json(
         {
           success: true,
@@ -275,50 +179,31 @@ export async function POST(request: NextRequest) {
 // DELETE /api/admin/media - Delete media items
 export async function DELETE(request: NextRequest) {
   try {
-    // Check permissions
-    // const permissionCheck = await requireManageMedia()(request);
-    // if (permissionCheck) return permissionCheck;
-
     const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
     const ids = searchParams.get('ids');
-
-    if (!ids) {
+    let deleted = 0;
+    if (id) {
+      if (MediaModel.deleteById(id)) deleted = 1;
+    } else if (ids) {
+      const idList = ids
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+      for (const mediaId of idList) {
+        if (MediaModel.deleteById(mediaId)) deleted++;
+      }
+    } else {
       return NextResponse.json(
-        { success: false, error: 'Media IDs are required' },
+        { success: false, error: 'Media id or ids query parameter required' },
         { status: 400 }
       );
     }
-
-    const mediaIds = ids.split(',');
-    let deletedCount = 0;
-
-    for (const mediaId of mediaIds) {
-      try {
-        // Get media item
-        const mediaItem = sampleMedia.find(item => item.id === mediaId);
-
-        if (mediaItem) {
-          // Delete from sample data
-          const index = sampleMedia.indexOf(mediaItem);
-          if (index > -1) {
-            sampleMedia.splice(index, 1);
-          }
-          deletedCount++;
-        }
-      } catch (error) {
-        console.error(`Error deleting media ${mediaId}:`, error);
-      }
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: `Deleted ${deletedCount} media items`,
-      deletedCount,
-    });
+    return NextResponse.json({ success: true, deleted });
   } catch (error) {
-    console.error('Error deleting media items:', error);
+    console.error('Error deleting media:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to delete media items' },
+      { success: false, error: 'Failed to delete media' },
       { status: 500 }
     );
   }
@@ -351,18 +236,13 @@ export async function PATCH(request: NextRequest) {
         { status: 400 }
       );
     }
-    const mediaItem = sampleMedia.find(item => item.id === id);
+    const mediaItem = MediaModel.updateMetadata(id, result.data);
     if (!mediaItem) {
       return NextResponse.json(
         { success: false, error: 'Media not found' },
         { status: 404 }
       );
     }
-    if (result.data.alt_text !== undefined)
-      mediaItem.alt_text = result.data.alt_text;
-    if (result.data.caption !== undefined)
-      mediaItem.caption = result.data.caption;
-    if (result.data.tags !== undefined) mediaItem.tags = result.data.tags;
     return NextResponse.json({ success: true, media: mediaItem });
   } catch (error) {
     console.error('Error updating media:', error);

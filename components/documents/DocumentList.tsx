@@ -18,170 +18,133 @@ import {
 import RoleGuard from '@/components/auth/RoleGuard';
 import { InlineLoader } from '@/components/ui/LoadingSpinner';
 
-interface Document {
-  _id: string;
-  title: string;
-  description: string;
+interface MediaItem {
+  id: string;
   filename: string;
-  originalName: string;
-  mimetype: string;
-  size: number;
-  category: string;
-  type: string;
-  uploadedBy: {
-    _id: string;
-    name: string;
-    email: string;
-  };
-  createdAt: string;
-  updatedAt: string;
+  original_name: string;
+  file_path: string;
+  file_size: number;
+  mime_type: string;
+  alt_text?: string;
+  caption?: string;
+  tags?: string[];
+  uploaded_by?: string;
+  created_at: string;
 }
 
 interface DocumentListProps {
-  type?: string;
-  category?: string;
+  mimeTypes?: string[]; // e.g., ['application/pdf', 'application/msword']
   showActions?: boolean;
-  onDocumentSelect?: (document: Document) => void;
+  onDocumentSelect?: (media: MediaItem) => void;
 }
 
 export default function DocumentList({
-  type,
-  category,
+  mimeTypes = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  ],
   showActions = true,
   onDocumentSelect,
 }: DocumentListProps) {
   const { isAuthenticated, hasRole } = useAuth();
-  const [documents, setDocuments] = useState<Document[]>([]);
-  const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
+  const [media, setMedia] = useState<MediaItem[]>([]);
+  const [filteredMedia, setFilteredMedia] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(category || 'all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
-    fetchDocuments();
-  }, [type, category]);
+    fetchMedia();
+  }, [mimeTypes]);
 
   useEffect(() => {
-    filterDocuments();
-  }, [documents, searchTerm, selectedCategory]);
+    filterMedia();
+  }, [media, searchTerm]);
 
-  const fetchDocuments = async () => {
+  const fetchMedia = async () => {
     try {
       setLoading(true);
       setError(null);
-
-      let url = '/api/documents';
-      const params = new URLSearchParams();
-
-      if (type) params.append('type', type);
-      if (category) params.append('category', category);
-
-      if (params.toString()) {
-        url += `?${params.toString()}`;
+      let url = '/api/admin/media';
+      if (mimeTypes && mimeTypes.length > 0) {
+        url += `?mime_type=${encodeURIComponent(mimeTypes[0])}`;
       }
-
-      const response = await apiFetch<{ documents: Document[] }>(url);
-      setDocuments(response.documents || []);
+      console.log('[DEBUG] fetchMedia called, url:', url);
+      const response = await apiFetch<{ media: MediaItem[] }>(url);
+      let items = response.media || [];
+      if (mimeTypes.length > 1) {
+        items = items.filter(item => mimeTypes.includes(item.mime_type));
+      }
+      setMedia(items);
+      console.log('[DEBUG] setMedia called, items:', items);
     } catch (err: any) {
-      // Silently handle errors in test environment
-
-      // Handle different types of errors
       if (err instanceof ApiException) {
-        if (err.status === 401) {
-          setError('Authentication required to view documents.');
-        } else if (err.status === 403) {
-          setError('You do not have permission to view documents.');
-        } else if (err.status === 404) {
-          setError('Documents not found.');
-        } else if (err.status >= 500) {
-          setError('Server error. Please try again later.');
-        } else {
-          setError(err.message || 'Failed to load documents.');
-        }
+        setError(err.message || 'Failed to load documents.');
       } else {
         setError('Failed to load documents. Please try again.');
       }
     } finally {
       setLoading(false);
+      console.log('[DEBUG] setLoading(false) called');
     }
   };
 
-  const filterDocuments = () => {
-    let filtered = documents;
-
-    // Filter by search term
+  const filterMedia = () => {
+    let filtered = media;
     if (searchTerm) {
       filtered = filtered.filter(
-        doc =>
-          doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          doc.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          doc.originalName.toLowerCase().includes(searchTerm.toLowerCase())
+        item =>
+          (item.original_name &&
+            item.original_name
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())) ||
+          (item.caption &&
+            item.caption.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (item.alt_text &&
+            item.alt_text.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
-
-    // Filter by category
-    if (selectedCategory && selectedCategory !== 'all') {
-      filtered = filtered.filter(doc => doc.category === selectedCategory);
-    }
-
-    setFilteredDocuments(filtered);
+    setFilteredMedia(filtered);
+    console.log('[DEBUG] setFilteredMedia called, filtered:', filtered);
   };
 
-  const handleDownload = async (document: Document) => {
+  const handleDownload = async (item: MediaItem) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/documents/${document._id}/download`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Download failed');
-      }
-
+      const url = item.file_path.startsWith('/')
+        ? item.file_path
+        : `/uploads/${item.filename}`;
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Download failed');
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
       const a = window.document.createElement('a');
-      a.href = url;
-      a.download = document.originalName;
+      a.href = window.URL.createObjectURL(blob);
+      a.download = item.original_name || item.filename;
       window.document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(a.href);
       window.document.body.removeChild(a);
-    } catch (error: any) {
-      // Silently handle download errors in test environment
+    } catch {
       alert('Failed to download document');
     }
   };
 
-  const handleDelete = async (documentId: string) => {
-    if (!confirm('Are you sure you want to delete this document?')) {
-      return;
-    }
-
+  const handleDelete = async (mediaId: string) => {
+    if (!confirm('Are you sure you want to delete this document?')) return;
     try {
-      await apiFetch(`/api/documents/${documentId}`, {
-        method: 'DELETE',
-      });
-
-      setDocuments(prev => prev.filter(doc => doc._id !== documentId));
-    } catch (error: any) {
-      // Silently handle delete errors in test environment
+      await apiFetch(`/api/admin/media?ids=${mediaId}`, { method: 'DELETE' });
+      setMedia(prev => prev.filter(item => item.id !== mediaId));
+    } catch {
       alert('Failed to delete document');
     }
   };
 
-  const getFileIcon = (mimetype: string | undefined) => {
-    if (!mimetype) return <File className='h-6 w-6' />;
-    if (mimetype.startsWith('image/')) return <Image className='h-6 w-6' />;
-    if (mimetype.includes('pdf')) return <FileText className='h-6 w-6' />;
-    if (mimetype.includes('zip') || mimetype.includes('rar'))
+  const getFileIcon = (mime_type: string | undefined) => {
+    if (!mime_type) return <File className='h-6 w-6' />;
+    if (mime_type.startsWith('image/')) return <Image className='h-6 w-6' />;
+    if (mime_type.includes('pdf')) return <FileText className='h-6 w-6' />;
+    if (mime_type.includes('zip') || mime_type.includes('rar'))
       return <FileArchive className='h-6 w-6' />;
     return <File className='h-6 w-6' />;
   };
@@ -202,19 +165,9 @@ export default function DocumentList({
     });
   };
 
-  const categories = [
-    'all',
-    'general',
-    'project',
-    'technical',
-    'financial',
-    'legal',
-  ];
-
   if (loading) {
     return <InlineLoader text='Loading documents...' />;
   }
-
   if (error) {
     return (
       <div className='text-center py-12'>
@@ -238,7 +191,7 @@ export default function DocumentList({
         </h3>
         <p className='text-gray-600 mb-4'>{error}</p>
         <button
-          onClick={fetchDocuments}
+          onClick={fetchMedia}
           className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors'
         >
           <svg
@@ -262,7 +215,7 @@ export default function DocumentList({
 
   return (
     <div className='space-y-6'>
-      {/* Search and Filter Controls */}
+      {/* Search Controls */}
       <div className='flex flex-col sm:flex-row gap-4 items-center justify-between'>
         <div className='flex flex-1 max-w-md'>
           <div className='relative flex-1'>
@@ -276,44 +229,23 @@ export default function DocumentList({
             />
           </div>
         </div>
-
-        <div className='flex items-center space-x-4'>
-          <div className='flex items-center space-x-2'>
-            <Filter className='h-4 w-4 text-gray-400' />
-            <select
-              value={selectedCategory}
-              onChange={e => setSelectedCategory(e.target.value)}
-              className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary'
-            >
-              {categories.map(cat => (
-                <option key={cat} value={cat}>
-                  {cat === 'all'
-                    ? 'All Categories'
-                    : cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className='flex border border-gray-300 rounded-md'>
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`px-3 py-2 text-sm ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}
-            >
-              Grid
-            </button>
-            <button
-              onClick={() => setViewMode('list')}
-              className={`px-3 py-2 text-sm ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}
-            >
-              List
-            </button>
-          </div>
+        <div className='flex border border-gray-300 rounded-md'>
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`px-3 py-2 text-sm ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}
+          >
+            Grid
+          </button>
+          <button
+            onClick={() => setViewMode('list')}
+            className={`px-3 py-2 text-sm ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}
+          >
+            List
+          </button>
         </div>
       </div>
-
       {/* Documents Display */}
-      {filteredDocuments.length === 0 ? (
+      {filteredMedia.length === 0 ? (
         <div className='text-center py-12'>
           <div className='text-gray-600 mb-4'>
             <svg
@@ -334,8 +266,8 @@ export default function DocumentList({
             No Documents Found
           </h3>
           <p className='text-gray-600'>
-            {searchTerm || selectedCategory !== 'all'
-              ? 'Try adjusting your search or filter criteria.'
+            {searchTerm
+              ? 'Try adjusting your search criteria.'
               : 'No documents have been uploaded yet.'}
           </p>
         </div>
@@ -347,84 +279,73 @@ export default function DocumentList({
               : 'space-y-4'
           }
         >
-          {filteredDocuments.map(document => (
+          {filteredMedia.map(item => (
             <div
-              key={document._id}
-              className={`border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow bg-white ${
-                viewMode === 'list' ? 'flex items-center space-x-4' : ''
-              }`}
+              key={item.id}
+              className={`border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow bg-white ${viewMode === 'list' ? 'flex items-center space-x-4' : ''}`}
             >
               <div
                 className={`flex items-start space-x-4 ${viewMode === 'list' ? 'flex-1' : ''}`}
               >
                 <div className='flex-shrink-0'>
                   <div className='w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center'>
-                    {getFileIcon(document.mimetype)}
+                    {getFileIcon(item.mime_type)}
                   </div>
                 </div>
-
                 <div className='flex-1 min-w-0'>
                   <h3 className='text-lg font-semibold text-gray-900 truncate'>
-                    {document.title || 'Untitled Document'}
+                    {item.original_name || 'Untitled Document'}
                   </h3>
                   <p className='text-sm text-gray-500 mt-1'>
-                    {document.originalName || 'Unknown file'}
+                    {item.filename || 'Unknown file'}
                   </p>
-                  {document.description && (
+                  {item.caption && (
                     <p className='text-sm text-gray-600 mt-2 line-clamp-2'>
-                      {document.description}
+                      {item.caption}
                     </p>
                   )}
-
                   <div className='flex items-center space-x-4 mt-3 text-xs text-gray-500'>
-                    <span>{formatFileSize(document.size || 0)}</span>
-                    <span>{document.category || 'Uncategorized'}</span>
+                    <span>{formatFileSize(item.file_size || 0)}</span>
+                    <span>{item.tags?.join(', ') || 'No tags'}</span>
                     <span>
-                      {formatDate(
-                        document.createdAt || new Date().toISOString()
-                      )}
+                      {formatDate(item.created_at || new Date().toISOString())}
                     </span>
                   </div>
-
                   <div className='text-xs text-gray-400 mt-1'>
-                    Uploaded by {document.uploadedBy?.name || 'Unknown user'}
+                    Uploaded by {item.uploaded_by || 'Unknown user'}
                   </div>
                 </div>
               </div>
-
               {showActions && (
                 <div className='flex items-center space-x-2 mt-4'>
                   <button
-                    onClick={() => handleDownload(document)}
+                    onClick={() => handleDownload(item)}
                     className='p-2 text-gray-400 hover:text-primary transition-colors'
                     title='Download'
                   >
                     <Download className='h-4 w-4' />
                   </button>
-
                   {onDocumentSelect && (
                     <button
-                      onClick={() => onDocumentSelect(document)}
+                      onClick={() => onDocumentSelect(item)}
                       className='p-2 text-gray-400 hover:text-primary transition-colors'
                       title='View'
                     >
                       <Eye className='h-4 w-4' />
                     </button>
                   )}
-
                   <RoleGuard roles={['admin', 'editor']}>
                     <button
-                      onClick={() => onDocumentSelect?.(document)}
+                      onClick={() => onDocumentSelect?.(item)}
                       className='p-2 text-gray-400 hover:text-primary transition-colors'
                       title='Edit'
                     >
                       <Edit className='h-4 w-4' />
                     </button>
                   </RoleGuard>
-
                   <RoleGuard roles={['admin']}>
                     <button
-                      onClick={() => handleDelete(document._id)}
+                      onClick={() => handleDelete(item.id)}
                       className='p-2 text-gray-400 hover:text-red-500 transition-colors'
                       title='Delete'
                     >
@@ -437,10 +358,8 @@ export default function DocumentList({
           ))}
         </div>
       )}
-
-      {/* Results Count */}
       <div className='text-sm text-gray-500 text-center'>
-        Showing {filteredDocuments.length} of {documents.length} documents
+        Showing {filteredMedia.length} of {media.length} documents
       </div>
     </div>
   );

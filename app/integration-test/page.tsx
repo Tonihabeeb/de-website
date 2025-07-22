@@ -100,11 +100,11 @@ export default function IntegrationTestPage() {
     });
 
     try {
-      const response = await apiFetch<{ documents: any[] }>('/api/documents');
+      const response = await apiFetch<{ media: any[] }>('/api/admin/media');
       tests[2] = {
         name: 'Documents API',
         status: 'success',
-        message: `Found ${response.documents?.length || 0} documents`,
+        message: `Found ${response.media?.length || 0} documents/media`,
         details: response,
       };
     } catch (error: any) {
@@ -392,7 +392,7 @@ export default function IntegrationTestPage() {
             <DocumentList
               showActions={false}
               onDocumentSelect={document => {
-                toast.info(`Selected: ${document.title}`);
+                toast.info(`Selected: ${document.original_name}`);
               }}
             />
           </div>

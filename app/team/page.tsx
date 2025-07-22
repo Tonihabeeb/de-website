@@ -13,16 +13,13 @@ export const metadata: Metadata = {
 };
 
 interface TeamMember {
-  _id: string;
+  id: string;
   name: string;
   role: string;
-  bio: string;
-  expertise?: string;
-  image?: string;
   email?: string;
-  linkedin?: string;
-  createdAt: string;
-  updatedAt: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 interface TeamResponse {
@@ -35,45 +32,20 @@ async function getTeamData(): Promise<{
   error: string | null;
 }> {
   try {
-    const response = await apiFetch<TeamResponse>('/api/documents?type=team');
+    // Fetch all admin users as team members (adjust role as needed)
+    const response = await apiFetch<{ users: TeamMember[] }>(
+      '/api/admin/users?role=admin'
+    );
     return {
-      teamMembers: response.documents || [],
+      teamMembers: response.users || [],
       error: null,
     };
   } catch (err: any) {
     console.error('Error fetching team members:', err);
-
-    // Handle different types of errors
-    if (err instanceof ApiException) {
-      if (err.status === 401) {
-        return {
-          teamMembers: [],
-          error: 'Authentication required to view team members.',
-        };
-      } else if (err.status === 403) {
-        return {
-          teamMembers: [],
-          error: 'You do not have permission to view team members.',
-        };
-      } else if (err.status === 404) {
-        return { teamMembers: [], error: 'Team members not found.' };
-      } else if (err.status >= 500) {
-        return {
-          teamMembers: [],
-          error: 'Server error. Please try again later.',
-        };
-      } else {
-        return {
-          teamMembers: [],
-          error: err.message || 'Failed to load team members.',
-        };
-      }
-    } else {
-      return {
-        teamMembers: [],
-        error: 'Failed to load team members. Please try again later.',
-      };
-    }
+    return {
+      teamMembers: [],
+      error: err.message || 'Failed to load team members.',
+    };
   }
 }
 
@@ -136,99 +108,38 @@ export default async function TeamPage() {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
               {teamMembers.map(member => (
                 <div
-                  key={member._id}
+                  key={member.id}
                   className='bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow'
                 >
-                  {/* Profile Image */}
-                  {member.image ? (
-                    <div className='w-32 h-32 mx-auto mb-4'>
-                      <img
-                        src={member.image}
-                        alt={`Photo of ${member.name}, ${member.role}`}
-                        className='w-full h-full object-cover rounded-full'
-                      />
+                  {/* Profile Image (not available in new API, so skip or add placeholder) */}
+                  <div className='w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mx-auto mb-4'>
+                    <div className='text-white text-center'>
+                      <svg
+                        className='w-8 h-8 mx-auto mb-2'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                        />
+                      </svg>
+                      <p className='text-sm opacity-90'>Photo</p>
                     </div>
-                  ) : (
-                    <div className='w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mx-auto mb-4'>
-                      <div className='text-white text-center'>
-                        <svg
-                          className='w-8 h-8 mx-auto mb-2'
-                          fill='none'
-                          stroke='currentColor'
-                          viewBox='0 0 24 24'
-                        >
-                          <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth={2}
-                            d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
-                          />
-                        </svg>
-                        <p className='text-sm opacity-90'>Photo</p>
-                      </div>
-                    </div>
-                  )}
-
+                  </div>
                   <h3 className='text-xl font-semibold text-primary mb-2'>
                     {member.name}
                   </h3>
                   <p className='text-accent-warm font-medium mb-3'>
                     {member.role}
                   </p>
-                  <p className='text-gray-text text-base mb-4'>{member.bio}</p>
-
-                  {member.expertise && (
-                    <div className='text-xs text-gray-text mb-4'>
-                      <span className='font-medium'>Expertise:</span>{' '}
-                      {member.expertise}
-                    </div>
-                  )}
-
-                  {/* Contact Links */}
-                  <div className='flex justify-center space-x-3'>
-                    {member.email && (
-                      <a
-                        href={`mailto:${member.email}`}
-                        className='text-primary hover:text-primary-dark'
-                        aria-label={`Email ${member.name}`}
-                      >
-                        <svg
-                          className='w-5 h-5'
-                          fill='currentColor'
-                          viewBox='0 0 20 20'
-                        >
-                          <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z' />
-                          <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
-                        </svg>
-                      </a>
-                    )}
-                    {member.linkedin && (
-                      <a
-                        href={member.linkedin}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='text-primary hover:text-primary-dark'
-                        aria-label={`${member.name}'s LinkedIn profile`}
-                      >
-                        <svg
-                          className='w-5 h-5'
-                          fill='currentColor'
-                          viewBox='0 0 20 20'
-                        >
-                          <path
-                            fillRule='evenodd'
-                            d='M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z'
-                            clipRule='evenodd'
-                          />
-                        </svg>
-                      </a>
-                    )}
-                  </div>
-
                   <div className='text-xs text-gray-500 mt-4'>
                     <p>
                       Last updated:{' '}
-                      {new Date(member.updatedAt).toLocaleDateString()}
+                      {new Date(member.updated_at).toLocaleDateString()}
                     </p>
                   </div>
                 </div>

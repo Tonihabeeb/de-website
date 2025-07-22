@@ -20,6 +20,8 @@ interface PageFormData {
   twitter_description: string;
   twitter_image: string;
   status: 'draft' | 'published';
+  publish_at: string;
+  unpublish_at: string;
 }
 
 export default function NewPage() {
@@ -38,6 +40,8 @@ export default function NewPage() {
     twitter_description: '',
     twitter_image: '',
     status: 'draft',
+    publish_at: '',
+    unpublish_at: '',
   });
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<'content' | 'seo' | 'settings'>(
@@ -533,6 +537,70 @@ export default function NewPage() {
                     <option value='draft'>Draft</option>
                     <option value='published'>Published</option>
                   </select>
+                </div>
+
+                <div>
+                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                    Publish At
+                  </label>
+                  <input
+                    type='datetime-local'
+                    value={formData.publish_at}
+                    onChange={e =>
+                      setFormData(f => ({ ...f, publish_at: e.target.value }))
+                    }
+                    className='w-full px-3 py-2 border rounded-lg'
+                  />
+                </div>
+                <div>
+                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                    Unpublish At
+                  </label>
+                  <input
+                    type='datetime-local'
+                    value={formData.unpublish_at}
+                    onChange={e =>
+                      setFormData(f => ({ ...f, unpublish_at: e.target.value }))
+                    }
+                    className='w-full px-3 py-2 border rounded-lg'
+                  />
+                </div>
+                <div>
+                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                    Schedule Status
+                  </label>
+                  <div className='px-3 py-2 border rounded-lg bg-gray-50'>
+                    {(() => {
+                      const now = new Date();
+                      const pub = formData.publish_at
+                        ? new Date(formData.publish_at)
+                        : null;
+                      const unpub = formData.unpublish_at
+                        ? new Date(formData.unpublish_at)
+                        : null;
+                      if (pub && now < pub)
+                        return (
+                          <span className='text-yellow-600'>
+                            Scheduled (will publish at {pub.toLocaleString()})
+                          </span>
+                        );
+                      if (unpub && now > unpub)
+                        return (
+                          <span className='text-gray-500'>
+                            Expired (unpublished at {unpub.toLocaleString()})
+                          </span>
+                        );
+                      if (pub && (!unpub || now < unpub) && now >= pub)
+                        return (
+                          <span className='text-green-700'>Published</span>
+                        );
+                      return (
+                        <span className='text-blue-700'>
+                          Draft / Unscheduled
+                        </span>
+                      );
+                    })()}
+                  </div>
                 </div>
 
                 <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-4'>

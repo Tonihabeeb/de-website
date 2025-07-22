@@ -113,3 +113,22 @@ This project is proprietary and confidential. All rights reserved to Deep Engine
 ## 📞 Contact
 
 For support or inquiries, contact: [info@deepengineering.co](mailto:info@deepengineering.co)
+
+## Integration Test Workaround for Next.js/Jest/ESM Context and API Mocking
+
+When writing integration tests for components that use context (e.g., AuthContext) and custom API utilities in a Next.js/TypeScript project, you may encounter issues with Jest not picking up mocks due to ESM/CJS interop and path aliasing quirks. To ensure reliable tests:
+
+- Always mock both `@/contexts/AuthContext` and `@/utils/api` at the very top of your test file (before any imports).
+- Use async-safe queries like `await screen.findByText(...)` to wait for React state updates.
+- If you encounter persistent context errors, try writing a pure JS test (see `__tests__/minimal-doclist.pure.test.js`) as a reference for debugging.
+
+**Example:**
+
+```js
+jest.mock('@/contexts/AuthContext', ...);
+jest.mock('@/utils/api', ...);
+import ...
+// ...test code...
+```
+
+See `__tests__/minimal-doclist.pure.test.js` for a working pattern.

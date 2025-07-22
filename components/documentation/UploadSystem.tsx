@@ -8,9 +8,15 @@ interface UploadFile {
   size: number;
 }
 
-interface UploadedFileMeta {
-  name: string;
-  tag: string;
+interface MediaItem {
+  id: string;
+  filename: string;
+  original_name: string;
+  file_path: string;
+  file_size: number;
+  mime_type: string;
+  tags?: string[];
+  created_at: string;
 }
 
 const TAG_OPTIONS = ['Technical', 'Legal', 'Environmental', 'Business'];
@@ -20,16 +26,16 @@ export default function UploadSystem() {
   const [uploading, setUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState(TAG_OPTIONS[0]);
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFileMeta[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<MediaItem[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Fetch uploaded files metadata
+  // Fetch uploaded files from /api/admin/media
   const fetchUploadedFiles = async () => {
     try {
-      const res = await fetch('/uploads/metadata.json', { cache: 'no-store' });
+      const res = await fetch('/api/admin/media');
       if (res.ok) {
         const data = await res.json();
-        setUploadedFiles(Array.isArray(data) ? data : []);
+        setUploadedFiles(Array.isArray(data.media) ? data.media : []);
       } else {
         setUploadedFiles([]);
       }
@@ -67,9 +73,10 @@ export default function UploadSystem() {
     setUploadStatus(null);
     const formData = new FormData();
     files.forEach(f => formData.append('files', f.file));
-    formData.append('tag', selectedTag);
+    // Use tags as an array
+    formData.append('tags', selectedTag);
     try {
-      const res = await fetch('/api/upload', {
+      const res = await fetch('/api/admin/media', {
         method: 'POST',
         body: formData,
       });
@@ -88,11 +95,14 @@ export default function UploadSystem() {
     }
   };
 
-  // Group files by tag
-  const filesByTag: { [tag: string]: UploadedFileMeta[] } = {};
+  // Group files by tag using tags property
+  const filesByTag: { [tag: string]: MediaItem[] } = {};
   uploadedFiles.forEach(file => {
-    if (!filesByTag[file.tag]) filesByTag[file.tag] = [];
-    filesByTag[file.tag].push(file);
+    const tagList = file.tags || ['Untagged'];
+    tagList.forEach(tag => {
+      if (!filesByTag[tag]) filesByTag[tag] = [];
+      filesByTag[tag].push(file);
+    });
   });
 
   return (
@@ -191,14 +201,14 @@ export default function UploadSystem() {
             <div className='font-semibold text-blue-700 mb-1'>{tag}</div>
             <ul className='list-disc list-inside'>
               {files.map(file => (
-                <li key={file.name}>
+                <li key={file.id}>
                   <a
-                    href={`/uploads/${encodeURIComponent(file.name)}`}
+                    href={file.file_path}
                     target='_blank'
                     rel='noopener noreferrer'
                     className='text-blue-600 underline hover:text-blue-800'
                   >
-                    {file.name}
+                    {file.original_name}
                   </a>
                 </li>
               ))}

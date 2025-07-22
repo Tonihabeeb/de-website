@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
   Zap,
@@ -95,11 +95,20 @@ export default function ScrollTriggeredDiagram({
 function StepCard({ step, index }: { step: any; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [expanded, setExpanded] = useState(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  // On mobile, toggle expanded on click; on desktop, always expanded
+  const handleToggle = () => {
+    if (isMobile) setExpanded(e => !e);
+  };
 
   return (
     <motion.div
       ref={ref}
-      className='relative z-10 text-center bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100'
+      className={`relative z-10 text-center bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 transition-all duration-200 cursor-pointer ${
+        expanded || !isMobile ? 'ring-2 ring-primary' : ''
+      }`}
       initial={{ opacity: 0, y: 50, scale: 0.8 }}
       animate={
         isInView
@@ -112,10 +121,18 @@ function StepCard({ step, index }: { step: any; index: number }) {
         ease: 'easeOut',
       }}
       whileHover={{ y: -5 }}
+      tabIndex={0}
+      role='button'
+      aria-expanded={expanded || !isMobile}
+      aria-label={step.title}
+      onClick={handleToggle}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') handleToggle();
+      }}
     >
-      {/* Step Circle */}
+      {/* Step Circle with Icon */}
       <motion.div
-        className='w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white text-lg font-bold mx-auto mb-4 relative shadow-lg'
+        className='w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white text-3xl mx-auto mb-4 relative shadow-lg'
         initial={{ scale: 0, rotate: 0 }}
         animate={isInView ? { scale: 1, rotate: 360 } : { scale: 0, rotate: 0 }}
         transition={{
@@ -123,31 +140,19 @@ function StepCard({ step, index }: { step: any; index: number }) {
           delay: index * 0.2 + 0.1,
           ease: 'backOut',
         }}
-      >
-        <span className='relative z-10'>{step.step}</span>
-        <div className='absolute inset-0 bg-gradient-to-br from-primary-light to-primary rounded-full opacity-20 animate-pulse' />
-      </motion.div>
-
-      {/* Icon */}
-      <motion.div
-        className='text-2xl mb-4'
-        initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : { scale: 0 }}
-        transition={{
-          duration: 0.4,
-          delay: index * 0.2 + 0.2,
-          ease: 'backOut',
-        }}
+        aria-hidden='true'
       >
         {step.icon}
+        <div className='absolute inset-0 bg-gradient-to-br from-primary-light to-primary rounded-full opacity-20 animate-pulse' />
       </motion.div>
 
       {/* Content */}
       <h3 className='text-xl font-semibold text-primary mb-3'>{step.title}</h3>
-
-      <p className='text-gray-text text-sm leading-relaxed'>
-        {step.description}
-      </p>
+      {(expanded || !isMobile) && (
+        <p className='text-gray-text text-sm leading-relaxed'>
+          {step.description}
+        </p>
+      )}
 
       {/* Decorative elements */}
       <div className='absolute top-2 right-2 w-2 h-2 bg-primary-light rounded-full opacity-30' />

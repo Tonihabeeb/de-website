@@ -160,6 +160,30 @@ export default function HowItWorksPage() {
                 that ensures optimal performance and safety, automatically
                 adjusting air input and monitoring output in real-time.
               </p>
+              <div className='mt-8'>
+                <Link
+                  href='/technology/physics'
+                  className='inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
+                  style={{
+                    transition: 'color 0.2s, background 0.2s, transform 0.2s',
+                  }}
+                >
+                  More Details
+                  <svg
+                    className='ml-2 w-5 h-5'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M17 8l4 4m0 0l-4 4m4-4H3'
+                    />
+                  </svg>
+                </Link>
+              </div>
             </div>
             <div className='bg-white rounded-lg p-8'>
               <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
@@ -291,7 +315,7 @@ export default function HowItWorksPage() {
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/technology'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
+              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark hover:text-white focus:text-white transition-colors'
             >
               Technology Overview
             </Link>

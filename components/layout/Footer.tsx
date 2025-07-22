@@ -52,7 +52,7 @@ export default function Footer() {
                 <Mail className='inline w-5 h-5 mr-2 text-white align-text-bottom' />
                 <a
                   href='mailto:info@deepengineering.co'
-                  className='underline min-w-[44px] min-h-[44px] inline-block text-center'
+                  className='underline min-w-[44px] min-h-[44px] inline-block text-center text-white hover:text-white focus:text-white transition-colors'
                 >
                   info@deepengineering.co
                 </a>
