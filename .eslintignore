@@ -48,7 +48,4 @@ pnpm-lock.yaml
 
 # Backend specific
 backend/logs/
-backend/.env
-
-# Documentation
-*.md 
+backend/.env 

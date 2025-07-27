@@ -1,4 +1,15 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+# Skip lint-staged if there are no staged files
+if [ -z "$(git diff --cached --name-only)" ]; then
+  echo "No staged files, skipping pre-commit hooks"
+  exit 0
+fi
+
+# Run lint-staged with better error handling
+npx lint-staged --verbose || {
+  echo "❌ Pre-commit hooks failed. Please fix the issues above and try again."
+  echo "💡 You can bypass this check with: git commit --no-verify"
+  exit 1
+}
