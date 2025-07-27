@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
 # Skip lint-staged if there are no staged files
 if [ -z "$(git diff --cached --name-only)" ]; then
