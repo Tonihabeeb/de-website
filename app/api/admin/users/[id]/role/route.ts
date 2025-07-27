@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { UserModel, UserRole } from '@/database/models/User';
+// import { UserRole } from '../../../backend/src/models/User';
 import { requireAdmin } from '@/middleware/permissions';
 
 // PATCH /api/admin/users/[id]/role - Assign role to user
@@ -17,51 +17,24 @@ export async function PATCH(
     const body = await request.json();
     const { role } = body;
 
-    // Validate role
-    const validRoles = Object.values(UserRole);
-    if (!validRoles.includes(role)) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/users/${id}/role`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ role }),
+    });
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        {
-          success: false,
-          error: `Invalid role. Must be one of: ${validRoles.join(', ')}`,
-        },
-        { status: 400 }
+        { success: false, error: error.error || 'Failed to update user role' },
+        { status: res.status }
       );
     }
-
-    // Check if user exists
-    const existingUser = await UserModel.findById(id);
-    if (!existingUser) {
-      return NextResponse.json(
-        { success: false, error: 'User not found' },
-        { status: 404 }
-      );
-    }
-
-    // Prevent changing super admin role
-    if (existingUser.role === UserRole.SUPER_ADMIN) {
-      return NextResponse.json(
-        { success: false, error: 'Cannot change super admin role' },
-        { status: 403 }
-      );
-    }
-
-    // Update user role
-    const updatedUser = await UserModel.update(id, { role });
-
-    if (!updatedUser) {
-      return NextResponse.json(
-        { success: false, error: 'Failed to update user role' },
-        { status: 500 }
-      );
-    }
-
-    // Remove password from response
-    const { password: _, ...userWithoutPassword } = updatedUser;
-
+    const user = await res.json();
+    if (user && user.password) delete user.password;
     return NextResponse.json({
       success: true,
-      user: userWithoutPassword,
+      user,
       message: 'User role updated successfully',
     });
   } catch (error) {

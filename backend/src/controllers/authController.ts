@@ -1,30 +1,27 @@
 import { Request, Response } from 'express';
-import { User } from '../models/User';
-import bcrypt from 'bcrypt';
+import { UserModel, CreateUserSchema } from '../models/User';
 import jwt from 'jsonwebtoken';
-import { logAudit } from '../utils/audit';
+import bcrypt from 'bcryptjs';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
-const JWT_EXPIRES_IN = '7d';
 
 export async function register(req: Request, res: Response) {
   try {
-    const { name, email, password, role } = req.body;
-    if (!name || !email || !password) {
-      return res.status(400).json({ error: 'Name, email, and password are required.' });
-    }
-    const existing = await User.findOne({ email });
+    const data = CreateUserSchema.parse(req.body);
+    // Check if user already exists
+    const existing = await UserModel.findByEmail(data.email);
     if (existing) {
-      return res.status(409).json({ error: 'Email already registered.' });
+      return res.status(409).json({ error: 'Email already registered' });
     }
-    const passwordHash = await bcrypt.hash(password, 10);
-    const user = new User({ name, email, passwordHash, role });
-    await user.save();
-    await logAudit({ userId: user._id, action: 'register', details: { email, name, role } });
-    return res.status(201).json({ message: 'User registered successfully.' });
-  } catch (err) {
-    console.error('Registration error:', err);
-    return res.status(500).json({ error: 'Registration failed.' });
+    const user = await UserModel.create(data);
+    // Do not return password_hash
+    const { password_hash, ...userSafe } = user;
+    res.status(201).json(userSafe);
+  } catch (err: any) {
+    if (err.name === 'ZodError') {
+      return res.status(400).json({ error: err.errors });
+    }
+    res.status(500).json({ error: 'Registration failed' });
   }
 }
 
@@ -32,21 +29,35 @@ export async function login(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required.' });
+      return res.status(400).json({ error: 'Email and password required' });
     }
-    const user = await User.findOne({ email });
+    // Normalize email to lowercase for case-insensitive comparison
+    const normalizedEmail = email.toLowerCase();
+    const user = await UserModel.findByEmail(normalizedEmail);
     if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials.' });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
-    const valid = await bcrypt.compare(password, user.passwordHash);
+    const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) {
-      return res.status(401).json({ error: 'Invalid credentials.' });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
-    const token = jwt.sign({ userId: user._id, role: user.role }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-    await logAudit({ userId: user._id, action: 'login', details: { email } });
-    return res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    // Generate JWT with user details
+    const token = jwt.sign({ 
+      userId: user.id, 
+      role: user.role,
+      name: user.name,
+      email: user.email
+    }, JWT_SECRET, { expiresIn: '7d' });
+    
+    // Return token and user details
+    const { password_hash, ...userWithoutPassword } = user;
+    res.json({ 
+      success: true,
+      token,
+      user: userWithoutPassword
+    });
   } catch (err) {
-    return res.status(500).json({ error: 'Login failed.' });
+    res.status(500).json({ error: 'Login failed' });
   }
 }
 
@@ -56,9 +67,11 @@ export async function getCurrentUser(req: Request, res: Response) {
     // @ts-ignore
     const userId = req.user?.userId;
     if (!userId) return res.status(401).json({ error: 'Unauthorized' });
-    const user = await User.findById(userId).select('-passwordHash');
+    const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ error: 'User not found' });
-    return res.json({ user });
+    // Remove password from response
+    const { password_hash, ...userWithoutPassword } = user;
+    return res.json({ user: userWithoutPassword });
   } catch (err) {
     return res.status(500).json({ error: 'Failed to fetch user.' });
   }

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PageModel } from '@/database/models/Page';
 import {
   requireAuthor,
   requireEditPages,
@@ -18,18 +17,19 @@ export async function GET(
     const permissionCheck = await requireAuthor()(request);
     if (permissionCheck) return permissionCheck;
 
-    const page = await PageModel.findById(id);
-
-    if (!page) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/pages/${id}`);
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Page not found' },
-        { status: 404 }
+        { success: false, error: error.error || 'Page not found' },
+        { status: res.status }
       );
     }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      page,
+      ...data,
     });
   } catch (error) {
     console.error('Error fetching page:', error);
@@ -53,73 +53,23 @@ export async function PUT(
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const {
-      slug,
-      title,
-      content,
-      meta_title,
-      meta_description,
-      meta_keywords,
-      og_title,
-      og_description,
-      og_image,
-      twitter_title,
-      twitter_description,
-      twitter_image,
-      status,
-      publish_at,
-      unpublish_at,
-    } = body;
-
-    // Check if page exists
-    const existingPage = await PageModel.findById(id);
-    if (!existingPage) {
-      return NextResponse.json(
-        { success: false, error: 'Page not found' },
-        { status: 404 }
-      );
-    }
-
-    // Check if slug is being changed and if it already exists
-    if (slug && slug !== existingPage.slug) {
-      const slugExists = await PageModel.findBySlug(slug);
-      if (slugExists) {
-        return NextResponse.json(
-          { success: false, error: 'Page with this slug already exists' },
-          { status: 409 }
-        );
-      }
-    }
-
-    const updatedPage = await PageModel.update(id, {
-      slug,
-      title,
-      content,
-      meta_title,
-      meta_description,
-      meta_keywords,
-      og_title,
-      og_description,
-      og_image,
-      twitter_title,
-      twitter_description,
-      twitter_image,
-      status,
-      publish_at: publish_at ? new Date(publish_at) : null,
-      unpublish_at: unpublish_at ? new Date(unpublish_at) : null,
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/pages/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
-
-    if (!updatedPage) {
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Failed to update page' },
-        { status: 500 }
+        { success: false, error: error.error || 'Failed to update page' },
+        { status: res.status }
       );
     }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      page: updatedPage,
-      message: 'Page updated successfully',
+      ...data,
     });
   } catch (error) {
     console.error('Error updating page:', error);
@@ -142,27 +92,21 @@ export async function DELETE(
     const permissionCheck = await requireDeletePages()(request);
     if (permissionCheck) return permissionCheck;
 
-    // Check if page exists
-    const existingPage = await PageModel.findById(id);
-    if (!existingPage) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/pages/${id}`, {
+      method: 'DELETE',
+    });
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Page not found' },
-        { status: 404 }
+        { success: false, error: error.error || 'Failed to delete page' },
+        { status: res.status }
       );
     }
-
-    const deleted = await PageModel.delete(id);
-
-    if (!deleted) {
-      return NextResponse.json(
-        { success: false, error: 'Failed to delete page' },
-        { status: 500 }
-      );
-    }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      message: 'Page deleted successfully',
+      ...data,
     });
   } catch (error) {
     console.error('Error deleting page:', error);

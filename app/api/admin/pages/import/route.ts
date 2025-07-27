@@ -1,38 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PageModel } from '@/database/models/Page';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    if (!Array.isArray(body)) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/pages/import`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: request.headers.get('authorization') || '',
+      },
+      body: await request.text(),
+    });
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Invalid format: expected an array of pages' },
-        { status: 400 }
+        { success: false, error: error.error || 'Failed to import pages' },
+        { status: res.status }
       );
     }
-    const results = [];
-    for (const page of body) {
-      if (!page.slug || !page.title || !page.content) {
-        results.push({
-          slug: page.slug,
-          success: false,
-          error: 'Missing required fields',
-        });
-        continue;
-      }
-      try {
-        await PageModel.create(page);
-        results.push({ slug: page.slug, success: true });
-      } catch (err) {
-        const errorMsg = err instanceof Error ? err.message : String(err);
-        results.push({
-          slug: page.slug,
-          success: false,
-          error: errorMsg || 'Failed to import',
-        });
-      }
-    }
-    return NextResponse.json({ success: true, results });
+    const data = await res.json();
+    return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
       { success: false, error: 'Failed to import pages' },

@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { toast } from '@/components/ui/Toast';
 import Image from 'next/image';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface Project {
   id: string;
@@ -40,7 +41,15 @@ interface Project {
   updated_at: string;
 }
 
-export default function EditProject() {
+export default function AdminProjectEditPage() {
+  return (
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <EditProject />
+    </ProtectedRoute>
+  );
+}
+
+function EditProject() {
   const router = useRouter();
   const params = useParams();
   const projectId = params.id as string;

@@ -1,33 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PageModel } from '@/database/models/Page';
 
 // GET /api/admin/pages - Get all pages
 export async function GET(request: NextRequest) {
   try {
-    // Temporarily remove authentication check for development
-    // TODO: Re-enable authentication once auth system is properly set up
-
     const { searchParams } = new URL(request.url);
-    const status = searchParams.get('status');
-    const created_by = searchParams.get('created_by');
-    const limit = searchParams.get('limit')
-      ? parseInt(searchParams.get('limit')!)
-      : undefined;
-    const offset = searchParams.get('offset')
-      ? parseInt(searchParams.get('offset')!)
-      : undefined;
-
-    const pages = await PageModel.findAll({
-      status: status || undefined,
-      created_by: created_by || undefined,
-      limit,
-      offset,
-    });
-
+    const params = new URLSearchParams(searchParams);
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/pages?${params.toString()}`);
+    if (!res.ok) {
+      const error = await res.json();
+      return NextResponse.json(
+        { success: false, error: error.error || 'Failed to fetch pages' },
+        { status: res.status }
+      );
+    }
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      pages,
-      total: pages.length,
+      ...data,
     });
   } catch (error) {
     console.error('Error fetching pages:', error);
@@ -41,70 +31,25 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/pages - Create new page
 export async function POST(request: NextRequest) {
   try {
-    // Temporarily remove authentication check for development
-    // TODO: Re-enable authentication once auth system is properly set up
-
     const body = await request.json();
-    const {
-      slug,
-      title,
-      content,
-      meta_title,
-      meta_description,
-      meta_keywords,
-      og_title,
-      og_description,
-      og_image,
-      twitter_title,
-      twitter_description,
-      twitter_image,
-      publish_at,
-      unpublish_at,
-    } = body;
-
-    // Validate required fields
-    if (!slug || !title || !content) {
-      return NextResponse.json(
-        { success: false, error: 'Slug, title, and content are required' },
-        { status: 400 }
-      );
-    }
-
-    // Check if slug already exists
-    const existingPage = await PageModel.findBySlug(slug);
-    if (existingPage) {
-      return NextResponse.json(
-        { success: false, error: 'Page with this slug already exists' },
-        { status: 409 }
-      );
-    }
-
-    const page = await PageModel.create({
-      slug,
-      title,
-      content,
-      meta_title,
-      meta_description,
-      meta_keywords,
-      og_title,
-      og_description,
-      og_image,
-      twitter_title,
-      twitter_description,
-      twitter_image,
-      publish_at: publish_at ? new Date(publish_at) : null,
-      unpublish_at: unpublish_at ? new Date(unpublish_at) : null,
-      created_by: 'admin', // Default user for now
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/pages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
-
-    return NextResponse.json(
-      {
-        success: true,
-        page,
-        message: 'Page created successfully',
-      },
-      { status: 201 }
-    );
+    if (!res.ok) {
+      const error = await res.json();
+      return NextResponse.json(
+        { success: false, error: error.error || 'Failed to create page' },
+        { status: res.status }
+      );
+    }
+    const data = await res.json();
+    return NextResponse.json({
+      success: true,
+      ...data,
+    });
   } catch (error) {
     console.error('Error creating page:', error);
     return NextResponse.json(

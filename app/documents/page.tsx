@@ -26,6 +26,20 @@ interface Document {
   updatedAt: string;
 }
 
+interface MediaItem {
+  id: string;
+  filename: string;
+  original_name: string;
+  file_path: string;
+  file_size: number;
+  mime_type: string;
+  alt_text?: string;
+  caption?: string;
+  tags?: string[];
+  uploaded_by?: string;
+  created_at: string;
+}
+
 const tabs = [
   { id: 'all', name: 'All Documents', icon: Folder },
   { id: 'document', name: 'Documents', icon: FileText },
@@ -52,10 +66,28 @@ export default function DocumentsPage() {
     // Optionally show error message to user
   };
 
-  const handleDocumentSelect = (document: Document) => {
-    setSelectedDocument(document);
-    // You can implement a modal or navigation to document details
-    console.log('Selected document:', document);
+  const handleDocumentSelect = (media: MediaItem) => {
+    // Convert MediaItem to Document (best effort)
+    const doc: Document = {
+      _id: media.id,
+      title: media.original_name || media.filename,
+      description: '',
+      filename: media.filename,
+      originalName: media.original_name,
+      mimetype: media.mime_type,
+      size: media.file_size,
+      category: '',
+      type: '',
+      uploadedBy: {
+        _id: media.uploaded_by || '',
+        name: media.uploaded_by || '',
+        email: '',
+      },
+      createdAt: media.created_at,
+      updatedAt: media.created_at,
+    };
+    setSelectedDocument(doc);
+    console.log('Selected document:', doc);
   };
 
   return (
@@ -129,7 +161,6 @@ export default function DocumentsPage() {
         {/* Document List */}
         <div className='bg-white rounded-lg shadow p-6'>
           <DocumentList
-            type={activeTab === 'all' ? undefined : activeTab}
             showActions={true}
             onDocumentSelect={handleDocumentSelect}
           />

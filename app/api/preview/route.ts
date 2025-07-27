@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // This is a simple in-memory store for draft content (for demo/dev only)
 // In production, use a more robust solution (e.g., Redis, DB, JWT, etc.)
-const previewDraftStore: Record<string, any> = {};
+import { previewDraftStore } from './store';
 
 export async function POST(request: NextRequest) {
   try {
@@ -41,6 +41,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-// Export the draft store for use in preview pages (dev only)
-export { previewDraftStore };

@@ -90,7 +90,8 @@ const navigation: NavigationItem[] = [
 ];
 
 export default function Navbar() {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, logout } = useAuth();
+  const isAuthenticated = !!user;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [technologyDropdownOpen, setTechnologyDropdownOpen] = useState(false);
@@ -111,9 +112,33 @@ export default function Navbar() {
   const teamButtonRef = useRef<HTMLButtonElement>(null);
   const userButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
+  const [dynamicNavigation, setDynamicNavigation] = useState<NavigationItem[] | null>(null);
+  const [navLoading, setNavLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchNavigation() {
+      try {
+        setNavLoading(true);
+        const res = await fetch('/api/navigation');
+        const data = await res.json();
+        if (data && data.length > 0 && data[0].items_json) {
+          setDynamicNavigation(JSON.parse(data[0].items_json));
+        } else {
+          setDynamicNavigation(null);
+        }
+      } catch (err) {
+        setDynamicNavigation(null);
+      } finally {
+        setNavLoading(false);
+      }
+    }
+    fetchNavigation();
+  }, []);
+
+  const menuToRender = dynamicNavigation || navigation;
 
   // Filter navigation items based on authentication
-  const filteredNavigation = navigation.filter(item => {
+  const filteredNavigation = menuToRender.filter(item => {
     if (item.requiresAuth && !isAuthenticated) {
       return false;
     }
@@ -402,7 +427,7 @@ export default function Navbar() {
                   </div>
                   <div className='hidden lg:block text-left'>
                     <div className='text-sm font-medium text-gray-900'>
-                      {user?.name}
+                      {user?.name || 'User'}
                     </div>
                     <div className='text-xs text-gray-500'>
                       {user?.role
@@ -426,7 +451,7 @@ export default function Navbar() {
                         </div>
                         <div>
                           <div className='text-sm font-medium text-gray-900'>
-                            {user?.name}
+                            {user?.name || 'User'}
                           </div>
                           <div className='text-xs text-gray-500'>
                             {user?.role
@@ -450,7 +475,15 @@ export default function Navbar() {
                       </Link>
                       <RoleGuard roles={['admin', 'super_admin']}>
                         <Link
-                          href='/admin'
+                          href='/admin/'
+                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
+                          onClick={() => setUserDropdownOpen(false)}
+                        >
+                          <Settings className='w-4 h-4 mr-3' />
+                          Admin Home
+                        </Link>
+                        <Link
+                          href='/admin/dashboard'
                           className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
                           onClick={() => setUserDropdownOpen(false)}
                         >
@@ -592,11 +625,11 @@ export default function Navbar() {
                   {/* User Info */}
                   <div className='flex items-center space-x-3 px-3 py-3 bg-gray-50 rounded-lg'>
                     <div className='w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-sm font-semibold'>
-                      {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+                      {user?.userId?.charAt(0)?.toUpperCase() || 'U'}
                     </div>
                     <div>
                       <div className='text-sm font-medium text-gray-900'>
-                        {user?.name}
+                        {user?.userId}
                       </div>
                       <div className='text-xs text-gray-500'>
                         {user?.role

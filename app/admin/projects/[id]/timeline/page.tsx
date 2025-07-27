@@ -11,6 +11,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import ProjectTimeline from '@/components/admin/ProjectTimeline';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface Milestone {
   id: string;
@@ -32,7 +33,7 @@ interface Project {
   end_date: string;
 }
 
-export default function ProjectTimelinePage() {
+export default function AdminProjectTimelinePage() {
   const params = useParams();
   const router = useRouter();
   const projectId = params.id as string;
@@ -204,103 +205,105 @@ export default function ProjectTimelinePage() {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 p-6'>
-      <div className='max-w-7xl mx-auto'>
-        {/* Header */}
-        <div className='mb-8'>
-          <button
-            onClick={() => router.back()}
-            className='flex items-center text-gray-600 hover:text-gray-900 mb-4'
-          >
-            <ArrowLeft className='w-4 h-4 mr-2' />
-            Back to Project
-          </button>
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <div className='min-h-screen bg-gray-50 p-6'>
+        <div className='max-w-7xl mx-auto'>
+          {/* Header */}
+          <div className='mb-8'>
+            <button
+              onClick={() => router.back()}
+              className='flex items-center text-gray-600 hover:text-gray-900 mb-4'
+            >
+              <ArrowLeft className='w-4 h-4 mr-2' />
+              Back to Project
+            </button>
 
-          <div className='flex items-center justify-between'>
-            <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
-                {project.name} - Timeline
-              </h1>
-              <p className='text-gray-600 mt-2'>{project.description}</p>
-            </div>
-
-            <div className='flex items-center space-x-4 text-sm text-gray-500'>
-              <div className='flex items-center'>
-                <Calendar className='w-4 h-4 mr-1' />
-                <span>
-                  Start: {new Date(project.start_date).toLocaleDateString()}
-                </span>
+            <div className='flex items-center justify-between'>
+              <div>
+                <h1 className='text-3xl font-bold text-gray-900'>
+                  {project.name} - Timeline
+                </h1>
+                <p className='text-gray-600 mt-2'>{project.description}</p>
               </div>
-              <div className='flex items-center'>
-                <Clock className='w-4 h-4 mr-1' />
-                <span>
-                  End: {new Date(project.end_date).toLocaleDateString()}
-                </span>
+
+              <div className='flex items-center space-x-4 text-sm text-gray-500'>
+                <div className='flex items-center'>
+                  <Calendar className='w-4 h-4 mr-1' />
+                  <span>
+                    Start: {new Date(project.start_date).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className='flex items-center'>
+                  <Clock className='w-4 h-4 mr-1' />
+                  <span>
+                    End: {new Date(project.end_date).toLocaleDateString()}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Project Status Summary */}
+          <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mb-8'>
+            <div className='bg-white p-4 rounded-lg shadow-sm border'>
+              <div className='flex items-center justify-between'>
+                <div>
+                  <p className='text-sm text-gray-600'>Total Milestones</p>
+                  <p className='text-2xl font-bold text-gray-900'>
+                    {milestones.length}
+                  </p>
+                </div>
+                <Calendar className='w-8 h-8 text-blue-400' />
+              </div>
+            </div>
+
+            <div className='bg-white p-4 rounded-lg shadow-sm border'>
+              <div className='flex items-center justify-between'>
+                <div>
+                  <p className='text-sm text-gray-600'>Completed</p>
+                  <p className='text-2xl font-bold text-green-600'>
+                    {milestones.filter(m => m.status === 'completed').length}
+                  </p>
+                </div>
+                <CheckCircle className='w-8 h-8 text-green-400' />
+              </div>
+            </div>
+
+            <div className='bg-white p-4 rounded-lg shadow-sm border'>
+              <div className='flex items-center justify-between'>
+                <div>
+                  <p className='text-sm text-gray-600'>In Progress</p>
+                  <p className='text-2xl font-bold text-blue-600'>
+                    {milestones.filter(m => m.status === 'in-progress').length}
+                  </p>
+                </div>
+                <Clock className='w-8 h-8 text-blue-400' />
+              </div>
+            </div>
+
+            <div className='bg-white p-4 rounded-lg shadow-sm border'>
+              <div className='flex items-center justify-between'>
+                <div>
+                  <p className='text-sm text-gray-600'>Pending</p>
+                  <p className='text-2xl font-bold text-gray-600'>
+                    {milestones.filter(m => m.status === 'pending').length}
+                  </p>
+                </div>
+                <Circle className='w-8 h-8 text-gray-400' />
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline Component */}
+          <ProjectTimeline
+            projectId={projectId}
+            milestones={milestones}
+            onMilestoneUpdate={handleMilestoneUpdate}
+            onMilestoneAdd={handleMilestoneAdd}
+            onMilestoneDelete={handleMilestoneDelete}
+          />
         </div>
-
-        {/* Project Status Summary */}
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mb-8'>
-          <div className='bg-white p-4 rounded-lg shadow-sm border'>
-            <div className='flex items-center justify-between'>
-              <div>
-                <p className='text-sm text-gray-600'>Total Milestones</p>
-                <p className='text-2xl font-bold text-gray-900'>
-                  {milestones.length}
-                </p>
-              </div>
-              <Calendar className='w-8 h-8 text-blue-400' />
-            </div>
-          </div>
-
-          <div className='bg-white p-4 rounded-lg shadow-sm border'>
-            <div className='flex items-center justify-between'>
-              <div>
-                <p className='text-sm text-gray-600'>Completed</p>
-                <p className='text-2xl font-bold text-green-600'>
-                  {milestones.filter(m => m.status === 'completed').length}
-                </p>
-              </div>
-              <CheckCircle className='w-8 h-8 text-green-400' />
-            </div>
-          </div>
-
-          <div className='bg-white p-4 rounded-lg shadow-sm border'>
-            <div className='flex items-center justify-between'>
-              <div>
-                <p className='text-sm text-gray-600'>In Progress</p>
-                <p className='text-2xl font-bold text-blue-600'>
-                  {milestones.filter(m => m.status === 'in-progress').length}
-                </p>
-              </div>
-              <Clock className='w-8 h-8 text-blue-400' />
-            </div>
-          </div>
-
-          <div className='bg-white p-4 rounded-lg shadow-sm border'>
-            <div className='flex items-center justify-between'>
-              <div>
-                <p className='text-sm text-gray-600'>Pending</p>
-                <p className='text-2xl font-bold text-gray-600'>
-                  {milestones.filter(m => m.status === 'pending').length}
-                </p>
-              </div>
-              <Circle className='w-8 h-8 text-gray-400' />
-            </div>
-          </div>
-        </div>
-
-        {/* Timeline Component */}
-        <ProjectTimeline
-          projectId={projectId}
-          milestones={milestones}
-          onMilestoneUpdate={handleMilestoneUpdate}
-          onMilestoneAdd={handleMilestoneAdd}
-          onMilestoneDelete={handleMilestoneDelete}
-        />
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }

@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { toast } from '@/components/ui/Toast';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface RealTimeData {
   activeUsers: number;
@@ -67,7 +68,7 @@ interface RealTimeData {
   }[];
 }
 
-export default function RealTimeAnalyticsPage() {
+export default function AdminAnalyticsRealtimePage() {
   const [realTimeData, setRealTimeData] = useState<RealTimeData | null>(null);
   const [isLive, setIsLive] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
@@ -274,346 +275,348 @@ export default function RealTimeAnalyticsPage() {
   }
 
   return (
-    <div className='container mx-auto px-4 py-8'>
-      <div className='mb-8'>
-        <div className='flex items-center justify-between'>
-          <div>
-            <h1 className='text-3xl font-bold text-gray-900'>
-              Real-Time Analytics
-            </h1>
-            <p className='text-gray-600 mt-2'>
-              Live system activity, user sessions, and performance metrics
-            </p>
-          </div>
-          <div className='flex items-center gap-3'>
-            <Button
-              variant='secondary'
-              onClick={handleToggleLive}
-              className='flex items-center gap-2'
-            >
-              {isLive ? (
-                <Pause className='w-4 h-4' />
-              ) : (
-                <Play className='w-4 h-4' />
-              )}
-              {isLive ? 'Pause' : 'Resume'}
-            </Button>
-            <Button onClick={handleRefresh} className='flex items-center gap-2'>
-              <RefreshCw className='w-4 h-4' />
-              Refresh
-            </Button>
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <div className='container mx-auto px-4 py-8'>
+        <div className='mb-8'>
+          <div className='flex items-center justify-between'>
+            <div>
+              <h1 className='text-3xl font-bold text-gray-900'>
+                Real-Time Analytics
+              </h1>
+              <p className='text-gray-600 mt-2'>
+                Live system activity, user sessions, and performance metrics
+              </p>
+            </div>
+            <div className='flex items-center gap-3'>
+              <Button
+                variant='secondary'
+                onClick={handleToggleLive}
+                className='flex items-center gap-2'
+              >
+                {isLive ? (
+                  <Pause className='w-4 h-4' />
+                ) : (
+                  <Play className='w-4 h-4' />
+                )}
+                {isLive ? 'Pause' : 'Resume'}
+              </Button>
+              <Button onClick={handleRefresh} className='flex items-center gap-2'>
+                <RefreshCw className='w-4 h-4' />
+                Refresh
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Live Status Indicator */}
-      <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-8'>
-        <div className='flex items-center justify-between'>
-          <div className='flex items-center gap-3'>
-            <div
-              className={`w-3 h-3 rounded-full ${isLive ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
-            />
-            <span className='font-medium text-gray-900'>
-              {isLive ? 'Live Updates Active' : 'Live Updates Paused'}
-            </span>
-            <span className='text-sm text-gray-500'>
-              Last updated: {new Date().toLocaleTimeString()}
-            </span>
-          </div>
-          <div className='flex items-center gap-4'>
-            <label className='flex items-center gap-2 text-sm'>
-              <input
-                type='checkbox'
-                checked={autoRefresh}
-                onChange={e => setAutoRefresh(e.target.checked)}
-                className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
+        {/* Live Status Indicator */}
+        <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-8'>
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-3'>
+              <div
+                className={`w-3 h-3 rounded-full ${isLive ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
               />
-              Auto-refresh
-            </label>
-            <select
-              value={refreshInterval}
-              onChange={e => setRefreshInterval(parseInt(e.target.value))}
-              className='text-sm border border-gray-300 rounded px-2 py-1'
-            >
-              <option value={2000}>2s</option>
-              <option value={5000}>5s</option>
-              <option value={10000}>10s</option>
-              <option value={30000}>30s</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Key Metrics */}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
-          <div className='flex items-center justify-between mb-4'>
-            <div className='flex items-center gap-3'>
-              <Users className='w-6 h-6 text-blue-500' />
-              <h3 className='font-medium text-gray-900'>Active Users</h3>
+              <span className='font-medium text-gray-900'>
+                {isLive ? 'Live Updates Active' : 'Live Updates Paused'}
+              </span>
+              <span className='text-sm text-gray-500'>
+                Last updated: {new Date().toLocaleTimeString()}
+              </span>
             </div>
-            <TrendingUp className='w-4 h-4 text-green-500' />
-          </div>
-          <div className='text-3xl font-bold text-gray-900'>
-            {realTimeData.activeUsers}
-          </div>
-          <div className='text-sm text-gray-500 mt-1'>Currently online</div>
-        </div>
-
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
-          <div className='flex items-center justify-between mb-4'>
-            <div className='flex items-center gap-3'>
-              <Eye className='w-6 h-6 text-green-500' />
-              <h3 className='font-medium text-gray-900'>Page Views</h3>
-            </div>
-            <TrendingUp className='w-4 h-4 text-green-500' />
-          </div>
-          <div className='text-3xl font-bold text-gray-900'>
-            {realTimeData.pageViews.toLocaleString()}
-          </div>
-          <div className='text-sm text-gray-500 mt-1'>Today's total</div>
-        </div>
-
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
-          <div className='flex items-center justify-between mb-4'>
-            <div className='flex items-center gap-3'>
-              <Clock className='w-6 h-6 text-purple-500' />
-              <h3 className='font-medium text-gray-900'>Avg Session</h3>
-            </div>
-            <TrendingUp className='w-4 h-4 text-green-500' />
-          </div>
-          <div className='text-3xl font-bold text-gray-900'>
-            {Math.floor(realTimeData.averageSessionDuration / 60)}m
-          </div>
-          <div className='text-sm text-gray-500 mt-1'>
-            {realTimeData.averageSessionDuration % 60}s
-          </div>
-        </div>
-
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
-          <div className='flex items-center justify-between mb-4'>
-            <div className='flex items-center gap-3'>
-              <Activity className='w-6 h-6 text-orange-500' />
-              <h3 className='font-medium text-gray-900'>Bounce Rate</h3>
-            </div>
-            <TrendingDown className='w-4 h-4 text-red-500' />
-          </div>
-          <div className='text-3xl font-bold text-gray-900'>
-            {realTimeData.bounceRate}%
-          </div>
-          <div className='text-sm text-gray-500 mt-1'>Single page visits</div>
-        </div>
-      </div>
-
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-        {/* Live User Activity */}
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
-          <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
-              Live User Activity
-            </h2>
-            <p className='text-gray-600 mt-1'>
-              Real-time user actions and page visits
-            </p>
-          </div>
-          <div className='p-6'>
-            <div className='space-y-4 max-h-96 overflow-y-auto'>
-              {realTimeData.userActivity.map((activity, index) => (
-                <div
-                  key={index}
-                  className='flex items-center gap-4 p-3 bg-gray-50 rounded-lg'
-                >
-                  <div className='w-2 h-2 bg-green-500 rounded-full animate-pulse' />
-                  <div className='flex-1'>
-                    <div className='flex items-center justify-between'>
-                      <span className='font-medium text-gray-900'>
-                        {activity.user}
-                      </span>
-                      <span className='text-sm text-gray-500'>
-                        {new Date(activity.timestamp).toLocaleTimeString()}
-                      </span>
-                    </div>
-                    <div className='text-sm text-gray-600'>
-                      {activity.action.replace('_', ' ')} on {activity.page}
-                    </div>
-                  </div>
-                  <div className='text-sm text-gray-500'>
-                    {activity.duration}s
-                  </div>
-                </div>
-              ))}
+            <div className='flex items-center gap-4'>
+              <label className='flex items-center gap-2 text-sm'>
+                <input
+                  type='checkbox'
+                  checked={autoRefresh}
+                  onChange={e => setAutoRefresh(e.target.checked)}
+                  className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
+                />
+                Auto-refresh
+              </label>
+              <select
+                value={refreshInterval}
+                onChange={e => setRefreshInterval(parseInt(e.target.value))}
+                className='text-sm border border-gray-300 rounded px-2 py-1'
+              >
+                <option value={2000}>2s</option>
+                <option value={5000}>5s</option>
+                <option value={10000}>10s</option>
+                <option value={30000}>30s</option>
+              </select>
             </div>
           </div>
         </div>
 
-        {/* System Alerts */}
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
-          <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
-              System Alerts
-            </h2>
-            <p className='text-gray-600 mt-1'>
-              Live system notifications and warnings
-            </p>
+        {/* Key Metrics */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
+            <div className='flex items-center justify-between mb-4'>
+              <div className='flex items-center gap-3'>
+                <Users className='w-6 h-6 text-blue-500' />
+                <h3 className='font-medium text-gray-900'>Active Users</h3>
+              </div>
+              <TrendingUp className='w-4 h-4 text-green-500' />
+            </div>
+            <div className='text-3xl font-bold text-gray-900'>
+              {realTimeData.activeUsers}
+            </div>
+            <div className='text-sm text-gray-500 mt-1'>Currently online</div>
           </div>
-          <div className='p-6'>
-            <div className='space-y-4'>
-              {realTimeData.systemAlerts.map(alert => (
-                <div
-                  key={alert.id}
-                  className={`p-4 border rounded-lg ${getAlertColor(alert.type)} ${
-                    alert.resolved ? 'opacity-60' : ''
-                  }`}
-                >
-                  <div className='flex items-start justify-between'>
-                    <div className='flex items-start gap-3'>
-                      {getAlertIcon(alert.type)}
-                      <div className='flex-1'>
-                        <p className='text-sm font-medium text-gray-900'>
-                          {alert.message}
-                        </p>
-                        <p className='text-xs text-gray-500 mt-1'>
-                          {new Date(alert.timestamp).toLocaleString()}
-                        </p>
+
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
+            <div className='flex items-center justify-between mb-4'>
+              <div className='flex items-center gap-3'>
+                <Eye className='w-6 h-6 text-green-500' />
+                <h3 className='font-medium text-gray-900'>Page Views</h3>
+              </div>
+              <TrendingUp className='w-4 h-4 text-green-500' />
+            </div>
+            <div className='text-3xl font-bold text-gray-900'>
+              {realTimeData.pageViews.toLocaleString()}
+            </div>
+            <div className='text-sm text-gray-500 mt-1'>Today's total</div>
+          </div>
+
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
+            <div className='flex items-center justify-between mb-4'>
+              <div className='flex items-center gap-3'>
+                <Clock className='w-6 h-6 text-purple-500' />
+                <h3 className='font-medium text-gray-900'>Avg Session</h3>
+              </div>
+              <TrendingUp className='w-4 h-4 text-green-500' />
+            </div>
+            <div className='text-3xl font-bold text-gray-900'>
+              {Math.floor(realTimeData.averageSessionDuration / 60)}m
+            </div>
+            <div className='text-sm text-gray-500 mt-1'>
+              {realTimeData.averageSessionDuration % 60}s
+            </div>
+          </div>
+
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
+            <div className='flex items-center justify-between mb-4'>
+              <div className='flex items-center gap-3'>
+                <Activity className='w-6 h-6 text-orange-500' />
+                <h3 className='font-medium text-gray-900'>Bounce Rate</h3>
+              </div>
+              <TrendingDown className='w-4 h-4 text-red-500' />
+            </div>
+            <div className='text-3xl font-bold text-gray-900'>
+              {realTimeData.bounceRate}%
+            </div>
+            <div className='text-sm text-gray-500 mt-1'>Single page visits</div>
+          </div>
+        </div>
+
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+          {/* Live User Activity */}
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
+            <div className='p-6 border-b border-gray-200'>
+              <h2 className='text-xl font-semibold text-gray-900'>
+                Live User Activity
+              </h2>
+              <p className='text-gray-600 mt-1'>
+                Real-time user actions and page visits
+              </p>
+            </div>
+            <div className='p-6'>
+              <div className='space-y-4 max-h-96 overflow-y-auto'>
+                {realTimeData.userActivity.map((activity, index) => (
+                  <div
+                    key={index}
+                    className='flex items-center gap-4 p-3 bg-gray-50 rounded-lg'
+                  >
+                    <div className='w-2 h-2 bg-green-500 rounded-full animate-pulse' />
+                    <div className='flex-1'>
+                      <div className='flex items-center justify-between'>
+                        <span className='font-medium text-gray-900'>
+                          {activity.user}
+                        </span>
+                        <span className='text-sm text-gray-500'>
+                          {new Date(activity.timestamp).toLocaleTimeString()}
+                        </span>
+                      </div>
+                      <div className='text-sm text-gray-600'>
+                        {activity.action.replace('_', ' ')} on {activity.page}
                       </div>
                     </div>
-                    {!alert.resolved && (
-                      <Button
-                        size='sm'
-                        variant='secondary'
-                        onClick={() => handleResolveAlert(alert.id)}
-                      >
-                        Resolve
-                      </Button>
-                    )}
+                    <div className='text-sm text-gray-500'>
+                      {activity.duration}s
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* System Alerts */}
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
+            <div className='p-6 border-b border-gray-200'>
+              <h2 className='text-xl font-semibold text-gray-900'>
+                System Alerts
+              </h2>
+              <p className='text-gray-600 mt-1'>
+                Live system notifications and warnings
+              </p>
+            </div>
+            <div className='p-6'>
+              <div className='space-y-4'>
+                {realTimeData.systemAlerts.map(alert => (
+                  <div
+                    key={alert.id}
+                    className={`p-4 border rounded-lg ${getAlertColor(alert.type)} ${
+                      alert.resolved ? 'opacity-60' : ''
+                    }`}
+                  >
+                    <div className='flex items-start justify-between'>
+                      <div className='flex items-start gap-3'>
+                        {getAlertIcon(alert.type)}
+                        <div className='flex-1'>
+                          <p className='text-sm font-medium text-gray-900'>
+                            {alert.message}
+                          </p>
+                          <p className='text-xs text-gray-500 mt-1'>
+                            {new Date(alert.timestamp).toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                      {!alert.resolved && (
+                        <Button
+                          size='sm'
+                          variant='secondary'
+                          onClick={() => handleResolveAlert(alert.id)}
+                        >
+                          Resolve
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Device and Geographic Distribution */}
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8'>
-        {/* Device Distribution */}
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
+        {/* Device and Geographic Distribution */}
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8'>
+          {/* Device Distribution */}
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
+            <div className='p-6 border-b border-gray-200'>
+              <h2 className='text-xl font-semibold text-gray-900'>
+                Device Distribution
+              </h2>
+              <p className='text-gray-600 mt-1'>Current users by device type</p>
+            </div>
+            <div className='p-6'>
+              <div className='space-y-4'>
+                {realTimeData.deviceStats.map((device, index) => (
+                  <div key={index} className='flex items-center justify-between'>
+                    <div className='flex items-center gap-3'>
+                      {device.device === 'Desktop' && (
+                        <Monitor className='w-4 h-4 text-blue-500' />
+                      )}
+                      {device.device === 'Mobile' && (
+                        <Smartphone className='w-4 h-4 text-green-500' />
+                      )}
+                      {device.device === 'Tablet' && (
+                        <Globe className='w-4 h-4 text-purple-500' />
+                      )}
+                      <span className='font-medium text-gray-900'>
+                        {device.device}
+                      </span>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <div className='w-24 bg-gray-200 rounded-full h-2'>
+                        <div
+                          className='bg-blue-500 h-2 rounded-full'
+                          style={{ width: `${device.percentage}%` }}
+                        />
+                      </div>
+                      <span className='text-sm text-gray-600 w-12 text-right'>
+                        {device.users} ({device.percentage}%)
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Geographic Distribution */}
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
+            <div className='p-6 border-b border-gray-200'>
+              <h2 className='text-xl font-semibold text-gray-900'>
+                Geographic Distribution
+              </h2>
+              <p className='text-gray-600 mt-1'>Current users by location</p>
+            </div>
+            <div className='p-6'>
+              <div className='space-y-4'>
+                {realTimeData.geographicData.map((geo, index) => (
+                  <div key={index} className='flex items-center justify-between'>
+                    <div className='flex items-center gap-3'>
+                      <Globe className='w-4 h-4 text-blue-500' />
+                      <span className='font-medium text-gray-900'>
+                        {geo.country}
+                      </span>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <div className='w-24 bg-gray-200 rounded-full h-2'>
+                        <div
+                          className='bg-green-500 h-2 rounded-full'
+                          style={{ width: `${geo.percentage}%` }}
+                        />
+                      </div>
+                      <span className='text-sm text-gray-600 w-12 text-right'>
+                        {geo.users} ({geo.percentage}%)
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Performance Metrics */}
+        <div className='bg-white rounded-lg shadow-sm border border-gray-200 mt-8'>
           <div className='p-6 border-b border-gray-200'>
             <h2 className='text-xl font-semibold text-gray-900'>
-              Device Distribution
+              Performance Metrics
             </h2>
-            <p className='text-gray-600 mt-1'>Current users by device type</p>
+            <p className='text-gray-600 mt-1'>
+              Real-time system performance indicators
+            </p>
           </div>
           <div className='p-6'>
-            <div className='space-y-4'>
-              {realTimeData.deviceStats.map((device, index) => (
-                <div key={index} className='flex items-center justify-between'>
-                  <div className='flex items-center gap-3'>
-                    {device.device === 'Desktop' && (
-                      <Monitor className='w-4 h-4 text-blue-500' />
-                    )}
-                    {device.device === 'Mobile' && (
-                      <Smartphone className='w-4 h-4 text-green-500' />
-                    )}
-                    {device.device === 'Tablet' && (
-                      <Globe className='w-4 h-4 text-purple-500' />
-                    )}
-                    <span className='font-medium text-gray-900'>
-                      {device.device}
-                    </span>
-                  </div>
-                  <div className='flex items-center gap-2'>
-                    <div className='w-24 bg-gray-200 rounded-full h-2'>
-                      <div
-                        className='bg-blue-500 h-2 rounded-full'
-                        style={{ width: `${device.percentage}%` }}
-                      />
-                    </div>
-                    <span className='text-sm text-gray-600 w-12 text-right'>
-                      {device.users} ({device.percentage}%)
-                    </span>
-                  </div>
+            <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
+              <div className='text-center'>
+                <div className='text-2xl font-bold text-gray-900'>
+                  {realTimeData.performanceMetrics.responseTime}ms
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Geographic Distribution */}
-        <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
-          <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
-              Geographic Distribution
-            </h2>
-            <p className='text-gray-600 mt-1'>Current users by location</p>
-          </div>
-          <div className='p-6'>
-            <div className='space-y-4'>
-              {realTimeData.geographicData.map((geo, index) => (
-                <div key={index} className='flex items-center justify-between'>
-                  <div className='flex items-center gap-3'>
-                    <Globe className='w-4 h-4 text-blue-500' />
-                    <span className='font-medium text-gray-900'>
-                      {geo.country}
-                    </span>
-                  </div>
-                  <div className='flex items-center gap-2'>
-                    <div className='w-24 bg-gray-200 rounded-full h-2'>
-                      <div
-                        className='bg-green-500 h-2 rounded-full'
-                        style={{ width: `${geo.percentage}%` }}
-                      />
-                    </div>
-                    <span className='text-sm text-gray-600 w-12 text-right'>
-                      {geo.users} ({geo.percentage}%)
-                    </span>
-                  </div>
+                <div className='text-sm text-gray-500'>Response Time</div>
+              </div>
+              <div className='text-center'>
+                <div className='text-2xl font-bold text-gray-900'>
+                  {realTimeData.performanceMetrics.loadTime}s
                 </div>
-              ))}
+                <div className='text-sm text-gray-500'>Load Time</div>
+              </div>
+              <div className='text-center'>
+                <div className='text-2xl font-bold text-gray-900'>
+                  {realTimeData.performanceMetrics.errorRate}%
+                </div>
+                <div className='text-sm text-gray-500'>Error Rate</div>
+              </div>
+              <div className='text-center'>
+                <div className='text-2xl font-bold text-gray-900'>
+                  {realTimeData.performanceMetrics.uptime}%
+                </div>
+                <div className='text-sm text-gray-500'>Uptime</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Performance Metrics */}
-      <div className='bg-white rounded-lg shadow-sm border border-gray-200 mt-8'>
-        <div className='p-6 border-b border-gray-200'>
-          <h2 className='text-xl font-semibold text-gray-900'>
-            Performance Metrics
-          </h2>
-          <p className='text-gray-600 mt-1'>
-            Real-time system performance indicators
-          </p>
-        </div>
-        <div className='p-6'>
-          <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
-            <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
-                {realTimeData.performanceMetrics.responseTime}ms
-              </div>
-              <div className='text-sm text-gray-500'>Response Time</div>
-            </div>
-            <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
-                {realTimeData.performanceMetrics.loadTime}s
-              </div>
-              <div className='text-sm text-gray-500'>Load Time</div>
-            </div>
-            <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
-                {realTimeData.performanceMetrics.errorRate}%
-              </div>
-              <div className='text-sm text-gray-500'>Error Rate</div>
-            </div>
-            <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
-                {realTimeData.performanceMetrics.uptime}%
-              </div>
-              <div className='text-sm text-gray-500'>Uptime</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </ProtectedRoute>
   );
 }

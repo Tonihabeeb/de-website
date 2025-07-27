@@ -10,6 +10,7 @@ import {
   Calendar,
 } from 'lucide-react';
 import ProjectAnalytics from '@/components/admin/ProjectAnalytics';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface Project {
   id: string;
@@ -20,7 +21,7 @@ interface Project {
   end_date: string;
 }
 
-export default function ProjectAnalyticsPage() {
+export default function AdminProjectAnalyticsPage() {
   const params = useParams();
   const router = useRouter();
   const projectId = params.id as string;
@@ -82,46 +83,48 @@ export default function ProjectAnalyticsPage() {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 p-6'>
-      <div className='max-w-7xl mx-auto'>
-        {/* Header */}
-        <div className='mb-8'>
-          <button
-            onClick={() => router.back()}
-            className='flex items-center text-gray-600 hover:text-gray-900 mb-4'
-          >
-            <ArrowLeft className='w-4 h-4 mr-2' />
-            Back to Project
-          </button>
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <div className='min-h-screen bg-gray-50 p-6'>
+        <div className='max-w-7xl mx-auto'>
+          {/* Header */}
+          <div className='mb-8'>
+            <button
+              onClick={() => router.back()}
+              className='flex items-center text-gray-600 hover:text-gray-900 mb-4'
+            >
+              <ArrowLeft className='w-4 h-4 mr-2' />
+              Back to Project
+            </button>
 
-          <div className='flex items-center justify-between'>
-            <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
-                {project.name} - Analytics
-              </h1>
-              <p className='text-gray-600 mt-2'>{project.description}</p>
-            </div>
-
-            <div className='flex items-center space-x-4 text-sm text-gray-500'>
-              <div className='flex items-center'>
-                <Calendar className='w-4 h-4 mr-1' />
-                <span>
-                  Start: {new Date(project.start_date).toLocaleDateString()}
-                </span>
+            <div className='flex items-center justify-between'>
+              <div>
+                <h1 className='text-3xl font-bold text-gray-900'>
+                  {project.name} - Analytics
+                </h1>
+                <p className='text-gray-600 mt-2'>{project.description}</p>
               </div>
-              <div className='flex items-center'>
-                <Calendar className='w-4 h-4 mr-1' />
-                <span>
-                  End: {new Date(project.end_date).toLocaleDateString()}
-                </span>
+
+              <div className='flex items-center space-x-4 text-sm text-gray-500'>
+                <div className='flex items-center'>
+                  <Calendar className='w-4 h-4 mr-1' />
+                  <span>
+                    Start: {new Date(project.start_date).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className='flex items-center'>
+                  <Calendar className='w-4 h-4 mr-1' />
+                  <span>
+                    End: {new Date(project.end_date).toLocaleDateString()}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Project Analytics Component */}
-        <ProjectAnalytics projectId={projectId} />
+          {/* Project Analytics Component */}
+          <ProjectAnalytics projectId={projectId} />
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }

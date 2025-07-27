@@ -10,10 +10,20 @@ const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }) => {
   return <div>No error</div>;
 };
 
+// Mock window.location.href and navigator.userAgent for all tests
+beforeAll(() => {
+  window.location.href = 'http://localhost/';
+  Object.defineProperty(window.navigator, 'userAgent', {
+    value: 'jest-test',
+    configurable: true,
+  });
+});
+
 describe('ErrorBoundary', () => {
   beforeEach(() => {
-    // Suppress console.error for tests
+    // Suppress console.error and console.log for tests
     jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -101,48 +111,28 @@ describe('ErrorBoundary', () => {
   });
 
   it('shows error details in development mode', () => {
-    // Skip this test if we can't mock NODE_ENV
-    if (process.env.NODE_ENV === 'development') {
-      render(
-        <ErrorBoundary>
-          <ThrowError shouldThrow={true} />
-        </ErrorBoundary>
-      );
-
-      const detailsElement = screen.getByText('Error Details (Development)');
-      expect(detailsElement).toBeInTheDocument();
-    } else {
-      // If not in development, just test that the error boundary works
-      render(
-        <ErrorBoundary>
-          <ThrowError shouldThrow={true} />
-        </ErrorBoundary>
-      );
-
-      expect(screen.getByText('Something went wrong')).toBeInTheDocument();
-    }
+    const originalEnv = process.env.NODE_ENV;
+    Object.defineProperty(process.env, 'NODE_ENV', { value: 'development', configurable: true });
+    render(
+      <ErrorBoundary>
+        <ThrowError shouldThrow={true} />
+      </ErrorBoundary>
+    );
+    const detailsElement = screen.getByText('Error Details (Development)');
+    expect(detailsElement).toBeInTheDocument();
+    Object.defineProperty(process.env, 'NODE_ENV', { value: originalEnv, configurable: true });
   });
 
   it('does not show error details in production mode', () => {
-    // Skip this test if we can't mock NODE_ENV
-    if (process.env.NODE_ENV === 'production') {
-      render(
-        <ErrorBoundary>
-          <ThrowError shouldThrow={true} />
-        </ErrorBoundary>
-      );
-
-      const detailsElement = screen.queryByText('Error Details (Development)');
-      expect(detailsElement).not.toBeInTheDocument();
-    } else {
-      // If not in production, just test that the error boundary works
-      render(
-        <ErrorBoundary>
-          <ThrowError shouldThrow={true} />
-        </ErrorBoundary>
-      );
-
-      expect(screen.getByText('Something went wrong')).toBeInTheDocument();
-    }
+    const originalEnv = process.env.NODE_ENV;
+    Object.defineProperty(process.env, 'NODE_ENV', { value: 'production', configurable: true });
+    render(
+      <ErrorBoundary>
+        <ThrowError shouldThrow={true} />
+      </ErrorBoundary>
+    );
+    const detailsElement = screen.queryByText('Error Details (Development)');
+    expect(detailsElement).not.toBeInTheDocument();
+    Object.defineProperty(process.env, 'NODE_ENV', { value: originalEnv, configurable: true });
   });
 });

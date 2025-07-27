@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PageModel } from '@/database/models/Page';
 import { requirePublishPages } from '@/middleware/permissions';
 
 // POST /api/admin/pages/[id]/publish - Publish page
@@ -14,29 +13,21 @@ export async function POST(
     const permissionCheck = await requirePublishPages()(request);
     if (permissionCheck) return permissionCheck;
 
-    // Check if page exists
-    const existingPage = await PageModel.findById(id);
-    if (!existingPage) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/pages/${id}/publish`, {
+      method: 'POST',
+    });
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Page not found' },
-        { status: 404 }
+        { success: false, error: error.error || 'Failed to publish page' },
+        { status: res.status }
       );
     }
-
-    // Publish the page
-    const publishedPage = await PageModel.publish(id);
-
-    if (!publishedPage) {
-      return NextResponse.json(
-        { success: false, error: 'Failed to publish page' },
-        { status: 500 }
-      );
-    }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      page: publishedPage,
-      message: 'Page published successfully',
+      ...data,
     });
   } catch (error) {
     console.error('Error publishing page:', error);

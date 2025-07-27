@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "seed-db": "node scripts/seed-database.js",
+    "create-admin": "node scripts/create-super-admin.js",
+    "cleanup-users": "node scripts/cleanup-users.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -42,20 +45,27 @@
     "@types/formidable": "^3.4.5",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/pdfkit": "^0.17.1",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.16",
     "bcryptjs": "^3.0.2",
     "better-sqlite3": "^12.2.0",
+    "chart.js": "^4.5.0",
     "date-fns": "^4.1.0",
+    "form-data": "^4.0.4",
     "formidable": "^3.5.4",
     "framer-motion": "^12.23.3",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.525.0",
     "next": "15.4.2",
+    "node-fetch": "^3.3.2",
     "pdfkit": "^0.17.1",
     "postcss": "^8.4.38",
     "react": "18.3.1",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "18.3.1",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.60.0",
@@ -64,7 +74,6 @@
     "sonner": "^2.0.6",
     "tailwindcss": "^3.4.3",
     "uuid": "^11.1.0",
-    "xlsx": "^0.18.5",
     "zod": "^4.0.5"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
@@ -85,9 +94,11 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/bcrypt": "^6.0.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/jest": "^30.0.0",
     "@types/leaflet": "^1.9.20",
+    "@types/multer": "^2.0.0",
     "@types/node": "24.0.13",
     "@types/react": "19.1.8",
     "@types/supertest": "^6.0.3",
@@ -104,7 +115,24 @@
     "prettier": "^3.6.2",
     "supertest": "^7.1.3",
     "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
     "typescript": "5.8.3",
     "typescript-eslint": "^8.37.0"
-  }
+  },
+  "description": "A modern, production-grade web platform for Deep Engineering, built with Next.js 15, React 18, TypeScript, and a custom CMS. This project powers the public site, investor portal, and admin dashboard for managing KPP technology projects in Iraq and the Kurdistan region.",
+  "main": "babel.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tonihabeeb/de-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tonihabeeb/de-website/issues"
+  },
+  "homepage": "https://github.com/Tonihabeeb/de-website#readme"
 }

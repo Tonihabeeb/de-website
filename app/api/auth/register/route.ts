@@ -1,84 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
-import { db } from '@/database/connection';
-import { z } from 'zod';
+
+export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const schema = z.object({
-      name: z.string().min(2).max(100),
-      email: z.string().email(),
-      password: z.string().min(8).max(100),
-      role: z.string().optional(),
-    });
-    const result = schema.safeParse(body);
-    if (!result.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Invalid input',
-          details: result.error.issues,
-        },
-        { status: 400 }
-      );
-    }
-    const { name, email, password, role = 'user' } = result.data;
-
-    if (!name || !email || !password) {
-      return NextResponse.json(
-        { success: false, error: 'Name, email, and password are required' },
-        { status: 400 }
-      );
-    }
-
-    // Check if user already exists
-    const existingUser = db
-      .prepare('SELECT id FROM users WHERE email = ?')
-      .get(email);
-    if (existingUser) {
-      return NextResponse.json(
-        { success: false, error: 'User with this email already exists' },
-        { status: 409 }
-      );
-    }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
-    const userId = uuidv4();
-    const now = new Date().toISOString();
-
-    const insertStmt = db.prepare(`
-      INSERT INTO users (id, name, email, password_hash, role, is_active, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    insertStmt.run(userId, name, email, hashedPassword, role, 1, now, now);
-
-    // Return user data (without password)
-    const userData = {
-      _id: userId,
-      name,
-      email,
-      role,
-    };
-
-    return NextResponse.json(
-      {
-        success: true,
-        user: userData,
-        message: 'User registered successfully',
+    console.log('DEBUG NEXT_PUBLIC_API_BASE_URL:', process.env.NEXT_PUBLIC_API_BASE_URL);
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      { status: 201 }
-    );
+      body: await request.text(),
+    });
+    const data = await res.json();
+    return NextResponse.json(data, { status: res.status });
   } catch (error) {
-    console.error('Registration error:', error);
-    return NextResponse.json(
-      { success: false, error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
   }
 }

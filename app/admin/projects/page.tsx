@@ -17,6 +17,7 @@ import {
   History,
 } from 'lucide-react';
 import { toast } from '@/components/ui/Toast';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface Project {
   id: string;
@@ -35,7 +36,7 @@ interface Project {
   updated_at: string;
 }
 
-export default function ProjectsManagement() {
+export default function AdminProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -291,335 +292,337 @@ export default function ProjectsManagement() {
   }
 
   return (
-    <div className='p-6'>
-      {/* Header */}
-      <div className='flex items-center justify-between mb-6'>
-        <h1 className='text-2xl font-bold'>Projects</h1>
-        <div className='flex items-center gap-2'>
-          <button
-            onClick={handleExport}
-            className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'
-          >
-            Export
-          </button>
-          <button
-            onClick={handleImportClick}
-            className='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700'
-            disabled={importing}
-          >
-            Import
-          </button>
-          <input
-            type='file'
-            accept='.json'
-            ref={fileInputRef}
-            onChange={handleImportFile}
-            className='hidden'
-          />
-        </div>
-      </div>
-
-      {/* Search and Filter */}
-      <div className='mb-6'>
-        <div className='flex flex-col sm:flex-row gap-4'>
-          <div className='flex-1'>
-            <div className='relative'>
-              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
-              <input
-                type='text'
-                placeholder='Search projects...'
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                onKeyPress={e => e.key === 'Enter' && handleSearch()}
-                className='w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-              />
-            </div>
-          </div>
-          <div className='flex gap-2'>
-            <select
-              value={statusFilter}
-              onChange={e => setStatusFilter(e.target.value)}
-              className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-            >
-              <option value='all'>All Status</option>
-              <option value='planning'>Planning</option>
-              <option value='in-progress'>In Progress</option>
-              <option value='completed'>Completed</option>
-              <option value='cancelled'>Cancelled</option>
-            </select>
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <div className='p-6'>
+        {/* Header */}
+        <div className='flex items-center justify-between mb-6'>
+          <h1 className='text-2xl font-bold'>Projects</h1>
+          <div className='flex items-center gap-2'>
             <button
-              onClick={handleSearch}
-              className='inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+              onClick={handleExport}
+              className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'
             >
-              <Filter className='w-4 h-4 mr-2' />
-              Filter
+              Export
             </button>
+            <button
+              onClick={handleImportClick}
+              className='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700'
+              disabled={importing}
+            >
+              Import
+            </button>
+            <input
+              type='file'
+              accept='.json'
+              ref={fileInputRef}
+              onChange={handleImportFile}
+              className='hidden'
+            />
           </div>
         </div>
-      </div>
 
-      {/* Error Message */}
-      {error && (
-        <div className='mb-6 p-4 bg-red-50 border border-red-200 rounded-md'>
-          <div className='flex'>
-            <div className='flex-shrink-0'>
-              <svg
-                className='h-5 w-5 text-red-400'
-                viewBox='0 0 20 20'
-                fill='currentColor'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
-                  clipRule='evenodd'
+        {/* Search and Filter */}
+        <div className='mb-6'>
+          <div className='flex flex-col sm:flex-row gap-4'>
+            <div className='flex-1'>
+              <div className='relative'>
+                <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                <input
+                  type='text'
+                  placeholder='Search projects...'
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  onKeyPress={e => e.key === 'Enter' && handleSearch()}
+                  className='w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
                 />
-              </svg>
-            </div>
-            <div className='ml-3'>
-              <h3 className='text-sm font-medium text-red-800'>Error</h3>
-              <div className='mt-2 text-sm text-red-700'>
-                <p>{error}</p>
               </div>
-              <div className='mt-4'>
-                <button
-                  onClick={fetchProjects}
-                  className='text-sm font-medium text-red-800 hover:text-red-900 underline'
+            </div>
+            <div className='flex gap-2'>
+              <select
+                value={statusFilter}
+                onChange={e => setStatusFilter(e.target.value)}
+                className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+              >
+                <option value='all'>All Status</option>
+                <option value='planning'>Planning</option>
+                <option value='in-progress'>In Progress</option>
+                <option value='completed'>Completed</option>
+                <option value='cancelled'>Cancelled</option>
+              </select>
+              <button
+                onClick={handleSearch}
+                className='inline-flex items-center px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+              >
+                <Filter className='w-4 h-4 mr-2' />
+                Filter
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className='mb-6 p-4 bg-red-50 border border-red-200 rounded-md'>
+            <div className='flex'>
+              <div className='flex-shrink-0'>
+                <svg
+                  className='h-5 w-5 text-red-400'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
                 >
-                  Try again
+                  <path
+                    fillRule='evenodd'
+                    d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
+                    clipRule='evenodd'
+                  />
+                </svg>
+              </div>
+              <div className='ml-3'>
+                <h3 className='text-sm font-medium text-red-800'>Error</h3>
+                <div className='mt-2 text-sm text-red-700'>
+                  <p>{error}</p>
+                </div>
+                <div className='mt-4'>
+                  <button
+                    onClick={fetchProjects}
+                    className='text-sm font-medium text-red-800 hover:text-red-900 underline'
+                  >
+                    Try again
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Projects Grid */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+          {filteredProjects.length === 0 ? (
+            <div className='col-span-full text-center py-12'>
+              <div className='text-gray-500'>
+                <p className='text-lg font-medium'>No projects found.</p>
+                <p className='mt-1'>
+                  Get started by creating your first project.
+                </p>
+                <Link
+                  href='/admin/projects/new'
+                  className='mt-4 inline-flex items-center text-blue-600 hover:text-blue-500'
+                >
+                  <Plus className='w-4 h-4 mr-1' />
+                  Create your first project
+                </Link>
+              </div>
+            </div>
+          ) : (
+            filteredProjects.map(project => (
+              <div
+                key={project.id}
+                className='bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow'
+              >
+                <div className='p-6'>
+                  <div className='flex justify-between items-start mb-4'>
+                    <div className='flex-1'>
+                      <h3 className='text-lg font-semibold text-gray-900 mb-1'>
+                        {project.name}
+                      </h3>
+                      <p className='text-sm text-gray-600 line-clamp-2'>
+                        {project.description}
+                      </p>
+                    </div>
+                    <div className='ml-4'>{getStatusBadge(project.status)}</div>
+                  </div>
+
+                  <div className='space-y-2 mb-4'>
+                    {project.location && (
+                      <div className='flex items-center text-sm text-gray-600'>
+                        <MapPin className='w-4 h-4 mr-2' />
+                        {project.location}
+                      </div>
+                    )}
+                    {project.capacity_mw && (
+                      <div className='flex items-center text-sm text-gray-600'>
+                        <div className='w-4 h-4 mr-2 bg-blue-100 rounded flex items-center justify-center'>
+                          <span className='text-xs font-medium text-blue-600'>
+                            MW
+                          </span>
+                        </div>
+                        {project.capacity_mw} MW
+                      </div>
+                    )}
+                    {project.budget && (
+                      <div className='flex items-center text-sm text-gray-600'>
+                        <DollarSign className='w-4 h-4 mr-2' />
+                        {project.budget.toLocaleString()}{' '}
+                        {project.budget_currency || 'USD'}
+                      </div>
+                    )}
+                    {project.start_date && (
+                      <div className='flex items-center text-sm text-gray-600'>
+                        <Calendar className='w-4 h-4 mr-2' />
+                        {new Date(project.start_date).toLocaleDateString()}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
+                    <div className='text-xs text-gray-500'>
+                      Created {new Date(project.created_at).toLocaleDateString()}
+                    </div>
+                    <div className='flex items-center space-x-2'>
+                      <Link
+                        href={`/admin/projects/${project.id}/edit`}
+                        className='text-blue-600 hover:text-blue-900 p-1'
+                      >
+                        <Edit className='w-4 h-4' />
+                      </Link>
+                      <Link
+                        href={`/admin/projects/${project.id}`}
+                        className='text-green-600 hover:text-green-900 p-1'
+                      >
+                        <Eye className='w-4 h-4' />
+                      </Link>
+                      <button
+                        onClick={() => openVersionModal(project.id)}
+                        className='text-gray-600 hover:text-blue-600 p-1'
+                        aria-label='View version history'
+                      >
+                        <History className='w-4 h-4' />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(project.id)}
+                        className='text-red-600 hover:text-red-900 p-1'
+                      >
+                        <Trash2 className='w-4 h-4' />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Version History Modal */}
+        {versionModalProjectId && (
+          <div
+            className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'
+            role='dialog'
+            aria-modal='true'
+          >
+            <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+                Version History
+              </h3>
+              {versionLoading ? (
+                <div>Loading...</div>
+              ) : versionError ? (
+                <div className='text-red-600'>{versionError}</div>
+              ) : (
+                <>
+                  {versions.length === 0 ? (
+                    <div className='text-gray-500'>
+                      No previous versions found.
+                    </div>
+                  ) : (
+                    <table className='min-w-full mb-4'>
+                      <thead>
+                        <tr>
+                          <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                            Version
+                          </th>
+                          <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                            Created
+                          </th>
+                          <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                            User
+                          </th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {versions.map(v => (
+                          <tr key={v.id} className='hover:bg-gray-50'>
+                            <td className='px-2 py-1'>V{v.version_number}</td>
+                            <td className='px-2 py-1'>
+                              {new Date(v.created_at).toLocaleString()}
+                            </td>
+                            <td className='px-2 py-1'>
+                              {v.created_by || 'Unknown'}
+                            </td>
+                            <td className='px-2 py-1 text-right'>
+                              <button
+                                onClick={() => setSelectedVersion(v)}
+                                className='text-blue-600 hover:underline text-xs mr-2'
+                              >
+                                View
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleRestoreVersion(
+                                    versionModalProjectId,
+                                    v.id
+                                  )
+                                }
+                                className='text-green-600 hover:underline text-xs'
+                              >
+                                Restore
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                  {selectedVersion && (
+                    <div className='mb-4 p-4 bg-gray-50 rounded border border-gray-200'>
+                      <h4 className='font-semibold mb-2'>Version Content</h4>
+                      <pre className='text-xs whitespace-pre-wrap'>
+                        {JSON.stringify(selectedVersion.content, null, 2)}
+                      </pre>
+                    </div>
+                  )}
+                </>
+              )}
+              <div className='flex justify-end mt-4'>
+                <button
+                  onClick={() => setVersionModalProjectId(null)}
+                  className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+                >
+                  Close
                 </button>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Projects Grid */}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-        {filteredProjects.length === 0 ? (
-          <div className='col-span-full text-center py-12'>
-            <div className='text-gray-500'>
-              <p className='text-lg font-medium'>No projects found.</p>
-              <p className='mt-1'>
-                Get started by creating your first project.
-              </p>
-              <Link
-                href='/admin/projects/new'
-                className='mt-4 inline-flex items-center text-blue-600 hover:text-blue-500'
-              >
-                <Plus className='w-4 h-4 mr-1' />
-                Create your first project
-              </Link>
-            </div>
-          </div>
-        ) : (
-          filteredProjects.map(project => (
-            <div
-              key={project.id}
-              className='bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow'
-            >
-              <div className='p-6'>
-                <div className='flex justify-between items-start mb-4'>
-                  <div className='flex-1'>
-                    <h3 className='text-lg font-semibold text-gray-900 mb-1'>
-                      {project.name}
-                    </h3>
-                    <p className='text-sm text-gray-600 line-clamp-2'>
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className='ml-4'>{getStatusBadge(project.status)}</div>
-                </div>
-
-                <div className='space-y-2 mb-4'>
-                  {project.location && (
-                    <div className='flex items-center text-sm text-gray-600'>
-                      <MapPin className='w-4 h-4 mr-2' />
-                      {project.location}
-                    </div>
-                  )}
-                  {project.capacity_mw && (
-                    <div className='flex items-center text-sm text-gray-600'>
-                      <div className='w-4 h-4 mr-2 bg-blue-100 rounded flex items-center justify-center'>
-                        <span className='text-xs font-medium text-blue-600'>
-                          MW
-                        </span>
-                      </div>
-                      {project.capacity_mw} MW
-                    </div>
-                  )}
-                  {project.budget && (
-                    <div className='flex items-center text-sm text-gray-600'>
-                      <DollarSign className='w-4 h-4 mr-2' />
-                      {project.budget.toLocaleString()}{' '}
-                      {project.budget_currency || 'USD'}
-                    </div>
-                  )}
-                  {project.start_date && (
-                    <div className='flex items-center text-sm text-gray-600'>
-                      <Calendar className='w-4 h-4 mr-2' />
-                      {new Date(project.start_date).toLocaleDateString()}
-                    </div>
-                  )}
-                </div>
-
-                <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
-                  <div className='text-xs text-gray-500'>
-                    Created {new Date(project.created_at).toLocaleDateString()}
-                  </div>
-                  <div className='flex items-center space-x-2'>
-                    <Link
-                      href={`/admin/projects/${project.id}/edit`}
-                      className='text-blue-600 hover:text-blue-900 p-1'
-                    >
-                      <Edit className='w-4 h-4' />
-                    </Link>
-                    <Link
-                      href={`/admin/projects/${project.id}`}
-                      className='text-green-600 hover:text-green-900 p-1'
-                    >
-                      <Eye className='w-4 h-4' />
-                    </Link>
-                    <button
-                      onClick={() => openVersionModal(project.id)}
-                      className='text-gray-600 hover:text-blue-600 p-1'
-                      aria-label='View version history'
-                    >
-                      <History className='w-4 h-4' />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(project.id)}
-                      className='text-red-600 hover:text-red-900 p-1'
-                    >
-                      <Trash2 className='w-4 h-4' />
-                    </button>
-                  </div>
-                </div>
+        {/* Import Results Modal/Alert */}
+        {importResults && (
+          <div className='fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center'>
+            <div className='bg-white rounded-lg p-6 w-full max-w-lg'>
+              <h3 className='text-lg font-semibold mb-4'>Import Results</h3>
+              <ul className='max-h-64 overflow-y-auto mb-4'>
+                {importResults.map((r, i) => (
+                  <li
+                    key={i}
+                    className={r.success ? 'text-green-700' : 'text-red-600'}
+                  >
+                    {r.success ? '✔' : '✖'} {r.slug || r.id}:{' '}
+                    {r.success ? 'Imported' : r.error}
+                  </li>
+                ))}
+              </ul>
+              <div className='flex justify-end'>
+                <button
+                  onClick={() => setImportResults(null)}
+                  className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400'
+                >
+                  Close
+                </button>
               </div>
             </div>
-          ))
+          </div>
         )}
       </div>
-
-      {/* Version History Modal */}
-      {versionModalProjectId && (
-        <div
-          className='fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center'
-          role='dialog'
-          aria-modal='true'
-        >
-          <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
-              Version History
-            </h3>
-            {versionLoading ? (
-              <div>Loading...</div>
-            ) : versionError ? (
-              <div className='text-red-600'>{versionError}</div>
-            ) : (
-              <>
-                {versions.length === 0 ? (
-                  <div className='text-gray-500'>
-                    No previous versions found.
-                  </div>
-                ) : (
-                  <table className='min-w-full mb-4'>
-                    <thead>
-                      <tr>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
-                          Version
-                        </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
-                          Created
-                        </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
-                          User
-                        </th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {versions.map(v => (
-                        <tr key={v.id} className='hover:bg-gray-50'>
-                          <td className='px-2 py-1'>V{v.version_number}</td>
-                          <td className='px-2 py-1'>
-                            {new Date(v.created_at).toLocaleString()}
-                          </td>
-                          <td className='px-2 py-1'>
-                            {v.created_by || 'Unknown'}
-                          </td>
-                          <td className='px-2 py-1 text-right'>
-                            <button
-                              onClick={() => setSelectedVersion(v)}
-                              className='text-blue-600 hover:underline text-xs mr-2'
-                            >
-                              View
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleRestoreVersion(
-                                  versionModalProjectId,
-                                  v.id
-                                )
-                              }
-                              className='text-green-600 hover:underline text-xs'
-                            >
-                              Restore
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-                {selectedVersion && (
-                  <div className='mb-4 p-4 bg-gray-50 rounded border border-gray-200'>
-                    <h4 className='font-semibold mb-2'>Version Content</h4>
-                    <pre className='text-xs whitespace-pre-wrap'>
-                      {JSON.stringify(selectedVersion.content, null, 2)}
-                    </pre>
-                  </div>
-                )}
-              </>
-            )}
-            <div className='flex justify-end mt-4'>
-              <button
-                onClick={() => setVersionModalProjectId(null)}
-                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Import Results Modal/Alert */}
-      {importResults && (
-        <div className='fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center'>
-          <div className='bg-white rounded-lg p-6 w-full max-w-lg'>
-            <h3 className='text-lg font-semibold mb-4'>Import Results</h3>
-            <ul className='max-h-64 overflow-y-auto mb-4'>
-              {importResults.map((r, i) => (
-                <li
-                  key={i}
-                  className={r.success ? 'text-green-700' : 'text-red-600'}
-                >
-                  {r.success ? '✔' : '✖'} {r.slug || r.id}:{' '}
-                  {r.success ? 'Imported' : r.error}
-                </li>
-              ))}
-            </ul>
-            <div className='flex justify-end'>
-              <button
-                onClick={() => setImportResults(null)}
-                className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400'
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+    </ProtectedRoute>
   );
 }

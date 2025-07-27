@@ -13,6 +13,7 @@ import {
   Save,
 } from 'lucide-react';
 import Image from 'next/image';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface MediaItem {
   id: string;
@@ -51,7 +52,15 @@ interface SortOption {
   direction: 'asc' | 'desc';
 }
 
-export default function MediaSearch() {
+export default function AdminMediaSearchPage() {
+  return (
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <MediaSearch />
+    </ProtectedRoute>
+  );
+}
+
+function MediaSearch() {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [filteredItems, setFilteredItems] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(true);

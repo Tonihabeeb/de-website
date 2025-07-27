@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ProjectModel } from '@/database/models/Project';
 import {
   requireAuthor,
   requireEditProjects,
@@ -18,18 +17,19 @@ export async function GET(
     const permissionCheck = await requireAuthor()(request);
     if (permissionCheck) return permissionCheck;
 
-    const project = await ProjectModel.findById(id);
-
-    if (!project) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/projects/${id}`);
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
+        { success: false, error: error.error || 'Project not found' },
+        { status: res.status }
       );
     }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      project,
+      ...data,
     });
   } catch (error) {
     console.error('Error fetching project:', error);
@@ -53,87 +53,23 @@ export async function PUT(
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const {
-      name,
-      slug,
-      description,
-      content,
-      meta_title,
-      meta_description,
-      meta_keywords,
-      og_title,
-      og_description,
-      og_image,
-      twitter_title,
-      twitter_description,
-      twitter_image,
-      status,
-      capacity_mw,
-      location,
-      start_date,
-      end_date,
-      budget,
-      budget_currency,
-      publish_at,
-      unpublish_at,
-    } = body;
-
-    // Check if project exists
-    const existingProject = await ProjectModel.findById(id);
-    if (!existingProject) {
-      return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
-      );
-    }
-
-    // Check if slug is being changed and if it already exists
-    if (slug && slug !== existingProject.slug) {
-      const slugExists = await ProjectModel.findBySlug(slug);
-      if (slugExists) {
-        return NextResponse.json(
-          { success: false, error: 'Project with this slug already exists' },
-          { status: 409 }
-        );
-      }
-    }
-
-    const updatedProject = await ProjectModel.update(id, {
-      name,
-      slug,
-      description,
-      content,
-      meta_title,
-      meta_description,
-      meta_keywords,
-      og_title,
-      og_description,
-      og_image,
-      twitter_title,
-      twitter_description,
-      twitter_image,
-      status,
-      capacity_mw: capacity_mw ? parseFloat(capacity_mw) : undefined,
-      location,
-      start_date: start_date ? new Date(start_date) : undefined,
-      end_date: end_date ? new Date(end_date) : undefined,
-      budget: budget ? parseFloat(budget) : undefined,
-      budget_currency,
-      publish_at: publish_at ? new Date(publish_at) : null,
-      unpublish_at: unpublish_at ? new Date(unpublish_at) : null,
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/projects/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
-
-    if (!updatedProject) {
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Failed to update project' },
-        { status: 500 }
+        { success: false, error: error.error || 'Failed to update project' },
+        { status: res.status }
       );
     }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      project: updatedProject,
-      message: 'Project updated successfully',
+      ...data,
     });
   } catch (error) {
     console.error('Error updating project:', error);
@@ -156,27 +92,21 @@ export async function DELETE(
     const permissionCheck = await requireDeleteProjects()(request);
     if (permissionCheck) return permissionCheck;
 
-    // Check if project exists
-    const existingProject = await ProjectModel.findById(id);
-    if (!existingProject) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/projects/${id}`, {
+      method: 'DELETE',
+    });
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
+        { success: false, error: error.error || 'Failed to delete project' },
+        { status: res.status }
       );
     }
-
-    const deleted = await ProjectModel.delete(id);
-
-    if (!deleted) {
-      return NextResponse.json(
-        { success: false, error: 'Failed to delete project' },
-        { status: 500 }
-      );
-    }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      message: 'Project deleted successfully',
+      ...data,
     });
   } catch (error) {
     console.error('Error deleting project:', error);

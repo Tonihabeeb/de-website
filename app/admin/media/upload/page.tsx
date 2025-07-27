@@ -1,9 +1,8 @@
-'use client';
-
+"use client";
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import { useState, useRef, useEffect } from 'react';
 import {
   Upload,
-  Image,
   File,
   Video,
   Music,
@@ -24,7 +23,7 @@ import {
   Plus,
   RefreshCw,
 } from 'lucide-react';
-import Image from 'next/image'; // Add this import
+import Image from 'next/image';
 
 interface MediaItem {
   id: string;
@@ -48,7 +47,15 @@ interface UploadProgress {
   error?: string;
 }
 
-export default function MediaUpload() {
+export default function AdminMediaUploadPage() {
+  return (
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <MediaUpload />
+    </ProtectedRoute>
+  );
+}
+
+function MediaUpload() {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [uploadQueue, setUploadQueue] = useState<UploadProgress[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -204,7 +211,7 @@ export default function MediaUpload() {
 
   const getFileIcon = (mimeType: string) => {
     if (mimeType.startsWith('image/'))
-      return <Image className='w-8 h-8 text-blue-500' />;
+      return <Image src='/icons/image.svg' alt='Image' width={32} height={32} />;
     if (mimeType.startsWith('video/'))
       return <Video className='w-8 h-8 text-purple-500' />;
     if (mimeType.startsWith('audio/'))

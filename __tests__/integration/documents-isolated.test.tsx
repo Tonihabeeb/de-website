@@ -140,11 +140,15 @@ jest.mock('@/utils/api', () => ({
   ApiException: class ApiException extends Error {},
 }));
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 test('renders DocumentList and waits for loading spinner to disappear', async () => {
   render(<DocumentList />);
   await waitFor(() => {
     expect(screen.queryByText('Loading documents...')).not.toBeInTheDocument();
   });
-  expect(screen.getByText('Project Report.pdf')).toBeInTheDocument();
-  expect(screen.getByText('Technical Specs.docx')).toBeInTheDocument();
+  await screen.findByText('Project Report.pdf');
+  await screen.findByText('Technical Specs.docx');
 });

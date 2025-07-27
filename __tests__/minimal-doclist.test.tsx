@@ -1,24 +1,4 @@
-jest.mock('@/contexts/AuthContext', () => ({
-  useAuth: () => ({
-    isAuthenticated: true,
-    user: {
-      id: 'test',
-      name: 'Test',
-      email: 'test@example.com',
-      role: 'admin',
-    },
-    login: jest.fn(),
-    logout: jest.fn(),
-    hasRole: jest.fn(() => true),
-    hasAnyRole: jest.fn(() => true),
-  }),
-  AuthProvider: ({ children }: { children: React.ReactNode }) => children,
-}));
-
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import DocumentList from '@/components/documents/DocumentList';
-
+// Mock media data and @/utils/api before any imports
 const mockMedia = [
   {
     id: '1',
@@ -51,19 +31,43 @@ const mockMedia = [
   },
 ];
 
+jest.mock('@/contexts/AuthContext', () => ({
+  useAuth: () => ({
+    isAuthenticated: true,
+    user: {
+      id: 'test',
+      name: 'Test',
+      email: 'test@example.com',
+      role: 'admin',
+    },
+    login: jest.fn(),
+    logout: jest.fn(),
+    hasRole: jest.fn(() => true),
+    hasAnyRole: jest.fn(() => true),
+  }),
+  AuthProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 jest.mock('@/utils/api', () => ({
   apiFetch: jest.fn(() => Promise.resolve({ media: mockMedia })),
   ApiException: class ApiException extends Error {},
 }));
 
-test('renders DocumentList and waits for loading spinner to disappear', async () => {
-  render(<DocumentList />);
-  await waitFor(() => {
-    expect(screen.queryByText('Loading documents...')).not.toBeInTheDocument();
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import DocumentList from '@/components/documents/DocumentList';
+
+describe('Minimal DocumentList', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
   });
-  // Debug the DOM after loading
-  screen.debug();
-  // Try to find the document names
-  expect(screen.getByText('Project Report.pdf')).toBeInTheDocument();
-  expect(screen.getByText('Technical Specs.docx')).toBeInTheDocument();
+
+  test('renders DocumentList and waits for document names to appear', async () => {
+    render(<DocumentList />);
+    await waitFor(() => {
+      expect(screen.queryByText('Loading documents...')).not.toBeInTheDocument();
+    });
+    await screen.findByText('Project Report.pdf');
+    await screen.findByText('Technical Specs.docx');
+  });
 });

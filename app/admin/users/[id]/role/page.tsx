@@ -16,6 +16,7 @@ import {
   Edit,
   Trash2,
 } from 'lucide-react';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface User {
   id: string;
@@ -41,7 +42,15 @@ interface Permission {
   action: string;
 }
 
-export default function UserRoleAssignment() {
+export default function AdminUserRolePage() {
+  return (
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <UserRoleAssignment />
+    </ProtectedRoute>
+  );
+}
+
+function UserRoleAssignment() {
   const params = useParams();
   const router = useRouter();
   const userId = params.id as string;

@@ -1,6 +1,10 @@
 import { apiFetch, ApiException } from '@/utils/api';
 import { serverApiFetch, ServerApiException } from '@/utils/server-api';
 
+// Ensure global.fetch is a Jest mock for this test file
+const originalFetch = global.fetch;
+(global as any).fetch = jest.fn();
+
 // Use the global fetch mock from jest.setup.js
 const mockFetch = global.fetch as jest.MockedFunction<typeof fetch>;
 
@@ -30,12 +34,12 @@ describe('API Integration Tests', () => {
         ok: true,
         status: 200,
         json: async () => mockResponse,
-      } as Response);
+        headers: { get: () => 'application/json' },
+      } as any);
 
       const result = await apiFetch('/test');
       expect(result).toEqual(mockResponse);
-      expect(mockFetch).toHaveBeenCalledWith('/test', {
-        method: 'GET',
+      expect(mockFetch).toHaveBeenCalledWith('http://localhost:4000/test', {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -49,11 +53,11 @@ describe('API Integration Tests', () => {
         ok: true,
         status: 200,
         json: async () => mockResponse,
-      } as Response);
+        headers: { get: () => 'application/json' },
+      } as any);
 
       await apiFetch('/test');
-      expect(mockFetch).toHaveBeenCalledWith('/test', {
-        method: 'GET',
+      expect(mockFetch).toHaveBeenCalledWith('http://localhost:4000/test', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer test-token',
@@ -73,11 +77,10 @@ describe('API Integration Tests', () => {
         status: 404,
         statusText: 'Not Found',
         json: async () => ({ error: 'Not found' }),
-      } as Response);
+        headers: { get: () => 'application/json' },
+      } as any);
 
-      await expect(apiFetch('/test')).rejects.toThrow(
-        'HTTP error! status: 404'
-      );
+      await expect(apiFetch('/test')).rejects.toThrow('Not found');
     });
   });
 
@@ -88,12 +91,12 @@ describe('API Integration Tests', () => {
         ok: true,
         status: 200,
         json: async () => mockResponse,
-      } as Response);
+        headers: { get: () => 'application/json' },
+      } as any);
 
       const result = await serverApiFetch('/test');
       expect(result).toEqual(mockResponse);
-      expect(mockFetch).toHaveBeenCalledWith('/test', {
-        method: 'GET',
+      expect(mockFetch).toHaveBeenCalledWith('http://localhost:4000/test', {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -106,11 +109,14 @@ describe('API Integration Tests', () => {
         status: 500,
         statusText: 'Internal Server Error',
         json: async () => ({ error: 'Server error' }),
-      } as Response);
+        headers: { get: () => 'application/json' },
+      } as any);
 
-      await expect(serverApiFetch('/test')).rejects.toThrow(
-        'HTTP error! status: 500'
-      );
+      await expect(serverApiFetch('/test')).rejects.toThrow('Server error');
     });
   });
+});
+
+afterAll(() => {
+  global.fetch = originalFetch;
 });

@@ -16,6 +16,7 @@ import {
   TrendingDown,
   Minus,
 } from 'lucide-react';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface Project {
   id: string;
@@ -40,7 +41,15 @@ interface StatusUpdate {
   created_by: string;
 }
 
-export default function ProjectStatusManagement() {
+export default function AdminProjectStatusPage() {
+  return (
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <ProjectStatusManagement />
+    </ProtectedRoute>
+  );
+}
+
+function ProjectStatusManagement() {
   const params = useParams();
   const router = useRouter();
   const projectId = params.id as string;

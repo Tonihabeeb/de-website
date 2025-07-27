@@ -1,69 +1,42 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import React, { ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requiredRoles?: ('user' | 'admin' | 'editor' | 'viewer')[];
-  redirectTo?: string;
+  requiredRoles?: string[];
 }
 
-export default function ProtectedRoute({
-  children,
-  requiredRoles = [],
-  redirectTo = '/login',
-}: ProtectedRouteProps) {
-  const { isAuthenticated, isLoading, user, hasAnyRole } = useAuth();
+export default function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps) {
+  const { user, loading, token } = useAuth();
+  const router = useRouter();
 
-  // Conditionally use router to handle test environment
-  let router: any = null;
-  try {
-    router = useRouter();
-  } catch (error) {
-    // Router not available in test environment
-    // Silently handle this in test environment
+  // Debug log for ProtectedRoute
+  console.log('[ProtectedRoute] user:', user);
+  console.log('[ProtectedRoute] token:', token);
+  console.log('[ProtectedRoute] requiredRoles:', requiredRoles);
+  const hasRequiredRole = user && requiredRoles.includes(user.role);
+  console.log('[ProtectedRoute] hasRequiredRole:', hasRequiredRole);
+  if (!user) {
+    console.log('[ProtectedRoute] No user, redirecting to /login');
+    router.replace(`/login?redirect=${encodeURIComponent(router.asPath)}`);
+    return null;
+  }
+  if (requiredRoles && !requiredRoles.includes(user.role)) {
+    console.log('[ProtectedRoute] User role not authorized, redirecting to /unauthorized');
+    router.replace('/unauthorized');
+    return null;
   }
 
-  useEffect(() => {
-    if (!isLoading && router) {
-      if (!isAuthenticated) {
-        router.push(redirectTo);
-        return;
-      }
-
-      if (requiredRoles.length > 0 && !hasAnyRole(requiredRoles)) {
-        router.push('/unauthorized');
-        return;
-      }
-    }
-  }, [
-    isAuthenticated,
-    isLoading,
-    user,
-    requiredRoles,
-    hasAnyRole,
-    router,
-    redirectTo,
-  ]);
-
-  if (isLoading) {
-    return (
-      <div className='min-h-screen flex items-center justify-center'>
-        <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-primary'></div>
-      </div>
-    );
+  if (loading || !user) {
+    return <div className="text-center py-10">Loading...</div>;
   }
-
-  if (!isAuthenticated) {
-    return null; // Will redirect to login
+  if (requiredRoles && !requiredRoles.includes(user.role)) {
+    console.log('[ProtectedRoute] User role not allowed:', user.role, 'Required:', requiredRoles);
+    return <div className="text-center py-10 text-red-600">You do not have permission to view this page.</div>;
   }
-
-  if (requiredRoles.length > 0 && !hasAnyRole(requiredRoles)) {
-    return null; // Will redirect to unauthorized
-  }
-
+  console.log('[ProtectedRoute] Access granted, rendering children');
   return <>{children}</>;
 }

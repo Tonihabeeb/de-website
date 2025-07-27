@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -29,6 +29,8 @@ import {
   ChevronDown,
   ChevronRight,
 } from 'lucide-react';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { useForm as useSimpleForm } from 'react-hook-form';
 
 // Validation schemas
 const menuItemSchema = z.object({
@@ -54,9 +56,6 @@ interface NavigationManagerProps {
 export default function NavigationManager({
   className = '',
 }: NavigationManagerProps) {
-  const [activeMenu, setActiveMenu] = useState<'main' | 'footer' | 'mobile'>(
-    'main'
-  );
   const [menuItems, setMenuItems] = useState<MenuItem[]>([
     {
       id: '1',
@@ -163,6 +162,94 @@ export default function NavigationManager({
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [menuId, setMenuId] = useState<string | null>(null);
+  const [menus, setMenus] = useState<{ id: string; name: string }[]>([]);
+  const [selectedMenuId, setSelectedMenuId] = useState<string | null>(null);
+  const [showCreateMenuModal, setShowCreateMenuModal] = useState(false);
+  const [showDeleteMenuModal, setShowDeleteMenuModal] = useState(false);
+  const createMenuForm = useSimpleForm<{ name: string }>({ defaultValues: { name: '' } });
+
+  // Load all menus on mount
+  useEffect(() => {
+    async function fetchMenus() {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch('/api/admin/navigation');
+        const data = await res.json();
+        if (data && data.length > 0) {
+          setMenus(data.map((m: any) => ({ id: m.id, name: m.name })));
+          setSelectedMenuId(data[0].id);
+          setMenuItems(JSON.parse(data[0].items_json));
+          setMenuId(data[0].id);
+        } else {
+          setMenus([]);
+          setSelectedMenuId(null);
+          setMenuItems([]);
+          setMenuId(null);
+        }
+      } catch (err) {
+        setError('Failed to load navigation menus');
+        setMenus([]);
+        setSelectedMenuId(null);
+        setMenuItems([]);
+        setMenuId(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMenus();
+  }, []);
+
+  // When selectedMenuId changes, load that menu
+  useEffect(() => {
+    if (!selectedMenuId) return;
+    async function fetchMenu() {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(`/api/admin/navigation/${selectedMenuId}`);
+        const data = await res.json();
+        if (data && data.items_json) {
+          setMenuItems(JSON.parse(data.items_json));
+          setMenuId(data.id);
+        } else {
+          setMenuItems([]);
+          setMenuId(selectedMenuId);
+        }
+      } catch (err) {
+        setError('Failed to load navigation menu');
+        setMenuItems([]);
+        setMenuId(selectedMenuId);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMenu();
+  }, [selectedMenuId]);
+
+  // Save menu to backend
+  async function saveMenuToBackend(items: MenuItem[]) {
+    if (!menuId) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/admin/navigation/${menuId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items_json: JSON.stringify(items) }),
+      });
+      if (!res.ok) throw new Error('Failed to save menu');
+      toast.success('Navigation menu saved');
+    } catch (err) {
+      setError('Failed to save navigation menu');
+      toast.error('Failed to save navigation menu');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const form = useForm<z.infer<typeof menuItemSchema>>({
     resolver: zodResolver(menuItemSchema),
@@ -231,39 +318,34 @@ export default function NavigationManager({
   const handleSaveItem = async (data: z.infer<typeof menuItemSchema>) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+      let newItems: MenuItem[];
       if (editingItem) {
         // Update existing item
-        setMenuItems(prev => {
-          const updateItem = (items: MenuItem[]): MenuItem[] => {
-            return items.map(item => {
-              if (item.id === editingItem.id) {
-                return { ...item, ...data };
-              }
-              if (item.children) {
-                item.children = updateItem(item.children);
-              }
-              return item;
-            });
-          };
-          return updateItem(prev);
-        });
-        toast.success('Menu item updated successfully');
+        newItems = (function updateItem(items: MenuItem[]): MenuItem[] {
+          return items.map(item => {
+            if (item.id === editingItem.id) {
+              return { ...item, ...data };
+            }
+            if (item.children) {
+              item.children = updateItem(item.children);
+            }
+            return item;
+          });
+        })(menuItems);
       } else {
         // Add new item
         const newItem: MenuItem = {
           id: Date.now().toString(),
           ...data,
         };
-        setMenuItems(prev => [...prev, newItem]);
-        toast.success('Menu item added successfully');
+        newItems = [...menuItems, newItem];
       }
-
+      setMenuItems(newItems);
+      await saveMenuToBackend(newItems);
       setShowAddModal(false);
       setShowEditModal(false);
       setEditingItem(null);
+      toast.success(editingItem ? 'Menu item updated successfully' : 'Menu item added successfully');
     } catch (error) {
       toast.error('Failed to save menu item');
     } finally {
@@ -364,11 +446,144 @@ export default function NavigationManager({
     );
   };
 
-  const menus = [
-    { id: 'main', label: 'Main Navigation', icon: Menu },
-    { id: 'footer', label: 'Footer Navigation', icon: Menu },
-    { id: 'mobile', label: 'Mobile Navigation', icon: Menu },
-  ] as const;
+  // Helper to find and move an item in a tree
+  function moveItemInTree(tree: MenuItem[], source: { droppableId: string; index: number }, destination: { droppableId: string; index: number }): MenuItem[] {
+    // Flatten tree to list with parent references
+    function flatten(items: MenuItem[], parentId: string | null = null, path: string[] = []): any[] {
+      return items.flatMap((item, idx) => [
+        { ...item, parentId, path: [...path, String(idx)] },
+        ...(item.children ? flatten(item.children, item.id, [...path, String(idx)]) : []),
+      ]);
+    }
+    const flat = flatten(tree);
+    const sourceItem = flat.find(i => i.id === source.droppableId);
+    const destItem = flat.find(i => i.id === destination.droppableId);
+    // Remove from source
+    function remove(items: MenuItem[], id: string): [MenuItem | null, MenuItem[]] {
+      let removed: MenuItem | null = null;
+      const filtered = items.filter(item => {
+        if (item.id === id) {
+          removed = item;
+          return false;
+        }
+        if (item.children) {
+          const [childRemoved, newChildren] = remove(item.children, id);
+          if (childRemoved) removed = childRemoved;
+          item.children = newChildren;
+        }
+        return true;
+      });
+      return [removed, filtered];
+    }
+    const [removed, withoutSource] = remove(tree, source.droppableId);
+    if (!removed) return tree;
+    // Insert into destination
+    function insert(items: MenuItem[], id: string | null, index: number, item: MenuItem): MenuItem[] {
+      if (id === null) {
+        const arr = [...items];
+        arr.splice(index, 0, item);
+        return arr;
+      }
+      return items.map(i => {
+        if (i.id === id) {
+          const arr = i.children ? [...i.children] : [];
+          arr.splice(index, 0, item);
+          return { ...i, children: arr };
+        }
+        if (i.children) {
+          return { ...i, children: insert(i.children, id, index, item) };
+        }
+        return i;
+      });
+    }
+    return insert(withoutSource, destination.droppableId === 'menu' ? null : destination.droppableId, destination.index, removed);
+  }
+
+  // Recursive render for nested droppables
+  function renderMenuTree(items: MenuItem[], parentDroppableId: string = 'menu', level = 0) {
+    return (
+      <Droppable droppableId={parentDroppableId} type='MENU'>
+        {(provided: any) => (
+          <div ref={provided.innerRef} {...provided.droppableProps} className={`space-y-2 ml-${level * 4}`}>
+            {items.map((item, index) => (
+              <Draggable key={item.id} draggableId={item.id} index={index}>
+                {(providedDraggable: any) => (
+                  <div ref={providedDraggable.innerRef} {...providedDraggable.draggableProps} {...providedDraggable.dragHandleProps}>
+                    {renderMenuItem(item, level)}
+                    {item.children && item.children.length > 0 && renderMenuTree(item.children, item.id, level + 1)}
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    );
+  }
+
+  // Drag-and-drop handler
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    const newTree = moveItemInTree(menuItems, result.source, result.destination);
+    setMenuItems(newTree);
+    saveMenuToBackend(newTree);
+  };
+
+  // Create menu handler
+  async function handleCreateMenu(data: { name: string }) {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/admin/navigation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: data.name, items_json: '[]' }),
+      });
+      if (!res.ok) throw new Error('Failed to create menu');
+      const newMenu = await res.json();
+      setMenus(prev => [...prev, { id: newMenu.id, name: newMenu.name }]);
+      setSelectedMenuId(newMenu.id);
+      setMenuItems([]);
+      setMenuId(newMenu.id);
+      setShowCreateMenuModal(false);
+      createMenuForm.reset();
+      toast.success('Menu created');
+    } catch (err) {
+      setError('Failed to create menu');
+      toast.error('Failed to create menu');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Delete menu handler
+  async function handleDeleteMenu() {
+    if (!selectedMenuId) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/admin/navigation/${selectedMenuId}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete menu');
+      setMenus(prev => prev.filter(m => m.id !== selectedMenuId));
+      // Select another menu or clear selection
+      if (menus.length > 1) {
+        const nextMenu = menus.find(m => m.id !== selectedMenuId);
+        setSelectedMenuId(nextMenu ? nextMenu.id : null);
+      } else {
+        setSelectedMenuId(null);
+        setMenuItems([]);
+        setMenuId(null);
+      }
+      setShowDeleteMenuModal(false);
+      toast.success('Menu deleted');
+    } catch (err) {
+      setError('Failed to delete menu');
+      toast.error('Failed to delete menu');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
@@ -394,19 +609,19 @@ export default function NavigationManager({
       <div className='border-b border-gray-200'>
         <nav className='flex space-x-8 px-6'>
           {menus.map(menu => {
-            const Icon = menu.icon;
+            const Icon = Menu; // Assuming Menu icon is always used for tabs
             return (
               <button
                 key={menu.id}
-                onClick={() => setActiveMenu(menu.id)}
+                onClick={() => setSelectedMenuId(menu.id)}
                 className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                  activeMenu === menu.id
+                  selectedMenuId === menu.id
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
                 <Icon className='w-4 h-4' />
-                <span>{menu.label}</span>
+                <span>{menu.name}</span>
               </button>
             );
           })}
@@ -415,28 +630,38 @@ export default function NavigationManager({
 
       {/* Content */}
       <div className='p-6'>
-        <div className='mb-4'>
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
-            {menus.find(m => m.id === activeMenu)?.label}
-          </h3>
-          <p className='text-sm text-gray-600'>
-            Drag and drop to reorder menu items. Click the arrow to
-            expand/collapse submenus.
-          </p>
+        {/* Menu selector */}
+        <div className='flex justify-between items-center mb-4'>
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-2'>Select Menu</label>
+            <select
+              value={selectedMenuId || ''}
+              onChange={e => setSelectedMenuId(e.target.value)}
+              className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            >
+              {menus.map(menu => (
+                <option key={menu.id} value={menu.id}>{menu.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className='flex gap-2'>
+            <Button onClick={() => setShowCreateMenuModal(true)} variant='secondary'>New Menu</Button>
+            {selectedMenuId && <Button onClick={() => setShowDeleteMenuModal(true)} variant='secondary' className='text-red-600'>Delete Menu</Button>}
+          </div>
         </div>
 
         {/* Menu Items List */}
-        <div className='space-y-2'>
-          {menuItems.length === 0 ? (
-            <div className='text-center py-8 text-gray-500'>
-              <Menu className='w-12 h-12 mx-auto mb-4 text-gray-300' />
-              <p>No menu items found</p>
-              <p className='text-sm'>Click "Add Menu Item" to get started</p>
-            </div>
-          ) : (
-            menuItems.map(item => renderMenuItem(item))
-          )}
-        </div>
+        <DragDropContext
+          onDragEnd={result => {
+            if (!result.destination) return;
+            if (result.source.droppableId === result.destination.droppableId && result.source.index === result.destination.index) return;
+            const newTree = moveItemInTree(menuItems, result.source, result.destination);
+            setMenuItems(newTree);
+            saveMenuToBackend(newTree);
+          }}
+        >
+          {renderMenuTree(menuItems)}
+        </DragDropContext>
       </div>
 
       {/* Add Menu Item Modal */}
@@ -587,6 +812,28 @@ export default function NavigationManager({
             </div>
           </form>
         </FormProvider>
+      </Modal>
+
+      {/* Create Menu Modal */}
+      <Modal isOpen={showCreateMenuModal} onClose={() => setShowCreateMenuModal(false)} title='Create New Menu'>
+        <FormProvider {...createMenuForm}>
+          <form onSubmit={createMenuForm.handleSubmit(handleCreateMenu)} className='space-y-4'>
+            <FormField name='name' label='Menu Name' placeholder='e.g. Footer Navigation' />
+            <div className='flex justify-end gap-2'>
+              <Button type='button' variant='secondary' onClick={() => setShowCreateMenuModal(false)}>Cancel</Button>
+              <Button type='submit'>Create</Button>
+            </div>
+          </form>
+        </FormProvider>
+      </Modal>
+
+      {/* Delete Menu Modal */}
+      <Modal isOpen={showDeleteMenuModal} onClose={() => setShowDeleteMenuModal(false)} title='Delete Menu?'>
+        <div className='mb-4'>Are you sure you want to delete this menu? This cannot be undone.</div>
+        <div className='flex justify-end gap-2'>
+          <Button type='button' variant='secondary' onClick={() => setShowDeleteMenuModal(false)}>Cancel</Button>
+          <Button type='button' variant='secondary' onClick={handleDeleteMenu}>Delete</Button>
+        </div>
       </Modal>
     </div>
   );

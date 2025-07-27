@@ -1,20 +1,4 @@
-jest.mock('@/contexts/AuthContext', () => ({
-  useAuth: () => ({
-    isAuthenticated: true,
-    user: {
-      id: 'test',
-      name: 'Test',
-      email: 'test@example.com',
-      role: 'admin',
-    },
-    login: jest.fn(),
-    logout: jest.fn(),
-    hasRole: jest.fn(() => true),
-    hasAnyRole: jest.fn(() => true),
-  }),
-  AuthProvider: ({ children }: { children: React.ReactNode }) => children,
-}));
-
+// Mock media data and @/utils/api before any imports
 const mockMedia = [
   {
     id: '1',
@@ -52,13 +36,35 @@ jest.mock('@/utils/api', () => ({
   ApiException: class ApiException extends Error {},
 }));
 
+jest.mock('@/contexts/AuthContext', () => ({
+  useAuth: () => ({
+    isAuthenticated: true,
+    user: {
+      id: 'test',
+      name: 'Test',
+      email: 'test@example.com',
+      role: 'admin',
+    },
+    login: jest.fn(),
+    logout: jest.fn(),
+    hasRole: jest.fn(() => true),
+    hasAnyRole: jest.fn(() => true),
+  }),
+  AuthProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DocumentList from '@/components/documents/DocumentList';
 
 describe('DocumentList Integration', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders and waits for document names to appear', async () => {
     render(<DocumentList />);
+    // Wait for document names to appear asynchronously
     await screen.findByText('Project Report.pdf');
     await screen.findByText('Technical Specs.docx');
   });

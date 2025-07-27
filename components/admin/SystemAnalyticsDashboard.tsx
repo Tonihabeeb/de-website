@@ -26,6 +26,29 @@ import {
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import { toast } from '@/components/ui/Toast';
+import { Line, Bar, Pie } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface AnalyticsData {
   overview: {
@@ -109,129 +132,9 @@ export default function SystemAnalyticsDashboard({
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [autoRefresh, setAutoRefresh] = useState(false);
   const [selectedMetric, setSelectedMetric] = useState<string>('overview');
-
-  // Mock data for demonstration
-  const mockAnalyticsData: AnalyticsData = {
-    overview: {
-      totalUsers: 1247,
-      totalPages: 89,
-      totalProjects: 23,
-      totalMedia: 456,
-      activeUsers: 342,
-      pageViews: 15420,
-      uniqueVisitors: 2891,
-      bounceRate: 23.4,
-    },
-    userGrowth: [
-      { date: '2024-12-13', newUsers: 12, activeUsers: 89 },
-      { date: '2024-12-14', newUsers: 18, activeUsers: 156 },
-      { date: '2024-12-15', newUsers: 15, activeUsers: 234 },
-      { date: '2024-12-16', newUsers: 22, activeUsers: 298 },
-      { date: '2024-12-17', newUsers: 19, activeUsers: 267 },
-      { date: '2024-12-18', newUsers: 25, activeUsers: 312 },
-      { date: '2024-12-19', newUsers: 28, activeUsers: 342 },
-    ],
-    pageViews: [
-      { date: '2024-12-13', views: 1200, uniqueViews: 890 },
-      { date: '2024-12-14', views: 1850, uniqueViews: 1240 },
-      { date: '2024-12-15', views: 2100, uniqueViews: 1560 },
-      { date: '2024-12-16', views: 1950, uniqueViews: 1420 },
-      { date: '2024-12-17', views: 2300, uniqueViews: 1780 },
-      { date: '2024-12-18', views: 2450, uniqueViews: 1890 },
-      { date: '2024-12-19', views: 2670, uniqueViews: 2100 },
-    ],
-    topPages: [
-      {
-        path: '/',
-        title: 'Homepage',
-        views: 3450,
-        uniqueViews: 2890,
-        avgTimeOnPage: 145,
-      },
-      {
-        path: '/technology',
-        title: 'Technology',
-        views: 2340,
-        uniqueViews: 1890,
-        avgTimeOnPage: 234,
-      },
-      {
-        path: '/projects',
-        title: 'Projects',
-        views: 1890,
-        uniqueViews: 1450,
-        avgTimeOnPage: 189,
-      },
-      {
-        path: '/about',
-        title: 'About Us',
-        views: 1230,
-        uniqueViews: 980,
-        avgTimeOnPage: 98,
-      },
-      {
-        path: '/contact',
-        title: 'Contact',
-        views: 890,
-        uniqueViews: 720,
-        avgTimeOnPage: 67,
-      },
-    ],
-    userActivity: [
-      { hour: 0, users: 12, sessions: 18 },
-      { hour: 1, users: 8, sessions: 12 },
-      { hour: 2, users: 5, sessions: 8 },
-      { hour: 3, users: 3, sessions: 5 },
-      { hour: 4, users: 2, sessions: 3 },
-      { hour: 5, users: 4, sessions: 6 },
-      { hour: 6, users: 8, sessions: 12 },
-      { hour: 7, users: 15, sessions: 23 },
-      { hour: 8, users: 28, sessions: 42 },
-      { hour: 9, users: 45, sessions: 67 },
-      { hour: 10, users: 52, sessions: 78 },
-      { hour: 11, users: 48, sessions: 72 },
-      { hour: 12, users: 42, sessions: 63 },
-      { hour: 13, users: 38, sessions: 57 },
-      { hour: 14, users: 45, sessions: 68 },
-      { hour: 15, users: 52, sessions: 79 },
-      { hour: 16, users: 58, sessions: 87 },
-      { hour: 17, users: 62, sessions: 93 },
-      { hour: 18, users: 55, sessions: 82 },
-      { hour: 19, users: 48, sessions: 72 },
-      { hour: 20, users: 42, sessions: 63 },
-      { hour: 21, users: 35, sessions: 52 },
-      { hour: 22, users: 28, sessions: 42 },
-      { hour: 23, users: 18, sessions: 27 },
-    ],
-    deviceStats: [
-      { device: 'Desktop', users: 1890, percentage: 65.2 },
-      { device: 'Mobile', users: 856, percentage: 29.5 },
-      { device: 'Tablet', users: 156, percentage: 5.3 },
-    ],
-    geographicData: [
-      { country: 'Iraq', users: 1247, percentage: 43.0 },
-      { country: 'Germany', users: 456, percentage: 15.7 },
-      { country: 'United States', users: 234, percentage: 8.1 },
-      { country: 'United Kingdom', users: 189, percentage: 6.5 },
-      { country: 'France', users: 156, percentage: 5.4 },
-      { country: 'Other', users: 609, percentage: 21.3 },
-    ],
-    performanceMetrics: [
-      { date: '2024-12-13', responseTime: 245, loadTime: 1.2, errorRate: 0.8 },
-      { date: '2024-12-14', responseTime: 234, loadTime: 1.1, errorRate: 0.6 },
-      { date: '2024-12-15', responseTime: 256, loadTime: 1.3, errorRate: 0.9 },
-      { date: '2024-12-16', responseTime: 223, loadTime: 1.0, errorRate: 0.5 },
-      { date: '2024-12-17', responseTime: 267, loadTime: 1.4, errorRate: 1.1 },
-      { date: '2024-12-18', responseTime: 245, loadTime: 1.2, errorRate: 0.7 },
-      { date: '2024-12-19', responseTime: 234, loadTime: 1.1, errorRate: 0.6 },
-    ],
-    contentPerformance: [
-      { type: 'Pages', count: 89, views: 15420, engagement: 78.5 },
-      { type: 'Projects', count: 23, views: 5670, engagement: 85.2 },
-      { type: 'Media', count: 456, views: 8900, engagement: 62.3 },
-      { type: 'Documents', count: 67, views: 2340, engagement: 71.8 },
-    ],
-  };
+  // Add filter state for country/device (optional, for demonstration)
+  const [geoFilter, setGeoFilter] = useState('all');
+  const [deviceFilter, setDeviceFilter] = useState('all');
 
   useEffect(() => {
     loadAnalyticsData();
@@ -245,10 +148,16 @@ export default function SystemAnalyticsDashboard({
   const loadAnalyticsData = async () => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setAnalyticsData(mockAnalyticsData);
+      const res = await fetch(`/api/admin/analytics?range=${dateRange}`);
+      const data = await res.json();
+      if (data.success && data.analytics) {
+        setAnalyticsData(data.analytics);
+      } else {
+        setAnalyticsData(null);
+        toast.error(data.error || 'Failed to load analytics data');
+      }
     } catch (error) {
+      setAnalyticsData(null);
       toast.error('Failed to load analytics data');
     } finally {
       setIsLoading(false);
@@ -503,15 +412,44 @@ export default function SystemAnalyticsDashboard({
               User Growth
             </h4>
             <div className='h-64 flex items-center justify-center bg-white rounded border'>
-              <div className='text-center'>
-                <TrendingUp className='w-12 h-12 text-blue-500 mx-auto mb-2' />
-                <p className='text-sm text-gray-600'>
-                  Chart visualization would be here
-                </p>
-                <p className='text-xs text-gray-500 mt-1'>
-                  Using Chart.js or similar library
-                </p>
-              </div>
+              {analyticsData.userGrowth && analyticsData.userGrowth.length > 0 ? (
+                <Line
+                  data={{
+                    labels: analyticsData.userGrowth.map((d) => d.date),
+                    datasets: [
+                      {
+                        label: 'New Users',
+                        data: analyticsData.userGrowth.map((d) => d.newUsers),
+                        borderColor: 'rgba(59,130,246,1)',
+                        backgroundColor: 'rgba(59,130,246,0.2)',
+                        fill: true,
+                        tension: 0.4,
+                      },
+                      {
+                        label: 'Active Users',
+                        data: analyticsData.userGrowth.map((d) => d.activeUsers),
+                        borderColor: 'rgba(16,185,129,1)',
+                        backgroundColor: 'rgba(16,185,129,0.2)',
+                        fill: true,
+                        tension: 0.4,
+                      },
+                    ],
+                  }}
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      legend: { display: true },
+                      title: { display: false },
+                    },
+                    scales: {
+                      x: { title: { display: true, text: 'Date' } },
+                      y: { title: { display: true, text: 'Users' } },
+                    },
+                  }}
+                />
+              ) : (
+                <div className='text-center'>No data</div>
+              )}
             </div>
             <div className='mt-4 grid grid-cols-2 gap-4 text-sm'>
               <div>
@@ -547,15 +485,38 @@ export default function SystemAnalyticsDashboard({
               Page Views
             </h4>
             <div className='h-64 flex items-center justify-center bg-white rounded border'>
-              <div className='text-center'>
-                <BarChart3 className='w-12 h-12 text-green-500 mx-auto mb-2' />
-                <p className='text-sm text-gray-600'>
-                  Chart visualization would be here
-                </p>
-                <p className='text-xs text-gray-500 mt-1'>
-                  Using Chart.js or similar library
-                </p>
-              </div>
+              {analyticsData.pageViews && analyticsData.pageViews.length > 0 ? (
+                <Bar
+                  data={{
+                    labels: analyticsData.pageViews.map((d) => d.date),
+                    datasets: [
+                      {
+                        label: 'Views',
+                        data: analyticsData.pageViews.map((d) => d.views),
+                        backgroundColor: 'rgba(139,92,246,0.7)',
+                      },
+                      {
+                        label: 'Unique Views',
+                        data: analyticsData.pageViews.map((d) => d.uniqueViews),
+                        backgroundColor: 'rgba(59,130,246,0.7)',
+                      },
+                    ],
+                  }}
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      legend: { display: true },
+                      title: { display: false },
+                    },
+                    scales: {
+                      x: { title: { display: true, text: 'Date' } },
+                      y: { title: { display: true, text: 'Views' } },
+                    },
+                  }}
+                />
+              ) : (
+                <div className='text-center'>No data</div>
+              )}
             </div>
             <div className='mt-4 grid grid-cols-2 gap-4 text-sm'>
               <div>
@@ -641,33 +602,34 @@ export default function SystemAnalyticsDashboard({
             <h4 className='text-lg font-medium text-gray-900 mb-4'>
               Device Usage
             </h4>
-            <div className='space-y-3'>
-              {analyticsData.deviceStats.map((device, index) => (
-                <div key={index} className='flex items-center justify-between'>
-                  <div className='flex items-center space-x-3'>
-                    <div className='p-2 bg-white rounded-full'>
-                      {device.device === 'Desktop' ? (
-                        <Monitor className='w-4 h-4 text-blue-600' />
-                      ) : device.device === 'Mobile' ? (
-                        <Smartphone className='w-4 h-4 text-green-600' />
-                      ) : (
-                        <Globe className='w-4 h-4 text-purple-600' />
-                      )}
-                    </div>
-                    <span className='text-sm font-medium text-gray-900'>
-                      {device.device}
-                    </span>
-                  </div>
-                  <div className='text-right'>
-                    <p className='text-sm font-medium text-gray-900'>
-                      {formatNumber(device.users)}
-                    </p>
-                    <p className='text-xs text-gray-500'>
-                      {formatPercentage(device.percentage)}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            <div className='h-64 flex items-center justify-center bg-white rounded border'>
+              {analyticsData.deviceStats && analyticsData.deviceStats.length > 0 ? (
+                <Pie
+                  data={{
+                    labels: analyticsData.deviceStats.map((d) => d.device),
+                    datasets: [
+                      {
+                        label: 'Users',
+                        data: analyticsData.deviceStats.map((d) => d.users),
+                        backgroundColor: [
+                          'rgba(59,130,246,0.7)',
+                          'rgba(16,185,129,0.7)',
+                          'rgba(139,92,246,0.7)',
+                        ],
+                      },
+                    ],
+                  }}
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      legend: { display: true, position: 'bottom' },
+                      title: { display: false },
+                    },
+                  }}
+                />
+              ) : (
+                <div className='text-center'>No data</div>
+              )}
             </div>
           </div>
 
@@ -676,23 +638,136 @@ export default function SystemAnalyticsDashboard({
             <h4 className='text-lg font-medium text-gray-900 mb-4'>
               Geographic Distribution
             </h4>
-            <div className='space-y-3'>
-              {analyticsData.geographicData.slice(0, 5).map((geo, index) => (
-                <div key={index} className='flex items-center justify-between'>
-                  <span className='text-sm font-medium text-gray-900'>
-                    {geo.country}
-                  </span>
-                  <div className='text-right'>
-                    <p className='text-sm font-medium text-gray-900'>
-                      {formatNumber(geo.users)}
-                    </p>
-                    <p className='text-xs text-gray-500'>
-                      {formatPercentage(geo.percentage)}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            <div className='mb-2'>
+              <label className='text-sm text-gray-700 mr-2'>Country Filter:</label>
+              <select
+                value={geoFilter}
+                onChange={e => setGeoFilter(e.target.value)}
+                className='px-2 py-1 border border-gray-300 rounded text-sm'
+              >
+                <option value='all'>All</option>
+                {analyticsData.geographicData.map((geo, idx) => (
+                  <option key={idx} value={geo.country}>{geo.country}</option>
+                ))}
+              </select>
             </div>
+            <div className='h-64 flex items-center justify-center bg-white rounded border'>
+              {analyticsData.geographicData && analyticsData.geographicData.length > 0 ? (
+                <Bar
+                  data={{
+                    labels: analyticsData.geographicData
+                      .filter(geo => geoFilter === 'all' || geo.country === geoFilter)
+                      .map((geo) => geo.country),
+                    datasets: [
+                      {
+                        label: 'Users',
+                        data: analyticsData.geographicData
+                          .filter(geo => geoFilter === 'all' || geo.country === geoFilter)
+                          .map((geo) => geo.users),
+                        backgroundColor: 'rgba(59,130,246,0.7)',
+                      },
+                      {
+                        label: 'Percentage',
+                        data: analyticsData.geographicData
+                          .filter(geo => geoFilter === 'all' || geo.country === geoFilter)
+                          .map((geo) => geo.percentage),
+                        backgroundColor: 'rgba(16,185,129,0.7)',
+                      },
+                    ],
+                  }}
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      legend: { display: true },
+                      title: { display: false },
+                    },
+                    scales: {
+                      x: { title: { display: true, text: 'Country' } },
+                      y: { title: { display: true, text: 'Users/Percentage' } },
+                    },
+                  }}
+                />
+              ) : (
+                <div className='text-center'>No data</div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Performance Metrics */}
+        <div className='bg-gray-50 rounded-lg p-4 mt-6'>
+          <h4 className='text-lg font-medium text-gray-900 mb-4'>
+            Performance Metrics
+          </h4>
+          <div className='h-64 flex items-center justify-center bg-white rounded border'>
+            {analyticsData.performanceMetrics && analyticsData.performanceMetrics.length > 0 ? (
+              <Line
+                data={{
+                  labels: analyticsData.performanceMetrics.map((d) => d.date),
+                  datasets: [
+                    {
+                      label: 'Response Time (ms)',
+                      data: analyticsData.performanceMetrics.map((d) => d.responseTime),
+                      borderColor: 'rgba(59,130,246,1)',
+                      backgroundColor: 'rgba(59,130,246,0.2)',
+                      fill: true,
+                      tension: 0.4,
+                      yAxisID: 'y',
+                    },
+                    {
+                      label: 'Load Time (s)',
+                      data: analyticsData.performanceMetrics.map((d) => d.loadTime),
+                      borderColor: 'rgba(16,185,129,1)',
+                      backgroundColor: 'rgba(16,185,129,0.2)',
+                      fill: true,
+                      tension: 0.4,
+                      yAxisID: 'y1',
+                    },
+                    {
+                      label: 'Error Rate (%)',
+                      data: analyticsData.performanceMetrics.map((d) => d.errorRate),
+                      borderColor: 'rgba(239,68,68,1)',
+                      backgroundColor: 'rgba(239,68,68,0.2)',
+                      fill: true,
+                      tension: 0.4,
+                      yAxisID: 'y2',
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: { display: true },
+                    title: { display: false },
+                  },
+                  scales: {
+                    x: { title: { display: true, text: 'Date' } },
+                    y: {
+                      type: 'linear',
+                      display: true,
+                      position: 'left',
+                      title: { display: true, text: 'Response Time (ms)' },
+                    },
+                    y1: {
+                      type: 'linear',
+                      display: true,
+                      position: 'right',
+                      grid: { drawOnChartArea: false },
+                      title: { display: true, text: 'Load Time (s)' },
+                    },
+                    y2: {
+                      type: 'linear',
+                      display: true,
+                      position: 'right',
+                      grid: { drawOnChartArea: false },
+                      title: { display: true, text: 'Error Rate (%)' },
+                    },
+                  },
+                }}
+              />
+            ) : (
+              <div className='text-center'>No data</div>
+            )}
           </div>
         </div>
       </div>

@@ -1,28 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/database/connection';
 
 export async function GET(request: NextRequest) {
   try {
-    console.log('Testing database connection...');
-
-    // Test basic database connection
-    const result = db.prepare('SELECT COUNT(*) as count FROM pages').get() as {
-      count: number;
-    };
-    console.log('Pages count:', result);
-
-    // Test if we can query pages
-    const pages = db
-      .prepare('SELECT id, slug, title, status FROM pages LIMIT 5')
-      .all();
-    console.log('Pages found:', pages.length);
-
-    return NextResponse.json({
-      success: true,
-      message: 'Database connection working',
-      pagesCount: result.count,
-      samplePages: pages,
-    });
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/test`);
+    if (!res.ok) {
+      const error = await res.json();
+      return NextResponse.json(
+        { success: false, error: error.error || 'Test API error' },
+        { status: res.status }
+      );
+    }
+    const data = await res.json();
+    return NextResponse.json(data);
   } catch (error) {
     console.error('Test API error:', error);
     return NextResponse.json(

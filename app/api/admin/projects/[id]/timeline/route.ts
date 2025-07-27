@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ProjectModel } from '@/database/models/Project';
 import { requireEditProjects } from '@/middleware/permissions';
 
 // GET /api/admin/projects/[id]/timeline - Get project timeline
@@ -14,30 +13,21 @@ export async function GET(
     const permissionCheck = await requireEditProjects()(request);
     if (permissionCheck) return permissionCheck;
 
-    const project = await ProjectModel.findById(id);
-
-    if (!project) {
+    const { searchParams } = new URL(request.url);
+    const paramsStr = new URLSearchParams(searchParams).toString();
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/projects/${id}/timeline${paramsStr ? '?' + paramsStr : ''}`);
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
+        { success: false, error: error.error || 'Failed to fetch project timeline' },
+        { status: res.status }
       );
     }
-
-    // Extract timeline data from project content
-    const timeline = project.content?.timeline || [];
-    const milestones = project.content?.milestones || [];
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      timeline,
-      milestones,
-      project: {
-        id: project.id,
-        name: project.name,
-        start_date: project.start_date,
-        end_date: project.end_date,
-        status: project.status,
-      },
+      ...data,
     });
   } catch (error) {
     console.error('Error fetching project timeline:', error);
@@ -61,45 +51,23 @@ export async function PUT(
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const { timeline, milestones, start_date, end_date } = body;
-
-    // Check if project exists
-    const existingProject = await ProjectModel.findById(id);
-    if (!existingProject) {
-      return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
-      );
-    }
-
-    // Update project with timeline data
-    const updatedContent = {
-      ...existingProject.content,
-      timeline: timeline || [],
-      milestones: milestones || [],
-    };
-
-    const updatedProject = await ProjectModel.update(id, {
-      content: updatedContent,
-      start_date: start_date
-        ? new Date(start_date)
-        : existingProject.start_date,
-      end_date: end_date ? new Date(end_date) : existingProject.end_date,
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/projects/${id}/timeline`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
-
-    if (!updatedProject) {
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Failed to update project timeline' },
-        { status: 500 }
+        { success: false, error: error.error || 'Failed to update project timeline' },
+        { status: res.status }
       );
     }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      project: updatedProject,
-      timeline: updatedContent.timeline,
-      milestones: updatedContent.milestones,
-      message: 'Project timeline updated successfully',
+      ...data,
     });
   } catch (error) {
     console.error('Error updating project timeline:', error);
@@ -123,64 +91,24 @@ export async function POST(
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const { title, description, due_date, status = 'pending', assignee } = body;
-
-    // Validate required fields
-    if (!title || !due_date) {
-      return NextResponse.json(
-        { success: false, error: 'Milestone title and due date are required' },
-        { status: 400 }
-      );
-    }
-
-    // Check if project exists
-    const existingProject = await ProjectModel.findById(id);
-    if (!existingProject) {
-      return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
-      );
-    }
-
-    // Create new milestone
-    const newMilestone = {
-      id: Date.now().toString(), // Simple ID generation
-      title,
-      description,
-      due_date: new Date(due_date),
-      status,
-      assignee,
-      created_at: new Date(),
-      updated_at: new Date(),
-    };
-
-    // Update project with new milestone
-    const existingMilestones = existingProject.content?.milestones || [];
-    const updatedContent = {
-      ...existingProject.content,
-      milestones: [...existingMilestones, newMilestone],
-    };
-
-    const updatedProject = await ProjectModel.update(id, {
-      content: updatedContent,
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/projects/${id}/timeline/milestones`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
-
-    if (!updatedProject) {
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Failed to add milestone' },
-        { status: 500 }
+        { success: false, error: error.error || 'Failed to add milestone' },
+        { status: res.status }
       );
     }
-
-    return NextResponse.json(
-      {
-        success: true,
-        milestone: newMilestone,
-        project: updatedProject,
-        message: 'Milestone added successfully',
-      },
-      { status: 201 }
-    );
+    const data = await res.json();
+    return NextResponse.json({
+      success: true,
+      ...data,
+    }, { status: 201 });
   } catch (error) {
     console.error('Error adding milestone:', error);
     return NextResponse.json(

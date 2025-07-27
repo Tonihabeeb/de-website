@@ -20,6 +20,8 @@ interface TeamMember {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  bio?: string;
+  expertise?: string;
 }
 
 interface TeamResponse {

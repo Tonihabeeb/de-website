@@ -22,6 +22,7 @@ import {
   Edit3,
 } from 'lucide-react';
 import Image from 'next/image';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface MediaItem {
   id: string;
@@ -46,7 +47,15 @@ interface MediaMetadata {
   folder: string;
 }
 
-export default function MediaEdit() {
+export default function AdminMediaEditPage() {
+  return (
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <MediaEdit />
+    </ProtectedRoute>
+  );
+}
+
+function MediaEdit() {
   const params = useParams();
   const router = useRouter();
   const mediaId = params.id as string;

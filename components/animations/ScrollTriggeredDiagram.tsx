@@ -142,6 +142,8 @@ function StepCard({ step, index }: { step: any; index: number }) {
         }}
         aria-hidden='true'
       >
+        {/* Step number badge */}
+        <span className='absolute -top-2 -left-2 bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-base font-bold shadow-md'>{step.step}</span>
         {step.icon}
         <div className='absolute inset-0 bg-gradient-to-br from-primary-light to-primary rounded-full opacity-20 animate-pulse' />
       </motion.div>

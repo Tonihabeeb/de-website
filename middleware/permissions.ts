@@ -1,20 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { UserModel, UserRole } from '@/database/models/User';
 
-// Simple token verification function for analytics APIs
-export async function verifyToken(token: string): Promise<any> {
-  try {
-    // This is a simplified version - in production, you'd verify the JWT token
-    // For now, we'll assume the token contains user information
-    const decoded = JSON.parse(Buffer.from(token, 'base64').toString());
-    return await UserModel.findById(decoded.userId);
-  } catch (error) {
-    return null;
-  }
-}
+export type UserRole = 'SUPER_ADMIN' | 'ADMIN' | 'EDITOR' | 'AUTHOR' | 'USER';
 
 export interface PermissionMiddlewareOptions {
-  requiredPermissions?: (keyof import('@/database/models/User').UserPermissions)[];
+  requiredPermissions?: string[];
   requiredRoles?: UserRole[];
   allowOwnResource?: boolean;
 }
@@ -36,7 +25,7 @@ export class PermissionMiddleware {
       }
 
       const token = authHeader.substring(7);
-      const user = await this.getUserFromToken(token);
+      const user = await this.getUserFromToken(token, request);
 
       if (!user) {
         return { user: null, hasAccess: false, error: 'Invalid token' };
@@ -67,8 +56,7 @@ export class PermissionMiddleware {
         options.requiredPermissions &&
         options.requiredPermissions.length > 0
       ) {
-        const userPermissions = await UserModel.getPermissions(user.id);
-
+        const userPermissions = await this.getUserPermissions(user.id, request);
         for (const permission of options.requiredPermissions) {
           if (!userPermissions[permission]) {
             return {
@@ -87,20 +75,40 @@ export class PermissionMiddleware {
     }
   }
 
-  static async getUserFromToken(token: string): Promise<any> {
+  static async getUserFromToken(token: string, request: NextRequest): Promise<any> {
     try {
       // This is a simplified version - in production, you'd verify the JWT token
       // For now, we'll assume the token contains user information
       const decoded = JSON.parse(Buffer.from(token, 'base64').toString());
-      return await UserModel.findById(decoded.userId);
+      const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+      const res = await fetch(`${backendUrl}/api/users/${decoded.userId}`, {
+        headers: {
+          Authorization: request.headers.get('authorization') || '',
+        },
+      });
+      if (!res.ok) return null;
+      return await res.json();
     } catch (error) {
       return null;
     }
   }
 
-  static requirePermission(
-    permission: keyof import('@/database/models/User').UserPermissions
-  ) {
+  static async getUserPermissions(userId: string, request: NextRequest): Promise<Record<string, boolean>> {
+    try {
+      const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+      const res = await fetch(`${backendUrl}/api/users/${userId}/permissions`, {
+        headers: {
+          Authorization: request.headers.get('authorization') || '',
+        },
+      });
+      if (!res.ok) return {};
+      return await res.json();
+    } catch (error) {
+      return {};
+    }
+  }
+
+  static requirePermission(permission: string) {
     return async (request: NextRequest) => {
       const result = await this.checkPermissions(request, {
         requiredPermissions: [permission],
@@ -135,13 +143,13 @@ export class PermissionMiddleware {
   }
 
   static requireSuperAdmin() {
-    return this.requireRole(UserRole.SUPER_ADMIN);
+    return this.requireRole('SUPER_ADMIN');
   }
 
   static requireAdmin() {
     return async (request: NextRequest) => {
       const result = await this.checkPermissions(request, {
-        requiredRoles: [UserRole.SUPER_ADMIN, UserRole.ADMIN],
+        requiredRoles: ['SUPER_ADMIN', 'ADMIN'],
       });
 
       if (!result.hasAccess) {
@@ -158,7 +166,7 @@ export class PermissionMiddleware {
   static requireEditor() {
     return async (request: NextRequest) => {
       const result = await this.checkPermissions(request, {
-        requiredRoles: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.EDITOR],
+        requiredRoles: ['SUPER_ADMIN', 'ADMIN', 'EDITOR'],
       });
 
       if (!result.hasAccess) {
@@ -176,10 +184,10 @@ export class PermissionMiddleware {
     return async (request: NextRequest) => {
       const result = await this.checkPermissions(request, {
         requiredRoles: [
-          UserRole.SUPER_ADMIN,
-          UserRole.ADMIN,
-          UserRole.EDITOR,
-          UserRole.AUTHOR,
+          'SUPER_ADMIN',
+          'ADMIN',
+          'EDITOR',
+          'AUTHOR',
         ],
       });
 

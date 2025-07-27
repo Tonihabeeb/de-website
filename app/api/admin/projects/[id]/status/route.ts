@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ProjectModel } from '@/database/models/Project';
 import { requireEditProjects } from '@/middleware/permissions';
 
 // PATCH /api/admin/projects/[id]/status - Update project status
@@ -15,44 +14,23 @@ export async function PATCH(
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const { status } = body;
-
-    // Validate status
-    const validStatuses = ['planning', 'in-progress', 'completed', 'cancelled'];
-    if (!validStatuses.includes(status)) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/projects/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        {
-          success: false,
-          error:
-            'Invalid status. Must be one of: planning, in-progress, completed, cancelled',
-        },
-        { status: 400 }
+        { success: false, error: error.error || 'Failed to update project status' },
+        { status: res.status }
       );
     }
-
-    // Check if project exists
-    const existingProject = await ProjectModel.findById(id);
-    if (!existingProject) {
-      return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
-      );
-    }
-
-    // Update project status
-    const updatedProject = await ProjectModel.updateStatus(id, status);
-
-    if (!updatedProject) {
-      return NextResponse.json(
-        { success: false, error: 'Failed to update project status' },
-        { status: 500 }
-      );
-    }
-
+    const data = await res.json();
     return NextResponse.json({
       success: true,
-      project: updatedProject,
-      message: 'Project status updated successfully',
+      ...data,
     });
   } catch (error) {
     console.error('Error updating project status:', error);

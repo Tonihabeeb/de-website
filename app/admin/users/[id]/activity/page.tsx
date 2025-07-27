@@ -19,6 +19,7 @@ import {
   TrendingDown,
   Filter,
 } from 'lucide-react';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 interface User {
   id: string;
@@ -53,7 +54,15 @@ interface ActivityStats {
   recent_activity: ActivityLog[];
 }
 
-export default function UserActivity() {
+export default function AdminUserActivityPage() {
+  return (
+    <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
+      <UserActivity />
+    </ProtectedRoute>
+  );
+}
+
+function UserActivity() {
   const params = useParams();
   const router = useRouter();
   const userId = params.id as string;

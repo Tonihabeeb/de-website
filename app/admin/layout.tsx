@@ -11,27 +11,22 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, isAuthenticated, isLoading } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && (!isAuthenticated || !user)) {
+    if (loading) return; // Wait until loading is false
+    if (!user) {
       router.push('/login');
       return;
     }
-
-    if (
-      !isLoading &&
-      isAuthenticated &&
-      user &&
-      !['admin', 'super_admin'].includes(user.role)
-    ) {
+    if (user && !['admin', 'superadmin', 'super_admin'].includes(user.role)) {
       router.push('/');
       return;
     }
-  }, [isAuthenticated, user, isLoading, router]);
+  }, [user, loading, router]);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
         <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600'></div>
@@ -39,11 +34,7 @@ export default function AdminLayout({
     );
   }
 
-  if (
-    !isAuthenticated ||
-    !user ||
-    !['admin', 'super_admin'].includes(user.role)
-  ) {
+  if (!user || !['admin', 'superadmin', 'super_admin'].includes(user.role)) {
     return null;
   }
 

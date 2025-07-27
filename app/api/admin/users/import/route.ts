@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireCreateUsers } from '@/middleware/permissions';
-import { UserModel } from '@/database/models/User';
 import { v4 as uuidv4 } from 'uuid';
 
 interface ImportUser {
@@ -25,101 +24,24 @@ export async function POST(request: NextRequest) {
     if (permissionCheck) return permissionCheck;
 
     const body = await request.json();
-    const { users, format = 'json' } = body;
-
-    if (!users || !Array.isArray(users)) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+    const res = await fetch(`${backendUrl}/api/users/import`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const error = await res.json();
       return NextResponse.json(
-        { success: false, error: 'Users array is required' },
-        { status: 400 }
+        { success: false, error: error.error || 'Failed to import users' },
+        { status: res.status }
       );
     }
-
-    const result: ImportResult = {
-      success: 0,
-      failed: 0,
-      errors: [],
-      users: [],
-    };
-
-    // Process each user
-    for (let i = 0; i < users.length; i++) {
-      const userData = users[i];
-
-      try {
-        // Validate required fields
-        if (!userData.name || !userData.email || !userData.role) {
-          result.failed++;
-          result.errors.push(
-            `Row ${i + 1}: Missing required fields (name, email, role)`
-          );
-          continue;
-        }
-
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(userData.email)) {
-          result.failed++;
-          result.errors.push(`Row ${i + 1}: Invalid email format`);
-          continue;
-        }
-
-        // Validate role
-        const validRoles = ['user', 'admin', 'super_admin', 'editor', 'viewer'];
-        if (!validRoles.includes(userData.role)) {
-          result.failed++;
-          result.errors.push(`Row ${i + 1}: Invalid role (${userData.role})`);
-          continue;
-        }
-
-        // Check if user already exists
-        const existingUser = await UserModel.findByEmail(userData.email);
-        if (existingUser) {
-          result.failed++;
-          result.errors.push(
-            `Row ${i + 1}: User with email ${userData.email} already exists`
-          );
-          continue;
-        }
-
-        // Generate random password for imported users
-        const randomPassword =
-          Math.random().toString(36).slice(-8) +
-          Math.random().toString(36).slice(-8);
-
-        // Create user
-        const user = await UserModel.create({
-          email: userData.email,
-          password: randomPassword,
-          name: userData.name,
-          role: userData.role,
-        });
-
-        if (user) {
-          result.success++;
-          result.users.push({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            is_active: user.is_active,
-            temporary_password: randomPassword, // Include for admin reference
-          });
-        } else {
-          result.failed++;
-          result.errors.push(`Row ${i + 1}: Failed to create user`);
-        }
-      } catch (error) {
-        result.failed++;
-        result.errors.push(
-          `Row ${i + 1}: ${error instanceof Error ? error.message : 'Unknown error'}`
-        );
-      }
-    }
-
+    const result = await res.json();
     return NextResponse.json({
       success: true,
       result,
-      message: `Import completed: ${result.success} successful, ${result.failed} failed`,
+      message: result.message || 'Import completed',
     });
   } catch (error) {
     console.error('Error importing users:', error);
