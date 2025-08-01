@@ -61,7 +61,7 @@ export default function AdminPermissionsPage() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600'></div>
-          <span className='ml-2 text-gray-600'>Loading permissions...</span>
+          <span className='ml-2 text-gray-text'>Loading permissions...</span>
         </div>
       </div>
     );
@@ -81,10 +81,10 @@ export default function AdminPermissionsPage() {
                 <ArrowLeft className='w-5 h-5' />
               </Link>
               <div>
-                <h1 className='text-2xl font-bold text-gray-900'>
+                <h1 className='text-2xl font-bold text-primary'>
                   Permission Management
                 </h1>
-                <p className='text-gray-600 mt-1'>
+                <p className='text-gray-text mt-1'>
                   Manage roles and permissions
                 </p>
               </div>
@@ -103,8 +103,8 @@ export default function AdminPermissionsPage() {
           <div className='bg-white p-6 rounded-lg shadow'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>Total Permissions</p>
-                <p className='text-2xl font-bold text-gray-900'>{permissions.length}</p>
+                <p className='text-sm font-medium text-gray-text'>Total Permissions</p>
+                <p className='text-2xl font-bold text-primary'>{permissions.length}</p>
               </div>
               <Shield className='w-8 h-8 text-blue-500' />
             </div>
@@ -112,8 +112,8 @@ export default function AdminPermissionsPage() {
           <div className='bg-white p-6 rounded-lg shadow'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>Total Roles</p>
-                <p className='text-2xl font-bold text-gray-900'>{roles.length}</p>
+                <p className='text-sm font-medium text-gray-text'>Total Roles</p>
+                <p className='text-2xl font-bold text-primary'>{roles.length}</p>
               </div>
               <Users className='w-8 h-8 text-green-500' />
             </div>
@@ -121,8 +121,8 @@ export default function AdminPermissionsPage() {
           <div className='bg-white p-6 rounded-lg shadow'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>Categories</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-sm font-medium text-gray-text'>Categories</p>
+                <p className='text-2xl font-bold text-primary'>
                   {new Set(permissions.map(p => p.category)).size}
                 </p>
               </div>
@@ -134,7 +134,7 @@ export default function AdminPermissionsPage() {
         {/* Roles and Permissions Table */}
         <div className='bg-white rounded-lg shadow'>
           <div className='px-6 py-4 border-b border-gray-200'>
-            <h2 className='text-lg font-medium text-gray-900'>Role Permissions</h2>
+            <h2 className='text-lg font-medium text-primary'>Role Permissions</h2>
           </div>
           <div className='overflow-x-auto'>
             <table className='min-w-full divide-y divide-gray-200'>
@@ -178,19 +178,19 @@ export default function AdminPermissionsPage() {
         {/* Permission Categories */}
         <div className='mt-8 bg-white rounded-lg shadow'>
           <div className='px-6 py-4 border-b border-gray-200'>
-            <h2 className='text-lg font-medium text-gray-900'>Permission Categories</h2>
+            <h2 className='text-lg font-medium text-primary'>Permission Categories</h2>
           </div>
           <div className='p-6'>
             {Array.from(new Set(permissions.map(p => p.category))).map(category => (
               <div key={category} className='mb-6'>
-                <h3 className='text-md font-medium text-gray-900 mb-3'>{category}</h3>
+                <h3 className='text-md font-medium text-primary mb-3'>{category}</h3>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
                   {permissions
                     .filter(p => p.category === category)
                     .map(permission => (
                       <div key={permission.id} className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'>
                         <div>
-                          <p className='text-sm font-medium text-gray-900'>{permission.name}</p>
+                          <p className='text-sm font-medium text-primary'>{permission.name}</p>
                           <p className='text-xs text-gray-500'>{permission.description}</p>
                         </div>
                         <button className='text-red-500 hover:text-red-700'>

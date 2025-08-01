@@ -255,7 +255,7 @@ function MediaEdit() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading media item...</span>
+          <span className='ml-2 text-gray-text'>Loading media item...</span>
         </div>
       </div>
     );
@@ -266,10 +266,10 @@ function MediaEdit() {
       <div className='p-6'>
         <div className='text-center py-12'>
           <AlertCircle className='w-12 h-12 text-red-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <h3 className='text-lg font-medium text-primary mb-2'>
             Media not found
           </h3>
-          <p className='text-gray-600'>
+          <p className='text-gray-text'>
             The requested media file could not be found.
           </p>
         </div>
@@ -285,13 +285,13 @@ function MediaEdit() {
           <div className='flex items-center space-x-4'>
             <button
               onClick={() => router.back()}
-              className='p-2 text-gray-600 hover:text-gray-900 transition-colors'
+              className='p-2 text-gray-text hover:text-primary transition-colors'
             >
               <ArrowLeft className='w-5 h-5' />
             </button>
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>Edit Media</h1>
-              <p className='text-gray-600 mt-1'>
+              <h1 className='text-2xl font-bold text-primary'>Edit Media</h1>
+              <p className='text-gray-text mt-1'>
                 Update metadata and properties
               </p>
             </div>
@@ -344,7 +344,7 @@ function MediaEdit() {
         {/* File Preview */}
         <div className='lg:col-span-1'>
           <div className='bg-white rounded-lg shadow p-6'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
               <Eye className='w-5 h-5 mr-2' />
               File Preview
             </h3>
@@ -363,7 +363,7 @@ function MediaEdit() {
                 ) : (
                   <div className='text-center'>
                     {getFileIcon(mediaItem.mime_type)}
-                    <div className='mt-2 text-sm text-gray-600'>
+                    <div className='mt-2 text-sm text-gray-text'>
                       {getFileTypeCategory(mediaItem.mime_type)}
                     </div>
                   </div>
@@ -376,7 +376,7 @@ function MediaEdit() {
                   <label className='block text-sm font-medium text-gray-700 mb-1'>
                     Filename
                   </label>
-                  <div className='text-sm text-gray-900 font-medium'>
+                  <div className='text-sm text-primary font-medium'>
                     {mediaItem.filename}
                   </div>
                 </div>
@@ -385,7 +385,7 @@ function MediaEdit() {
                   <label className='block text-sm font-medium text-gray-700 mb-1'>
                     Original Name
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className='text-sm text-gray-text'>
                     {mediaItem.original_name}
                   </div>
                 </div>
@@ -394,7 +394,7 @@ function MediaEdit() {
                   <label className='block text-sm font-medium text-gray-700 mb-1'>
                     File Type
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className='text-sm text-gray-text'>
                     {mediaItem.mime_type}
                   </div>
                 </div>
@@ -403,7 +403,7 @@ function MediaEdit() {
                   <label className='block text-sm font-medium text-gray-700 mb-1'>
                     File Size
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className='text-sm text-gray-text'>
                     {formatFileSize(mediaItem.file_size)}
                   </div>
                 </div>
@@ -412,7 +412,7 @@ function MediaEdit() {
                   <label className='block text-sm font-medium text-gray-700 mb-1'>
                     Uploaded
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className='text-sm text-gray-text'>
                     {new Date(mediaItem.created_at).toLocaleString()}
                   </div>
                 </div>
@@ -421,7 +421,7 @@ function MediaEdit() {
                   <label className='block text-sm font-medium text-gray-700 mb-1'>
                     Uploaded By
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className='text-sm text-gray-text'>
                     {mediaItem.uploaded_by}
                   </div>
                 </div>
@@ -459,7 +459,7 @@ function MediaEdit() {
         {/* Metadata Editor */}
         <div className='lg:col-span-2'>
           <div className='bg-white rounded-lg shadow p-6'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-6 flex items-center'>
+            <h3 className='text-lg font-semibold text-primary mb-6 flex items-center'>
               <Edit3 className='w-5 h-5 mr-2' />
               Edit Metadata
             </h3>
@@ -519,7 +519,7 @@ function MediaEdit() {
                         {tag}
                         <button
                           onClick={() => removeTag(tag)}
-                          className='ml-2 text-blue-600 hover:text-blue-800'
+                          className='ml-2 text-blue-600 hover:opacity-80'
                         >
                           <X className='w-3 h-3' />
                         </button>

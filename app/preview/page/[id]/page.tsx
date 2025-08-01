@@ -24,9 +24,9 @@ export default async function PagePreview({ params }: { params: Promise<{ id: st
   if (isPreview && previewDraftStore[`page:${id}`]) {
     content = previewDraftStore[`page:${id}`];
   } else {
-    // Fallback: fetch published content from backend
+    // Fallback: fetch published content from backend using slug
     const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
-    const res = await fetch(`${backendUrl}/api/pages/${id}`);
+    const res = await fetch(`${backendUrl}/api/pages/slug/${id}`);
     if (res.ok) {
       const page = await res.json();
       content = page?.content || 'No content found.';

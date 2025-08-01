@@ -118,10 +118,10 @@ export default function AdminAnalyticsProjectsPage() {
       <div className='flex items-center justify-center min-h-screen'>
         <div className='text-center'>
           <AlertTriangle className='h-12 w-12 text-red-500 mx-auto mb-4' />
-          <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+          <h2 className='text-xl font-semibold text-primary mb-2'>
             Error Loading Analytics
           </h2>
-          <p className='text-gray-600 mb-4'>{error}</p>
+          <p className='text-gray-text mb-4'>{error}</p>
           <Button onClick={fetchProjectAnalytics}>Try Again</Button>
         </div>
       </div>
@@ -134,10 +134,10 @@ export default function AdminAnalyticsProjectsPage() {
         {/* Header */}
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-3xl font-bold text-gray-900'>
+            <h1 className='text-3xl font-bold text-primary'>
               Project Analytics
             </h1>
-            <p className='text-gray-600 mt-2'>
+            <p className='text-gray-text mt-2'>
               Comprehensive project performance and analytics dashboard
             </p>
           </div>
@@ -176,10 +176,10 @@ export default function AdminAnalyticsProjectsPage() {
           <div className='bg-white rounded-lg shadow-md p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className='text-sm font-medium text-gray-text'>
                   Total Projects
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-2xl font-bold text-primary'>
                   {projects.length}
                 </p>
               </div>
@@ -193,10 +193,10 @@ export default function AdminAnalyticsProjectsPage() {
           <div className='bg-white rounded-lg shadow-md p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className='text-sm font-medium text-gray-text'>
                   Active Projects
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-2xl font-bold text-primary'>
                   {projects.filter(p => p.status === 'in-progress').length}
                 </p>
               </div>
@@ -208,8 +208,8 @@ export default function AdminAnalyticsProjectsPage() {
           <div className='bg-white rounded-lg shadow-md p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>Team Members</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-sm font-medium text-gray-text'>Team Members</p>
+                <p className='text-2xl font-bold text-primary'>
                   {projects.reduce((sum, p) => sum + p.team_size, 0)}
                 </p>
               </div>
@@ -221,10 +221,10 @@ export default function AdminAnalyticsProjectsPage() {
           <div className='bg-white rounded-lg shadow-md p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className='text-sm font-medium text-gray-text'>
                   Avg Completion
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-2xl font-bold text-primary'>
                   {projects.length > 0
                     ? Math.round(
                         projects.reduce((sum, p) => sum + p.completion_rate, 0) /
@@ -243,7 +243,7 @@ export default function AdminAnalyticsProjectsPage() {
         {/* Project Details */}
         <div className='bg-white rounded-lg shadow-md'>
           <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className='text-xl font-semibold text-primary'>
               Project Performance Overview
             </h2>
           </div>
@@ -254,7 +254,7 @@ export default function AdminAnalyticsProjectsPage() {
                 <div key={project.project_id} className='border rounded-lg p-6'>
                   <div className='flex justify-between items-start mb-4'>
                     <div>
-                      <h3 className='text-lg font-semibold text-gray-900'>
+                      <h3 className='text-lg font-semibold text-primary'>
                         {project.name}
                       </h3>
                       <span
@@ -274,7 +274,7 @@ export default function AdminAnalyticsProjectsPage() {
                   <div className='space-y-4'>
                     <div>
                       <div className='flex justify-between text-sm mb-2'>
-                        <span className='text-gray-600'>Progress</span>
+                        <span className='text-gray-text'>Progress</span>
                         <span className='font-medium'>
                           {project.completion_rate}%
                         </span>
@@ -310,7 +310,7 @@ export default function AdminAnalyticsProjectsPage() {
 
                     {/* Performance Metrics */}
                     <div className='border-t pt-4'>
-                      <h4 className='font-medium text-gray-900 mb-3'>
+                      <h4 className='font-medium text-primary mb-3'>
                         Performance Metrics
                       </h4>
                       <div className='grid grid-cols-3 gap-4'>
@@ -344,7 +344,7 @@ export default function AdminAnalyticsProjectsPage() {
                     {/* Recent Activities */}
                     {project.recent_activities.length > 0 && (
                       <div className='border-t pt-4'>
-                        <h4 className='font-medium text-gray-900 mb-3'>
+                        <h4 className='font-medium text-primary mb-3'>
                           Recent Activities
                         </h4>
                         <div className='space-y-2'>
@@ -368,7 +368,7 @@ export default function AdminAnalyticsProjectsPage() {
                                 )}
                               </div>
                               <div className='flex-1 min-w-0'>
-                                <p className='text-gray-900'>
+                                <p className='text-primary'>
                                   {activity.description}
                                 </p>
                                 <p className='text-gray-500'>

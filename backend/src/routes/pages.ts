@@ -2,6 +2,7 @@ import express from 'express';
 import {
   listPages,
   getPage,
+  getPageBySlug,
   createPage,
   updatePage,
   deletePage,
@@ -13,6 +14,8 @@ const router = express.Router();
 
 router.get('/', listPages);
 router.post('/', createPage);
+router.get('/slug', getPageBySlug); // Handle empty slug case
+router.get('/slug/:slug', getPageBySlug); // Handle slug with value
 router.get('/:id', getPage);
 router.put('/:id', updatePage);
 router.delete('/:id', deletePage);

@@ -231,7 +231,7 @@ export default function ControlSystemPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 text-center'
                 >
                   Learn How It Works
                 </Link>
@@ -378,23 +378,30 @@ export default function ControlSystemPage() {
               Detailed Engineering Data
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  PLC-based control system coordinates compressor, valves, and
-                  generator load.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">PLC-based control system coordinates compressor, valves, and
+                  generator load.</span>
                 </li>
-                <li>
-                  Multi-core CPU, 16-64 GB RAM, 1-10 TB SSD, Gigabit Ethernet
-                  networking.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Multi-core CPU, 16-64 GB RAM, 1-10 TB SSD, Gigabit Ethernet
+                  networking.</span>
                 </li>
-                <li>
-                  Real-time data acquisition and processing for all KPP modules.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Real-time data acquisition and processing for all KPP modules.</span>
                 </li>
-                <li>
-                  Redundant power supply and fail-safe design for high
-                  reliability.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Redundant power supply and fail-safe design for high
+                  reliability.</span>
                 </li>
-                <li>Modular and scalable architecture for future expansion.</li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Modular and scalable architecture for future expansion.</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -405,14 +412,27 @@ export default function ControlSystemPage() {
               Performance Benchmarks
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>Response time: &lt; 100 ms for system adjustments.</li>
-                <li>System uptime: 99.9% with high availability.</li>
-                <li>Data accuracy: 99.99% for all monitored parameters.</li>
-                <li>Unlimited scalability for large KPP installations.</li>
-                <li>
-                  Comprehensive monitoring and analytics for predictive
-                  maintenance.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Response time: &lt; 100 ms for system adjustments.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">System uptime: 99.9% with high availability.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Data accuracy: 99.99% for all monitored parameters.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Unlimited scalability for large KPP installations.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Comprehensive monitoring and analytics for predictive
+                  maintenance.</span>
                 </li>
               </ul>
             </div>
@@ -426,15 +446,23 @@ export default function ControlSystemPage() {
               Maintenance Requirements
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>Software updates and security patches as per schedule.</li>
-                <li>
-                  Sensor calibration and diagnostics at regular intervals.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Software updates and security patches as per schedule.</span>
                 </li>
-                <li>
-                  Periodic inspection of PLC hardware and network components.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Sensor calibration and diagnostics at regular intervals.</span>
                 </li>
-                <li>Redundant systems reduce maintenance-related downtime.</li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Periodic inspection of PLC hardware and network components.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Redundant systems reduce maintenance-related downtime.</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -445,19 +473,23 @@ export default function ControlSystemPage() {
               Integration Specifications
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Integrates with all KPP modules for coordinated operation.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Integrates with all KPP modules for coordinated operation.</span>
                 </li>
-                <li>
-                  Remote monitoring and control via secure network connection.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Remote monitoring and control via secure network connection.</span>
                 </li>
-                <li>
-                  Supports grid integration and demand response protocols.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Supports grid integration and demand response protocols.</span>
                 </li>
-                <li>
-                  Safety interlocks and emergency shutdown for operational
-                  safety.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Safety interlocks and emergency shutdown for operational
+                  safety.</span>
                 </li>
               </ul>
             </div>
@@ -495,7 +527,7 @@ export default function ControlSystemPage() {
             </Link>
             <Link
               href='/contact'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
             >
               Contact Us
             </Link>

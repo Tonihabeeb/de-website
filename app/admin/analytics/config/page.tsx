@@ -315,10 +315,10 @@ export default function AdminAnalyticsConfigPage() {
         <div className='mb-8'>
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
+              <h1 className='text-3xl font-bold text-primary'>
                 Analytics Configuration
               </h1>
-              <p className='text-gray-600 mt-2'>
+              <p className='text-gray-text mt-2'>
                 Configure analytics tracking, privacy settings, and data
                 management
               </p>
@@ -351,18 +351,18 @@ export default function AdminAnalyticsConfigPage() {
             <div className='p-6 border-b border-gray-200'>
               <div className='flex items-center gap-3'>
                 <Eye className='w-6 h-6 text-blue-500' />
-                <h2 className='text-xl font-semibold text-gray-900'>
+                <h2 className='text-xl font-semibold text-primary'>
                   Tracking Configuration
                 </h2>
               </div>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Configure what data to collect and track
               </p>
             </div>
             <div className='p-6 space-y-4'>
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Enable Analytics Tracking
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -384,7 +384,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Anonymize Data
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -409,7 +409,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Track User Behavior
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -434,7 +434,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Track Page Views
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -459,7 +459,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Track Custom Events
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -484,7 +484,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Track Performance
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -509,7 +509,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Respect Do Not Track
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -539,18 +539,18 @@ export default function AdminAnalyticsConfigPage() {
             <div className='p-6 border-b border-gray-200'>
               <div className='flex items-center gap-3'>
                 <Shield className='w-6 h-6 text-green-500' />
-                <h2 className='text-xl font-semibold text-gray-900'>
+                <h2 className='text-xl font-semibold text-primary'>
                   Privacy & Compliance
                 </h2>
               </div>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 GDPR and privacy compliance settings
               </p>
             </div>
             <div className='p-6 space-y-4'>
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     GDPR Compliant
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -575,7 +575,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Cookie Consent
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -600,7 +600,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Data Processing Consent
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -625,7 +625,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     User Consent Management
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -647,7 +647,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Data Export Rights
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -669,7 +669,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Right to be Forgotten
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -699,18 +699,18 @@ export default function AdminAnalyticsConfigPage() {
             <div className='p-6 border-b border-gray-200'>
               <div className='flex items-center gap-3'>
                 <Database className='w-6 h-6 text-purple-500' />
-                <h2 className='text-xl font-semibold text-gray-900'>
+                <h2 className='text-xl font-semibold text-primary'>
                   Google Analytics Integration
                 </h2>
               </div>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Configure Google Analytics 4 integration
               </p>
             </div>
             <div className='p-6 space-y-4'>
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Enable Google Analytics
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -762,7 +762,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>
+                  <span className='font-medium text-primary'>
                     Enhanced Ecommerce
                   </span>
                   <p className='text-sm text-gray-500'>
@@ -790,7 +790,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>Demographics</span>
+                  <span className='font-medium text-primary'>Demographics</span>
                   <p className='text-sm text-gray-500'>Track user demographics</p>
                 </div>
                 <input
@@ -814,7 +814,7 @@ export default function AdminAnalyticsConfigPage() {
 
               <label className='flex items-center justify-between'>
                 <div>
-                  <span className='font-medium text-gray-900'>Interests</span>
+                  <span className='font-medium text-primary'>Interests</span>
                   <p className='text-sm text-gray-500'>Track user interests</p>
                 </div>
                 <input
@@ -844,7 +844,7 @@ export default function AdminAnalyticsConfigPage() {
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-3'>
                   <Settings className='w-6 h-6 text-orange-500' />
-                  <h2 className='text-xl font-semibold text-gray-900'>
+                  <h2 className='text-xl font-semibold text-primary'>
                     Custom Events
                   </h2>
                 </div>
@@ -857,7 +857,7 @@ export default function AdminAnalyticsConfigPage() {
                   Add Event
                 </Button>
               </div>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Configure custom event tracking
               </p>
             </div>
@@ -869,7 +869,7 @@ export default function AdminAnalyticsConfigPage() {
                     className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'
                   >
                     <div className='flex-1'>
-                      <div className='font-medium text-gray-900'>
+                      <div className='font-medium text-primary'>
                         {event.name}
                       </div>
                       <div className='text-sm text-gray-500'>

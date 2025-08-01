@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     const data = await res.json();
     return NextResponse.json({
       success: true,
-      ...data,
+      data: data,
     });
   } catch (error) {
     console.error('Error fetching pages:', error);
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     const data = await res.json();
     return NextResponse.json({
       success: true,
-      ...data,
+      data: data,
     });
   } catch (error) {
     console.error('Error creating page:', error);

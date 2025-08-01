@@ -23,7 +23,7 @@ export default function CTABanner() {
             </Link>
             <Link
               href='/technology'
-              className='border-4 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px]'
+              className='border-4 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200 min-w-[44px] min-h-[44px]'
             >
               Learn About KPP
             </Link>

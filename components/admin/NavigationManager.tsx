@@ -380,7 +380,7 @@ export default function NavigationManager({
             {hasChildren && (
               <button
                 onClick={() => toggleExpanded(item.id)}
-                className='text-gray-400 hover:text-gray-600'
+                className='text-gray-400 hover:text-gray-text'
               >
                 {isExpanded ? (
                   <ChevronDown className='w-4 h-4' />
@@ -397,7 +397,7 @@ export default function NavigationManager({
                   <div className='w-4 h-4 bg-gray-200 rounded'></div>
                 </div>
               )}
-              <span className='font-medium text-gray-900'>{item.title}</span>
+              <span className='font-medium text-primary'>{item.title}</span>
               {item.target === '_blank' && (
                 <ExternalLink className='w-3 h-3 text-gray-400' />
               )}
@@ -591,10 +591,10 @@ export default function NavigationManager({
       <div className='px-6 py-4 border-b border-gray-200'>
         <div className='flex justify-between items-center'>
           <div>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className='text-xl font-semibold text-primary'>
               Navigation Manager
             </h2>
-            <p className='text-sm text-gray-600 mt-1'>
+            <p className='text-sm text-gray-text mt-1'>
               Manage site navigation menus and menu items
             </p>
           </div>

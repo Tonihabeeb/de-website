@@ -1,9 +1,11 @@
 import { Fragment } from 'react';
 import type { Metadata } from 'next';
+import { AlertTriangle, Users, User } from 'lucide-react';
 import StructuredData from '@/components/StructuredData';
 import { apiFetch, ApiException } from '@/utils/api';
 import { PageLoader } from '@/components/ui/LoadingSpinner';
 import ReloadButton from '@/components/ui/ReloadButton';
+
 
 export const metadata: Metadata = {
   title: 'Our Team | Deep Engineering',
@@ -35,11 +37,11 @@ async function getTeamData(): Promise<{
 }> {
   try {
     // Fetch all admin users as team members (adjust role as needed)
-    const response = await apiFetch<{ users: TeamMember[] }>(
+    const response = await apiFetch<{ data: TeamMember[] }>(
       '/api/admin/users?role=admin'
     );
     return {
-      teamMembers: response.users || [],
+      teamMembers: response.data || [],
       error: null,
     };
   } catch (err: any) {
@@ -73,8 +75,8 @@ export default async function TeamPage() {
         }}
       />
 
-      <section className='py-16 bg-gray-50'>
-        <div className='container mx-auto px-4'>
+      <section className='section-padding bg-gray-50'>
+        <div className='container'>
           <div className='text-center mb-12'>
             <h1 className='text-4xl font-bold text-primary mb-4'>Our Team</h1>
             <p className='text-xl text-gray-text max-w-3xl mx-auto'>
@@ -83,27 +85,17 @@ export default async function TeamPage() {
             </p>
           </div>
 
+
+
           {error ? (
             <div className='text-center py-12'>
               <div className='text-red-600 mb-4'>
-                <svg
-                  className='w-12 h-12 mx-auto'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z'
-                  />
-                </svg>
+                <AlertTriangle className='w-12 h-12 mx-auto' />
               </div>
-              <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+              <h3 className='text-lg font-semibold text-primary mb-2'>
                 Error Loading Team
               </h3>
-              <p className='text-gray-600 mb-4'>{error}</p>
+              <p className='text-gray-text mb-4'>{error}</p>
               <ReloadButton>Try Again</ReloadButton>
             </div>
           ) : teamMembers.length > 0 ? (
@@ -116,19 +108,7 @@ export default async function TeamPage() {
                   {/* Profile Image (not available in new API, so skip or add placeholder) */}
                   <div className='w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mx-auto mb-4'>
                     <div className='text-white text-center'>
-                      <svg
-                        className='w-8 h-8 mx-auto mb-2'
-                        fill='none'
-                        stroke='currentColor'
-                        viewBox='0 0 24 24'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
-                        />
-                      </svg>
+                      <User className='w-8 h-8 mx-auto mb-2' />
                       <p className='text-sm opacity-90'>Photo</p>
                     </div>
                   </div>
@@ -149,22 +129,10 @@ export default async function TeamPage() {
             </div>
           ) : (
             <div className='text-center py-12'>
-              <div className='text-gray-600 mb-4'>
-                <svg
-                  className='w-12 h-12 mx-auto'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
-                  />
-                </svg>
+              <div className='text-gray-text mb-4'>
+                <Users className='w-12 h-12 mx-auto' />
               </div>
-              <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+              <h3 className='text-lg font-semibold text-primary mb-2'>
                 No Team Members Found
               </h3>
               <p className='text-gray-text'>

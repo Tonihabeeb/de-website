@@ -17,14 +17,14 @@ export default function ProtectedRoute({ children, requiredRoles }: ProtectedRou
   console.log('[ProtectedRoute] user:', user);
   console.log('[ProtectedRoute] token:', token);
   console.log('[ProtectedRoute] requiredRoles:', requiredRoles);
-  const hasRequiredRole = user && requiredRoles.includes(user.role);
+  const hasRequiredRole = user && user.role && requiredRoles && requiredRoles.includes(user.role);
   console.log('[ProtectedRoute] hasRequiredRole:', hasRequiredRole);
   if (!user) {
     console.log('[ProtectedRoute] No user, redirecting to /login');
-    router.replace(`/login?redirect=${encodeURIComponent(router.asPath)}`);
+    router.replace('/login');
     return null;
   }
-  if (requiredRoles && !requiredRoles.includes(user.role)) {
+  if (requiredRoles && user.role && !requiredRoles.includes(user.role)) {
     console.log('[ProtectedRoute] User role not authorized, redirecting to /unauthorized');
     router.replace('/unauthorized');
     return null;
@@ -33,7 +33,7 @@ export default function ProtectedRoute({ children, requiredRoles }: ProtectedRou
   if (loading || !user) {
     return <div className="text-center py-10">Loading...</div>;
   }
-  if (requiredRoles && !requiredRoles.includes(user.role)) {
+  if (requiredRoles && user.role && !requiredRoles.includes(user.role)) {
     console.log('[ProtectedRoute] User role not allowed:', user.role, 'Required:', requiredRoles);
     return <div className="text-center py-10 text-red-600">You do not have permission to view this page.</div>;
   }

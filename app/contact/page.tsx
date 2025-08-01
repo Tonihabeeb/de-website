@@ -7,6 +7,8 @@ import { CheckCircle, AlertCircle, MapPin, Phone, Mail } from 'lucide-react';
 import GoogleOfficeMap from '@/components/maps/GoogleOfficeMap';
 import HeroSection from '@/components/sections/HeroSection';
 
+
+
 interface FormData {
   name: string;
   email: string;
@@ -268,6 +270,8 @@ export default function ContactPage() {
         subtitle='Get in touch with our team to learn more about KPP technology, discuss partnership opportunities, or explore project collaboration.'
       />
 
+
+
       {/* Contact Form & Info */}
       <section className='section-padding bg-white'>
         <div className='container'>
@@ -496,10 +500,11 @@ export default function ContactPage() {
                   <button
                     type='submit'
                     disabled={isSubmitting}
-                    className='w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]'
+                    className='w-full bg-primary text-white py-4 px-8 rounded-lg font-semibold text-lg hover:from-primary-dark hover:to-primary hover:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]'
                     aria-describedby={
                       isSubmitting ? 'submitting-status' : undefined
                     }
+                    onClick={handleSubmit}
                   >
                     {isSubmitting ? (
                       <>
@@ -645,7 +650,7 @@ export default function ContactPage() {
               href='https://www.google.com/maps/dir/?api=1&destination=36.191856681457985,43.968337343201846'
               target='_blank'
               rel='noopener noreferrer'
-              className='mt-4 inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors duration-200 min-w-[44px] min-h-[44px]'
+              className='mt-4 inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold text-lg hover:from-primary-dark hover:to-primary hover:text-white transition-colors duration-200 min-w-[44px] min-h-[44px]'
             >
               Get Directions
             </a>

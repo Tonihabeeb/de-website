@@ -28,7 +28,7 @@ export default function NotFound() {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
               <Link
                 href='/'
-                className='bg-primary text-white px-6 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200'
+                className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-4 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200'
               >
                 Go to Homepage
               </Link>

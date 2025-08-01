@@ -200,7 +200,7 @@ export default function ProjectProgressDashboard() {
                       <tr key={milestone.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <div>
-                            <div className='text-sm font-medium text-gray-900'>
+                            <div className='text-sm font-medium text-primary'>
                               {milestone.name}
                             </div>
                             <div className='text-sm text-gray-500'>
@@ -226,7 +226,7 @@ export default function ProjectProgressDashboard() {
                                 style={{ width: `${milestone.progress}%` }}
                               ></div>
                             </div>
-                            <span className='text-sm text-gray-900'>
+                            <span className='text-sm text-primary'>
                               {milestone.progress}%
                             </span>
                           </div>
@@ -241,7 +241,7 @@ export default function ProjectProgressDashboard() {
               </div>
             </div>
           ) : (
-            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+            <div className='bg-gray-50 border rounded p-4 text-gray-text'>
               <em>
                 No milestones found. Add milestones through the admin panel.
               </em>
@@ -266,7 +266,7 @@ export default function ProjectProgressDashboard() {
                 }))}
               />
             ) : (
-              <div className='text-gray-600'>
+              <div className='text-gray-text'>
                 <em>No milestones available for progress tracking.</em>
               </div>
             )}
@@ -292,7 +292,7 @@ export default function ProjectProgressDashboard() {
                 </div>
               </div>
             ) : (
-              <div className='text-gray-600'>
+              <div className='text-gray-text'>
                 <em>
                   Financial metrics will be displayed here when available.
                 </em>
@@ -332,7 +332,7 @@ export default function ProjectProgressDashboard() {
                       <tr key={item.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <div>
-                            <div className='text-sm font-medium text-gray-900'>
+                            <div className='text-sm font-medium text-primary'>
                               {item.title}
                             </div>
                             <div className='text-sm text-gray-500'>
@@ -345,7 +345,7 @@ export default function ProjectProgressDashboard() {
                             {item.type.replace('_', ' ')}
                           </span>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-primary'>
                           {item.user}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -357,7 +357,7 @@ export default function ProjectProgressDashboard() {
                 </table>
               </div>
             ) : (
-              <div className='p-4 text-gray-600'>
+              <div className='p-4 text-gray-text'>
                 <em>
                   No recent activity found. Activity logs will appear here when
                   updates are made.

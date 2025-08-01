@@ -85,7 +85,7 @@ export default function FullComponentsPage() {
                 aria-label={`Jump to ${item.label}`}
               >
                 <div className='w-12 h-12 bg-primary group-hover:bg-white rounded-full flex items-center justify-center mx-auto mb-3'>
-                  <div className='text-white group-hover:text-primary transition-colors duration-200'>
+                  <div className='text-white group-hover:text-gray-300 transition-colors duration-200'>
                     {item.icon}
                   </div>
                 </div>
@@ -525,7 +525,7 @@ export default function FullComponentsPage() {
                   <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mr-4'>
                     <div className='text-white'>{section.icon}</div>
                   </div>
-                  <h2 className='text-2xl font-bold text-gray-900'>
+                  <h2 className='text-2xl font-bold text-primary'>
                     {section.title}
                   </h2>
                 </div>

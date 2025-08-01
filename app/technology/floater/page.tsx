@@ -205,7 +205,7 @@ export default function FloaterPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 text-center'
                 >
                   Learn How It Works
                 </Link>
@@ -390,22 +390,29 @@ export default function FloaterPage() {
               Detailed Engineering Data
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Each module contains 66 hollow steel floaters attached to an
-                  endless chain loop.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Each module contains 66 hollow steel floaters attached to an
+                  endless chain loop.</span>
                 </li>
-                <li>
-                  Floaters are air-filled for buoyancy (rising) and water-filled
-                  for weight (sinking).
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Floaters are air-filled for buoyancy (rising) and water-filled
+                  for weight (sinking).</span>
                 </li>
-                <li>
-                  Constructed for durability and pressure resistance; designed
-                  for 25+ years of operation.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Constructed for durability and pressure resistance; designed
+                  for 25+ years of operation.</span>
                 </li>
-                <li>Optimized for minimal drag and maximum buoyant force.</li>
-                <li>
-                  Modular design allows for easy replacement and maintenance.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Optimized for minimal drag and maximum buoyant force.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Modular design allows for easy replacement and maintenance.</span>
                 </li>
               </ul>
             </div>
@@ -417,17 +424,26 @@ export default function FloaterPage() {
               Performance Benchmarks
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Buoyant force per floater: 50–200 kN (configurable by design).
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Buoyant force per floater: 50–200 kN (configurable by design).</span>
                 </li>
-                <li>Cycle time: 30–60 seconds per full loop.</li>
-                <li>High durability for continuous 24/7 operation.</li>
-                <li>
-                  Efficiency: 85–92% buoyancy-to-kinetic energy conversion.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Cycle time: 30–60 seconds per full loop.</span>
                 </li>
-                <li>
-                  Minimal wear due to robust construction and water lubrication.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">High durability for continuous 24/7 operation.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Efficiency: 85–92% buoyancy-to-kinetic energy conversion.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Minimal wear due to robust construction and water lubrication.</span>
                 </li>
               </ul>
             </div>
@@ -441,15 +457,23 @@ export default function FloaterPage() {
               Maintenance Requirements
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>Periodic inspection for leaks or corrosion in floaters.</li>
-                <li>
-                  Chain lubrication and tension adjustment as part of routine
-                  maintenance.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Periodic inspection for leaks or corrosion in floaters.</span>
                 </li>
-                <li>Replacement of floaters as needed (modular design).</li>
-                <li>
-                  Minimal moving parts reduce maintenance frequency and cost.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Chain lubrication and tension adjustment as part of routine
+                  maintenance.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Replacement of floaters as needed (modular design).</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Minimal moving parts reduce maintenance frequency and cost.</span>
                 </li>
               </ul>
             </div>
@@ -461,18 +485,24 @@ export default function FloaterPage() {
               Integration Specifications
             </h2>
             <div className='bg-gray-50 border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Floaters are synchronized with the PLC-based control system
-                  for precise air/water cycling.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Floaters are synchronized with the PLC-based control system
+                  for precise air/water cycling.</span>
                 </li>
-                <li>Modular and easily replaceable for rapid maintenance.</li>
-                <li>
-                  Compatible with various shaft heights and KPP module sizes.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Modular and easily replaceable for rapid maintenance.</span>
                 </li>
-                <li>
-                  Designed for seamless integration with conveyor chain and
-                  drive systems.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Compatible with various shaft heights and KPP module sizes.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Designed for seamless integration with conveyor chain and
+                  drive systems.</span>
                 </li>
               </ul>
             </div>
@@ -602,7 +632,7 @@ export default function FloaterPage() {
             </Link>
             <Link
               href='/contact'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
             >
               Contact Us
             </Link>

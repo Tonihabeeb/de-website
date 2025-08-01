@@ -1,5 +1,9 @@
 "use client";
 import React, { useState } from 'react';
+import HeroSection from '@/components/sections/HeroSection';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
 
 export default function PasswordResetPage() {
   const [email, setEmail] = useState('');
@@ -32,34 +36,69 @@ export default function PasswordResetPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block font-medium">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2 mt-1"
-            autoComplete="email"
-          />
+    <div>
+      <HeroSection
+        title='Reset Password'
+        subtitle='Enter your email address to receive a password reset link.'
+      />
+
+      <section className='section-padding bg-white'>
+        <div className='container'>
+          <div className='max-w-md mx-auto'>
+            <div className='bg-white rounded-lg shadow-lg p-8'>
+              <h2 className='text-2xl font-bold text-primary mb-6 text-center'>
+                Forgot Your Password?
+              </h2>
+              
+              <form onSubmit={handleSubmit} className='space-y-6'>
+                <div>
+                  <Label htmlFor='email'>Email Address</Label>
+                  <Input
+                    id='email'
+                    type='email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    placeholder='your.email@example.com'
+                    autoComplete='email'
+                  />
+                </div>
+                
+                {error && (
+                  <div className='text-red-600 text-sm bg-red-50 p-3 rounded'>
+                    {error}
+                  </div>
+                )}
+                
+                {success && (
+                  <div className='text-green-600 text-sm bg-green-50 p-3 rounded'>
+                    If your email is registered, you will receive a password reset link.
+                  </div>
+                )}
+                
+                <Button
+                  type='submit'
+                  variant='primary'
+                  size='lg'
+                  className='w-full'
+                  disabled={loading}
+                >
+                  {loading ? 'Sending...' : 'Send Reset Link'}
+                </Button>
+              </form>
+              
+              <div className='mt-6 text-sm text-center text-gray-text'>
+                <a 
+                  href='/login' 
+                  className='text-primary hover:text-primary-dark transition-colors'
+                >
+                  Back to login
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-        {error && <div className="text-red-600 text-sm">{error}</div>}
-        {success && <div className="text-green-600 text-sm">If your email is registered, you will receive a password reset link.</div>}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? 'Sending...' : 'Send Reset Link'}
-        </button>
-      </form>
-      <div className="mt-4 text-sm text-center">
-        <a href="/login" className="text-blue-600 hover:underline">Back to login</a>
-      </div>
+      </section>
     </div>
   );
 } 

@@ -6,53 +6,65 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
-const morgan_1 = __importDefault(require("morgan"));
-const mongoose_1 = __importDefault(require("mongoose"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const path_1 = __importDefault(require("path"));
-const fs_1 = __importDefault(require("fs"));
+const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+const connection_1 = require("./connection");
 const auth_1 = __importDefault(require("./routes/auth"));
-const document_1 = __importDefault(require("./routes/document"));
-const audit_1 = __importDefault(require("./routes/audit"));
-const dashboard_1 = __importDefault(require("./routes/dashboard"));
-// Load .env.local if it exists, otherwise .env
-const envPath = fs_1.default.existsSync(path_1.default.join(__dirname, '../.env.local'))
-    ? path_1.default.join(__dirname, '../.env.local')
-    : path_1.default.join(__dirname, '../.env');
-dotenv_1.default.config({ path: envPath });
+const analytics_1 = __importDefault(require("./routes/analytics"));
+const navigation_1 = __importDefault(require("./routes/navigation"));
+const pages_1 = __importDefault(require("./routes/pages"));
+const projects_1 = __importDefault(require("./routes/projects"));
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
-// Middleware
-app.use((0, cors_1.default)());
+// Initialize database with migrations
+(0, connection_1.initializeDatabase)();
+// Security middleware
 app.use((0, helmet_1.default)());
-app.use((0, morgan_1.default)('dev'));
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
-// Serve uploads statically
-app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '../uploads')));
-// Connect to MongoDB
-mongoose_1.default.connect(process.env.MONGODB_URI || '', {
-    // @ts-ignore
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => console.log('MongoDB connected'))
-    .catch((err) => console.error('MongoDB connection error:', err));
-// Auth routes
-app.use('/api/auth', auth_1.default);
-// Document routes
-app.use('/api/documents', document_1.default);
-// Audit log routes
-app.use('/api/audit', audit_1.default);
-// Dashboard routes
-app.use('/api/dashboards', dashboard_1.default);
-// Root route
-app.get('/', (req, res) => {
-    res.json({ message: 'Deep Engineering Backend API' });
+app.use((0, cors_1.default)({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    credentials: true
+}));
+// Rate limiting
+const limiter = (0, express_rate_limit_1.default)({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
 });
-if (require.main === module) {
-    app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
+app.use(limiter);
+// Body parsing middleware
+app.use(express_1.default.json({ limit: '10mb' }));
+app.use(express_1.default.urlencoded({ extended: true }));
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        database: 'connected'
     });
-}
+});
+// API routes
+app.use('/api/auth', auth_1.default);
+app.use('/api/analytics', analytics_1.default);
+app.use('/api/navigation', navigation_1.default);
+app.use('/api/pages', pages_1.default);
+app.use('/api/projects', projects_1.default);
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).json({
+        success: false,
+        error: 'Internal server error',
+        message: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+});
+// 404 handler
+app.use('*', (req, res) => {
+    res.status(404).json({
+        success: false,
+        error: 'Route not found'
+    });
+});
+app.listen(PORT, () => {
+    console.log(`🚀 Backend server running on port ${PORT}`);
+    console.log(`📊 Health check: http://localhost:${PORT}/health`);
+    console.log(`🔗 Database initialized and ready`);
+});
 exports.default = app;

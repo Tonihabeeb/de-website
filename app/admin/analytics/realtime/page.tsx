@@ -252,7 +252,7 @@ export default function AdminAnalyticsRealtimePage() {
       <div className='container mx-auto px-4 py-8'>
         <div className='flex items-center justify-center h-64'>
           <RefreshCw className='w-8 h-8 text-blue-500 animate-spin' />
-          <span className='ml-2 text-gray-600'>Loading real-time data...</span>
+          <span className='ml-2 text-gray-text'>Loading real-time data...</span>
         </div>
       </div>
     );
@@ -263,10 +263,10 @@ export default function AdminAnalyticsRealtimePage() {
       <div className='container mx-auto px-4 py-8'>
         <div className='text-center'>
           <Activity className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <h3 className='text-lg font-medium text-primary mb-2'>
             No real-time data available
           </h3>
-          <p className='text-gray-600'>
+          <p className='text-gray-text'>
             Real-time analytics are not currently available.
           </p>
         </div>
@@ -280,10 +280,10 @@ export default function AdminAnalyticsRealtimePage() {
         <div className='mb-8'>
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
+              <h1 className='text-3xl font-bold text-primary'>
                 Real-Time Analytics
               </h1>
-              <p className='text-gray-600 mt-2'>
+              <p className='text-gray-text mt-2'>
                 Live system activity, user sessions, and performance metrics
               </p>
             </div>
@@ -315,7 +315,7 @@ export default function AdminAnalyticsRealtimePage() {
               <div
                 className={`w-3 h-3 rounded-full ${isLive ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
               />
-              <span className='font-medium text-gray-900'>
+              <span className='font-medium text-primary'>
                 {isLive ? 'Live Updates Active' : 'Live Updates Paused'}
               </span>
               <span className='text-sm text-gray-500'>
@@ -352,11 +352,11 @@ export default function AdminAnalyticsRealtimePage() {
             <div className='flex items-center justify-between mb-4'>
               <div className='flex items-center gap-3'>
                 <Users className='w-6 h-6 text-blue-500' />
-                <h3 className='font-medium text-gray-900'>Active Users</h3>
+                <h3 className='font-medium text-primary'>Active Users</h3>
               </div>
               <TrendingUp className='w-4 h-4 text-green-500' />
             </div>
-            <div className='text-3xl font-bold text-gray-900'>
+            <div className='text-3xl font-bold text-primary'>
               {realTimeData.activeUsers}
             </div>
             <div className='text-sm text-gray-500 mt-1'>Currently online</div>
@@ -366,11 +366,11 @@ export default function AdminAnalyticsRealtimePage() {
             <div className='flex items-center justify-between mb-4'>
               <div className='flex items-center gap-3'>
                 <Eye className='w-6 h-6 text-green-500' />
-                <h3 className='font-medium text-gray-900'>Page Views</h3>
+                <h3 className='font-medium text-primary'>Page Views</h3>
               </div>
               <TrendingUp className='w-4 h-4 text-green-500' />
             </div>
-            <div className='text-3xl font-bold text-gray-900'>
+            <div className='text-3xl font-bold text-primary'>
               {realTimeData.pageViews.toLocaleString()}
             </div>
             <div className='text-sm text-gray-500 mt-1'>Today's total</div>
@@ -380,11 +380,11 @@ export default function AdminAnalyticsRealtimePage() {
             <div className='flex items-center justify-between mb-4'>
               <div className='flex items-center gap-3'>
                 <Clock className='w-6 h-6 text-purple-500' />
-                <h3 className='font-medium text-gray-900'>Avg Session</h3>
+                <h3 className='font-medium text-primary'>Avg Session</h3>
               </div>
               <TrendingUp className='w-4 h-4 text-green-500' />
             </div>
-            <div className='text-3xl font-bold text-gray-900'>
+            <div className='text-3xl font-bold text-primary'>
               {Math.floor(realTimeData.averageSessionDuration / 60)}m
             </div>
             <div className='text-sm text-gray-500 mt-1'>
@@ -396,11 +396,11 @@ export default function AdminAnalyticsRealtimePage() {
             <div className='flex items-center justify-between mb-4'>
               <div className='flex items-center gap-3'>
                 <Activity className='w-6 h-6 text-orange-500' />
-                <h3 className='font-medium text-gray-900'>Bounce Rate</h3>
+                <h3 className='font-medium text-primary'>Bounce Rate</h3>
               </div>
               <TrendingDown className='w-4 h-4 text-red-500' />
             </div>
-            <div className='text-3xl font-bold text-gray-900'>
+            <div className='text-3xl font-bold text-primary'>
               {realTimeData.bounceRate}%
             </div>
             <div className='text-sm text-gray-500 mt-1'>Single page visits</div>
@@ -411,10 +411,10 @@ export default function AdminAnalyticsRealtimePage() {
           {/* Live User Activity */}
           <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
             <div className='p-6 border-b border-gray-200'>
-              <h2 className='text-xl font-semibold text-gray-900'>
+              <h2 className='text-xl font-semibold text-primary'>
                 Live User Activity
               </h2>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Real-time user actions and page visits
               </p>
             </div>
@@ -428,14 +428,14 @@ export default function AdminAnalyticsRealtimePage() {
                     <div className='w-2 h-2 bg-green-500 rounded-full animate-pulse' />
                     <div className='flex-1'>
                       <div className='flex items-center justify-between'>
-                        <span className='font-medium text-gray-900'>
+                        <span className='font-medium text-primary'>
                           {activity.user}
                         </span>
                         <span className='text-sm text-gray-500'>
                           {new Date(activity.timestamp).toLocaleTimeString()}
                         </span>
                       </div>
-                      <div className='text-sm text-gray-600'>
+                      <div className='text-sm text-gray-text'>
                         {activity.action.replace('_', ' ')} on {activity.page}
                       </div>
                     </div>
@@ -451,10 +451,10 @@ export default function AdminAnalyticsRealtimePage() {
           {/* System Alerts */}
           <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
             <div className='p-6 border-b border-gray-200'>
-              <h2 className='text-xl font-semibold text-gray-900'>
+              <h2 className='text-xl font-semibold text-primary'>
                 System Alerts
               </h2>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Live system notifications and warnings
               </p>
             </div>
@@ -471,7 +471,7 @@ export default function AdminAnalyticsRealtimePage() {
                       <div className='flex items-start gap-3'>
                         {getAlertIcon(alert.type)}
                         <div className='flex-1'>
-                          <p className='text-sm font-medium text-gray-900'>
+                          <p className='text-sm font-medium text-primary'>
                             {alert.message}
                           </p>
                           <p className='text-xs text-gray-500 mt-1'>
@@ -501,10 +501,10 @@ export default function AdminAnalyticsRealtimePage() {
           {/* Device Distribution */}
           <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
             <div className='p-6 border-b border-gray-200'>
-              <h2 className='text-xl font-semibold text-gray-900'>
+              <h2 className='text-xl font-semibold text-primary'>
                 Device Distribution
               </h2>
-              <p className='text-gray-600 mt-1'>Current users by device type</p>
+              <p className='text-gray-text mt-1'>Current users by device type</p>
             </div>
             <div className='p-6'>
               <div className='space-y-4'>
@@ -520,7 +520,7 @@ export default function AdminAnalyticsRealtimePage() {
                       {device.device === 'Tablet' && (
                         <Globe className='w-4 h-4 text-purple-500' />
                       )}
-                      <span className='font-medium text-gray-900'>
+                      <span className='font-medium text-primary'>
                         {device.device}
                       </span>
                     </div>
@@ -531,7 +531,7 @@ export default function AdminAnalyticsRealtimePage() {
                           style={{ width: `${device.percentage}%` }}
                         />
                       </div>
-                      <span className='text-sm text-gray-600 w-12 text-right'>
+                      <span className='text-sm text-gray-text w-12 text-right'>
                         {device.users} ({device.percentage}%)
                       </span>
                     </div>
@@ -544,10 +544,10 @@ export default function AdminAnalyticsRealtimePage() {
           {/* Geographic Distribution */}
           <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
             <div className='p-6 border-b border-gray-200'>
-              <h2 className='text-xl font-semibold text-gray-900'>
+              <h2 className='text-xl font-semibold text-primary'>
                 Geographic Distribution
               </h2>
-              <p className='text-gray-600 mt-1'>Current users by location</p>
+              <p className='text-gray-text mt-1'>Current users by location</p>
             </div>
             <div className='p-6'>
               <div className='space-y-4'>
@@ -555,7 +555,7 @@ export default function AdminAnalyticsRealtimePage() {
                   <div key={index} className='flex items-center justify-between'>
                     <div className='flex items-center gap-3'>
                       <Globe className='w-4 h-4 text-blue-500' />
-                      <span className='font-medium text-gray-900'>
+                      <span className='font-medium text-primary'>
                         {geo.country}
                       </span>
                     </div>
@@ -566,7 +566,7 @@ export default function AdminAnalyticsRealtimePage() {
                           style={{ width: `${geo.percentage}%` }}
                         />
                       </div>
-                      <span className='text-sm text-gray-600 w-12 text-right'>
+                      <span className='text-sm text-gray-text w-12 text-right'>
                         {geo.users} ({geo.percentage}%)
                       </span>
                     </div>
@@ -580,35 +580,35 @@ export default function AdminAnalyticsRealtimePage() {
         {/* Performance Metrics */}
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 mt-8'>
           <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className='text-xl font-semibold text-primary'>
               Performance Metrics
             </h2>
-            <p className='text-gray-600 mt-1'>
+            <p className='text-gray-text mt-1'>
               Real-time system performance indicators
             </p>
           </div>
           <div className='p-6'>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
               <div className='text-center'>
-                <div className='text-2xl font-bold text-gray-900'>
+                <div className='text-2xl font-bold text-primary'>
                   {realTimeData.performanceMetrics.responseTime}ms
                 </div>
                 <div className='text-sm text-gray-500'>Response Time</div>
               </div>
               <div className='text-center'>
-                <div className='text-2xl font-bold text-gray-900'>
+                <div className='text-2xl font-bold text-primary'>
                   {realTimeData.performanceMetrics.loadTime}s
                 </div>
                 <div className='text-sm text-gray-500'>Load Time</div>
               </div>
               <div className='text-center'>
-                <div className='text-2xl font-bold text-gray-900'>
+                <div className='text-2xl font-bold text-primary'>
                   {realTimeData.performanceMetrics.errorRate}%
                 </div>
                 <div className='text-sm text-gray-500'>Error Rate</div>
               </div>
               <div className='text-center'>
-                <div className='text-2xl font-bold text-gray-900'>
+                <div className='text-2xl font-bold text-primary'>
                   {realTimeData.performanceMetrics.uptime}%
                 </div>
                 <div className='text-sm text-gray-500'>Uptime</div>

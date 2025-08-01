@@ -7,8 +7,8 @@ export default function AdminSystemBackupPage() {
     <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
       <div className='container mx-auto px-4 py-8'>
         <div className='mb-8'>
-          <h1 className='text-3xl font-bold text-gray-900'>Backup & Restore</h1>
-          <p className='text-gray-600 mt-2'>
+          <h1 className='text-3xl font-bold text-primary'>Backup & Restore</h1>
+          <p className='text-gray-text mt-2'>
             Manage database backups, schedules, and restoration procedures
           </p>
         </div>

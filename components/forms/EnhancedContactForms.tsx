@@ -341,13 +341,13 @@ export default function EnhancedContactForms() {
         <h2 className='text-2xl font-bold text-green-600 mb-4'>
           Message Sent Successfully!
         </h2>
-        <p className='text-gray-600 mb-6'>
+        <p className='text-gray-text mb-6'>
           Thank you for your inquiry. Our team will get back to you within 24
           hours.
         </p>
         <button
           onClick={() => setSubmitSuccess(false)}
-          className='bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
+          className='bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:from-primary-dark hover:to-primary hover:text-white transition-colors'
         >
           Send Another Message
         </button>
@@ -359,7 +359,7 @@ export default function EnhancedContactForms() {
     <div className='bg-white rounded-lg shadow-lg p-8'>
       <div className='text-center mb-8'>
         <h2 className='text-2xl font-bold text-primary mb-4'>Contact Us</h2>
-        <p className='text-gray-600'>
+        <p className='text-gray-text'>
           Get in touch with our team for any inquiries about KPP technology,
           projects, or investment opportunities.
         </p>
@@ -481,7 +481,7 @@ export default function EnhancedContactForms() {
           <button
             type='submit'
             disabled={isSubmitting}
-            className='bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed mobile-button touch-target w-full md:w-auto min-h-[44px]'
+            className='bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:from-primary-dark hover:to-primary hover:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed mobile-button touch-target w-full md:w-auto min-h-[44px]'
           >
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
@@ -496,17 +496,17 @@ export default function EnhancedContactForms() {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 text-base'>
           <div>
             <span className='font-medium text-gray-700'>📍 Address:</span>
-            <p className='text-gray-600'>
+            <p className='text-gray-text'>
               Roya Tower A 1-14, Erbil-44001, Iraq
             </p>
           </div>
           <div>
             <span className='font-medium text-gray-700'>📧 Email:</span>
-            <p className='text-gray-600'>info@deepengineering.co</p>
+            <p className='text-gray-text'>info@deepengineering.co</p>
           </div>
           <div>
             <span className='font-medium text-gray-700'>📞 Phone:</span>
-            <p className='text-gray-600'>+964 XXX XXX XXXX</p>
+            <p className='text-gray-text'>+964 XXX XXX XXXX</p>
           </div>
         </div>
       </div>

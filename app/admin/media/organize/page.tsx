@@ -291,7 +291,7 @@ export default function AdminMediaOrganize() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <RefreshCw className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading media organizer...</span>
+          <span className='ml-2 text-gray-text'>Loading media organizer...</span>
         </div>
       </div>
     );
@@ -304,10 +304,10 @@ export default function AdminMediaOrganize() {
         <div className='mb-6'>
           <div className='flex justify-between items-center'>
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>
+              <h1 className='text-2xl font-bold text-primary'>
                 Media Organization
               </h1>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Organize media with folders, tags, and bulk operations
               </p>
             </div>
@@ -364,7 +364,7 @@ export default function AdminMediaOrganize() {
           <div className='lg:col-span-1 space-y-6'>
             {/* Folders */}
             <div className='bg-white rounded-lg shadow p-6'>
-              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
                 <Folder className='w-5 h-5 mr-2' />
                 Folders
               </h3>
@@ -405,7 +405,7 @@ export default function AdminMediaOrganize() {
 
             {/* Tags */}
             <div className='bg-white rounded-lg shadow p-6'>
-              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
                 <Tag className='w-5 h-5 mr-2' />
                 Tags
               </h3>
@@ -490,7 +490,7 @@ export default function AdminMediaOrganize() {
             {/* Media Grid/List */}
             <div className='bg-white rounded-lg shadow'>
               <div className='p-6 border-b border-gray-200'>
-                <h2 className='text-lg font-semibold text-gray-900'>
+                <h2 className='text-lg font-semibold text-primary'>
                   Media Files ({filteredMedia.length} files)
                   {selectedItems.length > 0 && (
                     <span className='ml-2 text-sm text-blue-600'>
@@ -522,7 +522,7 @@ export default function AdminMediaOrganize() {
 
                         <div className='text-center'>
                           <div
-                            className='text-sm font-medium text-gray-900 truncate'
+                            className='text-sm font-medium text-primary truncate'
                             title={item.filename}
                           >
                             {item.filename}
@@ -603,7 +603,7 @@ export default function AdminMediaOrganize() {
                             <div className='flex items-center'>
                               {getFileIcon(item.mime_type)}
                               <div className='ml-3'>
-                                <div className='text-sm font-medium text-gray-900'>
+                                <div className='text-sm font-medium text-primary'>
                                   {item.filename}
                                 </div>
                                 <div className='text-sm text-gray-500'>
@@ -636,7 +636,7 @@ export default function AdminMediaOrganize() {
                                 onClick={() =>
                                   window.open(item.file_path, '_blank')
                                 }
-                                className='text-blue-600 hover:text-blue-900'
+                                className='text-blue-600 hover:opacity-80'
                                 title='View'
                               >
                                 <Eye className='w-4 h-4' />
@@ -660,10 +660,10 @@ export default function AdminMediaOrganize() {
               {filteredMedia.length === 0 && (
                 <div className='text-center py-12'>
                   <Folder className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-                  <h3 className='text-lg font-medium text-gray-900 mb-2'>
+                  <h3 className='text-lg font-medium text-primary mb-2'>
                     No media files found
                   </h3>
-                  <p className='text-gray-600'>
+                  <p className='text-gray-text'>
                     Try adjusting your filters or search terms.
                   </p>
                 </div>
@@ -677,7 +677,7 @@ export default function AdminMediaOrganize() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Create New Folder
                 </h3>
                 <input
@@ -711,7 +711,7 @@ export default function AdminMediaOrganize() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Create New Tag
                 </h3>
                 <input
@@ -751,7 +751,7 @@ export default function AdminMediaOrganize() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Bulk Edit ({selectedItems.length} items)
                 </h3>
 

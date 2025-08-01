@@ -201,7 +201,7 @@ export default function PneumaticSystemPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 text-center'
                 >
                   Learn How It Works
                 </Link>
@@ -320,24 +320,31 @@ export default function PneumaticSystemPage() {
               Detailed Engineering Data
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Oil-lubricated piston-type air compressor with high-efficiency
-                  IE3 electric motor.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Oil-lubricated piston-type air compressor with high-efficiency
+                  IE3 electric motor.</span>
                 </li>
-                <li>
-                  Working pressure: 10 bar (adjustable); Max air flow: 1.2–1.5
-                  m³/min.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Working pressure: 10 bar (adjustable); Max air flow: 1.2–1.5
+                  m³/min.</span>
                 </li>
-                <li>
-                  Receiver tank: 300 L horizontal steel air tank; floor-mounted
-                  on anti-vibration feet.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Receiver tank: 300 L horizontal steel air tank; floor-mounted
+                  on anti-vibration feet.</span>
                 </li>
-                <li>
-                  Auto start/stop with pressure switch; direct-on-line (DOL)
-                  startup.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Auto start/stop with pressure switch; direct-on-line (DOL)
+                  startup.</span>
                 </li>
-                <li>Thermal cutout and pressure relief valve for safety.</li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Thermal cutout and pressure relief valve for safety.</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -348,16 +355,27 @@ export default function PneumaticSystemPage() {
               Performance Benchmarks
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Power input: 3.5–5.5 kW (depending on mode); 400 V / 50 Hz.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Power input: 3.5–5.5 kW (depending on mode); 400 V / 50 Hz.</span>
                 </li>
-                <li>Max air flow: 1.2–1.5 m³/min; working pressure: 10 bar.</li>
-                <li>Cycle mode: auto start/stop with pressure switch.</li>
-                <li>Consumes ~1% of net KPP power output.</li>
-                <li>
-                  Rapid response and stable pressure for continuous KPP
-                  operation.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Max air flow: 1.2–1.5 m³/min; working pressure: 10 bar.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Cycle mode: auto start/stop with pressure switch.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Consumes ~1% of net KPP power output.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Rapid response and stable pressure for continuous KPP
+                  operation.</span>
                 </li>
               </ul>
             </div>
@@ -371,21 +389,25 @@ export default function PneumaticSystemPage() {
               Maintenance Requirements
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Automatic pressure relief on overpressure; moisture drain
-                  valve on receiver.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Automatic pressure relief on overpressure; moisture drain
+                  valve on receiver.</span>
                 </li>
-                <li>
-                  Periodic service: oil change, filter replacement, and
-                  inspection for leaks.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Periodic service: oil change, filter replacement, and
+                  inspection for leaks.</span>
                 </li>
-                <li>
-                  Annual maintenance schedule recommended for optimal
-                  performance.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Annual maintenance schedule recommended for optimal
+                  performance.</span>
                 </li>
-                <li>
-                  Low maintenance due to robust design and quality components.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Low maintenance due to robust design and quality components.</span>
                 </li>
               </ul>
             </div>
@@ -397,17 +419,23 @@ export default function PneumaticSystemPage() {
               Integration Specifications
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className='list-disc pl-6 space-y-2'>
-                <li>
-                  Supplies compressed air to KPP modules for buoyancy control.
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Supplies compressed air to KPP modules for buoyancy control.</span>
                 </li>
-                <li>Located next to each module for efficient pipe routing.</li>
-                <li>
-                  Auto start/stop and pressure regulation integrated with
-                  PLC-based control system.
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Located next to each module for efficient pipe routing.</span>
                 </li>
-                <li>
-                  Consumes only a small portion of net KPP power output (~1%).
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Auto start/stop and pressure regulation integrated with
+                  PLC-based control system.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Consumes only a small portion of net KPP power output (~1%).</span>
                 </li>
               </ul>
             </div>
@@ -445,7 +473,7 @@ export default function PneumaticSystemPage() {
             </Link>
             <Link
               href='/contact'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
             >
               Contact Us
             </Link>

@@ -379,8 +379,8 @@ export default function SystemSettings({
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       {/* Header */}
       <div className='px-6 py-4 border-b border-gray-200'>
-        <h2 className='text-xl font-semibold text-gray-900'>System Settings</h2>
-        <p className='text-sm text-gray-600 mt-1'>
+        <h2 className='text-xl font-semibold text-primary'>System Settings</h2>
+        <p className='text-sm text-gray-text mt-1'>
           Configure system-wide settings and preferences
         </p>
       </div>
@@ -494,7 +494,7 @@ export default function SystemSettings({
                     </div>
 
                     <div className='space-y-4'>
-                      <h3 className='text-lg font-medium text-gray-900'>
+                      <h3 className='text-lg font-medium text-primary'>
                         System Options
                       </h3>
                       <div className='space-y-3'>
@@ -587,7 +587,7 @@ export default function SystemSettings({
                     </div>
 
                     <div className='space-y-4'>
-                      <h3 className='text-lg font-medium text-gray-900'>
+                      <h3 className='text-lg font-medium text-primary'>
                         Security Options
                       </h3>
                       <div className='space-y-3'>
@@ -628,7 +628,7 @@ export default function SystemSettings({
                     </div>
 
                     <div className='space-y-4'>
-                      <h3 className='text-lg font-medium text-gray-900'>
+                      <h3 className='text-lg font-medium text-primary'>
                         File Upload Security
                       </h3>
                       <FormField
@@ -689,7 +689,7 @@ export default function SystemSettings({
                         <button
                           type='button'
                           onClick={() => setShowPassword(!showPassword)}
-                          className='absolute right-3 top-8 text-gray-400 hover:text-gray-600'
+                          className='absolute right-3 top-8 text-gray-400 hover:text-gray-text'
                         >
                           {showPassword ? (
                             <EyeOff className='w-4 h-4' />
@@ -712,7 +712,7 @@ export default function SystemSettings({
                     </div>
 
                     <div className='space-y-4'>
-                      <h3 className='text-lg font-medium text-gray-900'>
+                      <h3 className='text-lg font-medium text-primary'>
                         Email Options
                       </h3>
                       <div className='flex items-center'>
@@ -776,7 +776,7 @@ export default function SystemSettings({
                 </div>
 
                 <div className='space-y-4'>
-                  <h3 className='text-lg font-medium text-gray-900'>
+                  <h3 className='text-lg font-medium text-primary'>
                     System Performance
                   </h3>
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -808,7 +808,7 @@ export default function SystemSettings({
                 </div>
 
                 <div className='space-y-4'>
-                  <h3 className='text-lg font-medium text-gray-900'>
+                  <h3 className='text-lg font-medium text-primary'>
                     Database Settings
                   </h3>
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -862,7 +862,7 @@ export default function SystemSettings({
         title='Send Test Email'
       >
         <div className='space-y-4'>
-          <p className='text-sm text-gray-600'>
+          <p className='text-sm text-gray-text'>
             Enter an email address to send a test email and verify your SMTP
             configuration.
           </p>

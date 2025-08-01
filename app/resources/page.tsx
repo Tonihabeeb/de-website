@@ -29,7 +29,7 @@ export default function ResourcesPage() {
             <Search className='w-6 h-6 text-green-600' />
             Search & Filter
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className='bg-gray-50 border rounded p-4 text-gray-text'>
             <SearchSystem />
           </div>
         </section>
@@ -40,7 +40,7 @@ export default function ResourcesPage() {
             <Folder className='w-6 h-6 text-orange-600' />
             Document Categories
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className='bg-gray-50 border rounded p-4 text-gray-text'>
             <em>
               Technical, business, legal, and environmental document categories
               will be listed here.
@@ -54,7 +54,7 @@ export default function ResourcesPage() {
             <FileText className='w-6 h-6 text-blue-600' />
             Document Preview
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className='bg-gray-50 border rounded p-4 text-gray-text'>
             <DocumentViewer />
           </div>
         </section>
@@ -65,7 +65,7 @@ export default function ResourcesPage() {
             <Upload className='w-6 h-6 text-pink-600' />
             Upload Documents
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className='bg-gray-50 border rounded p-4 text-gray-text'>
             <UploadSystem />
           </div>
         </section>

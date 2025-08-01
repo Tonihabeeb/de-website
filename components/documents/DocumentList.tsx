@@ -47,7 +47,7 @@ export default function DocumentList({
   showActions = true,
   onDocumentSelect,
 }: DocumentListProps) {
-  const { isAuthenticated, hasRole } = useAuth();
+  const { isAuthenticated, hasAnyRole } = useAuth();
   const [media, setMedia] = useState<MediaItem[]>([]);
   const [filteredMedia, setFilteredMedia] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -133,8 +133,12 @@ export default function DocumentList({
   const handleDelete = async (mediaId: string) => {
     if (!confirm('Are you sure you want to delete this document?')) return;
     try {
-      await apiFetch(`/api/admin/media?ids=${mediaId}`, { method: 'DELETE' });
-      setMedia(prev => prev.filter(item => item.id !== mediaId));
+      const response = await fetch(`/api/admin/media?ids=${mediaId}`, { method: 'DELETE' });
+      if (response.ok) {
+        setMedia(prev => prev.filter(item => item.id !== mediaId));
+      } else {
+        throw new Error('Failed to delete document');
+      }
     } catch {
       alert('Failed to delete document');
     }
@@ -186,10 +190,10 @@ export default function DocumentList({
             />
           </svg>
         </div>
-        <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+        <h3 className='text-lg font-semibold text-primary mb-2'>
           Error Loading Documents
         </h3>
-        <p className='text-gray-600 mb-4'>{error}</p>
+        <p className='text-gray-text mb-4'>{error}</p>
         <button
           onClick={fetchMedia}
           className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors'
@@ -247,7 +251,7 @@ export default function DocumentList({
       {/* Documents Display */}
       {filteredMedia.length === 0 ? (
         <div className='text-center py-12'>
-          <div className='text-gray-600 mb-4'>
+          <div className='text-gray-text mb-4'>
             <svg
               className='w-12 h-12 mx-auto'
               fill='none'
@@ -262,10 +266,10 @@ export default function DocumentList({
               />
             </svg>
           </div>
-          <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+          <h3 className='text-lg font-semibold text-primary mb-2'>
             No Documents Found
           </h3>
-          <p className='text-gray-600'>
+          <p className='text-gray-text'>
             {searchTerm
               ? 'Try adjusting your search criteria.'
               : 'No documents have been uploaded yet.'}
@@ -293,14 +297,14 @@ export default function DocumentList({
                   </div>
                 </div>
                 <div className='flex-1 min-w-0'>
-                  <h3 className='text-lg font-semibold text-gray-900 truncate'>
+                  <h3 className='text-lg font-semibold text-primary truncate'>
                     {item.original_name || 'Untitled Document'}
                   </h3>
                   <p className='text-sm text-gray-500 mt-1'>
                     {item.filename || 'Unknown file'}
                   </p>
                   {item.caption && (
-                    <p className='text-sm text-gray-600 mt-2 line-clamp-2'>
+                    <p className='text-sm text-gray-text mt-2 line-clamp-2'>
                       {item.caption}
                     </p>
                   )}
@@ -320,7 +324,7 @@ export default function DocumentList({
                 <div className='flex items-center space-x-2 mt-4'>
                   <button
                     onClick={() => handleDownload(item)}
-                    className='p-2 text-gray-400 hover:text-primary transition-colors'
+                    className='p-2 text-gray-400 hover:text-gray-300 transition-colors'
                     title='Download'
                   >
                     <Download className='h-4 w-4' />
@@ -328,7 +332,7 @@ export default function DocumentList({
                   {onDocumentSelect && (
                     <button
                       onClick={() => onDocumentSelect(item)}
-                      className='p-2 text-gray-400 hover:text-primary transition-colors'
+                      className='p-2 text-gray-400 hover:text-gray-300 transition-colors'
                       title='View'
                     >
                       <Eye className='h-4 w-4' />
@@ -337,7 +341,7 @@ export default function DocumentList({
                   <RoleGuard roles={['admin', 'editor']}>
                     <button
                       onClick={() => onDocumentSelect?.(item)}
-                      className='p-2 text-gray-400 hover:text-primary transition-colors'
+                      className='p-2 text-gray-400 hover:text-gray-300 transition-colors'
                       title='Edit'
                     >
                       <Edit className='h-4 w-4' />

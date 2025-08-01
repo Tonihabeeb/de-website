@@ -46,10 +46,12 @@ interface UserStats {
 
 interface UserOverviewChartsProps {
   className?: string;
+  userStats?: any;
 }
 
 const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
   className = '',
+  userStats: propUserStats,
 }) => {
   const [userStats, setUserStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -59,8 +61,15 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
   >('overview');
 
   useEffect(() => {
-    fetchUserStats();
-  }, []);
+    if (propUserStats) {
+      // Use provided user stats
+      setUserStats(propUserStats);
+      setLoading(false);
+    } else {
+      // Fallback to mock data if no user stats provided
+      fetchUserStats();
+    }
+  }, [propUserStats]);
 
   const fetchUserStats = async () => {
     try {
@@ -111,304 +120,204 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
       };
 
       setUserStats(mockStats);
-    } catch (err) {
-      setError('Failed to fetch user statistics');
-      console.error('Error fetching user stats:', err);
-    } finally {
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching user stats:', error);
+      setError('Failed to load user statistics');
       setLoading(false);
     }
   };
 
-  const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
-
-  const roleDistributionData = userStats
-    ? Object.entries(userStats.role_distribution).map(([role, count]) => ({
-        name: role.replace('_', ' ').toUpperCase(),
-        value: count,
-      }))
-    : [];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
   if (loading) {
     return (
-      <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-        <div className='p-6'>
-          <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-gray-900'>
-              User Overview
-            </h3>
-            <Users className='w-5 h-5 text-gray-400' />
+      <div className={`flex items-center justify-center h-64 ${className}`}>
+        <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600'></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={`flex items-center justify-center h-64 ${className}`}>
+        <div className='text-center'>
+          <div className='text-red-600 mb-2'>Failed to load user statistics</div>
+          <button
+            onClick={fetchUserStats}
+            className='text-blue-600 hover:text-blue-800 text-sm'
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!userStats) {
+    return (
+      <div className={`flex items-center justify-center h-64 ${className}`}>
+        <div className='text-gray-500'>No user data available</div>
+      </div>
+    );
+  }
+
+  // Transform role distribution data for pie chart
+  const roleData = Object.entries(userStats.role_distribution || {}).map(
+    ([role, count]) => ({
+      name: role.replace('_', ' ').toUpperCase(),
+      value: count,
+    })
+  );
+
+  return (
+    <div className={className}>
+      {/* Chart Type Selector */}
+      <div className='flex space-x-2 mb-4'>
+        {[
+          { key: 'overview', label: 'Overview', icon: Users },
+          { key: 'growth', label: 'Growth', icon: TrendingUp },
+          { key: 'roles', label: 'Roles', icon: UserCheck },
+          { key: 'activity', label: 'Activity', icon: UserPlus },
+        ].map(({ key, label, icon: Icon }) => (
+          <button
+            key={key}
+            onClick={() => setSelectedChart(key as any)}
+            className={`flex items-center space-x-1 px-3 py-1 text-sm rounded-full transition-colors ${
+              selectedChart === key
+                ? 'bg-blue-100 text-blue-700'
+                : 'bg-gray-100 text-gray-text hover:bg-gray-200'
+            }`}
+          >
+            <Icon className='w-4 h-4' />
+            <span>{label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Charts */}
+      <div className='h-48'>
+        {selectedChart === 'overview' && (
+          <div className='grid grid-cols-2 gap-4'>
+            <div className='bg-gray-50 rounded-lg p-4'>
+              <div className='text-2xl font-bold text-primary'>
+                {userStats.total_users}
+              </div>
+              <div className='text-sm text-gray-text'>Total Users</div>
+            </div>
+            <div className='bg-gray-50 rounded-lg p-4'>
+              <div className='text-2xl font-bold text-green-600'>
+                {userStats.active_users}
+              </div>
+              <div className='text-sm text-gray-text'>Active Users</div>
+            </div>
+            <div className='bg-gray-50 rounded-lg p-4'>
+              <div className='text-2xl font-bold text-blue-600'>
+                {userStats.new_users_this_month}
+              </div>
+              <div className='text-sm text-gray-text'>New This Month</div>
+            </div>
+            <div className='bg-gray-50 rounded-lg p-4'>
+              <div className='text-2xl font-bold text-purple-600'>
+                {userStats.user_growth_rate}%
+              </div>
+              <div className='text-sm text-gray-text'>Growth Rate</div>
+            </div>
           </div>
-          <div className='grid grid-cols-1 md:grid-cols-4 gap-4 animate-pulse'>
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className='h-24 bg-gray-200 rounded-lg'></div>
+        )}
+
+        {selectedChart === 'growth' && userStats.user_activity_timeline && (
+          <ResponsiveContainer width='100%' height='100%'>
+            <AreaChart data={userStats.user_activity_timeline}>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='date' />
+              <YAxis />
+              <Tooltip />
+              <Area
+                type='monotone'
+                dataKey='active_users'
+                stackId='1'
+                stroke='#8884d8'
+                fill='#8884d8'
+                name='Active Users'
+              />
+              <Area
+                type='monotone'
+                dataKey='new_users'
+                stackId='1'
+                stroke='#82ca9d'
+                fill='#82ca9d'
+                name='New Users'
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        )}
+
+        {selectedChart === 'roles' && (
+          <ResponsiveContainer width='100%' height='100%'>
+            <PieChart>
+              <Pie
+                data={roleData}
+                cx='50%'
+                cy='50%'
+                labelLine={false}
+                label={({ name, percent }) =>
+                  `${name} ${((percent || 0) * 100).toFixed(0)}%`
+                }
+                outerRadius={80}
+                fill='#8884d8'
+                dataKey='value'
+              >
+                {roleData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        )}
+
+        {selectedChart === 'activity' && userStats.user_activity_timeline && (
+          <ResponsiveContainer width='100%' height='100%'>
+            <LineChart data={userStats.user_activity_timeline}>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='date' />
+              <YAxis />
+              <Tooltip />
+              <Line
+                type='monotone'
+                dataKey='active_users'
+                stroke='#8884d8'
+                strokeWidth={2}
+                name='Active Users'
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
+      </div>
+
+      {/* Top Users */}
+      {userStats.top_users && userStats.top_users.length > 0 && (
+        <div className='mt-4'>
+          <h4 className='text-sm font-medium text-primary mb-2'>Top Active Users</h4>
+          <div className='space-y-2'>
+            {userStats.top_users.slice(0, 3).map((user: any) => (
+              <div
+                key={user.user_id}
+                className='flex items-center justify-between text-sm'
+              >
+                <span className='text-gray-text'>{user.username}</span>
+                <span className='text-primary font-medium'>
+                  {user.activity_count} activities
+                </span>
+              </div>
             ))}
           </div>
         </div>
-      </div>
-    );
-  }
-
-  if (error || !userStats) {
-    return (
-      <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-        <div className='p-6'>
-          <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-gray-900'>
-              User Overview
-            </h3>
-            <Users className='w-5 h-5 text-gray-400' />
-          </div>
-          <div className='text-center py-8'>
-            <p className='text-red-600'>{error || 'No data available'}</p>
-            <button
-              onClick={fetchUserStats}
-              className='mt-2 text-sm text-blue-600 hover:text-blue-800'
-            >
-              Try again
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-      <div className='p-6'>
-        <div className='flex items-center justify-between mb-6'>
-          <h3 className='text-lg font-semibold text-gray-900'>User Overview</h3>
-          <Users className='w-5 h-5 text-gray-400' />
-        </div>
-
-        {/* Chart Navigation */}
-        <div className='flex space-x-2 mb-6'>
-          <button
-            onClick={() => setSelectedChart('overview')}
-            className={`px-3 py-1 text-sm rounded-md transition-colors ${
-              selectedChart === 'overview'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            Overview
-          </button>
-          <button
-            onClick={() => setSelectedChart('growth')}
-            className={`px-3 py-1 text-sm rounded-md transition-colors ${
-              selectedChart === 'growth'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            Growth
-          </button>
-          <button
-            onClick={() => setSelectedChart('roles')}
-            className={`px-3 py-1 text-sm rounded-md transition-colors ${
-              selectedChart === 'roles'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            Roles
-          </button>
-          <button
-            onClick={() => setSelectedChart('activity')}
-            className={`px-3 py-1 text-sm rounded-md transition-colors ${
-              selectedChart === 'activity'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            Activity
-          </button>
-        </div>
-
-        {/* Overview Cards */}
-        {selectedChart === 'overview' && (
-          <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mb-6'>
-            <div className='bg-blue-50 p-4 rounded-lg'>
-              <div className='flex items-center justify-between'>
-                <div>
-                  <p className='text-sm text-blue-600 font-medium'>
-                    Total Users
-                  </p>
-                  <p className='text-2xl font-bold text-blue-900'>
-                    {userStats.total_users}
-                  </p>
-                </div>
-                <Users className='w-8 h-8 text-blue-400' />
-              </div>
-            </div>
-
-            <div className='bg-green-50 p-4 rounded-lg'>
-              <div className='flex items-center justify-between'>
-                <div>
-                  <p className='text-sm text-green-600 font-medium'>
-                    Active Users
-                  </p>
-                  <p className='text-2xl font-bold text-green-900'>
-                    {userStats.active_users}
-                  </p>
-                </div>
-                <UserCheck className='w-8 h-8 text-green-400' />
-              </div>
-            </div>
-
-            <div className='bg-orange-50 p-4 rounded-lg'>
-              <div className='flex items-center justify-between'>
-                <div>
-                  <p className='text-sm text-orange-600 font-medium'>
-                    New This Month
-                  </p>
-                  <p className='text-2xl font-bold text-orange-900'>
-                    {userStats.new_users_this_month}
-                  </p>
-                </div>
-                <UserPlus className='w-8 h-8 text-orange-400' />
-              </div>
-            </div>
-
-            <div className='bg-purple-50 p-4 rounded-lg'>
-              <div className='flex items-center justify-between'>
-                <div>
-                  <p className='text-sm text-purple-600 font-medium'>
-                    Growth Rate
-                  </p>
-                  <p className='text-2xl font-bold text-purple-900'>
-                    {userStats.user_growth_rate}%
-                  </p>
-                </div>
-                <TrendingUp className='w-8 h-8 text-purple-400' />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Charts */}
-        <div className='h-80'>
-          {selectedChart === 'growth' && (
-            <ResponsiveContainer width='100%' height='100%'>
-              <AreaChart data={userStats.user_activity_timeline}>
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis
-                  dataKey='date'
-                  tickFormatter={value => new Date(value).toLocaleDateString()}
-                />
-                <YAxis />
-                <Tooltip
-                  labelFormatter={value => new Date(value).toLocaleDateString()}
-                  formatter={(value, name) => [
-                    value,
-                    name === 'active_users' ? 'Active Users' : 'New Users',
-                  ]}
-                />
-                <Area
-                  type='monotone'
-                  dataKey='active_users'
-                  stackId='1'
-                  stroke='#3B82F6'
-                  fill='#3B82F6'
-                  fillOpacity={0.6}
-                />
-                <Area
-                  type='monotone'
-                  dataKey='new_users'
-                  stackId='2'
-                  stroke='#10B981'
-                  fill='#10B981'
-                  fillOpacity={0.6}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          )}
-
-          {selectedChart === 'roles' && (
-            <ResponsiveContainer width='100%' height='100%'>
-              <PieChart>
-                <Pie
-                  data={roleDistributionData}
-                  cx='50%'
-                  cy='50%'
-                  labelLine={false}
-                  label={({ name, percent }) =>
-                    `${name} ${((percent || 0) * 100).toFixed(0)}%`
-                  }
-                  outerRadius={80}
-                  fill='#8884d8'
-                  dataKey='value'
-                >
-                  {roleDistributionData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip formatter={value => [value, 'Users']} />
-              </PieChart>
-            </ResponsiveContainer>
-          )}
-
-          {selectedChart === 'activity' && (
-            <ResponsiveContainer width='100%' height='100%'>
-              <BarChart data={userStats.user_activity_timeline}>
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis
-                  dataKey='date'
-                  tickFormatter={value => new Date(value).toLocaleDateString()}
-                />
-                <YAxis />
-                <Tooltip
-                  labelFormatter={value => new Date(value).toLocaleDateString()}
-                  formatter={(value, name) => [
-                    value,
-                    name === 'active_users' ? 'Active Users' : 'New Users',
-                  ]}
-                />
-                <Bar dataKey='active_users' fill='#3B82F6' />
-                <Bar dataKey='new_users' fill='#10B981' />
-              </BarChart>
-            </ResponsiveContainer>
-          )}
-        </div>
-
-        {/* Top Users */}
-        {selectedChart === 'overview' && (
-          <div className='mt-6'>
-            <h4 className='text-sm font-medium text-gray-900 mb-3'>
-              Top Active Users
-            </h4>
-            <div className='space-y-2'>
-              {userStats.top_users.map(user => (
-                <div
-                  key={user.user_id}
-                  className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'
-                >
-                  <div className='flex items-center space-x-3'>
-                    <div className='w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center'>
-                      <span className='text-sm font-medium text-blue-600'>
-                        {user.username.charAt(0).toUpperCase()}
-                      </span>
-                    </div>
-                    <div>
-                      <p className='text-sm font-medium text-gray-900'>
-                        {user.username}
-                      </p>
-                      <p className='text-xs text-gray-500'>
-                        {user.activity_count} activities
-                      </p>
-                    </div>
-                  </div>
-                  <div className='text-xs text-gray-500'>
-                    {new Date(user.last_activity).toLocaleDateString()}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 };

@@ -1,9 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  requireAuthor,
-  requireEditPages,
-  requireDeletePages,
-} from '@/middleware/permissions';
 
 // GET /api/admin/pages/[id] - Get page by ID
 export async function GET(
@@ -12,11 +7,6 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-
-    // Check permissions
-    const permissionCheck = await requireAuthor()(request);
-    if (permissionCheck) return permissionCheck;
-
     const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
     const res = await fetch(`${backendUrl}/api/pages/${id}`);
     if (!res.ok) {
@@ -47,11 +37,6 @@ export async function PUT(
 ) {
   try {
     const { id } = await params;
-
-    // Check permissions
-    const permissionCheck = await requireEditPages()(request);
-    if (permissionCheck) return permissionCheck;
-
     const body = await request.json();
     const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
     const res = await fetch(`${backendUrl}/api/pages/${id}`, {
@@ -87,11 +72,6 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-
-    // Check permissions
-    const permissionCheck = await requireDeletePages()(request);
-    if (permissionCheck) return permissionCheck;
-
     const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
     const res = await fetch(`${backendUrl}/api/pages/${id}`, {
       method: 'DELETE',

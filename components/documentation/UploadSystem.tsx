@@ -199,14 +199,14 @@ export default function UploadSystem() {
         {Object.entries(filesByTag).map(([tag, files]) => (
           <div key={tag} className='mb-4'>
             <div className='font-semibold text-blue-700 mb-1'>{tag}</div>
-            <ul className='list-disc list-inside'>
+            <ul className="space-y-2">
               {files.map(file => (
                 <li key={file.id}>
                   <a
                     href={file.file_path}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-blue-600 underline hover:text-blue-800'
+                    className='text-blue-600 underline hover:opacity-80'
                   >
                     {file.original_name}
                   </a>

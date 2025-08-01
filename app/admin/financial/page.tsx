@@ -285,10 +285,10 @@ export default function AdminFinancialPage() {
         <div className='mb-6'>
           <div className='flex justify-between items-center'>
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>
+              <h1 className='text-2xl font-bold text-primary'>
                 Financial Management
               </h1>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Manage financial data, revenue, costs, and investment metrics
               </p>
             </div>
@@ -366,7 +366,7 @@ export default function AdminFinancialPage() {
                 <tbody className='bg-white divide-y divide-gray-200'>
                   {revenue.map(item => (
                     <tr key={item.id}>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-primary'>
                         {item.month} {item.year}
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium'>
@@ -378,7 +378,7 @@ export default function AdminFinancialPage() {
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-blue-600 font-medium'>
                         {formatCurrency(item.profit)}
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-primary'>
                         {((item.profit / item.revenue) * 100).toFixed(1)}%
                       </td>
                     </tr>
@@ -421,11 +421,11 @@ export default function AdminFinancialPage() {
                   {investmentMetrics.map(metric => (
                     <tr key={metric.id}>
                       <td className='px-6 py-4 whitespace-nowrap'>
-                        <div className='text-sm font-medium text-gray-900'>
+                        <div className='text-sm font-medium text-primary'>
                           {metric.metric}
                         </div>
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-primary font-medium'>
                         {metric.value} {metric.unit}
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -487,7 +487,7 @@ export default function AdminFinancialPage() {
                     <tr key={transaction.id}>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         <div>
-                          <div className='text-sm font-medium text-gray-900'>
+                          <div className='text-sm font-medium text-primary'>
                             {transaction.description}
                           </div>
                           <div className='text-sm text-gray-500'>
@@ -518,7 +518,7 @@ export default function AdminFinancialPage() {
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                         {new Date(transaction.date).toLocaleDateString()}
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-primary'>
                         {transaction.user}
                       </td>
                     </tr>
@@ -534,7 +534,7 @@ export default function AdminFinancialPage() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Add Revenue Record
                 </h3>
                 <form onSubmit={handleRevenueSubmit} className='space-y-4'>
@@ -651,7 +651,7 @@ export default function AdminFinancialPage() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Log Transaction
                 </h3>
                 <form onSubmit={handleTransactionSubmit} className='space-y-4'>
@@ -787,7 +787,7 @@ export default function AdminFinancialPage() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Add Investment Metric
                 </h3>
                 <form onSubmit={handleMetricSubmit} className='space-y-4'>

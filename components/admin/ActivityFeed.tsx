@@ -24,24 +24,31 @@ interface ActivityItem {
     | 'user_created'
     | 'user_updated'
     | 'system_backup'
-    | 'system_restore';
+    | 'system_restore'
+    | 'user_activity'
+    | 'page_updated'
+    | 'project_updated';
   description: string;
   timestamp: string;
   user: string;
   resource_id?: string;
   resource_type?: string;
+  resource_name?: string;
+  user_email?: string;
 }
 
 interface ActivityFeedProps {
   limit?: number;
   showFilters?: boolean;
   className?: string;
+  activities?: ActivityItem[];
 }
 
 const ActivityFeed: React.FC<ActivityFeedProps> = ({
   limit = 10,
   showFilters = true,
   className = '',
+  activities: propActivities,
 }) => {
   const [activities, setActivities] = useState<ActivityItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -49,8 +56,15 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchActivities();
-  }, []);
+    if (propActivities) {
+      // Use provided activities
+      setActivities(propActivities.slice(0, limit));
+      setLoading(false);
+    } else {
+      // Fallback to mock data if no activities provided
+      fetchActivities();
+    }
+  }, [propActivities, limit]);
 
   const fetchActivities = async () => {
     try {
@@ -104,11 +118,11 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
         },
       ];
 
-      setActivities(mockActivities);
-    } catch (err) {
-      setError('Failed to fetch activities');
-      console.error('Error fetching activities:', err);
-    } finally {
+      setActivities(mockActivities.slice(0, limit));
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching activities:', error);
+      setError('Failed to load activities');
       setLoading(false);
     }
   };
@@ -117,13 +131,13 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
     switch (type) {
       case 'page_created':
       case 'page_updated':
-      case 'page_deleted':
         return <FileText className='w-4 h-4' />;
       case 'project_created':
       case 'project_updated':
         return <Activity className='w-4 h-4' />;
       case 'user_created':
       case 'user_updated':
+      case 'user_activity':
         return <User className='w-4 h-4' />;
       case 'system_backup':
       case 'system_restore':
@@ -136,161 +150,117 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
   const getActivityColor = (type: ActivityItem['type']) => {
     switch (type) {
       case 'page_created':
-      case 'project_created':
-      case 'user_created':
-        return 'text-green-600 bg-green-100';
       case 'page_updated':
-      case 'project_updated':
-      case 'user_updated':
         return 'text-blue-600 bg-blue-100';
-      case 'page_deleted':
-        return 'text-red-600 bg-red-100';
+      case 'project_created':
+      case 'project_updated':
+        return 'text-green-600 bg-green-100';
+      case 'user_created':
+      case 'user_updated':
+      case 'user_activity':
+        return 'text-purple-600 bg-purple-100';
       case 'system_backup':
       case 'system_restore':
-        return 'text-purple-600 bg-purple-100';
+        return 'text-orange-600 bg-orange-100';
       default:
-        return 'text-gray-600 bg-gray-100';
+        return 'text-gray-text bg-gray-100';
     }
   };
 
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
     const now = new Date();
-    const diffInMinutes = Math.floor(
-      (now.getTime() - date.getTime()) / (1000 * 60)
-    );
+    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
 
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
-    return date.toLocaleDateString();
+    return `${Math.floor(diffInMinutes / 1440)}d ago`;
   };
-
-  const filteredActivities = activities
-    .filter(activity => {
-      if (filter === 'all') return true;
-      return activity.type.includes(filter);
-    })
-    .slice(0, limit);
 
   if (loading) {
     return (
-      <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-        <div className='p-6'>
-          <div className='flex items-center justify-between mb-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>
-              Recent Activity
-            </h3>
-            <Activity className='w-5 h-5 text-gray-400' />
-          </div>
-          <div className='space-y-4'>
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className='flex items-start space-x-3 animate-pulse'>
-                <div className='w-8 h-8 bg-gray-200 rounded-full'></div>
-                <div className='flex-1 space-y-2'>
-                  <div className='h-4 bg-gray-200 rounded w-3/4'></div>
-                  <div className='h-3 bg-gray-200 rounded w-1/2'></div>
-                </div>
+      <div className={`space-y-4 ${className}`}>
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className='animate-pulse'>
+            <div className='flex items-center space-x-3'>
+              <div className='w-8 h-8 bg-gray-200 rounded-full'></div>
+              <div className='flex-1'>
+                <div className='h-4 bg-gray-200 rounded w-3/4'></div>
+                <div className='h-3 bg-gray-200 rounded w-1/2 mt-2'></div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-        <div className='p-6'>
-          <div className='flex items-center justify-between mb-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>
-              Recent Activity
-            </h3>
-            <Activity className='w-5 h-5 text-gray-400' />
-          </div>
-          <div className='text-center py-8'>
-            <p className='text-red-600'>{error}</p>
-            <button
-              onClick={fetchActivities}
-              className='mt-2 text-sm text-blue-600 hover:text-blue-800'
-            >
-              Try again
-            </button>
-          </div>
-        </div>
+      <div className={`text-center py-8 ${className}`}>
+        <div className='text-red-600 mb-2'>Failed to load activities</div>
+        <button
+          onClick={fetchActivities}
+          className='text-blue-600 hover:text-blue-800 text-sm'
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  if (activities.length === 0) {
+    return (
+      <div className={`text-center py-8 ${className}`}>
+        <div className='text-gray-500'>No recent activity</div>
       </div>
     );
   }
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
-      <div className='p-6'>
-        <div className='flex items-center justify-between mb-4'>
-          <h3 className='text-lg font-semibold text-gray-900'>
-            Recent Activity
-          </h3>
-          <Activity className='w-5 h-5 text-gray-400' />
-        </div>
-
-        {showFilters && (
-          <div className='mb-4'>
-            <select
-              value={filter}
-              onChange={e => setFilter(e.target.value)}
-              className='text-sm border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500'
+    <div className={`space-y-4 ${className}`}>
+      {showFilters && (
+        <div className='flex space-x-2 mb-4'>
+          {['all', 'pages', 'projects', 'users', 'system'].map((filterType) => (
+            <button
+              key={filterType}
+              onClick={() => setFilter(filterType)}
+              className={`px-3 py-1 text-sm rounded-full ${
+                filter === filterType
+                  ? 'bg-blue-100 text-blue-700'
+                  : 'bg-gray-100 text-gray-text hover:bg-gray-200'
+              }`}
             >
-              <option value='all'>All Activities</option>
-              <option value='page'>Pages</option>
-              <option value='project'>Projects</option>
-              <option value='user'>Users</option>
-              <option value='system'>System</option>
-            </select>
-          </div>
-        )}
-
-        <div className='space-y-4'>
-          {filteredActivities.length === 0 ? (
-            <div className='text-center py-8 text-gray-500'>
-              <Activity className='w-8 h-8 mx-auto mb-2 text-gray-300' />
-              <p>No recent activity</p>
-            </div>
-          ) : (
-            filteredActivities.map(activity => (
-              <div key={activity.id} className='flex items-start space-x-3'>
-                <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${getActivityColor(activity.type)}`}
-                >
-                  {getActivityIcon(activity.type)}
-                </div>
-                <div className='flex-1 min-w-0'>
-                  <p className='text-sm text-gray-900'>
-                    {activity.description}
-                  </p>
-                  <div className='flex items-center space-x-2 mt-1'>
-                    <span className='text-xs text-gray-500'>
-                      {activity.user}
-                    </span>
-                    <span className='text-gray-300'>•</span>
-                    <div className='flex items-center space-x-1 text-xs text-gray-500'>
-                      <Clock className='w-3 h-3' />
-                      <span>{formatTimestamp(activity.timestamp)}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-
-        {activities.length > limit && (
-          <div className='mt-4 pt-4 border-t border-gray-200'>
-            <button className='text-sm text-blue-600 hover:text-blue-800'>
-              View all activities
+              {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
             </button>
+          ))}
+        </div>
+      )}
+
+      {activities.map((activity) => (
+        <div key={activity.id} className='flex items-start space-x-3'>
+          <div
+            className={`p-2 rounded-full ${getActivityColor(activity.type)}`}
+          >
+            {getActivityIcon(activity.type)}
           </div>
-        )}
-      </div>
+          <div className='flex-1 min-w-0'>
+            <div className='flex items-center justify-between'>
+              <p className='text-sm font-medium text-primary truncate'>
+                {activity.description}
+              </p>
+              <span className='text-xs text-gray-500 flex items-center'>
+                <Clock className='w-3 h-3 mr-1' />
+                {formatTimestamp(activity.timestamp)}
+              </span>
+            </div>
+            <p className='text-xs text-gray-500 mt-1'>
+              by {activity.user}
+            </p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

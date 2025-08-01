@@ -13,45 +13,43 @@ interface CalculationResult {
 }
 
 export default function EnergyCostCalculator() {
-  const [energyNeeds, setEnergyNeeds] = useState(1000); // MWh per year
+  const [installedCapacity, setInstalledCapacity] = useState(1000); // MW
   const [operatingHours, setOperatingHours] = useState(8760); // hours per year
   const [currentFuelCost, setCurrentFuelCost] = useState(0.15); // €/kWh
   const [results, setResults] = useState<CalculationResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const calculateCosts = () => {
-    // KPP Technology costs
-    const kppLCOE = 25; // €/MWh
-    const kppCost = (energyNeeds * kppLCOE) / 1000; // Convert to thousands
+  const calculateCosts = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch('/api/calculator/energy-costs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          installedCapacity,
+          operatingHours,
+          currentFuelCost,
+        }),
+      });
 
-    // Diesel Generator costs
-    const dieselLCOE = 180; // €/MWh
-    const dieselCost = (energyNeeds * dieselLCOE) / 1000;
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to calculate costs');
+      }
 
-    // Solar PV costs
-    const solarLCOE = 45; // €/MWh
-    const solarCost = (energyNeeds * solarLCOE) / 1000;
-
-    // Natural Gas costs
-    const gasLCOE = 80; // €/MWh
-    const gasCost = (energyNeeds * gasLCOE) / 1000;
-
-    // Calculate savings vs diesel (most common comparison)
-    const kppSavings = dieselCost - kppCost;
-    const annualSavings = kppSavings * 1000; // Convert back to full amount
-
-    // Calculate payback period (assuming €1.2M capital cost for 1MW)
-    const capitalCost = energyNeeds * 1.2; // €1.2M per MW
-    const paybackPeriod = capitalCost / annualSavings;
-
-    setResults({
-      kppCost,
-      dieselCost,
-      solarCost,
-      gasCost,
-      kppSavings,
-      paybackPeriod,
-      annualSavings,
-    });
+      const data = await response.json();
+      setResults(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to calculate costs');
+      console.error('Calculator error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const formatCurrency = (amount: number) => {
@@ -73,7 +71,7 @@ export default function EnergyCostCalculator() {
         <h2 className='text-2xl font-bold text-primary mb-4'>
           Energy Cost Calculator
         </h2>
-        <p className='text-gray-600'>
+        <p className='text-gray-text'>
           Compare the costs of KPP technology with traditional energy sources
           and see your potential savings.
         </p>
@@ -83,12 +81,12 @@ export default function EnergyCostCalculator() {
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8'>
         <div>
           <label className='block text-sm font-medium text-gray-700 mb-2'>
-            Annual Energy Needs (MWh)
+            Installed Capacity
           </label>
           <input
             type='number'
-            value={energyNeeds}
-            onChange={e => setEnergyNeeds(Number(e.target.value))}
+            value={installedCapacity}
+            onChange={e => setInstalledCapacity(Number(e.target.value))}
             className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent mobile-input touch-target min-h-[44px]'
             placeholder='1000'
             min='1'
@@ -127,11 +125,17 @@ export default function EnergyCostCalculator() {
       </div>
 
       <div className='text-center mb-8'>
+        {error && (
+          <div className='mb-4 p-4 bg-red-50 border border-red-200 rounded-lg'>
+            <p className='text-red-600 text-sm'>{error}</p>
+          </div>
+        )}
         <button
           onClick={calculateCosts}
-          className='bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 mobile-button touch-target w-full md:w-auto min-h-[44px]'
+          disabled={loading}
+          className='bg-gradient-to-r from-primary to-primary-light text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 mobile-button touch-target w-full md:w-auto min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed'
         >
-          Calculate Costs
+          {loading ? 'Calculating...' : 'Calculate Costs'}
         </button>
       </div>
 
@@ -148,7 +152,7 @@ export default function EnergyCostCalculator() {
                 <div className='text-2xl font-bold text-green-600 mb-2'>
                   {formatCurrency(results.kppCost)}
                 </div>
-                <div className='text-sm text-gray-600'>KPP Technology</div>
+                <div className='text-sm text-gray-text'>KPP Technology</div>
                 <div className='text-xs text-green-600 font-medium'>
                   {formatPercentage(results.kppCost)} of diesel cost
                 </div>
@@ -158,7 +162,7 @@ export default function EnergyCostCalculator() {
                 <div className='text-2xl font-bold text-red-600 mb-2'>
                   {formatCurrency(results.dieselCost)}
                 </div>
-                <div className='text-sm text-gray-600'>Diesel Generators</div>
+                <div className='text-sm text-gray-text'>Diesel Generators</div>
                 <div className='text-xs text-red-600 font-medium'>Baseline</div>
               </div>
 
@@ -166,7 +170,7 @@ export default function EnergyCostCalculator() {
                 <div className='text-2xl font-bold text-yellow-600 mb-2'>
                   {formatCurrency(results.solarCost)}
                 </div>
-                <div className='text-sm text-gray-600'>Solar PV</div>
+                <div className='text-sm text-gray-text'>Solar PV</div>
                 <div className='text-xs text-yellow-600 font-medium'>
                   {formatPercentage(results.solarCost)} of diesel cost
                 </div>
@@ -176,7 +180,7 @@ export default function EnergyCostCalculator() {
                 <div className='text-2xl font-bold text-orange-600 mb-2'>
                   {formatCurrency(results.gasCost)}
                 </div>
-                <div className='text-sm text-gray-600'>Natural Gas</div>
+                <div className='text-sm text-gray-text'>Natural Gas</div>
                 <div className='text-xs text-orange-600 font-medium'>
                   {formatPercentage(results.gasCost)} of diesel cost
                 </div>
@@ -194,7 +198,7 @@ export default function EnergyCostCalculator() {
                 <div className='text-3xl font-bold text-green-600 mb-2'>
                   {formatCurrency(results.kppSavings)}
                 </div>
-                <div className='text-sm text-gray-600'>
+                <div className='text-sm text-gray-text'>
                   Annual Savings vs Diesel
                 </div>
               </div>
@@ -203,7 +207,7 @@ export default function EnergyCostCalculator() {
                 <div className='text-3xl font-bold text-blue-600 mb-2'>
                   {results.paybackPeriod.toFixed(1)} years
                 </div>
-                <div className='text-sm text-gray-600'>Payback Period</div>
+                <div className='text-sm text-gray-text'>Payback Period</div>
               </div>
 
               <div className='text-center'>
@@ -211,7 +215,7 @@ export default function EnergyCostCalculator() {
                   {((results.kppSavings / results.dieselCost) * 100).toFixed(1)}
                   %
                 </div>
-                <div className='text-sm text-gray-600'>Cost Reduction</div>
+                <div className='text-sm text-gray-text'>Cost Reduction</div>
               </div>
             </div>
           </div>
@@ -288,14 +292,30 @@ export default function EnergyCostCalculator() {
           Calculation Assumptions
         </h4>
         <ul className='text-sm text-blue-700 space-y-1'>
-          <li>• KPP LCOE: €25/MWh (includes all operational costs)</li>
-          <li>• Diesel LCOE: €180/MWh (includes fuel and maintenance)</li>
-          <li>• Solar PV LCOE: €45/MWh (includes intermittency costs)</li>
-          <li>
-            • Natural Gas LCOE: €80/MWh (includes fuel and infrastructure)
-          </li>
-          <li>• Capital cost: €1.2M per MW for KPP technology</li>
-          <li>• Operating hours: 24/7 availability for KPP</li>
+          <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">KPP LCOE: €25/MWh (includes all operational costs)</span>
+                </li>
+          <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Diesel LCOE: €180/MWh (includes fuel and maintenance)</span>
+                </li>
+          <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Solar PV LCOE: €45/MWh (includes intermittency costs)</span>
+                </li>
+          <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">• Natural Gas LCOE: €80/MWh (includes fuel and infrastructure)</span>
+                </li>
+          <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Capital cost: €1.2M per MW for KPP technology</span>
+                </li>
+          <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Operating hours: 24/7 availability for KPP</span>
+                </li>
         </ul>
       </div>
     </div>

@@ -31,7 +31,7 @@ interface TestResult {
 }
 
 export default function IntegrationTestPage() {
-  const { user, isAuthenticated, login, logout, hasRole } = useAuth();
+  const { user, isAuthenticated, login, logout, hasAnyRole } = useAuth();
 
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [isRunningTests, setIsRunningTests] = useState(false);
@@ -100,13 +100,18 @@ export default function IntegrationTestPage() {
     });
 
     try {
-      const response = await apiFetch<{ media: any[] }>('/api/admin/media');
-      tests[2] = {
-        name: 'Documents API',
-        status: 'success',
-        message: `Found ${response.media?.length || 0} documents/media`,
-        details: response,
-      };
+      const response = await fetch('/api/admin/media');
+      if (response.ok) {
+        const data = await response.json();
+        tests[2] = {
+          name: 'Documents API',
+          status: 'success',
+          message: `Found ${data.media?.length || 0} documents/media`,
+          details: data,
+        };
+      } else {
+        throw new Error('Documents API failed');
+      }
     } catch (error: any) {
       tests[2] = {
         name: 'Documents API',
@@ -127,10 +132,10 @@ export default function IntegrationTestPage() {
     });
 
     const roleTests = {
-      admin: hasRole('admin'),
-      editor: hasRole('editor'),
-      viewer: hasRole('viewer'),
-      user: hasRole('user'),
+      admin: hasAnyRole(['admin']),
+      editor: hasAnyRole(['editor']),
+      viewer: hasAnyRole(['viewer']),
+      user: hasAnyRole(['user']),
     };
 
     tests[3] = {
@@ -197,10 +202,10 @@ export default function IntegrationTestPage() {
       <div className='container mx-auto px-4'>
         {/* Header */}
         <div className='text-center mb-8'>
-          <h1 className='text-3xl font-bold text-gray-900 mb-4'>
+          <h1 className='text-3xl font-bold text-primary mb-4'>
             Frontend-Backend Integration Test
           </h1>
-          <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
+          <p className='text-lg text-gray-text max-w-3xl mx-auto'>
             This page tests all the integrations from previous stages to ensure
             everything is working together properly.
           </p>
@@ -208,7 +213,7 @@ export default function IntegrationTestPage() {
 
         {/* Authentication Status */}
         <div className='bg-white rounded-lg shadow p-6 mb-8'>
-          <h2 className='text-xl font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className='text-xl font-semibold text-primary mb-4 flex items-center'>
             <User className='h-5 w-5 mr-2' />
             Authentication Status
           </h2>
@@ -220,7 +225,7 @@ export default function IntegrationTestPage() {
                   <p className='text-sm font-medium text-gray-700'>
                     Logged in as:
                   </p>
-                  <p className='text-lg text-gray-900'>{user?.name}</p>
+                  <p className='text-lg text-primary'>{user?.name}</p>
                   <p className='text-sm text-gray-500'>
                     {user?.email} • Role: {user?.role}
                   </p>
@@ -239,9 +244,9 @@ export default function IntegrationTestPage() {
                     Admin Access
                   </p>
                   <p
-                    className={`text-lg font-bold ${hasRole('admin') ? 'text-green-600' : 'text-red-600'}`}
-                  >
-                    {hasRole('admin') ? 'Yes' : 'No'}
+                                    className={`text-lg font-bold ${hasAnyRole(['admin']) ? 'text-green-600' : 'text-red-600'}`}
+              >
+                {hasAnyRole(['admin']) ? 'Yes' : 'No'}
                   </p>
                 </div>
                 <div className='text-center p-3 bg-gray-50 rounded'>
@@ -249,9 +254,9 @@ export default function IntegrationTestPage() {
                     Editor Access
                   </p>
                   <p
-                    className={`text-lg font-bold ${hasRole('editor') ? 'text-green-600' : 'text-red-600'}`}
-                  >
-                    {hasRole('editor') ? 'Yes' : 'No'}
+                                    className={`text-lg font-bold ${hasAnyRole(['editor']) ? 'text-green-600' : 'text-red-600'}`}
+              >
+                {hasAnyRole(['editor']) ? 'Yes' : 'No'}
                   </p>
                 </div>
                 <div className='text-center p-3 bg-gray-50 rounded'>
@@ -259,9 +264,9 @@ export default function IntegrationTestPage() {
                     Viewer Access
                   </p>
                   <p
-                    className={`text-lg font-bold ${hasRole('viewer') ? 'text-green-600' : 'text-red-600'}`}
-                  >
-                    {hasRole('viewer') ? 'Yes' : 'No'}
+                                    className={`text-lg font-bold ${hasAnyRole(['viewer']) ? 'text-green-600' : 'text-red-600'}`}
+              >
+                {hasAnyRole(['viewer']) ? 'Yes' : 'No'}
                   </p>
                 </div>
                 <div className='text-center p-3 bg-gray-50 rounded'>
@@ -269,16 +274,16 @@ export default function IntegrationTestPage() {
                     User Access
                   </p>
                   <p
-                    className={`text-lg font-bold ${hasRole('user') ? 'text-green-600' : 'text-red-600'}`}
-                  >
-                    {hasRole('user') ? 'Yes' : 'No'}
+                                    className={`text-lg font-bold ${hasAnyRole(['user']) ? 'text-green-600' : 'text-red-600'}`}
+              >
+                {hasAnyRole(['user']) ? 'Yes' : 'No'}
                   </p>
                 </div>
               </div>
             </div>
           ) : (
             <div className='text-center py-8'>
-              <p className='text-gray-600 mb-4'>
+              <p className='text-gray-text mb-4'>
                 You need to be logged in to run integration tests.
               </p>
               <button
@@ -295,7 +300,7 @@ export default function IntegrationTestPage() {
         {isAuthenticated && (
           <div className='bg-white rounded-lg shadow p-6 mb-8'>
             <div className='flex items-center justify-between mb-6'>
-              <h2 className='text-xl font-semibold text-gray-900 flex items-center'>
+              <h2 className='text-xl font-semibold text-primary flex items-center'>
                 <Database className='h-5 w-5 mr-2' />
                 Integration Tests
               </h2>
@@ -329,10 +334,10 @@ export default function IntegrationTestPage() {
                       <div className='flex items-start space-x-3'>
                         {getStatusIcon(test.status)}
                         <div className='flex-1'>
-                          <h3 className='text-sm font-medium text-gray-900'>
+                          <h3 className='text-sm font-medium text-primary'>
                             {test.name}
                           </h3>
-                          <p className='text-sm text-gray-600 mt-1'>
+                          <p className='text-sm text-gray-text mt-1'>
                             {test.message}
                           </p>
                           {test.details && (
@@ -359,7 +364,7 @@ export default function IntegrationTestPage() {
         {isAuthenticated && (
           <div className='bg-white rounded-lg shadow p-6 mb-8'>
             <div className='flex items-center justify-between mb-6'>
-              <h2 className='text-xl font-semibold text-gray-900 flex items-center'>
+              <h2 className='text-xl font-semibold text-primary flex items-center'>
                 <FileText className='h-5 w-5 mr-2' />
                 Document Management Test
               </h2>
@@ -401,7 +406,7 @@ export default function IntegrationTestPage() {
         {/* Toast Test */}
         {isAuthenticated && (
           <div className='bg-white rounded-lg shadow p-6'>
-            <h2 className='text-xl font-semibold text-gray-900 mb-4 flex items-center'>
+            <h2 className='text-xl font-semibold text-primary mb-4 flex items-center'>
               <Globe className='h-5 w-5 mr-2' />
               Toast Notification Test
             </h2>

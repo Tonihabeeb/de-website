@@ -224,10 +224,10 @@ export default function SystemAnalyticsPage() {
       <div className='flex items-center justify-center min-h-screen'>
         <div className='text-center'>
           <AlertTriangle className='h-12 w-12 text-red-500 mx-auto mb-4' />
-          <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+          <h2 className='text-xl font-semibold text-primary mb-2'>
             Error Loading System Analytics
           </h2>
-          <p className='text-gray-600 mb-4'>{error}</p>
+          <p className='text-gray-text mb-4'>{error}</p>
           <Button onClick={fetchSystemAnalytics}>Try Again</Button>
         </div>
       </div>
@@ -239,8 +239,8 @@ export default function SystemAnalyticsPage() {
       {/* Header */}
       <div className='flex justify-between items-center'>
         <div>
-          <h1 className='text-3xl font-bold text-gray-900'>System Analytics</h1>
-          <p className='text-gray-600 mt-2'>
+          <h1 className='text-3xl font-bold text-primary'>System Analytics</h1>
+          <p className='text-gray-text mt-2'>
             Real-time system monitoring and performance analytics
           </p>
         </div>
@@ -270,7 +270,7 @@ export default function SystemAnalyticsPage() {
       {systemHealth && (
         <div className='bg-white rounded-lg shadow-sm border p-6'>
           <div className='flex items-center justify-between mb-4'>
-            <h2 className='text-xl font-semibold text-gray-900 flex items-center gap-2'>
+            <h2 className='text-xl font-semibold text-primary flex items-center gap-2'>
               <Server className='h-5 w-5' />
               System Health Overview
             </h2>
@@ -346,8 +346,8 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>CPU Usage</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-sm font-medium text-gray-text'>CPU Usage</p>
+                <p className='text-2xl font-bold text-primary'>
                   {currentMetrics.cpu_usage}%
                 </p>
               </div>
@@ -366,10 +366,10 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className='text-sm font-medium text-gray-text'>
                   Memory Usage
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-2xl font-bold text-primary'>
                   {currentMetrics.memory_usage}%
                 </p>
               </div>
@@ -388,17 +388,17 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className='text-sm font-medium text-gray-text'>
                   Active Users
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-2xl font-bold text-primary'>
                   {currentMetrics.active_users}
                 </p>
               </div>
               <Users className='h-8 w-8 text-purple-500' />
             </div>
             <div className='mt-4'>
-              <div className='flex items-center text-sm text-gray-600'>
+              <div className='flex items-center text-sm text-gray-text'>
                 <TrendingUp className='h-4 w-4 text-green-500 mr-1' />
                 <span>+12% from last hour</span>
               </div>
@@ -408,17 +408,17 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className='text-sm font-medium text-gray-text'>
                   API Requests/min
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className='text-2xl font-bold text-primary'>
                   {currentMetrics.api_requests_per_minute}
                 </p>
               </div>
               <Activity className='h-8 w-8 text-orange-500' />
             </div>
             <div className='mt-4'>
-              <div className='flex items-center text-sm text-gray-600'>
+              <div className='flex items-center text-sm text-gray-text'>
                 <TrendingUp className='h-4 w-4 text-green-500 mr-1' />
                 <span>+5% from last hour</span>
               </div>
@@ -458,7 +458,7 @@ export default function SystemAnalyticsPage() {
             <div className='space-y-6'>
               <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
                 <div>
-                  <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                  <h3 className='text-lg font-medium text-primary mb-4'>
                     System Resources
                   </h3>
                   <div className='space-y-4'>
@@ -509,18 +509,18 @@ export default function SystemAnalyticsPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                  <h3 className='text-lg font-medium text-primary mb-4'>
                     Performance Metrics
                   </h3>
                   <div className='space-y-4'>
                     <div className='flex justify-between items-center'>
-                      <span className='text-sm text-gray-600'>Error Rate</span>
+                      <span className='text-sm text-gray-text'>Error Rate</span>
                       <span className='text-sm font-medium'>
                         {currentMetrics?.error_rate || 0}%
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
-                      <span className='text-sm text-gray-600'>
+                      <span className='text-sm text-gray-text'>
                         Response Time
                       </span>
                       <span className='text-sm font-medium'>
@@ -528,7 +528,7 @@ export default function SystemAnalyticsPage() {
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
-                      <span className='text-sm text-gray-600'>
+                      <span className='text-sm text-gray-text'>
                         Database Connections
                       </span>
                       <span className='text-sm font-medium'>
@@ -543,7 +543,7 @@ export default function SystemAnalyticsPage() {
 
           {activeTab === 'performance' && (
             <div>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className='text-lg font-medium text-primary mb-4'>
                 API Performance
               </h3>
               <div className='overflow-x-auto'>
@@ -567,7 +567,7 @@ export default function SystemAnalyticsPage() {
                   <tbody className='bg-white divide-y divide-gray-200'>
                     {performanceData.map((endpoint, index) => (
                       <tr key={index}>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-primary'>
                           {endpoint.endpoint}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -589,7 +589,7 @@ export default function SystemAnalyticsPage() {
 
           {activeTab === 'trends' && (
             <div>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className='text-lg font-medium text-primary mb-4'>
                 System Trends
               </h3>
               <div className='text-center py-12 text-gray-500'>
@@ -601,7 +601,7 @@ export default function SystemAnalyticsPage() {
 
           {activeTab === 'alerts' && (
             <div>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className='text-lg font-medium text-primary mb-4'>
                 System Alerts
               </h3>
               <div className='text-center py-12 text-gray-500'>

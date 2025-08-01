@@ -230,10 +230,10 @@ export default function SEOManagementPanel({
       {/* SEO Score */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
         <div className='flex items-center justify-between mb-4'>
-          <h3 className='text-lg font-medium text-gray-900'>SEO Analysis</h3>
+          <h3 className='text-lg font-medium text-primary'>SEO Analysis</h3>
           <div className='flex items-center space-x-2'>
             <BarChart3 className='w-5 h-5 text-gray-400' />
-            <span className='text-sm text-gray-600'>Real-time analysis</span>
+            <span className='text-sm text-gray-text'>Real-time analysis</span>
           </div>
         </div>
 
@@ -243,7 +243,7 @@ export default function SEOManagementPanel({
           >
             {analysis.score}
           </div>
-          <div className='text-sm text-gray-600 mb-4'>SEO Score</div>
+          <div className='text-sm text-gray-text mb-4'>SEO Score</div>
           <div className='w-full bg-gray-200 rounded-full h-3 mb-2'>
             <div
               className={`h-3 rounded-full ${getScoreBgColor(analysis.score).replace('bg-', 'bg-')}`}
@@ -264,11 +264,11 @@ export default function SEOManagementPanel({
 
       {/* Search Preview */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+        <h3 className='text-lg font-medium text-primary mb-4'>
           Search Preview
         </h3>
         <div className='border border-gray-300 rounded-lg p-4 bg-gray-50'>
-          <div className='text-sm text-gray-600 mb-1'>
+          <div className='text-sm text-gray-text mb-1'>
             {analysis.preview.url}
           </div>
           <div className='text-lg text-blue-600 font-medium mb-1 hover:underline cursor-pointer'>
@@ -285,7 +285,7 @@ export default function SEOManagementPanel({
 
       {/* SEO Fields */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>SEO Settings</h3>
+        <h3 className='text-lg font-medium text-primary mb-4'>SEO Settings</h3>
 
         <div className='space-y-4'>
           <div>
@@ -371,7 +371,7 @@ export default function SEOManagementPanel({
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         {/* Issues */}
         <div className='bg-white border border-gray-200 rounded-lg p-6'>
-          <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          <h3 className='text-lg font-medium text-primary mb-4'>
             Issues to Fix
           </h3>
           {loading ? (
@@ -400,14 +400,14 @@ export default function SEOManagementPanel({
           ) : (
             <div className='text-center py-4'>
               <CheckCircle className='w-8 h-8 text-green-500 mx-auto mb-2' />
-              <p className='text-sm text-gray-600'>No issues found!</p>
+              <p className='text-sm text-gray-text'>No issues found!</p>
             </div>
           )}
         </div>
 
         {/* Suggestions */}
         <div className='bg-white border border-gray-200 rounded-lg p-6'>
-          <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          <h3 className='text-lg font-medium text-primary mb-4'>
             Suggestions
           </h3>
           {loading ? (
@@ -440,7 +440,7 @@ export default function SEOManagementPanel({
           ) : (
             <div className='text-center py-4'>
               <CheckCircle className='w-8 h-8 text-green-500 mx-auto mb-2' />
-              <p className='text-sm text-gray-600'>
+              <p className='text-sm text-gray-text'>
                 No suggestions at this time
               </p>
             </div>
@@ -450,31 +450,31 @@ export default function SEOManagementPanel({
 
       {/* Quick Actions */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+        <h3 className='text-lg font-medium text-primary mb-4'>
           Quick Actions
         </h3>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           <button className='flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
             <Search className='w-5 h-5 text-blue-600 mr-3' />
             <div className='text-left'>
-              <p className='font-medium text-gray-900'>Keyword Research</p>
-              <p className='text-sm text-gray-600'>Find relevant keywords</p>
+              <p className='font-medium text-primary'>Keyword Research</p>
+              <p className='text-sm text-gray-text'>Find relevant keywords</p>
             </div>
           </button>
 
           <button className='flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
             <TrendingUp className='w-5 h-5 text-green-600 mr-3' />
             <div className='text-left'>
-              <p className='font-medium text-gray-900'>SEO Analytics</p>
-              <p className='text-sm text-gray-600'>View performance data</p>
+              <p className='font-medium text-primary'>SEO Analytics</p>
+              <p className='text-sm text-gray-text'>View performance data</p>
             </div>
           </button>
 
           <button className='flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
             <Link className='w-5 h-5 text-purple-600 mr-3' />
             <div className='text-left'>
-              <p className='font-medium text-gray-900'>Link Building</p>
-              <p className='text-sm text-gray-600'>Manage backlinks</p>
+              <p className='font-medium text-primary'>Link Building</p>
+              <p className='text-sm text-gray-text'>Manage backlinks</p>
             </div>
           </button>
         </div>

@@ -29,7 +29,7 @@ export default function OMPage() {
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='max-w-6xl mx-auto'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-12 text-center'>
+            <h2 className='text-3xl font-bold text-primary mb-12 text-center'>
               O&M Service Portfolio
             </h2>
 
@@ -39,10 +39,10 @@ export default function OMPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Zap className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className='text-2xl font-bold text-primary mb-4'>
                   Operations
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className='text-gray-text mb-6'>
                   Professional operations management ensuring continuous,
                   efficient, and safe power generation with maximum uptime.
                 </p>
@@ -75,10 +75,10 @@ export default function OMPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Wrench className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className='text-2xl font-bold text-primary mb-4'>
                   Maintenance
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className='text-gray-text mb-6'>
                   Comprehensive maintenance programs including preventive,
                   predictive, and corrective maintenance to maximize equipment
                   reliability.
@@ -116,10 +116,10 @@ export default function OMPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <TrendingUp className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className='text-2xl font-bold text-primary mb-4'>
                   Monitoring & Control
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className='text-gray-text mb-6'>
                   Advanced monitoring and control systems providing real-time
                   data, analytics, and remote operation capabilities.
                 </p>
@@ -152,10 +152,10 @@ export default function OMPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Settings className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className='text-2xl font-bold text-primary mb-4'>
                   Asset Management
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className='text-gray-text mb-6'>
                   Strategic asset management to optimize performance, extend
                   equipment life, and maximize return on investment.
                 </p>
@@ -188,22 +188,22 @@ export default function OMPage() {
       <section className='py-16 bg-gray-50'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
+            <h2 className='text-3xl font-bold text-primary mb-8 text-center'>
               O&M Performance Metrics
             </h2>
 
             <div className='grid md:grid-cols-2 gap-8'>
               <div className='bg-white p-6 rounded-lg shadow-sm'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+                <h3 className='text-xl font-semibold text-primary mb-4'>
                   Reliability & Uptime
                 </h3>
                 <div className='space-y-3'>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>System Availability</span>
+                    <span className='text-gray-text'>System Availability</span>
                     <span className='font-semibold text-blue-600'>99.8%</span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>
+                    <span className='text-gray-text'>
                       Mean Time Between Failures
                     </span>
                     <span className='font-semibold text-blue-600'>
@@ -211,13 +211,13 @@ export default function OMPage() {
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Mean Time to Repair</span>
+                    <span className='text-gray-text'>Mean Time to Repair</span>
                     <span className='font-semibold text-blue-600'>
                       &lt; 4 hours
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Planned Maintenance</span>
+                    <span className='text-gray-text'>Planned Maintenance</span>
                     <span className='font-semibold text-blue-600'>
                       98% on schedule
                     </span>
@@ -226,26 +226,26 @@ export default function OMPage() {
               </div>
 
               <div className='bg-white p-6 rounded-lg shadow-sm'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+                <h3 className='text-xl font-semibold text-primary mb-4'>
                   Performance & Efficiency
                 </h3>
                 <div className='space-y-3'>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Energy Efficiency</span>
+                    <span className='text-gray-text'>Energy Efficiency</span>
                     <span className='font-semibold text-green-600'>94.2%</span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Response Time</span>
+                    <span className='text-gray-text'>Response Time</span>
                     <span className='font-semibold text-green-600'>
                       &lt; 100ms
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Grid Stability</span>
+                    <span className='text-gray-text'>Grid Stability</span>
                     <span className='font-semibold text-green-600'>99.9%</span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Safety Record</span>
+                    <span className='text-gray-text'>Safety Record</span>
                     <span className='font-semibold text-green-600'>
                       Zero incidents
                     </span>
@@ -260,20 +260,32 @@ export default function OMPage() {
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
+            <h2 className='text-3xl font-bold text-primary mb-8 text-center'>
               O&M Service Levels
             </h2>
 
             <div className='grid md:grid-cols-3 gap-8'>
               <div className='bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+                <h3 className='text-xl font-semibold text-primary mb-4'>
                   Basic O&M
                 </h3>
-                <ul className='space-y-2 text-gray-600 mb-6'>
-                  <li>• Scheduled maintenance</li>
-                  <li>• Basic monitoring</li>
-                  <li>• Emergency response</li>
-                  <li>• Performance reporting</li>
+                <ul className='space-y-2 text-gray-text mb-6'>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Scheduled maintenance</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Basic monitoring</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Emergency response</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Performance reporting</span>
+                </li>
                 </ul>
                 <p className='text-sm text-gray-500'>
                   Ideal for smaller installations
@@ -281,29 +293,59 @@ export default function OMPage() {
               </div>
 
               <div className='bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border-2 border-green-200'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+                <h3 className='text-xl font-semibold text-primary mb-4'>
                   Premium O&M
                 </h3>
-                <ul className='space-y-2 text-gray-600 mb-6'>
-                  <li>• 24/7 monitoring</li>
-                  <li>• Predictive maintenance</li>
-                  <li>• Performance optimization</li>
-                  <li>• Remote operation</li>
-                  <li>• Advanced analytics</li>
+                <ul className='space-y-2 text-gray-text mb-6'>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">24/7 monitoring</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Predictive maintenance</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Performance optimization</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Remote operation</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Advanced analytics</span>
+                </li>
                 </ul>
                 <p className='text-sm text-gray-500'>Most popular choice</p>
               </div>
 
               <div className='bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+                <h3 className='text-xl font-semibold text-primary mb-4'>
                   Enterprise O&M
                 </h3>
-                <ul className='space-y-2 text-gray-600 mb-6'>
-                  <li>• Full asset management</li>
-                  <li>• Custom optimization</li>
-                  <li>• Dedicated team</li>
-                  <li>• Strategic planning</li>
-                  <li>• ROI optimization</li>
+                <ul className='space-y-2 text-gray-text mb-6'>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Full asset management</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Custom optimization</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Dedicated team</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Strategic planning</span>
+                </li>
+                  <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">ROI optimization</span>
+                </li>
                 </ul>
                 <p className='text-sm text-gray-500'>
                   For large-scale operations
@@ -334,7 +376,7 @@ export default function OMPage() {
               </a>
               <a
                 href='/services'
-                className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
+                className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
               >
                 View All Services
               </a>

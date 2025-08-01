@@ -264,10 +264,10 @@ export default function AdminProjectProgressPage() {
         <div className='mb-6'>
           <div className='flex justify-between items-center'>
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>
+              <h1 className='text-2xl font-bold text-primary'>
                 Project Progress Management
               </h1>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-gray-text mt-1'>
                 Manage project milestones, metrics, and activity logs
               </p>
             </div>
@@ -340,7 +340,7 @@ export default function AdminProjectProgressPage() {
                     <tr key={milestone.id}>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         <div>
-                          <div className='text-sm font-medium text-gray-900'>
+                          <div className='text-sm font-medium text-primary'>
                             {milestone.name}
                           </div>
                           <div className='text-sm text-gray-500'>
@@ -366,7 +366,7 @@ export default function AdminProjectProgressPage() {
                               style={{ width: `${milestone.progress}%` }}
                             ></div>
                           </div>
-                          <span className='text-sm text-gray-900'>
+                          <span className='text-sm text-primary'>
                             {milestone.progress}%
                           </span>
                         </div>
@@ -390,7 +390,7 @@ export default function AdminProjectProgressPage() {
                               });
                               setShowMilestoneForm(true);
                             }}
-                            className='text-blue-600 hover:text-blue-900'
+                            className='text-blue-600 hover:opacity-80'
                           >
                             <Edit className='w-4 h-4' />
                           </button>
@@ -440,7 +440,7 @@ export default function AdminProjectProgressPage() {
                     <tr key={item.id}>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         <div>
-                          <div className='text-sm font-medium text-gray-900'>
+                          <div className='text-sm font-medium text-primary'>
                             {item.title}
                           </div>
                           <div className='text-sm text-gray-500'>
@@ -453,7 +453,7 @@ export default function AdminProjectProgressPage() {
                           {item.type.replace('_', ' ')}
                         </span>
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-primary'>
                         {item.user}
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -472,7 +472,7 @@ export default function AdminProjectProgressPage() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   {editingMilestone ? 'Edit Milestone' : 'Add New Milestone'}
                 </h3>
                 <form onSubmit={handleMilestoneSubmit} className='space-y-4'>
@@ -618,7 +618,7 @@ export default function AdminProjectProgressPage() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Log Activity
                 </h3>
                 <form onSubmit={handleActivitySubmit} className='space-y-4'>

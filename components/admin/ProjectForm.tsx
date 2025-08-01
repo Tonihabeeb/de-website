@@ -192,10 +192,10 @@ export default function ProjectForm({
       {/* Header */}
       <div className='flex items-center justify-between mb-6'>
         <div>
-          <h2 className='text-2xl font-bold text-gray-900'>
+          <h2 className='text-2xl font-bold text-primary'>
             {isEdit ? 'Edit Project' : 'Create New Project'}
           </h2>
-          <p className='text-gray-600 mt-1'>
+          <p className='text-gray-text mt-1'>
             {isEdit
               ? 'Update project information and settings'
               : 'Add a new project to your portfolio'}
@@ -527,7 +527,7 @@ export default function ProjectForm({
                 <button
                   type='button'
                   onClick={() => addArrayItem('team_members', '')}
-                  className='text-blue-600 hover:text-blue-800 text-sm'
+                  className='text-blue-600 hover:opacity-80 text-sm'
                 >
                   + Add Team Member
                 </button>
@@ -564,7 +564,7 @@ export default function ProjectForm({
                 <button
                   type='button'
                   onClick={() => addArrayItem('technologies', '')}
-                  className='text-blue-600 hover:text-blue-800 text-sm'
+                  className='text-blue-600 hover:opacity-80 text-sm'
                 >
                   + Add Technology
                 </button>
@@ -606,7 +606,7 @@ export default function ProjectForm({
                 <button
                   type='button'
                   onClick={() => addArrayItem('objectives', '')}
-                  className='text-blue-600 hover:text-blue-800 text-sm'
+                  className='text-blue-600 hover:opacity-80 text-sm'
                 >
                   + Add Objective
                 </button>
@@ -648,7 +648,7 @@ export default function ProjectForm({
                 <button
                   type='button'
                   onClick={() => addArrayItem('risks', '')}
-                  className='text-blue-600 hover:text-blue-800 text-sm'
+                  className='text-blue-600 hover:opacity-80 text-sm'
                 >
                   + Add Risk
                 </button>
@@ -674,7 +674,7 @@ export default function ProjectForm({
                 />
                 <label htmlFor='file-upload' className='cursor-pointer'>
                   <Image className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-                  <p className='text-gray-600 mb-2'>
+                  <p className='text-gray-text mb-2'>
                     Click to upload files or drag and drop
                   </p>
                   <p className='text-sm text-gray-500'>
@@ -698,7 +698,7 @@ export default function ProjectForm({
                       <div className='flex items-center space-x-3'>
                         <FileText className='w-5 h-5 text-gray-400' />
                         <div>
-                          <p className='text-sm font-medium text-gray-900'>
+                          <p className='text-sm font-medium text-primary'>
                             {file.name}
                           </p>
                           <p className='text-xs text-gray-500'>

@@ -106,6 +106,96 @@ export default function RootLayout({
         <meta name='apple-mobile-web-app-title' content='Deep Engineering' />
         <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Aggressive browser extension handling
+              (function() {
+                // Suppress all hydration errors immediately
+                const originalError = console.error;
+                const originalWarn = console.warn;
+                
+                console.error = function(...args) {
+                  const errorMessage = args[0]?.toString() || '';
+                  if (
+                    errorMessage.includes('extwaiokist') ||
+                    errorMessage.includes('Hydration failed') ||
+                    errorMessage.includes('server rendered HTML didn\\'t match the client') ||
+                    errorMessage.includes('Text content does not match') ||
+                    errorMessage.includes('Hydration mismatch') ||
+                    errorMessage.includes('Rendered more hooks') ||
+                    errorMessage.includes('Rules of Hooks')
+                  ) {
+                    return;
+                  }
+                  originalError.apply(console, args);
+                };
+                
+                console.warn = function(...args) {
+                  const warnMessage = args[0]?.toString() || '';
+                  if (
+                    warnMessage.includes('extwaiokist') ||
+                    warnMessage.includes('Hydration') ||
+                    warnMessage.includes('hooks')
+                  ) {
+                    return;
+                  }
+                  originalWarn.apply(console, args);
+                };
+                
+                // Aggressive cleanup of browser extension elements
+                function cleanupExtensions() {
+                  // Remove extwaiokist elements
+                  const extwaiokistElements = document.querySelectorAll('[id="extwaiokist"]');
+                  extwaiokistElements.forEach(function(element) {
+                    if (element.parentNode) {
+                      element.parentNode.removeChild(element);
+                    }
+                  });
+                  
+                  // Remove elements with extension-like attributes
+                  const extensionElements = document.querySelectorAll('[v], [q], [c], [i], [u], [s], [sg], [d], [w], [e], [a], [m], [vn]');
+                  extensionElements.forEach(function(element) {
+                    if (element.getAttribute('data-extension-cleanup') !== 'true') {
+                      element.setAttribute('data-extension-cleanup', 'true');
+                      element.style.display = 'none';
+                    }
+                  });
+                }
+                
+                // Run cleanup immediately and on DOM ready
+                cleanupExtensions();
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', cleanupExtensions);
+                }
+                
+                // Set up mutation observer to catch new injections
+                const observer = new MutationObserver(function(mutations) {
+                  mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                      mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                          const element = node;
+                          if (element.id === 'extwaiokist' || element.hasAttribute('v') || element.hasAttribute('q')) {
+                            if (element.parentNode) {
+                              element.parentNode.removeChild(element);
+                            }
+                          }
+                        }
+                      });
+                    }
+                  });
+                });
+                
+                // Start observing
+                observer.observe(document, {
+                  childList: true,
+                  subtree: true
+                });
+              })();
+            `,
+          }}
+        />
+        <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

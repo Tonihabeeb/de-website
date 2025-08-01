@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import HeroSection from '@/components/sections/HeroSection';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,47 +42,83 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block font-medium">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2 mt-1"
-            autoComplete="email"
-          />
+    <div>
+      <HeroSection
+        title='Login'
+        subtitle='Access your Deep Engineering account to manage projects and view detailed information.'
+      />
+
+      <section className='section-padding bg-white'>
+        <div className='container'>
+          <div className='max-w-md mx-auto'>
+            <div className='bg-white rounded-lg shadow-lg p-8'>
+              <h2 className='text-2xl font-bold text-primary mb-6 text-center'>
+                Welcome Back
+              </h2>
+              
+              <form onSubmit={handleSubmit} className='space-y-6'>
+                <div>
+                  <Label htmlFor='email'>Email Address</Label>
+                  <Input
+                    id='email'
+                    type='email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    placeholder='your.email@example.com'
+                    autoComplete='email'
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor='password'>Password</Label>
+                  <Input
+                    id='password'
+                    type='password'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    placeholder='Enter your password'
+                    autoComplete='current-password'
+                  />
+                </div>
+                
+                {error && (
+                  <div className='text-red-600 text-sm bg-red-50 p-3 rounded'>
+                    {error}
+                  </div>
+                )}
+                
+                <Button
+                  type='submit'
+                  variant='primary'
+                  size='lg'
+                  className='w-full'
+                  disabled={loading}
+                >
+                  {loading ? 'Logging in...' : 'Login'}
+                </Button>
+              </form>
+              
+              <div className='mt-6 text-sm text-center text-gray-text'>
+                <a 
+                  href='/register' 
+                  className='text-primary hover:text-primary-dark transition-colors'
+                >
+                  Create an account
+                </a>
+                {' | '}
+                <a 
+                  href='/password-reset' 
+                  className='text-primary hover:text-primary-dark transition-colors'
+                >
+                  Forgot password?
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password" className="block font-medium">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2 mt-1"
-            autoComplete="current-password"
-          />
-        </div>
-        {error && <div className="text-red-600 text-sm">{error}</div>}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-      <div className="mt-4 text-sm text-center">
-        <a href="/register" className="text-blue-600 hover:underline">Create an account</a>
-        {' | '}
-        <a href="/password-reset" className="text-blue-600 hover:underline">Forgot password?</a>
-      </div>
+      </section>
     </div>
   );
 }

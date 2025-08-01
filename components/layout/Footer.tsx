@@ -8,6 +8,12 @@ const footerNavigation = {
     { name: 'Team', href: '/team' },
     { name: 'Contact', href: '/contact' },
   ],
+  legal: [
+    { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'Terms of Service', href: '/terms-of-service' },
+    { name: 'Cookie Policy', href: '/cookie-policy' },
+    { name: 'Accessibility', href: '/accessibility' },
+  ],
   technology: [
     { name: 'KPP Overview', href: '/technology' },
     { name: 'Technical Specifications', href: '/technology/specifications' },
@@ -63,7 +69,7 @@ export default function Footer() {
                 <Mail className='inline w-5 h-5 mr-2 text-white align-text-bottom' />
                 <a
                   href='mailto:info@deepengineering.co'
-                  className='underline min-w-[44px] min-h-[44px] inline-block text-center text-white hover:text-white focus:text-white transition-colors'
+                  className='underline min-w-[44px] min-h-[44px] inline-block text-center text-white hover:text-white focus:text-white transition-colors focus:outline-none'
                 >
                   info@deepengineering.co
                 </a>
@@ -81,7 +87,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className='text-white hover:text-white transition-colors duration-200 drop-shadow-lg'
+                    className='text-white hover:text-white transition-colors duration-200 drop-shadow-lg focus:outline-none'
                   >
                     {item.name}
                   </Link>
@@ -100,7 +106,26 @@ export default function Footer() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className='text-white hover:text-white transition-colors duration-200 drop-shadow-lg'
+                    className='text-white hover:text-white transition-colors duration-200 drop-shadow-lg focus:outline-none'
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Legal Links */}
+          <nav aria-label='Legal navigation'>
+            <h4 className='font-semibold mb-4 text-white drop-shadow-lg'>
+              Legal
+            </h4>
+            <ul className='space-y-2'>
+              {footerNavigation.legal.map(item => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className='text-white hover:text-white transition-colors duration-200 drop-shadow-lg focus:outline-none'
                   >
                     {item.name}
                   </Link>
@@ -123,7 +148,7 @@ export default function Footer() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className='text-white hover:text-white transition-colors duration-200 text-sm drop-shadow-lg'
+                  className='text-white hover:text-white transition-colors duration-200 text-sm drop-shadow-lg focus:outline-none'
                 >
                   {item.name}
                 </Link>

@@ -151,10 +151,10 @@ export default function NewProject() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className='text-2xl font-bold text-primary'>
               Create New Project
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className='text-gray-text mt-1'>
               Set up a new project with all necessary details
             </p>
           </div>
@@ -207,7 +207,7 @@ export default function NewProject() {
       {/* Form */}
       <form onSubmit={handleSubmit} className='space-y-6'>
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+          <h2 className='text-lg font-semibold text-primary mb-4'>
             Basic Information
           </h2>
 
@@ -292,7 +292,7 @@ export default function NewProject() {
 
         {/* Timeline */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
             <Calendar className='w-5 h-5 mr-2' />
             Timeline
           </h2>
@@ -326,7 +326,7 @@ export default function NewProject() {
 
         {/* Budget */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
             <DollarSign className='w-5 h-5 mr-2' />
             Budget & Financials
           </h2>
@@ -385,7 +385,7 @@ export default function NewProject() {
 
         {/* Team & Stakeholders */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
             <Users className='w-5 h-5 mr-2' />
             Team & Stakeholders
           </h2>
@@ -453,7 +453,7 @@ export default function NewProject() {
                   <button
                     type='button'
                     onClick={() => removeTeamMember(member)}
-                    className='ml-2 text-blue-600 hover:text-blue-800'
+                    className='ml-2 text-blue-600 hover:opacity-80'
                   >
                     ×
                   </button>
@@ -465,7 +465,7 @@ export default function NewProject() {
 
         {/* Location & Details */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
             <MapPin className='w-5 h-5 mr-2' />
             Location & Additional Details
           </h2>
@@ -517,7 +517,7 @@ export default function NewProject() {
                     <button
                       type='button'
                       onClick={() => removeTag(tag)}
-                      className='ml-2 text-gray-600 hover:text-gray-800'
+                      className='ml-2 text-gray-text hover:text-gray-800'
                     >
                       ×
                     </button>

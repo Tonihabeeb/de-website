@@ -162,25 +162,25 @@ export default function EconomicsPage() {
                         </div>
                         <div className='grid grid-cols-2 gap-4 text-sm'>
                           <div>
-                            <span className='text-gray-600'>LCOE:</span>
+                            <span className='text-gray-text'>LCOE:</span>
                             <span className='font-semibold text-primary ml-2'>
                               {tech.lcoe}
                             </span>
                           </div>
                           <div>
-                            <span className='text-gray-600'>Fuel Cost:</span>
+                            <span className='text-gray-text'>Fuel Cost:</span>
                             <span className='font-semibold text-gray-800 ml-2'>
                               {tech.fuelCost}
                             </span>
                           </div>
                           <div>
-                            <span className='text-gray-600'>O&M Cost:</span>
+                            <span className='text-gray-text'>O&M Cost:</span>
                             <span className='font-semibold text-gray-800 ml-2'>
                               {tech.oamCost}
                             </span>
                           </div>
                           <div>
-                            <span className='text-gray-600'>Capital Cost:</span>
+                            <span className='text-gray-text'>Capital Cost:</span>
                             <span className='font-semibold text-gray-800 ml-2'>
                               {tech.capitalCost}
                             </span>
@@ -262,19 +262,19 @@ export default function EconomicsPage() {
                     <div className='text-3xl font-bold text-primary mb-2'>
                       €155M
                     </div>
-                    <div className='text-sm text-gray-600'>Annual Savings</div>
+                    <div className='text-sm text-gray-text'>Annual Savings</div>
                   </div>
                   <div className='text-center'>
                     <div className='text-3xl font-bold text-green-600 mb-2'>
                       85%
                     </div>
-                    <div className='text-sm text-gray-600'>Cost Reduction</div>
+                    <div className='text-sm text-gray-text'>Cost Reduction</div>
                   </div>
                   <div className='text-center'>
                     <div className='text-3xl font-bold text-blue-600 mb-2'>
                       0
                     </div>
-                    <div className='text-sm text-gray-600'>Fuel Required</div>
+                    <div className='text-sm text-gray-text'>Fuel Required</div>
                   </div>
                 </div>
 
@@ -286,7 +286,7 @@ export default function EconomicsPage() {
                   <div className='space-y-2'>
                     {savingsData.map((data, index) => (
                       <div key={index} className='flex items-center gap-4'>
-                        <span className='w-16 text-sm text-gray-600'>
+                        <span className='w-16 text-sm text-gray-text'>
                           Year {data.year}
                         </span>
                         <div className='flex-1 bg-gray-200 rounded-full h-4'>
@@ -330,7 +330,7 @@ export default function EconomicsPage() {
                 <h3 className='text-lg font-semibold text-gray-800 mb-2'>
                   Payback Period
                 </h3>
-                <p className='text-sm text-gray-600'>
+                <p className='text-sm text-gray-text'>
                   Time to recover initial investment
                 </p>
               </div>
@@ -341,7 +341,7 @@ export default function EconomicsPage() {
                 <h3 className='text-lg font-semibold text-gray-800 mb-2'>
                   Annual ROI
                 </h3>
-                <p className='text-sm text-gray-600'>
+                <p className='text-sm text-gray-text'>
                   Return on investment rate
                 </p>
               </div>
@@ -352,7 +352,7 @@ export default function EconomicsPage() {
                 <h3 className='text-lg font-semibold text-gray-800 mb-2'>
                   Service Life
                 </h3>
-                <p className='text-sm text-gray-600'>
+                <p className='text-sm text-gray-text'>
                   Extended operational lifetime
                 </p>
               </div>
@@ -391,32 +391,32 @@ export default function EconomicsPage() {
 
                   <div className='space-y-3 mb-4'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Location:</span>
+                      <span className='text-gray-text'>Location:</span>
                       <span className='font-medium'>
                         {opportunity.location}
                       </span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Investment:</span>
+                      <span className='text-gray-text'>Investment:</span>
                       <span className='font-bold text-primary'>
                         {opportunity.investment}
                       </span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Expected Returns:</span>
+                      <span className='text-gray-text'>Expected Returns:</span>
                       <span className='font-bold text-green-600'>
                         {opportunity.returns}
                       </span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Timeline:</span>
+                      <span className='text-gray-text'>Timeline:</span>
                       <span className='font-medium'>
                         {opportunity.timeline}
                       </span>
                     </div>
                   </div>
 
-                  <button className='w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]'>
+                  <button className='w-full bg-gradient-to-r from-primary to-primary-light text-white py-2 px-4 rounded-lg hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 min-w-[44px] min-h-[44px]'>
                     Learn More
                   </button>
                 </div>
@@ -443,7 +443,7 @@ export default function EconomicsPage() {
             </Link>
             <Link
               href='/projects'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
             >
               View Projects
             </Link>

@@ -121,15 +121,27 @@ export default function AnimationDemoPage() {
               <h3 className='text-lg font-semibold text-primary mb-4'>
                 Interactive Diagram
               </h3>
-              <p className='text-gray-600 text-base mb-4'>
+              <p className='text-gray-text text-base mb-4'>
                 Clickable components with detailed specifications and hover
                 effects.
               </p>
-              <ul className='text-base text-gray-600 space-y-2'>
-                <li>• Component details on click</li>
-                <li>• Hover labels and tooltips</li>
-                <li>• System relationship visualization</li>
-                <li>• Technical specifications panel</li>
+              <ul className='text-base text-gray-text space-y-2'>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Component details on click</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Hover labels and tooltips</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">System relationship visualization</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Technical specifications panel</span>
+                </li>
               </ul>
             </div>
 
@@ -137,15 +149,27 @@ export default function AnimationDemoPage() {
               <h3 className='text-lg font-semibold text-primary mb-4'>
                 Dynamic Animation
               </h3>
-              <p className='text-gray-600 text-base mb-4'>
+              <p className='text-gray-text text-base mb-4'>
                 Full cycle animation showing the complete energy generation
                 process.
               </p>
-              <ul className='text-base text-gray-600 space-y-2'>
-                <li>• Play/pause controls</li>
-                <li>• Adjustable speed settings</li>
-                <li>• Real-time energy flow visualization</li>
-                <li>• Component interaction effects</li>
+              <ul className='text-base text-gray-text space-y-2'>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Play/pause controls</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Adjustable speed settings</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Real-time energy flow visualization</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Component interaction effects</span>
+                </li>
               </ul>
             </div>
 
@@ -153,14 +177,26 @@ export default function AnimationDemoPage() {
               <h3 className='text-lg font-semibold text-primary mb-4'>
                 Blueprint View
               </h3>
-              <p className='text-gray-600 text-base mb-4'>
+              <p className='text-gray-text text-base mb-4'>
                 Professional engineering schematic with technical measurements.
               </p>
-              <ul className='text-base text-gray-600 space-y-2'>
-                <li>• Engineering blueprint style</li>
-                <li>• Technical specifications overlay</li>
-                <li>• Measurement indicators</li>
-                <li>• Professional documentation format</li>
+              <ul className='text-base text-gray-text space-y-2'>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Engineering blueprint style</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Technical specifications overlay</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Measurement indicators</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-text">Professional documentation format</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -209,7 +245,7 @@ export default function AnimationDemoPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-600'>
+            <p className='text-base text-gray-text'>
               Explore more about KPP technology and related topics:
             </p>
           </div>

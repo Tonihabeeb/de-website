@@ -126,10 +126,10 @@ export default function PageContentForm({
       {/* Form Header */}
       <div className='flex justify-between items-center'>
         <div>
-          <h2 className='text-lg font-medium text-gray-900'>
+          <h2 className='text-lg font-medium text-primary'>
             {isEdit ? 'Edit Page' : 'Create New Page'}
           </h2>
-          <p className='text-sm text-gray-600'>
+          <p className='text-sm text-gray-text'>
             {isEdit
               ? 'Update your page content and settings'
               : 'Add a new page to your website'}
@@ -353,7 +353,7 @@ export default function PageContentForm({
 
             {activeSection === 'preview' && (
               <div className='bg-white border border-gray-200 rounded-lg p-6'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className='text-lg font-medium text-primary mb-4'>
                   Page Preview
                 </h3>
                 <div className='prose max-w-none'>
@@ -374,7 +374,7 @@ export default function PageContentForm({
           <div className='space-y-6'>
             {/* Page Info */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className='text-sm font-medium text-primary mb-3'>
                 Page Information
               </h3>
               <div className='space-y-2 text-sm'>
@@ -392,13 +392,13 @@ export default function PageContentForm({
                 </div>
                 <div>
                   <span className='text-gray-500'>URL:</span>
-                  <span className='ml-2 text-gray-900'>
+                  <span className='ml-2 text-primary'>
                     /{formData.slug || 'page-slug'}
                   </span>
                 </div>
                 <div>
                   <span className='text-gray-500'>Created:</span>
-                  <span className='ml-2 text-gray-900'>
+                  <span className='ml-2 text-primary'>
                     {isEdit ? 'Updated' : 'Just now'}
                   </span>
                 </div>
@@ -407,14 +407,14 @@ export default function PageContentForm({
 
             {/* SEO Score */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className='text-sm font-medium text-primary mb-3'>
                 SEO Score
               </h3>
               <div className='text-center'>
                 <div className='text-2xl font-bold text-blue-600'>
                   {seoScore.percentage}%
                 </div>
-                <div className='text-sm text-gray-600'>
+                <div className='text-sm text-gray-text'>
                   {seoScore.score}/{seoScore.maxScore} points
                 </div>
                 <div className='mt-2 w-full bg-gray-200 rounded-full h-2'>
@@ -424,7 +424,7 @@ export default function PageContentForm({
                   ></div>
                 </div>
               </div>
-              <div className='mt-3 space-y-1 text-xs text-gray-600'>
+              <div className='mt-3 space-y-1 text-xs text-gray-text'>
                 <div className='flex items-center'>
                   <div
                     className={`w-2 h-2 rounded-full mr-2 ${formData.title.length > 0 ? 'bg-green-500' : 'bg-gray-300'}`}
@@ -460,7 +460,7 @@ export default function PageContentForm({
 
             {/* Actions */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className='text-sm font-medium text-primary mb-3'>
                 Actions
               </h3>
               <div className='space-y-2'>

@@ -357,7 +357,7 @@ function MediaSearch() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <RefreshCw className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading media search...</span>
+          <span className='ml-2 text-gray-text'>Loading media search...</span>
         </div>
       </div>
     );
@@ -369,10 +369,10 @@ function MediaSearch() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className='text-2xl font-bold text-primary'>
               Media Search & Filter
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className='text-gray-text mt-1'>
               Advanced search and filtering for media files
             </p>
           </div>
@@ -436,7 +436,7 @@ function MediaSearch() {
       {/* Advanced Filters */}
       {showFilters && (
         <div className='mb-6 bg-white rounded-lg shadow p-6'>
-          <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
             <Filter className='w-5 h-5 mr-2' />
             Advanced Filters
           </h3>
@@ -603,7 +603,7 @@ function MediaSearch() {
       {/* Results Header */}
       <div className='mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
         <div>
-          <h2 className='text-lg font-semibold text-gray-900'>
+          <h2 className='text-lg font-semibold text-primary'>
             Search Results ({filteredItems.length} files)
           </h2>
           {Object.values(filters).some(value =>
@@ -612,7 +612,7 @@ function MediaSearch() {
               : typeof value === 'object'
                 ? Object.values(value).some(v => v !== '' && v !== 0)
                 : value !== ''
-          ) && <p className='text-sm text-gray-600 mt-1'>Filters applied</p>}
+          ) && <p className='text-sm text-gray-text mt-1'>Filters applied</p>}
         </div>
 
         <div className='flex items-center space-x-3'>
@@ -677,7 +677,7 @@ function MediaSearch() {
 
                   <div className='text-center'>
                     <div
-                      className='text-sm font-medium text-gray-900 truncate'
+                      className='text-sm font-medium text-primary truncate'
                       title={item.filename}
                     >
                       {item.filename}
@@ -772,7 +772,7 @@ function MediaSearch() {
                       <div className='flex items-center'>
                         {getFileIcon(item.mime_type)}
                         <div className='ml-3'>
-                          <div className='text-sm font-medium text-gray-900'>
+                          <div className='text-sm font-medium text-primary'>
                             {item.filename}
                           </div>
                           <div className='text-sm text-gray-500'>
@@ -809,7 +809,7 @@ function MediaSearch() {
                       <div className='flex items-center justify-end space-x-2'>
                         <button
                           onClick={() => window.open(item.file_path, '_blank')}
-                          className='text-blue-600 hover:text-blue-900'
+                          className='text-blue-600 hover:opacity-80'
                           title='View'
                         >
                           <Eye className='w-4 h-4' />
@@ -840,10 +840,10 @@ function MediaSearch() {
         {filteredItems.length === 0 && (
           <div className='text-center py-12'>
             <Search className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-            <h3 className='text-lg font-medium text-gray-900 mb-2'>
+            <h3 className='text-lg font-medium text-primary mb-2'>
               No files found
             </h3>
-            <p className='text-gray-600'>
+            <p className='text-gray-text'>
               Try adjusting your search terms or filters.
             </p>
           </div>

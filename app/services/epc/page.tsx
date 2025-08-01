@@ -346,7 +346,7 @@ export default function EPCServicesPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:from-primary-dark hover:to-primary hover:text-white transition-colors duration-200 text-center'
                 >
                   Learn About KPP Technology
                 </Link>
@@ -684,7 +684,7 @@ export default function EPCServicesPage() {
             </Link>
             <Link
               href='/projects/kpp-project'
-              className='border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-300 transition-colors duration-200'
             >
               View KPP Project
             </Link>

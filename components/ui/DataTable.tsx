@@ -127,7 +127,7 @@ const DataTable = <TData, TValue>({
                   {row.getVisibleCells().map(cell => (
                     <td
                       key={cell.id}
-                      className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'
+                      className='px-6 py-4 whitespace-nowrap text-sm text-primary'
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

@@ -4,6 +4,9 @@ import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
 import ScrollTriggeredDiagram from '@/components/animations/ScrollTriggeredDiagram';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import HeroSection from '@/components/sections/HeroSection';
+import KPPSchematic from '@/components/technical/KPPSchematic';
+
+
 import {
   Wind,
   ArrowUp,
@@ -13,6 +16,9 @@ import {
   Sun,
   Leaf,
   TrendingUp,
+  ArrowRight,
+  Lightbulb,
+  Play,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -163,48 +169,18 @@ export default function HowItWorksPage() {
               <div className='mt-8'>
                 <Link
                   href='/technology/physics'
-                  className='inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
+                  className='inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary to-primary-light text-white font-semibold rounded-lg hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-white transition-all duration-200'
                   style={{
                     transition: 'color 0.2s, background 0.2s, transform 0.2s',
                   }}
                 >
                   More Details
-                  <svg
-                    className='ml-2 w-5 h-5'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M17 8l4 4m0 0l-4 4m4-4H3'
-                    />
-                  </svg>
+                  <ArrowRight className='ml-2 w-5 h-5' />
                 </Link>
               </div>
             </div>
             <div className='bg-white rounded-lg p-8'>
-              <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
-                <div className='text-white text-center'>
-                  <svg
-                    className='w-4 h-4 mx-auto mb-4'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'
-                    />
-                  </svg>
-                  <p className='text-lg font-semibold'>Technical Diagram</p>
-                  <p className='text-base opacity-90'>Coming Soon</p>
-                </div>
-              </div>
+              <KPPSchematic />
             </div>
           </div>
         </div>
@@ -253,19 +229,7 @@ export default function HowItWorksPage() {
           <div className='bg-white rounded-lg p-8 text-center'>
             <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
               <div className='text-white text-center'>
-                <svg
-                  className='w-4 h-4 mx-auto mb-4'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                  />
-                </svg>
+                <Play className='w-16 h-16 mx-auto mb-4' />
                 <p className='text-lg font-semibold'>KPP Technology Video</p>
                 <p className='text-base opacity-90'>Coming Soon</p>
               </div>
@@ -293,7 +257,7 @@ export default function HowItWorksPage() {
             </Link>
             <Link
               href='/technology/performance'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center'
             >
               Performance Data
             </Link>
@@ -308,14 +272,14 @@ export default function HowItWorksPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-600'>
+            <p className='text-base text-gray-text'>
               Explore more about KPP technology and related topics:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/technology'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark hover:text-white focus:text-white transition-colors'
+              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:from-primary-dark hover:to-primary hover:text-white hover:text-white focus:text-white transition-colors'
             >
               Technology Overview
             </Link>

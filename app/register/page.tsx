@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import HeroSection from '@/components/sections/HeroSection';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -38,59 +42,96 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Create Account</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block font-medium">Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2 mt-1"
-            autoComplete="name"
-          />
+    <div>
+      <HeroSection
+        title='Create Account'
+        subtitle='Join Deep Engineering to access project information and manage your account.'
+      />
+
+      <section className='section-padding bg-white'>
+        <div className='container'>
+          <div className='max-w-md mx-auto'>
+            <div className='bg-white rounded-lg shadow-lg p-8'>
+              <h2 className='text-2xl font-bold text-primary mb-6 text-center'>
+                Join Deep Engineering
+              </h2>
+              
+              <form onSubmit={handleSubmit} className='space-y-6'>
+                <div>
+                  <Label htmlFor='name'>Full Name</Label>
+                  <Input
+                    id='name'
+                    type='text'
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    required
+                    placeholder='Enter your full name'
+                    autoComplete='name'
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor='email'>Email Address</Label>
+                  <Input
+                    id='email'
+                    type='email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    placeholder='your.email@example.com'
+                    autoComplete='email'
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor='password'>Password</Label>
+                  <Input
+                    id='password'
+                    type='password'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    minLength={6}
+                    placeholder='Create a password (min 6 characters)'
+                    autoComplete='new-password'
+                  />
+                </div>
+                
+                {error && (
+                  <div className='text-red-600 text-sm bg-red-50 p-3 rounded'>
+                    {error}
+                  </div>
+                )}
+                
+                {success && (
+                  <div className='text-green-600 text-sm bg-green-50 p-3 rounded'>
+                    Account created! Redirecting...
+                  </div>
+                )}
+                
+                <Button
+                  type='submit'
+                  variant='primary'
+                  size='lg'
+                  className='w-full'
+                  disabled={loading}
+                >
+                  {loading ? 'Creating account...' : 'Register'}
+                </Button>
+              </form>
+              
+              <div className='mt-6 text-sm text-center text-gray-text'>
+                <a 
+                  href='/login' 
+                  className='text-primary hover:text-primary-dark transition-colors'
+                >
+                  Already have an account? Login
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="email" className="block font-medium">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            className="w-full border rounded px-3 py-2 mt-1"
-            autoComplete="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password" className="block font-medium">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-            minLength={6}
-            className="w-full border rounded px-3 py-2 mt-1"
-            autoComplete="new-password"
-          />
-        </div>
-        {error && <div className="text-red-600 text-sm">{error}</div>}
-        {success && <div className="text-green-600 text-sm">Account created! Redirecting...</div>}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? 'Creating account...' : 'Register'}
-        </button>
-      </form>
-      <div className="mt-4 text-sm text-center">
-        <a href="/login" className="text-blue-600 hover:underline">Already have an account? Login</a>
-      </div>
+      </section>
     </div>
   );
 }

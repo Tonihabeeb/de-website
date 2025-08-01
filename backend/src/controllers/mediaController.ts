@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { MediaModel, CreateMediaSchema } from '../models/Media';
-import type { File as MulterFile } from 'multer';
+import type { Multer } from 'multer';
 
 export async function listMedia(req: Request, res: Response) {
   try {
@@ -32,7 +32,7 @@ export async function getMedia(req: Request, res: Response) {
 export async function uploadMedia(req: Request, res: Response) {
   try {
     // Placeholder: req.file should be set by Multer middleware
-    const file = req.file as MulterFile | undefined;
+    const file = req.file as Express.Multer.File | undefined;
     if (!file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
