@@ -29,7 +29,7 @@ export default function SupplyPage() {
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='max-w-6xl mx-auto'>
-            <h2 className='text-3xl font-bold text-primary mb-12 text-center'>
+            <h2 className='text-3xl font-bold text-gray-900 mb-12 text-center'>
               Supply Portfolio
             </h2>
 
@@ -39,10 +39,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Zap className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-primary mb-4'>
+                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
                   Complete KPP Units
                 </h3>
-                <p className='text-gray-text mb-6'>
+                <p className='text-gray-600 mb-6'>
                   Fully integrated power generation units ready for installation
                   and operation, including all necessary components and control
                   systems.
@@ -80,10 +80,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Wrench className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-primary mb-4'>
+                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
                   Individual Components
                 </h3>
-                <p className='text-gray-text mb-6'>
+                <p className='text-gray-600 mb-6'>
                   High-quality individual components and spare parts for
                   maintenance, upgrades, and custom system configurations.
                 </p>
@@ -120,10 +120,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Settings className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-primary mb-4'>
+                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
                   Control & Monitoring
                 </h3>
-                <p className='text-gray-text mb-6'>
+                <p className='text-gray-600 mb-6'>
                   Advanced control and monitoring systems for optimal
                   performance, safety, and remote operation capabilities.
                 </p>
@@ -158,10 +158,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Battery className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-primary mb-4'>
+                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
                   Energy Storage Solutions
                 </h3>
-                <p className='text-gray-text mb-6'>
+                <p className='text-gray-600 mb-6'>
                   High-capacity energy storage systems for grid stability, peak
                   shaving, and renewable energy integration.
                 </p>
@@ -200,36 +200,36 @@ export default function SupplyPage() {
       <section className='py-16 bg-gray-50'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-bold text-primary mb-8 text-center'>
+            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
               Supply Capabilities
             </h2>
 
             <div className='grid md:grid-cols-2 gap-8'>
               <div className='bg-white p-6 rounded-lg shadow-sm'>
-                <h3 className='text-xl font-semibold text-primary mb-4'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
                   Production Capacity
                 </h3>
                 <div className='space-y-3'>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Annual Production</span>
+                    <span className='text-gray-600'>Annual Production</span>
                     <span className='font-semibold text-blue-600'>
                       100+ Units
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Lead Time</span>
+                    <span className='text-gray-600'>Lead Time</span>
                     <span className='font-semibold text-blue-600'>
                       6-12 months
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Quality Control</span>
+                    <span className='text-gray-600'>Quality Control</span>
                     <span className='font-semibold text-blue-600'>
                       100% Testing
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Warranty</span>
+                    <span className='text-gray-600'>Warranty</span>
                     <span className='font-semibold text-blue-600'>
                       10 Years
                     </span>
@@ -238,30 +238,30 @@ export default function SupplyPage() {
               </div>
 
               <div className='bg-white p-6 rounded-lg shadow-sm'>
-                <h3 className='text-xl font-semibold text-primary mb-4'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
                   Logistics & Support
                 </h3>
                 <div className='space-y-3'>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Global Shipping</span>
+                    <span className='text-gray-600'>Global Shipping</span>
                     <span className='font-semibold text-green-600'>
                       Worldwide
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Installation Support</span>
+                    <span className='text-gray-600'>Installation Support</span>
                     <span className='font-semibold text-green-600'>
                       Included
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Training Programs</span>
+                    <span className='text-gray-600'>Training Programs</span>
                     <span className='font-semibold text-green-600'>
                       Comprehensive
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-text'>Technical Support</span>
+                    <span className='text-gray-600'>Technical Support</span>
                     <span className='font-semibold text-green-600'>
                       24/7 Available
                     </span>
@@ -276,7 +276,7 @@ export default function SupplyPage() {
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-bold text-primary mb-8 text-center'>
+            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
               Supply Process
             </h2>
 
@@ -285,10 +285,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 mx-auto mb-4 bg-primary rounded-full flex items-center justify-center'>
                   <span className='text-white text-2xl'>1</span>
                 </div>
-                <h3 className='text-xl font-semibold text-primary mb-2'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                   Consultation
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   Initial consultation to understand your requirements and
                   project specifications.
                 </p>
@@ -298,10 +298,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 mx-auto mb-4 bg-primary rounded-full flex items-center justify-center'>
                   <span className='text-white text-2xl'>2</span>
                 </div>
-                <h3 className='text-xl font-semibold text-primary mb-2'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                   Design
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   Custom design and engineering to meet your specific project
                   needs.
                 </p>
@@ -311,10 +311,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 mx-auto mb-4 bg-primary rounded-full flex items-center justify-center'>
                   <span className='text-white text-2xl'>3</span>
                 </div>
-                <h3 className='text-xl font-semibold text-primary mb-2'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                   Production
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   Manufacturing and quality control testing in our
                   state-of-the-art facilities.
                 </p>
@@ -324,10 +324,10 @@ export default function SupplyPage() {
                 <div className='w-16 h-16 mx-auto mb-4 bg-primary rounded-full flex items-center justify-center'>
                   <span className='text-white text-2xl'>4</span>
                 </div>
-                <h3 className='text-xl font-semibold text-primary mb-2'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                   Delivery
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   Secure shipping and delivery with installation support and
                   training.
                 </p>
@@ -354,7 +354,7 @@ export default function SupplyPage() {
               </a>
               <a
                 href='/services'
-                className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
+                className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
               >
                 View All Services
               </a>

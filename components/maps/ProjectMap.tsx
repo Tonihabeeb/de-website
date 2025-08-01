@@ -233,7 +233,7 @@ export default function ProjectMap() {
                 </h3>
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className='text-gray-text hover:text-gray-700 transition-colors'
+                  className='text-gray-600 hover:text-gray-700 transition-colors'
                   aria-label='Close project details'
                 >
                   <svg
@@ -254,7 +254,7 @@ export default function ProjectMap() {
 
               <div className='space-y-3'>
                 <div>
-                  <span className='text-sm font-medium text-gray-text'>
+                  <span className='text-sm font-medium text-gray-600'>
                     Location:
                   </span>
                   <p className='text-sm text-gray-800'>
@@ -263,7 +263,7 @@ export default function ProjectMap() {
                 </div>
 
                 <div>
-                  <span className='text-sm font-medium text-gray-text'>
+                  <span className='text-sm font-medium text-gray-600'>
                     Capacity:
                   </span>
                   <p className='text-sm text-gray-800'>
@@ -272,7 +272,7 @@ export default function ProjectMap() {
                 </div>
 
                 <div>
-                  <span className='text-sm font-medium text-gray-text'>
+                  <span className='text-sm font-medium text-gray-600'>
                     Status:
                   </span>
                   <div className='flex items-center gap-2'>
@@ -288,7 +288,7 @@ export default function ProjectMap() {
                 {selectedProject.progress !== undefined &&
                   selectedProject.progress > 0 && (
                     <div>
-                      <span className='text-sm font-medium text-gray-text'>
+                      <span className='text-sm font-medium text-gray-600'>
                         Progress:
                       </span>
                       <div className='mt-1'>
@@ -300,7 +300,7 @@ export default function ProjectMap() {
                             className='bg-primary h-2 rounded-full'
                           />
                         </div>
-                        <span className='text-xs text-gray-text'>
+                        <span className='text-xs text-gray-600'>
                           {selectedProject.progress}%
                         </span>
                       </div>
@@ -308,7 +308,7 @@ export default function ProjectMap() {
                   )}
 
                 <div>
-                  <span className='text-sm font-medium text-gray-text'>
+                  <span className='text-sm font-medium text-gray-600'>
                     Description:
                   </span>
                   <p className='text-sm text-gray-800 mt-1'>
@@ -338,7 +338,7 @@ export default function ProjectMap() {
                 <h4 className='font-semibold text-sm text-gray-800'>
                   {project.name}
                 </h4>
-                <p className='text-xs text-gray-text'>{project.capacity}</p>
+                <p className='text-xs text-gray-600'>{project.capacity}</p>
               </div>
             </div>
           </motion.div>
@@ -349,15 +349,15 @@ export default function ProjectMap() {
       <div className='mt-6 flex flex-wrap gap-6 justify-center'>
         <div className='flex items-center gap-2'>
           <div className='w-4 h-4 rounded-full bg-yellow-500'></div>
-          <span className='text-sm text-gray-text'>Planned</span>
+          <span className='text-sm text-gray-600'>Planned</span>
         </div>
         <div className='flex items-center gap-2'>
           <div className='w-4 h-4 rounded-full bg-orange-500'></div>
-          <span className='text-sm text-gray-text'>Under Construction</span>
+          <span className='text-sm text-gray-600'>Under Construction</span>
         </div>
         <div className='flex items-center gap-2'>
           <div className='w-4 h-4 rounded-full bg-green-500'></div>
-          <span className='text-sm text-gray-text'>Operational</span>
+          <span className='text-sm text-gray-600'>Operational</span>
         </div>
       </div>
     </div>

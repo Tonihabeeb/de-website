@@ -238,7 +238,7 @@ export default function AdminUsersPage() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600'></div>
-          <span className='ml-2 text-gray-text'>Loading users...</span>
+          <span className='ml-2 text-gray-600'>Loading users...</span>
         </div>
       </div>
     );
@@ -251,10 +251,10 @@ export default function AdminUsersPage() {
         <div className='mb-6'>
           <div className='flex justify-between items-center'>
             <div>
-              <h1 className='text-2xl font-bold text-primary'>
+              <h1 className='text-2xl font-bold text-gray-900'>
                 User Management
               </h1>
-              <p className='text-gray-text mt-1'>
+              <p className='text-gray-600 mt-1'>
                 Manage users, roles, and permissions
               </p>
             </div>
@@ -292,8 +292,8 @@ export default function AdminUsersPage() {
           <div className='bg-white p-6 rounded-lg shadow'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-text'>Total Users</p>
-                <p className='text-2xl font-bold text-primary'>
+                <p className='text-sm font-medium text-gray-600'>Total Users</p>
+                <p className='text-2xl font-bold text-gray-900'>
                   {userStats.total}
                 </p>
               </div>
@@ -301,13 +301,13 @@ export default function AdminUsersPage() {
             </div>
             <div className='mt-4'>
               <div className='flex justify-between text-sm'>
-                <span className='text-gray-text'>Active</span>
+                <span className='text-gray-600'>Active</span>
                 <span className='font-medium text-green-600'>
                   {userStats.active}
                 </span>
               </div>
               <div className='flex justify-between text-sm'>
-                <span className='text-gray-text'>Inactive</span>
+                <span className='text-gray-600'>Inactive</span>
                 <span className='font-medium text-red-600'>
                   {userStats.inactive}
                 </span>
@@ -318,7 +318,7 @@ export default function AdminUsersPage() {
           <div className='bg-white p-6 rounded-lg shadow'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-text'>Super Admins</p>
+                <p className='text-sm font-medium text-gray-600'>Super Admins</p>
                 <p className='text-2xl font-bold text-purple-600'>
                   {userStats.superAdmin}
                 </p>
@@ -330,7 +330,7 @@ export default function AdminUsersPage() {
           <div className='bg-white p-6 rounded-lg shadow'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-text'>Admins</p>
+                <p className='text-sm font-medium text-gray-600'>Admins</p>
                 <p className='text-2xl font-bold text-red-600'>
                   {userStats.admin}
                 </p>
@@ -342,7 +342,7 @@ export default function AdminUsersPage() {
           <div className='bg-white p-6 rounded-lg shadow'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-text'>Editors</p>
+                <p className='text-sm font-medium text-gray-600'>Editors</p>
                 <p className='text-2xl font-bold text-blue-600'>
                   {userStats.editor}
                 </p>
@@ -494,11 +494,11 @@ export default function AdminUsersPage() {
                       <div className='flex items-center'>
                         <div className='flex-shrink-0 h-10 w-10'>
                           <div className='h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center'>
-                            <User className='w-5 h-5 text-gray-text' />
+                            <User className='w-5 h-5 text-gray-600' />
                           </div>
                         </div>
                         <div className='ml-4'>
-                          <div className='text-sm font-medium text-primary'>
+                          <div className='text-sm font-medium text-gray-900'>
                             {user.name}
                           </div>
                           <div className='text-sm text-gray-500'>
@@ -536,7 +536,7 @@ export default function AdminUsersPage() {
                       <div className='flex items-center justify-end space-x-2'>
                         <Link
                           href={`/admin/users/${user.id}`}
-                          className='text-blue-600 hover:opacity-80'
+                          className='text-blue-600 hover:text-blue-900'
                           title='Edit'
                         >
                           <Edit className='w-4 h-4' />
@@ -566,10 +566,10 @@ export default function AdminUsersPage() {
           {filteredUsers.length === 0 && (
             <div className='text-center py-12'>
               <User className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-              <h3 className='text-lg font-medium text-primary mb-2'>
+              <h3 className='text-lg font-medium text-gray-900 mb-2'>
                 No users found
               </h3>
-              <p className='text-gray-text mb-4'>
+              <p className='text-gray-600 mb-4'>
                 {searchTerm || roleFilter || statusFilter
                   ? 'Try adjusting your search or filters.'
                   : 'Start by creating your first user.'}

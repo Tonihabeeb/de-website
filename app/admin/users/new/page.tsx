@@ -20,7 +20,6 @@ interface Role {
   name: string;
   description: string;
   permissions: string[];
-  level: number; // Added level property
 }
 
 interface UserFormData {
@@ -125,13 +124,6 @@ export default function NewUser() {
       setLoading(true);
       setError(null);
 
-      // Get the selected role object to get the correct role value
-      const selectedRole = roles.find(role => role.id === formData.role_id);
-      if (!selectedRole) {
-        setError('Invalid role selected');
-        return;
-      }
-
       const response = await fetch('/api/admin/users', {
         method: 'POST',
         headers: {
@@ -141,8 +133,8 @@ export default function NewUser() {
           name: formData.name,
           email: formData.email,
           password: formData.password,
-          role: selectedRole.id, // Use the role ID as the role value
-          is_active: formData.status === 'active',
+          role_id: formData.role_id,
+          status: formData.status,
           first_name: formData.first_name,
           last_name: formData.last_name,
           phone: formData.phone,
@@ -209,10 +201,10 @@ export default function NewUser() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-primary'>
+            <h1 className='text-2xl font-bold text-gray-900'>
               Create New User
             </h1>
-            <p className='text-gray-text mt-1'>Add a new user to the system</p>
+            <p className='text-gray-600 mt-1'>Add a new user to the system</p>
           </div>
           <div className='flex space-x-3'>
             <button
@@ -263,7 +255,7 @@ export default function NewUser() {
       {/* Form */}
       <form onSubmit={handleSubmit} className='space-y-6'>
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
             <User className='w-5 h-5 mr-2' />
             Basic Information
           </h2>
@@ -369,7 +361,7 @@ export default function NewUser() {
 
         {/* Security Settings */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
             <Shield className='w-5 h-5 mr-2' />
             Security Settings
           </h2>
@@ -391,7 +383,7 @@ export default function NewUser() {
                 <button
                   type='button'
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-text'
+                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
                 >
                   {showPassword ? (
                     <EyeOff className='w-4 h-4' />
@@ -413,7 +405,7 @@ export default function NewUser() {
                         }}
                       />
                     </div>
-                    <span className='text-xs text-gray-text'>
+                    <span className='text-xs text-gray-600'>
                       {passwordStrength.text}
                     </span>
                   </div>
@@ -447,7 +439,7 @@ export default function NewUser() {
                 <button
                   type='button'
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-text'
+                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
                 >
                   {showConfirmPassword ? (
                     <EyeOff className='w-4 h-4' />
@@ -469,7 +461,7 @@ export default function NewUser() {
 
         {/* Role and Status */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
             <Shield className='w-5 h-5 mr-2' />
             Role & Status
           </h2>
@@ -492,11 +484,6 @@ export default function NewUser() {
                   </option>
                 ))}
               </select>
-              {formData.role_id && (
-                <p className='mt-1 text-xs text-gray-500'>
-                  Level {roles.find(r => r.id === formData.role_id)?.level} access
-                </p>
-              )}
             </div>
 
             <div>
@@ -516,26 +503,17 @@ export default function NewUser() {
 
           {/* Role Description */}
           {formData.role_id && (
-            <div className='mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg'>
-              <h4 className='text-sm font-medium text-blue-900 mb-3 flex items-center'>
-                <Shield className='w-4 h-4 mr-2' />
-                {roles.find(r => r.id === formData.role_id)?.name} Permissions
+            <div className='mt-4 p-4 bg-gray-50 rounded-lg'>
+              <h4 className='text-sm font-medium text-gray-900 mb-2'>
+                Role Permissions
               </h4>
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-                {roles
-                  .find(r => r.id === formData.role_id)
-                  ?.permissions.map((permission, index) => (
-                    <div key={index} className='text-sm text-blue-800 flex items-start'>
-                      <span className='text-blue-600 mr-2 mt-0.5'>•</span>
-                      <span>{permission}</span>
-                    </div>
-                  ))}
-              </div>
-              <div className='mt-3 pt-3 border-t border-blue-200'>
-                <p className='text-xs text-blue-700'>
-                  <strong>Access Level:</strong> {roles.find(r => r.id === formData.role_id)?.level}/5
-                </p>
-              </div>
+              {roles
+                .find(r => r.id === formData.role_id)
+                ?.permissions.map((permission, index) => (
+                  <div key={index} className='text-sm text-gray-600'>
+                    • {permission}
+                  </div>
+                ))}
             </div>
           )}
         </div>

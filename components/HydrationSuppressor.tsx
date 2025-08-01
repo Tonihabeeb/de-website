@@ -21,9 +21,7 @@ export default function HydrationSuppressor({
         if (
           args[0]?.includes?.('Hydration failed') ||
           args[0]?.includes?.('Text content does not match') ||
-          args[0]?.includes?.('Hydration mismatch') ||
-          args[0]?.includes?.('extwaiokist') ||
-          args[0]?.includes?.('server rendered HTML didn\'t match the client')
+          args[0]?.includes?.('Hydration mismatch')
         ) {
           return;
         }

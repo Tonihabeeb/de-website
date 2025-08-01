@@ -77,7 +77,7 @@ export default function SearchSystem() {
             <div key={i} className='bg-white border rounded-lg p-4 shadow-sm'>
               <div className='flex items-center justify-between mb-1'>
                 <span className='font-semibold text-primary'>{doc.title}</span>
-                <span className='text-xs bg-gray-100 text-gray-text px-2 py-1 rounded'>
+                <span className='text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded'>
                   {doc.category}
                 </span>
               </div>

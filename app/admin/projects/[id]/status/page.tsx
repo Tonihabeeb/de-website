@@ -229,7 +229,7 @@ function ProjectStatusManagement() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-text'>Loading project status...</span>
+          <span className='ml-2 text-gray-600'>Loading project status...</span>
         </div>
       </div>
     );
@@ -245,7 +245,7 @@ function ProjectStatusManagement() {
           </div>
           <button
             onClick={() => router.push('/admin/projects')}
-            className='mt-4 text-blue-600 hover:opacity-80'
+            className='mt-4 text-blue-600 hover:text-blue-800'
           >
             Back to Projects
           </button>
@@ -260,10 +260,10 @@ function ProjectStatusManagement() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-primary'>
+            <h1 className='text-2xl font-bold text-gray-900'>
               Project Status Management
             </h1>
-            <p className='text-gray-text mt-1'>
+            <p className='text-gray-600 mt-1'>
               {project?.title} - Monitor and update project status
             </p>
           </div>
@@ -303,7 +303,7 @@ function ProjectStatusManagement() {
         {/* Current Status */}
         <div className='lg:col-span-2'>
           <div className='bg-white rounded-lg shadow p-6'>
-            <h2 className='text-lg font-semibold text-primary mb-4'>
+            <h2 className='text-lg font-semibold text-gray-900 mb-4'>
               Current Status
             </h2>
 
@@ -363,7 +363,7 @@ function ProjectStatusManagement() {
                     <h3 className='text-sm font-medium text-gray-700 mb-2'>
                       Timeline
                     </h3>
-                    <div className='text-sm text-gray-text'>
+                    <div className='text-sm text-gray-600'>
                       <p>
                         Start:{' '}
                         {project.start_date
@@ -383,7 +383,7 @@ function ProjectStatusManagement() {
                     <h3 className='text-sm font-medium text-gray-700 mb-2'>
                       Budget
                     </h3>
-                    <div className='text-sm text-gray-text'>
+                    <div className='text-sm text-gray-600'>
                       <p>
                         {project.budget_currency}{' '}
                         {project.budget?.toLocaleString() || '0'}
@@ -397,7 +397,7 @@ function ProjectStatusManagement() {
 
           {/* Status Update Form */}
           <div className='bg-white rounded-lg shadow p-6 mt-6'>
-            <h2 className='text-lg font-semibold text-primary mb-4'>
+            <h2 className='text-lg font-semibold text-gray-900 mb-4'>
               Update Status
             </h2>
 
@@ -459,7 +459,7 @@ function ProjectStatusManagement() {
 
         {/* Status History */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
             Status History
           </h2>
 
@@ -476,7 +476,7 @@ function ProjectStatusManagement() {
                     {new Date(update.created_at).toLocaleDateString()}
                   </span>
                 </div>
-                <p className='text-sm text-gray-text mb-1'>{update.notes}</p>
+                <p className='text-sm text-gray-600 mb-1'>{update.notes}</p>
                 <p className='text-xs text-gray-500'>by {update.created_by}</p>
               </div>
             ))}

@@ -64,15 +64,15 @@ export default function TechnologySpecificationsPage() {
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Rated Power:</span>
+                      <span className='text-gray-600'>Rated Power:</span>
                       <span className='font-semibold'>500 kW</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Operating Speed:</span>
+                      <span className='text-gray-600'>Operating Speed:</span>
                       <span className='font-semibold'>375 RPM</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Efficiency:</span>
+                      <span className='text-gray-600'>Efficiency:</span>
                       <span className='font-semibold'>95.2%</span>
                     </div>
                   </div>
@@ -84,15 +84,15 @@ export default function TechnologySpecificationsPage() {
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Diameter:</span>
+                      <span className='text-gray-600'>Diameter:</span>
                       <span className='font-semibold'>800 mm</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Height:</span>
+                      <span className='text-gray-600'>Height:</span>
                       <span className='font-semibold'>2,400 mm</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Weight:</span>
+                      <span className='text-gray-600'>Weight:</span>
                       <span className='font-semibold'>4,700 kg</span>
                     </div>
                   </div>
@@ -104,15 +104,15 @@ export default function TechnologySpecificationsPage() {
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Protection Class:</span>
+                      <span className='text-gray-600'>Protection Class:</span>
                       <span className='font-semibold'>IP54</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Temperature Range:</span>
+                      <span className='text-gray-600'>Temperature Range:</span>
                       <span className='font-semibold'>90-130°C</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Noise Level:</span>
+                      <span className='text-gray-600'>Noise Level:</span>
                       <span className='font-semibold'>&lt;65 dB</span>
                     </div>
                   </div>
@@ -132,15 +132,15 @@ export default function TechnologySpecificationsPage() {
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Operating Pressure:</span>
+                      <span className='text-gray-600'>Operating Pressure:</span>
                       <span className='font-semibold'>10 bar</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Air Flow Rate:</span>
+                      <span className='text-gray-600'>Air Flow Rate:</span>
                       <span className='font-semibold'>1.2-1.5 m³/min</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Compression Ratio:</span>
+                      <span className='text-gray-600'>Compression Ratio:</span>
                       <span className='font-semibold'>10:1</span>
                     </div>
                   </div>
@@ -152,15 +152,15 @@ export default function TechnologySpecificationsPage() {
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Compressor Type:</span>
+                      <span className='text-gray-600'>Compressor Type:</span>
                       <span className='font-semibold'>Reciprocating</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Cooling System:</span>
+                      <span className='text-gray-600'>Cooling System:</span>
                       <span className='font-semibold'>Water-cooled</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Control System:</span>
+                      <span className='text-gray-600'>Control System:</span>
                       <span className='font-semibold'>PLC-based</span>
                     </div>
                   </div>
@@ -182,7 +182,7 @@ export default function TechnologySpecificationsPage() {
                     <div className='text-4xl font-bold text-primary mb-2'>
                       30 m³
                     </div>
-                    <p className='text-gray-text'>
+                    <p className='text-gray-600'>
                       Initial water requirement for system startup
                     </p>
                   </div>
@@ -196,7 +196,7 @@ export default function TechnologySpecificationsPage() {
                     <div className='text-4xl font-bold text-primary mb-2'>
                       &lt;5%
                     </div>
-                    <p className='text-gray-text'>
+                    <p className='text-gray-600'>
                       Annual water loss through evaporation
                     </p>
                   </div>
@@ -208,15 +208,15 @@ export default function TechnologySpecificationsPage() {
                   </h3>
                   <div className='space-y-2'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>pH Level:</span>
+                      <span className='text-gray-600'>pH Level:</span>
                       <span className='font-semibold'>6.5-8.5</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>Hardness:</span>
+                      <span className='text-gray-600'>Hardness:</span>
                       <span className='font-semibold'>&lt;150 ppm</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-text'>TDS:</span>
+                      <span className='text-gray-600'>TDS:</span>
                       <span className='font-semibold'>&lt;500 ppm</span>
                     </div>
                   </div>
@@ -254,12 +254,12 @@ export default function TechnologySpecificationsPage() {
               <h2 className='text-2xl font-bold text-gray-800 mb-4'>
                 Download Technical Documentation
               </h2>
-              <p className='text-gray-text mb-6'>
+              <p className='text-gray-600 mb-6'>
                 Access detailed technical specifications, installation guides,
                 and maintenance manuals.
               </p>
               <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                <button className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 min-w-[44px] min-h-[44px]'>
+                <button className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 min-w-[44px] min-h-[44px]'>
                   Download Full Specifications (PDF)
                 </button>
                 <button className='border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors duration-200 min-w-[44px] min-h-[44px]'>
@@ -288,7 +288,7 @@ export default function TechnologySpecificationsPage() {
             </a>
             <a
               href='/technology/how-it-works'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200 min-w-[44px] min-h-[44px] inline-block text-center'
             >
               How It Works
             </a>
@@ -303,14 +303,14 @@ export default function TechnologySpecificationsPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-text'>
+            <p className='text-base text-gray-600'>
               Explore more about KPP technology and related topics:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/technology'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:from-primary-dark hover:to-primary hover:text-white transition-colors'
+              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
             >
               Technology Overview
             </Link>

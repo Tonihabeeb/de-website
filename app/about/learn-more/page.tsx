@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {
+  Sparkles,
   Landmark,
   BarChart3,
   Leaf,
@@ -12,6 +13,7 @@ import {
   Shield,
   Target,
   BarChart3 as BarChart3Icon,
+  CheckCircle2,
   FileText,
   Eye,
   Zap,
@@ -21,16 +23,7 @@ import {
   AlertTriangle,
   Clock,
   MapPin,
-  Lightbulb,
-  Sprout,
-  Star,
-  ArrowRight,
-  Calendar,
-  MapPin as MapPinIcon,
-  Users as UsersIcon,
-  Zap as ZapIcon,
 } from 'lucide-react';
-import Image from 'next/image';
 import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata = {
@@ -65,74 +58,18 @@ export const metadata = {
 
 export default function LearnMorePage() {
   return (
-    <div className='min-h-screen'>
+    <div>
       {/* Hero Section */}
       <HeroSection
         title='About Deep Engineering'
         subtitle="We are Iraq's premier renewable energy company, dedicated to revolutionizing the country's energy landscape through innovative KPP technology."
-      >
-        <div className='flex flex-wrap justify-center gap-4 mt-8'>
-          <Link
-            href='/technology'
-            className='bg-white text-primary px-6 py-3 rounded-lg font-semibold hover-effect flex items-center gap-2 transition-all duration-200'
-          >
-            Explore Our Technology
-            <ArrowRight className='w-4 h-4' />
-          </Link>
-          <Link
-            href='/projects'
-            className='border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-300 transition-all duration-200 flex items-center gap-2'
-          >
-            View Our Projects
-            <ArrowRight className='w-4 h-4' />
-          </Link>
-        </div>
-      </HeroSection>
-
-      {/* Quick Stats */}
-      <section className='py-12 bg-white border-b border-gray-100'>
-        <div className='container'>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4'>
-                <Calendar className='w-8 h-8 text-white' />
-              </div>
-              <div className='text-3xl font-bold text-primary mb-2'>2019</div>
-              <div className='text-gray-text text-sm'>Founded</div>
-            </div>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4'>
-                <ZapIcon className='w-8 h-8 text-white' />
-              </div>
-              <div className='text-3xl font-bold text-primary mb-2'>390 MW</div>
-              <div className='text-gray-text text-sm'>Clean Power Capacity</div>
-            </div>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4'>
-                <UsersIcon className='w-8 h-8 text-white' />
-              </div>
-              <div className='text-3xl font-bold text-primary mb-2'>2,500+</div>
-              <div className='text-gray-text text-sm'>Jobs Created</div>
-            </div>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4'>
-                <MapPinIcon className='w-8 h-8 text-white' />
-              </div>
-              <div className='text-3xl font-bold text-primary mb-2'>Iraq</div>
-              <div className='text-gray-text text-sm'>Exclusive License</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      />
 
       {/* Our Story */}
-      <section className='section-padding bg-gray-light' aria-label='Company story'>
+      <section className='section-padding bg-white' aria-label='Company story'>
         <div className='container'>
           <div className='max-w-4xl mx-auto'>
-            <div className='text-center mb-12'>
-              <h2 className='text-3xl font-bold text-primary mb-4'>Our Story</h2>
-              <div className='w-24 h-1 bg-primary mx-auto'></div>
-            </div>
+            <h2 className='mb-6'>Our Story</h2>
             <div className='prose prose-lg text-gray-text'>
               <p className='text-lg text-gray-text mb-6 leading-relaxed'>
                 Deep Engineering was founded with a bold vision: to transform
@@ -158,67 +95,41 @@ export default function LearnMorePage() {
                 everything we do.
               </p>
             </div>
-            <div className='text-center mt-8'>
-              <Link
-                href='/technology/how-it-works'
-                className='inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200'
-              >
-                Learn How KPP Works
-                <ArrowRight className='w-4 h-4' />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Mission & Vision */}
       <section
-        className='section-padding bg-white'
+        className='section-padding bg-gray-light'
         aria-label='Mission and vision'
       >
         <div className='container'>
-          <div className='max-w-6xl mx-auto'>
-            <div className='text-center mb-12'>
-              <h2 className='text-3xl font-bold text-primary mb-4'>Mission & Vision</h2>
-              <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
-              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
-                Our mission drives our daily actions, while our vision inspires our long-term goals for a sustainable energy future.
-              </p>
-            </div>
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
-              <div className='bg-white p-8 rounded-xl hover-effect'>
-                <div className='flex items-center mb-6'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                    <Target className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-2xl font-bold text-primary'>Our Mission</h3>
-                </div>
-                <p className='text-lg text-gray-text leading-relaxed mb-4'>
+          <div className='max-w-4xl mx-auto'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
+              <div>
+                <h3 className='mb-4'>Our Mission</h3>
+                <p className='text-lg text-gray-text leading-relaxed'>
                   To revolutionize Iraq's energy landscape by deploying
                   innovative KPP technology that delivers clean, continuous, and
                   reliable power while contributing to environmental
                   sustainability and economic growth.
                 </p>
-                <p className='text-lg text-gray-text leading-relaxed'>
+                <p className='text-lg text-gray-text leading-relaxed mt-4'>
                   To accelerate the global transition to sustainable energy
                   through innovative engineering solutions, collaborative
                   partnerships, and unwavering commitment to environmental
                   stewardship.
                 </p>
               </div>
-              <div className='bg-white p-8 rounded-xl hover-effect'>
-                <div className='flex items-center mb-6'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                    <Eye className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-2xl font-bold text-primary'>Our Vision</h3>
-                </div>
-                <p className='text-lg text-gray-text leading-relaxed mb-4'>
+              <div>
+                <h3 className='mb-4'>Our Vision</h3>
+                <p className='text-lg text-gray-text leading-relaxed'>
                   To be the leading renewable energy company in Iraq, setting
                   new standards for clean energy generation and inspiring the
                   adoption of sustainable technologies across the region.
                 </p>
-                <p className='text-lg text-gray-text leading-relaxed'>
+                <p className='text-lg text-gray-text leading-relaxed mt-4'>
                   To be the global leader in sustainable energy solutions,
                   pioneering technologies that transform how the world
                   generates, distributes, and consumes energy while preserving
@@ -231,71 +142,62 @@ export default function LearnMorePage() {
       </section>
 
       {/* Core Values */}
-      <section className='section-padding bg-gray-light'>
-        <div className='container'>
-          <div className='max-w-6xl mx-auto text-center'>
-            <h2 className='text-3xl font-bold text-primary mb-4'>
+      <section className='py-16 bg-gray-50'>
+        <div className='container mx-auto px-4'>
+          <div className='max-w-4xl mx-auto text-center'>
+            <h2 className='text-3xl font-bold text-gray-900 mb-8'>
               Our Core Values
             </h2>
-            <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
-            <p className='text-lg text-gray-text leading-relaxed mb-12 max-w-3xl mx-auto'>
+            <p className='text-lg text-gray-600 leading-relaxed mb-12'>
               These fundamental principles guide our decisions, shape our
               culture, and define how we work with each other and our
               stakeholders.
             </p>
             <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
-              <div className='bg-white p-6 rounded-xl hover-effect'>
-                <div className='flex items-center mb-4'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-3'>
-                    <Lightbulb className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-xl font-semibold text-primary'>
-                    Innovation
-                  </h3>
+              <div className='text-center'>
+                <div className='w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center'>
+                  <span className='text-white text-2xl'>💡</span>
                 </div>
-                <p className='text-gray-text text-sm leading-relaxed'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                  Innovation
+                </h3>
+                <p className='text-gray-600 text-sm'>
                   We constantly push boundaries and embrace new ideas to solve
                   complex challenges.
                 </p>
               </div>
-              <div className='bg-white p-6 rounded-xl hover-effect'>
-                <div className='flex items-center mb-4'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-3'>
-                    <Sprout className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-xl font-semibold text-primary'>
-                    Sustainability
-                  </h3>
+              <div className='text-center'>
+                <div className='w-16 h-16 mx-auto mb-4 bg-green-500 rounded-full flex items-center justify-center'>
+                  <span className='text-white text-2xl'>🌱</span>
                 </div>
-                <p className='text-gray-text text-sm leading-relaxed'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                  Sustainability
+                </h3>
+                <p className='text-gray-600 text-sm'>
                   Every decision we make considers the long-term impact on our
                   planet and communities.
                 </p>
               </div>
-              <div className='bg-white p-6 rounded-xl hover-effect'>
-                <div className='flex items-center mb-4'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-3'>
-                    <Handshake className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-xl font-semibold text-primary'>
-                    Collaboration
-                  </h3>
+              <div className='text-center'>
+                <div className='w-16 h-16 mx-auto mb-4 bg-purple-500 rounded-full flex items-center justify-center'>
+                  <span className='text-white text-2xl'>🤝</span>
                 </div>
-                <p className='text-gray-text text-sm leading-relaxed'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                  Collaboration
+                </h3>
+                <p className='text-gray-600 text-sm'>
                   We believe in the power of partnerships and diverse
                   perspectives to achieve our goals.
                 </p>
               </div>
-              <div className='bg-white p-6 rounded-xl hover-effect'>
-                <div className='flex items-center mb-4'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-3'>
-                    <Star className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-xl font-semibold text-primary'>
-                    Excellence
-                  </h3>
+              <div className='text-center'>
+                <div className='w-16 h-16 mx-auto mb-4 bg-orange-500 rounded-full flex items-center justify-center'>
+                  <span className='text-white text-2xl'>⭐</span>
                 </div>
-                <p className='text-gray-text text-sm leading-relaxed'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                  Excellence
+                </h3>
+                <p className='text-gray-600 text-sm'>
                   We strive for the highest quality in everything we do, from
                   technology to service.
                 </p>
@@ -312,11 +214,10 @@ export default function LearnMorePage() {
       >
         <div className='container'>
           <div className='max-w-4xl mx-auto text-center'>
-            <h2 className='text-3xl font-bold text-primary mb-4'>
+            <h2 className='text-3xl font-bold text-primary mb-8'>
               Our Commitment: ESG, CSR & HSE
             </h2>
-            <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
-            <p className='text-lg text-gray-text mb-8 leading-relaxed'>
+            <p className='text-lg text-gray-text mb-6'>
               Deep Engineering integrates Environmental, Social, and Governance
               (ESG), Corporate Social Responsibility (CSR), and Health, Safety &
               Environment (HSE) principles into every aspect of our operations.
@@ -324,13 +225,6 @@ export default function LearnMorePage() {
               technology, responsible business practices, and a culture of
               safety and wellbeing.
             </p>
-            <Link
-              href='/resources/environmental-esg'
-              className='inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200'
-            >
-              View ESG Report
-              <ArrowRight className='w-4 h-4' />
-            </Link>
           </div>
         </div>
       </section>
@@ -339,94 +233,52 @@ export default function LearnMorePage() {
       <section className='section-padding bg-gray-light' aria-label='ESG'>
         <div className='container'>
           <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-primary mb-4'>Environmental, Social & Governance (ESG)</h2>
-            <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
+            <h2 className='mb-4'>Environmental, Social & Governance (ESG)</h2>
             <p className='text-lg text-gray-text max-w-3xl mx-auto'>
               Our comprehensive ESG framework drives sustainable impact through
               the KPP project and responsible business practices.
             </p>
           </div>
+          {/* ESG Metrics and Framework (summarized for brevity; full details can be expanded as needed) */}
           <div className='grid lg:grid-cols-3 gap-8'>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Globe className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>
-                  Environmental
-                </h3>
+            <div className='bg-green-50 p-8 rounded-lg border border-green-200'>
+              <div className='w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6'>
+                <Globe className='w-8 h-8 text-white' />
               </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Zero emissions technology: no fuel, no pollution</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>2.5M tons CO₂ emissions avoided annually</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Zero water consumption, minimal land footprint</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Reforestation, habitat restoration, and conservation</span>
-                </li>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                Environmental
+              </h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>Zero emissions technology: no fuel, no pollution</li>
+                <li>2.5M tons CO₂ emissions avoided annually</li>
+                <li>Zero water consumption, minimal land footprint</li>
+                <li>Reforestation, habitat restoration, and conservation</li>
               </ul>
             </div>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Handshake className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>Social</h3>
+            <div className='bg-blue-50 p-8 rounded-lg border border-blue-200'>
+              <div className='w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6'>
+                <Handshake className='w-8 h-8 text-white' />
               </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>2,500+ direct and indirect jobs created</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Community development and education initiatives</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Skills training and workforce development</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Health, wellbeing, and safety programs</span>
-                </li>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>Social</h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>2,500+ direct and indirect jobs created</li>
+                <li>Community development and education initiatives</li>
+                <li>Skills training and workforce development</li>
+                <li>Health, wellbeing, and safety programs</li>
               </ul>
             </div>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Scale className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>
-                  Governance
-                </h3>
+            <div className='bg-purple-50 p-8 rounded-lg border border-purple-200'>
+              <div className='w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-6'>
+                <Scale className='w-8 h-8 text-white' />
               </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>International certifications (TÜV, SGS, DEKRA)</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>100% government approvals and compliance</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Transparency, ethical leadership, and reporting</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Continuous improvement and stakeholder engagement</span>
-                </li>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                Governance
+              </h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>International certifications (TÜV, SGS, DEKRA)</li>
+                <li>100% government approvals and compliance</li>
+                <li>Transparency, ethical leadership, and reporting</li>
+                <li>Continuous improvement and stakeholder engagement</li>
               </ul>
             </div>
           </div>
@@ -437,91 +289,56 @@ export default function LearnMorePage() {
       <section className='section-padding bg-white' aria-label='CSR'>
         <div className='container'>
           <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-primary mb-4'>Corporate Social Responsibility (CSR)</h2>
-            <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
+            <h2 className='mb-4'>Corporate Social Responsibility (CSR)</h2>
             <p className='text-lg text-gray-text max-w-3xl mx-auto'>
               Our CSR initiatives create value beyond profit, supporting
               communities, education, health, and the environment for a more
               sustainable and equitable world.
             </p>
           </div>
-          <div className='grid lg:grid-cols-3 gap-8'>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Users className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>Community Development</h3>
-              </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Educational programs and scholarships for STEM students</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Infrastructure development in underserved areas</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Skills training and job creation programs</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Support for local businesses and entrepreneurs</span>
-                </li>
+          <div className='grid lg:grid-cols-2 gap-12'>
+            <div className='bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg'>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                Community Development
+              </h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>Educational programs and scholarships for STEM students</li>
+                <li>Infrastructure development in underserved areas</li>
+                <li>Skills training and job creation programs</li>
+                <li>Support for local businesses and entrepreneurs</li>
               </ul>
             </div>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Brain className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>Education & Innovation</h3>
-              </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>STEM education programs for schools and universities</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Research partnerships and innovation hubs</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Mentorship programs for young professionals</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Open-source technology development</span>
-                </li>
+            <div className='bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg'>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                Environmental Stewardship
+              </h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>Reforestation and habitat restoration projects</li>
+                <li>Clean energy adoption and carbon offset programs</li>
+                <li>Waste reduction and circular economy initiatives</li>
+                <li>Environmental education and awareness campaigns</li>
               </ul>
             </div>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Leaf className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>Environmental Stewardship</h3>
-              </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Reforestation and habitat restoration projects</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Clean energy adoption and carbon offset programs</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Waste reduction and circular economy initiatives</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Environmental education and awareness campaigns</span>
-                </li>
+            <div className='bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-lg'>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                Education & Innovation
+              </h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>STEM education programs for schools and universities</li>
+                <li>Research partnerships and innovation hubs</li>
+                <li>Mentorship programs for young professionals</li>
+                <li>Open-source technology development</li>
+              </ul>
+            </div>
+            <div className='bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-lg'>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                Health & Wellbeing
+              </h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>Healthcare access programs in underserved areas</li>
+                <li>Mental health awareness and support services</li>
+                <li>Workplace wellness and safety programs</li>
+                <li>Disaster relief and emergency response support</li>
               </ul>
             </div>
           </div>
@@ -532,8 +349,7 @@ export default function LearnMorePage() {
       <section className='section-padding bg-gray-light' aria-label='HSE'>
         <div className='container'>
           <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-primary mb-4'>Health, Safety & Environment (HSE)</h2>
-            <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
+            <h2 className='mb-4'>Health, Safety & Environment (HSE)</h2>
             <p className='text-lg text-gray-text max-w-3xl mx-auto'>
               Our comprehensive HSE framework ensures the wellbeing of our
               people and protection of our planet through innovative technology
@@ -541,86 +357,35 @@ export default function LearnMorePage() {
             </p>
           </div>
           <div className='grid lg:grid-cols-3 gap-8'>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Heart className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>Health</h3>
-              </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Comprehensive health monitoring and wellness programs</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Mental health support and work-life balance initiatives</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Preventive care and early intervention programs</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Quarterly health screenings</span>
-                </li>
+            <div className='bg-blue-50 p-8 rounded-lg border border-blue-200'>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>Health</h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>Comprehensive health monitoring and wellness programs</li>
+                <li>Mental health support and work-life balance initiatives</li>
+                <li>Preventive care and early intervention programs</li>
+                <li>Quarterly health screenings</li>
               </ul>
             </div>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Shield className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>Safety</h3>
-              </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Zero harm culture and comprehensive safety protocols</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Continuous training and emergency response teams</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Automated safety interlocks and real-time monitoring</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Monthly emergency drills and safety audits</span>
-                </li>
+            <div className='bg-orange-50 p-8 rounded-lg border border-orange-200'>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>Safety</h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>Zero harm culture and comprehensive safety protocols</li>
+                <li>Continuous training and emergency response teams</li>
+                <li>Automated safety interlocks and real-time monitoring</li>
+                <li>Monthly emergency drills and safety audits</li>
               </ul>
             </div>
-            <div className='bg-white p-8 rounded-xl hover-effect'>
-              <div className='flex items-center mb-6'>
-                <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                  <Leaf className='w-6 h-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-primary'>
-                  Environment
-                </h3>
-              </div>
-              <ul className='text-gray-text text-sm space-y-3'>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>
-                    Zero emissions, zero water consumption, minimal land use
-                  </span>
+            <div className='bg-green-50 p-8 rounded-lg border border-green-200'>
+              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                Environment
+              </h3>
+              <ul className='text-gray-600 text-sm space-y-2'>
+                <li>
+                  Zero emissions, zero water consumption, minimal land use
                 </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Climate action and carbon neutrality leadership</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Environmental monitoring and reporting systems</span>
-                </li>
-                <li className='flex items-start gap-3'>
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>ISO 14001 certified environmental management</span>
-                </li>
+                <li>Climate action and carbon neutrality leadership</li>
+                <li>Environmental monitoring and reporting systems</li>
+                <li>ISO 14001 certified environmental management</li>
               </ul>
             </div>
           </div>
@@ -630,68 +395,44 @@ export default function LearnMorePage() {
       {/* Partners */}
       <section className='section-padding bg-white' aria-label='Partners'>
         <div className='container'>
-          <div className='max-w-6xl mx-auto'>
-            <div className='text-center mb-12'>
-              <h2 className='text-3xl font-bold text-primary mb-4'>Our Partners</h2>
-              <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
-              <p className='text-lg text-gray-text mb-8 leading-relaxed max-w-3xl mx-auto'>
-                We collaborate with world-class partners to bring the best
-                technology and expertise to Iraq's energy sector.
-              </p>
-            </div>
-            {/* Partners */}
-            <div className='mb-12'>
-              <div className='text-center mb-8'>
-                <h3 className='text-2xl font-bold text-primary mb-4'>Technical</h3>
-                <div className='w-16 h-1 bg-primary mx-auto mb-4'></div>
+          <div className='max-w-4xl mx-auto'>
+            <h2 className='mb-4'>Our Partners</h2>
+            <p className='text-lg text-gray-text mb-8 leading-relaxed'>
+              We collaborate with world-class partners to bring the best
+              technology and expertise to Iraq's energy sector.
+            </p>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <div className='text-center'>
+                <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4'>
+                  <Sparkles className='w-8 h-8 text-white' />
+                </div>
+                <h3 className='font-semibold mb-2'>Rosch Innovations</h3>
+                <p className='text-gray-text text-sm'>
+                  German technology partner and KPP patent holder, providing
+                  cutting-edge engineering and technical support.
+                </p>
               </div>
-              <div className='flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-300'>
-                <div className='flex flex-col items-center'>
-                  <Image
-                    src='/logos/Screenshot_2025-08-01_183639-removebg-preview.png'
-                    alt='Partner Logo 1'
-                    width={170}
-                    height={64}
-                    className='w-40 h-16 filter grayscale brightness-50 contrast-150 opacity-60 hover:opacity-100 transition-opacity duration-300'
-                  />
+              <div className='text-center'>
+                <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4'>
+                  <Landmark className='w-8 h-8 text-white' />
                 </div>
-                <div className='flex flex-col items-center'>
-                  <Image
-                    src='/logos/htl-logo_weiß_250x100-removebg-preview.png'
-                    alt='HTL Logo'
-                    width={170}
-                    height={64}
-                    className='w-40 h-16 filter grayscale brightness-50 contrast-150 opacity-60 hover:opacity-100 transition-opacity duration-300'
-                  />
-                </div>
-                <div className='flex flex-col items-center'>
-                  <Image
-                    src='/logos/nyco.png'
-                    alt='NYCO Logo'
-                    width={170}
-                    height={64}
-                    className='w-40 h-16 filter grayscale brightness-50 contrast-150 opacity-60 hover:opacity-100 transition-opacity duration-300'
-                  />
-                </div>
+                <h3 className='font-semibold mb-2'>
+                  KRG Ministry of Electricity
+                </h3>
+                <p className='text-gray-text text-sm'>
+                  Government partner supporting renewable energy development in
+                  the Kurdistan Region of Iraq.
+                </p>
               </div>
-            </div>
-
-            {/* Clients */}
-            <div className='mt-12'>
-              <div className='text-center mb-8'>
-                <h3 className='text-2xl font-bold text-primary mb-4'>Clients</h3>
-                <div className='w-16 h-1 bg-primary mx-auto mb-4'></div>
-              </div>
-              <div className='flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-300'>
-                <div className='flex flex-col items-center'>
-                  <Image
-                    src='/logos/moel logo.png'
-                    alt='Moel Logo'
-                    width={170}
-                    height={64}
-                    className='w-40 h-16 filter grayscale brightness-50 contrast-150 opacity-60 hover:opacity-100 transition-opacity duration-300'
-                  />
+              <div className='text-center'>
+                <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4'>
+                  <BarChart3 className='w-8 h-8 text-white' />
                 </div>
+                <h3 className='font-semibold mb-2'>Board of Investment</h3>
+                <p className='text-gray-text text-sm'>
+                  Strategic partner facilitating investment and development
+                  opportunities for renewable energy projects.
+                </p>
               </div>
             </div>
           </div>
@@ -699,76 +440,65 @@ export default function LearnMorePage() {
       </section>
 
       {/* Strategic Goals */}
-      <section className='section-padding bg-gray-light'>
-        <div className='container'>
-          <div className='max-w-6xl mx-auto'>
-            <div className='text-center mb-12'>
-              <h2 className='text-3xl font-bold text-primary mb-4'>Strategic Goals</h2>
-              <div className='w-24 h-1 bg-primary mx-auto mb-8'></div>
-            </div>
+      <section className='py-16 bg-white'>
+        <div className='container mx-auto px-4'>
+          <div className='max-w-4xl mx-auto'>
+            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
+              Strategic Goals
+            </h2>
             <div className='grid md:grid-cols-2 gap-8'>
-              <div className='bg-white p-8 rounded-xl hover-effect'>
-                <div className='flex items-center mb-6'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                    <Zap className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-2xl font-bold text-primary'>
-                    Technology Leadership
-                  </h3>
-                </div>
-                <ul className='space-y-3 text-gray-text'>
+              <div className='bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg'>
+                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                  Technology Leadership
+                </h3>
+                <ul className='space-y-3 text-gray-600'>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-blue-500 font-bold'>•</span>
                     <span>
                       Develop breakthrough renewable energy technologies
                     </span>
                   </li>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-blue-500 font-bold'>•</span>
                     <span>
                       Advance energy storage and distribution solutions
                     </span>
                   </li>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-blue-500 font-bold'>•</span>
                     <span>Create intelligent energy management systems</span>
                   </li>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-blue-500 font-bold'>•</span>
                     <span>Pioneer carbon capture and utilization methods</span>
                   </li>
                 </ul>
               </div>
-              <div className='bg-white p-8 rounded-xl hover-effect'>
-                <div className='flex items-center mb-6'>
-                  <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4'>
-                    <Globe className='w-6 h-6 text-white' />
-                  </div>
-                  <h3 className='text-2xl font-bold text-primary'>
-                    Global Impact
-                  </h3>
-                </div>
-                <ul className='space-y-3 text-gray-text'>
+              <div className='bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg'>
+                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                  Global Impact
+                </h3>
+                <ul className='space-y-3 text-gray-600'>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-green-500 font-bold'>•</span>
                     <span>
                       Deploy sustainable energy solutions in 50+ countries
                     </span>
                   </li>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-green-500 font-bold'>•</span>
                     <span>
                       Reduce global carbon emissions by 1 billion tons
                     </span>
                   </li>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-green-500 font-bold'>•</span>
                     <span>
                       Provide clean energy access to 100 million people
                     </span>
                   </li>
                   <li className='flex items-start space-x-3'>
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className='text-green-500 font-bold'>•</span>
                     <span>Create 10,000+ green jobs worldwide</span>
                   </li>
                 </ul>
@@ -784,29 +514,18 @@ export default function LearnMorePage() {
         aria-label='Join our team'
       >
         <div className='container text-center'>
-          <h2 className='text-3xl font-bold mb-4'>Join Our Team</h2>
-          <div className='w-24 h-1 bg-white mx-auto mb-8'></div>
-          <p className='text-xl text-white mb-8 max-w-3xl mx-auto leading-relaxed'>
+          <h2 className='mb-4'>Join Our Team</h2>
+          <p className='text-xl text-white mb-8 max-w-3xl mx-auto'>
             Be part of the team revolutionizing Iraq's energy landscape. We're
             always looking for passionate professionals who share our vision for
             a sustainable future.
           </p>
-          <div className='flex flex-wrap justify-center gap-4'>
-            <Link
-              href='/team/careers'
-              className='bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover-effect transition-all duration-200 flex items-center gap-2'
-            >
-              View Careers
-              <ArrowRight className='w-5 h-5' />
-            </Link>
-            <Link
-              href='/contact'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-all duration-200 flex items-center gap-2'
-            >
-              Contact Us
-              <ArrowRight className='w-5 h-5' />
-            </Link>
-          </div>
+          <Link
+            href='/team/careers'
+            className='bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200'
+          >
+            View Careers
+          </Link>
         </div>
       </section>
     </div>

@@ -8,7 +8,6 @@ import analyticsRoutes from './routes/analytics';
 import navigationRoutes from './routes/navigation';
 import pagesRoutes from './routes/pages';
 import projectsRoutes from './routes/projects';
-import calculatorRoutes from './routes/calculator';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -49,7 +48,6 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/navigation', navigationRoutes);
 app.use('/api/pages', pagesRoutes);
 app.use('/api/projects', projectsRoutes);
-app.use('/api/calculator', calculatorRoutes);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

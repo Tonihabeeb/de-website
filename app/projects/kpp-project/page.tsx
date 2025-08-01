@@ -388,11 +388,11 @@ export default function KPPProjectPage() {
                 </div>
                 <div className='flex justify-between items-center'>
                   <span>Construction Phase</span>
-                  <span className='text-gray-text font-semibold'>0%</span>
+                  <span className='text-gray-600 font-semibold'>0%</span>
                 </div>
                 <div className='flex justify-between items-center'>
                   <span>Commissioning</span>
-                  <span className='text-gray-text font-semibold'>0%</span>
+                  <span className='text-gray-600 font-semibold'>0%</span>
                 </div>
               </div>
             </div>
@@ -478,7 +478,7 @@ export default function KPPProjectPage() {
             </Link>
             <Link
               href='/about'
-              className='border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-300 transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors duration-200'
             >
               Learn More About Us
             </Link>

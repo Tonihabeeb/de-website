@@ -86,7 +86,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
         {/* Header */}
         <div className='flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50'>
           <div className='flex items-center space-x-4'>
-            <h3 className='text-lg font-semibold text-primary'>{title}</h3>
+            <h3 className='text-lg font-semibold text-gray-900'>{title}</h3>
 
             {/* Device Selector */}
             <div className='flex items-center space-x-2 bg-white rounded-lg border border-gray-200 p-1'>
@@ -187,7 +187,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
                       <div className='w-3 h-3 bg-yellow-400 rounded-full'></div>
                       <div className='w-3 h-3 bg-green-400 rounded-full'></div>
                     </div>
-                    <div className='flex-1 bg-white rounded px-3 py-1 text-sm text-gray-text'>
+                    <div className='flex-1 bg-white rounded px-3 py-1 text-sm text-gray-600'>
                       {title}
                     </div>
                   </div>
@@ -218,7 +218,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
 
         {/* Footer */}
         <div className='p-4 border-t border-gray-200 bg-gray-50'>
-          <div className='flex items-center justify-between text-sm text-gray-text'>
+          <div className='flex items-center justify-between text-sm text-gray-600'>
             <div className='flex items-center space-x-4'>
               <span>Device: {currentConfig.label}</span>
               <span>
@@ -267,7 +267,7 @@ export function SidebarPreview({
       {/* Preview Header */}
       <div className='px-4 py-3 border-b border-gray-200'>
         <div className='flex items-center justify-between'>
-          <h3 className='text-sm font-medium text-primary'>Preview</h3>
+          <h3 className='text-sm font-medium text-gray-900'>Preview</h3>
           <div className='flex items-center space-x-1'>
             {(['mobile', 'tablet', 'desktop'] as DeviceType[]).map(device => (
               <button
@@ -276,7 +276,7 @@ export function SidebarPreview({
                 className={`p-1 rounded transition-colors ${
                   deviceType === device
                     ? 'bg-blue-100 text-blue-600'
-                    : 'text-gray-400 hover:text-gray-text'
+                    : 'text-gray-400 hover:text-gray-600'
                 }`}
               >
                 {getDeviceIcon(device)}
@@ -292,11 +292,11 @@ export function SidebarPreview({
           {/* Header */}
           <div className='bg-gray-50 border-b border-gray-200 px-4 py-3'>
             <div>
-              <h1 className='text-sm font-bold text-primary truncate'>
+              <h1 className='text-sm font-bold text-gray-900 truncate'>
                 {title || 'Page Title'}
               </h1>
               {metaDescription && (
-                <p className='text-xs text-gray-text mt-1 line-clamp-2'>
+                <p className='text-xs text-gray-600 mt-1 line-clamp-2'>
                   {metaDescription}
                 </p>
               )}
@@ -318,7 +318,7 @@ export function SidebarPreview({
             ) : (
               <div className='text-center py-8'>
                 <Eye className='w-8 h-8 text-gray-400 mx-auto mb-2' />
-                <p className='text-sm text-gray-text'>No content yet</p>
+                <p className='text-sm text-gray-600'>No content yet</p>
               </div>
             )}
           </div>

@@ -1,8 +1,17 @@
--- Clean schema migration: creates tables for a modern web app
--- This migration will only run once due to the migration tracking system
+-- Clean schema migration: drops legacy tables and creates new ones for a modern web app
+
+-- Drop legacy tables if they exist
+DROP TABLE IF EXISTS audit_logs;
+DROP TABLE IF EXISTS media;
+DROP TABLE IF EXISTS pages;
+DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS navigation_menus;
+DROP TABLE IF EXISTS site_settings;
+DROP TABLE IF EXISTS analytics_events;
 
 -- USERS TABLE
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id            TEXT PRIMARY KEY,
     name          TEXT NOT NULL,
     email         TEXT NOT NULL UNIQUE,
@@ -15,7 +24,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- PROJECTS TABLE
-CREATE TABLE IF NOT EXISTS projects (
+CREATE TABLE projects (
     id            TEXT PRIMARY KEY,
     name          TEXT NOT NULL,
     description   TEXT,
@@ -27,32 +36,21 @@ CREATE TABLE IF NOT EXISTS projects (
 );
 
 -- PAGES TABLE
-CREATE TABLE IF NOT EXISTS pages (
+CREATE TABLE pages (
     id            TEXT PRIMARY KEY,
     title         TEXT NOT NULL,
     slug          TEXT NOT NULL UNIQUE,
     content       TEXT,
-    meta_title    TEXT,
-    meta_description TEXT,
-    meta_keywords TEXT,
-    og_title      TEXT,
-    og_description TEXT,
-    og_image      TEXT,
-    twitter_title TEXT,
-    twitter_description TEXT,
-    twitter_image TEXT,
-    status        TEXT NOT NULL DEFAULT 'draft',
     author_id     TEXT NOT NULL,
     published     INTEGER NOT NULL DEFAULT 0,
     published_at  DATETIME,
     created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    created_by    TEXT,
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
 
 -- MEDIA TABLE
-CREATE TABLE IF NOT EXISTS media (
+CREATE TABLE media (
     id            TEXT PRIMARY KEY,
     filename      TEXT NOT NULL,
     url           TEXT NOT NULL,
@@ -67,7 +65,7 @@ CREATE TABLE IF NOT EXISTS media (
 );
 
 -- AUDIT LOGS TABLE
-CREATE TABLE IF NOT EXISTS audit_logs (
+CREATE TABLE audit_logs (
     id            TEXT PRIMARY KEY,
     user_id       TEXT,
     action        TEXT NOT NULL,
@@ -79,7 +77,7 @@ CREATE TABLE IF NOT EXISTS audit_logs (
 );
 
 -- NAVIGATION MENUS TABLE
-CREATE TABLE IF NOT EXISTS navigation_menus (
+CREATE TABLE navigation_menus (
     id          TEXT PRIMARY KEY,
     name        TEXT NOT NULL,
     items_json  TEXT NOT NULL,
@@ -88,7 +86,7 @@ CREATE TABLE IF NOT EXISTS navigation_menus (
 );
 
 -- SITE SETTINGS TABLE
-CREATE TABLE IF NOT EXISTS site_settings (
+CREATE TABLE site_settings (
     id         TEXT PRIMARY KEY,
     key        TEXT NOT NULL UNIQUE,
     value      TEXT NOT NULL,
@@ -96,7 +94,7 @@ CREATE TABLE IF NOT EXISTS site_settings (
 );
 
 -- ANALYTICS EVENTS TABLE
-CREATE TABLE IF NOT EXISTS analytics_events (
+CREATE TABLE analytics_events (
     id         TEXT PRIMARY KEY,
     user_id    TEXT,
     event_type TEXT NOT NULL,
@@ -106,8 +104,8 @@ CREATE TABLE IF NOT EXISTS analytics_events (
 );
 
 -- Indexes for performance
-CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
-CREATE INDEX IF NOT EXISTS idx_projects_owner ON projects(owner_id);
-CREATE INDEX IF NOT EXISTS idx_pages_author ON pages(author_id);
-CREATE INDEX IF NOT EXISTS idx_media_uploaded_by ON media(uploaded_by);
-CREATE INDEX IF NOT EXISTS idx_audit_logs_user ON audit_logs(user_id); 
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_projects_owner ON projects(owner_id);
+CREATE INDEX idx_pages_author ON pages(author_id);
+CREATE INDEX idx_media_uploaded_by ON media(uploaded_by);
+CREATE INDEX idx_audit_logs_user ON audit_logs(user_id); 

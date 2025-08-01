@@ -79,15 +79,12 @@ export default function MiniProjects() {
         setIsLoading(true);
         setError(null);
         if (isAuthenticated) {
-          const response = await fetch('/api/admin/projects');
-          if (response.ok) {
-            const data = await response.json();
-            const allProjects = data.projects || [];
-            setProjects(allProjects.slice(0, 3));
-            setIsAuthenticatedUser(true);
-          } else {
-            throw new Error('Failed to fetch projects');
-          }
+          const response = await apiFetch<{ projects: Project[] }>(
+            '/api/admin/projects'
+          );
+          const allProjects = response.projects || [];
+          setProjects(allProjects.slice(0, 3));
+          setIsAuthenticatedUser(true);
         } else {
           setProjects(sampleProjects);
           setIsAuthenticatedUser(false);
@@ -121,7 +118,7 @@ export default function MiniProjects() {
           </div>
           <div className='text-center py-8'>
             <div className='inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary'></div>
-            <p className='text-gray-text mt-4'>Loading projects...</p>
+            <p className='text-gray-600 mt-4'>Loading projects...</p>
           </div>
         </div>
       </section>
@@ -144,7 +141,7 @@ export default function MiniProjects() {
               Showing sample projects.{' '}
               <Link
                 href='/login'
-                className='text-primary hover:text-gray-300-dark'
+                className='text-primary hover:text-primary-dark'
               >
                 Login
               </Link>{' '}
@@ -155,7 +152,7 @@ export default function MiniProjects() {
 
         {error ? (
           <div className='text-center py-8'>
-            <p className='text-gray-text'>{error}</p>
+            <p className='text-gray-600'>{error}</p>
           </div>
         ) : projects.length > 0 ? (
           <>
@@ -209,7 +206,7 @@ export default function MiniProjects() {
             <div className='text-center'>
               <Link
                 href='/projects'
-                className='inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary to-primary-light hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200'
+                className='inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200'
               >
                 View All Projects
                 <svg
@@ -228,7 +225,7 @@ export default function MiniProjects() {
           </>
         ) : (
           <div className='text-center py-8'>
-            <div className='text-gray-text mb-4'>
+            <div className='text-gray-600 mb-4'>
               <svg
                 className='w-12 h-12 mx-auto'
                 fill='none'
@@ -243,7 +240,7 @@ export default function MiniProjects() {
                 />
               </svg>
             </div>
-            <h3 className='text-lg font-semibold text-primary mb-2'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-2'>
               No Projects Available
             </h3>
             <p className='text-gray-text'>

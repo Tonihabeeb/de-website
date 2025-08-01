@@ -133,15 +133,15 @@ export default function AdminNewPage() {
           <div className='flex items-center space-x-4'>
             <button
               onClick={() => router.back()}
-              className='text-gray-text hover:text-primary'
+              className='text-gray-600 hover:text-gray-900'
             >
               <ArrowLeft className='w-5 h-5' />
             </button>
             <div>
-              <h1 className='text-2xl font-bold text-primary'>
+              <h1 className='text-2xl font-bold text-gray-900'>
                 Create New Page
               </h1>
-              <p className='text-gray-text'>Add a new page to your website</p>
+              <p className='text-gray-600'>Add a new page to your website</p>
             </div>
           </div>
           <div className='flex items-center space-x-3'>
@@ -628,7 +628,7 @@ export default function AdminNewPage() {
             <div className='space-y-6'>
               {/* Page Info */}
               <div className='bg-white border border-gray-200 rounded-lg p-4'>
-                <h3 className='text-sm font-medium text-primary mb-3'>
+                <h3 className='text-sm font-medium text-gray-900 mb-3'>
                   Page Information
                 </h3>
                 <div className='space-y-2 text-sm'>
@@ -646,20 +646,20 @@ export default function AdminNewPage() {
                   </div>
                   <div>
                     <span className='text-gray-500'>URL:</span>
-                    <span className='ml-2 text-primary'>
+                    <span className='ml-2 text-gray-900'>
                       /{formData.slug || 'page-slug'}
                     </span>
                   </div>
                   <div>
                     <span className='text-gray-500'>Created:</span>
-                    <span className='ml-2 text-primary'>Just now</span>
+                    <span className='ml-2 text-gray-900'>Just now</span>
                   </div>
                 </div>
               </div>
 
               {/* Actions */}
               <div className='bg-white border border-gray-200 rounded-lg p-4'>
-                <h3 className='text-sm font-medium text-primary mb-3'>
+                <h3 className='text-sm font-medium text-gray-900 mb-3'>
                   Actions
                 </h3>
                 <div className='space-y-2'>

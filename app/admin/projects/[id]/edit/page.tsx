@@ -307,7 +307,7 @@ function EditProject() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-text'>Loading project...</span>
+          <span className='ml-2 text-gray-600'>Loading project...</span>
         </div>
       </div>
     );
@@ -323,7 +323,7 @@ function EditProject() {
           </div>
           <button
             onClick={() => router.push('/admin/projects')}
-            className='mt-4 text-blue-600 hover:opacity-80'
+            className='mt-4 text-blue-600 hover:text-blue-800'
           >
             Back to Projects
           </button>
@@ -338,8 +338,8 @@ function EditProject() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-primary'>Edit Project</h1>
-            <p className='text-gray-text mt-1'>
+            <h1 className='text-2xl font-bold text-gray-900'>Edit Project</h1>
+            <p className='text-gray-600 mt-1'>
               Update project details and configuration
             </p>
             {project && (
@@ -414,7 +414,7 @@ function EditProject() {
           aria-modal='true'
         >
           <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
-            <h3 className='text-lg font-semibold text-primary mb-4'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
               Version History
             </h3>
             {versionLoading ? (
@@ -497,7 +497,7 @@ function EditProject() {
       {/* Form */}
       <form onSubmit={handleSubmit} className='space-y-6'>
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
             Basic Information
           </h2>
 
@@ -582,7 +582,7 @@ function EditProject() {
 
         {/* Timeline */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
             <Calendar className='w-5 h-5 mr-2' />
             Timeline
           </h2>
@@ -616,7 +616,7 @@ function EditProject() {
 
         {/* Budget */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
             <DollarSign className='w-5 h-5 mr-2' />
             Budget & Financials
           </h2>
@@ -675,7 +675,7 @@ function EditProject() {
 
         {/* Team & Stakeholders */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
             <Users className='w-5 h-5 mr-2' />
             Team & Stakeholders
           </h2>
@@ -743,7 +743,7 @@ function EditProject() {
                   <button
                     type='button'
                     onClick={() => removeTeamMember(member)}
-                    className='ml-2 text-blue-600 hover:opacity-80'
+                    className='ml-2 text-blue-600 hover:text-blue-800'
                   >
                     ×
                   </button>
@@ -755,7 +755,7 @@ function EditProject() {
 
         {/* Location & Details */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
             <MapPin className='w-5 h-5 mr-2' />
             Location & Additional Details
           </h2>
@@ -807,7 +807,7 @@ function EditProject() {
                     <button
                       type='button'
                       onClick={() => removeTag(tag)}
-                      className='ml-2 text-gray-text hover:text-gray-800'
+                      className='ml-2 text-gray-600 hover:text-gray-800'
                     >
                       ×
                     </button>

@@ -209,7 +209,7 @@ function UserRoleAssignment() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-text'>Loading user...</span>
+          <span className='ml-2 text-gray-600'>Loading user...</span>
         </div>
       </div>
     );
@@ -225,7 +225,7 @@ function UserRoleAssignment() {
           </div>
           <button
             onClick={() => router.push('/admin/users')}
-            className='mt-4 text-blue-600 hover:opacity-80'
+            className='mt-4 text-blue-600 hover:text-blue-800'
           >
             Back to Users
           </button>
@@ -240,10 +240,10 @@ function UserRoleAssignment() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-primary'>
+            <h1 className='text-2xl font-bold text-gray-900'>
               Role Assignment
             </h1>
-            <p className='text-gray-text mt-1'>
+            <p className='text-gray-600 mt-1'>
               Manage role and permissions for {user?.name}
             </p>
           </div>
@@ -284,7 +284,7 @@ function UserRoleAssignment() {
           {/* User Information */}
           <div className='lg:col-span-1'>
             <div className='bg-white rounded-lg shadow p-6'>
-              <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <User className='w-5 h-5 mr-2' />
                 User Information
               </h2>
@@ -294,14 +294,14 @@ function UserRoleAssignment() {
                   <label className='block text-sm font-medium text-gray-700'>
                     Name
                   </label>
-                  <p className='text-sm text-primary mt-1'>{user.name}</p>
+                  <p className='text-sm text-gray-900 mt-1'>{user.name}</p>
                 </div>
 
                 <div>
                   <label className='block text-sm font-medium text-gray-700'>
                     Email
                   </label>
-                  <p className='text-sm text-primary mt-1'>{user.email}</p>
+                  <p className='text-sm text-gray-900 mt-1'>{user.email}</p>
                 </div>
 
                 <div>
@@ -338,7 +338,7 @@ function UserRoleAssignment() {
                   <label className='block text-sm font-medium text-gray-700'>
                     Member Since
                   </label>
-                  <p className='text-sm text-primary mt-1'>
+                  <p className='text-sm text-gray-900 mt-1'>
                     {new Date(user.created_at).toLocaleDateString()}
                   </p>
                 </div>
@@ -350,7 +350,7 @@ function UserRoleAssignment() {
           <div className='lg:col-span-2'>
             <form onSubmit={handleSubmit} className='space-y-6'>
               <div className='bg-white rounded-lg shadow p-6'>
-                <h2 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+                <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                   <Shield className='w-5 h-5 mr-2' />
                   Role Assignment
                 </h2>
@@ -377,14 +377,14 @@ function UserRoleAssignment() {
 
                   {selectedRole && (
                     <div className='mt-4 p-4 bg-gray-50 rounded-lg'>
-                      <h4 className='text-sm font-medium text-primary mb-2'>
+                      <h4 className='text-sm font-medium text-gray-900 mb-2'>
                         Role Description
                       </h4>
-                      <p className='text-sm text-gray-text mb-3'>
+                      <p className='text-sm text-gray-600 mb-3'>
                         {roles.find(r => r.id === selectedRole)?.description}
                       </p>
 
-                      <h5 className='text-sm font-medium text-primary mb-2'>
+                      <h5 className='text-sm font-medium text-gray-900 mb-2'>
                         Default Permissions
                       </h5>
                       <div className='space-y-1'>
@@ -393,7 +393,7 @@ function UserRoleAssignment() {
                           ?.permissions.map((permission, index) => (
                             <div
                               key={index}
-                              className='text-sm text-gray-text flex items-center'
+                              className='text-sm text-gray-600 flex items-center'
                             >
                               <CheckCircle className='w-4 h-4 text-green-500 mr-2' />
                               {permission}
@@ -408,7 +408,7 @@ function UserRoleAssignment() {
               {/* Custom Permissions */}
               <div className='bg-white rounded-lg shadow p-6'>
                 <div className='flex items-center justify-between mb-4'>
-                  <h2 className='text-lg font-semibold text-primary flex items-center'>
+                  <h2 className='text-lg font-semibold text-gray-900 flex items-center'>
                     <Settings className='w-5 h-5 mr-2' />
                     Custom Permissions
                   </h2>
@@ -417,7 +417,7 @@ function UserRoleAssignment() {
                     onClick={() =>
                       setShowCustomPermissions(!showCustomPermissions)
                     }
-                    className='text-blue-600 hover:opacity-80 text-sm font-medium'
+                    className='text-blue-600 hover:text-blue-800 text-sm font-medium'
                   >
                     {showCustomPermissions ? 'Hide' : 'Show'} Custom Permissions
                   </button>
@@ -431,7 +431,7 @@ function UserRoleAssignment() {
                           key={resource}
                           className='border border-gray-200 rounded-lg p-4'
                         >
-                          <h3 className='text-sm font-medium text-primary mb-3 capitalize'>
+                          <h3 className='text-sm font-medium text-gray-900 mb-3 capitalize'>
                             {resource.replace('_', ' ')}
                           </h3>
                           <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
@@ -451,7 +451,7 @@ function UserRoleAssignment() {
                                   className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                                 />
                                 <div>
-                                  <span className='text-sm font-medium text-primary'>
+                                  <span className='text-sm font-medium text-gray-900'>
                                     {permission.action.replace('_', ' ')}
                                   </span>
                                   <p className='text-xs text-gray-500'>

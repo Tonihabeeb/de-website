@@ -39,7 +39,6 @@ export default function RichTextEditor({
         init={{
           height: height,
           menubar: false,
-          apiKey: process.env.NEXT_PUBLIC_TINYMCE_API_KEY || undefined,
           plugins: [
             'advlist',
             'autolink',

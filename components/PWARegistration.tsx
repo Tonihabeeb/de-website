@@ -87,16 +87,16 @@ export default function PWARegistration() {
               </div>
             </div>
             <div className='flex-1 min-w-0'>
-              <h3 className='text-base font-medium text-primary'>
+              <h3 className='text-base font-medium text-gray-900'>
                 Install Deep Engineering
               </h3>
-              <p className='text-base text-gray-text mt-1'>
+              <p className='text-base text-gray-600 mt-1'>
                 Add to your home screen for quick access.
               </p>
             </div>
             <button
               onClick={handleDismissInstall}
-              className='flex-shrink-0 text-gray-400 hover:text-gray-text touch-target min-w-[44px] min-h-[44px]'
+              className='flex-shrink-0 text-gray-400 hover:text-gray-600 touch-target min-w-[44px] min-h-[44px]'
               aria-label='Dismiss install prompt'
             >
               <LucideX className='w-5 h-5' />

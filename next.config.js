@@ -21,11 +21,6 @@ const nextConfig = {
         hostname: 'deepengineering.co',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '/**',
-      },
     ],
   },
 

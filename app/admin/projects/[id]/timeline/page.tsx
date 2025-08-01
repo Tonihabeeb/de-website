@@ -212,7 +212,7 @@ export default function AdminProjectTimelinePage() {
           <div className='mb-8'>
             <button
               onClick={() => router.back()}
-              className='flex items-center text-gray-text hover:text-primary mb-4'
+              className='flex items-center text-gray-600 hover:text-gray-900 mb-4'
             >
               <ArrowLeft className='w-4 h-4 mr-2' />
               Back to Project
@@ -220,10 +220,10 @@ export default function AdminProjectTimelinePage() {
 
             <div className='flex items-center justify-between'>
               <div>
-                <h1 className='text-3xl font-bold text-primary'>
+                <h1 className='text-3xl font-bold text-gray-900'>
                   {project.name} - Timeline
                 </h1>
-                <p className='text-gray-text mt-2'>{project.description}</p>
+                <p className='text-gray-600 mt-2'>{project.description}</p>
               </div>
 
               <div className='flex items-center space-x-4 text-sm text-gray-500'>
@@ -248,8 +248,8 @@ export default function AdminProjectTimelinePage() {
             <div className='bg-white p-4 rounded-lg shadow-sm border'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm text-gray-text'>Total Milestones</p>
-                  <p className='text-2xl font-bold text-primary'>
+                  <p className='text-sm text-gray-600'>Total Milestones</p>
+                  <p className='text-2xl font-bold text-gray-900'>
                     {milestones.length}
                   </p>
                 </div>
@@ -260,7 +260,7 @@ export default function AdminProjectTimelinePage() {
             <div className='bg-white p-4 rounded-lg shadow-sm border'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm text-gray-text'>Completed</p>
+                  <p className='text-sm text-gray-600'>Completed</p>
                   <p className='text-2xl font-bold text-green-600'>
                     {milestones.filter(m => m.status === 'completed').length}
                   </p>
@@ -272,7 +272,7 @@ export default function AdminProjectTimelinePage() {
             <div className='bg-white p-4 rounded-lg shadow-sm border'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm text-gray-text'>In Progress</p>
+                  <p className='text-sm text-gray-600'>In Progress</p>
                   <p className='text-2xl font-bold text-blue-600'>
                     {milestones.filter(m => m.status === 'in-progress').length}
                   </p>
@@ -284,8 +284,8 @@ export default function AdminProjectTimelinePage() {
             <div className='bg-white p-4 rounded-lg shadow-sm border'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm text-gray-text'>Pending</p>
-                  <p className='text-2xl font-bold text-gray-text'>
+                  <p className='text-sm text-gray-600'>Pending</p>
+                  <p className='text-2xl font-bold text-gray-600'>
                     {milestones.filter(m => m.status === 'pending').length}
                   </p>
                 </div>

@@ -204,41 +204,15 @@ export default function Navbar() {
     };
   }, []);
 
-  // Check if we're on the homepage and if hero section is visible
-  const isHomePage = pathname === '/';
-  const [isHeroVisible, setIsHeroVisible] = useState(false);
-
-  // Check if hero section is visible (for homepage only)
-  useEffect(() => {
-    if (isHomePage) {
-      const checkHeroVisibility = () => {
-        const heroSection = document.querySelector('section');
-        if (heroSection) {
-          const rect = heroSection.getBoundingClientRect();
-          // Hero is visible if it's in the viewport
-          setIsHeroVisible(rect.top <= 0 && rect.bottom > 0);
-        }
-      };
-
-      checkHeroVisibility();
-      window.addEventListener('scroll', checkHeroVisibility);
-      return () => window.removeEventListener('scroll', checkHeroVisibility);
-    }
-  }, [isHomePage]);
-  
   return (
-    <nav className={`sticky top-0 z-[100] transition-all duration-300 ${
-      isHomePage && isHeroVisible
-        ? 'bg-transparent border-b border-gray-300/30 shadow-none' 
-        : 'bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm'
-    }`}>
+    <nav className='sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center h-16'>
           {/* Logo */}
           <Link
             href='/'
             aria-label='Deep Engineering - Go to homepage'
-            className='flex-shrink-0 focus:outline-none'
+            className='flex-shrink-0'
           >
             <Image
               src='/logo.svg'
@@ -246,7 +220,6 @@ export default function Navbar() {
               height={40}
               width={120}
               priority
-              className={isHomePage && isHeroVisible ? 'filter brightness-0 invert' : ''}
             />
           </Link>
 
@@ -334,11 +307,7 @@ export default function Navbar() {
                           setServicesDropdownOpen(false);
                         }
                       }}
-                                            className={`flex items-center space-x-1 transition-colors duration-200 font-medium focus:outline-none ${
-                        isHomePage && isHeroVisible
-                          ? 'text-white hover:text-gray-200'
-                          : 'text-gray-text hover:text-gray-300'
-                      }`}
+                      className='flex items-center space-x-1 text-gray-text hover:text-primary transition-colors duration-200 font-medium'
                       aria-expanded={
                         item.name === 'About'
                           ? aboutDropdownOpen
@@ -362,7 +331,7 @@ export default function Navbar() {
                           ? servicesDropdownOpen
                           : teamDropdownOpen) && (
                       <div
-                        className='absolute top-full left-0 mt-2 w-64 bg-white/90 backdrop-blur-md rounded-lg shadow-lg border border-gray-200/50 py-2 z-20'
+                        className='absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20'
                         onMouseEnter={() => {
                           if (item.name === 'About') {
                             setAboutDropdownOpen(true);
@@ -391,19 +360,19 @@ export default function Navbar() {
                             {sub.submenu ? (
                               <>
                                 <button
-                                  className='flex items-center w-full px-4 py-2 text-left hover:bg-gray-100 text-gray-700 group-hover:bg-gray-100 focus:outline-none'
+                                  className='flex items-center w-full px-4 py-2 text-left hover:bg-gray-100 text-gray-700 group-hover:bg-gray-100'
                                   aria-haspopup='true'
                                   aria-label={`Toggle ${sub.name} submenu`}
                                 >
                                   <span>{sub.name}</span>
                                   <ChevronDown className='w-4 h-4 ml-auto' />
                                 </button>
-                                <div className='absolute top-0 left-full w-56 bg-white/90 backdrop-blur-md rounded-lg shadow-lg border border-gray-200/50 py-2 z-30 hidden group-hover:block group-focus-within:block'>
+                                <div className='absolute top-0 left-full w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-30 hidden group-hover:block group-focus-within:block'>
                                   {sub.submenu.map((nested: SubMenuItem) => (
                                     <Link
                                       key={nested.name}
                                       href={nested.href}
-                                      className='block px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none'
+                                      className='block px-4 py-2 hover:bg-gray-100 text-gray-700'
                                     >
                                       {nested.name}
                                     </Link>
@@ -413,7 +382,7 @@ export default function Navbar() {
                             ) : (
                               <Link
                                 href={sub.href}
-                                className='block px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none'
+                                className='block px-4 py-2 hover:bg-gray-100 text-gray-700'
                               >
                                 {sub.name}
                               </Link>
@@ -428,17 +397,11 @@ export default function Navbar() {
                     href={item.href}
                     role='menuitem'
                     aria-current={pathname === item.href ? 'page' : undefined}
-                                          className={`transition-colors duration-200 font-medium min-w-[44px] min-h-[44px] focus:outline-none ${
-                        isHomePage && isHeroVisible
-                          ? 'text-white hover:text-gray-200'
-                          : 'text-gray-text hover:text-gray-300'
-                      } ${
-                        pathname === item.href
-                          ? isHomePage && isHeroVisible
-                            ? 'text-white font-bold border-b-2 border-white'
-                            : 'text-primary font-bold border-b-2 border-primary'
-                          : ''
-                      }`}
+                    className={`text-gray-text hover:text-primary transition-colors duration-200 font-medium min-w-[44px] min-h-[44px] ${
+                      pathname === item.href
+                        ? 'text-primary font-bold underline'
+                        : ''
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -454,11 +417,7 @@ export default function Navbar() {
                 <button
                   ref={userButtonRef}
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                                    className={`flex items-center space-x-3 p-2 rounded-full transition-colors duration-200 focus:outline-none ${
-                    isHomePage && isHeroVisible
-                      ? 'hover:bg-white/10'
-                      : 'hover:bg-gray-50'
-                  }`}
+                  className='flex items-center space-x-3 p-2 rounded-full hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
                   aria-expanded={userDropdownOpen}
                   aria-haspopup='true'
                   aria-label='User menu'
@@ -467,29 +426,23 @@ export default function Navbar() {
                     {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                   </div>
                   <div className='hidden lg:block text-left'>
-                                                          <div className={`text-sm font-medium ${
-                      isHomePage && isHeroVisible ? 'text-white' : 'text-primary'
-                    }`}>
-                    {user?.name || 'User'}
-                  </div>
-                                      <div className={`text-xs ${
-                      isHomePage && isHeroVisible ? 'text-gray-200' : 'text-gray-500'
-                    }`}>
+                    <div className='text-sm font-medium text-gray-900'>
+                      {user?.name || 'User'}
+                    </div>
+                    <div className='text-xs text-gray-500'>
                       {user?.role
                         ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
                         : 'User'}
                     </div>
                   </div>
                   <ChevronDown
-                                          className={`w-4 h-4 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''} ${
-                        isHomePage && isHeroVisible ? 'text-white' : 'text-gray-400'
-                      }`}
+                    className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`}
                   />
                 </button>
 
                 {/* User Dropdown Menu */}
                 {userDropdownOpen && (
-                  <div className='absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-md rounded-lg shadow-lg border border-gray-200/50 py-2 z-30'>
+                  <div className='absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-30'>
                     {/* User Info Header */}
                     <div className='px-4 py-3 border-b border-gray-100'>
                       <div className='flex items-center space-x-3'>
@@ -497,7 +450,7 @@ export default function Navbar() {
                           {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                         </div>
                         <div>
-                          <div className='text-sm font-medium text-primary'>
+                          <div className='text-sm font-medium text-gray-900'>
                             {user?.name || 'User'}
                           </div>
                           <div className='text-xs text-gray-500'>
@@ -514,7 +467,7 @@ export default function Navbar() {
                     <div className='py-1'>
                       <Link
                         href='/documents'
-                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-300 transition-colors duration-200 focus:outline-none'
+                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         <FileText className='w-4 h-4 mr-3' />
@@ -523,7 +476,7 @@ export default function Navbar() {
                       <RoleGuard roles={['admin', 'super_admin']}>
                         <Link
                           href='/admin/'
-                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-300 transition-colors duration-200 focus:outline-none'
+                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
                           onClick={() => setUserDropdownOpen(false)}
                         >
                           <Settings className='w-4 h-4 mr-3' />
@@ -531,7 +484,7 @@ export default function Navbar() {
                         </Link>
                         <Link
                           href='/admin/dashboard'
-                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-300 transition-colors duration-200 focus:outline-none'
+                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
                           onClick={() => setUserDropdownOpen(false)}
                         >
                           <Settings className='w-4 h-4 mr-3' />
@@ -540,7 +493,7 @@ export default function Navbar() {
                       </RoleGuard>
                       <Link
                         href='/dashboard'
-                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-300 transition-colors duration-200 focus:outline-none'
+                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         <svg
@@ -564,7 +517,7 @@ export default function Navbar() {
                           logout();
                           setUserDropdownOpen(false);
                         }}
-                        className='flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 focus:outline-none'
+                        className='flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200'
                       >
                         <LogOut className='w-4 h-4 mr-3' />
                         Logout
@@ -577,21 +530,13 @@ export default function Navbar() {
               <div className='flex items-center space-x-4'>
                 <Link
                   href='/login'
-                                    className={`text-sm transition-colors duration-200 font-medium px-3 py-2 rounded-md focus:outline-none ${
-                    isHomePage && isHeroVisible
-                      ? 'text-white hover:text-gray-200 hover:bg-white/10'
-                      : 'text-gray-700 hover:text-gray-300 hover:bg-gray-50'
-                  }`}
+                  className='text-sm text-gray-700 hover:text-primary transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-gray-50'
                 >
                   Login
                 </Link>
                 <Link
                   href='/register'
-                                    className={`text-sm px-4 py-2 rounded-md transition-colors duration-200 font-medium shadow-sm hover:shadow-md focus:outline-none ${
-                    isHomePage && isHeroVisible
-                      ? 'bg-white text-primary hover:bg-gray-100'
-                      : 'bg-primary text-white hover:bg-primary-dark'
-                  }`}
+                  className='text-sm bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-200 font-medium shadow-sm hover:shadow-md'
                 >
                   Register
                 </Link>
@@ -602,11 +547,7 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             type='button'
-                            className={`md:hidden p-3 rounded-lg transition-all duration-200 min-w-[48px] min-h-[48px] focus:outline-none ${
-                  isHomePage && isHeroVisible
-                    ? 'text-white hover:text-gray-200 hover:bg-white/10'
-                    : 'text-gray-text hover:text-gray-300 hover:bg-gray-50'
-                }`}
+            className='md:hidden p-3 text-gray-text hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 min-w-[48px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={
               mobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'
@@ -627,11 +568,7 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div
           id='mobile-menu'
-          className={`md:hidden border-t shadow-lg ${
-            isHomePage 
-              ? 'border-white/20 bg-white/95 backdrop-blur-sm' 
-              : 'border-gray-200 bg-white'
-          }`}
+          className='md:hidden border-t border-gray-200 bg-white shadow-lg'
           role='navigation'
           aria-label='Mobile navigation'
         >
@@ -641,11 +578,7 @@ export default function Navbar() {
                 <li key={item.name} role='none'>
                   {item.submenu ? (
                     <div>
-                                              <div className={`px-3 py-3 font-semibold text-lg border-b ${
-                          isHomePage && isHeroVisible
-                            ? 'text-white border-white/20'
-                            : 'text-primary border-gray-100'
-                        }`}>
+                      <div className='px-3 py-3 text-primary font-semibold text-lg border-b border-gray-100'>
                         {item.name}
                       </div>
                       <ul className='pl-4 space-y-1 mt-2'>
@@ -653,12 +586,10 @@ export default function Navbar() {
                           <li key={subItem.name}>
                             <Link
                               href={subItem.href}
-                                                            className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium focus:outline-none ${
+                              className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium ${
                                 pathname === subItem.href
                                   ? 'bg-primary text-white shadow-md'
-                                  : isHomePage && isHeroVisible
-                                    ? 'text-white hover:bg-white/10 hover:text-gray-200'
-                                    : 'text-gray-text hover:bg-gray-50 hover:text-gray-300'
+                                  : 'text-gray-text hover:bg-gray-50 hover:text-primary'
                               }`}
                               onClick={() => setMobileMenuOpen(false)}
                             >
@@ -673,12 +604,10 @@ export default function Navbar() {
                       href={item.href}
                       role='menuitem'
                       aria-current={pathname === item.href ? 'page' : undefined}
-                                            className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium focus:outline-none ${
+                      className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium ${
                         pathname === item.href
                           ? 'bg-primary text-white shadow-md'
-                          : isHomePage && isHeroVisible
-                            ? 'text-white hover:bg-white/10 hover:text-gray-200'
-                            : 'text-gray-text hover:bg-gray-50 hover:text-gray-300'
+                          : 'text-gray-text hover:bg-gray-50 hover:text-primary'
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -690,11 +619,7 @@ export default function Navbar() {
             </ul>
 
             {/* Mobile Authentication Section */}
-            <div className={`border-t pt-6 mt-6 ${
-              isHomePage && isHeroVisible
-                ? 'border-gray-200' 
-                : 'border-gray-200'
-            }`}>
+            <div className='border-t border-gray-200 pt-6 mt-6'>
               {isAuthenticated ? (
                 <div className='space-y-4'>
                   {/* User Info */}
@@ -703,7 +628,7 @@ export default function Navbar() {
                       {user?.userId?.charAt(0)?.toUpperCase() || 'U'}
                     </div>
                     <div>
-                      <div className='text-sm font-medium text-primary'>
+                      <div className='text-sm font-medium text-gray-900'>
                         {user?.userId}
                       </div>
                       <div className='text-xs text-gray-500'>
@@ -719,7 +644,7 @@ export default function Navbar() {
                   <div className='space-y-2'>
                     <Link
                       href='/documents'
-                      className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-gray-300 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                      className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <FileText className='w-4 h-4 mr-3' />
@@ -728,7 +653,7 @@ export default function Navbar() {
                     <RoleGuard roles={['admin', 'super_admin']}>
                       <Link
                         href='/admin'
-                        className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-gray-300 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                        className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Settings className='w-4 h-4 mr-3' />
@@ -753,13 +678,13 @@ export default function Navbar() {
                 </div>
               ) : (
                 <div className='space-y-3'>
-                  <div className='text-sm text-gray-text font-medium px-3'>
+                  <div className='text-sm text-gray-600 font-medium px-3'>
                     Account
                   </div>
                   <div className='space-y-2'>
                     <Link
                       href='/login'
-                      className='block px-3 py-3 text-sm text-gray-text hover:text-gray-300 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                      className='block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Login

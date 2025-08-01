@@ -113,7 +113,7 @@ const KPPChainHero: React.FC = () => {
         <h1 className='text-4xl md:text-6xl font-bold text-gray-800 mb-4'>
           Harnessing Kinetic Power
         </h1>
-        <p className='text-lg md:text-2xl text-gray-text mb-6 max-w-xl'>
+        <p className='text-lg md:text-2xl text-gray-600 mb-6 max-w-xl'>
           Discover how our KPP system transforms motion into clean, reliable
           energy.
         </p>

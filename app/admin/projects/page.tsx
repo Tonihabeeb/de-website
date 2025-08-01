@@ -406,7 +406,7 @@ export default function AdminProjectsPage() {
                 </p>
                 <Link
                   href='/admin/projects/new'
-                  className='mt-4 inline-flex items-center text-blue-600 hover:opacity-80'
+                  className='mt-4 inline-flex items-center text-blue-600 hover:text-blue-500'
                 >
                   <Plus className='w-4 h-4 mr-1' />
                   Create your first project
@@ -422,10 +422,10 @@ export default function AdminProjectsPage() {
                 <div className='p-6'>
                   <div className='flex justify-between items-start mb-4'>
                     <div className='flex-1'>
-                      <h3 className='text-lg font-semibold text-primary mb-1'>
+                      <h3 className='text-lg font-semibold text-gray-900 mb-1'>
                         {project.name}
                       </h3>
-                      <p className='text-sm text-gray-text line-clamp-2'>
+                      <p className='text-sm text-gray-600 line-clamp-2'>
                         {project.description}
                       </p>
                     </div>
@@ -434,13 +434,13 @@ export default function AdminProjectsPage() {
 
                   <div className='space-y-2 mb-4'>
                     {project.location && (
-                      <div className='flex items-center text-sm text-gray-text'>
+                      <div className='flex items-center text-sm text-gray-600'>
                         <MapPin className='w-4 h-4 mr-2' />
                         {project.location}
                       </div>
                     )}
                     {project.capacity_mw && (
-                      <div className='flex items-center text-sm text-gray-text'>
+                      <div className='flex items-center text-sm text-gray-600'>
                         <div className='w-4 h-4 mr-2 bg-blue-100 rounded flex items-center justify-center'>
                           <span className='text-xs font-medium text-blue-600'>
                             MW
@@ -450,14 +450,14 @@ export default function AdminProjectsPage() {
                       </div>
                     )}
                     {project.budget && (
-                      <div className='flex items-center text-sm text-gray-text'>
+                      <div className='flex items-center text-sm text-gray-600'>
                         <DollarSign className='w-4 h-4 mr-2' />
                         {project.budget.toLocaleString()}{' '}
                         {project.budget_currency || 'USD'}
                       </div>
                     )}
                     {project.start_date && (
-                      <div className='flex items-center text-sm text-gray-text'>
+                      <div className='flex items-center text-sm text-gray-600'>
                         <Calendar className='w-4 h-4 mr-2' />
                         {new Date(project.start_date).toLocaleDateString()}
                       </div>
@@ -471,7 +471,7 @@ export default function AdminProjectsPage() {
                     <div className='flex items-center space-x-2'>
                       <Link
                         href={`/admin/projects/${project.id}/edit`}
-                        className='text-blue-600 hover:opacity-80 p-1'
+                        className='text-blue-600 hover:text-blue-900 p-1'
                       >
                         <Edit className='w-4 h-4' />
                       </Link>
@@ -483,7 +483,7 @@ export default function AdminProjectsPage() {
                       </Link>
                       <button
                         onClick={() => openVersionModal(project.id)}
-                        className='text-gray-text hover:opacity-80 p-1'
+                        className='text-gray-600 hover:text-blue-600 p-1'
                         aria-label='View version history'
                       >
                         <History className='w-4 h-4' />
@@ -510,7 +510,7 @@ export default function AdminProjectsPage() {
             aria-modal='true'
           >
             <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
-              <h3 className='text-lg font-semibold text-primary mb-4'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4'>
                 Version History
               </h3>
               {versionLoading ? (
@@ -602,11 +602,13 @@ export default function AdminProjectsPage() {
               <h3 className='text-lg font-semibold mb-4'>Import Results</h3>
               <ul className='max-h-64 overflow-y-auto mb-4'>
                 {importResults.map((r, i) => (
-                  <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">{r.success ? '✔' : '✖'} {r.slug || r.id}:{' '}
-                    {r.success ? 'Imported' : r.error}</span>
-                </li>
+                  <li
+                    key={i}
+                    className={r.success ? 'text-green-700' : 'text-red-600'}
+                  >
+                    {r.success ? '✔' : '✖'} {r.slug || r.id}:{' '}
+                    {r.success ? 'Imported' : r.error}
+                  </li>
                 ))}
               </ul>
               <div className='flex justify-end'>

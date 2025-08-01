@@ -237,7 +237,7 @@ export default function SystemHealthMonitor({
       case 'critical':
         return 'text-red-600 bg-red-50';
       default:
-        return 'text-gray-text bg-gray-50';
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
@@ -287,10 +287,10 @@ export default function SystemHealthMonitor({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6 text-center'>
           <AlertCircle className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium text-primary mb-2'>
+          <h3 className='text-lg font-medium text-gray-900 mb-2'>
             Unable to Load System Health
           </h3>
-          <p className='text-gray-text mb-4'>
+          <p className='text-gray-600 mb-4'>
             Failed to connect to system monitoring service.
           </p>
           <Button onClick={loadSystemHealth} variant='primary'>
@@ -312,10 +312,10 @@ export default function SystemHealthMonitor({
       <div className='px-6 py-4 border-b border-gray-200'>
         <div className='flex items-center justify-between'>
           <div>
-            <h2 className='text-xl font-semibold text-primary'>
+            <h2 className='text-xl font-semibold text-gray-900'>
               System Health Monitor
             </h2>
-            <p className='text-sm text-gray-text mt-1'>
+            <p className='text-sm text-gray-600 mt-1'>
               Real-time system monitoring and alerts
             </p>
           </div>
@@ -328,7 +328,7 @@ export default function SystemHealthMonitor({
                 onChange={e => setAutoRefresh(e.target.checked)}
                 className='rounded border-gray-300'
               />
-              <label htmlFor='autoRefresh' className='text-sm text-gray-text'>
+              <label htmlFor='autoRefresh' className='text-sm text-gray-600'>
                 Auto refresh
               </label>
             </div>
@@ -357,10 +357,10 @@ export default function SystemHealthMonitor({
               {getStatusIcon(systemHealth.overall)}
             </div>
             <div>
-              <p className='text-sm font-medium text-primary'>
+              <p className='text-sm font-medium text-gray-900'>
                 Overall Status
               </p>
-              <p className='text-sm text-gray-text capitalize'>
+              <p className='text-sm text-gray-600 capitalize'>
                 {systemHealth.overall}
               </p>
             </div>
@@ -371,8 +371,8 @@ export default function SystemHealthMonitor({
               <Server className='w-4 h-4 text-blue-600' />
             </div>
             <div>
-              <p className='text-sm font-medium text-primary'>Uptime</p>
-              <p className='text-sm text-gray-text'>{systemHealth.uptime}%</p>
+              <p className='text-sm font-medium text-gray-900'>Uptime</p>
+              <p className='text-sm text-gray-600'>{systemHealth.uptime}%</p>
             </div>
           </div>
 
@@ -381,8 +381,8 @@ export default function SystemHealthMonitor({
               <AlertTriangle className='w-4 h-4 text-red-600' />
             </div>
             <div>
-              <p className='text-sm font-medium text-primary'>Active Alerts</p>
-              <p className='text-sm text-gray-text'>{activeAlerts.length}</p>
+              <p className='text-sm font-medium text-gray-900'>Active Alerts</p>
+              <p className='text-sm text-gray-600'>{activeAlerts.length}</p>
             </div>
           </div>
 
@@ -391,8 +391,8 @@ export default function SystemHealthMonitor({
               <CheckCircle className='w-4 h-4 text-green-600' />
             </div>
             <div>
-              <p className='text-sm font-medium text-primary'>Services</p>
-              <p className='text-sm text-gray-text'>
+              <p className='text-sm font-medium text-gray-900'>Services</p>
+              <p className='text-sm text-gray-600'>
                 {
                   systemHealth.services.filter(s => s.status === 'running')
                     .length
@@ -441,14 +441,14 @@ export default function SystemHealthMonitor({
 
       {/* Metrics Grid */}
       <div className='p-6'>
-        <h3 className='text-lg font-medium text-primary mb-4'>
+        <h3 className='text-lg font-medium text-gray-900 mb-4'>
           System Metrics
         </h3>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6'>
           {systemHealth.metrics.map(metric => (
             <div key={metric.id} className='bg-gray-50 rounded-lg p-4'>
               <div className='flex items-center justify-between mb-2'>
-                <h4 className='font-medium text-primary'>{metric.name}</h4>
+                <h4 className='font-medium text-gray-900'>{metric.name}</h4>
                 <div className='flex items-center space-x-1'>
                   {getTrendIcon(metric.trend)}
                   <div
@@ -459,10 +459,10 @@ export default function SystemHealthMonitor({
                 </div>
               </div>
               <div className='flex items-baseline space-x-2'>
-                <span className='text-2xl font-bold text-primary'>
+                <span className='text-2xl font-bold text-gray-900'>
                   {metric.value}
                 </span>
-                <span className='text-sm text-gray-text'>{metric.unit}</span>
+                <span className='text-sm text-gray-600'>{metric.unit}</span>
               </div>
               <div className='mt-2'>
                 <div className='flex justify-between text-xs text-gray-500 mb-1'>
@@ -496,7 +496,7 @@ export default function SystemHealthMonitor({
 
         {/* Service Status */}
         <div className='mb-6'>
-          <h3 className='text-lg font-medium text-primary mb-4'>
+          <h3 className='text-lg font-medium text-gray-900 mb-4'>
             Service Status
           </h3>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
@@ -524,17 +524,17 @@ export default function SystemHealthMonitor({
                     )}
                   </div>
                   <div>
-                    <p className='font-medium text-primary'>{service.name}</p>
-                    <p className='text-sm text-gray-text capitalize'>
+                    <p className='font-medium text-gray-900'>{service.name}</p>
+                    <p className='text-sm text-gray-600 capitalize'>
                       {service.status}
                     </p>
                   </div>
                 </div>
                 <div className='text-right'>
-                  <p className='text-sm font-medium text-primary'>
+                  <p className='text-sm font-medium text-gray-900'>
                     {service.responseTime}ms
                   </p>
-                  <p className='text-xs text-gray-text'>Response</p>
+                  <p className='text-xs text-gray-600'>Response</p>
                 </div>
               </div>
             ))}
@@ -544,7 +544,7 @@ export default function SystemHealthMonitor({
         {/* Recent Alerts */}
         <div>
           <div className='flex items-center justify-between mb-4'>
-            <h3 className='text-lg font-medium text-primary'>Recent Alerts</h3>
+            <h3 className='text-lg font-medium text-gray-900'>Recent Alerts</h3>
             <Button variant='secondary' size='sm'>
               View All
             </Button>
@@ -586,8 +586,8 @@ export default function SystemHealthMonitor({
                       )}
                     </div>
                     <div>
-                      <p className='font-medium text-primary'>{alert.title}</p>
-                      <p className='text-sm text-gray-text mt-1'>
+                      <p className='font-medium text-gray-900'>{alert.title}</p>
+                      <p className='text-sm text-gray-600 mt-1'>
                         {alert.message}
                       </p>
                       <p className='text-xs text-gray-500 mt-2'>
@@ -637,12 +637,12 @@ export default function SystemHealthMonitor({
                 ) : (
                   <Info className='w-5 h-5 text-blue-600' />
                 )}
-                <h3 className='text-lg font-medium text-primary'>
+                <h3 className='text-lg font-medium text-gray-900'>
                   {selectedAlert.title}
                 </h3>
               </div>
               <p className='text-gray-700'>{selectedAlert.message}</p>
-              <p className='text-sm text-gray-text mt-2'>
+              <p className='text-sm text-gray-600 mt-2'>
                 {selectedAlert.timestamp.toLocaleString()}
               </p>
             </div>

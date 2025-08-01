@@ -203,7 +203,7 @@ function UserActivity() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-text'>Loading user activity...</span>
+          <span className='ml-2 text-gray-600'>Loading user activity...</span>
         </div>
       </div>
     );
@@ -219,7 +219,7 @@ function UserActivity() {
           </div>
           <button
             onClick={() => router.push('/admin/users')}
-            className='mt-4 text-blue-600 hover:opacity-80'
+            className='mt-4 text-blue-600 hover:text-blue-800'
           >
             Back to Users
           </button>
@@ -234,8 +234,8 @@ function UserActivity() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-primary'>User Activity</h1>
-            <p className='text-gray-text mt-1'>
+            <h1 className='text-2xl font-bold text-gray-900'>User Activity</h1>
+            <p className='text-gray-600 mt-1'>
               Activity monitoring for {user?.name}
             </p>
           </div>
@@ -256,10 +256,10 @@ function UserActivity() {
             <div className='bg-white p-6 rounded-lg shadow'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm font-medium text-gray-text'>
+                  <p className='text-sm font-medium text-gray-600'>
                     Total Actions
                   </p>
-                  <p className='text-2xl font-bold text-primary'>
+                  <p className='text-2xl font-bold text-gray-900'>
                     {activityStats.total_actions}
                   </p>
                 </div>
@@ -267,13 +267,13 @@ function UserActivity() {
               </div>
               <div className='mt-4'>
                 <div className='flex justify-between text-sm'>
-                  <span className='text-gray-text'>Today</span>
+                  <span className='text-gray-600'>Today</span>
                   <span className='font-medium text-green-600'>
                     {activityStats.actions_today}
                   </span>
                 </div>
                 <div className='flex justify-between text-sm'>
-                  <span className='text-gray-text'>This Week</span>
+                  <span className='text-gray-600'>This Week</span>
                   <span className='font-medium text-blue-600'>
                     {activityStats.actions_this_week}
                   </span>
@@ -284,7 +284,7 @@ function UserActivity() {
             <div className='bg-white p-6 rounded-lg shadow'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm font-medium text-gray-text'>
+                  <p className='text-sm font-medium text-gray-600'>
                     This Month
                   </p>
                   <p className='text-2xl font-bold text-purple-600'>
@@ -298,7 +298,7 @@ function UserActivity() {
             <div className='bg-white p-6 rounded-lg shadow'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm font-medium text-gray-text'>
+                  <p className='text-sm font-medium text-gray-600'>
                     Most Active Day
                   </p>
                   <p className='text-lg font-bold text-green-600'>
@@ -312,7 +312,7 @@ function UserActivity() {
             <div className='bg-white p-6 rounded-lg shadow'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm font-medium text-gray-text'>
+                  <p className='text-sm font-medium text-gray-600'>
                     Most Common Action
                   </p>
                   <p className='text-lg font-bold text-orange-600 capitalize'>
@@ -367,7 +367,7 @@ function UserActivity() {
 
           {/* Activity by Type Chart */}
           <div className='bg-white rounded-lg shadow p-6 mb-6'>
-            <h2 className='text-lg font-semibold text-primary mb-4'>
+            <h2 className='text-lg font-semibold text-gray-900 mb-4'>
               Activity by Type
             </h2>
             <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
@@ -381,7 +381,7 @@ function UserActivity() {
                           {action.replace('_', ' ')}
                         </span>
                       </div>
-                      <span className='text-lg font-bold text-primary'>
+                      <span className='text-lg font-bold text-gray-900'>
                         {count}
                       </span>
                     </div>
@@ -394,7 +394,7 @@ function UserActivity() {
           {/* Activity Logs */}
           <div className='bg-white rounded-lg shadow overflow-hidden'>
             <div className='px-6 py-4 border-b border-gray-200'>
-              <h2 className='text-lg font-semibold text-primary'>
+              <h2 className='text-lg font-semibold text-gray-900'>
                 Recent Activity
               </h2>
             </div>
@@ -437,7 +437,7 @@ function UserActivity() {
                         <div className='flex items-center'>
                           {getResourceIcon(log.resource_type)}
                           <div className='ml-2'>
-                            <div className='text-sm font-medium text-primary capitalize'>
+                            <div className='text-sm font-medium text-gray-900 capitalize'>
                               {log.resource_type.replace('_', ' ')}
                             </div>
                             <div className='text-sm text-gray-500'>
@@ -447,7 +447,7 @@ function UserActivity() {
                         </div>
                       </td>
                       <td className='px-6 py-4'>
-                        <div className='text-sm text-primary max-w-xs truncate'>
+                        <div className='text-sm text-gray-900 max-w-xs truncate'>
                           {log.details}
                         </div>
                       </td>
@@ -469,10 +469,10 @@ function UserActivity() {
             {filteredActivityLogs.length === 0 && (
               <div className='text-center py-12'>
                 <Activity className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-                <h3 className='text-lg font-medium text-primary mb-2'>
+                <h3 className='text-lg font-medium text-gray-900 mb-2'>
                   No activity found
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   {actionFilter || resourceFilter
                     ? 'Try adjusting your filters.'
                     : 'No activity recorded for this period.'}

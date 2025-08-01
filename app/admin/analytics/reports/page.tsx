@@ -251,7 +251,7 @@ export default function AdminAnalyticsReportsPage() {
       case 'monthly':
         return 'text-purple-600 bg-purple-50';
       default:
-        return 'text-gray-text bg-gray-50';
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
@@ -283,8 +283,8 @@ export default function AdminAnalyticsReportsPage() {
           {/* Header */}
           <div className='flex justify-between items-center mb-8'>
             <div>
-              <h1 className='text-3xl font-bold text-primary'>Custom Reports</h1>
-              <p className='text-gray-text mt-2'>
+              <h1 className='text-3xl font-bold text-gray-900'>Custom Reports</h1>
+              <p className='text-gray-600 mt-2'>
                 Create and manage custom analytics reports
               </p>
             </div>
@@ -300,7 +300,7 @@ export default function AdminAnalyticsReportsPage() {
           {/* Report Templates */}
           {templates.length > 0 && (
             <div className='mb-8'>
-              <h2 className='text-xl font-semibold text-primary mb-4'>
+              <h2 className='text-xl font-semibold text-gray-900 mb-4'>
                 Report Templates
               </h2>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
@@ -323,11 +323,11 @@ export default function AdminAnalyticsReportsPage() {
                   >
                     <div className='flex items-center gap-2 mb-2'>
                       {getReportTypeIcon(template.type)}
-                      <h3 className='font-medium text-primary'>
+                      <h3 className='font-medium text-gray-900'>
                         {template.name}
                       </h3>
                     </div>
-                    <p className='text-sm text-gray-text'>
+                    <p className='text-sm text-gray-600'>
                       {template.description}
                     </p>
                   </div>
@@ -347,20 +347,20 @@ export default function AdminAnalyticsReportsPage() {
                   <div className='flex items-start justify-between mb-4'>
                     <div className='flex items-center gap-2'>
                       {getReportTypeIcon(report.type)}
-                      <h3 className='font-semibold text-primary'>
+                      <h3 className='font-semibold text-gray-900'>
                         {report.name}
                       </h3>
                     </div>
                     <div className='flex items-center gap-1'>
                       <button
                         onClick={() => openViewModal(report)}
-                        className='p-1 text-gray-400 hover:text-gray-text'
+                        className='p-1 text-gray-400 hover:text-gray-600'
                       >
                         <Eye className='w-4 h-4' />
                       </button>
                       <button
                         onClick={() => openEditModal(report)}
-                        className='p-1 text-gray-400 hover:opacity-80'
+                        className='p-1 text-gray-400 hover:text-blue-600'
                       >
                         <Edit className='w-4 h-4' />
                       </button>
@@ -373,7 +373,7 @@ export default function AdminAnalyticsReportsPage() {
                     </div>
                   </div>
 
-                  <p className='text-sm text-gray-text mb-4'>
+                  <p className='text-sm text-gray-600 mb-4'>
                     {report.description}
                   </p>
 
@@ -388,14 +388,14 @@ export default function AdminAnalyticsReportsPage() {
                     </div>
                     <div className='flex items-center gap-2'>
                       <FileText className='w-4 h-4 text-gray-400' />
-                      <span className='text-xs text-gray-text'>
+                      <span className='text-xs text-gray-600'>
                         {report.format.toUpperCase()}
                       </span>
                     </div>
                     {report.last_run && (
                       <div className='flex items-center gap-2'>
                         <Clock className='w-4 h-4 text-gray-400' />
-                        <span className='text-xs text-gray-text'>
+                        <span className='text-xs text-gray-600'>
                           Last run:{' '}
                           {new Date(report.last_run).toLocaleDateString()}
                         </span>
@@ -428,10 +428,10 @@ export default function AdminAnalyticsReportsPage() {
           {reports.length === 0 && (
             <div className='text-center py-12'>
               <BarChart3 className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-              <h3 className='text-lg font-medium text-primary mb-2'>
+              <h3 className='text-lg font-medium text-gray-900 mb-2'>
                 No reports yet
               </h3>
-              <p className='text-gray-text mb-4'>
+              <p className='text-gray-600 mb-4'>
                 Create your first custom report to get started
               </p>
               <Button onClick={() => setShowCreateModal(true)}>
@@ -597,10 +597,10 @@ export default function AdminAnalyticsReportsPage() {
           {selectedReport && (
             <div className='space-y-4'>
               <div>
-                <h3 className='font-medium text-primary'>
+                <h3 className='font-medium text-gray-900'>
                   {selectedReport.name}
                 </h3>
-                <p className='text-sm text-gray-text mt-1'>
+                <p className='text-sm text-gray-600 mt-1'>
                   {selectedReport.description}
                 </p>
               </div>
@@ -608,19 +608,19 @@ export default function AdminAnalyticsReportsPage() {
               <div className='grid grid-cols-2 gap-4 text-sm'>
                 <div>
                   <span className='font-medium text-gray-700'>Type:</span>
-                  <span className='ml-2 text-gray-text'>
+                  <span className='ml-2 text-gray-600'>
                     {selectedReport.type}
                   </span>
                 </div>
                 <div>
                   <span className='font-medium text-gray-700'>Schedule:</span>
-                  <span className='ml-2 text-gray-text'>
+                  <span className='ml-2 text-gray-600'>
                     {selectedReport.schedule}
                   </span>
                 </div>
                 <div>
                   <span className='font-medium text-gray-700'>Format:</span>
-                  <span className='ml-2 text-gray-text'>
+                  <span className='ml-2 text-gray-600'>
                     {selectedReport.format.toUpperCase()}
                   </span>
                 </div>
@@ -641,7 +641,7 @@ export default function AdminAnalyticsReportsPage() {
               {selectedReport.last_run && (
                 <div className='text-sm'>
                   <span className='font-medium text-gray-700'>Last Run:</span>
-                  <span className='ml-2 text-gray-text'>
+                  <span className='ml-2 text-gray-600'>
                     {new Date(selectedReport.last_run).toLocaleString()}
                   </span>
                 </div>
@@ -650,7 +650,7 @@ export default function AdminAnalyticsReportsPage() {
               {selectedReport.next_run && (
                 <div className='text-sm'>
                   <span className='font-medium text-gray-700'>Next Run:</span>
-                  <span className='ml-2 text-gray-text'>
+                  <span className='ml-2 text-gray-600'>
                     {new Date(selectedReport.next_run).toLocaleString()}
                   </span>
                 </div>

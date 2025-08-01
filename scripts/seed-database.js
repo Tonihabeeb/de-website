@@ -118,22 +118,10 @@ async function seedDatabase() {
         <p>Our cutting-edge KPP (Kinetic Power Plant) technology represents a breakthrough in sustainable energy generation.</p>
         <h2>Key Features</h2>
         <ul>
-          <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">High efficiency energy conversion</span>
-                </li>
-          <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Minimal environmental impact</span>
-                </li>
-          <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Scalable design for various applications</span>
-                </li>
-          <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Advanced monitoring and control systems</span>
-                </li>
+          <li>High efficiency energy conversion</li>
+          <li>Minimal environmental impact</li>
+          <li>Scalable design for various applications</li>
+          <li>Advanced monitoring and control systems</li>
         </ul>
       `,
       author_id: author.id,

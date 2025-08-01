@@ -205,7 +205,7 @@ export default function ConveyorChainPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 text-center'
+                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
                 >
                   Learn How It Works
                 </Link>
@@ -323,30 +323,25 @@ export default function ConveyorChainPage() {
               Detailed Engineering Data
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Two parallel high-grade steel chains run over upper and lower
-                  sprocket wheels (idler gears).</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>
+                  Two parallel high-grade steel chains run over upper and lower
+                  sprocket wheels (idler gears).
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Chains are engineered for high load capacity and minimal
-                  stretch.</span>
+                <li>
+                  Chains are engineered for high load capacity and minimal
+                  stretch.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Transfers the combined force of buoyant and heavy floaters in
-                  a continuous loop.</span>
+                <li>
+                  Transfers the combined force of buoyant and heavy floaters in
+                  a continuous loop.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Optimized for strength-to-weight ratio and corrosion
-                  resistance.</span>
+                <li>
+                  Optimized for strength-to-weight ratio and corrosion
+                  resistance.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Modular design allows for easy replacement and maintenance.</span>
+                <li>
+                  Modular design allows for easy replacement and maintenance.
                 </li>
               </ul>
             </div>
@@ -358,26 +353,15 @@ export default function ConveyorChainPage() {
               Performance Benchmarks
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Load capacity: 500–2000 kN breaking load.</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>Load capacity: 500–2000 kN breaking load.</li>
+                <li>
+                  Transmission efficiency: 92–96% kinetic energy transfer.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Transmission efficiency: 92–96% kinetic energy transfer.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Operating speed: 0.5–2.0 m/s, variable by design.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Durability for 20+ years of continuous operation.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Minimal wear due to robust construction and water lubrication.</span>
+                <li>Operating speed: 0.5–2.0 m/s, variable by design.</li>
+                <li>Durability for 20+ years of continuous operation.</li>
+                <li>
+                  Minimal wear due to robust construction and water lubrication.
                 </li>
               </ul>
             </div>
@@ -391,23 +375,17 @@ export default function ConveyorChainPage() {
               Maintenance Requirements
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Routine lubrication and tension adjustment of chains.</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>Routine lubrication and tension adjustment of chains.</li>
+                <li>
+                  Periodic inspection for wear, corrosion, or misalignment.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Periodic inspection for wear, corrosion, or misalignment.</span>
+                <li>
+                  Replacement of chain segments as needed (modular design).
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Replacement of chain segments as needed (modular design).</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Minimal maintenance required due to robust materials and
-                  design.</span>
+                <li>
+                  Minimal maintenance required due to robust materials and
+                  design.
                 </li>
               </ul>
             </div>
@@ -419,24 +397,18 @@ export default function ConveyorChainPage() {
               Integration Specifications
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Compatible with various shaft heights and KPP module sizes.</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>
+                  Compatible with various shaft heights and KPP module sizes.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Designed for seamless integration with floaters and drive
-                  shaft.</span>
+                <li>
+                  Designed for seamless integration with floaters and drive
+                  shaft.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Modular and easily replaceable for rapid maintenance.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Synchronized with PLC-based control system for optimal
-                  performance.</span>
+                <li>Modular and easily replaceable for rapid maintenance.</li>
+                <li>
+                  Synchronized with PLC-based control system for optimal
+                  performance.
                 </li>
               </ul>
             </div>
@@ -474,7 +446,7 @@ export default function ConveyorChainPage() {
             </Link>
             <Link
               href='/contact'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
             >
               Contact Us
             </Link>

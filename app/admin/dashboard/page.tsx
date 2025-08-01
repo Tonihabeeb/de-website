@@ -192,8 +192,8 @@ export default function AdminDashboard() {
         <div className='max-w-7xl mx-auto'>
           {/* Header */}
           <div className='mb-8'>
-            <h1 className='text-3xl font-bold text-primary'>Admin Dashboard</h1>
-            <p className='text-gray-text mt-2'>
+            <h1 className='text-3xl font-bold text-gray-900'>Admin Dashboard</h1>
+            <p className='text-gray-600 mt-2'>
               Manage your website content, projects, and users
             </p>
           </div>
@@ -234,26 +234,26 @@ export default function AdminDashboard() {
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8'>
             {/* Content Management */}
             <div className='bg-white p-6 rounded-lg shadow'>
-              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <FileText className='w-5 h-5 mr-2' />
                 Content Management
               </h3>
               <div className='space-y-2'>
                 <Link
                   href='/admin/pages'
-                  className='block text-sm text-blue-600 hover:opacity-80'
+                  className='block text-sm text-blue-600 hover:text-blue-800'
                 >
                   All Pages
                 </Link>
                 <Link
                   href='/admin/pages/new'
-                  className='block text-sm text-blue-600 hover:opacity-80'
+                  className='block text-sm text-blue-600 hover:text-blue-800'
                 >
                   Create Page
                 </Link>
                 <Link
                   href='/admin/pages/seo'
-                  className='block text-sm text-blue-600 hover:opacity-80'
+                  className='block text-sm text-blue-600 hover:text-blue-800'
                 >
                   SEO Management
                 </Link>
@@ -262,7 +262,7 @@ export default function AdminDashboard() {
 
             {/* Project Management */}
             <div className='bg-white p-6 rounded-lg shadow'>
-              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <FolderOpen className='w-5 h-5 mr-2' />
                 Project Management
               </h3>
@@ -296,7 +296,7 @@ export default function AdminDashboard() {
 
             {/* Media Library */}
             <div className='bg-white p-6 rounded-lg shadow'>
-              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <Upload className='w-5 h-5 mr-2' />
                 Media Library
               </h3>
@@ -330,7 +330,7 @@ export default function AdminDashboard() {
 
             {/* User Management */}
             <div className='bg-white p-6 rounded-lg shadow'>
-              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <Users className='w-5 h-5 mr-2' />
                 User Management
               </h3>
@@ -364,32 +364,32 @@ export default function AdminDashboard() {
 
             {/* System Management */}
             <div className='bg-white p-6 rounded-lg shadow'>
-              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <Settings className='w-5 h-5 mr-2' />
                 System Management
               </h3>
               <div className='space-y-2'>
                 <Link
                   href='/admin/settings'
-                  className='block text-sm text-gray-text hover:text-gray-800'
+                  className='block text-sm text-gray-600 hover:text-gray-800'
                 >
                   General Settings
                 </Link>
                 <Link
                   href='/admin/navigation'
-                  className='block text-sm text-gray-text hover:text-gray-800'
+                  className='block text-sm text-gray-600 hover:text-gray-800'
                 >
                   Navigation
                 </Link>
                 <Link
                   href='/admin/system/backup'
-                  className='block text-sm text-gray-text hover:text-gray-800'
+                  className='block text-sm text-gray-600 hover:text-gray-800'
                 >
                   Backup & Restore
                 </Link>
                 <Link
                   href='/admin/system/health'
-                  className='block text-sm text-gray-text hover:text-gray-800'
+                  className='block text-sm text-gray-600 hover:text-gray-800'
                 >
                   System Health
                 </Link>
@@ -398,7 +398,7 @@ export default function AdminDashboard() {
 
             {/* Analytics & Reports */}
             <div className='bg-white p-6 rounded-lg shadow'>
-              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <BarChart3 className='w-5 h-5 mr-2' />
                 Analytics & Reports
               </h3>
@@ -443,7 +443,7 @@ export default function AdminDashboard() {
           {/* Recent Activity */}
           {stats && stats.recent_activity.length > 0 && (
             <div className='bg-white p-6 rounded-lg shadow'>
-              <h3 className='text-lg font-semibold text-primary mb-4 flex items-center'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
                 <Activity className='w-5 h-5 mr-2 text-gray-500' />
                 Recent Activity
               </h3>
@@ -456,7 +456,7 @@ export default function AdminDashboard() {
                     <div className='flex items-center'>
                       {getStatusIcon(activity.action)}
                       <div className='ml-3'>
-                        <p className='text-sm font-medium text-primary'>
+                        <p className='text-sm font-medium text-gray-900'>
                           {activity.action} {activity.resource}
                         </p>
                         <p className='text-xs text-gray-500'>

@@ -65,23 +65,11 @@ export default function FullComponentsPage() {
               engineered for minimal surface footprint and robust, long-term
               operation.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Material: Reinforced concrete or steel</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Height: ~22 m (customizable per unit)</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Initial fill: ~30 m³ water per 20 m shaft</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Evaporation minimized by underground/indoor siting</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80'>
+              <li>Material: Reinforced concrete or steel</li>
+              <li>Height: ~22 m (customizable per unit)</li>
+              <li>Initial fill: ~30 m³ water per 20 m shaft</li>
+              <li>Evaporation minimized by underground/indoor siting</li>
             </ul>
           </section>
 
@@ -96,23 +84,11 @@ export default function FullComponentsPage() {
               with water, it sinks. This alternating cycle is the heart of the
               KPP’s kinetic energy generation.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Material: Corrosion-resistant steel</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Quantity: ~66 per module</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Cycle: Air-filled (rising) / Water-filled (sinking)</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Sealed for durability and minimal maintenance</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80'>
+              <li>Material: Corrosion-resistant steel</li>
+              <li>Quantity: ~66 per module</li>
+              <li>Cycle: Air-filled (rising) / Water-filled (sinking)</li>
+              <li>Sealed for durability and minimal maintenance</li>
             </ul>
           </section>
 
@@ -127,19 +103,10 @@ export default function FullComponentsPage() {
               the combined force of buoyant and heavy floaters, enabling
               efficient energy transfer from the floaters to the drive shaft.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Heavy-duty, corrosion-resistant chain</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Continuous operation with minimal wear</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Upper/lower sprocket wheels (idler gears)</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80'>
+              <li>Heavy-duty, corrosion-resistant chain</li>
+              <li>Continuous operation with minimal wear</li>
+              <li>Upper/lower sprocket wheels (idler gears)</li>
             </ul>
           </section>
 
@@ -154,19 +121,10 @@ export default function FullComponentsPage() {
               rotation speed to the generator’s rated RPM for optimal power
               conversion.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Drive shaft: High-strength steel, precision bearings</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Gearbox: Increases RPM, robust for 24/7 operation</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Directly couples mechanical energy to generator</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80'>
+              <li>Drive shaft: High-strength steel, precision bearings</li>
+              <li>Gearbox: Increases RPM, robust for 24/7 operation</li>
+              <li>Directly couples mechanical energy to generator</li>
             </ul>
           </section>
 
@@ -178,40 +136,18 @@ export default function FullComponentsPage() {
               uses a low-speed, permanent magnet AC generator for high
               efficiency and reliability.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Type: Brushless, low-speed permanent magnet synchronous
-                generator</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Rated Power: ~500–530 kW per module</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Efficiency: Up to 95.2% at 375 RPM</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Voltage/Frequency: 400 V / 50 Hz</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Insulation Class: H (IEC 60034)</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">IP Rating: IP54</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Designed Lifetime: 20 years</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Remote monitoring and overload protection</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80 mb-2'>
+              <li>
+                Type: Brushless, low-speed permanent magnet synchronous
+                generator
+              </li>
+              <li>Rated Power: ~500–530 kW per module</li>
+              <li>Efficiency: Up to 95.2% at 375 RPM</li>
+              <li>Voltage/Frequency: 400 V / 50 Hz</li>
+              <li>Insulation Class: H (IEC 60034)</li>
+              <li>IP Rating: IP54</li>
+              <li>Designed Lifetime: 20 years</li>
+              <li>Remote monitoring and overload protection</li>
             </ul>
             <p className='text-white/80'>
               <strong>Key Features:</strong> Modular design, compact footprint,
@@ -230,35 +166,16 @@ export default function FullComponentsPage() {
               A pressure regulator and synchronized valve system control air
               injection timing.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Compressor: Oil-lubricated piston type, IE3 electric motor</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Working Pressure: 10 bar (adjustable)</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Max Air Flow: 1.2–1.5 m³/min</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Receiver Tank: 300 L steel</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Power Input: 3.5–5.5 kW</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Auto start/stop, thermal cutout, pressure relief</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Consumes ~1% of net KPP output</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80 mb-2'>
+              <li>
+                Compressor: Oil-lubricated piston type, IE3 electric motor
+              </li>
+              <li>Working Pressure: 10 bar (adjustable)</li>
+              <li>Max Air Flow: 1.2–1.5 m³/min</li>
+              <li>Receiver Tank: 300 L steel</li>
+              <li>Power Input: 3.5–5.5 kW</li>
+              <li>Auto start/stop, thermal cutout, pressure relief</li>
+              <li>Consumes ~1% of net KPP output</li>
             </ul>
           </section>
 
@@ -273,19 +190,10 @@ export default function FullComponentsPage() {
               refill the floater. This ensures a closed-loop cycle of buoyancy
               and sinking.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Precision-timed air injection and release</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Automated, PLC-controlled operation</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Ensures continuous, efficient cycling</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80'>
+              <li>Precision-timed air injection and release</li>
+              <li>Automated, PLC-controlled operation</li>
+              <li>Ensures continuous, efficient cycling</li>
             </ul>
           </section>
 
@@ -298,23 +206,11 @@ export default function FullComponentsPage() {
               system operation, including startup, shutdown, and safety
               interlocks.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">PLC-based automation</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Real-time monitoring and control</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Startup/shutdown sequencing</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Safety interlocks and remote diagnostics</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80'>
+              <li>PLC-based automation</li>
+              <li>Real-time monitoring and control</li>
+              <li>Startup/shutdown sequencing</li>
+              <li>Safety interlocks and remote diagnostics</li>
             </ul>
           </section>
 
@@ -329,62 +225,26 @@ export default function FullComponentsPage() {
               deployment, easy maintenance, and rapid installation. Each module
               can operate independently or in parallel for larger power needs.
             </p>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Continuous 24/7 operation</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Modular, scalable plant size (500 kW blocks)</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Minimal surface footprint</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Low O&M costs</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Remote monitoring and control</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80'>
+              <li>Continuous 24/7 operation</li>
+              <li>Modular, scalable plant size (500 kW blocks)</li>
+              <li>Minimal surface footprint</li>
+              <li>Low O&M costs</li>
+              <li>Remote monitoring and control</li>
             </ul>
           </section>
 
           {/* KPP Benefits */}
           <section id='benefits'>
             <h2 className='text-2xl font-bold mb-2 text-white'>KPP Benefits</h2>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Zero emissions, no fuel required</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">24/7 continuous power output</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Low maintenance and operating costs</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Scalable and modular for any project size</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Minimal environmental footprint</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Proven, TÜV/SGS/DEKRA-validated technology</span>
-                </li>
-              <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Ideal for grid, distributed, or off-grid applications</span>
-                </li>
+            <ul className='list-disc list-inside text-white/80 mb-2'>
+              <li>Zero emissions, no fuel required</li>
+              <li>24/7 continuous power output</li>
+              <li>Low maintenance and operating costs</li>
+              <li>Scalable and modular for any project size</li>
+              <li>Minimal environmental footprint</li>
+              <li>Proven, TÜV/SGS/DEKRA-validated technology</li>
+              <li>Ideal for grid, distributed, or off-grid applications</li>
             </ul>
             <p className='text-white/80'>
               The KPP is a transformative solution for sustainable, reliable,

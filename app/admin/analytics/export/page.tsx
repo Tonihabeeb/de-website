@@ -195,7 +195,7 @@ export default function AdminAnalyticsExportPage() {
       case 'failed':
         return 'text-red-600 bg-red-50 border-red-200';
       default:
-        return 'text-gray-text bg-gray-50 border-gray-200';
+        return 'text-gray-600 bg-gray-50 border-gray-200';
     }
   };
 
@@ -211,8 +211,8 @@ export default function AdminAnalyticsExportPage() {
     <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
       <div className='container mx-auto px-4 py-8'>
         <div className='mb-8'>
-          <h1 className='text-3xl font-bold text-primary'>Analytics Export</h1>
-          <p className='text-gray-text mt-2'>
+          <h1 className='text-3xl font-bold text-gray-900'>Analytics Export</h1>
+          <p className='text-gray-600 mt-2'>
             Export analytics data in various formats for reporting and analysis
           </p>
         </div>
@@ -221,10 +221,10 @@ export default function AdminAnalyticsExportPage() {
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8'>
           <div className='flex items-center justify-between mb-6'>
             <div>
-              <h2 className='text-xl font-semibold text-primary'>
+              <h2 className='text-xl font-semibold text-gray-900'>
                 Create New Export
               </h2>
-              <p className='text-gray-text mt-1'>
+              <p className='text-gray-600 mt-1'>
                 Configure and schedule data exports
               </p>
             </div>
@@ -242,9 +242,9 @@ export default function AdminAnalyticsExportPage() {
             <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
               <div className='flex items-center gap-3 mb-2'>
                 <BarChart3 className='w-5 h-5 text-blue-500' />
-                <h3 className='font-medium text-primary'>System Overview</h3>
+                <h3 className='font-medium text-gray-900'>System Overview</h3>
               </div>
-              <p className='text-sm text-gray-text mb-3'>
+              <p className='text-sm text-gray-600 mb-3'>
                 Complete system analytics and metrics
               </p>
               <Button
@@ -265,9 +265,9 @@ export default function AdminAnalyticsExportPage() {
             <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
               <div className='flex items-center gap-3 mb-2'>
                 <Users className='w-5 h-5 text-green-500' />
-                <h3 className='font-medium text-primary'>User Analytics</h3>
+                <h3 className='font-medium text-gray-900'>User Analytics</h3>
               </div>
-              <p className='text-sm text-gray-text mb-3'>
+              <p className='text-sm text-gray-600 mb-3'>
                 User activity and engagement data
               </p>
               <Button
@@ -288,9 +288,9 @@ export default function AdminAnalyticsExportPage() {
             <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
               <div className='flex items-center gap-3 mb-2'>
                 <FileText className='w-5 h-5 text-purple-500' />
-                <h3 className='font-medium text-primary'>Content Analytics</h3>
+                <h3 className='font-medium text-gray-900'>Content Analytics</h3>
               </div>
-              <p className='text-sm text-gray-text mb-3'>
+              <p className='text-sm text-gray-600 mb-3'>
                 Page and project performance data
               </p>
               <Button
@@ -311,9 +311,9 @@ export default function AdminAnalyticsExportPage() {
             <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
               <div className='flex items-center gap-3 mb-2'>
                 <Activity className='w-5 h-5 text-orange-500' />
-                <h3 className='font-medium text-primary'>System Performance</h3>
+                <h3 className='font-medium text-gray-900'>System Performance</h3>
               </div>
-              <p className='text-sm text-gray-text mb-3'>
+              <p className='text-sm text-gray-600 mb-3'>
                 System health and performance metrics
               </p>
               <Button
@@ -336,8 +336,8 @@ export default function AdminAnalyticsExportPage() {
         {/* Export Jobs */}
         <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
           <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-primary'>Export Jobs</h2>
-            <p className='text-gray-text mt-1'>
+            <h2 className='text-xl font-semibold text-gray-900'>Export Jobs</h2>
+            <p className='text-gray-600 mt-1'>
               Track and manage your export requests
             </p>
           </div>
@@ -381,7 +381,7 @@ export default function AdminAnalyticsExportPage() {
                           {job.config.dataType === 'system' && (
                             <Activity className='w-4 h-4 text-orange-500' />
                           )}
-                          <span className='font-medium text-primary capitalize'>
+                          <span className='font-medium text-gray-900 capitalize'>
                             {job.config.dataType} Export
                           </span>
                         </div>
@@ -412,7 +412,7 @@ export default function AdminAnalyticsExportPage() {
                             style={{ width: `${job.progress}%` }}
                           />
                         </div>
-                        <span className='text-sm text-gray-text'>
+                        <span className='text-sm text-gray-600'>
                           {job.progress}%
                         </span>
                       </div>
@@ -465,10 +465,10 @@ export default function AdminAnalyticsExportPage() {
           {exportJobs.length === 0 && (
             <div className='p-8 text-center'>
               <Database className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-              <h3 className='text-lg font-medium text-primary mb-2'>
+              <h3 className='text-lg font-medium text-gray-900 mb-2'>
                 No export jobs
               </h3>
-              <p className='text-gray-text mb-4'>
+              <p className='text-gray-600 mb-4'>
                 Create your first export to get started
               </p>
               <Button onClick={() => setShowExportModal(true)}>
@@ -548,7 +548,7 @@ export default function AdminAnalyticsExportPage() {
                     >
                       <div className='flex items-center gap-3'>
                         <Icon className={`w-5 h-5 ${option.color}`} />
-                        <span className='font-medium text-primary'>
+                        <span className='font-medium text-gray-900'>
                           {option.label}
                         </span>
                       </div>

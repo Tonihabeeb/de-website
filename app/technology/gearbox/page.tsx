@@ -200,7 +200,7 @@ export default function GearboxPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 text-center'
+                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
                 >
                   Learn How It Works
                 </Link>
@@ -319,29 +319,24 @@ export default function GearboxPage() {
               Detailed Engineering Data
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Connects the drive shaft to the generator, increasing rotation
-                  speed to the generator's rated RPM.</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>
+                  Connects the drive shaft to the generator, increasing rotation
+                  speed to the generator's rated RPM.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Precision-engineered gears for high efficiency and minimal
-                  energy loss.</span>
+                <li>
+                  Precision-engineered gears for high efficiency and minimal
+                  energy loss.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Robust construction with high-quality materials for long
-                  operational life.</span>
+                <li>
+                  Robust construction with high-quality materials for long
+                  operational life.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Sealed housing for dust and water protection (IP65 rating).</span>
+                <li>
+                  Sealed housing for dust and water protection (IP65 rating).
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Modular design allows for easy replacement and maintenance.</span>
+                <li>
+                  Modular design allows for easy replacement and maintenance.
                 </li>
               </ul>
             </div>
@@ -353,27 +348,14 @@ export default function GearboxPage() {
               Performance Benchmarks
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Transmission efficiency: 95–98%.</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>Transmission efficiency: 95–98%.</li>
+                <li>Torque capacity: 1000–5000 kNm.</li>
+                <li>
+                  Rapid response time: &lt; 1 second for ratio adjustment.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Torque capacity: 1000–5000 kNm.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Rapid response time: &lt; 1 second for ratio adjustment.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Durability for 25+ years of continuous operation.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Quiet operation: &lt; 70 dB.</span>
-                </li>
+                <li>Durability for 25+ years of continuous operation.</li>
+                <li>Quiet operation: &lt; 70 dB.</li>
               </ul>
             </div>
           </div>
@@ -386,23 +368,19 @@ export default function GearboxPage() {
               Maintenance Requirements
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Oil change and lubrication at recommended intervals (18 months
-                  typical).</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>
+                  Oil change and lubrication at recommended intervals (18 months
+                  typical).
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Periodic inspection for wear, alignment, and seal integrity.</span>
+                <li>
+                  Periodic inspection for wear, alignment, and seal integrity.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Replacement of gears or bearings as needed (modular design).</span>
+                <li>
+                  Replacement of gears or bearings as needed (modular design).
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Low maintenance due to robust design and quality components.</span>
+                <li>
+                  Low maintenance due to robust design and quality components.
                 </li>
               </ul>
             </div>
@@ -414,25 +392,19 @@ export default function GearboxPage() {
               Integration Specifications
             </h2>
             <div className='bg-white border rounded p-4 text-gray-700'>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Modular and compatible with various generator types and KPP
-                  module sizes.</span>
+              <ul className='list-disc pl-6 space-y-2'>
+                <li>
+                  Modular and compatible with various generator types and KPP
+                  module sizes.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Designed for seamless integration with drive shaft and
-                  generator.</span>
+                <li>
+                  Designed for seamless integration with drive shaft and
+                  generator.
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Supports both grid-connected and off-grid applications.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Synchronized with PLC-based control system for optimal
-                  performance.</span>
+                <li>Supports both grid-connected and off-grid applications.</li>
+                <li>
+                  Synchronized with PLC-based control system for optimal
+                  performance.
                 </li>
               </ul>
             </div>
@@ -470,7 +442,7 @@ export default function GearboxPage() {
             </Link>
             <Link
               href='/contact'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
             >
               Contact Us
             </Link>

@@ -26,23 +26,6 @@ export async function getPage(req: Request, res: Response) {
   }
 }
 
-export async function getPageBySlug(req: Request, res: Response) {
-  try {
-    const { slug } = req.params;
-    
-    // Handle empty slug case (home page)
-    const pageSlug = slug || '';
-    
-    const page = await PageModel.findBySlug(pageSlug);
-    
-    if (!page) return res.status(404).json({ error: 'Page not found' });
-    res.json(page);
-  } catch (err) {
-    console.error('Error in getPageBySlug:', err);
-    res.status(500).json({ error: 'Failed to get page' });
-  }
-}
-
 export async function createPage(req: Request, res: Response) {
   try {
     const data = CreatePageSchema.parse(req.body);

@@ -106,10 +106,10 @@ const ComponentsDemoPage: React.FC = () => {
     <div className='min-h-screen bg-gray-50 py-8'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='mb-8'>
-          <h1 className='text-4xl font-bold text-primary mb-4'>
+          <h1 className='text-4xl font-bold text-gray-900 mb-4'>
             Professional Components Demo
           </h1>
-          <p className='text-lg text-gray-text'>
+          <p className='text-lg text-gray-600'>
             Showcase of the new professional UI components implemented with
             open-source libraries.
           </p>
@@ -118,10 +118,10 @@ const ComponentsDemoPage: React.FC = () => {
         <div className='space-y-12'>
           {/* Toast Notifications Demo */}
           <section className='bg-white rounded-lg shadow-lg p-8'>
-            <h2 className='text-2xl font-bold text-primary mb-4'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
               Toast Notifications
             </h2>
-            <p className='text-gray-text mb-6'>
+            <p className='text-gray-600 mb-6'>
               Professional toast notifications using Sonner library.
             </p>
             <div className='flex space-x-4'>
@@ -149,10 +149,10 @@ const ComponentsDemoPage: React.FC = () => {
 
           {/* Modal Demo */}
           <section className='bg-white rounded-lg shadow-lg p-8'>
-            <h2 className='text-2xl font-bold text-primary mb-4'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
               Modal Dialog
             </h2>
-            <p className='text-gray-text mb-6'>
+            <p className='text-gray-600 mb-6'>
               Accessible modal dialogs using Radix UI.
             </p>
             <div className='flex space-x-4'>
@@ -166,7 +166,7 @@ const ComponentsDemoPage: React.FC = () => {
               size='md'
             >
               <div className='space-y-4'>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   This is a professional modal dialog with proper accessibility
                   features.
                 </p>
@@ -192,10 +192,10 @@ const ComponentsDemoPage: React.FC = () => {
 
           {/* Data Table Demo */}
           <section className='bg-white rounded-lg shadow-lg p-8'>
-            <h2 className='text-2xl font-bold text-primary mb-4'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
               Data Table
             </h2>
-            <p className='text-gray-text mb-6'>
+            <p className='text-gray-600 mb-6'>
               Professional data table with sorting, filtering, and pagination
               using TanStack Table.
             </p>
@@ -210,10 +210,10 @@ const ComponentsDemoPage: React.FC = () => {
 
           {/* Rich Text Editor Demo */}
           <section className='bg-white rounded-lg shadow-lg p-8'>
-            <h2 className='text-2xl font-bold text-primary mb-4'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
               Rich Text Editor
             </h2>
-            <p className='text-gray-text mb-6'>
+            <p className='text-gray-600 mb-6'>
               Professional rich text editor using TipTap with formatting tools.
             </p>
             <RichTextEditor
@@ -222,8 +222,8 @@ const ComponentsDemoPage: React.FC = () => {
               placeholder='Start writing your content...'
             />
             <div className='mt-4 p-4 bg-gray-50 rounded-lg'>
-              <h4 className='font-medium text-primary mb-2'>HTML Output:</h4>
-              <pre className='text-sm text-gray-text overflow-x-auto'>
+              <h4 className='font-medium text-gray-900 mb-2'>HTML Output:</h4>
+              <pre className='text-sm text-gray-600 overflow-x-auto'>
                 {richTextContent}
               </pre>
             </div>
@@ -231,10 +231,10 @@ const ComponentsDemoPage: React.FC = () => {
 
           {/* File Upload Demo */}
           <section className='bg-white rounded-lg shadow-lg p-8'>
-            <h2 className='text-2xl font-bold text-primary mb-4'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
               File Upload
             </h2>
-            <p className='text-gray-text mb-6'>
+            <p className='text-gray-600 mb-6'>
               Drag and drop file upload with preview using React Dropzone.
             </p>
             <FileUpload
@@ -251,10 +251,10 @@ const ComponentsDemoPage: React.FC = () => {
 
           {/* Professional Form Demo */}
           <section className='bg-white rounded-lg shadow-lg p-8'>
-            <h2 className='text-2xl font-bold text-primary mb-4'>
+            <h2 className='text-2xl font-bold text-gray-900 mb-4'>
               Professional Form
             </h2>
-            <p className='text-gray-text mb-6'>
+            <p className='text-gray-600 mb-6'>
               Complete form with validation using React Hook Form and Zod.
             </p>
             <ProfessionalForm />

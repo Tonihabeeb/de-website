@@ -34,19 +34,10 @@ export default function PhysicsPage() {
             sprocket and shaft mechanism. This rotational energy is then used to
             drive a high-efficiency permanent magnet generator.
           </p>
-          <ul className="space-y-2">
-            <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Air injection engine creates controlled buoyancy cycles</span>
-                </li>
-            <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Chain system translates vertical to rotational motion</span>
-                </li>
-            <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Generator produces grid-quality AC power at 375 RPM</span>
-                </li>
+          <ul className='list-disc pl-6 mb-6 text-gray-text'>
+            <li>Air injection engine creates controlled buoyancy cycles</li>
+            <li>Chain system translates vertical to rotational motion</li>
+            <li>Generator produces grid-quality AC power at 375 RPM</li>
           </ul>
 
           <h2 className='text-2xl font-bold mb-6'>
@@ -66,7 +57,7 @@ export default function PhysicsPage() {
           </div>
 
           <h2 className='text-2xl font-bold mb-6'>Key Physics Concepts</h2>
-          <ul className="space-y-2">
+          <ul className='list-disc pl-6 mb-6 text-gray-text'>
             <li>
               <strong>Buoyant Force:</strong> F<sub>b</sub> = ρ<sub>water</sub>{' '}
               × V<sub>floater</sub> × g
@@ -88,30 +79,20 @@ export default function PhysicsPage() {
           <h2 className='text-2xl font-bold mb-6'>
             Engineering Considerations
           </h2>
-          <ul className="space-y-2">
-            <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Material selection for corrosion resistance and durability</span>
-                </li>
-            <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Optimized floater shape for maximum lift and minimal drag</span>
-                </li>
-            <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Redundant safety systems and emergency shutdown protocols</span>
-                </li>
-            <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">Environmental impact: zero emissions, zero water consumption,
-              minimal land use</span>
-                </li>
+          <ul className='list-disc pl-6 mb-6 text-gray-text'>
+            <li>Material selection for corrosion resistance and durability</li>
+            <li>Optimized floater shape for maximum lift and minimal drag</li>
+            <li>Redundant safety systems and emergency shutdown protocols</li>
+            <li>
+              Environmental impact: zero emissions, zero water consumption,
+              minimal land use
+            </li>
           </ul>
 
           <div className='mt-12 text-center'>
             <Link
               href='/technology/how-it-works'
-              className='inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:from-primary-dark hover:to-primary hover:text-white focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
+              className='inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
             >
               Back to How It Works
             </Link>

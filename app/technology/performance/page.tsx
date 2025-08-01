@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { Leaf, Fuel, Mountain, Droplets } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
-import InteractivePerformanceCharts from '@/components/charts/InteractivePerformanceCharts';
 
 export const metadata: Metadata = {
   title: 'KPP Performance & Specifications',
@@ -379,7 +378,7 @@ export default function PerformancePage() {
         </div>
       </section>
 
-      {/* Interactive Performance Charts */}
+      {/* Charts Placeholder */}
       <section className='section-padding bg-white'>
         <div className='container'>
           <div className='text-center mb-8'>
@@ -390,7 +389,51 @@ export default function PerformancePage() {
             </p>
           </div>
 
-          <InteractivePerformanceCharts />
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+            <div className='bg-gray-light rounded-lg p-8 text-center'>
+              <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
+                <div className='text-white text-center'>
+                  <svg
+                    className='w-4 h-4 mx-auto mb-4'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+                    />
+                  </svg>
+                  <p className='text-lg font-semibold'>Efficiency Trends</p>
+                  <p className='text-base opacity-90'>Coming Soon</p>
+                </div>
+              </div>
+            </div>
+
+            <div className='bg-gray-light rounded-lg p-8 text-center'>
+              <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
+                <div className='text-white text-center'>
+                  <svg
+                    className='w-4 h-4 mx-auto mb-4'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'
+                    />
+                  </svg>
+                  <p className='text-lg font-semibold'>Power Output</p>
+                  <p className='text-base opacity-90'>Coming Soon</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -414,7 +457,7 @@ export default function PerformancePage() {
             </Link>
             <Link
               href='/technology/components'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
             >
               View Components
             </Link>
@@ -429,7 +472,7 @@ export default function PerformancePage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-text'>
+            <p className='text-base text-gray-600'>
               Explore more about KPP technology and related topics:
             </p>
           </div>

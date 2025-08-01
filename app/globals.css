@@ -53,49 +53,15 @@
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded font-medium hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white active:from-primary-dark active:to-primary transition-all duration-200;
+    @apply bg-primary text-white px-6 py-3 rounded font-medium hover:bg-primary-dark active:bg-primary-dark transition-colors duration-200;
   }
 
   .btn-secondary {
-    @apply border-2 border-primary text-primary px-6 py-3 rounded font-medium hover:bg-primary hover:text-gray-300 hover:shadow-lg active:bg-primary-dark active:text-gray-300 transition-all duration-200;
+    @apply border-2 border-primary text-primary px-6 py-3 rounded font-medium hover:bg-primary hover:text-white active:bg-primary-dark active:text-white transition-colors duration-200;
   }
 
   .section-padding {
     @apply py-16 lg:py-24;
-  }
-
-  /* Improved hover effects */
-  .hover-effect {
-    @apply transition-all duration-200 hover:shadow-md;
-  }
-
-  .hover-effect-subtle {
-    @apply transition-all duration-200 hover:shadow-sm;
-  }
-
-  .hover-effect-scale {
-    @apply transition-all duration-200 hover:scale-105;
-  }
-
-  .hover-effect-shadow {
-    @apply transition-all duration-200 hover:shadow-lg;
-  }
-
-  /* Standardized bullet point styling */
-  .bullet-list {
-    @apply space-y-2;
-  }
-
-  .bullet-item {
-    @apply flex items-start gap-3;
-  }
-
-  .bullet-marker {
-    @apply w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0;
-  }
-
-  .bullet-text {
-    @apply text-gray-text;
   }
 }
 

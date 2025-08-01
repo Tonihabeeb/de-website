@@ -287,7 +287,7 @@ export default function DocumentUpload({
         onDrop={handleDrop}
       >
         <Upload className='mx-auto h-12 w-12 text-gray-400 mb-4' />
-        <div className='text-lg font-medium text-primary mb-2'>
+        <div className='text-lg font-medium text-gray-900 mb-2'>
           Drop files here or click to browse
         </div>
         <p className='text-sm text-gray-500 mb-4'>
@@ -313,7 +313,7 @@ export default function DocumentUpload({
       {/* File List */}
       {files.length > 0 && (
         <div className='mt-6'>
-          <h3 className='text-lg font-medium text-primary mb-4'>
+          <h3 className='text-lg font-medium text-gray-900 mb-4'>
             Selected Files
           </h3>
           <div className='space-y-3'>
@@ -325,7 +325,7 @@ export default function DocumentUpload({
                 <div className='flex items-center space-x-3'>
                   <File className='h-5 w-5 text-gray-400' />
                   <div>
-                    <p className='text-sm font-medium text-primary'>
+                    <p className='text-sm font-medium text-gray-900'>
                       {file.name}
                     </p>
                     <p className='text-xs text-gray-500'>

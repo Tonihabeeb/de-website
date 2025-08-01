@@ -339,7 +339,7 @@ export default function MobileNavigation() {
                           className={`w-full flex items-center justify-between p-4 rounded-xl transition-all duration-200 touch-target min-w-[44px] min-h-[44px] text-left ${
                             isActive(item.href)
                               ? 'bg-primary text-white shadow-md'
-                              : 'hover:bg-gray-50 text-gray-text hover:text-gray-300'
+                              : 'hover:bg-gray-50 text-gray-text hover:text-primary'
                           }`}
                           aria-label={`Expand/collapse ${item.label} submenu`}
                           aria-expanded={expandedItem === item.label}
@@ -369,7 +369,7 @@ export default function MobileNavigation() {
                                     className={`block p-3 rounded-lg transition-all duration-200 touch-target min-w-[44px] min-h-[44px] ${
                                       isActive(child.href)
                                         ? 'bg-primary/10 text-primary font-medium shadow-sm'
-                                        : 'text-gray-text hover:bg-gray-50 hover:text-gray-300'
+                                        : 'text-gray-text hover:bg-gray-50 hover:text-primary'
                                     }`}
                                     onClick={toggleMenu}
                                   >
@@ -394,7 +394,7 @@ export default function MobileNavigation() {
                         className={`flex items-center space-x-3 p-4 rounded-xl transition-all duration-200 touch-target min-w-[44px] min-h-[44px] ${
                           isActive(item.href)
                             ? 'bg-primary text-white shadow-md'
-                            : 'hover:bg-gray-50 text-gray-text hover:text-gray-300'
+                            : 'hover:bg-gray-50 text-gray-text hover:text-primary'
                         }`}
                         onClick={toggleMenu}
                       >

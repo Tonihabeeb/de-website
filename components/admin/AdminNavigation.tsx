@@ -180,7 +180,7 @@ export default function AdminNavigation() {
   return (
     <nav className='w-64 bg-white shadow-lg h-full overflow-y-auto'>
       <div className='p-6'>
-        <h2 className='text-lg font-semibold text-primary mb-6'>
+        <h2 className='text-lg font-semibold text-gray-900 mb-6'>
           Admin Panel
         </h2>
 
@@ -209,7 +209,7 @@ export default function AdminNavigation() {
                       className={`block px-4 py-2 text-sm rounded-lg transition-colors ${
                         pathname === subItem.href
                           ? 'bg-blue-100 text-blue-700'
-                          : 'text-gray-text hover:bg-gray-50'
+                          : 'text-gray-600 hover:bg-gray-50'
                       }`}
                     >
                       {subItem.title}
@@ -223,7 +223,7 @@ export default function AdminNavigation() {
 
         {/* Quick Actions */}
         <div className='mt-8 pt-6 border-t border-gray-200'>
-          <h3 className='text-sm font-medium text-primary mb-3'>
+          <h3 className='text-sm font-medium text-gray-900 mb-3'>
             Quick Actions
           </h3>
           <div className='space-y-2'>
@@ -267,7 +267,7 @@ export default function AdminNavigation() {
 
         {/* System Status */}
         <div className='mt-8 pt-6 border-t border-gray-200'>
-          <h3 className='text-sm font-medium text-primary mb-3'>
+          <h3 className='text-sm font-medium text-gray-900 mb-3'>
             System Status
           </h3>
           <div className='space-y-2'>
@@ -304,10 +304,10 @@ export default function AdminNavigation() {
 
         {/* Phase Features Summary */}
         <div className='mt-8 pt-6 border-t border-gray-200'>
-          <h3 className='text-sm font-medium text-primary mb-3'>
+          <h3 className='text-sm font-medium text-gray-900 mb-3'>
             Phase Features
           </h3>
-          <div className='space-y-2 text-xs text-gray-text'>
+          <div className='space-y-2 text-xs text-gray-600'>
             <div className='flex items-center'>
               <CheckCircle className='w-3 h-3 text-green-500 mr-2' />
               Phase 1: Backend Infrastructure

@@ -312,7 +312,7 @@ export default function ProjectTracker() {
         <h2 className='text-2xl font-bold text-primary mb-4'>
           Project Status Tracker
         </h2>
-        <p className='text-gray-text'>
+        <p className='text-gray-600'>
           Track the real-time progress of our KPP projects across Iraq with
           detailed timelines and updates.
         </p>
@@ -334,7 +334,7 @@ export default function ProjectTracker() {
               <h3 className='font-semibold text-gray-800 mb-1'>
                 {project.name}
               </h3>
-              <p className='text-sm text-gray-text mb-2'>{project.location}</p>
+              <p className='text-sm text-gray-600 mb-2'>{project.location}</p>
               <div className='flex items-center justify-between'>
                 <span className='text-sm font-medium text-gray-700'>
                   {project.capacity}
@@ -357,8 +357,8 @@ export default function ProjectTracker() {
             <h3 className='text-xl font-bold text-gray-800 mb-2'>
               {selectedProject.name}
             </h3>
-            <p className='text-gray-text mb-2'>{selectedProject.description}</p>
-            <div className='flex items-center gap-4 text-sm text-gray-text'>
+            <p className='text-gray-600 mb-2'>{selectedProject.description}</p>
+            <div className='flex items-center gap-4 text-sm text-gray-600'>
               <span>📍 {selectedProject.location}</span>
               <span>
                 <Zap className='w-4 h-4 inline mr-1' />{' '}
@@ -411,7 +411,7 @@ export default function ProjectTracker() {
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === tab.id
                 ? 'border-primary text-primary'
-                : 'border-transparent text-gray-text hover:text-gray-700'
+                : 'border-transparent text-gray-600 hover:text-gray-700'
             }`}
           >
             {tab.label}
@@ -428,13 +428,13 @@ export default function ProjectTracker() {
             </h4>
             <div className='space-y-3'>
               <div className='flex justify-between'>
-                <span className='text-gray-text'>Start Date:</span>
+                <span className='text-gray-600'>Start Date:</span>
                 <span className='font-medium'>
                   {new Date(selectedProject.startDate).toLocaleDateString()}
                 </span>
               </div>
               <div className='flex justify-between'>
-                <span className='text-gray-text'>Completion Date:</span>
+                <span className='text-gray-600'>Completion Date:</span>
                 <span className='font-medium'>
                   {new Date(
                     selectedProject.completionDate
@@ -442,11 +442,11 @@ export default function ProjectTracker() {
                 </span>
               </div>
               <div className='flex justify-between'>
-                <span className='text-gray-text'>Capacity:</span>
+                <span className='text-gray-600'>Capacity:</span>
                 <span className='font-medium'>{selectedProject.capacity}</span>
               </div>
               <div className='flex justify-between'>
-                <span className='text-gray-text'>Status:</span>
+                <span className='text-gray-600'>Status:</span>
                 <span
                   className={`px-2 py-1 rounded text-xs font-medium text-white ${statusColors[selectedProject.status]}`}
                 >
@@ -467,11 +467,11 @@ export default function ProjectTracker() {
                     <span className='font-medium text-gray-800'>
                       {update.title}
                     </span>
-                    <span className='text-xs text-gray-text'>
+                    <span className='text-xs text-gray-600'>
                       {new Date(update.date).toLocaleDateString()}
                     </span>
                   </div>
-                  <p className='text-sm text-gray-text'>{update.description}</p>
+                  <p className='text-sm text-gray-600'>{update.description}</p>
                 </div>
               ))}
             </div>
@@ -495,11 +495,11 @@ export default function ProjectTracker() {
                   <h4 className='font-semibold text-gray-800'>
                     {milestone.title}
                   </h4>
-                  <span className='text-sm text-gray-text'>
+                  <span className='text-sm text-gray-600'>
                     {new Date(milestone.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className='text-gray-text text-sm'>{milestone.description}</p>
+                <p className='text-gray-600 text-sm'>{milestone.description}</p>
                 {milestone.completed && (
                   <span className='inline-block mt-2 px-2 py-1 bg-green-100 text-green-800 text-xs rounded'>
                     Completed
@@ -520,11 +520,11 @@ export default function ProjectTracker() {
             >
               <div className='flex justify-between items-start mb-2'>
                 <h4 className='font-semibold text-gray-800'>{update.title}</h4>
-                <span className='text-sm text-gray-text'>
+                <span className='text-sm text-gray-600'>
                   {new Date(update.date).toLocaleDateString()}
                 </span>
               </div>
-              <p className='text-gray-text mb-2'>{update.description}</p>
+              <p className='text-gray-600 mb-2'>{update.description}</p>
               <span
                 className={`inline-block px-2 py-1 rounded text-xs font-medium ${
                   update.type === 'milestone'

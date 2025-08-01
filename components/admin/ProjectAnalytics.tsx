@@ -182,7 +182,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-primary'>
+            <h3 className='text-lg font-semibold text-gray-900'>
               Project Analytics
             </h3>
             <Activity className='w-5 h-5 text-gray-400' />
@@ -202,7 +202,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-primary'>
+            <h3 className='text-lg font-semibold text-gray-900'>
               Project Analytics
             </h3>
             <Activity className='w-5 h-5 text-gray-400' />
@@ -211,7 +211,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
             <p className='text-red-600'>{error || 'No data available'}</p>
             <button
               onClick={fetchProjectAnalytics}
-              className='mt-2 text-sm text-blue-600 hover:opacity-80'
+              className='mt-2 text-sm text-blue-600 hover:text-blue-800'
             >
               Try again
             </button>
@@ -233,10 +233,10 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
       <div className='p-6'>
         <div className='flex items-center justify-between mb-6'>
           <div>
-            <h3 className='text-lg font-semibold text-primary'>
+            <h3 className='text-lg font-semibold text-gray-900'>
               Project Analytics
             </h3>
-            <p className='text-sm text-gray-text'>{analytics.project_name}</p>
+            <p className='text-sm text-gray-600'>{analytics.project_name}</p>
           </div>
           <div className='flex items-center space-x-4'>
             <select
@@ -331,7 +331,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8'>
           {/* Timeline Chart */}
           <div className='bg-gray-50 p-4 rounded-lg'>
-            <h4 className='text-sm font-medium text-primary mb-4'>
+            <h4 className='text-sm font-medium text-gray-900 mb-4'>
               Engagement Timeline
             </h4>
             <ResponsiveContainer width='100%' height={200}>
@@ -367,7 +367,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
 
           {/* Milestone Progress */}
           <div className='bg-gray-50 p-4 rounded-lg'>
-            <h4 className='text-sm font-medium text-primary mb-4'>
+            <h4 className='text-sm font-medium text-gray-900 mb-4'>
               Milestone Progress
             </h4>
             <ResponsiveContainer width='100%' height={200}>
@@ -399,7 +399,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
 
         {/* Team Performance */}
         <div className='bg-gray-50 p-4 rounded-lg'>
-          <h4 className='text-sm font-medium text-primary mb-4'>
+          <h4 className='text-sm font-medium text-gray-900 mb-4'>
             Team Performance
           </h4>
           <div className='space-y-3'>
@@ -415,7 +415,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
                     </span>
                   </div>
                   <div>
-                    <p className='text-sm font-medium text-primary'>
+                    <p className='text-sm font-medium text-gray-900'>
                       {member.member}
                     </p>
                     <p className='text-xs text-gray-500'>
@@ -424,7 +424,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
                   </div>
                 </div>
                 <div className='flex items-center space-x-4 text-sm'>
-                  <span className='text-gray-text'>
+                  <span className='text-gray-600'>
                     {member.hours_logged}h logged
                   </span>
                   <span

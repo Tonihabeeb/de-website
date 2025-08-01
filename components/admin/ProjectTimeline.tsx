@@ -132,7 +132,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       <div className='p-6'>
         <div className='flex items-center justify-between mb-6'>
-          <h3 className='text-lg font-semibold text-primary'>
+          <h3 className='text-lg font-semibold text-gray-900'>
             Project Timeline
           </h3>
           <button
@@ -147,7 +147,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
         {/* Add Milestone Form */}
         {isAddingMilestone && (
           <div className='mb-6 p-4 bg-gray-50 rounded-lg border'>
-            <h4 className='text-sm font-medium text-primary mb-3'>
+            <h4 className='text-sm font-medium text-gray-900 mb-3'>
               Add New Milestone
             </h4>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -344,7 +344,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                       ) : (
                         <>
                           <div className='flex items-center justify-between'>
-                            <h4 className='text-sm font-medium text-primary'>
+                            <h4 className='text-sm font-medium text-gray-900'>
                               {milestone.title}
                             </h4>
                             <div className='flex items-center space-x-2'>
@@ -352,7 +352,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                                 onClick={() =>
                                   setEditingMilestone(milestone.id)
                                 }
-                                className='p-1 text-gray-400 hover:text-gray-text'
+                                className='p-1 text-gray-400 hover:text-gray-600'
                               >
                                 <Edit className='w-4 h-4' />
                               </button>
@@ -368,7 +368,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                           </div>
 
                           {milestone.description && (
-                            <p className='text-sm text-gray-text mt-1'>
+                            <p className='text-sm text-gray-600 mt-1'>
                               {milestone.description}
                             </p>
                           )}

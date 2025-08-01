@@ -42,7 +42,7 @@ export default function DocumentViewer({
         </div>
       </div>
       <p className='text-gray-700 mb-4'>{doc.description}</p>
-      <div className='bg-gray-50 border rounded p-4 text-gray-text min-h-[180px] flex items-center justify-center'>
+      <div className='bg-gray-50 border rounded p-4 text-gray-600 min-h-[180px] flex items-center justify-center'>
         {doc.type === 'pdf' && <em>PDF preview will be shown here.</em>}
         {doc.type === 'image' && <em>Image preview will be shown here.</em>}
         {doc.type === 'text' && <em>Text file preview will be shown here.</em>}

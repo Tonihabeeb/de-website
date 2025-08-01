@@ -17,8 +17,6 @@ import {
   Heart,
   Brain,
   Activity,
-  Linkedin,
-  ExternalLink,
 } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
 import Link from 'next/link';
@@ -39,56 +37,52 @@ export const metadata: Metadata = {
 
 const leadershipTeam = [
   {
-    name: 'Ranj S. ALi',
-    title: 'Co-founder and CEO',
+    name: 'Dr. Sarah Chen',
+    title: 'Chief Executive Officer',
     description:
-      'Ranj brings extensive experience in renewable energy and sustainable technology leadership. As co-founder and CEO, he drives the strategic vision and operational excellence of Deep Engineering, ensuring we deliver innovative KPP technology solutions across Iraq.',
+      'Dr. Chen brings over 20 years of experience in renewable energy and sustainable technology. She holds a PhD in Energy Systems from MIT and has led multiple successful energy startups before founding Deep Engineering.',
     expertise: [
-      'Strategic Leadership',
       'Renewable Energy',
-      'Business Development',
+      'Strategic Leadership',
+      'Technology Innovation',
     ],
-    linkedin: 'https://www.linkedin.com/in/ranj-sherko-72640013b/',
     icon: <User className='w-24 h-24 text-gray-400' />,
   },
   {
-    name: 'Nizar A. Debss',
-    title: 'Co-founder and MD',
+    name: 'Michael Rodriguez',
+    title: 'Chief Technology Officer',
     description:
-      'Nizar serves as Managing Director, overseeing day-to-day operations and ensuring seamless execution of our KPP projects. His expertise in project management and sustainable operations has been instrumental in scaling our impact across Iraq.',
+      'Michael is a technology visionary with expertise in AI, machine learning, and energy optimization. He has developed breakthrough algorithms that have revolutionized how we approach energy efficiency and sustainability.',
+    expertise: [
+      'AI & Machine Learning',
+      'Energy Optimization',
+      'Technology Development',
+    ],
+    icon: <Zap className='w-24 h-24 text-gray-400' />,
+  },
+  {
+    name: 'Jennifer Park',
+    title: 'Chief Financial Officer',
+    description:
+      'Jennifer oversees all financial operations and strategic planning. With a background in investment banking and clean energy financing, she ensures sustainable growth while maintaining our commitment to environmental responsibility.',
+    expertise: [
+      'Financial Strategy',
+      'Clean Energy Finance',
+      'Risk Management',
+    ],
+    icon: <BarChart3 className='w-24 h-24 text-gray-400' />,
+  },
+  {
+    name: 'David Thompson',
+    title: 'Chief Operations Officer',
+    description:
+      'David manages day-to-day operations and ensures seamless execution of our projects. His expertise in project management and sustainable operations has been instrumental in scaling our impact across multiple regions.',
     expertise: [
       'Project Management',
       'Operations Excellence',
       'Sustainable Development',
     ],
-    linkedin: 'https://www.linkedin.com/in/nizar-debss/',
     icon: <Target className='w-24 h-24 text-gray-400' />,
-  },
-  {
-    name: 'Khalid N. Othman',
-    title: 'Co-founder and Managing Partner',
-    description:
-      'Khalid brings deep expertise in energy systems and strategic partnerships. As Managing Partner, he focuses on building collaborative relationships with stakeholders and ensuring the successful implementation of our KPP technology across the region.',
-    expertise: [
-      'Strategic Partnerships',
-      'Energy Systems',
-      'Stakeholder Relations',
-    ],
-    linkedin: 'https://www.linkedin.com/in/khalid-noori-6b68a3123/',
-    icon: <Handshake className='w-24 h-24 text-gray-400' />,
-  },
-  {
-    name: 'Ibrahim S. Turfi',
-    title: 'Partner and Technical Consultant',
-    description:
-      'Ibrahim provides expert technical guidance and consultation for our KPP projects. His deep understanding of energy technology and engineering principles ensures we maintain the highest standards of technical excellence and innovation.',
-    expertise: [
-      'Technical Consulting',
-      'Energy Technology',
-      'Engineering Excellence',
-    ],
-    linkedin: 'https://www.linkedin.com/in/ibrahim-salih-4bb4b568/',
-    icon: <Zap className='w-24 h-24 text-gray-400' />,
   },
 ];
 
@@ -299,14 +293,14 @@ export default function LeadershipPage() {
                 <div className='w-48 h-48 mx-auto mb-6 bg-gray-200 rounded-full flex items-center justify-center'>
                   {leader.icon}
                 </div>
-                <h3 className='text-xl font-semibold text-primary mb-2'>
+                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                   {leader.name}
                 </h3>
                 <p className='text-primary font-medium mb-3'>{leader.title}</p>
-                <p className='text-gray-text text-sm leading-relaxed mb-4'>
+                <p className='text-gray-600 text-sm leading-relaxed mb-4'>
                   {leader.description}
                 </p>
-                <div className='flex flex-wrap justify-center gap-2 mb-4'>
+                <div className='flex flex-wrap justify-center gap-2'>
                   {leader.expertise.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
@@ -316,18 +310,6 @@ export default function LeadershipPage() {
                     </span>
                   ))}
                 </div>
-                {leader.linkedin && (
-                  <a
-                    href={leader.linkedin}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200'
-                  >
-                    <Linkedin className='w-4 h-4' />
-                    Connect on LinkedIn
-                    <ExternalLink className='w-3 h-3' />
-                  </a>
-                )}
               </div>
             ))}
           </div>
@@ -488,7 +470,7 @@ export default function LeadershipPage() {
       <section className='section-padding bg-white'>
         <div className='container'>
           <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-primary mb-4'>Our Leadership Philosophy</h2>
+            <h2 className='mb-4'>Our Leadership Philosophy</h2>
             <p className='text-lg text-gray-text max-w-3xl mx-auto'>
               At Deep Engineering, we believe in leading by example. Our
               leadership team is committed to transparency, innovation, and
@@ -498,30 +480,30 @@ export default function LeadershipPage() {
 
           <div className='grid md:grid-cols-3 gap-8'>
             <div className='text-center'>
-              <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mb-4 mx-auto'>
+              <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                 <Target className='w-8 h-8 text-white' />
               </div>
-              <h3 className='text-xl font-semibold text-primary mb-2'>Vision-Driven</h3>
+              <h3 className='text-xl font-semibold mb-2'>Vision-Driven</h3>
               <p className='text-gray-text'>
                 We lead with a clear vision of a sustainable future and inspire
                 others to join us on this journey.
               </p>
             </div>
             <div className='text-center'>
-              <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mb-4 mx-auto'>
+              <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                 <Users className='w-8 h-8 text-white' />
               </div>
-              <h3 className='text-xl font-semibold text-primary mb-2'>Collaborative</h3>
+              <h3 className='text-xl font-semibold mb-2'>Collaborative</h3>
               <p className='text-gray-text'>
                 We believe in the power of teamwork and diverse perspectives to
                 solve complex challenges.
               </p>
             </div>
             <div className='text-center'>
-              <div className='w-16 h-16 bg-primary rounded-lg flex items-center justify-center mb-4 mx-auto'>
+              <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                 <Leaf className='w-8 h-8 text-white' />
               </div>
-              <h3 className='text-xl font-semibold text-primary mb-2'>Sustainable</h3>
+              <h3 className='text-xl font-semibold mb-2'>Sustainable</h3>
               <p className='text-gray-text'>
                 Every decision we make considers the long-term impact on our
                 planet and future generations.
@@ -549,7 +531,7 @@ export default function LeadershipPage() {
             </Link>
             <a
               href='/contact'
-              className='border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-300 transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors duration-200'
             >
               Get Involved
             </a>

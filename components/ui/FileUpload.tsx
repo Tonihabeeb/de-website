@@ -98,7 +98,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
           <p className='text-blue-600 font-medium'>Drop the files here...</p>
         ) : (
           <div>
-            <p className='text-gray-text font-medium mb-2'>
+            <p className='text-gray-600 font-medium mb-2'>
               Drag & drop files here, or click to select files
             </p>
             <p className='text-sm text-gray-500'>
@@ -123,7 +123,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 <div className='flex items-center space-x-3'>
                   {getFileIcon(file)}
                   <div>
-                    <p className='text-sm font-medium text-primary truncate max-w-xs'>
+                    <p className='text-sm font-medium text-gray-900 truncate max-w-xs'>
                       {file.name}
                     </p>
                     <p className='text-xs text-gray-500'>

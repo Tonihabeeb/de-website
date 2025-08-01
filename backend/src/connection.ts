@@ -26,16 +26,6 @@ db.pragma('busy_timeout = 5000');
 // Initialize database with migrations
 export function initializeDatabase() {
   try {
-    // Drop and recreate migrations table to ensure correct schema
-    db.exec(`DROP TABLE IF EXISTS migrations`);
-    db.exec(`
-      CREATE TABLE migrations (
-        id TEXT PRIMARY KEY,
-        name TEXT NOT NULL,
-        executed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-      );
-    `);
-
     // Read and execute migration files
     const fs = require('fs');
     const migrationsPath = path.join(process.cwd(), 'database', 'migrations');
@@ -51,29 +41,11 @@ export function initializeDatabase() {
         .sort();
 
       for (const file of migrationFiles) {
-        const migrationId = file.replace('.sql', '');
-        
-        // Check if migration has already been executed
-        const stmt = db.prepare('SELECT id FROM migrations WHERE id = ?');
-        const existing = stmt.get(migrationId);
-        
-        if (!existing) {
-          const migrationPath = path.join(finalMigrationsPath, file);
-          const migrationSQL = fs.readFileSync(migrationPath, 'utf8');
+        const migrationPath = path.join(finalMigrationsPath, file);
+        const migrationSQL = fs.readFileSync(migrationPath, 'utf8');
 
-          console.log(`Executing migration: ${file}`);
-          
-          // Execute the migration
-          db.exec(migrationSQL);
-          
-          // Record that this migration has been executed
-          const insertStmt = db.prepare('INSERT INTO migrations (id, name) VALUES (?, ?)');
-          insertStmt.run(migrationId, file);
-          
-          console.log(`Migration ${migrationId} completed and recorded`);
-        } else {
-          console.log(`Migration ${migrationId} already executed, skipping`);
-        }
+        console.log(`Executing migration: ${file}`);
+        db.exec(migrationSQL);
       }
     }
 

@@ -98,13 +98,13 @@ export default function KPPAnimation({
             <h3 className='text-2xl font-bold text-primary mb-2'>
               KPP Animation
             </h3>
-            <p className='text-gray-text'>
+            <p className='text-gray-600'>
               Watch the complete energy generation cycle
             </p>
           </div>
           <div className='flex items-center space-x-4'>
             <div className='flex items-center space-x-2'>
-              <span className='text-sm text-gray-text'>Speed:</span>
+              <span className='text-sm text-gray-600'>Speed:</span>
               <select
                 value={speed}
                 onChange={e => window.location.reload()} // Simple reload for demo
@@ -328,25 +328,25 @@ export default function KPPAnimation({
             <div className='w-8 h-8 bg-blue-400 rounded-full mx-auto mb-2 flex items-center justify-center'>
               <Wind className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-text'>Air Injection</p>
+            <p className='text-xs text-gray-600'>Air Injection</p>
           </div>
           <div className='text-center'>
             <div className='w-8 h-8 bg-blue-500 rounded-full mx-auto mb-2 flex items-center justify-center'>
               <ArrowUp className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-text'>Floater Rise</p>
+            <p className='text-xs text-gray-600'>Floater Rise</p>
           </div>
           <div className='text-center'>
             <div className='w-8 h-8 bg-gray-400 rounded-full mx-auto mb-2 flex items-center justify-center'>
               <Settings className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-text'>Chain Drive</p>
+            <p className='text-xs text-gray-600'>Chain Drive</p>
           </div>
           <div className='text-center'>
             <div className='w-8 h-8 bg-green-500 rounded-lg mx-auto mb-2 flex items-center justify-center'>
               <Zap className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-text'>Power Output</p>
+            <p className='text-xs text-gray-600'>Power Output</p>
           </div>
         </div>
 
@@ -356,7 +356,7 @@ export default function KPPAnimation({
             <div
               className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-green-500' : 'bg-red-500'}`}
             ></div>
-            <span className='text-sm text-gray-text'>
+            <span className='text-sm text-gray-600'>
               {isPlaying ? 'Animation Running' : 'Animation Paused'}
             </span>
           </div>

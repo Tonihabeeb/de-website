@@ -40,265 +40,6 @@ interface Version {
 }
 
 export default function AdminPagesPage() {
-  const { user } = useAuth();
-  const [pages, setPages] = useState<Page[]>([]);
-  const [filteredPages, setFilteredPages] = useState<Page[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [importing, setImporting] = useState(false);
-  const [importResults, setImportResults] = useState<any[] | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  // Version history state
-  const [versionModalPageId, setVersionModalPageId] = useState<string | null>(null);
-  const [versions, setVersions] = useState<Version[]>([]);
-  const [versionLoading, setVersionLoading] = useState(false);
-  const [versionError, setVersionError] = useState<string | null>(null);
-  const [selectedVersion, setSelectedVersion] = useState<Version | null>(null);
-
-  useEffect(() => {
-    fetchPages();
-  }, []);
-
-  useEffect(() => {
-    filterPages();
-  }, [pages, searchTerm, statusFilter]);
-
-  const fetchPages = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await fetch('/api/admin/pages');
-      if (!response.ok) {
-        throw new Error('Failed to fetch pages');
-      }
-      const data = await response.json();
-      setPages(data.data || []);
-    } catch (err) {
-      console.error('Error fetching pages:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch pages');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filterPages = () => {
-    let filtered = pages;
-
-    // Apply search filter
-    if (searchTerm) {
-      filtered = filtered.filter(page =>
-        page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        page.slug.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    // Apply status filter
-    if (statusFilter !== 'all') {
-      filtered = filtered.filter(page => page.status === statusFilter);
-    }
-
-    setFilteredPages(filtered);
-  };
-
-  const handleSearch = () => {
-    // Search is handled by the filterPages useEffect
-  };
-
-  const handleExport = async () => {
-    try {
-      const dataStr = JSON.stringify(pages, null, 2);
-      const dataBlob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(dataBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'pages-export.json';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-      toast.success('Pages exported successfully');
-    } catch (error) {
-      console.error('Export error:', error);
-      toast.error('Failed to export pages');
-    }
-  };
-
-  const handleImportClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleImportFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    try {
-      setImporting(true);
-      const text = await file.text();
-      const importData = JSON.parse(text);
-      
-      const results = [];
-      for (const page of importData) {
-        try {
-          const response = await fetch('/api/admin/pages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(page),
-          });
-          
-          if (response.ok) {
-            results.push({ success: true, slug: page.slug });
-          } else {
-            const error = await response.json();
-            results.push({ success: false, slug: page.slug, error: error.error });
-          }
-        } catch (error) {
-          results.push({ success: false, slug: page.slug, error: 'Import failed' });
-        }
-      }
-      
-      setImportResults(results);
-      await fetchPages(); // Refresh the list
-    } catch (error) {
-      console.error('Import error:', error);
-      toast.error('Failed to import pages');
-    } finally {
-      setImporting(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
-    }
-  };
-
-  const handlePublish = async (pageId: string) => {
-    try {
-      const response = await fetch(`/api/admin/pages/${pageId}/publish`, {
-        method: 'POST',
-      });
-      
-      if (response.ok) {
-        toast.success('Page published successfully');
-        await fetchPages();
-      } else {
-        toast.error('Failed to publish page');
-      }
-    } catch (error) {
-      console.error('Publish error:', error);
-      toast.error('Failed to publish page');
-    }
-  };
-
-  const handleDuplicate = async (pageId: string) => {
-    try {
-      const response = await fetch(`/api/admin/pages/${pageId}/duplicate`, {
-        method: 'POST',
-      });
-      
-      if (response.ok) {
-        toast.success('Page duplicated successfully');
-        await fetchPages();
-      } else {
-        toast.error('Failed to duplicate page');
-      }
-    } catch (error) {
-      console.error('Duplicate error:', error);
-      toast.error('Failed to duplicate page');
-    }
-  };
-
-  const handleDelete = async (pageId: string) => {
-    if (!confirm('Are you sure you want to delete this page?')) return;
-    
-    try {
-      const response = await fetch(`/api/admin/pages/${pageId}`, {
-        method: 'DELETE',
-      });
-      
-      if (response.ok) {
-        toast.success('Page deleted successfully');
-        await fetchPages();
-      } else {
-        toast.error('Failed to delete page');
-      }
-    } catch (error) {
-      console.error('Delete error:', error);
-      toast.error('Failed to delete page');
-    }
-  };
-
-  const openVersionModal = async (pageId: string) => {
-    setVersionModalPageId(pageId);
-    setSelectedVersion(null);
-    await fetchVersions(pageId);
-  };
-
-  const fetchVersions = async (pageId: string) => {
-    try {
-      setVersionLoading(true);
-      setVersionError(null);
-      const response = await fetch(`/api/admin/pages/${pageId}/versions`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch versions');
-      }
-      const data = await response.json();
-      setVersions(data.data || []);
-    } catch (err) {
-      console.error('Error fetching versions:', err);
-      setVersionError(err instanceof Error ? err.message : 'Failed to fetch versions');
-    } finally {
-      setVersionLoading(false);
-    }
-  };
-
-  const handleRestoreVersion = async (pageId: string, versionId: string) => {
-    try {
-      const response = await fetch(`/api/admin/pages/${pageId}/versions/${versionId}/restore`, {
-        method: 'POST',
-      });
-      
-      if (response.ok) {
-        toast.success('Version restored successfully');
-        setVersionModalPageId(null);
-        await fetchPages();
-      } else {
-        toast.error('Failed to restore version');
-      }
-    } catch (error) {
-      console.error('Restore error:', error);
-      toast.error('Failed to restore version');
-    }
-  };
-
-  const getStatusBadge = (status: string) => {
-    const statusConfig = {
-      published: { color: 'bg-green-100 text-green-800', label: 'Published' },
-      draft: { color: 'bg-yellow-100 text-yellow-800', label: 'Draft' },
-      archived: { color: 'bg-gray-100 text-gray-800', label: 'Archived' },
-    };
-    
-    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.draft;
-    
-    return (
-      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color}`}>
-        {config.label}
-      </span>
-    );
-  };
-
-  if (loading) {
-    return (
-      <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
-        <div className='p-6'>
-          <div className='flex items-center justify-center h-64'>
-            <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600'></div>
-          </div>
-        </div>
-      </ProtectedRoute>
-    );
-  }
-
   return (
     <ProtectedRoute requiredRoles={['admin', 'superadmin']}>
       <div className='p-6'>
@@ -435,7 +176,7 @@ export default function AdminPagesPage() {
                       </p>
                       <Link
                         href='/admin/pages/new'
-                        className='mt-4 inline-flex items-center text-blue-600 hover:opacity-80'
+                        className='mt-4 inline-flex items-center text-blue-600 hover:text-blue-500'
                       >
                         <Plus className='w-4 h-4 mr-1' />
                         Create your first page
@@ -448,7 +189,7 @@ export default function AdminPagesPage() {
                   <tr key={page.id} className='hover:bg-gray-50'>
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <div>
-                        <div className='text-sm font-medium text-primary'>
+                        <div className='text-sm font-medium text-gray-900'>
                           {page.title}
                         </div>
                         <div className='text-sm text-gray-500'>/{page.slug}</div>
@@ -466,8 +207,8 @@ export default function AdminPagesPage() {
                     <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
                       <div className='flex items-center justify-end space-x-2'>
                         <Link
-                          href={`/admin/pages/edit?id=${page.id}`}
-                          className='text-blue-600 hover:opacity-80'
+                          href={`/admin/pages/${page.id}/edit`}
+                          className='text-blue-600 hover:text-blue-900'
                         >
                           <Edit className='w-4 h-4' />
                         </Link>
@@ -493,7 +234,7 @@ export default function AdminPagesPage() {
                         </button>
                         <button
                           onClick={() => openVersionModal(page.id)}
-                          className='text-gray-text hover:opacity-80'
+                          className='text-gray-600 hover:text-blue-600'
                           aria-label='View version history'
                         >
                           <History className='w-4 h-4' />
@@ -515,7 +256,7 @@ export default function AdminPagesPage() {
             aria-modal='true'
           >
             <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
-              <h3 className='text-lg font-semibold text-primary mb-4'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4'>
                 Version History
               </h3>
               {versionLoading ? (
@@ -604,11 +345,13 @@ export default function AdminPagesPage() {
               <h3 className='text-lg font-semibold mb-4'>Import Results</h3>
               <ul className='max-h-64 overflow-y-auto mb-4'>
                 {importResults.map((r, i) => (
-                  <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-text">{r.success ? '✔' : '✖'} {r.slug || r.id}:{' '}
-                    {r.success ? 'Imported' : r.error}</span>
-                </li>
+                  <li
+                    key={i}
+                    className={r.success ? 'text-green-700' : 'text-red-600'}
+                  >
+                    {r.success ? '✔' : '✖'} {r.slug || r.id}:{' '}
+                    {r.success ? 'Imported' : r.error}
+                  </li>
                 ))}
               </ul>
               <div className='flex justify-end'>

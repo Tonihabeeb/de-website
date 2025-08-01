@@ -221,7 +221,7 @@ export default function CareersPage() {
                   <h3 className='text-xl font-semibold text-primary mb-3'>
                     {benefit.title}
                   </h3>
-                  <p className='text-gray-text'>{benefit.description}</p>
+                  <p className='text-gray-600'>{benefit.description}</p>
                 </div>
               ))}
             </div>
@@ -252,7 +252,7 @@ export default function CareersPage() {
                       <h3 className='text-xl font-semibold text-primary mb-2'>
                         {job.title}
                       </h3>
-                      <div className='flex flex-wrap gap-4 text-sm text-gray-text'>
+                      <div className='flex flex-wrap gap-4 text-sm text-gray-600'>
                         <span className='flex items-center'>
                           <Briefcase className='w-4 h-4 mr-1' />
                           {job.department}
@@ -271,12 +271,12 @@ export default function CareersPage() {
                         </span>
                       </div>
                     </div>
-                    <button className='mt-4 lg:mt-0 bg-primary text-white px-6 py-2 rounded-lg hover:from-primary-dark hover:to-primary hover:text-white transition-colors min-w-[44px] min-h-[44px]'>
+                    <button className='mt-4 lg:mt-0 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]'>
                       Apply Now
                     </button>
                   </div>
 
-                  <p className='text-gray-text mb-4'>{job.description}</p>
+                  <p className='text-gray-600 mb-4'>{job.description}</p>
 
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     <div>
@@ -287,7 +287,7 @@ export default function CareersPage() {
                         {job.requirements.map((req, index) => (
                           <li key={index} className='flex items-start'>
                             <Check className='w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0' />
-                            <span className='text-sm text-gray-text'>{req}</span>
+                            <span className='text-sm text-gray-600'>{req}</span>
                           </li>
                         ))}
                       </ul>
@@ -301,7 +301,7 @@ export default function CareersPage() {
                         {job.responsibilities.map((resp, index) => (
                           <li key={index} className='flex items-start'>
                             <ArrowRight className='w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0' />
-                            <span className='text-sm text-gray-text'>
+                            <span className='text-sm text-gray-600'>
                               {resp}
                             </span>
                           </li>
@@ -329,7 +329,7 @@ export default function CareersPage() {
                 <h3 className='text-lg font-semibold text-gray-800 mb-2'>
                   Submit Application
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   Send your resume and cover letter to
                   careers@deepengineering.co
                 </p>
@@ -342,7 +342,7 @@ export default function CareersPage() {
                 <h3 className='text-lg font-semibold text-gray-800 mb-2'>
                   Interview Process
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   Initial screening followed by technical and cultural
                   interviews
                 </p>
@@ -355,7 +355,7 @@ export default function CareersPage() {
                 <h3 className='text-lg font-semibold text-gray-800 mb-2'>
                   Join Our Team
                 </h3>
-                <p className='text-gray-text'>
+                <p className='text-gray-600'>
                   Welcome aboard! Start your journey with Deep Engineering
                 </p>
               </div>
@@ -381,7 +381,7 @@ export default function CareersPage() {
             </a>
             <a
               href='/team'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
             >
               Meet Our Team
             </a>
@@ -396,14 +396,14 @@ export default function CareersPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-text'>
+            <p className='text-base text-gray-600'>
               Explore more about Deep Engineering and our team:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/team'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:from-primary-dark hover:to-primary hover:text-white transition-colors'
+              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
             >
               Meet the Team
             </Link>

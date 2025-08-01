@@ -59,7 +59,7 @@ export default function AuthGuard({
       <div className='min-h-screen flex items-center justify-center bg-gray-50'>
         <div className='text-center'>
           <Loader2 className='w-8 h-8 animate-spin text-primary mx-auto mb-4' />
-          <p className='text-gray-text'>Checking authentication...</p>
+          <p className='text-gray-600'>Checking authentication...</p>
         </div>
       </div>
     );
@@ -74,7 +74,7 @@ export default function AuthGuard({
       <div className='min-h-screen flex items-center justify-center bg-gray-50'>
         <div className='text-center'>
           <Shield className='w-8 h-8 text-primary mx-auto mb-4' />
-          <p className='text-gray-text'>Redirecting to login...</p>
+          <p className='text-gray-600'>Redirecting to login...</p>
         </div>
       </div>
     );
@@ -86,10 +86,10 @@ export default function AuthGuard({
       <div className='min-h-screen flex items-center justify-center bg-gray-50'>
         <div className='text-center'>
           <AlertTriangle className='w-8 h-8 text-red-500 mx-auto mb-4' />
-          <h2 className='text-xl font-semibold text-primary mb-2'>
+          <h2 className='text-xl font-semibold text-gray-900 mb-2'>
             Access Denied
           </h2>
-          <p className='text-gray-text mb-4'>
+          <p className='text-gray-600 mb-4'>
             You don't have permission to access this page.
           </p>
           <button

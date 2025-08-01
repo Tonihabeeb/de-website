@@ -1,14 +1,12 @@
 'use client';
 
 import { Fragment, useEffect, useState } from 'react';
-import { AlertTriangle, FolderOpen } from 'lucide-react';
 import StructuredData from '@/components/StructuredData';
 import { apiFetch, ApiException } from '@/utils/api';
 import { PageLoader } from '@/components/ui/LoadingSpinner';
 import ReloadButton from '@/components/ui/ReloadButton';
 import { useAuth } from '@/contexts/AuthContext';
 import AuthGuard from '@/components/auth/AuthGuard';
-
 
 interface Project {
   id: string;
@@ -94,16 +92,13 @@ export default function ProjectsPage() {
       try {
         setIsLoading(true);
         setError(null);
-        // Always try to fetch from API first
-        try {
+        if (isAuthenticated) {
           const response = await apiFetch<{ projects: Project[] }>(
-            '/api/projects'
+            '/api/admin/projects'
           );
           setProjects(response.projects || []);
           setIsAuthenticatedUser(true);
-        } catch (apiError) {
-          // Fallback to sample data if API fails
-          console.log('API not available, using sample data');
+        } else {
           setProjects(sampleProjects);
           setIsAuthenticatedUser(false);
         }
@@ -152,8 +147,8 @@ export default function ProjectsPage() {
           }}
         />
 
-        <section className='section-padding bg-gray-50'>
-          <div className='container'>
+        <section className='py-16 bg-gray-50'>
+          <div className='container mx-auto px-4'>
             <div className='text-center mb-12'>
               <h1 className='text-4xl font-bold text-primary mb-4'>
                 Our Projects
@@ -167,7 +162,7 @@ export default function ProjectsPage() {
                   Showing sample projects.{' '}
                   <a
                     href='/login'
-                    className='text-primary hover:text-gray-300-dark'
+                    className='text-primary hover:text-primary-dark'
                   >
                     Login
                   </a>{' '}
@@ -176,17 +171,27 @@ export default function ProjectsPage() {
               )}
             </div>
 
-
-
             {error ? (
               <div className='text-center py-12'>
                 <div className='text-red-600 mb-4'>
-                  <AlertTriangle className='w-12 h-12 mx-auto' />
+                  <svg
+                    className='w-12 h-12 mx-auto'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z'
+                    />
+                  </svg>
                 </div>
-                <h3 className='text-lg font-semibold text-primary mb-2'>
+                <h3 className='text-lg font-semibold text-gray-900 mb-2'>
                   Error Loading Projects
                 </h3>
-                <p className='text-gray-text mb-4'>{error}</p>
+                <p className='text-gray-600 mb-4'>{error}</p>
                 <ReloadButton>Try Again</ReloadButton>
               </div>
             ) : projects.length > 0 ? (
@@ -234,10 +239,22 @@ export default function ProjectsPage() {
               </div>
             ) : (
               <div className='text-center py-12'>
-                <div className='text-gray-text mb-4'>
-                  <FolderOpen className='w-12 h-12 mx-auto' />
+                <div className='text-gray-600 mb-4'>
+                  <svg
+                    className='w-12 h-12 mx-auto'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+                    />
+                  </svg>
                 </div>
-                <h3 className='text-lg font-semibold text-primary mb-2'>
+                <h3 className='text-lg font-semibold text-gray-900 mb-2'>
                   No Projects Found
                 </h3>
                 <p className='text-gray-text'>

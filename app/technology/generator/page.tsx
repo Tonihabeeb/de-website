@@ -205,7 +205,7 @@ export default function GeneratorPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-gradient-to-r from-primary to-primary-light text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 hover:from-primary-dark hover:to-primary hover:text-white transition-all duration-200 text-center'
+                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
                 >
                   Learn How It Works
                 </Link>
@@ -322,7 +322,7 @@ export default function GeneratorPage() {
               <Layers className='w-6 h-6 text-blue-600' />
               Detailed Engineering Data
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-text'>
+            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
               <em>
                 Detailed engineering data from KPP technical documents will be
                 integrated here.
@@ -335,7 +335,7 @@ export default function GeneratorPage() {
               <BarChart3 className='w-6 h-6 text-orange-600' />
               Performance Benchmarks
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-text'>
+            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
               <em>
                 Performance benchmarks and real-world data will be visualized
                 here.
@@ -350,7 +350,7 @@ export default function GeneratorPage() {
               <Wrench className='w-6 h-6 text-green-600' />
               Maintenance Requirements
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-text'>
+            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
               <em>
                 Maintenance schedules, requirements, and best practices will be
                 provided here.
@@ -363,7 +363,7 @@ export default function GeneratorPage() {
               <ClipboardCheck className='w-6 h-6 text-purple-600' />
               Integration Specifications
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-text'>
+            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
               <em>
                 Integration specifications and grid compatibility details will
                 be available here.
@@ -475,7 +475,7 @@ export default function GeneratorPage() {
             </Link>
             <Link
               href='/contact'
-              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-300 transition-colors duration-200'
+              className='border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors duration-200'
             >
               Contact Us
             </Link>

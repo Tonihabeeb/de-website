@@ -215,7 +215,7 @@ export default function FinancialDashboard() {
             {revenue.length > 0 ? (
               <RevenueBarChart />
             ) : (
-              <div className='text-gray-text text-center py-8'>
+              <div className='text-gray-600 text-center py-8'>
                 <em>
                   No revenue data available. Add revenue records through the
                   admin panel.
@@ -258,11 +258,11 @@ export default function FinancialDashboard() {
                     {investmentMetrics.map(metric => (
                       <tr key={metric.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
-                          <div className='text-sm font-medium text-primary'>
+                          <div className='text-sm font-medium text-gray-900'>
                             {metric.metric}
                           </div>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-primary font-medium'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium'>
                           {metric.value} {metric.unit}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -289,7 +289,7 @@ export default function FinancialDashboard() {
                 </table>
               </div>
             ) : (
-              <div className='p-6 text-gray-text text-center'>
+              <div className='p-6 text-gray-600 text-center'>
                 <em>
                   No investment metrics available. Add metrics through the admin
                   panel.
@@ -309,7 +309,7 @@ export default function FinancialDashboard() {
             {costBreakdown.length > 0 ? (
               <CostPieChart />
             ) : (
-              <div className='text-gray-text text-center py-8'>
+              <div className='text-gray-600 text-center py-8'>
                 <em>
                   No cost breakdown data available. Add cost data through the
                   admin panel.
@@ -329,7 +329,7 @@ export default function FinancialDashboard() {
             {cashFlow.length > 0 ? (
               <CashFlowLineChart />
             ) : (
-              <div className='text-gray-text text-center py-8'>
+              <div className='text-gray-600 text-center py-8'>
                 <em>
                   No cash flow data available. Add cash flow records through the
                   admin panel.
@@ -373,7 +373,7 @@ export default function FinancialDashboard() {
                       <tr key={transaction.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <div>
-                            <div className='text-sm font-medium text-primary'>
+                            <div className='text-sm font-medium text-gray-900'>
                               {transaction.description}
                             </div>
                             <div className='text-sm text-gray-500'>
@@ -404,7 +404,7 @@ export default function FinancialDashboard() {
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                           {new Date(transaction.date).toLocaleDateString()}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-primary'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                           {transaction.user}
                         </td>
                       </tr>
@@ -413,7 +413,7 @@ export default function FinancialDashboard() {
                 </table>
               </div>
             ) : (
-              <div className='p-6 text-gray-text text-center'>
+              <div className='p-6 text-gray-600 text-center'>
                 <em>
                   No recent financial activity found. Transactions will appear
                   here when logged.

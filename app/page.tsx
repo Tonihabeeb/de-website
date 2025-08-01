@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Zap, Heart, CheckCircle, MessageCircle, FolderOpen } from 'lucide-react';
 import StructuredData from '@/components/StructuredData';
 import HomeHeroSection from '@/components/sections/HomeHeroSection';
 import MiniProjects from '@/components/sections/MiniProjects';
@@ -127,8 +126,8 @@ export default function HomePage() {
       <MiniProjects />
 
       {/* Additional Static Content */}
-      <section className='section-padding bg-white'>
-        <div className='container'>
+      <section className='py-16 bg-white'>
+        <div className='container mx-auto px-4'>
           <div className='text-center mb-12'>
             <h2 className='text-3xl font-bold text-primary mb-4'>
               Why Choose Deep Engineering?
@@ -142,9 +141,21 @@ export default function HomePage() {
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             <div className='text-center'>
               <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4'>
-                <Zap className='w-8 h-8 text-white' />
+                <svg
+                  className='w-8 h-8 text-white'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M13 10V3L4 14h7v7l9-11h-7z'
+                  />
+                </svg>
               </div>
-              <h3 className='text-xl font-semibold text-primary mb-2'>
+              <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                 24/7 Power Generation
               </h3>
               <p className='text-gray-text'>
@@ -155,9 +166,21 @@ export default function HomePage() {
 
             <div className='text-center'>
               <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4'>
-                <Heart className='w-8 h-8 text-white' />
+                <svg
+                  className='w-8 h-8 text-white'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'
+                  />
+                </svg>
               </div>
-              <h3 className='text-xl font-semibold text-primary mb-2'>
+              <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                 Zero Emissions
               </h3>
               <p className='text-gray-text'>
@@ -169,9 +192,21 @@ export default function HomePage() {
 
             <div className='text-center'>
               <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4'>
-                <CheckCircle className='w-8 h-8 text-white' />
+                <svg
+                  className='w-8 h-8 text-white'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+                  />
+                </svg>
               </div>
-              <h3 className='text-xl font-semibold text-primary mb-2'>
+              <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                 Proven Technology
               </h3>
               <p className='text-gray-text'>
@@ -185,8 +220,8 @@ export default function HomePage() {
       </section>
 
       {/* Call to Action */}
-      <section className='section-padding bg-primary text-white'>
-        <div className='container text-center'>
+      <section className='py-16 bg-primary text-white'>
+        <div className='container mx-auto px-4 text-center'>
           <h2 className='text-3xl font-bold mb-4'>
             Ready to Transform Your Energy Future?
           </h2>
@@ -199,15 +234,39 @@ export default function HomePage() {
               href='/contact'
               className='inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors'
             >
-              <MessageCircle className='w-5 h-5 mr-2' />
               Get in Touch
+              <svg
+                className='ml-2 w-5 h-5'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'
+                />
+              </svg>
             </Link>
             <Link
               href='/projects'
               className='inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors'
             >
-              <FolderOpen className='w-5 h-5 mr-2' />
               View Our Projects
+              <svg
+                className='ml-2 w-5 h-5'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+                />
+              </svg>
             </Link>
           </div>
         </div>

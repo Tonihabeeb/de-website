@@ -55,7 +55,7 @@ export default function EnhancedHeroSection() {
 
       {/* Hero Content */}
       <div className='relative z-10 max-w-4xl mx-auto px-4 py-20 text-center flex flex-col items-center'>
-        <h1 className='text-4xl md:text-6xl font-extrabold text-primary mb-6 drop-shadow-lg'>
+        <h1 className='text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 drop-shadow-lg'>
           Kinetic Power Plant:{' '}
           <span className='text-blue-600'>The Future of Clean Energy</span>
         </h1>
@@ -68,15 +68,15 @@ export default function EnhancedHeroSection() {
         <div className='flex flex-wrap justify-center gap-6 mb-10'>
           <div className='bg-white/80 rounded-lg px-6 py-4 shadow-md flex flex-col items-center min-w-[120px]'>
             <span className='text-3xl font-bold text-blue-600'>300 MW+</span>
-            <span className='text-gray-text text-sm mt-1'>Installed</span>
+            <span className='text-gray-600 text-sm mt-1'>Installed</span>
           </div>
           <div className='bg-white/80 rounded-lg px-6 py-4 shadow-md flex flex-col items-center min-w-[120px]'>
             <span className='text-3xl font-bold text-green-600'>0</span>
-            <span className='text-gray-text text-sm mt-1'>Emissions</span>
+            <span className='text-gray-600 text-sm mt-1'>Emissions</span>
           </div>
           <div className='bg-white/80 rounded-lg px-6 py-4 shadow-md flex flex-col items-center min-w-[120px]'>
             <span className='text-3xl font-bold text-indigo-600'>95.2%</span>
-            <span className='text-gray-text text-sm mt-1'>Efficiency</span>
+            <span className='text-gray-600 text-sm mt-1'>Efficiency</span>
           </div>
         </div>
 

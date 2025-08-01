@@ -108,10 +108,10 @@ export default class ErrorBoundary extends Component<Props, State> {
               <div className='mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4'>
                 <AlertTriangle className='h-6 w-6 text-red-600' />
               </div>
-              <h1 className='text-xl font-semibold text-primary mb-2'>
+              <h1 className='text-xl font-semibold text-gray-900 mb-2'>
                 Something went wrong
               </h1>
-              <p className='text-gray-text mb-6'>
+              <p className='text-gray-600 mb-6'>
                 We're sorry, but something unexpected happened. Our team has
                 been notified and is working to fix this issue.
               </p>

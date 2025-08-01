@@ -203,7 +203,7 @@ const UserActivityMonitor: React.FC = () => {
       case 'upload':
         return <FileText className='w-4 h-4 text-purple-600' />;
       default:
-        return <Activity className='w-4 h-4 text-gray-text' />;
+        return <Activity className='w-4 h-4 text-gray-600' />;
     }
   };
 
@@ -232,7 +232,7 @@ const UserActivityMonitor: React.FC = () => {
         <div className='flex items-center space-x-2'>
           <User className='w-4 h-4 text-gray-400' />
           <div>
-            <p className='text-sm font-medium text-primary'>
+            <p className='text-sm font-medium text-gray-900'>
               {row.getValue('userName')}
             </p>
             <p className='text-xs text-gray-500'>{row.original.userEmail}</p>
@@ -257,7 +257,7 @@ const UserActivityMonitor: React.FC = () => {
       header: 'Resource',
       cell: ({ row }) => (
         <div>
-          <p className='text-sm text-primary'>{row.getValue('resource')}</p>
+          <p className='text-sm text-gray-900'>{row.getValue('resource')}</p>
           <span
             className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getResourceTypeColor(row.original.resourceType)}`}
           >
@@ -272,7 +272,7 @@ const UserActivityMonitor: React.FC = () => {
       cell: ({ row }) => (
         <div className='flex items-center space-x-2'>
           <Clock className='w-4 h-4 text-gray-400' />
-          <span className='text-sm text-primary'>
+          <span className='text-sm text-gray-900'>
             {format(new Date(row.getValue('timestamp')), 'MMM dd, yyyy HH:mm')}
           </span>
         </div>
@@ -282,7 +282,7 @@ const UserActivityMonitor: React.FC = () => {
       accessorKey: 'ipAddress',
       header: 'IP Address',
       cell: ({ row }) => (
-        <span className='text-sm text-gray-text font-mono'>
+        <span className='text-sm text-gray-600 font-mono'>
           {row.getValue('ipAddress')}
         </span>
       ),
@@ -333,10 +333,10 @@ const UserActivityMonitor: React.FC = () => {
               <Activity className='w-6 h-6 text-blue-600' />
             </div>
             <div className='ml-4'>
-              <p className='text-sm font-medium text-gray-text'>
+              <p className='text-sm font-medium text-gray-600'>
                 Total Activities
               </p>
-              <p className='text-2xl font-bold text-primary'>
+              <p className='text-2xl font-bold text-gray-900'>
                 {stats.totalActivities}
               </p>
             </div>
@@ -349,10 +349,10 @@ const UserActivityMonitor: React.FC = () => {
               <Calendar className='w-6 h-6 text-green-600' />
             </div>
             <div className='ml-4'>
-              <p className='text-sm font-medium text-gray-text'>
+              <p className='text-sm font-medium text-gray-600'>
                 Today's Activities
               </p>
-              <p className='text-2xl font-bold text-primary'>
+              <p className='text-2xl font-bold text-gray-900'>
                 {stats.todayActivities}
               </p>
             </div>
@@ -365,8 +365,8 @@ const UserActivityMonitor: React.FC = () => {
               <User className='w-6 h-6 text-purple-600' />
             </div>
             <div className='ml-4'>
-              <p className='text-sm font-medium text-gray-text'>Active Users</p>
-              <p className='text-2xl font-bold text-primary'>
+              <p className='text-sm font-medium text-gray-600'>Active Users</p>
+              <p className='text-2xl font-bold text-gray-900'>
                 {stats.activeUsers}
               </p>
             </div>
@@ -379,8 +379,8 @@ const UserActivityMonitor: React.FC = () => {
               <Filter className='w-6 h-6 text-orange-600' />
             </div>
             <div className='ml-4'>
-              <p className='text-sm font-medium text-gray-text'>Top Action</p>
-              <p className='text-lg font-bold text-primary capitalize'>
+              <p className='text-sm font-medium text-gray-600'>Top Action</p>
+              <p className='text-lg font-bold text-gray-900 capitalize'>
                 {stats.topActions[0]?.action || 'N/A'}
               </p>
             </div>
@@ -390,7 +390,7 @@ const UserActivityMonitor: React.FC = () => {
 
       {/* Filters */}
       <div className='bg-white rounded-lg shadow p-6'>
-        <h3 className='text-lg font-medium text-primary mb-4'>Filters</h3>
+        <h3 className='text-lg font-medium text-gray-900 mb-4'>Filters</h3>
         <div className='grid grid-cols-1 md:grid-cols-5 gap-4'>
           <div>
             <label className='block text-sm font-medium text-gray-700 mb-1'>
@@ -479,7 +479,7 @@ const UserActivityMonitor: React.FC = () => {
 
       {/* Actions */}
       <div className='flex justify-between items-center'>
-        <h2 className='text-xl font-bold text-primary'>User Activity Log</h2>
+        <h2 className='text-xl font-bold text-gray-900'>User Activity Log</h2>
         <div className='flex space-x-3'>
           <Button variant='secondary' onClick={handleRefresh}>
             <RefreshCw className='w-4 h-4 mr-2' />
@@ -515,7 +515,7 @@ const UserActivityMonitor: React.FC = () => {
                 <label className='block text-sm font-medium text-gray-700'>
                   User
                 </label>
-                <p className='text-sm text-primary'>
+                <p className='text-sm text-gray-900'>
                   {selectedActivity.userName}
                 </p>
                 <p className='text-xs text-gray-500'>
@@ -537,7 +537,7 @@ const UserActivityMonitor: React.FC = () => {
                 <label className='block text-sm font-medium text-gray-700'>
                   Resource
                 </label>
-                <p className='text-sm text-primary'>
+                <p className='text-sm text-gray-900'>
                   {selectedActivity.resource}
                 </p>
                 <span
@@ -550,7 +550,7 @@ const UserActivityMonitor: React.FC = () => {
                 <label className='block text-sm font-medium text-gray-700'>
                   Timestamp
                 </label>
-                <p className='text-sm text-primary'>
+                <p className='text-sm text-gray-900'>
                   {format(
                     new Date(selectedActivity.timestamp),
                     'MMM dd, yyyy HH:mm:ss'
@@ -561,7 +561,7 @@ const UserActivityMonitor: React.FC = () => {
                 <label className='block text-sm font-medium text-gray-700'>
                   IP Address
                 </label>
-                <p className='text-sm font-mono text-primary'>
+                <p className='text-sm font-mono text-gray-900'>
                   {selectedActivity.ipAddress}
                 </p>
               </div>
@@ -569,7 +569,7 @@ const UserActivityMonitor: React.FC = () => {
                 <label className='block text-sm font-medium text-gray-700'>
                   Session ID
                 </label>
-                <p className='text-sm font-mono text-primary'>
+                <p className='text-sm font-mono text-gray-900'>
                   {selectedActivity.sessionId}
                 </p>
               </div>
@@ -590,7 +590,7 @@ const UserActivityMonitor: React.FC = () => {
               <label className='block text-sm font-medium text-gray-700 mb-2'>
                 User Agent
               </label>
-              <p className='text-xs text-gray-text break-all'>
+              <p className='text-xs text-gray-600 break-all'>
                 {selectedActivity.userAgent}
               </p>
             </div>
