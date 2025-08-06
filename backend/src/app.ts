@@ -11,6 +11,13 @@ import mongoose from 'mongoose';
 // Import routes and middleware
 import { requireAuth } from './middleware/auth';
 import { register, login, getCurrentUser } from './controllers/authController';
+import { 
+  getAllProjects, 
+  getProjectById, 
+  createProject, 
+  updateProject, 
+  deleteProject 
+} from './controllers/projectController';
 
 // Load environment variables
 dotenv.config();
@@ -62,6 +69,15 @@ app.use('/api/auth', express.Router()
   .get('/me', requireAuth, getCurrentUser)
 );
 
+// Project routes
+app.use('/api/admin/projects', express.Router()
+  .get('/', getAllProjects)
+  .post('/', requireAuth, createProject)
+  .get('/:id', getProjectById)
+  .put('/:id', requireAuth, updateProject)
+  .delete('/:id', requireAuth, deleteProject)
+);
+
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err.stack);
@@ -92,6 +108,7 @@ async function startServer() {
     console.log(`🚀 Backend server running on port ${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
     console.log(`🔐 Auth endpoints: http://localhost:${PORT}/api/auth`);
+    console.log(`📋 Project endpoints: http://localhost:${PORT}/api/admin/projects`);
   });
 }
 
