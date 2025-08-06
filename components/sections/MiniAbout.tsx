@@ -8,14 +8,14 @@ export default function MiniAbout() {
           {/* Content */}
           <div>
             <h2 className='mb-6'>About Deep Engineering</h2>
-            <p className="text-lg text-white">
+            <p className="text-lg text-gray-700">
               Deep Engineering is Iraq's pioneer in renewable energy project
               development, turning innovative technology into sustainable power
               solutions. Founded in 2019 in Erbil with a branch in Basra, we've
               assembled a multidisciplinary team to drive Iraq's clean energy
               future.
             </p>
-            <p className="text-lg text-white">
+            <p className="text-lg text-gray-700">
               As the exclusive KPP licensee for Iraq, we are deploying
               world-class kinetic power plants to deliver reliable green
               electricity where it's needed most.
@@ -25,15 +25,15 @@ export default function MiniAbout() {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
               <div className='text-center'>
                 <div className='text-2xl font-bold text-primary mb-2'>2019</div>
-                <div className="text-sm text-white">Founded</div>
+                <div className="text-sm text-gray-600">Founded</div>
               </div>
               <div className='text-center'>
                 <div className='text-2xl font-bold text-primary mb-2'>35+</div>
-                <div className="text-sm text-white">Team Members</div>
+                <div className="text-sm text-gray-600">Team Members</div>
               </div>
               <div className='text-center'>
                 <div className='text-2xl font-bold text-primary mb-2'>2</div>
-                <div className="text-sm text-white">Offices</div>
+                <div className="text-sm text-gray-600">Offices</div>
               </div>
             </div>
 

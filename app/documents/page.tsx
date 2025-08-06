@@ -96,10 +96,10 @@ export default function DocumentsPage() {
         <div className='mb-8'>
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className="text-3xl font-bold text-white">
+              <h1 className="text-3xl font-bold text-gray-900">
                 Document Management
               </h1>
-              <p className="text-white">
+              <p className="text-gray-600">
                 Upload, organize, and manage your documents and files
               </p>
             </div>
@@ -120,7 +120,7 @@ export default function DocumentsPage() {
         {showUpload && (
           <div className='mb-8'>
             <div className='bg-white rounded-lg shadow p-6'>
-              <h2 className="text-xl font-semibold text-white">
+              <h2 className="text-xl font-semibold text-gray-900">
                 Upload New Document
               </h2>
               <DocumentUpload
@@ -171,47 +171,47 @@ export default function DocumentsPage() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className="text-lg font-medium text-white">
+                <h3 className="text-lg font-medium text-gray-900">
                   Document Details
                 </h3>
                 <div className='space-y-3'>
                   <div>
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium text-gray-700">
                       Title:
                     </label>
-                    <p className="text-sm text-white">
+                    <p className="text-sm text-gray-900">
                       {selectedDocument.title}
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium text-gray-700">
                       Description:
                     </label>
-                    <p className="text-sm text-white">
+                    <p className="text-sm text-gray-900">
                       {selectedDocument.description}
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium text-gray-700">
                       Category:
                     </label>
-                    <p className="text-sm text-white">
+                    <p className="text-sm text-gray-900">
                       {selectedDocument.category}
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium text-gray-700">
                       Uploaded by:
                     </label>
-                    <p className="text-sm text-white">
+                    <p className="text-sm text-gray-900">
                       {selectedDocument.uploadedBy.name}
                     </p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium text-gray-700">
                       Upload date:
                     </label>
-                    <p className="text-sm text-white">
+                    <p className="text-sm text-gray-900">
                       {new Date(
                         selectedDocument.createdAt
                       ).toLocaleDateString()}
@@ -221,7 +221,7 @@ export default function DocumentsPage() {
                 <div className='flex justify-end space-x-3 mt-6'>
                   <button
                     onClick={() => setSelectedDocument(null)}
-                    className="px-4 py-2 text-sm font-medium text-white"
+                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md"
                   >
                     Close
                   </button>
