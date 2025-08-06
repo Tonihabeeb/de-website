@@ -145,14 +145,13 @@ export default async function TechnologyPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Revolutionary Energy Generation</h2>
-              <p className='text-lg text-gray-text mb-6'>
-                The Kinetic Power Plant (KPP) represents a breakthrough in
-                renewable energy technology. By harnessing the principles of
+              <p className='text-lg text-gray-700 mb-6'>
+                Our revolutionary Kinetic Power Plant (KPP) technology combines
                 kinetic energy and advanced engineering, KPP systems generate
                 clean, continuous power without the limitations of traditional
                 renewable sources.
               </p>
-              <p className='text-gray-text mb-6'>
+              <p className='text-gray-700 mb-6'>
                 Our technology operates 24/7, requires no fuel, produces zero
                 emissions, and can be deployed anywhere - from urban centers to
                 remote locations. This makes KPP the ideal solution for Iraq's
@@ -187,7 +186,7 @@ export default async function TechnologyPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Why Choose KPP Technology?</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className='text-lg text-gray-700 max-w-3xl mx-auto'>
               KPP technology offers unparalleled advantages over traditional
               energy sources, making it the ideal choice for sustainable power
               generation.
@@ -200,10 +199,10 @@ export default async function TechnologyPage() {
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4'>
                   <div className='text-white'>{advantage.icon}</div>
                 </div>
-                <h3 className='text-xl font-semibold mb-2'>
+                <h3 className='text-xl font-semibold mb-2 text-gray-900'>
                   {advantage.title}
                 </h3>
-                <p className='text-gray-text'>{advantage.description}</p>
+                <p className='text-gray-700'>{advantage.description}</p>
               </div>
             ))}
           </div>
@@ -217,7 +216,7 @@ export default async function TechnologyPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>System Components</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className='text-lg text-gray-700 max-w-3xl mx-auto'>
               KPP systems consist of carefully engineered components that work
               together to generate clean, reliable power efficiently.
             </p>
@@ -229,8 +228,8 @@ export default async function TechnologyPage() {
                 <div className='w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4'>
                   <div className='text-white'>{component.icon}</div>
                 </div>
-                <h3 className='text-lg font-semibold mb-2'>{component.name}</h3>
-                <p className='text-gray-text'>{component.description}</p>
+                <h3 className='text-lg font-semibold mb-2 text-gray-900'>{component.name}</h3>
+                <p className='text-gray-700'>{component.description}</p>
               </div>
             ))}
           </div>
