@@ -1,0 +1,89 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E6F3FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8D4E3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tower" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#363636;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A1A1A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4169E1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000080;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky -->
+  <rect width="800" height="400" fill="url(#sky)"/>
+  
+  <!-- Ground -->
+  <rect y="400" width="800" height="200" fill="url(#ground)"/>
+  
+  <!-- Mountainous terrain -->
+  <polygon points="0,400 50,350 100,380 150,320 200,350 250,280 300,320 350,250 400,300 450,220 500,280 550,200 600,250 650,180 700,220 750,150 800,200 800,400" fill="#696969" opacity="0.7"/>
+  
+  <!-- KPP Tower 1 -->
+  <rect x="120" y="180" width="50" height="220" fill="url(#tower)"/>
+  <rect x="110" y="160" width="70" height="25" fill="url(#tower)"/>
+  <circle cx="145" cy="172" r="10" fill="#FFD700"/>
+  
+  <!-- KPP Tower 2 -->
+  <rect x="320" y="140" width="50" height="260" fill="url(#tower)"/>
+  <rect x="310" y="120" width="70" height="25" fill="url(#tower)"/>
+  <circle cx="345" cy="132" r="10" fill="#FFD700"/>
+  
+  <!-- KPP Tower 3 -->
+  <rect x="520" y="160" width="50" height="240" fill="url(#tower)"/>
+  <rect x="510" y="140" width="70" height="25" fill="url(#tower)"/>
+  <circle cx="545" cy="152" r="10" fill="#FFD700"/>
+  
+  <!-- KPP Tower 4 -->
+  <rect x="720" y="120" width="50" height="280" fill="url(#tower)"/>
+  <rect x="710" y="100" width="70" height="25" fill="url(#tower)"/>
+  <circle cx="745" cy="112" r="10" fill="#FFD700"/>
+  
+  <!-- Power lines connecting towers -->
+  <line x1="170" y1="172" x2="310" y2="132" stroke="#363636" stroke-width="4"/>
+  <line x1="370" y1="132" x2="510" y2="152" stroke="#363636" stroke-width="4"/>
+  <line x1="570" y1="152" x2="710" y2="112" stroke="#363636" stroke-width="4"/>
+  
+  <!-- Energy flow lines -->
+  <g stroke="#FFD700" stroke-width="3" opacity="0.9">
+    <line x1="145" y1="172" x2="345" y2="132" stroke-dasharray="8,8"/>
+    <line x1="345" y1="132" x2="545" y2="152" stroke-dasharray="8,8"/>
+    <line x1="545" y1="152" x2="745" y2="112" stroke-dasharray="8,8"/>
+  </g>
+  
+  <!-- Control center -->
+  <rect x="280" y="380" width="140" height="90" fill="#4169E1"/>
+  <rect x="290" y="390" width="25" height="25" fill="#87CEEB"/>
+  <rect x="325" y="390" width="25" height="25" fill="#87CEEB"/>
+  <rect x="360" y="390" width="25" height="25" fill="#87CEEB"/>
+  <rect x="395" y="390" width="25" height="25" fill="#87CEEB"/>
+  
+  <!-- Energy storage facility -->
+  <rect x="50" y="450" width="120" height="60" fill="#4682B4"/>
+  <circle cx="110" cy="480" r="20" fill="#FFD700" opacity="0.8"/>
+  
+  <!-- Wind turbines in background -->
+  <circle cx="650" cy="100" r="15" fill="#C0C0C0"/>
+  <line x1="650" y1="85" x2="650" y2="115" stroke="#A0A0A0" stroke-width="3"/>
+  <line x1="635" y1="100" x2="665" y2="100" stroke="#A0A0A0" stroke-width="3"/>
+  
+  <!-- Text -->
+  <text x="400" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#363636">Soran 100MW KPP Project</text>
+  <text x="400" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#228B22">Erbil Governorate, Iraq</text>
+  
+  <!-- Energy indicators -->
+  <circle cx="750" cy="80" r="18" fill="#FFD700" opacity="0.9"/>
+  <text x="750" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000">100MW</text>
+  
+  <!-- Status indicator -->
+  <circle cx="50" cy="80" r="12" fill="#FFA500"/>
+  <text x="50" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">PLANNED</text>
+</svg> 

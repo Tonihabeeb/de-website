@@ -1,0 +1,76 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8FBC8F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#556B2F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tower" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2F4F4F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1C1C1C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4682B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#191970;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky -->
+  <rect width="800" height="400" fill="url(#sky)"/>
+  
+  <!-- Ground -->
+  <rect y="400" width="800" height="200" fill="url(#ground)"/>
+  
+  <!-- Mountains in background -->
+  <polygon points="0,400 100,300 200,350 300,250 400,300 500,200 600,250 700,180 800,220 800,400" fill="#4A4A4A" opacity="0.6"/>
+  
+  <!-- KPP Tower 1 -->
+  <rect x="150" y="200" width="40" height="200" fill="url(#tower)"/>
+  <rect x="140" y="180" width="60" height="20" fill="url(#tower)"/>
+  <circle cx="170" cy="190" r="8" fill="#FFD700"/>
+  
+  <!-- KPP Tower 2 -->
+  <rect x="350" y="150" width="40" height="250" fill="url(#tower)"/>
+  <rect x="340" y="130" width="60" height="20" fill="url(#tower)"/>
+  <circle cx="370" cy="140" r="8" fill="#FFD700"/>
+  
+  <!-- KPP Tower 3 -->
+  <rect x="550" y="180" width="40" height="220" fill="url(#tower)"/>
+  <rect x="540" y="160" width="60" height="20" fill="url(#tower)"/>
+  <circle cx="570" cy="170" r="8" fill="#FFD700"/>
+  
+  <!-- Power lines connecting towers -->
+  <line x1="190" y1="190" x2="340" y2="140" stroke="#2F4F4F" stroke-width="3"/>
+  <line x1="390" y1="140" x2="540" y2="170" stroke="#2F4F4F" stroke-width="3"/>
+  
+  <!-- Energy flow lines -->
+  <g stroke="#FFD700" stroke-width="2" opacity="0.8">
+    <line x1="170" y1="190" x2="370" y2="140" stroke-dasharray="5,5"/>
+    <line x1="370" y1="140" x2="570" y2="170" stroke-dasharray="5,5"/>
+  </g>
+  
+  <!-- Control building -->
+  <rect x="300" y="350" width="120" height="80" fill="#4682B4"/>
+  <rect x="310" y="360" width="20" height="20" fill="#87CEEB"/>
+  <rect x="340" y="360" width="20" height="20" fill="#87CEEB"/>
+  <rect x="370" y="360" width="20" height="20" fill="#87CEEB"/>
+  <rect x="400" y="360" width="20" height="20" fill="#87CEEB"/>
+  
+  <!-- Solar panels -->
+  <rect x="50" y="450" width="200" height="80" fill="url(#panel)"/>
+  <rect x="60" y="460" width="30" height="20" fill="#FFD700"/>
+  <rect x="100" y="460" width="30" height="20" fill="#FFD700"/>
+  <rect x="140" y="460" width="30" height="20" fill="#FFD700"/>
+  <rect x="180" y="460" width="30" height="20" fill="#FFD700"/>
+  
+  <!-- Text -->
+  <text x="400" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2F4F4F">Zakho 100MW KPP Project</text>
+  <text x="400" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#556B2F">Duhok Governorate, Iraq</text>
+  
+  <!-- Energy indicators -->
+  <circle cx="700" cy="100" r="15" fill="#FFD700" opacity="0.9"/>
+  <text x="700" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000">100MW</text>
+</svg> 
