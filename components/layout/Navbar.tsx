@@ -340,7 +340,7 @@ export default function Navbar() {
                           ? servicesDropdownOpen
                           : teamDropdownOpen) && (
                       <div
-                        className='absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20'
+                        className='absolute top-full left-0 mt-2 w-64 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 py-2 z-20'
                         onMouseEnter={() => {
                           if (item.name === 'About') {
                             setAboutDropdownOpen(true);
@@ -369,19 +369,19 @@ export default function Navbar() {
                             {sub.submenu ? (
                               <>
                                 <button
-                                  className='flex items-center w-full px-4 py-2 text-left hover:bg-gray-100 text-gray-700 group-hover:bg-gray-100 focus:outline-none'
+                                  className='flex items-center w-full px-4 py-2 text-left hover:bg-gray-100/50 text-gray-700 group-hover:bg-gray-100/50 focus:outline-none'
                                   aria-haspopup='true'
                                   aria-label={`Toggle ${sub.name} submenu`}
                                 >
                                   <span>{sub.name}</span>
                                   <ChevronDown className='w-4 h-4 ml-auto' />
                                 </button>
-                                <div className='absolute top-0 left-full w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-30 hidden group-hover:block group-focus-within:block'>
+                                <div className='absolute top-0 left-full w-56 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 py-2 z-30 hidden group-hover:block group-focus-within:block'>
                                   {sub.submenu.map((nested: SubMenuItem) => (
                                     <Link
                                       key={nested.name}
                                       href={nested.href}
-                                      className='block px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none'
+                                      className='block px-4 py-2 hover:bg-gray-100/50 text-gray-700 focus:outline-none'
                                     >
                                       {nested.name}
                                     </Link>
@@ -391,7 +391,7 @@ export default function Navbar() {
                             ) : (
                               <Link
                                 href={sub.href}
-                                className='block px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none'
+                                className='block px-4 py-2 hover:bg-gray-100/50 text-gray-700 focus:outline-none'
                               >
                                 {sub.name}
                               </Link>
@@ -465,7 +465,7 @@ export default function Navbar() {
 
                 {/* User Dropdown Menu */}
                 {userDropdownOpen && (
-                  <div className='absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-30'>
+                  <div className='absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 py-2 z-30'>
                     {/* User Info Header */}
                     <div className='px-4 py-3 border-b border-gray-100'>
                       <div className='flex items-center space-x-3'>
@@ -490,7 +490,7 @@ export default function Navbar() {
                     <div className='py-1'>
                       <Link
                         href='/documents'
-                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 focus:outline-none'
+                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50/50 hover:text-primary transition-colors duration-200 focus:outline-none'
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         <FileText className='w-4 h-4 mr-3' />
@@ -499,7 +499,7 @@ export default function Navbar() {
                       <RoleGuard roles={['admin', 'super_admin']}>
                         <Link
                           href='/admin'
-                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 focus:outline-none'
+                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50/50 hover:text-primary transition-colors duration-200 focus:outline-none'
                           onClick={() => setUserDropdownOpen(false)}
                         >
                           <Settings className='w-4 h-4 mr-3' />
@@ -508,7 +508,7 @@ export default function Navbar() {
                       </RoleGuard>
                       <Link
                         href='/dashboard'
-                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 focus:outline-none'
+                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50/50 hover:text-primary transition-colors duration-200 focus:outline-none'
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         <svg
@@ -532,7 +532,7 @@ export default function Navbar() {
                           logout();
                           setUserDropdownOpen(false);
                         }}
-                        className='flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 focus:outline-none'
+                        className='flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50/50 hover:text-red-600 transition-colors duration-200 focus:outline-none'
                       >
                         <LogOut className='w-4 h-4 mr-3' />
                         Logout
@@ -595,7 +595,7 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div
           id='mobile-menu'
-          className='md:hidden border-t border-gray-200 bg-white shadow-lg'
+          className='md:hidden border-t border-gray-200 bg-white/90 backdrop-blur-sm shadow-lg'
           role='navigation'
           aria-label='Mobile navigation'
         >
@@ -616,7 +616,7 @@ export default function Navbar() {
                               className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium focus:outline-none ${
                                 pathname === subItem.href
                                   ? 'bg-primary text-white shadow-md'
-                                  : 'text-gray-text hover:bg-gray-50 hover:text-primary'
+                                  : 'text-gray-text hover:bg-gray-50/50 hover:text-primary'
                               }`}
                               onClick={() => setMobileMenuOpen(false)}
                             >
@@ -634,7 +634,7 @@ export default function Navbar() {
                       className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium focus:outline-none ${
                         pathname === item.href
                           ? 'bg-primary text-white shadow-md'
-                          : 'text-gray-text hover:bg-gray-50 hover:text-primary'
+                          : 'text-gray-text hover:bg-gray-50/50 hover:text-primary'
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -671,7 +671,7 @@ export default function Navbar() {
                   <div className='space-y-2'>
                     <Link
                       href='/documents'
-                      className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 focus:outline-none'
+                      className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50/50 transition-all duration-200 focus:outline-none'
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <FileText className='w-4 h-4 mr-3' />
@@ -680,7 +680,7 @@ export default function Navbar() {
                     <RoleGuard roles={['admin', 'super_admin']}>
                       <Link
                         href='/admin'
-                        className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 focus:outline-none'
+                        className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50/50 transition-all duration-200 focus:outline-none'
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Settings className='w-4 h-4 mr-3' />
@@ -696,7 +696,7 @@ export default function Navbar() {
                         logout();
                         setMobileMenuOpen(false);
                       }}
-                      className='flex items-center w-full px-3 py-3 text-sm text-gray-700 hover:text-red-600 font-medium rounded-lg hover:bg-red-50 transition-all duration-200 focus:outline-none'
+                      className='flex items-center w-full px-3 py-3 text-sm text-gray-700 hover:text-red-600 font-medium rounded-lg hover:bg-red-50/50 transition-all duration-200 focus:outline-none'
                     >
                       <LogOut className='w-4 h-4 mr-3' />
                       Logout
@@ -711,7 +711,7 @@ export default function Navbar() {
                   <div className='space-y-2'>
                     <Link
                       href='/login'
-                      className='block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 focus:outline-none'
+                      className='block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50/50 transition-all duration-200 focus:outline-none'
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Login
