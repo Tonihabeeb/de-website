@@ -221,7 +221,7 @@ export default function MediaEdit() {
       return <Music className='w-8 h-8 text-green-500' />;
     if (mimeType.includes('zip') || mimeType.includes('rar'))
       return <Archive className='w-8 h-8 text-orange-500' />;
-    return <FileText className='w-8 h-8 text-gray-500' />;
+    return <FileText className="w-8 h-8 text-white" />;
   };
 
   const formatFileSize = (bytes: number) => {
@@ -246,7 +246,7 @@ export default function MediaEdit() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading media item...</span>
+          <span className="ml-2 text-white">Loading media item...</span>
         </div>
       </div>
     );
@@ -257,10 +257,10 @@ export default function MediaEdit() {
       <div className='p-6'>
         <div className='text-center py-12'>
           <AlertCircle className='w-12 h-12 text-red-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <h3 className="text-lg font-medium text-white">
             Media not found
           </h3>
-          <p className='text-gray-600'>
+          <p className="text-white">
             The requested media file could not be found.
           </p>
         </div>
@@ -276,13 +276,13 @@ export default function MediaEdit() {
           <div className='flex items-center space-x-4'>
             <button
               onClick={() => router.back()}
-              className='p-2 text-gray-600 hover:text-gray-900 transition-colors'
+              className="p-2 text-gray-600 hover:text-white"
             >
               <ArrowLeft className='w-5 h-5' />
             </button>
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>Edit Media</h1>
-              <p className='text-gray-600 mt-1'>
+              <h1 className="text-2xl font-bold text-white">Edit Media</h1>
+              <p className="text-white">
                 Update metadata and properties
               </p>
             </div>
@@ -290,7 +290,7 @@ export default function MediaEdit() {
           <div className='flex space-x-3'>
             <button
               onClick={() => window.open(mediaItem.file_path, '_blank')}
-              className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+              className="px-4 py-2 border border-gray-300 rounded-lg text-white"
             >
               <ExternalLink className='w-4 h-4 mr-2' />
               View File
@@ -298,7 +298,7 @@ export default function MediaEdit() {
             <button
               onClick={saveMetadata}
               disabled={saving}
-              className='px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center'
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center text-white"
             >
               {saving ? (
                 <Loader2 className='w-4 h-4 animate-spin mr-2' />
@@ -335,7 +335,7 @@ export default function MediaEdit() {
         {/* File Preview */}
         <div className='lg:col-span-1'>
           <div className='bg-white rounded-lg shadow p-6'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <Eye className='w-5 h-5 mr-2' />
               File Preview
             </h3>
@@ -354,7 +354,7 @@ export default function MediaEdit() {
                 ) : (
                   <div className='text-center'>
                     {getFileIcon(mediaItem.mime_type)}
-                    <div className='mt-2 text-sm text-gray-600'>
+                    <div className="mt-2 text-sm text-white">
                       {getFileTypeCategory(mediaItem.mime_type)}
                     </div>
                   </div>
@@ -364,55 +364,55 @@ export default function MediaEdit() {
               {/* File Info */}
               <div className='space-y-3'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     Filename
                   </label>
-                  <div className='text-sm text-gray-900 font-medium'>
+                  <div className="text-sm text-white">
                     {mediaItem.filename}
                   </div>
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     Original Name
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className="text-sm text-white">
                     {mediaItem.original_name}
                   </div>
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     File Type
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className="text-sm text-white">
                     {mediaItem.mime_type}
                   </div>
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     File Size
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className="text-sm text-white">
                     {formatFileSize(mediaItem.file_size)}
                   </div>
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     Uploaded
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className="text-sm text-white">
                     {new Date(mediaItem.created_at).toLocaleString()}
                   </div>
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     Uploaded By
                   </label>
-                  <div className='text-sm text-gray-600'>
+                  <div className="text-sm text-white">
                     {mediaItem.uploaded_by}
                   </div>
                 </div>
@@ -423,21 +423,21 @@ export default function MediaEdit() {
                 <div className='flex space-x-2'>
                   <button
                     onClick={() => window.open(mediaItem.file_path, '_blank')}
-                    className='flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center'
+                    className="flex-1 px-3 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors flex items-center justify-center text-white"
                   >
                     <Eye className='w-4 h-4 mr-2' />
                     View
                   </button>
                   <button
                     onClick={() => window.open(mediaItem.file_path, '_blank')}
-                    className='flex-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center'
+                    className="flex-1 px-3 py-2 bg-gradient-to-b from-green-700 to-green-500 text-white hover:from-green-800 hover:to-green-600 active:from-green-900 active:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors flex items-center justify-center text-white"
                   >
                     <Download className='w-4 h-4 mr-2' />
                     Download
                   </button>
                   <button
                     onClick={deleteMedia}
-                    className='px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors'
+                    className="px-3 py-2 bg-gradient-to-b from-red-700 to-red-500 text-white hover:from-red-800 hover:to-red-600 active:from-red-900 active:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                   >
                     <Trash2 className='w-4 h-4' />
                   </button>
@@ -450,7 +450,7 @@ export default function MediaEdit() {
         {/* Metadata Editor */}
         <div className='lg:col-span-2'>
           <div className='bg-white rounded-lg shadow p-6'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-6 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <Edit3 className='w-5 h-5 mr-2' />
               Edit Metadata
             </h3>
@@ -458,9 +458,9 @@ export default function MediaEdit() {
             <div className='space-y-6'>
               {/* Alt Text */}
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className="block text-sm font-medium text-white">
                   Alt Text
-                  <span className='text-gray-500 ml-1'>
+                  <span className="text-white">
                     (for accessibility)
                   </span>
                 </label>
@@ -477,9 +477,9 @@ export default function MediaEdit() {
 
               {/* Caption */}
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className="block text-sm font-medium text-white">
                   Caption
-                  <span className='text-gray-500 ml-1'>
+                  <span className="text-white">
                     (optional description)
                   </span>
                 </label>
@@ -496,7 +496,7 @@ export default function MediaEdit() {
 
               {/* Tags */}
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2 flex items-center'>
+                <label className="block text-sm font-medium text-white">
                   <Tag className='w-4 h-4 mr-1' />
                   Tags
                 </label>
@@ -505,7 +505,7 @@ export default function MediaEdit() {
                     {metadata.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800'
+                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 text-white"
                       >
                         {tag}
                         <button
@@ -531,7 +531,7 @@ export default function MediaEdit() {
                       />
                       <button
                         onClick={addTag}
-                        className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+                        className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                       >
                         Add
                       </button>
@@ -540,7 +540,7 @@ export default function MediaEdit() {
                           setShowTagInput(false);
                           setNewTag('');
                         }}
-                        className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+                        className="px-4 py-2 border border-gray-300 rounded-lg text-white"
                       >
                         Cancel
                       </button>
@@ -548,7 +548,7 @@ export default function MediaEdit() {
                   ) : (
                     <button
                       onClick={() => setShowTagInput(true)}
-                      className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+                      className="px-4 py-2 border border-gray-300 rounded-lg text-white"
                     >
                       <Tag className='w-4 h-4 mr-2' />
                       Add Tag
@@ -558,7 +558,7 @@ export default function MediaEdit() {
                   {/* Available Tags */}
                   {availableTags.length > 0 && (
                     <div>
-                      <label className='block text-sm font-medium text-gray-700 mb-2'>
+                      <label className="block text-sm font-medium text-white">
                         Available Tags
                       </label>
                       <div className='flex flex-wrap gap-2'>
@@ -573,7 +573,7 @@ export default function MediaEdit() {
                                   tags: [...prev.tags, tag],
                                 }))
                               }
-                              className='px-3 py-1 border border-gray-300 rounded-full text-sm text-gray-700 hover:bg-gray-50 transition-colors'
+                              className="px-3 py-1 border border-gray-300 rounded-full text-sm text-white"
                             >
                               {tag}
                             </button>
@@ -586,7 +586,7 @@ export default function MediaEdit() {
 
               {/* Folder */}
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2 flex items-center'>
+                <label className="block text-sm font-medium text-white">
                   <Folder className='w-4 h-4 mr-1' />
                   Folder
                 </label>
@@ -604,7 +604,7 @@ export default function MediaEdit() {
                       />
                       <button
                         onClick={addFolder}
-                        className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+                        className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                       >
                         Set
                       </button>
@@ -613,7 +613,7 @@ export default function MediaEdit() {
                           setShowFolderInput(false);
                           setNewFolder('');
                         }}
-                        className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+                        className="px-4 py-2 border border-gray-300 rounded-lg text-white"
                       >
                         Cancel
                       </button>
@@ -625,7 +625,7 @@ export default function MediaEdit() {
                       </div>
                       <button
                         onClick={() => setShowFolderInput(true)}
-                        className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+                        className="px-4 py-2 border border-gray-300 rounded-lg text-white"
                       >
                         Change
                       </button>
@@ -645,7 +645,7 @@ export default function MediaEdit() {
                   {/* Available Folders */}
                   {availableFolders.length > 0 && (
                     <div>
-                      <label className='block text-sm font-medium text-gray-700 mb-2'>
+                      <label className="block text-sm font-medium text-white">
                         Available Folders
                       </label>
                       <div className='flex flex-wrap gap-2'>
@@ -657,7 +657,7 @@ export default function MediaEdit() {
                               onClick={() =>
                                 setMetadata(prev => ({ ...prev, folder }))
                               }
-                              className='px-3 py-1 border border-gray-300 rounded-full text-sm text-gray-700 hover:bg-gray-50 transition-colors'
+                              className="px-3 py-1 border border-gray-300 rounded-full text-sm text-white"
                             >
                               {folder}
                             </button>

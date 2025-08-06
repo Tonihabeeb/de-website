@@ -396,10 +396,10 @@ export default function BackupRestoreManager({
       <div className='px-6 py-4 border-b border-gray-200'>
         <div className='flex items-center justify-between'>
           <div>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               Backup & Restore
             </h2>
-            <p className='text-sm text-gray-600 mt-1'>
+            <p className="text-sm text-white">
               Manage database backups and restoration
             </p>
           </div>
@@ -431,14 +431,14 @@ export default function BackupRestoreManager({
 
       {/* Backup Schedules */}
       <div className='px-6 py-4 bg-gray-50 border-b border-gray-200'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+        <h3 className="text-lg font-medium text-white">
           Backup Schedules
         </h3>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
           {schedules.map(schedule => (
             <div key={schedule.id} className='bg-white rounded-lg p-4 border'>
               <div className='flex items-center justify-between mb-3'>
-                <h4 className='font-medium text-gray-900'>{schedule.name}</h4>
+                <h4 className="font-medium text-white">{schedule.name}</h4>
                 <div className='flex items-center space-x-2'>
                   <button
                     onClick={() => toggleSchedule(schedule.id)}
@@ -462,7 +462,7 @@ export default function BackupRestoreManager({
                   </button>
                 </div>
               </div>
-              <div className='space-y-2 text-sm text-gray-600'>
+              <div className="space-y-2 text-sm text-white">
                 <div className='flex justify-between'>
                   <span>Frequency:</span>
                   <span className='capitalize'>{schedule.frequency}</span>
@@ -487,7 +487,7 @@ export default function BackupRestoreManager({
 
       {/* Backup List */}
       <div className='p-6'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+        <h3 className="text-lg font-medium text-white">
           Recent Backups
         </h3>
         <div className='space-y-4'>
@@ -503,8 +503,8 @@ export default function BackupRestoreManager({
                   {getStatusIcon(backup.status)}
                 </div>
                 <div>
-                  <h4 className='font-medium text-gray-900'>{backup.name}</h4>
-                  <div className='flex items-center space-x-4 text-sm text-gray-600 mt-1'>
+                  <h4 className="font-medium text-white">{backup.name}</h4>
+                  <div className="flex items-center space-x-4 text-sm text-white">
                     <span className='flex items-center'>
                       <Database className='w-3 h-3 mr-1' />
                       {backup.tables.length} tables
@@ -604,7 +604,7 @@ export default function BackupRestoreManager({
                   {...form.register('compression')}
                   className='rounded border-gray-300'
                 />
-                <label className='ml-2 text-sm text-gray-700'>
+                <label className="ml-2 text-sm text-white">
                   Enable compression
                 </label>
               </div>
@@ -614,7 +614,7 @@ export default function BackupRestoreManager({
                   {...form.register('encryption')}
                   className='rounded border-gray-300'
                 />
-                <label className='ml-2 text-sm text-gray-700'>
+                <label className="ml-2 text-sm text-white">
                   Enable encryption
                 </label>
               </div>
@@ -669,8 +669,8 @@ export default function BackupRestoreManager({
             </div>
 
             <div className='bg-gray-50 rounded-lg p-4'>
-              <h4 className='font-medium text-gray-900 mb-2'>Backup Details</h4>
-              <div className='space-y-2 text-sm text-gray-600'>
+              <h4 className="font-medium text-white">Backup Details</h4>
+              <div className="space-y-2 text-sm text-white">
                 <div className='flex justify-between'>
                   <span>Name:</span>
                   <span>{selectedBackup.name}</span>

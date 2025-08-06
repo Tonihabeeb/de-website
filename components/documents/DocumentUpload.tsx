@@ -193,7 +193,7 @@ export default function DocumentUpload({
         <div>
           <label
             htmlFor='title'
-            className='block text-sm font-medium text-gray-700 mb-1'
+            className="block text-sm font-medium text-white"
           >
             Document Title
           </label>
@@ -212,7 +212,7 @@ export default function DocumentUpload({
         <div>
           <label
             htmlFor='description'
-            className='block text-sm font-medium text-gray-700 mb-1'
+            className="block text-sm font-medium text-white"
           >
             Description
           </label>
@@ -232,7 +232,7 @@ export default function DocumentUpload({
           <div>
             <label
               htmlFor='category'
-              className='block text-sm font-medium text-gray-700 mb-1'
+              className="block text-sm font-medium text-white"
             >
               Category
             </label>
@@ -255,7 +255,7 @@ export default function DocumentUpload({
           <div>
             <label
               htmlFor='type'
-              className='block text-sm font-medium text-gray-700 mb-1'
+              className="block text-sm font-medium text-white"
             >
               Type
             </label>
@@ -286,11 +286,11 @@ export default function DocumentUpload({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <Upload className='mx-auto h-12 w-12 text-gray-400 mb-4' />
-        <div className='text-lg font-medium text-gray-900 mb-2'>
+        <Upload className="mx-auto h-12 w-12 text-white" />
+        <div className="text-lg font-medium text-white">
           Drop files here or click to browse
         </div>
-        <p className='text-sm text-gray-500 mb-4'>
+        <p className="text-sm text-white">
           Supported formats: {allowedTypes.join(', ')} (Max {maxFileSize}MB)
         </p>
         <button
@@ -313,7 +313,7 @@ export default function DocumentUpload({
       {/* File List */}
       {files.length > 0 && (
         <div className='mt-6'>
-          <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          <h3 className="text-lg font-medium text-white">
             Selected Files
           </h3>
           <div className='space-y-3'>
@@ -323,12 +323,12 @@ export default function DocumentUpload({
                 className='flex items-center justify-between p-4 border border-gray-200 rounded-lg bg-white'
               >
                 <div className='flex items-center space-x-3'>
-                  <File className='h-5 w-5 text-gray-400' />
+                  <File className="h-5 w-5 text-white" />
                   <div>
-                    <p className='text-sm font-medium text-gray-900'>
+                    <p className="text-sm font-medium text-white">
                       {file.name}
                     </p>
-                    <p className='text-xs text-gray-500'>
+                    <p className="text-xs text-white">
                       {formatFileSize(file.size)}
                     </p>
                   </div>
@@ -338,7 +338,7 @@ export default function DocumentUpload({
                   {file.status === 'uploading' && (
                     <div className='flex items-center space-x-2'>
                       <div className='w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin'></div>
-                      <span className='text-sm text-gray-500'>
+                      <span className="text-sm text-white">
                         Uploading...
                       </span>
                     </div>
@@ -360,7 +360,7 @@ export default function DocumentUpload({
 
                   <button
                     onClick={() => removeFile(file.id)}
-                    className='text-gray-400 hover:text-red-500'
+                    className="text-white"
                   >
                     <X className='h-5 w-5' />
                   </button>

@@ -202,7 +202,7 @@ export default function PerformancePage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Performance Metrics</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Comprehensive performance data demonstrating KPP technology's
               efficiency, reliability, and environmental benefits.
             </p>
@@ -218,14 +218,14 @@ export default function PerformancePage() {
                   {category.metrics.map((metric, mIndex) => (
                     <div key={mIndex} className='border-b border-gray-300 pb-4'>
                       <div className='flex justify-between items-start mb-2'>
-                        <span className='font-medium text-gray-text'>
+                        <span className="font-medium text-white">
                           {metric.name}
                         </span>
                         <span className='font-bold text-primary text-lg'>
                           {metric.value}
                         </span>
                       </div>
-                      <p className='text-base text-gray-text'>
+                      <p className="text-base text-white">
                         {metric.description}
                       </p>
                     </div>
@@ -242,7 +242,7 @@ export default function PerformancePage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Technology Comparison</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               How KPP technology compares to other power generation technologies
               in terms of efficiency, reliability, and environmental impact.
             </p>
@@ -293,7 +293,7 @@ export default function PerformancePage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Environmental Benefits</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               KPP technology delivers significant environmental advantages over
               traditional power generation methods.
             </p>
@@ -308,7 +308,7 @@ export default function PerformancePage() {
                     <h3 className='text-xl font-semibold text-primary mb-3'>
                       {benefit.title}
                     </h3>
-                    <p className='text-gray-text mb-3'>{benefit.description}</p>
+                    <p className="text-white">{benefit.description}</p>
                     <p className='text-base text-accent-warm font-medium'>
                       {benefit.impact}
                     </p>
@@ -326,12 +326,12 @@ export default function PerformancePage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Economic Advantages</h2>
-              <p className='text-lg text-gray-text mb-6 leading-relaxed'>
+              <p className="text-lg text-white">
                 KPP technology offers significant economic benefits through
                 reduced operational costs, minimal maintenance requirements, and
                 elimination of fuel expenses.
               </p>
-              <p className='text-lg text-gray-text mb-6 leading-relaxed'>
+              <p className="text-lg text-white">
                 The modular design allows for scalable deployment, while the
                 high availability factor ensures consistent revenue generation
                 and grid stability.
@@ -340,11 +340,11 @@ export default function PerformancePage() {
               <div className='grid grid-cols-2 gap-6'>
                 <div className='text-center'>
                   <div className='text-xl font-bold text-primary mb-2'>0%</div>
-                  <div className='text-base text-gray-text'>Fuel Costs</div>
+                  <div className="text-base text-white">Fuel Costs</div>
                 </div>
                 <div className='text-center'>
                   <div className='text-xl font-bold text-primary mb-2'>98%</div>
-                  <div className='text-base text-gray-text'>Availability</div>
+                  <div className="text-base text-white">Availability</div>
                 </div>
               </div>
             </div>
@@ -353,23 +353,23 @@ export default function PerformancePage() {
               <h3 className='mb-6'>Cost Benefits</h3>
               <div className='space-y-4'>
                 <div className='flex justify-between items-center'>
-                  <span className='text-gray-text'>Fuel Costs</span>
+                  <span className="text-white">Fuel Costs</span>
                   <span className='font-semibold text-green-600'>
                     Eliminated
                   </span>
                 </div>
                 <div className='flex justify-between items-center'>
-                  <span className='text-gray-text'>Maintenance</span>
+                  <span className="text-white">Maintenance</span>
                   <span className='font-semibold text-green-600'>Minimal</span>
                 </div>
                 <div className='flex justify-between items-center'>
-                  <span className='text-gray-text'>Carbon Credits</span>
+                  <span className="text-white">Carbon Credits</span>
                   <span className='font-semibold text-green-600'>
                     Available
                   </span>
                 </div>
                 <div className='flex justify-between items-center'>
-                  <span className='text-gray-text'>Grid Stability</span>
+                  <span className="text-white">Grid Stability</span>
                   <span className='font-semibold text-green-600'>Enhanced</span>
                 </div>
               </div>
@@ -383,7 +383,7 @@ export default function PerformancePage() {
         <div className='container'>
           <div className='text-center mb-8'>
             <h2 className='mb-4'>Performance Analytics</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Interactive charts and analytics showing KPP performance data over
               time.
             </p>
@@ -391,7 +391,7 @@ export default function PerformancePage() {
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
             <div className='bg-gray-light rounded-lg p-8 text-center'>
-              <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
+              <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center text-white">
                 <div className='text-white text-center'>
                   <svg
                     className='w-4 h-4 mx-auto mb-4'
@@ -413,7 +413,7 @@ export default function PerformancePage() {
             </div>
 
             <div className='bg-gray-light rounded-lg p-8 text-center'>
-              <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
+              <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center text-white">
                 <div className='text-white text-center'>
                   <svg
                     className='w-4 h-4 mx-auto mb-4'
@@ -472,14 +472,14 @@ export default function PerformancePage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-600'>
+            <p className="text-base text-white">
               Explore more about KPP technology and related topics:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/technology'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
+              className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
             >
               Technology Overview
             </Link>

@@ -13,7 +13,7 @@ export default function PhysicsPage() {
           <h2 className='text-2xl font-bold mb-6'>
             Archimedes' Principle & Buoyancy
           </h2>
-          <p className='text-lg text-gray-text mb-4'>
+          <p className="text-lg text-white">
             The Kinetic Power Plant (KPP) leverages{' '}
             <strong>Archimedes' Principle</strong>, which states that any object
             submerged in a fluid experiences an upward buoyant force equal to
@@ -28,13 +28,13 @@ export default function PhysicsPage() {
           </div>
 
           <h2 className='text-2xl font-bold mb-6'>Energy Conversion Process</h2>
-          <p className='text-lg text-gray-text mb-4'>
+          <p className="text-lg text-white">
             The rising floaters are attached to a chain system. As they ascend,
             their vertical motion is converted into rotational energy via a
             sprocket and shaft mechanism. This rotational energy is then used to
             drive a high-efficiency permanent magnet generator.
           </p>
-          <ul className='list-disc pl-6 mb-6 text-gray-text'>
+          <ul className="list-disc pl-6 mb-6 text-white">
             <li>Air injection engine creates controlled buoyancy cycles</li>
             <li>Chain system translates vertical to rotational motion</li>
             <li>Generator produces grid-quality AC power at 375 RPM</li>
@@ -43,7 +43,7 @@ export default function PhysicsPage() {
           <h2 className='text-2xl font-bold mb-6'>
             System Efficiency & Control
           </h2>
-          <p className='text-lg text-gray-text mb-4'>
+          <p className="text-lg text-white">
             KPP achieves high system efficiency (~95%) by minimizing friction,
             using direct-drive generators, and optimizing the air injection
             cycle. An integrated SCADA system monitors and controls all
@@ -57,7 +57,7 @@ export default function PhysicsPage() {
           </div>
 
           <h2 className='text-2xl font-bold mb-6'>Key Physics Concepts</h2>
-          <ul className='list-disc pl-6 mb-6 text-gray-text'>
+          <ul className="list-disc pl-6 mb-6 text-white">
             <li>
               <strong>Buoyant Force:</strong> F<sub>b</sub> = ρ<sub>water</sub>{' '}
               × V<sub>floater</sub> × g
@@ -79,7 +79,7 @@ export default function PhysicsPage() {
           <h2 className='text-2xl font-bold mb-6'>
             Engineering Considerations
           </h2>
-          <ul className='list-disc pl-6 mb-6 text-gray-text'>
+          <ul className="list-disc pl-6 mb-6 text-white">
             <li>Material selection for corrosion resistance and durability</li>
             <li>Optimized floater shape for maximum lift and minimal drag</li>
             <li>Redundant safety systems and emergency shutdown protocols</li>
@@ -92,7 +92,7 @@ export default function PhysicsPage() {
           <div className='mt-12 text-center'>
             <Link
               href='/technology/how-it-works'
-              className='inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white text-white"
             >
               Back to How It Works
             </Link>

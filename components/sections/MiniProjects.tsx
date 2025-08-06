@@ -137,7 +137,7 @@ export default function MiniProjects() {
             successful project implementations.
           </p>
           {!isAuthenticatedUser && (
-            <p className='text-sm text-gray-500 mt-2'>
+            <p className='text-sm text-gray-700 mt-2'>
               Showing sample projects.{' '}
               <Link
                 href='/login'

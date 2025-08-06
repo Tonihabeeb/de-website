@@ -133,10 +133,10 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               User Overview
             </h3>
-            <Users className='w-5 h-5 text-gray-400' />
+            <Users className="w-5 h-5 text-white" />
           </div>
           <div className='grid grid-cols-1 md:grid-cols-4 gap-4 animate-pulse'>
             {[...Array(4)].map((_, i) => (
@@ -153,10 +153,10 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               User Overview
             </h3>
-            <Users className='w-5 h-5 text-gray-400' />
+            <Users className="w-5 h-5 text-white" />
           </div>
           <div className='text-center py-8'>
             <p className='text-red-600'>{error || 'No data available'}</p>
@@ -176,8 +176,8 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       <div className='p-6'>
         <div className='flex items-center justify-between mb-6'>
-          <h3 className='text-lg font-semibold text-gray-900'>User Overview</h3>
-          <Users className='w-5 h-5 text-gray-400' />
+          <h3 className="text-lg font-semibold text-white">User Overview</h3>
+          <Users className="w-5 h-5 text-white" />
         </div>
 
         {/* Chart Navigation */}
@@ -227,7 +227,7 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
         {/* Overview Cards */}
         {selectedChart === 'overview' && (
           <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mb-6'>
-            <div className='bg-blue-50 p-4 rounded-lg'>
+            <div className="bg-blue-50 p-4 rounded-lg text-white">
               <div className='flex items-center justify-between'>
                 <div>
                   <p className='text-sm text-blue-600 font-medium'>
@@ -376,7 +376,7 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
         {/* Top Users */}
         {selectedChart === 'overview' && (
           <div className='mt-6'>
-            <h4 className='text-sm font-medium text-gray-900 mb-3'>
+            <h4 className="text-sm font-medium text-white">
               Top Active Users
             </h4>
             <div className='space-y-2'>
@@ -386,21 +386,21 @@ const UserOverviewCharts: React.FC<UserOverviewChartsProps> = ({
                   className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'
                 >
                   <div className='flex items-center space-x-3'>
-                    <div className='w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center'>
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-white">
                       <span className='text-sm font-medium text-blue-600'>
                         {user.username.charAt(0).toUpperCase()}
                       </span>
                     </div>
                     <div>
-                      <p className='text-sm font-medium text-gray-900'>
+                      <p className="text-sm font-medium text-white">
                         {user.username}
                       </p>
-                      <p className='text-xs text-gray-500'>
+                      <p className="text-xs text-white">
                         {user.activity_count} activities
                       </p>
                     </div>
                   </div>
-                  <div className='text-xs text-gray-500'>
+                  <div className="text-xs text-white">
                     {new Date(user.last_activity).toLocaleDateString()}
                   </div>
                 </div>

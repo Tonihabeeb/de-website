@@ -157,7 +157,7 @@ export default function ProjectStatusManagement() {
       case 'cancelled':
         return <XCircle className='w-6 h-6 text-red-500' />;
       default:
-        return <Clock className='w-6 h-6 text-gray-500' />;
+        return <Clock className="w-6 h-6 text-white" />;
     }
   };
 
@@ -211,7 +211,7 @@ export default function ProjectStatusManagement() {
       case 'over_budget':
         return <TrendingUp className='w-4 h-4 text-red-500' />;
       default:
-        return <Minus className='w-4 h-4 text-gray-500' />;
+        return <Minus className="w-4 h-4 text-white" />;
     }
   };
 
@@ -220,7 +220,7 @@ export default function ProjectStatusManagement() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading project status...</span>
+          <span className="ml-2 text-white">Loading project status...</span>
         </div>
       </div>
     );
@@ -251,16 +251,16 @@ export default function ProjectStatusManagement() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Project Status Management
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               {project?.title} - Monitor and update project status
             </p>
           </div>
           <button
             onClick={() => router.push(`/admin/projects/${projectId}`)}
-            className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+            className="px-4 py-2 border border-gray-300 rounded-lg text-white"
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Project
@@ -294,7 +294,7 @@ export default function ProjectStatusManagement() {
         {/* Current Status */}
         <div className='lg:col-span-2'>
           <div className='bg-white rounded-lg shadow p-6'>
-            <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+            <h2 className="text-lg font-semibold text-white">
               Current Status
             </h2>
 
@@ -313,7 +313,7 @@ export default function ProjectStatusManagement() {
 
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                   <div className='bg-gray-50 p-4 rounded-lg'>
-                    <h3 className='text-sm font-medium text-gray-700 mb-2'>
+                    <h3 className="text-sm font-medium text-white">
                       Priority
                     </h3>
                     <span
@@ -324,7 +324,7 @@ export default function ProjectStatusManagement() {
                   </div>
 
                   <div className='bg-gray-50 p-4 rounded-lg'>
-                    <h3 className='text-sm font-medium text-gray-700 mb-2'>
+                    <h3 className="text-sm font-medium text-white">
                       Risk Level
                     </h3>
                     <span
@@ -335,7 +335,7 @@ export default function ProjectStatusManagement() {
                   </div>
 
                   <div className='bg-gray-50 p-4 rounded-lg'>
-                    <h3 className='text-sm font-medium text-gray-700 mb-2'>
+                    <h3 className="text-sm font-medium text-white">
                       Budget Status
                     </h3>
                     <div className='flex items-center space-x-1'>
@@ -351,10 +351,10 @@ export default function ProjectStatusManagement() {
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                   <div>
-                    <h3 className='text-sm font-medium text-gray-700 mb-2'>
+                    <h3 className="text-sm font-medium text-white">
                       Timeline
                     </h3>
-                    <div className='text-sm text-gray-600'>
+                    <div className="text-sm text-white">
                       <p>
                         Start:{' '}
                         {project.start_date
@@ -371,10 +371,10 @@ export default function ProjectStatusManagement() {
                   </div>
 
                   <div>
-                    <h3 className='text-sm font-medium text-gray-700 mb-2'>
+                    <h3 className="text-sm font-medium text-white">
                       Budget
                     </h3>
-                    <div className='text-sm text-gray-600'>
+                    <div className="text-sm text-white">
                       <p>
                         {project.budget_currency}{' '}
                         {project.budget?.toLocaleString() || '0'}
@@ -388,13 +388,13 @@ export default function ProjectStatusManagement() {
 
           {/* Status Update Form */}
           <div className='bg-white rounded-lg shadow p-6 mt-6'>
-            <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+            <h2 className="text-lg font-semibold text-white">
               Update Status
             </h2>
 
             <form onSubmit={handleStatusUpdate} className='space-y-4'>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className="block text-sm font-medium text-white">
                   New Status
                 </label>
                 <select
@@ -415,7 +415,7 @@ export default function ProjectStatusManagement() {
               </div>
 
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className="block text-sm font-medium text-white">
                   Status Notes
                 </label>
                 <textarea
@@ -434,7 +434,7 @@ export default function ProjectStatusManagement() {
                 <button
                   type='submit'
                   disabled={saving || !newStatus.status || !newStatus.notes}
-                  className='px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center'
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center text-white"
                 >
                   {saving ? (
                     <Loader2 className='w-4 h-4 animate-spin mr-2' />
@@ -450,7 +450,7 @@ export default function ProjectStatusManagement() {
 
         {/* Status History */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+          <h2 className="text-lg font-semibold text-white">
             Status History
           </h2>
 
@@ -463,19 +463,19 @@ export default function ProjectStatusManagement() {
                   >
                     {update.status.replace('_', ' ').toUpperCase()}
                   </span>
-                  <span className='text-xs text-gray-500'>
+                  <span className="text-xs text-white">
                     {new Date(update.created_at).toLocaleDateString()}
                   </span>
                 </div>
-                <p className='text-sm text-gray-600 mb-1'>{update.notes}</p>
-                <p className='text-xs text-gray-500'>by {update.created_by}</p>
+                <p className="text-sm text-white">{update.notes}</p>
+                <p className="text-xs text-white">by {update.created_by}</p>
               </div>
             ))}
 
             {statusHistory.length === 0 && (
               <div className='text-center py-4'>
-                <Clock className='w-8 h-8 text-gray-400 mx-auto mb-2' />
-                <p className='text-sm text-gray-500'>No status history yet</p>
+                <Clock className="w-8 h-8 text-white" />
+                <p className="text-sm text-white">No status history yet</p>
               </div>
             )}
           </div>

@@ -13,13 +13,13 @@ export default function LegalComplianceDocumentsPage() {
           <h2 className='mb-6 text-2xl font-bold'>
             Legal & Compliance Documents
           </h2>
-          <p className='text-gray-text mb-8 max-w-2xl'>
+          <p className="text-white">
             Browse and download legal documents, government contracts,
             regulatory compliance files, and insurance/guarantee documents for
             Deep Engineering projects.
           </p>
           {/* Placeholder for document list and search/filter features */}
-          <div className='bg-gray-light p-8 rounded-lg text-center text-gray-500'>
+          <div className="bg-gray-light p-8 rounded-lg text-center text-white">
             Document list and search/filter features coming soon.
           </div>
         </div>

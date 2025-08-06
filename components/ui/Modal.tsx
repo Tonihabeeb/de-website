@@ -39,14 +39,14 @@ const Modal: React.FC<ModalProps> = ({
         >
           {/* Header */}
           <div className='flex items-center justify-between p-6 border-b border-gray-200'>
-            <Dialog.Title className='text-lg font-semibold text-gray-900'>
+            <Dialog.Title className="text-lg font-semibold text-white">
               {title}
             </Dialog.Title>
             {showCloseButton && (
               <Dialog.Close asChild>
                 <button
                   onClick={onClose}
-                  className='p-1 text-gray-400 hover:text-gray-600 transition-colors'
+                  className="p-1 text-gray-600 hover:text-white"
                 >
                   <X className='w-5 h-5' />
                 </button>

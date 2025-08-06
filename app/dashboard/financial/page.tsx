@@ -120,9 +120,9 @@ export default function FinancialDashboard() {
       case 'below_target':
         return <AlertTriangle className='w-4 h-4 text-red-500' />;
       case 'neutral':
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
       default:
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
     }
   };
 
@@ -175,7 +175,7 @@ export default function FinancialDashboard() {
           <DollarSign className='w-8 h-8 text-green-600' />
           Financial Dashboard
         </h1>
-        <p className='mb-8 text-gray-700'>
+        <p className="mb-8 text-white">
           Real-time financial insights, projections, and investment metrics for
           KPP projects.
         </p>
@@ -215,7 +215,7 @@ export default function FinancialDashboard() {
             {revenue.length > 0 ? (
               <RevenueBarChart />
             ) : (
-              <div className='text-gray-600 text-center py-8'>
+              <div className="text-white">
                 <em>
                   No revenue data available. Add revenue records through the
                   admin panel.
@@ -237,19 +237,19 @@ export default function FinancialDashboard() {
                 <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='bg-gray-50'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Metric
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Value
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Target
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Status
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Description
                       </th>
                     </tr>
@@ -258,14 +258,14 @@ export default function FinancialDashboard() {
                     {investmentMetrics.map(metric => (
                       <tr key={metric.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
-                          <div className='text-sm font-medium text-gray-900'>
+                          <div className="text-sm font-medium text-white">
                             {metric.metric}
                           </div>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {metric.value} {metric.unit}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {metric.target
                             ? `${metric.target} ${metric.unit}`
                             : 'N/A'}
@@ -280,7 +280,7 @@ export default function FinancialDashboard() {
                             </span>
                           </span>
                         </td>
-                        <td className='px-6 py-4 text-sm text-gray-500'>
+                        <td className="px-6 py-4 text-sm text-white">
                           {metric.description}
                         </td>
                       </tr>
@@ -289,7 +289,7 @@ export default function FinancialDashboard() {
                 </table>
               </div>
             ) : (
-              <div className='p-6 text-gray-600 text-center'>
+              <div className="p-6 text-white">
                 <em>
                   No investment metrics available. Add metrics through the admin
                   panel.
@@ -309,7 +309,7 @@ export default function FinancialDashboard() {
             {costBreakdown.length > 0 ? (
               <CostPieChart />
             ) : (
-              <div className='text-gray-600 text-center py-8'>
+              <div className="text-white">
                 <em>
                   No cost breakdown data available. Add cost data through the
                   admin panel.
@@ -329,7 +329,7 @@ export default function FinancialDashboard() {
             {cashFlow.length > 0 ? (
               <CashFlowLineChart />
             ) : (
-              <div className='text-gray-600 text-center py-8'>
+              <div className="text-white">
                 <em>
                   No cash flow data available. Add cash flow records through the
                   admin panel.
@@ -351,19 +351,19 @@ export default function FinancialDashboard() {
                 <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='bg-gray-50'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Transaction
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Type
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Amount
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Date
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         User
                       </th>
                     </tr>
@@ -373,10 +373,10 @@ export default function FinancialDashboard() {
                       <tr key={transaction.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <div>
-                            <div className='text-sm font-medium text-gray-900'>
+                            <div className="text-sm font-medium text-white">
                               {transaction.description}
                             </div>
-                            <div className='text-sm text-gray-500'>
+                            <div className="text-sm text-white">
                               {transaction.category}
                             </div>
                           </div>
@@ -401,10 +401,10 @@ export default function FinancialDashboard() {
                         >
                           {formatCurrency(transaction.amount)}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {new Date(transaction.date).toLocaleDateString()}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {transaction.user}
                         </td>
                       </tr>
@@ -413,7 +413,7 @@ export default function FinancialDashboard() {
                 </table>
               </div>
             ) : (
-              <div className='p-6 text-gray-600 text-center'>
+              <div className="p-6 text-white">
                 <em>
                   No recent financial activity found. Transactions will appear
                   here when logged.

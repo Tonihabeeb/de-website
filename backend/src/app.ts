@@ -11,13 +11,6 @@ import mongoose from 'mongoose';
 // Import routes and middleware
 import { requireAuth } from './middleware/auth';
 import { register, login, getCurrentUser } from './controllers/authController';
-import { 
-  getProjects, 
-  getProjectById, 
-  createProject, 
-  updateProject, 
-  deleteProject 
-} from './controllers/projectController';
 
 // Load environment variables
 dotenv.config();
@@ -67,15 +60,6 @@ app.use('/api/auth', express.Router()
   .post('/register', register)
   .post('/login', login)
   .get('/me', requireAuth, getCurrentUser)
-);
-
-// Projects routes
-app.use('/api/admin/projects', express.Router()
-  .get('/', requireAuth, getProjects)
-  .get('/:id', requireAuth, getProjectById)
-  .post('/', requireAuth, createProject)
-  .put('/:id', requireAuth, updateProject)
-  .delete('/:id', requireAuth, deleteProject)
 );
 
 // Error handling middleware

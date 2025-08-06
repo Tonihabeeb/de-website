@@ -132,7 +132,7 @@ export default function HomePage() {
             <h2 className='text-3xl font-bold text-primary mb-4'>
               Why Choose Deep Engineering?
             </h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               We're revolutionizing the energy landscape with innovative
               technology and sustainable solutions.
             </p>
@@ -155,10 +155,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+              <h3 className="text-xl font-semibold text-white">
                 24/7 Power Generation
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Our KPP technology provides continuous energy generation without
                 interruption, ensuring reliable power supply around the clock.
               </p>
@@ -180,10 +180,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+              <h3 className="text-xl font-semibold text-white">
                 Zero Emissions
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Clean, green energy with absolutely no emissions or
                 environmental impact, contributing to a sustainable future for
                 generations to come.
@@ -206,10 +206,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+              <h3 className="text-xl font-semibold text-white">
                 Proven Technology
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Our KPP technology has been thoroughly tested and validated,
                 providing reliable and efficient energy solutions for diverse
                 applications.

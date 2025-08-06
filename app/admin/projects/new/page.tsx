@@ -151,17 +151,17 @@ export default function NewProject() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Create New Project
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Set up a new project with all necessary details
             </p>
           </div>
           <div className='flex space-x-3'>
             <button
               onClick={handleCancel}
-              className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+              className="px-4 py-2 border border-gray-300 rounded-lg text-white"
             >
               <X className='w-4 h-4 mr-2' />
               Cancel
@@ -169,7 +169,7 @@ export default function NewProject() {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className='px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center'
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center text-white"
             >
               {loading ? (
                 <div className='w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2' />
@@ -207,13 +207,13 @@ export default function NewProject() {
       {/* Form */}
       <form onSubmit={handleSubmit} className='space-y-6'>
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+          <h2 className="text-lg font-semibold text-white">
             Basic Information
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Title *
               </label>
               <input
@@ -227,7 +227,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Status
               </label>
               <select
@@ -244,7 +244,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Priority
               </label>
               <select
@@ -260,7 +260,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Risk Level
               </label>
               <select
@@ -276,7 +276,7 @@ export default function NewProject() {
           </div>
 
           <div className='mt-6'>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Description *
             </label>
             <textarea
@@ -292,14 +292,14 @@ export default function NewProject() {
 
         {/* Timeline */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <Calendar className='w-5 h-5 mr-2' />
             Timeline
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Start Date
               </label>
               <input
@@ -311,7 +311,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 End Date
               </label>
               <input
@@ -326,14 +326,14 @@ export default function NewProject() {
 
         {/* Budget */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <DollarSign className='w-5 h-5 mr-2' />
             Budget & Financials
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Budget Amount
               </label>
               <input
@@ -347,7 +347,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Currency
               </label>
               <select
@@ -365,7 +365,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Budget Status
               </label>
               <select
@@ -385,14 +385,14 @@ export default function NewProject() {
 
         {/* Team & Stakeholders */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <Users className='w-5 h-5 mr-2' />
             Team & Stakeholders
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Client Name
               </label>
               <input
@@ -405,7 +405,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Manager
               </label>
               <input
@@ -421,7 +421,7 @@ export default function NewProject() {
           </div>
 
           <div className='mt-6'>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Team Members
             </label>
             <div className='flex gap-2 mb-2'>
@@ -438,7 +438,7 @@ export default function NewProject() {
               <button
                 type='button'
                 onClick={addTeamMember}
-                className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+                className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Add
               </button>
@@ -447,7 +447,7 @@ export default function NewProject() {
               {formData.team_members.map((member, index) => (
                 <span
                   key={index}
-                  className='inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800'
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800 text-white"
                 >
                   {member}
                   <button
@@ -465,14 +465,14 @@ export default function NewProject() {
 
         {/* Location & Details */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <MapPin className='w-5 h-5 mr-2' />
             Location & Additional Details
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Location
               </label>
               <input
@@ -485,7 +485,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Tags
               </label>
               <div className='flex gap-2 mb-2'>
@@ -511,13 +511,13 @@ export default function NewProject() {
                 {formData.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className='inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-800'
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-white"
                   >
                     {tag}
                     <button
                       type='button'
                       onClick={() => removeTag(tag)}
-                      className='ml-2 text-gray-600 hover:text-gray-800'
+                      className="ml-2 text-gray-600 hover:text-white"
                     >
                       ×
                     </button>
@@ -529,7 +529,7 @@ export default function NewProject() {
 
           <div className='mt-6 grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Objectives
               </label>
               <textarea
@@ -542,7 +542,7 @@ export default function NewProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Deliverables
               </label>
               <textarea
@@ -563,14 +563,14 @@ export default function NewProject() {
           <button
             type='button'
             onClick={handleCancel}
-            className='px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+            className="px-6 py-2 border border-gray-300 rounded-lg text-white"
           >
             Cancel
           </button>
           <button
             type='submit'
             disabled={loading}
-            className='px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors'
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors text-white"
           >
             {loading ? 'Creating...' : 'Create Project'}
           </button>

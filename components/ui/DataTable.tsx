@@ -81,7 +81,7 @@ const DataTable = <TData, TValue>({
       {/* Search */}
       {searchKey && (
         <div className='relative'>
-          <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400' />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white" />
           <input
             placeholder={searchPlaceholder}
             value={globalFilter ?? ''}
@@ -101,7 +101,7 @@ const DataTable = <TData, TValue>({
                   {headerGroup.headers.map(header => (
                     <th
                       key={header.id}
-                      className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
+                      className={`px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider ${
                         header.column.getCanSort()
                           ? 'cursor-pointer select-none'
                           : ''
@@ -127,7 +127,7 @@ const DataTable = <TData, TValue>({
                   {row.getVisibleCells().map(cell => (
                     <td
                       key={cell.id}
-                      className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'
+                      className="px-6 py-4 whitespace-nowrap text-sm text-white"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -145,7 +145,7 @@ const DataTable = <TData, TValue>({
         <div className='bg-white px-4 py-3 border-t border-gray-200 sm:px-6'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center space-x-2'>
-              <span className='text-sm text-gray-700'>
+              <span className="text-sm text-white">
                 Showing{' '}
                 <span className='font-medium'>
                   {table.getState().pagination.pageIndex *
@@ -172,12 +172,12 @@ const DataTable = <TData, TValue>({
               <button
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
-                className='relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed rounded-md'
+                className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-white"
               >
                 <ChevronLeft className='w-4 h-4' />
               </button>
 
-              <span className='text-sm text-gray-700'>
+              <span className="text-sm text-white">
                 Page {table.getState().pagination.pageIndex + 1} of{' '}
                 {table.getPageCount()}
               </span>
@@ -185,7 +185,7 @@ const DataTable = <TData, TValue>({
               <button
                 onClick={() => table.nextPage()}
                 disabled={!table.getCanNextPage()}
-                className='relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed rounded-md'
+                className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-white"
               >
                 <ChevronRight className='w-4 h-4' />
               </button>

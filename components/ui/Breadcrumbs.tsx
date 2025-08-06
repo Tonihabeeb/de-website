@@ -22,7 +22,7 @@ export default function Breadcrumbs() {
 
   return (
     <nav aria-label='Breadcrumb' className='mb-4 text-sm'>
-      <ol className='flex flex-wrap items-center gap-2 text-gray-600'>
+      <ol className="flex flex-wrap items-center gap-2 text-white">
         {crumbs.map((crumb, idx) => (
           <li key={crumb.href} className='flex items-center'>
             {idx > 0 && <span className='mx-1'>/</span>}

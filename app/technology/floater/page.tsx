@@ -165,7 +165,7 @@ export default function FloaterPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className='section-padding bg-gradient-to-br from-primary to-primary-dark text-white'>
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white text-white">
         <div className='container'>
           <div className='max-w-4xl mx-auto text-center'>
             <h1 className='mb-6 text-white font-bold text-4xl md:text-5xl'>
@@ -190,13 +190,13 @@ export default function FloaterPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Buoyancy-Driven Innovation</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 The KPP floater represents a breakthrough in renewable energy
                 technology, utilizing the fundamental principles of buoyancy to
                 create continuous motion without requiring fuel, wind, or solar
                 energy.
               </p>
-              <p className='text-gray-text mb-6'>
+              <p className="text-white">
                 By harnessing the natural buoyancy forces in water, our floater
                 system generates consistent kinetic energy that drives the
                 entire KPP power generation process, making it truly sustainable
@@ -205,7 +205,7 @@ export default function FloaterPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 text-center text-white"
                 >
                   Learn How It Works
                 </Link>
@@ -225,19 +225,19 @@ export default function FloaterPage() {
                 </h3>
                 <div className='space-y-4 text-left'>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Buoyancy Force:</span>
+                    <span className="text-white">Buoyancy Force:</span>
                     <span className='font-semibold'>50-200 kN</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Cycle Time:</span>
+                    <span className="text-white">Cycle Time:</span>
                     <span className='font-semibold'>30-60 seconds</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Efficiency:</span>
+                    <span className="text-white">Efficiency:</span>
                     <span className='font-semibold'>85-92%</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Lifespan:</span>
+                    <span className="text-white">Lifespan:</span>
                     <span className='font-semibold'>25+ years</span>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ export default function FloaterPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Key Features & Capabilities</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               The KPP floater incorporates innovative engineering to maximize
               buoyancy efficiency and ensure reliable, continuous operation.
             </p>
@@ -267,7 +267,7 @@ export default function FloaterPage() {
                 <h3 className='text-xl font-semibold text-primary mb-3'>
                   {feature.title}
                 </h3>
-                <p className='text-gray-text'>{feature.description}</p>
+                <p className="text-white">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -279,7 +279,7 @@ export default function FloaterPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>How the Floater Works</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Understanding the innovative buoyancy-driven process that powers
               KPP technology.
             </p>
@@ -293,7 +293,7 @@ export default function FloaterPage() {
               <h3 className='text-lg font-semibold text-primary mb-3'>
                 Buoyancy Generation
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 The floater creates controlled buoyancy forces through
                 innovative design and material selection.
               </p>
@@ -306,7 +306,7 @@ export default function FloaterPage() {
               <h3 className='text-lg font-semibold text-primary mb-3'>
                 Upward Motion
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Buoyancy forces drive the floater upward, creating kinetic
                 energy in the process.
               </p>
@@ -319,7 +319,7 @@ export default function FloaterPage() {
               <h3 className='text-lg font-semibold text-primary mb-3'>
                 Energy Transfer
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Kinetic energy is transferred to the conveyor chain system for
                 power generation.
               </p>
@@ -332,7 +332,7 @@ export default function FloaterPage() {
               <h3 className='text-lg font-semibold text-primary mb-3'>
                 Cycle Reset
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 The system automatically resets for the next buoyancy cycle,
                 ensuring continuous operation.
               </p>
@@ -346,7 +346,7 @@ export default function FloaterPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Technical Specifications</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Detailed technical specifications and performance parameters of
               the KPP floater system.
             </p>
@@ -361,14 +361,14 @@ export default function FloaterPage() {
                   {category.specs.map((spec, sIndex) => (
                     <div key={sIndex} className='border-b border-gray-300 pb-4'>
                       <div className='flex justify-between items-start mb-2'>
-                        <span className='font-medium text-gray-text'>
+                        <span className="font-medium text-white">
                           {spec.name}
                         </span>
                         <span className='font-bold text-primary text-lg'>
                           {spec.value}
                         </span>
                       </div>
-                      <p className='text-sm text-gray-text'>
+                      <p className="text-sm text-white">
                         {spec.description}
                       </p>
                     </div>
@@ -389,7 +389,7 @@ export default function FloaterPage() {
               <Layers className='w-6 h-6 text-blue-600' />
               Detailed Engineering Data
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Each module contains 66 hollow steel floaters attached to an
@@ -416,7 +416,7 @@ export default function FloaterPage() {
               <BarChart3 className='w-6 h-6 text-orange-600' />
               Performance Benchmarks
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Buoyant force per floater: 50–200 kN (configurable by design).
@@ -440,7 +440,7 @@ export default function FloaterPage() {
               <Wrench className='w-6 h-6 text-green-600' />
               Maintenance Requirements
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>Periodic inspection for leaks or corrosion in floaters.</li>
                 <li>
@@ -460,7 +460,7 @@ export default function FloaterPage() {
               <ClipboardCheck className='w-6 h-6 text-purple-600' />
               Integration Specifications
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Floaters are synchronized with the PLC-based control system
@@ -478,7 +478,7 @@ export default function FloaterPage() {
             </div>
           </div>
         </div>
-        <div className='container mt-8 text-sm text-gray-500'>
+        <div className="container mt-8 text-sm text-white">
           <span>
             Source:{' '}
             <a
@@ -499,7 +499,7 @@ export default function FloaterPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Environmental Benefits</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 The KPP floater technology provides significant environmental
                 advantages over traditional power generation methods.
               </p>
@@ -512,7 +512,7 @@ export default function FloaterPage() {
                     <h4 className='font-semibold text-primary mb-1'>
                       Zero Emissions
                     </h4>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       No CO2, NOx, or particulate emissions during operation
                     </p>
                   </div>
@@ -525,7 +525,7 @@ export default function FloaterPage() {
                     <h4 className='font-semibold text-primary mb-1'>
                       No Fuel Required
                     </h4>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       Eliminates fuel extraction, transportation, and combustion
                     </p>
                   </div>
@@ -538,7 +538,7 @@ export default function FloaterPage() {
                     <h4 className='font-semibold text-primary mb-1'>
                       Marine Life Friendly
                     </h4>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       Minimal impact on marine ecosystems and wildlife
                     </p>
                   </div>
@@ -551,7 +551,7 @@ export default function FloaterPage() {
                     <h4 className='font-semibold text-primary mb-1'>
                       Sustainable Materials
                     </h4>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       Eco-friendly materials with long operational life
                     </p>
                   </div>

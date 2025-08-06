@@ -306,7 +306,7 @@ export default function MobileNavigation() {
       >
         <div className='flex flex-col h-full'>
           {/* Header */}
-          <div className='flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-primary to-primary-dark'>
+          <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-primary to-primary-dark text-white">
             <div className='flex items-center space-x-3'>
               <Image
                 src='/logo.svg'
@@ -319,7 +319,7 @@ export default function MobileNavigation() {
             </div>
             <button
               onClick={toggleMenu}
-              className='p-2 text-white hover:text-gray-200 transition-colors duration-200 touch-target rounded-lg hover:bg-white/10'
+              className="p-2 text-white hover:text-white"
               aria-label='Close menu'
             >
               <X className='w-6 h-6' />
@@ -377,7 +377,7 @@ export default function MobileNavigation() {
                                       {child.label}
                                     </div>
                                     {child.description && (
-                                      <div className='text-xs text-gray-500 mt-1'>
+                                      <div className="text-xs text-white">
                                         {child.description}
                                       </div>
                                     )}
@@ -421,8 +421,8 @@ export default function MobileNavigation() {
                   Deep Engineering
                 </p>
               </div>
-              <p className='text-xs text-gray-500'>KPP Technology Solutions</p>
-              <div className='flex items-center justify-center space-x-4 text-xs text-gray-400'>
+              <p className="text-xs text-white">KPP Technology Solutions</p>
+              <div className="flex items-center justify-center space-x-4 text-xs text-white">
                 <span>Continuous Clean Energy</span>
                 <span>•</span>
                 <span>Anywhere</span>

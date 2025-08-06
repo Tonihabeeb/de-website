@@ -81,10 +81,10 @@ export default function RegisterPage() {
     <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-md w-full space-y-8'>
         <div>
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
             Create your account
           </h2>
-          <p className='mt-2 text-center text-sm text-gray-600'>
+          <p className="mt-2 text-center text-sm text-white">
             Or{' '}
             <Link
               href='/login'
@@ -106,7 +106,7 @@ export default function RegisterPage() {
                 type='text'
                 autoComplete='name'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm'
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-white"
                 placeholder='Full Name'
                 value={formData.name}
                 onChange={handleInputChange}
@@ -123,7 +123,7 @@ export default function RegisterPage() {
                 type='email'
                 autoComplete='email'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm'
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-white"
                 placeholder='Email address'
                 value={formData.email}
                 onChange={handleInputChange}
@@ -138,7 +138,7 @@ export default function RegisterPage() {
                 id='role'
                 name='role'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm'
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-white"
                 value={formData.role}
                 onChange={handleInputChange}
                 disabled={isLoading}
@@ -159,7 +159,7 @@ export default function RegisterPage() {
                 type='password'
                 autoComplete='new-password'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm'
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-white"
                 placeholder='Password'
                 value={formData.password}
                 onChange={handleInputChange}
@@ -176,7 +176,7 @@ export default function RegisterPage() {
                 type='password'
                 autoComplete='new-password'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm'
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-white"
                 placeholder='Confirm Password'
                 value={formData.confirmPassword}
                 onChange={handleInputChange}

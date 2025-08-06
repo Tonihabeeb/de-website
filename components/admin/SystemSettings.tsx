@@ -227,8 +227,8 @@ export default function SystemSettings({
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       {/* Header */}
       <div className='px-6 py-4 border-b border-gray-200'>
-        <h2 className='text-xl font-semibold text-gray-900'>System Settings</h2>
-        <p className='text-sm text-gray-600 mt-1'>
+        <h2 className="text-xl font-semibold text-white">System Settings</h2>
+        <p className="text-sm text-white">
           Configure system-wide settings and preferences
         </p>
       </div>
@@ -245,7 +245,7 @@ export default function SystemSettings({
                 className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
                 <Icon className='w-4 h-4' />
@@ -314,7 +314,7 @@ export default function SystemSettings({
                 </div>
 
                 <div className='space-y-4'>
-                  <h3 className='text-lg font-medium text-gray-900'>
+                  <h3 className="text-lg font-medium text-white">
                     System Options
                   </h3>
                   <div className='space-y-3'>
@@ -324,7 +324,7 @@ export default function SystemSettings({
                         {...generalForm.register('maintenanceMode')}
                         className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className='ml-2 text-sm text-gray-700'>
+                      <label className="ml-2 text-sm text-white">
                         Maintenance Mode - Enable maintenance mode to restrict
                         access
                       </label>
@@ -335,7 +335,7 @@ export default function SystemSettings({
                         {...generalForm.register('allowRegistration')}
                         className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className='ml-2 text-sm text-gray-700'>
+                      <label className="ml-2 text-sm text-white">
                         Allow User Registration - Allow new users to register
                         accounts
                       </label>
@@ -346,7 +346,7 @@ export default function SystemSettings({
                         {...generalForm.register('requireEmailVerification')}
                         className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className='ml-2 text-sm text-gray-700'>
+                      <label className="ml-2 text-sm text-white">
                         Require Email Verification - Require email verification
                         for new accounts
                       </label>
@@ -407,7 +407,7 @@ export default function SystemSettings({
                 </div>
 
                 <div className='space-y-4'>
-                  <h3 className='text-lg font-medium text-gray-900'>
+                  <h3 className="text-lg font-medium text-white">
                     Security Options
                   </h3>
                   <div className='space-y-3'>
@@ -417,7 +417,7 @@ export default function SystemSettings({
                         {...securityForm.register('requireStrongPassword')}
                         className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className='ml-2 text-sm text-gray-700'>
+                      <label className="ml-2 text-sm text-white">
                         Require Strong Password - Enforce password complexity
                         requirements
                       </label>
@@ -428,7 +428,7 @@ export default function SystemSettings({
                         {...securityForm.register('enableTwoFactor')}
                         className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className='ml-2 text-sm text-gray-700'>
+                      <label className="ml-2 text-sm text-white">
                         Enable Two-Factor Authentication - Allow users to enable
                         2FA for their accounts
                       </label>
@@ -439,7 +439,7 @@ export default function SystemSettings({
                         {...securityForm.register('enableAuditLog')}
                         className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <label className='ml-2 text-sm text-gray-700'>
+                      <label className="ml-2 text-sm text-white">
                         Enable Audit Logging - Log all system activities for
                         security monitoring
                       </label>
@@ -448,7 +448,7 @@ export default function SystemSettings({
                 </div>
 
                 <div className='space-y-4'>
-                  <h3 className='text-lg font-medium text-gray-900'>
+                  <h3 className="text-lg font-medium text-white">
                     File Upload Security
                   </h3>
                   <FormField
@@ -509,7 +509,7 @@ export default function SystemSettings({
                     <button
                       type='button'
                       onClick={() => setShowPassword(!showPassword)}
-                      className='absolute right-3 top-8 text-gray-400 hover:text-gray-600'
+                      className="absolute right-3 top-8 text-gray-600 hover:text-white"
                     >
                       {showPassword ? (
                         <EyeOff className='w-4 h-4' />
@@ -532,7 +532,7 @@ export default function SystemSettings({
                 </div>
 
                 <div className='space-y-4'>
-                  <h3 className='text-lg font-medium text-gray-900'>
+                  <h3 className="text-lg font-medium text-white">
                     Email Options
                   </h3>
                   <div className='flex items-center'>
@@ -541,7 +541,7 @@ export default function SystemSettings({
                       {...emailForm.register('enableEmailNotifications')}
                       className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                     />
-                    <label className='ml-2 text-sm text-gray-700'>
+                    <label className="ml-2 text-sm text-white">
                       Enable Email Notifications - Send email notifications for
                       system events
                     </label>
@@ -596,12 +596,12 @@ export default function SystemSettings({
             </div>
 
             <div className='space-y-4'>
-              <h3 className='text-lg font-medium text-gray-900'>
+              <h3 className="text-lg font-medium text-white">
                 System Performance
               </h3>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='space-y-2'>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Cache Duration (seconds)
                   </label>
                   <input
@@ -613,7 +613,7 @@ export default function SystemSettings({
                   />
                 </div>
                 <div className='space-y-2'>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Max Concurrent Users
                   </label>
                   <input
@@ -628,12 +628,12 @@ export default function SystemSettings({
             </div>
 
             <div className='space-y-4'>
-              <h3 className='text-lg font-medium text-gray-900'>
+              <h3 className="text-lg font-medium text-white">
                 Database Settings
               </h3>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='space-y-2'>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Connection Pool Size
                   </label>
                   <input
@@ -645,7 +645,7 @@ export default function SystemSettings({
                   />
                 </div>
                 <div className='space-y-2'>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Query Timeout (seconds)
                   </label>
                   <input
@@ -680,12 +680,12 @@ export default function SystemSettings({
         title='Send Test Email'
       >
         <div className='space-y-4'>
-          <p className='text-sm text-gray-600'>
+          <p className="text-sm text-white">
             Enter an email address to send a test email and verify your SMTP
             configuration.
           </p>
           <div className='space-y-2'>
-            <label className='block text-sm font-medium text-gray-700'>
+            <label className="block text-sm font-medium text-white">
               Email Address
             </label>
             <input

@@ -130,7 +130,7 @@ export default function ProcessDiagram({ steps }: ProcessDiagramProps) {
             </motion.h3>
 
             <motion.p
-              className='text-gray-text'
+              className="text-white"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: 1 + index * 0.2 }}

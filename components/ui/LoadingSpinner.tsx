@@ -23,7 +23,7 @@ export default function LoadingSpinner({
   const colorClasses = {
     primary: 'text-primary',
     white: 'text-white',
-    gray: 'text-gray-500',
+    gray: 'text-gray-700',
   };
 
   const spinner = (

@@ -86,7 +86,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
         {/* Header */}
         <div className='flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50'>
           <div className='flex items-center space-x-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>{title}</h3>
+            <h3 className="text-lg font-semibold text-white">{title}</h3>
 
             {/* Device Selector */}
             <div className='flex items-center space-x-2 bg-white rounded-lg border border-gray-200 p-1'>
@@ -99,7 +99,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
                     className={`p-2 rounded-md transition-colors ${
                       deviceType === type
                         ? 'bg-blue-100 text-blue-600'
-                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                        : 'text-gray-700 hover:text-gray-700 hover:bg-gray-100'
                     }`}
                     title={config.label}
                   >
@@ -113,7 +113,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
           <div className='flex items-center space-x-2'>
             <button
               onClick={resetPreview}
-              className='p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors'
+              className="p-2 text-gray-700 hover:text-white"
               title='Reset Preview'
             >
               <RotateCcw className='w-4 h-4' />
@@ -121,7 +121,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
 
             <button
               onClick={toggleFullscreen}
-              className='p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors'
+              className="p-2 text-gray-700 hover:text-white"
               title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
             >
               {isFullscreen ? (
@@ -133,7 +133,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
 
             <button
               onClick={handleClose}
-              className='p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors'
+              className="p-2 text-gray-700 hover:text-white"
               title='Close Preview'
             >
               <X className='w-4 h-4' />
@@ -187,7 +187,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
                       <div className='w-3 h-3 bg-yellow-400 rounded-full'></div>
                       <div className='w-3 h-3 bg-green-400 rounded-full'></div>
                     </div>
-                    <div className='flex-1 bg-white rounded px-3 py-1 text-sm text-gray-600'>
+                    <div className="flex-1 bg-white rounded px-3 py-1 text-sm text-white">
                       {title}
                     </div>
                   </div>
@@ -197,7 +197,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
                 <div className='p-4'>
                   {/* Meta information */}
                   {metaDescription && (
-                    <div className='mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg'>
+                    <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-white">
                       <h4 className='text-sm font-medium text-blue-900 mb-1'>
                         Meta Description
                       </h4>
@@ -218,7 +218,7 @@ const LivePreview: React.FC<LivePreviewProps> = ({
 
         {/* Footer */}
         <div className='p-4 border-t border-gray-200 bg-gray-50'>
-          <div className='flex items-center justify-between text-sm text-gray-600'>
+          <div className="flex items-center justify-between text-sm text-white">
             <div className='flex items-center space-x-4'>
               <span>Device: {currentConfig.label}</span>
               <span>
@@ -267,7 +267,7 @@ export function SidebarPreview({
       {/* Preview Header */}
       <div className='px-4 py-3 border-b border-gray-200'>
         <div className='flex items-center justify-between'>
-          <h3 className='text-sm font-medium text-gray-900'>Preview</h3>
+          <h3 className="text-sm font-medium text-white">Preview</h3>
           <div className='flex items-center space-x-1'>
             {(['mobile', 'tablet', 'desktop'] as DeviceType[]).map(device => (
               <button
@@ -276,7 +276,7 @@ export function SidebarPreview({
                 className={`p-1 rounded transition-colors ${
                   deviceType === device
                     ? 'bg-blue-100 text-blue-600'
-                    : 'text-gray-400 hover:text-gray-600'
+                    : 'text-gray-600 hover:text-gray-600'
                 }`}
               >
                 {getDeviceIcon(device)}
@@ -292,11 +292,11 @@ export function SidebarPreview({
           {/* Header */}
           <div className='bg-gray-50 border-b border-gray-200 px-4 py-3'>
             <div>
-              <h1 className='text-sm font-bold text-gray-900 truncate'>
+              <h1 className="text-sm font-bold text-white">
                 {title || 'Page Title'}
               </h1>
               {metaDescription && (
-                <p className='text-xs text-gray-600 mt-1 line-clamp-2'>
+                <p className="text-xs text-white">
                   {metaDescription}
                 </p>
               )}
@@ -317,8 +317,8 @@ export function SidebarPreview({
               />
             ) : (
               <div className='text-center py-8'>
-                <Eye className='w-8 h-8 text-gray-400 mx-auto mb-2' />
-                <p className='text-sm text-gray-600'>No content yet</p>
+                <Eye className="w-8 h-8 text-white" />
+                <p className="text-sm text-white">No content yet</p>
               </div>
             )}
           </div>

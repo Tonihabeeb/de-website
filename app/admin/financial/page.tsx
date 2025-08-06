@@ -231,9 +231,9 @@ export default function FinancialManagement() {
       case 'below_target':
         return <AlertTriangle className='w-4 h-4 text-red-500' />;
       case 'neutral':
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
       default:
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
     }
   };
 
@@ -283,31 +283,31 @@ export default function FinancialManagement() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Financial Management
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Manage financial data, revenue, costs, and investment metrics
             </p>
           </div>
           <div className='flex gap-2'>
             <button
               onClick={() => setShowRevenueForm(true)}
-              className='inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-white"
             >
               <Plus className='w-4 h-4 mr-2' />
               Add Revenue
             </button>
             <button
               onClick={() => setShowTransactionForm(true)}
-              className='inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-b from-green-700 to-green-500 text-white hover:from-green-800 hover:to-green-600 active:from-green-900 active:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-white"
             >
               <Activity className='w-4 h-4 mr-2' />
               Log Transaction
             </button>
             <button
               onClick={() => setShowMetricForm(true)}
-              className='inline-flex items-center px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500'
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-b from-purple-700 to-purple-500 text-white hover:from-purple-800 hover:to-purple-600 active:from-purple-900 active:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 text-white"
             >
               <Target className='w-4 h-4 mr-2' />
               Add Metric
@@ -344,19 +344,19 @@ export default function FinancialManagement() {
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Period
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Revenue
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Cost
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Profit
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Margin
                   </th>
                 </tr>
@@ -364,7 +364,7 @@ export default function FinancialManagement() {
               <tbody className='bg-white divide-y divide-gray-200'>
                 {revenue.map(item => (
                   <tr key={item.id}>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                       {item.month} {item.year}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium'>
@@ -376,7 +376,7 @@ export default function FinancialManagement() {
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-blue-600 font-medium'>
                       {formatCurrency(item.profit)}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {((item.profit / item.revenue) * 100).toFixed(1)}%
                     </td>
                   </tr>
@@ -398,19 +398,19 @@ export default function FinancialManagement() {
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Metric
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Value
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Target
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Status
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Description
                   </th>
                 </tr>
@@ -419,14 +419,14 @@ export default function FinancialManagement() {
                 {investmentMetrics.map(metric => (
                   <tr key={metric.id}>
                     <td className='px-6 py-4 whitespace-nowrap'>
-                      <div className='text-sm font-medium text-gray-900'>
+                      <div className="text-sm font-medium text-white">
                         {metric.metric}
                       </div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {metric.value} {metric.unit}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {metric.target
                         ? `${metric.target} ${metric.unit}`
                         : 'N/A'}
@@ -441,7 +441,7 @@ export default function FinancialManagement() {
                         </span>
                       </span>
                     </td>
-                    <td className='px-6 py-4 text-sm text-gray-500'>
+                    <td className="px-6 py-4 text-sm text-white">
                       {metric.description}
                     </td>
                   </tr>
@@ -463,19 +463,19 @@ export default function FinancialManagement() {
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Transaction
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Type
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Amount
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Date
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     User
                   </th>
                 </tr>
@@ -485,10 +485,10 @@ export default function FinancialManagement() {
                   <tr key={transaction.id}>
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <div>
-                        <div className='text-sm font-medium text-gray-900'>
+                        <div className="text-sm font-medium text-white">
                           {transaction.description}
                         </div>
-                        <div className='text-sm text-gray-500'>
+                        <div className="text-sm text-white">
                           {transaction.category}
                         </div>
                       </div>
@@ -513,10 +513,10 @@ export default function FinancialManagement() {
                     >
                       {formatCurrency(transaction.amount)}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {new Date(transaction.date).toLocaleDateString()}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {transaction.user}
                     </td>
                   </tr>
@@ -532,13 +532,13 @@ export default function FinancialManagement() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 Add Revenue Record
               </h3>
               <form onSubmit={handleRevenueSubmit} className='space-y-4'>
                 <div className='grid grid-cols-2 gap-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       Month
                     </label>
                     <select
@@ -568,7 +568,7 @@ export default function FinancialManagement() {
                     </select>
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       Year
                     </label>
                     <input
@@ -586,7 +586,7 @@ export default function FinancialManagement() {
                   </div>
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Revenue (USD)
                   </label>
                   <input
@@ -603,7 +603,7 @@ export default function FinancialManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Cost (USD)
                   </label>
                   <input
@@ -626,13 +626,13 @@ export default function FinancialManagement() {
                       setShowRevenueForm(false);
                       resetRevenueForm();
                     }}
-                    className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                    className="px-4 py-2 text-sm font-medium text-white"
                   >
                     Cancel
                   </button>
                   <button
                     type='submit'
-                    className='inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-white"
                   >
                     <Save className='w-4 h-4 mr-2' />
                     Save Revenue
@@ -649,12 +649,12 @@ export default function FinancialManagement() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 Log Transaction
               </h3>
               <form onSubmit={handleTransactionSubmit} className='space-y-4'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Transaction Type
                   </label>
                   <select
@@ -672,7 +672,7 @@ export default function FinancialManagement() {
                   </select>
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Amount (USD)
                   </label>
                   <input
@@ -689,7 +689,7 @@ export default function FinancialManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Description
                   </label>
                   <input
@@ -706,7 +706,7 @@ export default function FinancialManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Category
                   </label>
                   <input
@@ -722,7 +722,7 @@ export default function FinancialManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Date
                   </label>
                   <input
@@ -739,7 +739,7 @@ export default function FinancialManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     User
                   </label>
                   <input
@@ -762,7 +762,7 @@ export default function FinancialManagement() {
                       setShowTransactionForm(false);
                       resetTransactionForm();
                     }}
-                    className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                    className="px-4 py-2 text-sm font-medium text-white"
                   >
                     Cancel
                   </button>
@@ -785,12 +785,12 @@ export default function FinancialManagement() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 Add Investment Metric
               </h3>
               <form onSubmit={handleMetricSubmit} className='space-y-4'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Metric Name
                   </label>
                   <input
@@ -806,7 +806,7 @@ export default function FinancialManagement() {
                 </div>
                 <div className='grid grid-cols-2 gap-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       Value
                     </label>
                     <input
@@ -824,7 +824,7 @@ export default function FinancialManagement() {
                     />
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       Unit
                     </label>
                     <input
@@ -840,7 +840,7 @@ export default function FinancialManagement() {
                   </div>
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Description
                   </label>
                   <input
@@ -857,7 +857,7 @@ export default function FinancialManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Target Value (Optional)
                   </label>
                   <input
@@ -880,7 +880,7 @@ export default function FinancialManagement() {
                       setShowMetricForm(false);
                       resetMetricForm();
                     }}
-                    className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                    className="px-4 py-2 text-sm font-medium text-white"
                   >
                     Cancel
                   </button>

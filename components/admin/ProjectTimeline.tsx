@@ -67,7 +67,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
       case 'overdue':
         return <AlertCircle className='w-5 h-5 text-red-500' />;
       default:
-        return <Circle className='w-5 h-5 text-gray-400' />;
+        return <Circle className="w-5 h-5 text-white" />;
     }
   };
 
@@ -132,12 +132,12 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       <div className='p-6'>
         <div className='flex items-center justify-between mb-6'>
-          <h3 className='text-lg font-semibold text-gray-900'>
+          <h3 className="text-lg font-semibold text-white">
             Project Timeline
           </h3>
           <button
             onClick={() => setIsAddingMilestone(true)}
-            className='flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
+            className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
           >
             <Plus className='w-4 h-4' />
             <span>Add Milestone</span>
@@ -147,12 +147,12 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
         {/* Add Milestone Form */}
         {isAddingMilestone && (
           <div className='mb-6 p-4 bg-gray-50 rounded-lg border'>
-            <h4 className='text-sm font-medium text-gray-900 mb-3'>
+            <h4 className="text-sm font-medium text-white">
               Add New Milestone
             </h4>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Title
                 </label>
                 <input
@@ -166,7 +166,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Due Date
                 </label>
                 <input
@@ -182,7 +182,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                 />
               </div>
               <div className='md:col-span-2'>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Description
                 </label>
                 <textarea
@@ -199,7 +199,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Status
                 </label>
                 <select
@@ -218,7 +218,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                 </select>
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Progress (%)
                 </label>
                 <input
@@ -239,13 +239,13 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
             <div className='flex items-center space-x-3 mt-4'>
               <button
                 onClick={handleAddMilestone}
-                className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
+                className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Add Milestone
               </button>
               <button
                 onClick={() => setIsAddingMilestone(false)}
-                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+                className="px-4 py-2 bg-gray-300 text-white"
               >
                 Cancel
               </button>
@@ -256,8 +256,8 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
         {/* Timeline */}
         <div className='space-y-4'>
           {sortedMilestones.length === 0 ? (
-            <div className='text-center py-8 text-gray-500'>
-              <Calendar className='w-12 h-12 mx-auto mb-4 text-gray-300' />
+            <div className="text-center py-8 text-white">
+              <Calendar className="w-12 h-12 mx-auto mb-4 text-white" />
               <p>No milestones yet</p>
               <p className='text-sm'>
                 Add milestones to track project progress
@@ -344,7 +344,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                       ) : (
                         <>
                           <div className='flex items-center justify-between'>
-                            <h4 className='text-sm font-medium text-gray-900'>
+                            <h4 className="text-sm font-medium text-white">
                               {milestone.title}
                             </h4>
                             <div className='flex items-center space-x-2'>
@@ -352,7 +352,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                                 onClick={() =>
                                   setEditingMilestone(milestone.id)
                                 }
-                                className='p-1 text-gray-400 hover:text-gray-600'
+                                className="p-1 text-gray-600 hover:text-white"
                               >
                                 <Edit className='w-4 h-4' />
                               </button>
@@ -360,7 +360,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                                 onClick={() =>
                                   onMilestoneDelete?.(milestone.id)
                                 }
-                                className='p-1 text-gray-400 hover:text-red-600'
+                                className="p-1 text-white"
                               >
                                 <Trash2 className='w-4 h-4' />
                               </button>
@@ -368,13 +368,13 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                           </div>
 
                           {milestone.description && (
-                            <p className='text-sm text-gray-600 mt-1'>
+                            <p className="text-sm text-white">
                               {milestone.description}
                             </p>
                           )}
 
                           <div className='flex items-center space-x-4 mt-2'>
-                            <div className='flex items-center space-x-1 text-xs text-gray-500'>
+                            <div className="flex items-center space-x-1 text-xs text-white">
                               <Calendar className='w-3 h-3' />
                               <span
                                 className={
@@ -389,7 +389,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                             </div>
 
                             {milestone.assigned_to && (
-                              <span className='text-xs text-gray-500'>
+                              <span className="text-xs text-white">
                                 Assigned to: {milestone.assigned_to}
                               </span>
                             )}
@@ -397,7 +397,7 @@ const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
 
                           {/* Progress bar */}
                           <div className='mt-3'>
-                            <div className='flex items-center justify-between text-xs text-gray-500 mb-1'>
+                            <div className="flex items-center justify-between text-xs text-white">
                               <span>Progress</span>
                               <span>{milestone.progress}%</span>
                             </div>

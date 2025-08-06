@@ -230,10 +230,10 @@ export default function SEOManagementPanel({
       {/* SEO Score */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
         <div className='flex items-center justify-between mb-4'>
-          <h3 className='text-lg font-medium text-gray-900'>SEO Analysis</h3>
+          <h3 className="text-lg font-medium text-white">SEO Analysis</h3>
           <div className='flex items-center space-x-2'>
-            <BarChart3 className='w-5 h-5 text-gray-400' />
-            <span className='text-sm text-gray-600'>Real-time analysis</span>
+            <BarChart3 className="w-5 h-5 text-white" />
+            <span className="text-sm text-white">Real-time analysis</span>
           </div>
         </div>
 
@@ -243,14 +243,14 @@ export default function SEOManagementPanel({
           >
             {analysis.score}
           </div>
-          <div className='text-sm text-gray-600 mb-4'>SEO Score</div>
+          <div className="text-sm text-white">SEO Score</div>
           <div className='w-full bg-gray-200 rounded-full h-3 mb-2'>
             <div
               className={`h-3 rounded-full ${getScoreBgColor(analysis.score).replace('bg-', 'bg-')}`}
               style={{ width: `${analysis.score}%` }}
             ></div>
           </div>
-          <div className='text-xs text-gray-500'>
+          <div className="text-xs text-white">
             {analysis.score >= 90
               ? 'Excellent'
               : analysis.score >= 70
@@ -264,34 +264,34 @@ export default function SEOManagementPanel({
 
       {/* Search Preview */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+        <h3 className="text-lg font-medium text-white">
           Search Preview
         </h3>
         <div className='border border-gray-300 rounded-lg p-4 bg-gray-50'>
-          <div className='text-sm text-gray-600 mb-1'>
+          <div className="text-sm text-white">
             {analysis.preview.url}
           </div>
           <div className='text-lg text-blue-600 font-medium mb-1 hover:underline cursor-pointer'>
             {analysis.preview.title}
           </div>
-          <div className='text-sm text-gray-700'>
+          <div className="text-sm text-white">
             {analysis.preview.description}
           </div>
         </div>
-        <p className='mt-2 text-xs text-gray-500'>
+        <p className="mt-2 text-xs text-white">
           This is how your page might appear in search results
         </p>
       </div>
 
       {/* SEO Fields */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>SEO Settings</h3>
+        <h3 className="text-lg font-medium text-white">SEO Settings</h3>
 
         <div className='space-y-4'>
           <div>
             <label
               htmlFor='seo-title'
-              className='block text-sm font-medium text-gray-700 mb-2'
+              className="block text-sm font-medium text-white"
             >
               Meta Title
             </label>
@@ -305,10 +305,10 @@ export default function SEOManagementPanel({
               maxLength={60}
             />
             <div className='flex justify-between mt-1'>
-              <p className='text-sm text-gray-500'>
+              <p className="text-sm text-white">
                 {seoData.title.length}/60 characters
               </p>
-              <p className='text-xs text-gray-400'>
+              <p className="text-xs text-white">
                 {seoData.title.length >= 30 && seoData.title.length <= 60
                   ? '✅ Optimal'
                   : '⚠️ Adjust length'}
@@ -319,7 +319,7 @@ export default function SEOManagementPanel({
           <div>
             <label
               htmlFor='seo-description'
-              className='block text-sm font-medium text-gray-700 mb-2'
+              className="block text-sm font-medium text-white"
             >
               Meta Description
             </label>
@@ -333,10 +333,10 @@ export default function SEOManagementPanel({
               maxLength={160}
             />
             <div className='flex justify-between mt-1'>
-              <p className='text-sm text-gray-500'>
+              <p className="text-sm text-white">
                 {seoData.description.length}/160 characters
               </p>
-              <p className='text-xs text-gray-400'>
+              <p className="text-xs text-white">
                 {seoData.description.length >= 120 &&
                 seoData.description.length <= 160
                   ? '✅ Optimal'
@@ -348,7 +348,7 @@ export default function SEOManagementPanel({
           <div>
             <label
               htmlFor='seo-keywords'
-              className='block text-sm font-medium text-gray-700 mb-2'
+              className="block text-sm font-medium text-white"
             >
               Meta Keywords
             </label>
@@ -360,7 +360,7 @@ export default function SEOManagementPanel({
               className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
               placeholder='keyword1, keyword2, keyword3...'
             />
-            <p className='mt-1 text-sm text-gray-500'>
+            <p className="mt-1 text-sm text-white">
               Separate keywords with commas (3-5 recommended)
             </p>
           </div>
@@ -371,7 +371,7 @@ export default function SEOManagementPanel({
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         {/* Issues */}
         <div className='bg-white border border-gray-200 rounded-lg p-6'>
-          <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          <h3 className="text-lg font-medium text-white">
             Issues to Fix
           </h3>
           {loading ? (
@@ -400,14 +400,14 @@ export default function SEOManagementPanel({
           ) : (
             <div className='text-center py-4'>
               <CheckCircle className='w-8 h-8 text-green-500 mx-auto mb-2' />
-              <p className='text-sm text-gray-600'>No issues found!</p>
+              <p className="text-sm text-white">No issues found!</p>
             </div>
           )}
         </div>
 
         {/* Suggestions */}
         <div className='bg-white border border-gray-200 rounded-lg p-6'>
-          <h3 className='text-lg font-medium text-gray-900 mb-4'>
+          <h3 className="text-lg font-medium text-white">
             Suggestions
           </h3>
           {loading ? (
@@ -421,7 +421,7 @@ export default function SEOManagementPanel({
               {analysis.suggestions.map((suggestion, index) => (
                 <div
                   key={index}
-                  className='flex items-start space-x-3 p-3 bg-blue-50 rounded-lg'
+                  className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg text-white"
                 >
                   <Info className='w-5 h-5 text-blue-500 mt-0.5' />
                   <div>
@@ -440,7 +440,7 @@ export default function SEOManagementPanel({
           ) : (
             <div className='text-center py-4'>
               <CheckCircle className='w-8 h-8 text-green-500 mx-auto mb-2' />
-              <p className='text-sm text-gray-600'>
+              <p className="text-sm text-white">
                 No suggestions at this time
               </p>
             </div>
@@ -450,31 +450,31 @@ export default function SEOManagementPanel({
 
       {/* Quick Actions */}
       <div className='bg-white border border-gray-200 rounded-lg p-6'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>
+        <h3 className="text-lg font-medium text-white">
           Quick Actions
         </h3>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           <button className='flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
             <Search className='w-5 h-5 text-blue-600 mr-3' />
             <div className='text-left'>
-              <p className='font-medium text-gray-900'>Keyword Research</p>
-              <p className='text-sm text-gray-600'>Find relevant keywords</p>
+              <p className="font-medium text-white">Keyword Research</p>
+              <p className="text-sm text-white">Find relevant keywords</p>
             </div>
           </button>
 
           <button className='flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
             <TrendingUp className='w-5 h-5 text-green-600 mr-3' />
             <div className='text-left'>
-              <p className='font-medium text-gray-900'>SEO Analytics</p>
-              <p className='text-sm text-gray-600'>View performance data</p>
+              <p className="font-medium text-white">SEO Analytics</p>
+              <p className="text-sm text-white">View performance data</p>
             </div>
           </button>
 
           <button className='flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
             <Link className='w-5 h-5 text-purple-600 mr-3' />
             <div className='text-left'>
-              <p className='font-medium text-gray-900'>Link Building</p>
-              <p className='text-sm text-gray-600'>Manage backlinks</p>
+              <p className="font-medium text-white">Link Building</p>
+              <p className="text-sm text-white">Manage backlinks</p>
             </div>
           </button>
         </div>

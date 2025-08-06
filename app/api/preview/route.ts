@@ -41,6 +41,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-// Export the draft store for use in preview pages (dev only)
-export { previewDraftStore };

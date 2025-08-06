@@ -57,7 +57,7 @@ export default function EnvironmentDashboardPage() {
                 </div>
               </div>
             </div>
-            <div className='bg-gray-light p-8 rounded-lg text-center text-gray-500'>
+            <div className="bg-gray-light p-8 rounded-lg text-center text-white">
               Impact assessment visualizations and compliance tracking coming
               soon.
             </div>

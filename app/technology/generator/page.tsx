@@ -165,7 +165,7 @@ export default function GeneratorPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className='section-padding bg-gradient-to-br from-primary to-primary-dark text-white'>
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white text-white">
         <div className='container'>
           <div className='max-w-4xl mx-auto text-center'>
             <h1 className='mb-6 text-white font-bold text-4xl md:text-5xl'>
@@ -190,13 +190,13 @@ export default function GeneratorPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Revolutionary Power Generation</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 The KPP generator represents a breakthrough in power generation
                 technology, specifically designed to harness kinetic energy and
                 convert it into high-quality electrical power with unprecedented
                 efficiency.
               </p>
-              <p className='text-gray-text mb-6'>
+              <p className="text-white">
                 Unlike traditional generators that rely on fuel combustion, our
                 generator operates purely on kinetic energy, eliminating
                 emissions while maintaining the reliability and performance
@@ -205,7 +205,7 @@ export default function GeneratorPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 text-center text-white"
                 >
                   Learn How It Works
                 </Link>
@@ -225,19 +225,19 @@ export default function GeneratorPage() {
                 </h3>
                 <div className='space-y-4 text-left'>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Power Range:</span>
+                    <span className="text-white">Power Range:</span>
                     <span className='font-semibold'>50-200 MW</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Efficiency:</span>
+                    <span className="text-white">Efficiency:</span>
                     <span className='font-semibold'>95-98%</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Response Time:</span>
+                    <span className="text-white">Response Time:</span>
                     <span className='font-semibold'>&lt; 100ms</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Availability:</span>
+                    <span className="text-white">Availability:</span>
                     <span className='font-semibold'>99.5%</span>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ export default function GeneratorPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Key Features & Capabilities</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               The KPP generator incorporates cutting-edge technology to deliver
               reliable, efficient, and sustainable power generation.
             </p>
@@ -267,7 +267,7 @@ export default function GeneratorPage() {
                 <h3 className='text-xl font-semibold text-primary mb-3'>
                   {feature.title}
                 </h3>
-                <p className='text-gray-text'>{feature.description}</p>
+                <p className="text-white">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -279,7 +279,7 @@ export default function GeneratorPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Technical Specifications</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Detailed technical specifications and performance parameters of
               the KPP generator system.
             </p>
@@ -294,14 +294,14 @@ export default function GeneratorPage() {
                   {category.specs.map((spec, sIndex) => (
                     <div key={sIndex} className='border-b border-gray-300 pb-4'>
                       <div className='flex justify-between items-start mb-2'>
-                        <span className='font-medium text-gray-text'>
+                        <span className="font-medium text-white">
                           {spec.name}
                         </span>
                         <span className='font-bold text-primary text-lg'>
                           {spec.value}
                         </span>
                       </div>
-                      <p className='text-sm text-gray-text'>
+                      <p className="text-sm text-white">
                         {spec.description}
                       </p>
                     </div>
@@ -322,7 +322,7 @@ export default function GeneratorPage() {
               <Layers className='w-6 h-6 text-blue-600' />
               Detailed Engineering Data
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <em>
                 Detailed engineering data from KPP technical documents will be
                 integrated here.
@@ -335,7 +335,7 @@ export default function GeneratorPage() {
               <BarChart3 className='w-6 h-6 text-orange-600' />
               Performance Benchmarks
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <em>
                 Performance benchmarks and real-world data will be visualized
                 here.
@@ -350,7 +350,7 @@ export default function GeneratorPage() {
               <Wrench className='w-6 h-6 text-green-600' />
               Maintenance Requirements
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <em>
                 Maintenance schedules, requirements, and best practices will be
                 provided here.
@@ -363,7 +363,7 @@ export default function GeneratorPage() {
               <ClipboardCheck className='w-6 h-6 text-purple-600' />
               Integration Specifications
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <em>
                 Integration specifications and grid compatibility details will
                 be available here.
@@ -379,7 +379,7 @@ export default function GeneratorPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Grid Integration & Applications</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 The KPP generator is designed for seamless integration with
                 existing power infrastructure, supporting both grid-connected
                 and off-grid applications.
@@ -393,7 +393,7 @@ export default function GeneratorPage() {
                     <h4 className='font-semibold text-primary mb-1'>
                       Grid Synchronization
                     </h4>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       Advanced synchronization technology ensures seamless grid
                       integration
                     </p>
@@ -407,7 +407,7 @@ export default function GeneratorPage() {
                     <h4 className='font-semibold text-primary mb-1'>
                       Load Management
                     </h4>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       Intelligent load balancing and demand response
                       capabilities
                     </p>
@@ -421,7 +421,7 @@ export default function GeneratorPage() {
                     <h4 className='font-semibold text-primary mb-1'>
                       Remote Monitoring
                     </h4>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       Real-time monitoring and control systems for optimal
                       performance
                     </p>

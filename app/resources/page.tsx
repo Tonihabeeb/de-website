@@ -17,7 +17,7 @@ export default function ResourcesPage() {
           <BookOpen className='w-8 h-8 text-blue-600' />
           Project Document Management
         </h1>
-        <p className='mb-8 text-gray-700'>
+        <p className="mb-8 text-white">
           Centralized access to all technical, business, legal, and
           environmental documents for KPP projects. Search, filter, preview, and
           manage your project documentation here.
@@ -29,7 +29,7 @@ export default function ResourcesPage() {
             <Search className='w-6 h-6 text-green-600' />
             Search & Filter
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className="bg-gray-50 border rounded p-4 text-white">
             <SearchSystem />
           </div>
         </section>
@@ -40,7 +40,7 @@ export default function ResourcesPage() {
             <Folder className='w-6 h-6 text-orange-600' />
             Document Categories
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className="bg-gray-50 border rounded p-4 text-white">
             <em>
               Technical, business, legal, and environmental document categories
               will be listed here.
@@ -54,7 +54,7 @@ export default function ResourcesPage() {
             <FileText className='w-6 h-6 text-blue-600' />
             Document Preview
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className="bg-gray-50 border rounded p-4 text-white">
             <DocumentViewer />
           </div>
         </section>
@@ -65,7 +65,7 @@ export default function ResourcesPage() {
             <Upload className='w-6 h-6 text-pink-600' />
             Upload Documents
           </h2>
-          <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+          <div className="bg-gray-50 border rounded p-4 text-white">
             <UploadSystem />
           </div>
         </section>

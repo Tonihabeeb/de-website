@@ -69,7 +69,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     } else if (file.type.startsWith('audio/')) {
       return <Music className='w-6 h-6 text-green-500' />;
     } else {
-      return <File className='w-6 h-6 text-gray-500' />;
+      return <File className="w-6 h-6 text-white" />;
     }
   };
 
@@ -89,19 +89,19 @@ const FileUpload: React.FC<FileUploadProps> = ({
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           isDragActive
             ? 'border-blue-500 bg-blue-50'
-            : 'border-gray-300 hover:border-gray-400'
+            : 'border-gray-300 hover:border-gray-600'
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
       >
         <input {...getInputProps()} />
-        <Upload className='w-12 h-12 text-gray-400 mx-auto mb-4' />
+        <Upload className="w-12 h-12 text-white" />
         {isDragActive ? (
           <p className='text-blue-600 font-medium'>Drop the files here...</p>
         ) : (
           <div>
-            <p className='text-gray-600 font-medium mb-2'>
+            <p className="text-white">
               Drag & drop files here, or click to select files
             </p>
-            <p className='text-sm text-gray-500'>
+            <p className="text-sm text-white">
               Max {maxFiles} files, up to {formatFileSize(maxSize)} each
             </p>
           </div>
@@ -111,7 +111,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       {/* File Preview */}
       {showPreview && uploadedFiles.length > 0 && (
         <div className='space-y-2'>
-          <h4 className='text-sm font-medium text-gray-700'>
+          <h4 className="text-sm font-medium text-white">
             Selected Files ({uploadedFiles.length}/{maxFiles})
           </h4>
           <div className='space-y-2'>
@@ -123,17 +123,17 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 <div className='flex items-center space-x-3'>
                   {getFileIcon(file)}
                   <div>
-                    <p className='text-sm font-medium text-gray-900 truncate max-w-xs'>
+                    <p className="text-sm font-medium text-white">
                       {file.name}
                     </p>
-                    <p className='text-xs text-gray-500'>
+                    <p className="text-xs text-white">
                       {formatFileSize(file.size)}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => removeFile(index)}
-                  className='p-1 text-gray-400 hover:text-red-500 transition-colors'
+                  className="p-1 text-white"
                 >
                   <X className='w-4 h-4' />
                 </button>

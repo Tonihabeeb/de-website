@@ -126,10 +126,10 @@ export default function PageContentForm({
       {/* Form Header */}
       <div className='flex justify-between items-center'>
         <div>
-          <h2 className='text-lg font-medium text-gray-900'>
+          <h2 className="text-lg font-medium text-white">
             {isEdit ? 'Edit Page' : 'Create New Page'}
           </h2>
-          <p className='text-sm text-gray-600'>
+          <p className="text-sm text-white">
             {isEdit
               ? 'Update your page content and settings'
               : 'Add a new page to your website'}
@@ -148,7 +148,7 @@ export default function PageContentForm({
             type='submit'
             form='page-form'
             disabled={loading}
-            className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center space-x-2'
+            className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none disabled:opacity-50 flex items-center space-x-2 text-white"
           >
             <Save className='w-4 h-4' />
             <span>{loading ? 'Saving...' : 'Save Page'}</span>
@@ -171,7 +171,7 @@ export default function PageContentForm({
               className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 ${
                 activeSection === section.id
                   ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
               <section.icon className='w-4 h-4' />
@@ -191,7 +191,7 @@ export default function PageContentForm({
                 <div>
                   <label
                     htmlFor='title'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Page Title *
                   </label>
@@ -204,7 +204,7 @@ export default function PageContentForm({
                     placeholder='Enter page title...'
                     required
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.title.length}/60 characters
                   </p>
                 </div>
@@ -212,12 +212,12 @@ export default function PageContentForm({
                 <div>
                   <label
                     htmlFor='slug'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     URL Slug *
                   </label>
                   <div className='flex'>
-                    <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
+                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-white">
                       /
                     </span>
                     <input
@@ -230,7 +230,7 @@ export default function PageContentForm({
                       required
                     />
                   </div>
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     This will be the URL of your page
                   </p>
                 </div>
@@ -238,7 +238,7 @@ export default function PageContentForm({
                 <div>
                   <label
                     htmlFor='content'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Page Content *
                   </label>
@@ -257,7 +257,7 @@ export default function PageContentForm({
                 <div>
                   <label
                     htmlFor='meta_title'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Meta Title
                   </label>
@@ -270,7 +270,7 @@ export default function PageContentForm({
                     placeholder='SEO title for search engines...'
                     maxLength={60}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.meta_title.length}/60 characters
                   </p>
                 </div>
@@ -278,7 +278,7 @@ export default function PageContentForm({
                 <div>
                   <label
                     htmlFor='meta_description'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Meta Description
                   </label>
@@ -291,7 +291,7 @@ export default function PageContentForm({
                     placeholder='Brief description for search results...'
                     maxLength={160}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.meta_description.length}/160 characters
                   </p>
                 </div>
@@ -299,7 +299,7 @@ export default function PageContentForm({
                 <div>
                   <label
                     htmlFor='meta_keywords'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Meta Keywords
                   </label>
@@ -311,7 +311,7 @@ export default function PageContentForm({
                     className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                     placeholder='keyword1, keyword2, keyword3...'
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     Separate keywords with commas
                   </p>
                 </div>
@@ -323,7 +323,7 @@ export default function PageContentForm({
                 <div>
                   <label
                     htmlFor='status'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Page Status
                   </label>
@@ -353,7 +353,7 @@ export default function PageContentForm({
 
             {activeSection === 'preview' && (
               <div className='bg-white border border-gray-200 rounded-lg p-6'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className="text-lg font-medium text-white">
                   Page Preview
                 </h3>
                 <div className='prose max-w-none'>
@@ -374,12 +374,12 @@ export default function PageContentForm({
           <div className='space-y-6'>
             {/* Page Info */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className="text-sm font-medium text-white">
                 Page Information
               </h3>
               <div className='space-y-2 text-sm'>
                 <div>
-                  <span className='text-gray-500'>Status:</span>
+                  <span className="text-white">Status:</span>
                   <span
                     className={`ml-2 px-2 py-1 rounded-full text-xs font-medium ${
                       formData.status === 'published'
@@ -391,14 +391,14 @@ export default function PageContentForm({
                   </span>
                 </div>
                 <div>
-                  <span className='text-gray-500'>URL:</span>
-                  <span className='ml-2 text-gray-900'>
+                  <span className="text-white">URL:</span>
+                  <span className="ml-2 text-white">
                     /{formData.slug || 'page-slug'}
                   </span>
                 </div>
                 <div>
-                  <span className='text-gray-500'>Created:</span>
-                  <span className='ml-2 text-gray-900'>
+                  <span className="text-white">Created:</span>
+                  <span className="ml-2 text-white">
                     {isEdit ? 'Updated' : 'Just now'}
                   </span>
                 </div>
@@ -407,24 +407,24 @@ export default function PageContentForm({
 
             {/* SEO Score */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className="text-sm font-medium text-white">
                 SEO Score
               </h3>
               <div className='text-center'>
                 <div className='text-2xl font-bold text-blue-600'>
                   {seoScore.percentage}%
                 </div>
-                <div className='text-sm text-gray-600'>
+                <div className="text-sm text-white">
                   {seoScore.score}/{seoScore.maxScore} points
                 </div>
                 <div className='mt-2 w-full bg-gray-200 rounded-full h-2'>
                   <div
-                    className='bg-blue-600 h-2 rounded-full'
+                    className="bg-blue-600 h-2 rounded-full text-white"
                     style={{ width: `${seoScore.percentage}%` }}
                   ></div>
                 </div>
               </div>
-              <div className='mt-3 space-y-1 text-xs text-gray-600'>
+              <div className="mt-3 space-y-1 text-xs text-white">
                 <div className='flex items-center'>
                   <div
                     className={`w-2 h-2 rounded-full mr-2 ${formData.title.length > 0 ? 'bg-green-500' : 'bg-gray-300'}`}
@@ -460,27 +460,27 @@ export default function PageContentForm({
 
             {/* Actions */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className="text-sm font-medium text-white">
                 Actions
               </h3>
               <div className='space-y-2'>
                 <button
                   type='submit'
                   disabled={loading}
-                  className='w-full bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm'
+                  className="w-full bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none disabled:opacity-50 text-sm text-white"
                 >
                   {loading ? 'Saving...' : 'Save Page'}
                 </button>
                 <button
                   type='button'
-                  className='w-full bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 text-sm'
+                  className="w-full bg-gray-100 text-white"
                 >
                   Save as Draft
                 </button>
                 {isEdit && (
                   <button
                     type='button'
-                    className='w-full border border-gray-300 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 text-sm'
+                    className="w-full border border-gray-300 text-white"
                   >
                     Duplicate Page
                   </button>

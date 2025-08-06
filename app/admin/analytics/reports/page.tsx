@@ -281,8 +281,8 @@ export default function CustomReportsPage() {
         {/* Header */}
         <div className='flex justify-between items-center mb-8'>
           <div>
-            <h1 className='text-3xl font-bold text-gray-900'>Custom Reports</h1>
-            <p className='text-gray-600 mt-2'>
+            <h1 className="text-3xl font-bold text-white">Custom Reports</h1>
+            <p className="text-white">
               Create and manage custom analytics reports
             </p>
           </div>
@@ -298,7 +298,7 @@ export default function CustomReportsPage() {
         {/* Report Templates */}
         {templates.length > 0 && (
           <div className='mb-8'>
-            <h2 className='text-xl font-semibold text-gray-900 mb-4'>
+            <h2 className="text-xl font-semibold text-white">
               Report Templates
             </h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
@@ -321,11 +321,11 @@ export default function CustomReportsPage() {
                 >
                   <div className='flex items-center gap-2 mb-2'>
                     {getReportTypeIcon(template.type)}
-                    <h3 className='font-medium text-gray-900'>
+                    <h3 className="font-medium text-white">
                       {template.name}
                     </h3>
                   </div>
-                  <p className='text-sm text-gray-600'>
+                  <p className="text-sm text-white">
                     {template.description}
                   </p>
                 </div>
@@ -345,39 +345,39 @@ export default function CustomReportsPage() {
                 <div className='flex items-start justify-between mb-4'>
                   <div className='flex items-center gap-2'>
                     {getReportTypeIcon(report.type)}
-                    <h3 className='font-semibold text-gray-900'>
+                    <h3 className="font-semibold text-white">
                       {report.name}
                     </h3>
                   </div>
                   <div className='flex items-center gap-1'>
                     <button
                       onClick={() => openViewModal(report)}
-                      className='p-1 text-gray-400 hover:text-gray-600'
+                      className="p-1 text-gray-600 hover:text-white"
                     >
                       <Eye className='w-4 h-4' />
                     </button>
                     <button
                       onClick={() => openEditModal(report)}
-                      className='p-1 text-gray-400 hover:text-blue-600'
+                      className="p-1 text-white"
                     >
                       <Edit className='w-4 h-4' />
                     </button>
                     <button
                       onClick={() => handleDeleteReport(report.id)}
-                      className='p-1 text-gray-400 hover:text-red-600'
+                      className="p-1 text-white"
                     >
                       <Trash2 className='w-4 h-4' />
                     </button>
                   </div>
                 </div>
 
-                <p className='text-sm text-gray-600 mb-4'>
+                <p className="text-sm text-white">
                   {report.description}
                 </p>
 
                 <div className='space-y-2 mb-4'>
                   <div className='flex items-center gap-2'>
-                    <Calendar className='w-4 h-4 text-gray-400' />
+                    <Calendar className="w-4 h-4 text-white" />
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${getScheduleColor(report.schedule)}`}
                     >
@@ -385,15 +385,15 @@ export default function CustomReportsPage() {
                     </span>
                   </div>
                   <div className='flex items-center gap-2'>
-                    <FileText className='w-4 h-4 text-gray-400' />
-                    <span className='text-xs text-gray-600'>
+                    <FileText className="w-4 h-4 text-white" />
+                    <span className="text-xs text-white">
                       {report.format.toUpperCase()}
                     </span>
                   </div>
                   {report.last_run && (
                     <div className='flex items-center gap-2'>
-                      <Clock className='w-4 h-4 text-gray-400' />
-                      <span className='text-xs text-gray-600'>
+                      <Clock className="w-4 h-4 text-white" />
+                      <span className="text-xs text-white">
                         Last run:{' '}
                         {new Date(report.last_run).toLocaleDateString()}
                       </span>
@@ -413,7 +413,7 @@ export default function CustomReportsPage() {
                   <Button
                     onClick={() => openEditModal(report)}
                     size='sm'
-                    className='bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    className="bg-gray-100 text-white"
                   >
                     <Settings className='w-4 h-4' />
                   </Button>
@@ -425,11 +425,11 @@ export default function CustomReportsPage() {
 
         {reports.length === 0 && (
           <div className='text-center py-12'>
-            <BarChart3 className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-            <h3 className='text-lg font-medium text-gray-900 mb-2'>
+            <BarChart3 className="w-12 h-12 text-white" />
+            <h3 className="text-lg font-medium text-white">
               No reports yet
             </h3>
-            <p className='text-gray-600 mb-4'>
+            <p className="text-white">
               Create your first custom report to get started
             </p>
             <Button onClick={() => setShowCreateModal(true)}>
@@ -452,7 +452,7 @@ export default function CustomReportsPage() {
       >
         <div className='space-y-4'>
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-1'>
+            <label className="block text-sm font-medium text-white">
               Report Name
             </label>
             <input
@@ -465,7 +465,7 @@ export default function CustomReportsPage() {
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-1'>
+            <label className="block text-sm font-medium text-white">
               Description
             </label>
             <textarea
@@ -481,7 +481,7 @@ export default function CustomReportsPage() {
 
           <div className='grid grid-cols-2 gap-4'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
+              <label className="block text-sm font-medium text-white">
                 Report Type
               </label>
               <select
@@ -503,7 +503,7 @@ export default function CustomReportsPage() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
+              <label className="block text-sm font-medium text-white">
                 Schedule
               </label>
               <select
@@ -525,7 +525,7 @@ export default function CustomReportsPage() {
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-1'>
+            <label className="block text-sm font-medium text-white">
               Export Format
             </label>
             <select
@@ -546,7 +546,7 @@ export default function CustomReportsPage() {
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-1'>
+            <label className="block text-sm font-medium text-white">
               Recipients (comma-separated emails)
             </label>
             <input
@@ -574,7 +574,7 @@ export default function CustomReportsPage() {
               setShowEditModal(false);
               resetForm();
             }}
-            className='bg-gray-100 text-gray-700 hover:bg-gray-200'
+            className="bg-gray-100 text-white"
           >
             Cancel
           </Button>
@@ -595,35 +595,35 @@ export default function CustomReportsPage() {
         {selectedReport && (
           <div className='space-y-4'>
             <div>
-              <h3 className='font-medium text-gray-900'>
+              <h3 className="font-medium text-white">
                 {selectedReport.name}
               </h3>
-              <p className='text-sm text-gray-600 mt-1'>
+              <p className="text-sm text-white">
                 {selectedReport.description}
               </p>
             </div>
 
             <div className='grid grid-cols-2 gap-4 text-sm'>
               <div>
-                <span className='font-medium text-gray-700'>Type:</span>
-                <span className='ml-2 text-gray-600'>
+                <span className="font-medium text-white">Type:</span>
+                <span className="ml-2 text-white">
                   {selectedReport.type}
                 </span>
               </div>
               <div>
-                <span className='font-medium text-gray-700'>Schedule:</span>
-                <span className='ml-2 text-gray-600'>
+                <span className="font-medium text-white">Schedule:</span>
+                <span className="ml-2 text-white">
                   {selectedReport.schedule}
                 </span>
               </div>
               <div>
-                <span className='font-medium text-gray-700'>Format:</span>
-                <span className='ml-2 text-gray-600'>
+                <span className="font-medium text-white">Format:</span>
+                <span className="ml-2 text-white">
                   {selectedReport.format.toUpperCase()}
                 </span>
               </div>
               <div>
-                <span className='font-medium text-gray-700'>Status:</span>
+                <span className="font-medium text-white">Status:</span>
                 <span
                   className={`ml-2 px-2 py-1 rounded-full text-xs ${
                     selectedReport.is_active
@@ -638,8 +638,8 @@ export default function CustomReportsPage() {
 
             {selectedReport.last_run && (
               <div className='text-sm'>
-                <span className='font-medium text-gray-700'>Last Run:</span>
-                <span className='ml-2 text-gray-600'>
+                <span className="font-medium text-white">Last Run:</span>
+                <span className="ml-2 text-white">
                   {new Date(selectedReport.last_run).toLocaleString()}
                 </span>
               </div>
@@ -647,8 +647,8 @@ export default function CustomReportsPage() {
 
             {selectedReport.next_run && (
               <div className='text-sm'>
-                <span className='font-medium text-gray-700'>Next Run:</span>
-                <span className='ml-2 text-gray-600'>
+                <span className="font-medium text-white">Next Run:</span>
+                <span className="ml-2 text-white">
                   {new Date(selectedReport.next_run).toLocaleString()}
                 </span>
               </div>
@@ -656,14 +656,14 @@ export default function CustomReportsPage() {
 
             {selectedReport.recipients.length > 0 && (
               <div>
-                <span className='font-medium text-gray-700 text-sm'>
+                <span className="font-medium text-white">
                   Recipients:
                 </span>
                 <div className='mt-1'>
                   {selectedReport.recipients.map((email, index) => (
                     <span
                       key={index}
-                      className='inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded mr-2 mb-1'
+                      className="inline-block bg-gray-100 text-white"
                     >
                       {email}
                     </span>
@@ -685,7 +685,7 @@ export default function CustomReportsPage() {
                   setShowViewModal(false);
                   openEditModal(selectedReport);
                 }}
-                className='bg-gray-100 text-gray-700 hover:bg-gray-200'
+                className="bg-gray-100 text-white"
               >
                 <Edit className='w-4 h-4 mr-2' />
                 Edit

@@ -178,10 +178,10 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               Recent Activity
             </h3>
-            <Activity className='w-5 h-5 text-gray-400' />
+            <Activity className="w-5 h-5 text-white" />
           </div>
           <div className='space-y-4'>
             {[...Array(3)].map((_, i) => (
@@ -204,10 +204,10 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               Recent Activity
             </h3>
-            <Activity className='w-5 h-5 text-gray-400' />
+            <Activity className="w-5 h-5 text-white" />
           </div>
           <div className='text-center py-8'>
             <p className='text-red-600'>{error}</p>
@@ -227,10 +227,10 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
     <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
       <div className='p-6'>
         <div className='flex items-center justify-between mb-4'>
-          <h3 className='text-lg font-semibold text-gray-900'>
+          <h3 className="text-lg font-semibold text-white">
             Recent Activity
           </h3>
-          <Activity className='w-5 h-5 text-gray-400' />
+          <Activity className="w-5 h-5 text-white" />
         </div>
 
         {showFilters && (
@@ -251,8 +251,8 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
 
         <div className='space-y-4'>
           {filteredActivities.length === 0 ? (
-            <div className='text-center py-8 text-gray-500'>
-              <Activity className='w-8 h-8 mx-auto mb-2 text-gray-300' />
+            <div className="text-center py-8 text-white">
+              <Activity className="w-8 h-8 mx-auto mb-2 text-white" />
               <p>No recent activity</p>
             </div>
           ) : (
@@ -264,15 +264,15 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({
                   {getActivityIcon(activity.type)}
                 </div>
                 <div className='flex-1 min-w-0'>
-                  <p className='text-sm text-gray-900'>
+                  <p className="text-sm text-white">
                     {activity.description}
                   </p>
                   <div className='flex items-center space-x-2 mt-1'>
-                    <span className='text-xs text-gray-500'>
+                    <span className="text-xs text-white">
                       {activity.user}
                     </span>
-                    <span className='text-gray-300'>•</span>
-                    <div className='flex items-center space-x-1 text-xs text-gray-500'>
+                    <span className="text-white">•</span>
+                    <div className="flex items-center space-x-1 text-xs text-white">
                       <Clock className='w-3 h-3' />
                       <span>{formatTimestamp(activity.timestamp)}</span>
                     </div>

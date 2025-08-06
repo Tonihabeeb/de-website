@@ -93,7 +93,7 @@ export default function ProjectMap() {
   return (
     <div className='w-full max-w-6xl mx-auto'>
       {/* Map Container */}
-      <div className='relative bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-8 shadow-lg'>
+      <div className="relative bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-8 shadow-lg text-white">
         <svg
           viewBox={mapViewBox}
           className='w-full h-auto'
@@ -233,7 +233,7 @@ export default function ProjectMap() {
                 </h3>
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className='text-gray-600 hover:text-gray-700 transition-colors'
+                  className="text-gray-600 hover:text-white"
                   aria-label='Close project details'
                 >
                   <svg
@@ -254,32 +254,32 @@ export default function ProjectMap() {
 
               <div className='space-y-3'>
                 <div>
-                  <span className='text-sm font-medium text-gray-600'>
+                  <span className="text-sm font-medium text-white">
                     Location:
                   </span>
-                  <p className='text-sm text-gray-800'>
+                  <p className="text-sm text-white">
                     {selectedProject.location}
                   </p>
                 </div>
 
                 <div>
-                  <span className='text-sm font-medium text-gray-600'>
+                  <span className="text-sm font-medium text-white">
                     Capacity:
                   </span>
-                  <p className='text-sm text-gray-800'>
+                  <p className="text-sm text-white">
                     {selectedProject.capacity}
                   </p>
                 </div>
 
                 <div>
-                  <span className='text-sm font-medium text-gray-600'>
+                  <span className="text-sm font-medium text-white">
                     Status:
                   </span>
                   <div className='flex items-center gap-2'>
                     <div
                       className={`w-3 h-3 rounded-full ${statusColors[selectedProject.status]}`}
                     ></div>
-                    <span className='text-sm text-gray-800'>
+                    <span className="text-sm text-white">
                       {statusLabels[selectedProject.status]}
                     </span>
                   </div>
@@ -288,7 +288,7 @@ export default function ProjectMap() {
                 {selectedProject.progress !== undefined &&
                   selectedProject.progress > 0 && (
                     <div>
-                      <span className='text-sm font-medium text-gray-600'>
+                      <span className="text-sm font-medium text-white">
                         Progress:
                       </span>
                       <div className='mt-1'>
@@ -300,7 +300,7 @@ export default function ProjectMap() {
                             className='bg-primary h-2 rounded-full'
                           />
                         </div>
-                        <span className='text-xs text-gray-600'>
+                        <span className="text-xs text-white">
                           {selectedProject.progress}%
                         </span>
                       </div>
@@ -308,10 +308,10 @@ export default function ProjectMap() {
                   )}
 
                 <div>
-                  <span className='text-sm font-medium text-gray-600'>
+                  <span className="text-sm font-medium text-white">
                     Description:
                   </span>
-                  <p className='text-sm text-gray-800 mt-1'>
+                  <p className="text-sm text-white">
                     {selectedProject.description}
                   </p>
                 </div>
@@ -335,10 +335,10 @@ export default function ProjectMap() {
                 className={`w-4 h-4 rounded-full ${statusColors[project.status]}`}
               ></div>
               <div>
-                <h4 className='font-semibold text-sm text-gray-800'>
+                <h4 className="font-semibold text-sm text-white">
                   {project.name}
                 </h4>
-                <p className='text-xs text-gray-600'>{project.capacity}</p>
+                <p className="text-xs text-white">{project.capacity}</p>
               </div>
             </div>
           </motion.div>
@@ -349,15 +349,15 @@ export default function ProjectMap() {
       <div className='mt-6 flex flex-wrap gap-6 justify-center'>
         <div className='flex items-center gap-2'>
           <div className='w-4 h-4 rounded-full bg-yellow-500'></div>
-          <span className='text-sm text-gray-600'>Planned</span>
+          <span className="text-sm text-white">Planned</span>
         </div>
         <div className='flex items-center gap-2'>
           <div className='w-4 h-4 rounded-full bg-orange-500'></div>
-          <span className='text-sm text-gray-600'>Under Construction</span>
+          <span className="text-sm text-white">Under Construction</span>
         </div>
         <div className='flex items-center gap-2'>
           <div className='w-4 h-4 rounded-full bg-green-500'></div>
-          <span className='text-sm text-gray-600'>Operational</span>
+          <span className="text-sm text-white">Operational</span>
         </div>
       </div>
     </div>

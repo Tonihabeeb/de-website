@@ -267,7 +267,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
       return <ImageIcon className='w-6 h-6 text-blue-500' />;
     if (mimeType.startsWith('video/'))
       return <File className='w-6 h-6 text-purple-500' />;
-    return <File className='w-6 h-6 text-gray-500' />;
+    return <File className="w-6 h-6 text-white" />;
   };
 
   const formatFileSize = (bytes: number) => {
@@ -287,10 +287,10 @@ const MediaManager: React.FC<MediaManagerProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               Media Library
             </h3>
-            <Folder className='w-5 h-5 text-gray-400' />
+            <Folder className="w-5 h-5 text-white" />
           </div>
           <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 animate-pulse'>
             {[...Array(12)].map((_, i) => (
@@ -307,11 +307,11 @@ const MediaManager: React.FC<MediaManagerProps> = ({
       <div className='p-6'>
         {/* Header */}
         <div className='flex items-center justify-between mb-6'>
-          <h3 className='text-lg font-semibold text-gray-900'>Media Library</h3>
+          <h3 className="text-lg font-semibold text-white">Media Library</h3>
           <div className='flex items-center space-x-2'>
             <button
               onClick={() => fileInputRef.current?.click()}
-              className='flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
+              className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
             >
               <Upload className='w-4 h-4' />
               <span>Upload</span>
@@ -331,7 +331,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
         <div className='flex items-center justify-between mb-6'>
           <div className='flex items-center space-x-4'>
             <div className='relative'>
-              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400' />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white" />
               <input
                 type='text'
                 placeholder='Search media...'
@@ -358,7 +358,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
               className={`p-2 rounded-md transition-colors ${
                 viewMode === 'grid'
                   ? 'bg-blue-100 text-blue-600'
-                  : 'text-gray-400 hover:text-gray-600'
+                  : 'text-gray-600 hover:text-gray-600'
               }`}
             >
               <Grid className='w-4 h-4' />
@@ -368,7 +368,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
               className={`p-2 rounded-md transition-colors ${
                 viewMode === 'list'
                   ? 'bg-blue-100 text-blue-600'
-                  : 'text-gray-400 hover:text-gray-600'
+                  : 'text-gray-600 hover:text-gray-600'
               }`}
             >
               <List className='w-4 h-4' />
@@ -379,7 +379,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
         {/* Advanced Search UI */}
         <div className='flex flex-wrap gap-4 mb-4'>
           <div className='relative'>
-            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400' />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white" />
             <input
               type='text'
               placeholder='Search by file name...'
@@ -390,7 +390,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-white"
               >
                 ×
               </button>
@@ -407,7 +407,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
             {altTextSearch && (
               <button
                 onClick={() => setAltTextSearch('')}
-                className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-white"
               >
                 ×
               </button>
@@ -424,7 +424,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
             {captionSearch && (
               <button
                 onClick={() => setCaptionSearch('')}
-                className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-white"
               >
                 ×
               </button>
@@ -451,7 +451,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
             {selectedTag && (
               <button
                 onClick={() => setSelectedTag(null)}
-                className='ml-2 px-3 py-1 rounded-full border border-gray-300 bg-gray-200 text-gray-700 text-sm hover:bg-gray-300 transition-colors'
+                className="ml-2 px-3 py-1 rounded-full border border-gray-300 bg-gray-200 text-white"
               >
                 Clear Tag Filter
               </button>
@@ -461,7 +461,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
 
         {/* Bulk Actions */}
         {selectedMedia.length > 0 && (
-          <div className='mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg'>
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-white">
             <div className='flex items-center justify-between'>
               <span className='text-sm text-blue-900'>
                 {selectedMedia.length} item(s) selected
@@ -469,14 +469,14 @@ const MediaManager: React.FC<MediaManagerProps> = ({
               <div className='flex items-center space-x-2'>
                 <button
                   onClick={handleBulkDelete}
-                  className='flex items-center space-x-1 px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm'
+                  className="flex items-center space-x-1 px-3 py-1 bg-gradient-to-b from-red-700 to-red-500 text-white hover:from-red-800 hover:to-red-600 active:from-red-900 active:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-sm text-white"
                 >
                   <Trash2 className='w-4 h-4' />
                   <span>Delete Selected</span>
                 </button>
                 <button
                   onClick={() => setSelectedMedia([])}
-                  className='px-3 py-1 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors text-sm'
+                  className="px-3 py-1 bg-gray-300 text-white"
                 >
                   Clear Selection
                 </button>
@@ -487,8 +487,8 @@ const MediaManager: React.FC<MediaManagerProps> = ({
 
         {/* Media Grid/List */}
         {filteredMedia.length === 0 ? (
-          <div className='text-center py-12 text-gray-500'>
-            <Folder className='w-16 h-16 mx-auto mb-4 text-gray-300' />
+          <div className="text-center py-12 text-white">
+            <Folder className="w-16 h-16 mx-auto mb-4 text-white" />
             <p className='text-lg font-medium'>No media found</p>
             <p className='text-sm'>Upload some files to get started</p>
           </div>
@@ -530,14 +530,14 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                           className='p-2 bg-white rounded-full hover:bg-gray-100 transition-colors'
                           aria-label='View media'
                         >
-                          <Eye className='w-4 h-4 text-gray-600' />
+                          <Eye className="w-4 h-4 text-white" />
                         </button>
                         <button
                           onClick={() => setEditingMedia(item.id)}
                           className='p-2 bg-white rounded-full hover:bg-gray-100 transition-colors'
                           aria-label='Edit media'
                         >
-                          <Edit className='w-4 h-4 text-gray-600' />
+                          <Edit className="w-4 h-4 text-white" />
                         </button>
                         <button
                           onClick={() => handleDeleteMedia(item.id)}
@@ -550,10 +550,10 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                     </div>
 
                     <div className='p-2'>
-                      <p className='text-xs font-medium text-gray-900 truncate'>
+                      <p className="text-xs font-medium text-white">
                         {item.original_name}
                       </p>
-                      <p className='text-xs text-gray-500'>
+                      <p className="text-xs text-white">
                         {formatFileSize(item.file_size)}
                       </p>
                     </div>
@@ -590,10 +590,10 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                     </div>
 
                     <div className='flex-1 min-w-0'>
-                      <p className='text-sm font-medium text-gray-900 truncate'>
+                      <p className="text-sm font-medium text-white">
                         {item.original_name}
                       </p>
-                      <p className='text-xs text-gray-500'>
+                      <p className="text-xs text-white">
                         {formatFileSize(item.file_size)} •{' '}
                         {formatDate(item.created_at)}
                       </p>
@@ -602,21 +602,21 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                     <div className='flex items-center space-x-1'>
                       <button
                         onClick={() => onMediaSelect?.(item)}
-                        className='p-1 text-gray-400 hover:text-gray-600'
+                        className="p-1 text-gray-600 hover:text-white"
                         aria-label='View media'
                       >
                         <Eye className='w-4 h-4' />
                       </button>
                       <button
                         onClick={() => setEditingMedia(item.id)}
-                        className='p-1 text-gray-400 hover:text-gray-600'
+                        className="p-1 text-gray-600 hover:text-white"
                         aria-label='Edit media'
                       >
                         <Edit className='w-4 h-4' />
                       </button>
                       <button
                         onClick={() => handleDeleteMedia(item.id)}
-                        className='p-1 text-gray-400 hover:text-red-600'
+                        className="p-1 text-white"
                         aria-label='Delete media'
                       >
                         <Trash2 className='w-4 h-4' />
@@ -645,7 +645,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
           <div className='bg-white rounded-lg p-6 w-full max-w-md' tabIndex={0}>
             <h3
               id='upload-media-modal-title'
-              className='text-lg font-semibold text-gray-900 mb-4'
+              className="text-lg font-semibold text-white"
             >
               Upload Media
             </h3>
@@ -660,13 +660,13 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                     {file.type.startsWith('image/') ? (
                       <ImageIcon className='w-6 h-6 text-blue-500' />
                     ) : (
-                      <File className='w-6 h-6 text-gray-500' />
+                      <File className="w-6 h-6 text-white" />
                     )}
                     <div>
-                      <p className='text-sm font-medium text-gray-900'>
+                      <p className="text-sm font-medium text-white">
                         {file.name}
                       </p>
-                      <p className='text-xs text-gray-500'>
+                      <p className="text-xs text-white">
                         {formatFileSize(file.size)}
                       </p>
                     </div>
@@ -687,7 +687,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
               <button
                 onClick={handleUpload}
                 disabled={uploading || uploadFiles.length === 0}
-                className='flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+                className="flex-1 px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-white"
               >
                 {uploading ? 'Uploading...' : 'Upload Files'}
               </button>
@@ -696,7 +696,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                   setIsUploadModalOpen(false);
                   setUploadFiles([]);
                 }}
-                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+                className="px-4 py-2 bg-gray-300 text-white"
               >
                 Cancel
               </button>
@@ -720,13 +720,13 @@ const MediaManager: React.FC<MediaManagerProps> = ({
           <div className='bg-white rounded-lg p-6 w-full max-w-md' tabIndex={0}>
             <h3
               id='edit-media-modal-title'
-              className='text-lg font-semibold text-gray-900 mb-4'
+              className="text-lg font-semibold text-white"
             >
               Edit Media Metadata
             </h3>
             <div className='space-y-4'>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Alt Text
                 </label>
                 <input
@@ -739,7 +739,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Caption
                 </label>
                 <input
@@ -752,7 +752,7 @@ const MediaManager: React.FC<MediaManagerProps> = ({
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Tags (comma separated)
                 </label>
                 <input
@@ -772,14 +772,14 @@ const MediaManager: React.FC<MediaManagerProps> = ({
               <button
                 onClick={handleEditSave}
                 disabled={editLoading}
-                className='flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+                className="flex-1 px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-white"
               >
                 {editLoading ? 'Saving...' : 'Save Changes'}
               </button>
               <button
                 onClick={() => setEditingMedia(null)}
                 aria-label='Cancel edit'
-                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+                className="px-4 py-2 bg-gray-300 text-white"
               >
                 Cancel
               </button>

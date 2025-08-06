@@ -108,7 +108,7 @@ export default function UploadSystem() {
   return (
     <div className='w-full max-w-2xl mx-auto'>
       <div
-        className='flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-lg p-8 bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors mb-4'
+        className="flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-lg p-8 bg-gray-50 cursor-pointer hover:bg-blue-50 transition-colors mb-4 text-white"
         onClick={() => inputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={e => e.preventDefault()}
@@ -156,7 +156,7 @@ export default function UploadSystem() {
               <li key={i} className='flex items-center justify-between py-2'>
                 <span>
                   {file.name}{' '}
-                  <span className='text-xs text-gray-500'>
+                  <span className="text-xs text-white">
                     ({(file.size / 1024).toFixed(1)} KB)
                   </span>
                 </span>
@@ -174,7 +174,7 @@ export default function UploadSystem() {
             ))}
           </ul>
           <button
-            className='mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-blue-700 disabled:opacity-50'
+            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-blue-700 disabled:opacity-50 text-white"
             onClick={handleUpload}
             disabled={uploading}
             aria-busy={uploading}
@@ -194,7 +194,7 @@ export default function UploadSystem() {
           Uploaded Files
         </h3>
         {Object.keys(filesByTag).length === 0 && (
-          <div className='text-gray-500'>No files uploaded yet.</div>
+          <div className="text-white">No files uploaded yet.</div>
         )}
         {Object.entries(filesByTag).map(([tag, files]) => (
           <div key={tag} className='mb-4'>

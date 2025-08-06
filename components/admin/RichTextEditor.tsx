@@ -111,7 +111,7 @@ export default function RichTextEditor({
       />
 
       {/* Editor Help */}
-      <div className='mt-2 text-xs text-gray-500'>
+      <div className="mt-2 text-xs text-white">
         <p>Use Ctrl+S to save, Ctrl+B for bold, Ctrl+I for italic</p>
         <p>Drag and drop images or use the image button to upload</p>
       </div>

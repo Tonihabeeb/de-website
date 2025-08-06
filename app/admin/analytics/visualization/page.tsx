@@ -161,10 +161,10 @@ export default function AnalyticsVisualizationPage() {
       <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
         <div className='flex items-center justify-between mb-6'>
           <div>
-            <h3 className='text-lg font-semibold text-gray-900 capitalize'>
+            <h3 className="text-lg font-semibold text-white">
               {config.dataSource} {config.type} Chart
             </h3>
-            <p className='text-sm text-gray-600'>
+            <p className="text-sm text-white">
               {config.timeRange} • {config.metrics.join(', ')}
             </p>
           </div>
@@ -212,12 +212,12 @@ export default function AnalyticsVisualizationPage() {
               {config.type === 'pie' && (
                 <PieChart className='w-16 h-16 text-purple-500 mx-auto mb-4' />
               )}
-              <h4 className='text-lg font-medium text-gray-900 mb-2'>
+              <h4 className="text-lg font-medium text-white">
                 {config.dataSource.charAt(0).toUpperCase() +
                   config.dataSource.slice(1)}{' '}
                 Analytics
               </h4>
-              <p className='text-gray-600'>
+              <p className="text-white">
                 Interactive {config.type} chart showing{' '}
                 {config.metrics.join(', ')} over {config.timeRange}
               </p>
@@ -228,7 +228,7 @@ export default function AnalyticsVisualizationPage() {
                       className='w-3 h-3 rounded'
                       style={{ backgroundColor: chartColors[i] }}
                     />
-                    <span className='text-sm text-gray-600'>
+                    <span className="text-sm text-white">
                       {dataset.label}
                     </span>
                   </div>
@@ -238,7 +238,7 @@ export default function AnalyticsVisualizationPage() {
           </div>
         </div>
 
-        <div className='mt-4 flex items-center justify-between text-sm text-gray-500'>
+        <div className="mt-4 flex items-center justify-between text-sm text-white">
           <div className='flex items-center gap-4'>
             <span>Last updated: {new Date().toLocaleTimeString()}</span>
             <span>Data points: {mockChartData.labels.length}</span>
@@ -258,10 +258,10 @@ export default function AnalyticsVisualizationPage() {
       <div className='mb-8'>
         <div className='flex items-center justify-between'>
           <div>
-            <h1 className='text-3xl font-bold text-gray-900'>
+            <h1 className="text-3xl font-bold text-white">
               Analytics Visualization
             </h1>
-            <p className='text-gray-600 mt-2'>
+            <p className="text-white">
               Create interactive charts and graphs for data analysis
             </p>
           </div>
@@ -302,45 +302,45 @@ export default function AnalyticsVisualizationPage() {
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
           <div className='flex items-center gap-3 mb-2'>
             <BarChart3 className='w-6 h-6 text-blue-500' />
-            <h3 className='font-medium text-gray-900'>Total Charts</h3>
+            <h3 className="font-medium text-white">Total Charts</h3>
           </div>
-          <div className='text-2xl font-bold text-gray-900'>
+          <div className="text-2xl font-bold text-white">
             {visualizations.length}
           </div>
-          <div className='text-sm text-gray-500'>Active visualizations</div>
+          <div className="text-sm text-white">Active visualizations</div>
         </div>
 
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
           <div className='flex items-center gap-3 mb-2'>
             <Users className='w-6 h-6 text-green-500' />
-            <h3 className='font-medium text-gray-900'>User Analytics</h3>
+            <h3 className="font-medium text-white">User Analytics</h3>
           </div>
-          <div className='text-2xl font-bold text-gray-900'>
+          <div className="text-2xl font-bold text-white">
             {visualizations.filter(v => v.dataSource === 'users').length}
           </div>
-          <div className='text-sm text-gray-500'>User-focused charts</div>
+          <div className="text-sm text-white">User-focused charts</div>
         </div>
 
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
           <div className='flex items-center gap-3 mb-2'>
             <Eye className='w-6 h-6 text-purple-500' />
-            <h3 className='font-medium text-gray-900'>Content Analytics</h3>
+            <h3 className="font-medium text-white">Content Analytics</h3>
           </div>
-          <div className='text-2xl font-bold text-gray-900'>
+          <div className="text-2xl font-bold text-white">
             {visualizations.filter(v => v.dataSource === 'content').length}
           </div>
-          <div className='text-sm text-gray-500'>Content-focused charts</div>
+          <div className="text-sm text-white">Content-focused charts</div>
         </div>
 
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
           <div className='flex items-center gap-3 mb-2'>
             <TrendingUp className='w-6 h-6 text-orange-500' />
-            <h3 className='font-medium text-gray-900'>System Analytics</h3>
+            <h3 className="font-medium text-white">System Analytics</h3>
           </div>
-          <div className='text-2xl font-bold text-gray-900'>
+          <div className="text-2xl font-bold text-white">
             {visualizations.filter(v => v.dataSource === 'system').length}
           </div>
-          <div className='text-sm text-gray-500'>System-focused charts</div>
+          <div className="text-sm text-white">System-focused charts</div>
         </div>
       </div>
 
@@ -353,11 +353,11 @@ export default function AnalyticsVisualizationPage() {
 
       {visualizations.length === 0 && (
         <div className='text-center py-12'>
-          <BarChart3 className='w-16 h-16 text-gray-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <BarChart3 className="w-16 h-16 text-white" />
+          <h3 className="text-lg font-medium text-white">
             No visualizations yet
           </h3>
-          <p className='text-gray-600 mb-4'>
+          <p className="text-white">
             Create your first chart to start analyzing data
           </p>
           <Button onClick={() => setShowCreateModal(true)}>
@@ -376,7 +376,7 @@ export default function AnalyticsVisualizationPage() {
         <div className='space-y-6'>
           {/* Chart Type */}
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-3'>
+            <label className="block text-sm font-medium text-white">
               Chart Type
             </label>
             <div className='grid grid-cols-3 gap-3'>
@@ -429,7 +429,7 @@ export default function AnalyticsVisualizationPage() {
                     }`}
                   >
                     <Icon className={`w-6 h-6 mx-auto mb-2 ${option.color}`} />
-                    <div className='font-medium text-gray-900'>
+                    <div className="font-medium text-white">
                       {option.label}
                     </div>
                   </button>
@@ -440,7 +440,7 @@ export default function AnalyticsVisualizationPage() {
 
           {/* Data Source */}
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-3'>
+            <label className="block text-sm font-medium text-white">
               Data Source
             </label>
             <div className='grid grid-cols-2 gap-3'>
@@ -470,8 +470,8 @@ export default function AnalyticsVisualizationPage() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <Icon className='w-5 h-5 mx-auto mb-2 text-gray-600' />
-                    <div className='font-medium text-gray-900'>
+                    <Icon className="w-5 h-5 mx-auto mb-2 text-white" />
+                    <div className="font-medium text-white">
                       {option.label}
                     </div>
                   </button>
@@ -482,7 +482,7 @@ export default function AnalyticsVisualizationPage() {
 
           {/* Time Range */}
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-3'>
+            <label className="block text-sm font-medium text-white">
               Time Range
             </label>
             <div className='grid grid-cols-5 gap-3'>
@@ -515,7 +515,7 @@ export default function AnalyticsVisualizationPage() {
 
           {/* Metrics */}
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-3'>
+            <label className="block text-sm font-medium text-white">
               Metrics to Display
             </label>
             <div className='grid grid-cols-2 gap-3'>
@@ -548,7 +548,7 @@ export default function AnalyticsVisualizationPage() {
                     }}
                     className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                   />
-                  <span className='ml-2 text-sm text-gray-700 capitalize'>
+                  <span className="ml-2 text-sm text-white">
                     {metric.replace(/([A-Z])/g, ' $1').trim()}
                   </span>
                 </label>
@@ -570,7 +570,7 @@ export default function AnalyticsVisualizationPage() {
                 }
                 className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
               />
-              <span className='ml-2 text-sm text-gray-700'>Show legend</span>
+              <span className="ml-2 text-sm text-white">Show legend</span>
             </label>
             <label className='flex items-center'>
               <input
@@ -581,7 +581,7 @@ export default function AnalyticsVisualizationPage() {
                 }
                 className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
               />
-              <span className='ml-2 text-sm text-gray-700'>Show grid</span>
+              <span className="ml-2 text-sm text-white">Show grid</span>
             </label>
             <label className='flex items-center'>
               <input
@@ -592,7 +592,7 @@ export default function AnalyticsVisualizationPage() {
                 }
                 className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
               />
-              <span className='ml-2 text-sm text-gray-700'>
+              <span className="ml-2 text-sm text-white">
                 Enable animations
               </span>
             </label>
@@ -621,7 +621,7 @@ export default function AnalyticsVisualizationPage() {
       >
         <div className='space-y-6'>
           <div>
-            <h3 className='text-lg font-medium text-gray-900 mb-4'>
+            <h3 className="text-lg font-medium text-white">
               Global Settings
             </h3>
             <div className='space-y-4'>
@@ -632,12 +632,12 @@ export default function AnalyticsVisualizationPage() {
                   onChange={e => setIsLive(e.target.checked)}
                   className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                 />
-                <span className='ml-2 text-sm text-gray-700'>
+                <span className="ml-2 text-sm text-white">
                   Enable live updates
                 </span>
               </label>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className="block text-sm font-medium text-white">
                   Auto-refresh interval
                 </label>
                 <select className='w-full border border-gray-300 rounded-md px-3 py-2'>

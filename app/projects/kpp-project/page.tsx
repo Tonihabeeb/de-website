@@ -182,14 +182,14 @@ export default function KPPProjectPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Executive Summary</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 The Kinetic Power Plant (KPP) project represents Iraq's most
                 ambitious renewable energy initiative, designed to deliver 500
                 MW of continuous, zero-emission power generation. This flagship
                 project demonstrates Iraq's commitment to energy independence
                 and environmental sustainability.
               </p>
-              <p className='text-gray-text mb-6'>
+              <p className="text-white">
                 With international technology validation, government approval,
                 and comprehensive environmental compliance, the KPP project is
                 positioned to transform Iraq's energy landscape while creating
@@ -199,7 +199,7 @@ export default function KPPProjectPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 text-center text-white"
                 >
                   Learn About Technology
                 </Link>
@@ -225,7 +225,7 @@ export default function KPPProjectPage() {
                       </div>
                       <div>
                         <h4 className='font-semibold'>{metric.label}</h4>
-                        <p className='text-sm text-gray-text'>
+                        <p className="text-sm text-white">
                           {metric.description}
                         </p>
                       </div>
@@ -248,7 +248,7 @@ export default function KPPProjectPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Project Timeline</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               The KPP project follows a structured timeline from concept to
               commercial operation, ensuring quality, compliance, and successful
               delivery.
@@ -285,7 +285,7 @@ export default function KPPProjectPage() {
                               <h3 className='font-semibold text-lg'>
                                 {milestone.title}
                               </h3>
-                              <p className='text-sm text-gray-text'>
+                              <p className="text-sm text-white">
                                 {milestone.date}
                               </p>
                             </div>
@@ -302,7 +302,7 @@ export default function KPPProjectPage() {
                             {milestone.status.replace('-', ' ').toUpperCase()}
                           </div>
                         </div>
-                        <p className='text-gray-text'>
+                        <p className="text-white">
                           {milestone.description}
                         </p>
                       </div>
@@ -320,7 +320,7 @@ export default function KPPProjectPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Key Achievements</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               The KPP project has achieved significant milestones that
               demonstrate its viability, compliance, and potential impact on
               Iraq's energy future.
@@ -339,7 +339,7 @@ export default function KPPProjectPage() {
                 <h3 className='text-xl font-semibold mb-2'>
                   {achievement.title}
                 </h3>
-                <p className='text-gray-text mb-4'>{achievement.description}</p>
+                <p className="text-white">{achievement.description}</p>
                 <div className='text-2xl font-bold text-primary'>
                   {achievement.metric}
                 </div>
@@ -354,7 +354,7 @@ export default function KPPProjectPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Project Progress</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Real-time tracking of project milestones, deliverables, and key
               performance indicators.
             </p>
@@ -388,11 +388,11 @@ export default function KPPProjectPage() {
                 </div>
                 <div className='flex justify-between items-center'>
                   <span>Construction Phase</span>
-                  <span className='text-gray-600 font-semibold'>0%</span>
+                  <span className="text-white">0%</span>
                 </div>
                 <div className='flex justify-between items-center'>
                   <span>Commissioning</span>
-                  <span className='text-gray-600 font-semibold'>0%</span>
+                  <span className="text-white">0%</span>
                 </div>
               </div>
             </div>
@@ -436,7 +436,7 @@ export default function KPPProjectPage() {
                   </div>
                   <div className='w-full bg-gray-200 rounded-full h-2'>
                     <div
-                      className='bg-blue-500 h-2 rounded-full'
+                      className="bg-blue-500 h-2 rounded-full text-white"
                       style={{ width: '98%' }}
                     ></div>
                   </div>

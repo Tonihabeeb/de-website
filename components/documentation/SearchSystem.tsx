@@ -52,7 +52,7 @@ export default function SearchSystem() {
             onChange={e => setQuery(e.target.value)}
             aria-label='Search documents'
           />
-          <Search className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5' />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white" />
         </div>
         <select
           className='border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary'
@@ -69,7 +69,7 @@ export default function SearchSystem() {
       </form>
       <div className='space-y-4'>
         {filteredResults.length === 0 ? (
-          <div className='text-gray-500 text-center py-8'>
+          <div className="text-white">
             No documents found.
           </div>
         ) : (
@@ -77,11 +77,11 @@ export default function SearchSystem() {
             <div key={i} className='bg-white border rounded-lg p-4 shadow-sm'>
               <div className='flex items-center justify-between mb-1'>
                 <span className='font-semibold text-primary'>{doc.title}</span>
-                <span className='text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded'>
+                <span className="text-xs bg-gray-100 text-white">
                   {doc.category}
                 </span>
               </div>
-              <p className='text-gray-700 text-sm'>{doc.description}</p>
+              <p className="text-white">{doc.description}</p>
             </div>
           ))
         )}

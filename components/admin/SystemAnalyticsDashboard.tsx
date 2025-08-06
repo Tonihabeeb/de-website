@@ -316,11 +316,11 @@ export default function SystemAnalyticsDashboard({
     return (
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6 text-center'>
-          <Activity className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <Activity className="w-12 h-12 text-white" />
+          <h3 className="text-lg font-medium text-white">
             Unable to Load Analytics
           </h3>
-          <p className='text-gray-600 mb-4'>
+          <p className="text-white">
             Failed to connect to analytics service.
           </p>
           <Button onClick={loadAnalyticsData} variant='primary'>
@@ -337,10 +337,10 @@ export default function SystemAnalyticsDashboard({
       <div className='px-6 py-4 border-b border-gray-200'>
         <div className='flex items-center justify-between'>
           <div>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               System Analytics
             </h2>
-            <p className='text-sm text-gray-600 mt-1'>
+            <p className="text-sm text-white">
               Comprehensive system performance and user analytics
             </p>
           </div>
@@ -363,7 +363,7 @@ export default function SystemAnalyticsDashboard({
                 onChange={e => setAutoRefresh(e.target.checked)}
                 className='rounded border-gray-300'
               />
-              <label htmlFor='autoRefresh' className='text-sm text-gray-600'>
+              <label htmlFor='autoRefresh' className="text-sm text-white">
                 Auto refresh
               </label>
             </div>
@@ -400,13 +400,13 @@ export default function SystemAnalyticsDashboard({
 
       {/* Overview Metrics */}
       <div className='px-6 py-4 bg-gray-50 border-b border-gray-200'>
-        <h3 className='text-lg font-medium text-gray-900 mb-4'>Overview</h3>
+        <h3 className="text-lg font-medium text-white">Overview</h3>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
           <div className='bg-white rounded-lg p-4 border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>Total Users</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm font-medium text-white">Total Users</p>
+                <p className="text-2xl font-bold text-white">
                   {formatNumber(analyticsData.overview.totalUsers)}
                 </p>
                 <p className='text-sm text-green-600 mt-1'>
@@ -418,7 +418,7 @@ export default function SystemAnalyticsDashboard({
                   % from last period
                 </p>
               </div>
-              <div className='p-3 bg-blue-100 rounded-full'>
+              <div className="p-3 bg-blue-100 rounded-full text-white">
                 <Users className='w-6 h-6 text-blue-600' />
               </div>
             </div>
@@ -427,10 +427,10 @@ export default function SystemAnalyticsDashboard({
           <div className='bg-white rounded-lg p-4 border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className="text-sm font-medium text-white">
                   Active Users
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-2xl font-bold text-white">
                   {formatNumber(analyticsData.overview.activeUsers)}
                 </p>
                 <p className='text-sm text-green-600 mt-1'>
@@ -451,8 +451,8 @@ export default function SystemAnalyticsDashboard({
           <div className='bg-white rounded-lg p-4 border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>Page Views</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm font-medium text-white">Page Views</p>
+                <p className="text-2xl font-bold text-white">
                   {formatNumber(analyticsData.overview.pageViews)}
                 </p>
                 <p className='text-sm text-green-600 mt-1'>
@@ -473,8 +473,8 @@ export default function SystemAnalyticsDashboard({
           <div className='bg-white rounded-lg p-4 border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>Bounce Rate</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm font-medium text-white">Bounce Rate</p>
+                <p className="text-2xl font-bold text-white">
                   {formatPercentage(analyticsData.overview.bounceRate)}
                 </p>
                 <p className='text-sm text-red-600 mt-1'>
@@ -499,23 +499,23 @@ export default function SystemAnalyticsDashboard({
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6'>
           {/* User Growth Chart */}
           <div className='bg-gray-50 rounded-lg p-4'>
-            <h4 className='text-lg font-medium text-gray-900 mb-4'>
+            <h4 className="text-lg font-medium text-white">
               User Growth
             </h4>
             <div className='h-64 flex items-center justify-center bg-white rounded border'>
               <div className='text-center'>
                 <TrendingUp className='w-12 h-12 text-blue-500 mx-auto mb-2' />
-                <p className='text-sm text-gray-600'>
+                <p className="text-sm text-white">
                   Chart visualization would be here
                 </p>
-                <p className='text-xs text-gray-500 mt-1'>
+                <p className="text-xs text-white">
                   Using Chart.js or similar library
                 </p>
               </div>
             </div>
             <div className='mt-4 grid grid-cols-2 gap-4 text-sm'>
               <div>
-                <p className='text-gray-600'>New Users</p>
+                <p className="text-white">New Users</p>
                 <p className='font-medium'>
                   {formatNumber(
                     analyticsData.userGrowth.reduce(
@@ -526,7 +526,7 @@ export default function SystemAnalyticsDashboard({
                 </p>
               </div>
               <div>
-                <p className='text-gray-600'>Avg Daily Active</p>
+                <p className="text-white">Avg Daily Active</p>
                 <p className='font-medium'>
                   {formatNumber(
                     Math.round(
@@ -543,23 +543,23 @@ export default function SystemAnalyticsDashboard({
 
           {/* Page Views Chart */}
           <div className='bg-gray-50 rounded-lg p-4'>
-            <h4 className='text-lg font-medium text-gray-900 mb-4'>
+            <h4 className="text-lg font-medium text-white">
               Page Views
             </h4>
             <div className='h-64 flex items-center justify-center bg-white rounded border'>
               <div className='text-center'>
                 <BarChart3 className='w-12 h-12 text-green-500 mx-auto mb-2' />
-                <p className='text-sm text-gray-600'>
+                <p className="text-sm text-white">
                   Chart visualization would be here
                 </p>
-                <p className='text-xs text-gray-500 mt-1'>
+                <p className="text-xs text-white">
                   Using Chart.js or similar library
                 </p>
               </div>
             </div>
             <div className='mt-4 grid grid-cols-2 gap-4 text-sm'>
               <div>
-                <p className='text-gray-600'>Total Views</p>
+                <p className="text-white">Total Views</p>
                 <p className='font-medium'>
                   {formatNumber(
                     analyticsData.pageViews.reduce(
@@ -570,7 +570,7 @@ export default function SystemAnalyticsDashboard({
                 </p>
               </div>
               <div>
-                <p className='text-gray-600'>Unique Views</p>
+                <p className="text-white">Unique Views</p>
                 <p className='font-medium'>
                   {formatNumber(
                     analyticsData.pageViews.reduce(
@@ -586,22 +586,22 @@ export default function SystemAnalyticsDashboard({
 
         {/* Top Pages */}
         <div className='mb-6'>
-          <h4 className='text-lg font-medium text-gray-900 mb-4'>Top Pages</h4>
+          <h4 className="text-lg font-medium text-white">Top Pages</h4>
           <div className='bg-gray-50 rounded-lg overflow-hidden'>
             <div className='overflow-x-auto'>
               <table className='min-w-full divide-y divide-gray-200'>
                 <thead className='bg-gray-100'>
                   <tr>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white">
                       Page
                     </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white">
                       Views
                     </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white">
                       Unique Views
                     </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white">
                       Avg Time
                     </th>
                   </tr>
@@ -611,19 +611,19 @@ export default function SystemAnalyticsDashboard({
                     <tr key={index} className='hover:bg-gray-50'>
                       <td className='px-6 py-4 whitespace-nowrap'>
                         <div>
-                          <p className='text-sm font-medium text-gray-900'>
+                          <p className="text-sm font-medium text-white">
                             {page.title}
                           </p>
-                          <p className='text-sm text-gray-500'>{page.path}</p>
+                          <p className="text-sm text-white">{page.path}</p>
                         </div>
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                         {formatNumber(page.views)}
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                         {formatNumber(page.uniqueViews)}
                       </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                         {formatTime(page.avgTimeOnPage)}
                       </td>
                     </tr>
@@ -638,7 +638,7 @@ export default function SystemAnalyticsDashboard({
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
           {/* Device Statistics */}
           <div className='bg-gray-50 rounded-lg p-4'>
-            <h4 className='text-lg font-medium text-gray-900 mb-4'>
+            <h4 className="text-lg font-medium text-white">
               Device Usage
             </h4>
             <div className='space-y-3'>
@@ -654,15 +654,15 @@ export default function SystemAnalyticsDashboard({
                         <Globe className='w-4 h-4 text-purple-600' />
                       )}
                     </div>
-                    <span className='text-sm font-medium text-gray-900'>
+                    <span className="text-sm font-medium text-white">
                       {device.device}
                     </span>
                   </div>
                   <div className='text-right'>
-                    <p className='text-sm font-medium text-gray-900'>
+                    <p className="text-sm font-medium text-white">
                       {formatNumber(device.users)}
                     </p>
-                    <p className='text-xs text-gray-500'>
+                    <p className="text-xs text-white">
                       {formatPercentage(device.percentage)}
                     </p>
                   </div>
@@ -673,20 +673,20 @@ export default function SystemAnalyticsDashboard({
 
           {/* Geographic Data */}
           <div className='bg-gray-50 rounded-lg p-4'>
-            <h4 className='text-lg font-medium text-gray-900 mb-4'>
+            <h4 className="text-lg font-medium text-white">
               Geographic Distribution
             </h4>
             <div className='space-y-3'>
               {analyticsData.geographicData.slice(0, 5).map((geo, index) => (
                 <div key={index} className='flex items-center justify-between'>
-                  <span className='text-sm font-medium text-gray-900'>
+                  <span className="text-sm font-medium text-white">
                     {geo.country}
                   </span>
                   <div className='text-right'>
-                    <p className='text-sm font-medium text-gray-900'>
+                    <p className="text-sm font-medium text-white">
                       {formatNumber(geo.users)}
                     </p>
-                    <p className='text-xs text-gray-500'>
+                    <p className="text-xs text-white">
                       {formatPercentage(geo.percentage)}
                     </p>
                   </div>
@@ -704,7 +704,7 @@ export default function SystemAnalyticsDashboard({
         title='Export Analytics Data'
       >
         <div className='space-y-4'>
-          <p className='text-gray-600'>
+          <p className="text-white">
             Choose the format and date range for your analytics export.
           </p>
 
@@ -756,7 +756,7 @@ export default function SystemAnalyticsDashboard({
       >
         <div className='space-y-4'>
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Auto-refresh Interval
             </label>
             <select className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'>
@@ -768,7 +768,7 @@ export default function SystemAnalyticsDashboard({
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Default Date Range
             </label>
             <select className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'>
@@ -785,7 +785,7 @@ export default function SystemAnalyticsDashboard({
               id='showRealTime'
               className='rounded border-gray-300'
             />
-            <label htmlFor='showRealTime' className='text-sm text-gray-700'>
+            <label htmlFor='showRealTime' className="text-sm text-white">
               Show real-time data
             </label>
           </div>

@@ -87,7 +87,7 @@ export default function StyleGuidePage() {
           <h1 className='text-4xl font-serif text-primary mb-2'>
             Deep Engineering Style Guide
           </h1>
-          <p className='text-lg text-gray-text'>
+          <p className="text-lg text-white">
             Design system and component library for the Deep Engineering website
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function StyleGuidePage() {
                 <h3 className='font-semibold text-primary mb-1'>
                   {color.name}
                 </h3>
-                <p className='text-sm text-gray-text'>Class: {color.class}</p>
+                <p className="text-sm text-white">Class: {color.class}</p>
               </div>
             ))}
           </div>
@@ -132,10 +132,10 @@ export default function StyleGuidePage() {
                   className='border-b border-gray-100 pb-4 last:border-b-0'
                 >
                   <div className='flex items-baseline justify-between mb-2'>
-                    <span className='text-sm font-medium text-gray-text'>
+                    <span className="text-sm font-medium text-white">
                       {type.name}
                     </span>
-                    <span className='text-xs text-gray-text'>
+                    <span className="text-xs text-white">
                       Class: {type.class}
                     </span>
                   </div>
@@ -155,7 +155,7 @@ export default function StyleGuidePage() {
                   <h4 className='font-serif text-lg text-primary mb-2'>
                     Serif (Crimson Pro)
                   </h4>
-                  <p className='font-serif text-gray-text'>
+                  <p className="font-serif text-white">
                     Used for headings and display text
                   </p>
                 </div>
@@ -163,7 +163,7 @@ export default function StyleGuidePage() {
                   <h4 className='font-sans text-lg text-primary mb-2'>
                     Sans (Heebo)
                   </h4>
-                  <p className='font-sans text-gray-text'>
+                  <p className="font-sans text-white">
                     Used for body text and UI elements
                   </p>
                 </div>
@@ -288,7 +288,7 @@ export default function StyleGuidePage() {
                   <h4 className='font-semibold text-primary text-sm mb-1'>
                     {iconItem.name}
                   </h4>
-                  <p className='text-xs text-gray-text'>
+                  <p className="text-xs text-white">
                     {iconItem.description}
                   </p>
                 </div>
@@ -314,7 +314,7 @@ export default function StyleGuidePage() {
                   <div className='flex items-center gap-4'>
                     <Zap className='w-6 h-6 text-primary' />
                     <Zap className='w-6 h-6 text-accent' />
-                    <Zap className='w-6 h-6 text-gray-text' />
+                    <Zap className="w-6 h-6 text-white" />
                     <Zap className='w-6 h-6 text-white bg-primary p-1 rounded' />
                   </div>
                 </div>
@@ -336,7 +336,7 @@ export default function StyleGuidePage() {
                 </h3>
                 <div className='space-y-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-text mb-2'>
+                    <label className="block text-sm font-medium text-white">
                       Text Input
                     </label>
                     <input
@@ -346,7 +346,7 @@ export default function StyleGuidePage() {
                     />
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-text mb-2'>
+                    <label className="block text-sm font-medium text-white">
                       Email Input
                     </label>
                     <input
@@ -356,7 +356,7 @@ export default function StyleGuidePage() {
                     />
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-text mb-2'>
+                    <label className="block text-sm font-medium text-white">
                       Textarea
                     </label>
                     <textarea
@@ -374,7 +374,7 @@ export default function StyleGuidePage() {
                 </h3>
                 <div className='space-y-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-text mb-2'>
+                    <label className="block text-sm font-medium text-white">
                       Select Option
                     </label>
                     <select className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent'>
@@ -395,7 +395,7 @@ export default function StyleGuidePage() {
                           type='checkbox'
                           className='rounded border-gray-300 text-primary focus:ring-primary'
                         />
-                        <span className='ml-2 text-gray-text'>
+                        <span className="ml-2 text-white">
                           Checkbox option 1
                         </span>
                       </label>
@@ -404,7 +404,7 @@ export default function StyleGuidePage() {
                           type='checkbox'
                           className='rounded border-gray-300 text-primary focus:ring-primary'
                         />
-                        <span className='ml-2 text-gray-text'>
+                        <span className="ml-2 text-white">
                           Checkbox option 2
                         </span>
                       </label>
@@ -422,7 +422,7 @@ export default function StyleGuidePage() {
                           name='radio'
                           className='border-gray-300 text-primary focus:ring-primary'
                         />
-                        <span className='ml-2 text-gray-text'>
+                        <span className="ml-2 text-white">
                           Radio option 1
                         </span>
                       </label>
@@ -432,7 +432,7 @@ export default function StyleGuidePage() {
                           name='radio'
                           className='border-gray-300 text-primary focus:ring-primary'
                         />
-                        <span className='ml-2 text-gray-text'>
+                        <span className="ml-2 text-white">
                           Radio option 2
                         </span>
                       </label>
@@ -455,7 +455,7 @@ export default function StyleGuidePage() {
               <h3 className='text-xl font-semibold text-primary mb-2'>
                 Feature Card
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 This is an example of a feature card with an icon, title, and
                 description.
               </p>
@@ -468,7 +468,7 @@ export default function StyleGuidePage() {
               <h3 className='text-xl font-semibold text-primary mb-2'>
                 Location Card
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Another example card showing different styling and content.
               </p>
             </div>
@@ -480,7 +480,7 @@ export default function StyleGuidePage() {
               <h3 className='text-xl font-semibold text-primary mb-2'>
                 Time Card
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 A third example demonstrating the card component system.
               </p>
             </div>
@@ -499,10 +499,10 @@ export default function StyleGuidePage() {
                   Container
                 </h3>
                 <div className='bg-gray-light p-4 rounded'>
-                  <p className='text-sm text-gray-text'>
+                  <p className="text-sm text-white">
                     Class: <code>.container</code>
                   </p>
-                  <p className='text-sm text-gray-text'>
+                  <p className="text-sm text-white">
                     Max width: 7xl (88rem), centered with responsive padding
                   </p>
                 </div>
@@ -513,10 +513,10 @@ export default function StyleGuidePage() {
                   Section Padding
                 </h3>
                 <div className='bg-gray-light p-4 rounded'>
-                  <p className='text-sm text-gray-text'>
+                  <p className="text-sm text-white">
                     Class: <code>.section-padding</code>
                   </p>
-                  <p className='text-sm text-gray-text'>
+                  <p className="text-sm text-white">
                     Padding: py-16 lg:py-24 (64px/96px vertical padding)
                   </p>
                 </div>
@@ -572,12 +572,12 @@ export default function StyleGuidePage() {
                   Reduced Motion
                 </h3>
                 <div className='space-y-4'>
-                  <p className='text-sm text-gray-text'>
+                  <p className="text-sm text-white">
                     The site respects <code>prefers-reduced-motion</code> media
                     query
                   </p>
                   <div className='bg-gray-light p-4 rounded'>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       Animations are disabled for users who prefer reduced
                       motion
                     </p>

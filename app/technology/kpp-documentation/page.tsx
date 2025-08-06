@@ -7,7 +7,7 @@ export default function KPPDocumentationPage() {
         <FileText className='w-8 h-8 text-blue-600' />
         KPP Technical Documentation
       </h1>
-      <p className='mb-8 text-gray-700'>
+      <p className="mb-8 text-white">
         Comprehensive technical documentation for the Kinetic Power Plant (KPP)
         project, including specifications, engineering diagrams, performance
         metrics, and interactive component explorer.
@@ -19,7 +19,7 @@ export default function KPPDocumentationPage() {
           <Layers className='w-6 h-6 text-green-600' />
           Component Specifications
         </h2>
-        <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+        <div className="bg-gray-50 border rounded p-4 text-white">
           <em>
             Component specifications from KPP technical documents will be
             displayed here.
@@ -33,7 +33,7 @@ export default function KPPDocumentationPage() {
           <BookOpen className='w-6 h-6 text-purple-600' />
           Engineering Diagrams & Blueprints
         </h2>
-        <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+        <div className="bg-gray-50 border rounded p-4 text-white">
           <em>
             Engineering diagrams and blueprints will be embedded or linked here.
           </em>
@@ -46,7 +46,7 @@ export default function KPPDocumentationPage() {
           <BarChart3 className='w-6 h-6 text-orange-600' />
           Performance Metrics & Analysis
         </h2>
-        <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+        <div className="bg-gray-50 border rounded p-4 text-white">
           <em>
             Performance metrics, charts, and analysis will be visualized here.
           </em>
@@ -59,7 +59,7 @@ export default function KPPDocumentationPage() {
           <FileText className='w-6 h-6 text-blue-600' />
           Technical Specifications Database
         </h2>
-        <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+        <div className="bg-gray-50 border rounded p-4 text-white">
           <em>
             Structured technical data and downloadable documents will be
             available here.
@@ -73,7 +73,7 @@ export default function KPPDocumentationPage() {
           <Search className='w-6 h-6 text-pink-600' />
           Interactive Component Explorer
         </h2>
-        <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+        <div className="bg-gray-50 border rounded p-4 text-white">
           <em>
             Interactive explorer for KPP components will be implemented here.
           </em>

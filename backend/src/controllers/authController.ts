@@ -3,6 +3,7 @@ import { User } from '../models/User';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { logAudit } from '../utils/audit';
+import mongoose from 'mongoose';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
 const JWT_EXPIRES_IN = '7d';
@@ -20,7 +21,7 @@ export async function register(req: Request, res: Response) {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = new User({ name, email, passwordHash, role });
     await user.save();
-    await logAudit({ userId: user._id, action: 'register', details: { email, name, role } });
+    await logAudit({ userId: user._id as mongoose.Types.ObjectId, action: 'register', details: { email, name, role } });
     return res.status(201).json({ message: 'User registered successfully.' });
   } catch (err) {
     console.error('Registration error:', err);
@@ -43,7 +44,7 @@ export async function login(req: Request, res: Response) {
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
     const token = jwt.sign({ userId: user._id, role: user.role }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-    await logAudit({ userId: user._id, action: 'login', details: { email } });
+    await logAudit({ userId: user._id as mongoose.Types.ObjectId, action: 'login', details: { email } });
     return res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (err) {
     return res.status(500).json({ error: 'Login failed.' });

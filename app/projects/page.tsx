@@ -153,12 +153,12 @@ export default function ProjectsPage() {
               <h1 className='text-4xl font-bold text-primary mb-4'>
                 Our Projects
               </h1>
-              <p className='text-xl text-gray-text max-w-3xl mx-auto'>
+              <p className="text-xl text-white">
                 Discover our portfolio of innovative engineering solutions and
                 successful project implementations.
               </p>
               {!isAuthenticatedUser && (
-                <p className='text-sm text-gray-500 mt-2'>
+                <p className="text-sm text-white">
                   Showing sample projects.{' '}
                   <a
                     href='/login'
@@ -188,10 +188,10 @@ export default function ProjectsPage() {
                     />
                   </svg>
                 </div>
-                <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Error Loading Projects
                 </h3>
-                <p className='text-gray-600 mb-4'>{error}</p>
+                <p className="text-white">{error}</p>
                 <ReloadButton>Try Again</ReloadButton>
               </div>
             ) : projects.length > 0 ? (
@@ -213,11 +213,11 @@ export default function ProjectsPage() {
                     </div>
 
                     <div className='space-y-3 mb-4'>
-                      <p className='text-base text-gray-text'>
+                      <p className="text-base text-white">
                         <span className='font-medium'>Location:</span>{' '}
                         {project.location}
                       </p>
-                      <p className='text-base text-gray-text'>
+                      <p className="text-base text-white">
                         <span className='font-medium'>Status:</span>
                         <span className='text-accent-warm ml-1'>
                           {project.status}
@@ -225,9 +225,9 @@ export default function ProjectsPage() {
                       </p>
                     </div>
 
-                    <p className='text-gray-text mb-4'>{project.description}</p>
+                    <p className="text-white">{project.description}</p>
 
-                    <div className='text-xs text-gray-500 mt-4'>
+                    <div className="text-xs text-white">
                       <p>Category: {project.meta_keywords}</p>
                       <p>
                         Last updated:{' '}
@@ -239,7 +239,7 @@ export default function ProjectsPage() {
               </div>
             ) : (
               <div className='text-center py-12'>
-                <div className='text-gray-600 mb-4'>
+                <div className="text-white">
                   <svg
                     className='w-12 h-12 mx-auto'
                     fill='none'
@@ -254,10 +254,10 @@ export default function ProjectsPage() {
                     />
                   </svg>
                 </div>
-                <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   No Projects Found
                 </h3>
-                <p className='text-gray-text'>
+                <p className="text-white">
                   Projects will appear here once they are added to the system.
                 </p>
               </div>

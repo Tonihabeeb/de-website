@@ -11,12 +11,12 @@ export default function TechnicalDocumentsPage() {
       <section className='section-padding bg-white'>
         <div className='container'>
           <h2 className='mb-6 text-2xl font-bold'>KPP Technical Documents</h2>
-          <p className='text-gray-text mb-8 max-w-2xl'>
+          <p className="text-white">
             Browse and download technical specifications, engineering drawings,
             and performance data for the Kinetic Power Plant and its components.
           </p>
           {/* Placeholder for document list and search/filter features */}
-          <div className='bg-gray-light p-8 rounded-lg text-center text-gray-500'>
+          <div className="bg-gray-light p-8 rounded-lg text-center text-white">
             Document list and search/filter features coming soon.
           </div>
         </div>

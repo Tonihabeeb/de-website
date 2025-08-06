@@ -31,7 +31,7 @@ const KPPChainHero: React.FC = () => {
   const floaterDelay = 12 / floaterCount;
 
   return (
-    <div className='relative w-full h-screen overflow-hidden bg-gradient-to-b from-blue-100 to-white'>
+    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-blue-100 to-white text-white">
       {/* Water ripple background layer */}
       <motion.div
         className="absolute inset-0 bg-[url('/assets/waves.svg')] bg-repeat opacity-50"
@@ -110,16 +110,16 @@ const KPPChainHero: React.FC = () => {
 
       {/* Overlayed headline and CTA */}
       <div className='absolute inset-0 flex flex-col items-center justify-center text-center px-4'>
-        <h1 className='text-4xl md:text-6xl font-bold text-gray-800 mb-4'>
+        <h1 className="text-4xl md:text-6xl font-bold text-white">
           Harnessing Kinetic Power
         </h1>
-        <p className='text-lg md:text-2xl text-gray-600 mb-6 max-w-xl'>
+        <p className="text-lg md:text-2xl text-white">
           Discover how our KPP system transforms motion into clean, reliable
           energy.
         </p>
         <a
           href='#learn-more'
-          className='px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition'
+          className="px-6 py-3 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition text-white"
         >
           Learn More
         </a>

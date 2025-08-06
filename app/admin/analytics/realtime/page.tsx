@@ -229,7 +229,7 @@ export default function RealTimeAnalyticsPage() {
       case 'error':
         return <XCircle className='w-4 h-4 text-red-500' />;
       default:
-        return <CheckCircle className='w-4 h-4 text-gray-500' />;
+        return <CheckCircle className="w-4 h-4 text-white" />;
     }
   };
 
@@ -251,7 +251,7 @@ export default function RealTimeAnalyticsPage() {
       <div className='container mx-auto px-4 py-8'>
         <div className='flex items-center justify-center h-64'>
           <RefreshCw className='w-8 h-8 text-blue-500 animate-spin' />
-          <span className='ml-2 text-gray-600'>Loading real-time data...</span>
+          <span className="ml-2 text-white">Loading real-time data...</span>
         </div>
       </div>
     );
@@ -261,11 +261,11 @@ export default function RealTimeAnalyticsPage() {
     return (
       <div className='container mx-auto px-4 py-8'>
         <div className='text-center'>
-          <Activity className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <Activity className="w-12 h-12 text-white" />
+          <h3 className="text-lg font-medium text-white">
             No real-time data available
           </h3>
-          <p className='text-gray-600'>
+          <p className="text-white">
             Real-time analytics are not currently available.
           </p>
         </div>
@@ -278,10 +278,10 @@ export default function RealTimeAnalyticsPage() {
       <div className='mb-8'>
         <div className='flex items-center justify-between'>
           <div>
-            <h1 className='text-3xl font-bold text-gray-900'>
+            <h1 className="text-3xl font-bold text-white">
               Real-Time Analytics
             </h1>
-            <p className='text-gray-600 mt-2'>
+            <p className="text-white">
               Live system activity, user sessions, and performance metrics
             </p>
           </div>
@@ -311,12 +311,12 @@ export default function RealTimeAnalyticsPage() {
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-3'>
             <div
-              className={`w-3 h-3 rounded-full ${isLive ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}
+              className={`w-3 h-3 rounded-full ${isLive ? 'bg-green-500 animate-pulse' : 'bg-gray-600'}`}
             />
-            <span className='font-medium text-gray-900'>
+            <span className="font-medium text-white">
               {isLive ? 'Live Updates Active' : 'Live Updates Paused'}
             </span>
-            <span className='text-sm text-gray-500'>
+            <span className="text-sm text-white">
               Last updated: {new Date().toLocaleTimeString()}
             </span>
           </div>
@@ -350,42 +350,42 @@ export default function RealTimeAnalyticsPage() {
           <div className='flex items-center justify-between mb-4'>
             <div className='flex items-center gap-3'>
               <Users className='w-6 h-6 text-blue-500' />
-              <h3 className='font-medium text-gray-900'>Active Users</h3>
+              <h3 className="font-medium text-white">Active Users</h3>
             </div>
             <TrendingUp className='w-4 h-4 text-green-500' />
           </div>
-          <div className='text-3xl font-bold text-gray-900'>
+          <div className="text-3xl font-bold text-white">
             {realTimeData.activeUsers}
           </div>
-          <div className='text-sm text-gray-500 mt-1'>Currently online</div>
+          <div className="text-sm text-white">Currently online</div>
         </div>
 
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
           <div className='flex items-center justify-between mb-4'>
             <div className='flex items-center gap-3'>
               <Eye className='w-6 h-6 text-green-500' />
-              <h3 className='font-medium text-gray-900'>Page Views</h3>
+              <h3 className="font-medium text-white">Page Views</h3>
             </div>
             <TrendingUp className='w-4 h-4 text-green-500' />
           </div>
-          <div className='text-3xl font-bold text-gray-900'>
+          <div className="text-3xl font-bold text-white">
             {realTimeData.pageViews.toLocaleString()}
           </div>
-          <div className='text-sm text-gray-500 mt-1'>Today's total</div>
+          <div className="text-sm text-white">Today's total</div>
         </div>
 
         <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
           <div className='flex items-center justify-between mb-4'>
             <div className='flex items-center gap-3'>
               <Clock className='w-6 h-6 text-purple-500' />
-              <h3 className='font-medium text-gray-900'>Avg Session</h3>
+              <h3 className="font-medium text-white">Avg Session</h3>
             </div>
             <TrendingUp className='w-4 h-4 text-green-500' />
           </div>
-          <div className='text-3xl font-bold text-gray-900'>
+          <div className="text-3xl font-bold text-white">
             {Math.floor(realTimeData.averageSessionDuration / 60)}m
           </div>
-          <div className='text-sm text-gray-500 mt-1'>
+          <div className="text-sm text-white">
             {realTimeData.averageSessionDuration % 60}s
           </div>
         </div>
@@ -394,14 +394,14 @@ export default function RealTimeAnalyticsPage() {
           <div className='flex items-center justify-between mb-4'>
             <div className='flex items-center gap-3'>
               <Activity className='w-6 h-6 text-orange-500' />
-              <h3 className='font-medium text-gray-900'>Bounce Rate</h3>
+              <h3 className="font-medium text-white">Bounce Rate</h3>
             </div>
             <TrendingDown className='w-4 h-4 text-red-500' />
           </div>
-          <div className='text-3xl font-bold text-gray-900'>
+          <div className="text-3xl font-bold text-white">
             {realTimeData.bounceRate}%
           </div>
-          <div className='text-sm text-gray-500 mt-1'>Single page visits</div>
+          <div className="text-sm text-white">Single page visits</div>
         </div>
       </div>
 
@@ -409,10 +409,10 @@ export default function RealTimeAnalyticsPage() {
         {/* Live User Activity */}
         <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
           <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               Live User Activity
             </h2>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Real-time user actions and page visits
             </p>
           </div>
@@ -426,18 +426,18 @@ export default function RealTimeAnalyticsPage() {
                   <div className='w-2 h-2 bg-green-500 rounded-full animate-pulse' />
                   <div className='flex-1'>
                     <div className='flex items-center justify-between'>
-                      <span className='font-medium text-gray-900'>
+                      <span className="font-medium text-white">
                         {activity.user}
                       </span>
-                      <span className='text-sm text-gray-500'>
+                      <span className="text-sm text-white">
                         {new Date(activity.timestamp).toLocaleTimeString()}
                       </span>
                     </div>
-                    <div className='text-sm text-gray-600'>
+                    <div className="text-sm text-white">
                       {activity.action.replace('_', ' ')} on {activity.page}
                     </div>
                   </div>
-                  <div className='text-sm text-gray-500'>
+                  <div className="text-sm text-white">
                     {activity.duration}s
                   </div>
                 </div>
@@ -449,10 +449,10 @@ export default function RealTimeAnalyticsPage() {
         {/* System Alerts */}
         <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
           <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               System Alerts
             </h2>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Live system notifications and warnings
             </p>
           </div>
@@ -469,10 +469,10 @@ export default function RealTimeAnalyticsPage() {
                     <div className='flex items-start gap-3'>
                       {getAlertIcon(alert.type)}
                       <div className='flex-1'>
-                        <p className='text-sm font-medium text-gray-900'>
+                        <p className="text-sm font-medium text-white">
                           {alert.message}
                         </p>
-                        <p className='text-xs text-gray-500 mt-1'>
+                        <p className="text-xs text-white">
                           {new Date(alert.timestamp).toLocaleString()}
                         </p>
                       </div>
@@ -499,10 +499,10 @@ export default function RealTimeAnalyticsPage() {
         {/* Device Distribution */}
         <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
           <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               Device Distribution
             </h2>
-            <p className='text-gray-600 mt-1'>Current users by device type</p>
+            <p className="text-white">Current users by device type</p>
           </div>
           <div className='p-6'>
             <div className='space-y-4'>
@@ -518,18 +518,18 @@ export default function RealTimeAnalyticsPage() {
                     {device.device === 'Tablet' && (
                       <Globe className='w-4 h-4 text-purple-500' />
                     )}
-                    <span className='font-medium text-gray-900'>
+                    <span className="font-medium text-white">
                       {device.device}
                     </span>
                   </div>
                   <div className='flex items-center gap-2'>
                     <div className='w-24 bg-gray-200 rounded-full h-2'>
                       <div
-                        className='bg-blue-500 h-2 rounded-full'
+                        className="bg-blue-500 h-2 rounded-full text-white"
                         style={{ width: `${device.percentage}%` }}
                       />
                     </div>
-                    <span className='text-sm text-gray-600 w-12 text-right'>
+                    <span className="text-sm text-white">
                       {device.users} ({device.percentage}%)
                     </span>
                   </div>
@@ -542,10 +542,10 @@ export default function RealTimeAnalyticsPage() {
         {/* Geographic Distribution */}
         <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
           <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               Geographic Distribution
             </h2>
-            <p className='text-gray-600 mt-1'>Current users by location</p>
+            <p className="text-white">Current users by location</p>
           </div>
           <div className='p-6'>
             <div className='space-y-4'>
@@ -553,7 +553,7 @@ export default function RealTimeAnalyticsPage() {
                 <div key={index} className='flex items-center justify-between'>
                   <div className='flex items-center gap-3'>
                     <Globe className='w-4 h-4 text-blue-500' />
-                    <span className='font-medium text-gray-900'>
+                    <span className="font-medium text-white">
                       {geo.country}
                     </span>
                   </div>
@@ -564,7 +564,7 @@ export default function RealTimeAnalyticsPage() {
                         style={{ width: `${geo.percentage}%` }}
                       />
                     </div>
-                    <span className='text-sm text-gray-600 w-12 text-right'>
+                    <span className="text-sm text-white">
                       {geo.users} ({geo.percentage}%)
                     </span>
                   </div>
@@ -578,38 +578,38 @@ export default function RealTimeAnalyticsPage() {
       {/* Performance Metrics */}
       <div className='bg-white rounded-lg shadow-sm border border-gray-200 mt-8'>
         <div className='p-6 border-b border-gray-200'>
-          <h2 className='text-xl font-semibold text-gray-900'>
+          <h2 className="text-xl font-semibold text-white">
             Performance Metrics
           </h2>
-          <p className='text-gray-600 mt-1'>
+          <p className="text-white">
             Real-time system performance indicators
           </p>
         </div>
         <div className='p-6'>
           <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
             <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
+              <div className="text-2xl font-bold text-white">
                 {realTimeData.performanceMetrics.responseTime}ms
               </div>
-              <div className='text-sm text-gray-500'>Response Time</div>
+              <div className="text-sm text-white">Response Time</div>
             </div>
             <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
+              <div className="text-2xl font-bold text-white">
                 {realTimeData.performanceMetrics.loadTime}s
               </div>
-              <div className='text-sm text-gray-500'>Load Time</div>
+              <div className="text-sm text-white">Load Time</div>
             </div>
             <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
+              <div className="text-2xl font-bold text-white">
                 {realTimeData.performanceMetrics.errorRate}%
               </div>
-              <div className='text-sm text-gray-500'>Error Rate</div>
+              <div className="text-sm text-white">Error Rate</div>
             </div>
             <div className='text-center'>
-              <div className='text-2xl font-bold text-gray-900'>
+              <div className="text-2xl font-bold text-white">
                 {realTimeData.performanceMetrics.uptime}%
               </div>
-              <div className='text-sm text-gray-500'>Uptime</div>
+              <div className="text-sm text-white">Uptime</div>
             </div>
           </div>
         </div>

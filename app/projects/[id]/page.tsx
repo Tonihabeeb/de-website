@@ -126,7 +126,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         {/* Breadcrumb */}
         <nav className='bg-white border-b border-gray-200'>
           <div className='container mx-auto px-4 py-4'>
-            <div className='flex items-center space-x-2 text-sm text-gray-600'>
+            <div className="flex items-center space-x-2 text-sm text-white">
               <Link href='/' className='hover:text-primary transition-colors'>
                 Home
               </Link>
@@ -138,7 +138,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 Projects
               </Link>
               <span>/</span>
-              <span className='text-gray-900 font-medium'>{project.name}</span>
+              <span className="text-white">{project.name}</span>
             </div>
           </div>
         </nav>
@@ -151,7 +151,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 <h1 className='text-4xl font-bold text-primary mb-4'>
                   {project.name}
                 </h1>
-                <p className='text-xl text-gray-text leading-relaxed'>
+                <p className="text-xl text-white">
                   {project.description}
                 </p>
               </div>
@@ -173,14 +173,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-8'>
                 <div className='space-y-4'>
                   <div>
-                    <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                    <h3 className="text-lg font-semibold text-white">
                       Location
                     </h3>
-                    <p className='text-gray-text'>{project.location}</p>
+                    <p className="text-white">{project.location}</p>
                   </div>
 
                   <div>
-                    <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                    <h3 className="text-lg font-semibold text-white">
                       Status
                     </h3>
                     <span className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800'>
@@ -189,10 +189,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   </div>
 
                   <div>
-                    <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                    <h3 className="text-lg font-semibold text-white">
                       Last Updated
                     </h3>
-                    <p className='text-gray-text'>
+                    <p className="text-white">
                       {new Date(project.updated_at).toLocaleDateString(
                         'en-US',
                         {
@@ -208,7 +208,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 <div className='space-y-4'>
                   {project.capacity_mw && (
                     <div>
-                      <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                      <h3 className="text-lg font-semibold text-white">
                         Capacity
                       </h3>
                       <p className='text-2xl font-bold text-primary'>
@@ -218,10 +218,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   )}
 
                   <div>
-                    <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+                    <h3 className="text-lg font-semibold text-white">
                       Category
                     </h3>
-                    <span className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800'>
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 text-white">
                       {project.meta_keywords}
                     </span>
                   </div>
@@ -232,7 +232,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               <div className='text-center'>
                 <Link
                   href='/projects'
-                  className='inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors'
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                 >
                   <svg
                     className='mr-2 w-5 h-5'

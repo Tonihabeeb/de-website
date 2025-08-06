@@ -298,7 +298,7 @@ export default function NavigationManager({
             {hasChildren && (
               <button
                 onClick={() => toggleExpanded(item.id)}
-                className='text-gray-400 hover:text-gray-600'
+                className="text-gray-600 hover:text-white"
               >
                 {isExpanded ? (
                   <ChevronDown className='w-4 h-4' />
@@ -310,18 +310,18 @@ export default function NavigationManager({
 
             <div className='flex items-center space-x-2'>
               {item.icon && (
-                <div className='w-4 h-4 text-gray-400'>
+                <div className="w-4 h-4 text-white">
                   {/* Icon placeholder */}
                   <div className='w-4 h-4 bg-gray-200 rounded'></div>
                 </div>
               )}
-              <span className='font-medium text-gray-900'>{item.title}</span>
+              <span className="font-medium text-white">{item.title}</span>
               {item.target === '_blank' && (
-                <ExternalLink className='w-3 h-3 text-gray-400' />
+                <ExternalLink className="w-3 h-3 text-white" />
               )}
             </div>
 
-            <div className='flex items-center space-x-2 text-sm text-gray-500'>
+            <div className="flex items-center space-x-2 text-sm text-white">
               <span className='bg-gray-100 px-2 py-1 rounded'>{item.url}</span>
               {!item.isVisible && (
                 <span className='bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs'>
@@ -376,10 +376,10 @@ export default function NavigationManager({
       <div className='px-6 py-4 border-b border-gray-200'>
         <div className='flex justify-between items-center'>
           <div>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               Navigation Manager
             </h2>
-            <p className='text-sm text-gray-600 mt-1'>
+            <p className="text-sm text-white">
               Manage site navigation menus and menu items
             </p>
           </div>
@@ -402,7 +402,7 @@ export default function NavigationManager({
                 className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeMenu === menu.id
                     ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
                 <Icon className='w-4 h-4' />
@@ -416,10 +416,10 @@ export default function NavigationManager({
       {/* Content */}
       <div className='p-6'>
         <div className='mb-4'>
-          <h3 className='text-lg font-medium text-gray-900 mb-2'>
+          <h3 className="text-lg font-medium text-white">
             {menus.find(m => m.id === activeMenu)?.label}
           </h3>
-          <p className='text-sm text-gray-600'>
+          <p className="text-sm text-white">
             Drag and drop to reorder menu items. Click the arrow to
             expand/collapse submenus.
           </p>
@@ -428,8 +428,8 @@ export default function NavigationManager({
         {/* Menu Items List */}
         <div className='space-y-2'>
           {menuItems.length === 0 ? (
-            <div className='text-center py-8 text-gray-500'>
-              <Menu className='w-12 h-12 mx-auto mb-4 text-gray-300' />
+            <div className="text-center py-8 text-white">
+              <Menu className="w-12 h-12 mx-auto mb-4 text-white" />
               <p>No menu items found</p>
               <p className='text-sm'>Click "Add Menu Item" to get started</p>
             </div>
@@ -481,7 +481,7 @@ export default function NavigationManager({
                   {...form.register('isActive')}
                   className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                 />
-                <label className='ml-2 text-sm text-gray-700'>
+                <label className="ml-2 text-sm text-white">
                   Active - Enable this menu item
                 </label>
               </div>
@@ -491,7 +491,7 @@ export default function NavigationManager({
                   {...form.register('isVisible')}
                   className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                 />
-                <label className='ml-2 text-sm text-gray-700'>
+                <label className="ml-2 text-sm text-white">
                   Visible - Show this menu item to users
                 </label>
               </div>
@@ -556,7 +556,7 @@ export default function NavigationManager({
                   {...form.register('isActive')}
                   className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                 />
-                <label className='ml-2 text-sm text-gray-700'>
+                <label className="ml-2 text-sm text-white">
                   Active - Enable this menu item
                 </label>
               </div>
@@ -566,7 +566,7 @@ export default function NavigationManager({
                   {...form.register('isVisible')}
                   className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                 />
-                <label className='ml-2 text-sm text-gray-700'>
+                <label className="ml-2 text-sm text-white">
                   Visible - Show this menu item to users
                 </label>
               </div>

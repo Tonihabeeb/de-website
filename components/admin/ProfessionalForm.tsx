@@ -88,10 +88,10 @@ const ProfessionalForm: React.FC = () => {
     <div className='max-w-4xl mx-auto p-6'>
       <div className='bg-white rounded-lg shadow-lg p-8'>
         <div className='mb-8'>
-          <h2 className='text-3xl font-bold text-gray-900 mb-2'>
+          <h2 className="text-3xl font-bold text-white">
             Professional Form Example
           </h2>
-          <p className='text-gray-600'>
+          <p className="text-white">
             This form demonstrates the new professional components with
             validation and enhanced UX.
           </p>
@@ -170,7 +170,7 @@ const ProfessionalForm: React.FC = () => {
 
           {/* Rich Text Editor */}
           <div className='space-y-2'>
-            <label className='block text-sm font-medium text-gray-700'>
+            <label className="block text-sm font-medium text-white">
               Content <span className='text-red-500'>*</span>
             </label>
             <RichTextEditor
@@ -187,7 +187,7 @@ const ProfessionalForm: React.FC = () => {
 
           {/* File Upload */}
           <div className='space-y-2'>
-            <label className='block text-sm font-medium text-gray-700'>
+            <label className="block text-sm font-medium text-white">
               Attachments
             </label>
             <FileUpload
@@ -248,25 +248,25 @@ const ProfessionalForm: React.FC = () => {
             <div className='grid grid-cols-2 gap-4 text-sm'>
               <div>
                 <span className='font-medium'>Title:</span>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   {watch('title') || 'Not provided'}
                 </p>
               </div>
               <div>
                 <span className='font-medium'>Email:</span>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   {watch('email') || 'Not provided'}
                 </p>
               </div>
               <div>
                 <span className='font-medium'>Category:</span>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   {watch('category') || 'Not provided'}
                 </p>
               </div>
               <div>
                 <span className='font-medium'>Priority:</span>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   {watch('priority') || 'Not provided'}
                 </p>
               </div>
@@ -274,7 +274,7 @@ const ProfessionalForm: React.FC = () => {
 
             <div>
               <span className='font-medium'>Description:</span>
-              <p className='text-gray-600 mt-1'>
+              <p className="text-white">
                 {watch('description') || 'Not provided'}
               </p>
             </div>
@@ -282,7 +282,7 @@ const ProfessionalForm: React.FC = () => {
             <div>
               <span className='font-medium'>Content:</span>
               <div
-                className='mt-1 text-gray-600 prose prose-sm max-w-none'
+                className="mt-1 text-white"
                 dangerouslySetInnerHTML={{
                   __html: watch('content') || 'Not provided',
                 }}
@@ -291,7 +291,7 @@ const ProfessionalForm: React.FC = () => {
 
             <div>
               <span className='font-medium'>Files:</span>
-              <p className='text-gray-600 mt-1'>
+              <p className="text-white">
                 {selectedFiles.length > 0
                   ? `${selectedFiles.length} file(s) selected`
                   : 'No files selected'}

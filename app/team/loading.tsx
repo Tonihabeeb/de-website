@@ -2,7 +2,7 @@ export default function Loading() {
   return (
     <div>
       {/* Hero Section Skeleton */}
-      <section className='section-padding bg-gradient-to-br from-primary to-primary-dark text-white animate-pulse'>
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white animate-pulse text-white">
         <div className='container'>
           <div className='max-w-4xl mx-auto text-center'>
             <div className='h-10 w-2/3 mx-auto bg-white/30 rounded mb-6' />

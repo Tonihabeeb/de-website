@@ -332,13 +332,13 @@ export default function EPCServicesPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Comprehensive EPC Solutions</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 Deep Engineering provides end-to-end Engineering, Procurement,
                 and Construction (EPC) services for renewable energy projects,
                 with specialized expertise in Kinetic Power Plant (KPP)
                 technology.
               </p>
-              <p className='text-gray-text mb-6'>
+              <p className="text-white">
                 Our integrated approach ensures seamless project delivery from
                 concept to commissioning, with rigorous quality assurance and
                 proven performance track record.
@@ -346,7 +346,7 @@ export default function EPCServicesPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 text-center text-white"
                 >
                   Learn About KPP Technology
                 </Link>
@@ -371,7 +371,7 @@ export default function EPCServicesPage() {
                   </div>
                   <div>
                     <h4 className='font-semibold'>Turnkey Solutions</h4>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       Complete project delivery from design to operation
                     </p>
                   </div>
@@ -384,7 +384,7 @@ export default function EPCServicesPage() {
                   </div>
                   <div>
                     <h4 className='font-semibold'>Quality Assurance</h4>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       Rigorous quality control and international standards
                     </p>
                   </div>
@@ -397,7 +397,7 @@ export default function EPCServicesPage() {
                   </div>
                   <div>
                     <h4 className='font-semibold'>Timely Delivery</h4>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       95% on-time project completion rate
                     </p>
                   </div>
@@ -410,7 +410,7 @@ export default function EPCServicesPage() {
                   </div>
                   <div>
                     <h4 className='font-semibold'>Safety First</h4>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       Zero-harm safety culture and protocols
                     </p>
                   </div>
@@ -426,7 +426,7 @@ export default function EPCServicesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>EPC Capabilities</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Comprehensive capabilities across Engineering, Procurement, and
               Construction phases, ensuring successful project delivery and
               optimal performance.
@@ -451,7 +451,7 @@ export default function EPCServicesPage() {
                       <h4 className='font-semibold text-sm mb-2'>
                         {capability.name}
                       </h4>
-                      <p className='text-xs text-gray-text'>
+                      <p className="text-xs text-white">
                         {capability.description}
                       </p>
                     </div>
@@ -468,7 +468,7 @@ export default function EPCServicesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Contractor Profiles & Capabilities</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our network of specialized contractors brings decades of combined
               experience in renewable energy projects and international best
               practices.
@@ -484,7 +484,7 @@ export default function EPCServicesPage() {
                   </div>
                   <div>
                     <h3 className='font-semibold text-lg'>{contractor.name}</h3>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       {contractor.specialization}
                     </p>
                   </div>
@@ -492,13 +492,13 @@ export default function EPCServicesPage() {
                 <div className='grid grid-cols-2 gap-4 mb-4'>
                   <div>
                     <h4 className='font-semibold text-sm'>Experience</h4>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       {contractor.experience}
                     </p>
                   </div>
                   <div>
                     <h4 className='font-semibold text-sm'>Projects</h4>
-                    <p className='text-sm text-gray-text'>
+                    <p className="text-sm text-white">
                       {contractor.projects}
                     </p>
                   </div>
@@ -527,7 +527,7 @@ export default function EPCServicesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Project Delivery Methodology</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our proven project delivery methodology ensures successful
               execution through structured phases and comprehensive quality
               control.
@@ -558,7 +558,7 @@ export default function EPCServicesPage() {
                               <h3 className='font-semibold text-lg'>
                                 {phase.phase}
                               </h3>
-                              <p className='text-sm text-gray-text'>
+                              <p className="text-sm text-white">
                                 {phase.description}
                               </p>
                             </div>
@@ -576,7 +576,7 @@ export default function EPCServicesPage() {
                               className='flex items-start'
                             >
                               <div className='w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0'></div>
-                              <span className='text-sm text-gray-text'>
+                              <span className="text-sm text-white">
                                 {activity}
                               </span>
                             </li>
@@ -597,7 +597,7 @@ export default function EPCServicesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Quality Assurance Processes</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Comprehensive quality assurance processes ensure consistent
               delivery of high-quality solutions that meet international
               standards and client expectations.
@@ -614,7 +614,7 @@ export default function EPCServicesPage() {
                   {category.processes.map((process, processIndex) => (
                     <li key={processIndex} className='flex items-start'>
                       <div className='w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0'></div>
-                      <span className='text-gray-text'>{process}</span>
+                      <span className="text-white">{process}</span>
                     </li>
                   ))}
                 </ul>
@@ -629,7 +629,7 @@ export default function EPCServicesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Performance Track Record</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Proven performance metrics demonstrate our commitment to
               excellence and successful project delivery across all EPC
               services.
@@ -654,7 +654,7 @@ export default function EPCServicesPage() {
                       <h4 className='font-semibold text-sm mb-2'>
                         {metric.label}
                       </h4>
-                      <p className='text-xs text-gray-text'>
+                      <p className="text-xs text-white">
                         {metric.description}
                       </p>
                     </div>

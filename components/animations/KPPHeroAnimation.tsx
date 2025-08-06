@@ -17,8 +17,8 @@ export default function KPPHeroAnimation() {
           </div>
 
           {/* Core Element */}
-          <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 rounded-full animate-pulse-slow'>
-            <div className='absolute inset-2 bg-gradient-to-br from-blue-400/30 to-indigo-500/30 rounded-full animate-ping-slow'></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 rounded-full animate-pulse-slow text-white">
+            <div className="absolute inset-2 bg-gradient-to-br from-blue-400/30 to-indigo-500/30 rounded-full animate-ping-slow text-white"></div>
           </div>
         </div>
       </div>
@@ -26,8 +26,8 @@ export default function KPPHeroAnimation() {
       {/* Floating Energy Particles */}
       <div className='absolute inset-0'>
         {/* Particle 1 */}
-        <div className='absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/60 rounded-full animate-float-1'></div>
-        <div className='absolute top-1/4 left-1/4 w-1 h-1 bg-blue-300/40 rounded-full animate-float-1-delayed'></div>
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/60 rounded-full animate-float-1 text-white"></div>
+        <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-blue-300/40 rounded-full animate-float-1-delayed text-white"></div>
 
         {/* Particle 2 */}
         <div className='absolute top-3/4 right-1/4 w-2 h-2 bg-indigo-400/60 rounded-full animate-float-2'></div>
@@ -38,8 +38,8 @@ export default function KPPHeroAnimation() {
         <div className='absolute top-1/2 right-1/3 w-1 h-1 bg-cyan-300/40 rounded-full animate-float-3-delayed'></div>
 
         {/* Particle 4 */}
-        <div className='absolute bottom-1/3 left-1/3 w-2 h-2 bg-blue-400/60 rounded-full animate-float-4'></div>
-        <div className='absolute bottom-1/3 left-1/3 w-1 h-1 bg-blue-300/40 rounded-full animate-float-4-delayed'></div>
+        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-blue-400/60 rounded-full animate-float-4 text-white"></div>
+        <div className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-blue-300/40 rounded-full animate-float-4-delayed text-white"></div>
       </div>
 
       {/* Energy Flow Lines */}
@@ -135,7 +135,7 @@ export default function KPPHeroAnimation() {
 
         {/* Pulse 2 */}
         <div className='absolute bottom-1/3 right-1/4 w-4 h-4 border border-blue-400/30 rounded-full animate-pulse-expand-2'></div>
-        <div className='absolute bottom-1/3 right-1/4 w-2 h-2 bg-blue-400/20 rounded-full animate-pulse-expand-2-delayed'></div>
+        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-blue-400/20 rounded-full animate-pulse-expand-2-delayed text-white"></div>
 
         {/* Pulse 3 */}
         <div className='absolute top-2/3 left-2/3 w-4 h-4 border border-indigo-400/30 rounded-full animate-pulse-expand-3'></div>
@@ -143,7 +143,7 @@ export default function KPPHeroAnimation() {
       </div>
 
       {/* Background Gradient Overlay */}
-      <div className='absolute inset-0 bg-gradient-to-br from-blue-50/80 via-indigo-50/60 to-cyan-50/80'></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-indigo-50/60 to-cyan-50/80 text-white"></div>
     </div>
   );
 }

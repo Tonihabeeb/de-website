@@ -26,7 +26,7 @@ export default function InteractiveFeaturesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Energy Cost Calculator</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Compare the costs of KPP technology with traditional energy
               sources and see your potential savings. Input your energy needs
               and get instant calculations.
@@ -41,7 +41,7 @@ export default function InteractiveFeaturesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Project Status Tracker</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Track the real-time progress of our KPP projects across Iraq with
               detailed timelines, milestones, and updates.
             </p>
@@ -55,7 +55,7 @@ export default function InteractiveFeaturesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Enhanced Contact Forms</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Get in touch with our team using specialized forms for different
               types of inquiries. Choose the form that best matches your needs.
             </p>
@@ -69,7 +69,7 @@ export default function InteractiveFeaturesPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Interactive Tools Overview</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our interactive features are designed to provide you with valuable
               insights and easy ways to engage with Deep Engineering.
             </p>
@@ -93,15 +93,15 @@ export default function InteractiveFeaturesPage() {
                     />
                   </svg>
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Energy Cost Calculator
                 </h3>
-                <p className='text-gray-600 text-base mb-4'>
+                <p className="text-white">
                   Compare KPP technology costs with diesel, solar, and natural
                   gas. Calculate potential savings and payback periods based on
                   your energy needs.
                 </p>
-                <ul className='text-base text-gray-500 space-y-1'>
+                <ul className="text-base text-white">
                   <li>• Real-time cost comparisons</li>
                   <li>• Savings calculations</li>
                   <li>• Payback period analysis</li>
@@ -110,7 +110,7 @@ export default function InteractiveFeaturesPage() {
               </div>
 
               <div className='bg-white rounded-lg p-6 shadow-sm border border-gray-200'>
-                <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4'>
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 text-white">
                   <svg
                     className='w-6 h-6 text-blue-600'
                     fill='none'
@@ -125,14 +125,14 @@ export default function InteractiveFeaturesPage() {
                     />
                   </svg>
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Project Status Tracker
                 </h3>
-                <p className='text-gray-600 text-base mb-4'>
+                <p className="text-white">
                   Monitor the progress of our KPP projects with detailed
                   timelines, milestones, and real-time updates from across Iraq.
                 </p>
-                <ul className='text-base text-gray-500 space-y-1'>
+                <ul className="text-base text-white">
                   <li>• Real-time project progress</li>
                   <li>• Milestone tracking</li>
                   <li>• Project updates</li>
@@ -156,14 +156,14 @@ export default function InteractiveFeaturesPage() {
                     />
                   </svg>
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Enhanced Contact Forms
                 </h3>
-                <p className='text-gray-600 text-base mb-4'>
+                <p className="text-white">
                   Specialized contact forms for different inquiry types with
                   smart validation and user-friendly interfaces.
                 </p>
-                <ul className='text-base text-gray-500 space-y-1'>
+                <ul className="text-base text-white">
                   <li>• Multiple form types</li>
                   <li>• Smart validation</li>
                   <li>• Real-time feedback</li>

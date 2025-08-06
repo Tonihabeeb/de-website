@@ -52,7 +52,7 @@ export default function ScrollTriggeredDiagram({
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative'>
           {/* Connection Lines */}
           <motion.div
-            className='hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-primary-light transform -translate-y-1/2 z-0'
+            className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-primary-light transform -translate-y-1/2 z-0 text-white"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 1, ease: 'easeOut' }}
@@ -132,7 +132,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
     >
       {/* Step Circle with Icon */}
       <motion.div
-        className='w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white text-3xl mx-auto mb-4 relative shadow-lg'
+        className="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white text-3xl mx-auto mb-4 relative shadow-lg text-white"
         initial={{ scale: 0, rotate: 0 }}
         animate={isInView ? { scale: 1, rotate: 360 } : { scale: 0, rotate: 0 }}
         transition={{
@@ -143,13 +143,13 @@ function StepCard({ step, index }: { step: any; index: number }) {
         aria-hidden='true'
       >
         {step.icon}
-        <div className='absolute inset-0 bg-gradient-to-br from-primary-light to-primary rounded-full opacity-20 animate-pulse' />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-light to-primary rounded-full opacity-20 animate-pulse text-white" />
       </motion.div>
 
       {/* Content */}
       <h3 className='text-xl font-semibold text-primary mb-3'>{step.title}</h3>
       {(expanded || !isMobile) && (
-        <p className='text-gray-text text-sm leading-relaxed'>
+        <p className="text-white">
           {step.description}
         </p>
       )}

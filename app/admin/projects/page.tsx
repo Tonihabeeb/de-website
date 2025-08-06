@@ -324,7 +324,7 @@ export default function ProjectsManagement() {
         <div className='flex flex-col sm:flex-row gap-4'>
           <div className='flex-1'>
             <div className='relative'>
-              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 w-4 h-4' />
               <input
                 type='text'
                 placeholder='Search projects...'
@@ -397,7 +397,7 @@ export default function ProjectsManagement() {
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {filteredProjects.length === 0 ? (
           <div className='col-span-full text-center py-12'>
-            <div className='text-gray-500'>
+            <div className='text-gray-700'>
               <p className='text-lg font-medium'>No projects found.</p>
               <p className='mt-1'>
                 Get started by creating your first project.
@@ -463,7 +463,7 @@ export default function ProjectsManagement() {
                 </div>
 
                 <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
-                  <div className='text-xs text-gray-500'>
+                  <div className='text-xs text-gray-700'>
                     Created {new Date(project.created_at).toLocaleDateString()}
                   </div>
                   <div className='flex items-center space-x-2'>
@@ -518,20 +518,20 @@ export default function ProjectsManagement() {
             ) : (
               <>
                 {versions.length === 0 ? (
-                  <div className='text-gray-500'>
+                  <div className='text-gray-700'>
                     No previous versions found.
                   </div>
                 ) : (
                   <table className='min-w-full mb-4'>
                     <thead>
                       <tr>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className='text-left text-xs font-medium text-gray-700 uppercase px-2 py-1'>
                           Version
                         </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className='text-left text-xs font-medium text-gray-700 uppercase px-2 py-1'>
                           Created
                         </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className='text-left text-xs font-medium text-gray-700 uppercase px-2 py-1'>
                           User
                         </th>
                         <th></th>
@@ -584,7 +584,7 @@ export default function ProjectsManagement() {
             <div className='flex justify-end mt-4'>
               <button
                 onClick={() => setVersionModalProjectId(null)}
-                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-600 transition-colors'
               >
                 Close
               </button>
@@ -612,7 +612,7 @@ export default function ProjectsManagement() {
             <div className='flex justify-end'>
               <button
                 onClick={() => setImportResults(null)}
-                className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400'
+                className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-600'
               >
                 Close
               </button>

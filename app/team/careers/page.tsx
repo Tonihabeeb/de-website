@@ -204,7 +204,7 @@ export default function CareersPage() {
           <div className='max-w-6xl mx-auto'>
             <div className='text-center mb-12'>
               <h2 className='mb-4'>Why Work With Us?</h2>
-              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+              <p className="text-lg text-white">
                 At Deep Engineering, we're not just building power plants –
                 we're building the future. Join a team that's passionate about
                 innovation, sustainability, and making a real impact.
@@ -221,7 +221,7 @@ export default function CareersPage() {
                   <h3 className='text-xl font-semibold text-primary mb-3'>
                     {benefit.title}
                   </h3>
-                  <p className='text-gray-600'>{benefit.description}</p>
+                  <p className="text-white">{benefit.description}</p>
                 </div>
               ))}
             </div>
@@ -234,7 +234,7 @@ export default function CareersPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Current Openings</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Explore our current job opportunities and find the perfect role to
               advance your career in renewable energy and engineering.
             </p>
@@ -252,7 +252,7 @@ export default function CareersPage() {
                       <h3 className='text-xl font-semibold text-primary mb-2'>
                         {job.title}
                       </h3>
-                      <div className='flex flex-wrap gap-4 text-sm text-gray-600'>
+                      <div className="flex flex-wrap gap-4 text-sm text-white">
                         <span className='flex items-center'>
                           <Briefcase className='w-4 h-4 mr-1' />
                           {job.department}
@@ -271,37 +271,37 @@ export default function CareersPage() {
                         </span>
                       </div>
                     </div>
-                    <button className='mt-4 lg:mt-0 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]'>
+                    <button className="mt-4 lg:mt-0 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors min-w-[44px] min-h-[44px] text-white">
                       Apply Now
                     </button>
                   </div>
 
-                  <p className='text-gray-600 mb-4'>{job.description}</p>
+                  <p className="text-white">{job.description}</p>
 
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     <div>
-                      <h4 className='font-semibold text-gray-800 mb-3'>
+                      <h4 className="font-semibold text-white">
                         Requirements
                       </h4>
                       <ul className='space-y-2'>
                         {job.requirements.map((req, index) => (
                           <li key={index} className='flex items-start'>
                             <Check className='w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0' />
-                            <span className='text-sm text-gray-600'>{req}</span>
+                            <span className="text-sm text-white">{req}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     <div>
-                      <h4 className='font-semibold text-gray-800 mb-3'>
+                      <h4 className="font-semibold text-white">
                         Responsibilities
                       </h4>
                       <ul className='space-y-2'>
                         {job.responsibilities.map((resp, index) => (
                           <li key={index} className='flex items-start'>
                             <ArrowRight className='w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0' />
-                            <span className='text-sm text-gray-600'>
+                            <span className="text-sm text-white">
                               {resp}
                             </span>
                           </li>
@@ -326,10 +326,10 @@ export default function CareersPage() {
                 <div className='w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4'>
                   1
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Submit Application
                 </h3>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   Send your resume and cover letter to
                   careers@deepengineering.co
                 </p>
@@ -339,10 +339,10 @@ export default function CareersPage() {
                 <div className='w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4'>
                   2
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Interview Process
                 </h3>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   Initial screening followed by technical and cultural
                   interviews
                 </p>
@@ -352,10 +352,10 @@ export default function CareersPage() {
                 <div className='w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4'>
                   3
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Join Our Team
                 </h3>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   Welcome aboard! Start your journey with Deep Engineering
                 </p>
               </div>
@@ -396,14 +396,14 @@ export default function CareersPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-600'>
+            <p className="text-base text-white">
               Explore more about Deep Engineering and our team:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/team'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
+              className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
             >
               Meet the Team
             </Link>

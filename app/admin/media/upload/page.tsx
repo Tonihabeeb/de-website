@@ -1,29 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import {
-  Upload,
-  Image,
-  File,
-  Video,
-  Music,
-  Archive,
-  X,
-  CheckCircle,
-  AlertCircle,
-  Loader2,
-  Eye,
-  Download,
-  Trash2,
-  Edit,
-  Search,
-  Filter,
-  Grid,
-  List,
-  FolderPlus,
-  Plus,
-  RefreshCw,
-} from 'lucide-react';
+import { Upload, ImageIcon, File, Video, Music, Archive, X, CheckCircle, AlertCircle, Loader2, Eye, Download, Trash2, Search, Grid, List, Plus, RefreshCw } from 'lucide-react';
 import Image from 'next/image'; // Add this import
 
 interface MediaItem {
@@ -204,14 +182,14 @@ export default function MediaUpload() {
 
   const getFileIcon = (mimeType: string) => {
     if (mimeType.startsWith('image/'))
-      return <Image className='w-8 h-8 text-blue-500' />;
+      return <ImageIcon className='w-8 h-8 text-blue-500' />;
     if (mimeType.startsWith('video/'))
       return <Video className='w-8 h-8 text-purple-500' />;
     if (mimeType.startsWith('audio/'))
       return <Music className='w-8 h-8 text-green-500' />;
     if (mimeType.includes('zip') || mimeType.includes('rar'))
       return <Archive className='w-8 h-8 text-orange-500' />;
-    return <File className='w-8 h-8 text-gray-500' />;
+    return <File className="w-8 h-8 text-white" />;
   };
 
   const formatFileSize = (bytes: number) => {
@@ -236,7 +214,7 @@ export default function MediaUpload() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading media library...</span>
+          <span className="ml-2 text-white">Loading media library...</span>
         </div>
       </div>
     );
@@ -248,22 +226,22 @@ export default function MediaUpload() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Media Upload & Gallery
             </h1>
-            <p className='text-gray-600 mt-1'>Upload and manage media files</p>
+            <p className="text-white">Upload and manage media files</p>
           </div>
           <div className='flex space-x-3'>
             <button
               onClick={fetchMedia}
-              className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+              className="px-4 py-2 border border-gray-300 rounded-lg text-white"
             >
               <RefreshCw className='w-4 h-4 mr-2' />
               Refresh
             </button>
             <button
               onClick={() => fileInputRef.current?.click()}
-              className='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center'
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center text-white"
             >
               <Plus className='w-4 h-4 mr-2' />
               Add Files
@@ -294,8 +272,8 @@ export default function MediaUpload() {
 
       {/* Upload Area */}
       {selectedFiles.length > 0 && (
-        <div className='mb-6 bg-blue-50 border border-blue-200 rounded-lg p-6'>
-          <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+        <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-6 text-white">
+          <h3 className="text-lg font-semibold text-white">
             Upload Queue
           </h3>
 
@@ -310,10 +288,10 @@ export default function MediaUpload() {
                   <div className='flex items-center space-x-3'>
                     {getFileIcon(file.type)}
                     <div>
-                      <div className='font-medium text-gray-900'>
+                      <div className="font-medium text-white">
                         {file.name}
                       </div>
-                      <div className='text-sm text-gray-500'>
+                      <div className="text-sm text-white">
                         {formatFileSize(file.size)}
                       </div>
                     </div>
@@ -331,7 +309,7 @@ export default function MediaUpload() {
                         {uploadItem.status === 'error' && (
                           <AlertCircle className='w-4 h-4 text-red-500' />
                         )}
-                        <span className='text-sm text-gray-600'>
+                        <span className="text-sm text-white">
                           {uploadItem.status === 'error'
                             ? uploadItem.error
                             : `${uploadItem.progress}%`}
@@ -374,14 +352,14 @@ export default function MediaUpload() {
         onDragOver={handleDragOver}
         className='mb-6 border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-400 transition-colors'
       >
-        <Upload className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-        <h3 className='text-lg font-medium text-gray-900 mb-2'>
+        <Upload className="w-12 h-12 text-white" />
+        <h3 className="text-lg font-medium text-white">
           Drop files here
         </h3>
-        <p className='text-gray-600 mb-4'>or click to select files</p>
+        <p className="text-white">or click to select files</p>
         <button
           onClick={() => fileInputRef.current?.click()}
-          className='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors'
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-white"
         >
           Select Files
         </button>
@@ -399,7 +377,7 @@ export default function MediaUpload() {
       <div className='mb-6 flex flex-col sm:flex-row gap-4'>
         <div className='flex-1'>
           <div className='relative'>
-            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
             <input
               type='text'
               placeholder='Search media files...'
@@ -425,7 +403,7 @@ export default function MediaUpload() {
 
           <button
             onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-            className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+            className="px-4 py-2 border border-gray-300 rounded-lg text-white"
           >
             {viewMode === 'grid' ? (
               <List className='w-4 h-4' />
@@ -439,7 +417,7 @@ export default function MediaUpload() {
       {/* Media Gallery */}
       <div className='bg-white rounded-lg shadow'>
         <div className='p-6 border-b border-gray-200'>
-          <h2 className='text-lg font-semibold text-gray-900'>
+          <h2 className="text-lg font-semibold text-white">
             Media Library ({filteredMedia.length} files)
           </h2>
         </div>
@@ -468,12 +446,12 @@ export default function MediaUpload() {
 
                   <div className='text-center'>
                     <div
-                      className='text-sm font-medium text-gray-900 truncate'
+                      className="text-sm font-medium text-white"
                       title={item.filename}
                     >
                       {item.filename}
                     </div>
-                    <div className='text-xs text-gray-500'>
+                    <div className="text-xs text-white">
                       {formatFileSize(item.file_size)}
                     </div>
                   </div>
@@ -482,14 +460,14 @@ export default function MediaUpload() {
                     <div className='flex space-x-2'>
                       <button
                         onClick={() => window.open(item.file_path, '_blank')}
-                        className='p-2 bg-white rounded-full text-gray-700 hover:bg-gray-100'
+                        className="p-2 bg-white rounded-full text-white"
                         title='View'
                       >
                         <Eye className='w-4 h-4' />
                       </button>
                       <button
                         onClick={() => window.open(item.file_path, '_blank')}
-                        className='p-2 bg-white rounded-full text-gray-700 hover:bg-gray-100'
+                        className="p-2 bg-white rounded-full text-white"
                         title='Download'
                       >
                         <Download className='w-4 h-4' />
@@ -512,19 +490,19 @@ export default function MediaUpload() {
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     File
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Type
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Size
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Uploaded
                   </th>
-                  <th className='px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-white">
                     Actions
                   </th>
                 </tr>
@@ -536,22 +514,22 @@ export default function MediaUpload() {
                       <div className='flex items-center'>
                         {getFileIcon(item.mime_type)}
                         <div className='ml-3'>
-                          <div className='text-sm font-medium text-gray-900'>
+                          <div className="text-sm font-medium text-white">
                             {item.filename}
                           </div>
-                          <div className='text-sm text-gray-500'>
+                          <div className="text-sm text-white">
                             {item.original_name}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {item.mime_type}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {formatFileSize(item.file_size)}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {new Date(item.created_at).toLocaleDateString()}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
@@ -588,11 +566,11 @@ export default function MediaUpload() {
 
         {filteredMedia.length === 0 && (
           <div className='text-center py-12'>
-            <Upload className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-            <h3 className='text-lg font-medium text-gray-900 mb-2'>
+            <Upload className="w-12 h-12 text-white" />
+            <h3 className="text-lg font-medium text-white">
               No media files found
             </h3>
-            <p className='text-gray-600'>
+            <p className="text-white">
               Upload your first file to get started.
             </p>
           </div>

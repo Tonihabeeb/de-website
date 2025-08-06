@@ -192,7 +192,7 @@ export default function ControlSystemPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className='section-padding bg-gradient-to-br from-primary to-primary-dark text-white'>
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white text-white">
         <div className='container'>
           <div className='max-w-4xl mx-auto text-center'>
             <h1 className='mb-6 text-white font-bold text-4xl md:text-5xl'>
@@ -217,13 +217,13 @@ export default function ControlSystemPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Intelligent Power Management</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 The KPP control system serves as the brain of our power
                 generation technology, providing intelligent automation,
                 real-time monitoring, and predictive analytics to ensure optimal
                 performance and reliability.
               </p>
-              <p className='text-gray-text mb-6'>
+              <p className="text-white">
                 Our advanced control technology enables unmanned operation while
                 maintaining peak efficiency, making KPP systems truly autonomous
                 and cost-effective power generation solutions.
@@ -231,7 +231,7 @@ export default function ControlSystemPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 text-center text-white"
                 >
                   Learn How It Works
                 </Link>
@@ -251,19 +251,19 @@ export default function ControlSystemPage() {
                 </h3>
                 <div className='space-y-4 text-left'>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Response Time:</span>
+                    <span className="text-white">Response Time:</span>
                     <span className='font-semibold'>&lt; 100ms</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Uptime:</span>
+                    <span className="text-white">Uptime:</span>
                     <span className='font-semibold'>99.9%</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Data Accuracy:</span>
+                    <span className="text-white">Data Accuracy:</span>
                     <span className='font-semibold'>99.99%</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Scalability:</span>
+                    <span className="text-white">Scalability:</span>
                     <span className='font-semibold'>Unlimited</span>
                   </div>
                 </div>
@@ -278,7 +278,7 @@ export default function ControlSystemPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Key Features & Capabilities</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               The KPP control system incorporates cutting-edge technology to
               ensure intelligent, reliable, and efficient power management.
             </p>
@@ -293,7 +293,7 @@ export default function ControlSystemPage() {
                 <h3 className='text-xl font-semibold text-primary mb-3'>
                   {feature.title}
                 </h3>
-                <p className='text-gray-text'>{feature.description}</p>
+                <p className="text-white">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -305,7 +305,7 @@ export default function ControlSystemPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Control Functions</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Comprehensive control functions that ensure optimal operation and
               performance of the KPP power generation system.
             </p>
@@ -322,7 +322,7 @@ export default function ControlSystemPage() {
                     {function_.title}
                   </h3>
                 </div>
-                <p className='text-gray-text'>{function_.description}</p>
+                <p className="text-white">{function_.description}</p>
               </div>
             ))}
           </div>
@@ -334,7 +334,7 @@ export default function ControlSystemPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Technical Specifications</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Detailed technical specifications and performance parameters of
               the KPP control system.
             </p>
@@ -349,14 +349,14 @@ export default function ControlSystemPage() {
                   {category.specs.map((spec, sIndex) => (
                     <div key={sIndex} className='border-b border-gray-300 pb-4'>
                       <div className='flex justify-between items-start mb-2'>
-                        <span className='font-medium text-gray-text'>
+                        <span className="font-medium text-white">
                           {spec.name}
                         </span>
                         <span className='font-bold text-primary text-lg'>
                           {spec.value}
                         </span>
                       </div>
-                      <p className='text-sm text-gray-text'>
+                      <p className="text-sm text-white">
                         {spec.description}
                       </p>
                     </div>
@@ -377,7 +377,7 @@ export default function ControlSystemPage() {
               <Layers className='w-6 h-6 text-blue-600' />
               Detailed Engineering Data
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   PLC-based control system coordinates compressor, valves, and
@@ -404,7 +404,7 @@ export default function ControlSystemPage() {
               <BarChart3 className='w-6 h-6 text-orange-600' />
               Performance Benchmarks
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>Response time: &lt; 100 ms for system adjustments.</li>
                 <li>System uptime: 99.9% with high availability.</li>
@@ -425,7 +425,7 @@ export default function ControlSystemPage() {
               <Wrench className='w-6 h-6 text-green-600' />
               Maintenance Requirements
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>Software updates and security patches as per schedule.</li>
                 <li>
@@ -444,7 +444,7 @@ export default function ControlSystemPage() {
               <ClipboardCheck className='w-6 h-6 text-purple-600' />
               Integration Specifications
             </h2>
-            <div className='bg-gray-50 border rounded p-4 text-gray-700'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Integrates with all KPP modules for coordinated operation.
@@ -463,7 +463,7 @@ export default function ControlSystemPage() {
             </div>
           </div>
         </div>
-        <div className='container mt-8 text-sm text-gray-500'>
+        <div className="container mt-8 text-sm text-white">
           <span>
             Source:{' '}
             <a

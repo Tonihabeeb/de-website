@@ -51,7 +51,7 @@ export default function StakeholderDashboardPage() {
                 <div className='text-primary'>Quality & compliance</div>
               </div>
             </div>
-            <div className='bg-gray-light p-8 rounded-lg text-center text-gray-500'>
+            <div className="bg-gray-light p-8 rounded-lg text-center text-white">
               Communication tracking, decision matrix, and relationship
               management interface coming soon.
             </div>

@@ -18,7 +18,7 @@ export default function NotFound() {
               <h2 className='text-2xl font-semibold text-primary mb-4'>
                 Oops! Page Not Found
               </h2>
-              <p className='text-lg text-gray-text mb-8'>
+              <p className="text-lg text-white">
                 We're sorry, but the page you're looking for doesn't exist. It
                 might have been moved, deleted, or you entered the wrong URL.
               </p>
@@ -28,7 +28,7 @@ export default function NotFound() {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
               <Link
                 href='/'
-                className='bg-primary text-white px-6 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200'
+                className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 text-white"
               >
                 Go to Homepage
               </Link>
@@ -53,7 +53,7 @@ export default function NotFound() {
                   <div className='text-primary font-semibold mb-2'>
                     Technology
                   </div>
-                  <div className='text-base text-gray-text'>
+                  <div className="text-base text-white">
                     Learn about KPP technology
                   </div>
                 </Link>
@@ -64,7 +64,7 @@ export default function NotFound() {
                   <div className='text-primary font-semibold mb-2'>
                     Projects
                   </div>
-                  <div className='text-base text-gray-text'>
+                  <div className="text-base text-white">
                     View our current projects
                   </div>
                 </Link>
@@ -75,7 +75,7 @@ export default function NotFound() {
                   <div className='text-primary font-semibold mb-2'>
                     About Us
                   </div>
-                  <div className='text-base text-gray-text'>
+                  <div className="text-base text-white">
                     Learn about Deep Engineering
                   </div>
                 </Link>

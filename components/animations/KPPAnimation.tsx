@@ -76,12 +76,12 @@ export default function KPPAnimation({
   if (shouldReduceMotion) {
     return (
       <div className={className} style={{ minHeight: 320 }}>
-        <div className='w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg mx-auto mt-16'>
+        <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg mx-auto mt-16 text-white">
           <div className='w-12 h-12 bg-white rounded-full flex items-center justify-center'>
             <span className='text-blue-600 text-2xl'>⚡</span>
           </div>
         </div>
-        <div className='text-center mt-2 text-base font-semibold text-gray-700'>
+        <div className="text-center mt-2 text-base font-semibold text-white">
           Floater (Animation Reduced)
         </div>
       </div>
@@ -91,20 +91,20 @@ export default function KPPAnimation({
   return (
     <div className={`relative w-full max-w-4xl mx-auto ${className}`}>
       {/* Animation Container */}
-      <div className='relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200'>
+      <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200 text-white">
         {/* Title and Controls */}
         <div className='flex items-center justify-between mb-8'>
           <div>
             <h3 className='text-2xl font-bold text-primary mb-2'>
               KPP Animation
             </h3>
-            <p className='text-gray-600'>
+            <p className="text-white">
               Watch the complete energy generation cycle
             </p>
           </div>
           <div className='flex items-center space-x-4'>
             <div className='flex items-center space-x-2'>
-              <span className='text-sm text-gray-600'>Speed:</span>
+              <span className="text-sm text-white">Speed:</span>
               <select
                 value={speed}
                 onChange={e => window.location.reload()} // Simple reload for demo
@@ -131,10 +131,10 @@ export default function KPPAnimation({
         {/* Main Animation Area */}
         <div className='relative h-96 bg-white rounded-xl border border-gray-200 overflow-hidden'>
           {/* Water Tank Background */}
-          <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-blue-200 to-blue-100'>
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-blue-200 to-blue-100 text-white">
             {/* Water Surface Effect */}
             <motion.div
-              className='absolute top-0 left-0 right-0 h-1 bg-blue-300/50'
+              className="absolute top-0 left-0 right-0 h-1 bg-blue-300/50 text-white"
               animate={{
                 opacity: [0.3, 0.7, 0.3],
               }}
@@ -159,8 +159,8 @@ export default function KPPAnimation({
               ease: 'easeInOut',
             }}
           >
-            <div className='w-16 h-16 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center'>
-              <div className='w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center'>
+            <div className="w-16 h-16 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white">
+              <div className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center text-white">
                 <Wind className='w-8 h-8 text-white' />
               </div>
             </div>
@@ -176,7 +176,7 @@ export default function KPPAnimation({
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className='absolute w-2 h-2 bg-blue-300 rounded-full'
+              className="absolute w-2 h-2 bg-blue-300 rounded-full text-white"
               style={{
                 willChange: 'transform, opacity',
                 left: `${45 + i * 2}%`,
@@ -202,7 +202,7 @@ export default function KPPAnimation({
             style={{ willChange: 'transform, opacity', bottom: '50%' }}
             animate={controls}
           >
-            <div className='w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg'>
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg text-white">
               <div className='w-12 h-12 bg-white rounded-full flex items-center justify-center'>
                 <Zap className='w-12 h-12 text-white' />
               </div>
@@ -228,7 +228,7 @@ export default function KPPAnimation({
               ease: 'linear',
             }}
           >
-            <div className='w-16 h-16 border-4 border-gray-400 rounded-full flex items-center justify-center'>
+            <div className='w-16 h-16 border-4 border-gray-600 rounded-full flex items-center justify-center'>
               <div className='w-8 h-8 bg-gray-600 rounded-full'></div>
             </div>
             <div className='text-center mt-2'>
@@ -252,7 +252,7 @@ export default function KPPAnimation({
               ease: 'easeInOut',
             }}
           >
-            <div className='w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center'>
+            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center text-white">
               <Zap className='w-16 h-16 text-white' />
             </div>
             <div className='text-center mt-2'>
@@ -325,28 +325,28 @@ export default function KPPAnimation({
         {/* Animation Legend */}
         <div className='mt-6 grid grid-cols-2 md:grid-cols-4 gap-4'>
           <div className='text-center'>
-            <div className='w-8 h-8 bg-blue-400 rounded-full mx-auto mb-2 flex items-center justify-center'>
+            <div className="w-8 h-8 bg-blue-400 rounded-full mx-auto mb-2 flex items-center justify-center text-white">
               <Wind className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-600'>Air Injection</p>
+            <p className="text-xs text-white">Air Injection</p>
           </div>
           <div className='text-center'>
-            <div className='w-8 h-8 bg-blue-500 rounded-full mx-auto mb-2 flex items-center justify-center'>
+            <div className="w-8 h-8 bg-blue-500 rounded-full mx-auto mb-2 flex items-center justify-center text-white">
               <ArrowUp className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-600'>Floater Rise</p>
+            <p className="text-xs text-white">Floater Rise</p>
           </div>
           <div className='text-center'>
-            <div className='w-8 h-8 bg-gray-400 rounded-full mx-auto mb-2 flex items-center justify-center'>
+            <div className='w-8 h-8 bg-gray-600 rounded-full mx-auto mb-2 flex items-center justify-center'>
               <Settings className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-600'>Chain Drive</p>
+            <p className="text-xs text-white">Chain Drive</p>
           </div>
           <div className='text-center'>
             <div className='w-8 h-8 bg-green-500 rounded-lg mx-auto mb-2 flex items-center justify-center'>
               <Zap className='w-8 h-8 text-white' />
             </div>
-            <p className='text-xs text-gray-600'>Power Output</p>
+            <p className="text-xs text-white">Power Output</p>
           </div>
         </div>
 
@@ -356,7 +356,7 @@ export default function KPPAnimation({
             <div
               className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-green-500' : 'bg-red-500'}`}
             ></div>
-            <span className='text-sm text-gray-600'>
+            <span className="text-sm text-white">
               {isPlaying ? 'Animation Running' : 'Animation Paused'}
             </span>
           </div>

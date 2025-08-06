@@ -161,7 +161,7 @@ export default function PneumaticSystemPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className='section-padding bg-gradient-to-br from-primary to-primary-dark text-white'>
+      <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-white text-white">
         <div className='container'>
           <div className='max-w-4xl mx-auto text-center'>
             <h1 className='mb-6 text-white font-bold text-4xl md:text-5xl'>
@@ -186,13 +186,13 @@ export default function PneumaticSystemPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>Precision Air Management</h2>
-              <p className='text-lg text-gray-text mb-6'>
+              <p className="text-lg text-white">
                 The KPP pneumatic system plays a crucial role in maintaining
                 optimal operating conditions throughout the power generation
                 process, ensuring efficient energy conversion and system
                 reliability.
               </p>
-              <p className='text-gray-text mb-6'>
+              <p className="text-white">
                 Our advanced air management technology provides precise control
                 over pressure and flow rates, enabling the KPP system to operate
                 at peak efficiency while maintaining safety and reliability
@@ -201,7 +201,7 @@ export default function PneumaticSystemPage() {
               <div className='flex flex-col sm:flex-row gap-4'>
                 <Link
                   href='/technology/how-it-works'
-                  className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 text-center'
+                  className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 text-center text-white"
                 >
                   Learn How It Works
                 </Link>
@@ -221,19 +221,19 @@ export default function PneumaticSystemPage() {
                 </h3>
                 <div className='space-y-4 text-left'>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Operating Pressure:</span>
+                    <span className="text-white">Operating Pressure:</span>
                     <span className='font-semibold'>2-10 bar</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Efficiency:</span>
+                    <span className="text-white">Efficiency:</span>
                     <span className='font-semibold'>85-92%</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Response Time:</span>
+                    <span className="text-white">Response Time:</span>
                     <span className='font-semibold'>&lt; 5 seconds</span>
                   </div>
                   <div className='flex justify-between'>
-                    <span className='text-gray-text'>Lifespan:</span>
+                    <span className="text-white">Lifespan:</span>
                     <span className='font-semibold'>15+ years</span>
                   </div>
                 </div>
@@ -248,7 +248,7 @@ export default function PneumaticSystemPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Key Features & Capabilities</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               The KPP pneumatic system incorporates advanced technology to
               ensure reliable, efficient, and precise air management throughout
               the power generation process.
@@ -264,7 +264,7 @@ export default function PneumaticSystemPage() {
                 <h3 className='text-xl font-semibold text-primary mb-3'>
                   {feature.title}
                 </h3>
-                <p className='text-gray-text'>{feature.description}</p>
+                <p className="text-white">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -276,7 +276,7 @@ export default function PneumaticSystemPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Technical Specifications</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Detailed technical specifications and performance parameters of
               the KPP pneumatic system.
             </p>
@@ -291,14 +291,14 @@ export default function PneumaticSystemPage() {
                   {category.specs.map((spec, sIndex) => (
                     <div key={sIndex} className='border-b border-gray-300 pb-4'>
                       <div className='flex justify-between items-start mb-2'>
-                        <span className='font-medium text-gray-text'>
+                        <span className="font-medium text-white">
                           {spec.name}
                         </span>
                         <span className='font-bold text-primary text-lg'>
                           {spec.value}
                         </span>
                       </div>
-                      <p className='text-sm text-gray-text'>
+                      <p className="text-sm text-white">
                         {spec.description}
                       </p>
                     </div>
@@ -319,7 +319,7 @@ export default function PneumaticSystemPage() {
               <Layers className='w-6 h-6 text-blue-600' />
               Detailed Engineering Data
             </h2>
-            <div className='bg-white border rounded p-4 text-gray-700'>
+            <div className="bg-white border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Oil-lubricated piston-type air compressor with high-efficiency
@@ -347,7 +347,7 @@ export default function PneumaticSystemPage() {
               <BarChart3 className='w-6 h-6 text-orange-600' />
               Performance Benchmarks
             </h2>
-            <div className='bg-white border rounded p-4 text-gray-700'>
+            <div className="bg-white border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Power input: 3.5–5.5 kW (depending on mode); 400 V / 50 Hz.
@@ -370,7 +370,7 @@ export default function PneumaticSystemPage() {
               <Wrench className='w-6 h-6 text-green-600' />
               Maintenance Requirements
             </h2>
-            <div className='bg-white border rounded p-4 text-gray-700'>
+            <div className="bg-white border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Automatic pressure relief on overpressure; moisture drain
@@ -396,7 +396,7 @@ export default function PneumaticSystemPage() {
               <ClipboardCheck className='w-6 h-6 text-purple-600' />
               Integration Specifications
             </h2>
-            <div className='bg-white border rounded p-4 text-gray-700'>
+            <div className="bg-white border rounded p-4 text-white">
               <ul className='list-disc pl-6 space-y-2'>
                 <li>
                   Supplies compressed air to KPP modules for buoyancy control.
@@ -413,7 +413,7 @@ export default function PneumaticSystemPage() {
             </div>
           </div>
         </div>
-        <div className='container mt-8 text-sm text-gray-500'>
+        <div className="container mt-8 text-sm text-white">
           <span>
             Source:{' '}
             <a

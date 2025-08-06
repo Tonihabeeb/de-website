@@ -313,10 +313,10 @@ export default function AnalyticsConfigPage() {
       <div className='mb-8'>
         <div className='flex items-center justify-between'>
           <div>
-            <h1 className='text-3xl font-bold text-gray-900'>
+            <h1 className="text-3xl font-bold text-white">
               Analytics Configuration
             </h1>
-            <p className='text-gray-600 mt-2'>
+            <p className="text-white">
               Configure analytics tracking, privacy settings, and data
               management
             </p>
@@ -349,21 +349,21 @@ export default function AnalyticsConfigPage() {
           <div className='p-6 border-b border-gray-200'>
             <div className='flex items-center gap-3'>
               <Eye className='w-6 h-6 text-blue-500' />
-              <h2 className='text-xl font-semibold text-gray-900'>
+              <h2 className="text-xl font-semibold text-white">
                 Tracking Configuration
               </h2>
             </div>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Configure what data to collect and track
             </p>
           </div>
           <div className='p-6 space-y-4'>
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Enable Analytics Tracking
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Master switch for all analytics tracking
                 </p>
               </div>
@@ -382,10 +382,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Anonymize Data
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Remove personally identifiable information
                 </p>
               </div>
@@ -407,10 +407,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Track User Behavior
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Monitor user interactions and patterns
                 </p>
               </div>
@@ -432,10 +432,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Track Page Views
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Monitor page visit statistics
                 </p>
               </div>
@@ -457,10 +457,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Track Custom Events
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Monitor specific user actions
                 </p>
               </div>
@@ -482,10 +482,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Track Performance
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Monitor Core Web Vitals and performance
                 </p>
               </div>
@@ -507,10 +507,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Respect Do Not Track
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Honor browser DNT preferences
                 </p>
               </div>
@@ -537,21 +537,21 @@ export default function AnalyticsConfigPage() {
           <div className='p-6 border-b border-gray-200'>
             <div className='flex items-center gap-3'>
               <Shield className='w-6 h-6 text-green-500' />
-              <h2 className='text-xl font-semibold text-gray-900'>
+              <h2 className="text-xl font-semibold text-white">
                 Privacy & Compliance
               </h2>
             </div>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               GDPR and privacy compliance settings
             </p>
           </div>
           <div className='p-6 space-y-4'>
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   GDPR Compliant
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Enable GDPR compliance features
                 </p>
               </div>
@@ -573,10 +573,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Cookie Consent
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Require explicit cookie consent
                 </p>
               </div>
@@ -598,10 +598,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Data Processing Consent
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Require consent for data processing
                 </p>
               </div>
@@ -623,10 +623,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   User Consent Management
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Allow users to manage their consent
                 </p>
               </div>
@@ -645,10 +645,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Data Export Rights
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Allow users to export their data
                 </p>
               </div>
@@ -667,10 +667,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Right to be Forgotten
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Allow users to delete their data
                 </p>
               </div>
@@ -697,21 +697,21 @@ export default function AnalyticsConfigPage() {
           <div className='p-6 border-b border-gray-200'>
             <div className='flex items-center gap-3'>
               <Database className='w-6 h-6 text-purple-500' />
-              <h2 className='text-xl font-semibold text-gray-900'>
+              <h2 className="text-xl font-semibold text-white">
                 Google Analytics Integration
               </h2>
             </div>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Configure Google Analytics 4 integration
             </p>
           </div>
           <div className='p-6 space-y-4'>
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Enable Google Analytics
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Send data to Google Analytics
                 </p>
               </div>
@@ -735,7 +735,7 @@ export default function AnalyticsConfigPage() {
             </label>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Measurement ID
               </label>
               <input
@@ -760,10 +760,10 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>
+                <span className="font-medium text-white">
                   Enhanced Ecommerce
                 </span>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Track ecommerce transactions
                 </p>
               </div>
@@ -788,8 +788,8 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>Demographics</span>
-                <p className='text-sm text-gray-500'>Track user demographics</p>
+                <span className="font-medium text-white">Demographics</span>
+                <p className="text-sm text-white">Track user demographics</p>
               </div>
               <input
                 type='checkbox'
@@ -812,8 +812,8 @@ export default function AnalyticsConfigPage() {
 
             <label className='flex items-center justify-between'>
               <div>
-                <span className='font-medium text-gray-900'>Interests</span>
-                <p className='text-sm text-gray-500'>Track user interests</p>
+                <span className="font-medium text-white">Interests</span>
+                <p className="text-sm text-white">Track user interests</p>
               </div>
               <input
                 type='checkbox'
@@ -842,7 +842,7 @@ export default function AnalyticsConfigPage() {
             <div className='flex items-center justify-between'>
               <div className='flex items-center gap-3'>
                 <Settings className='w-6 h-6 text-orange-500' />
-                <h2 className='text-xl font-semibold text-gray-900'>
+                <h2 className="text-xl font-semibold text-white">
                   Custom Events
                 </h2>
               </div>
@@ -855,7 +855,7 @@ export default function AnalyticsConfigPage() {
                 Add Event
               </Button>
             </div>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Configure custom event tracking
             </p>
           </div>
@@ -867,10 +867,10 @@ export default function AnalyticsConfigPage() {
                   className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'
                 >
                   <div className='flex-1'>
-                    <div className='font-medium text-gray-900'>
+                    <div className="font-medium text-white">
                       {event.name}
                     </div>
-                    <div className='text-sm text-gray-500'>
+                    <div className="text-sm text-white">
                       {event.category} • {event.action}
                       {event.label && ` • ${event.label}`}
                     </div>
@@ -908,7 +908,7 @@ export default function AnalyticsConfigPage() {
       >
         <div className='space-y-4'>
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Event Name
             </label>
             <input
@@ -925,7 +925,7 @@ export default function AnalyticsConfigPage() {
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Category
             </label>
             <select
@@ -945,7 +945,7 @@ export default function AnalyticsConfigPage() {
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Action
             </label>
             <input
@@ -962,7 +962,7 @@ export default function AnalyticsConfigPage() {
           </div>
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Label (Optional)
             </label>
             <input

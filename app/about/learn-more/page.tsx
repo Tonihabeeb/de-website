@@ -70,8 +70,8 @@ export default function LearnMorePage() {
         <div className='container'>
           <div className='max-w-4xl mx-auto'>
             <h2 className='mb-6'>Our Story</h2>
-            <div className='prose prose-lg text-gray-text'>
-              <p className='text-lg text-gray-text mb-6 leading-relaxed'>
+            <div className="prose prose-lg text-white">
+              <p className="text-lg text-white">
                 Deep Engineering was founded with a bold vision: to transform
                 Iraq's energy sector through cutting-edge renewable technology.
                 As the exclusive licensee of Kinetic Power Plant (KPP)
@@ -79,7 +79,7 @@ export default function LearnMorePage() {
                 engineering to deliver clean, continuous energy where it's
                 needed most.
               </p>
-              <p className='text-lg text-gray-text mb-6 leading-relaxed'>
+              <p className="text-lg text-white">
                 Our journey began with a recognition that Iraq's energy
                 challenges required innovative solutions. Traditional power
                 generation methods were insufficient, and renewable options like
@@ -87,7 +87,7 @@ export default function LearnMorePage() {
                 perfect solution: continuous, clean power generation without
                 fuel dependency or weather constraints.
               </p>
-              <p className='text-lg text-gray-text leading-relaxed'>
+              <p className="text-lg text-white">
                 Today, we are proud to be leading Iraq's transition to
                 sustainable energy, with projects across the country that will
                 deliver 390 MW of clean power capacity. Our commitment to
@@ -109,13 +109,13 @@ export default function LearnMorePage() {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
               <div>
                 <h3 className='mb-4'>Our Mission</h3>
-                <p className='text-lg text-gray-text leading-relaxed'>
+                <p className="text-lg text-white">
                   To revolutionize Iraq's energy landscape by deploying
                   innovative KPP technology that delivers clean, continuous, and
                   reliable power while contributing to environmental
                   sustainability and economic growth.
                 </p>
-                <p className='text-lg text-gray-text leading-relaxed mt-4'>
+                <p className="text-lg text-white">
                   To accelerate the global transition to sustainable energy
                   through innovative engineering solutions, collaborative
                   partnerships, and unwavering commitment to environmental
@@ -124,12 +124,12 @@ export default function LearnMorePage() {
               </div>
               <div>
                 <h3 className='mb-4'>Our Vision</h3>
-                <p className='text-lg text-gray-text leading-relaxed'>
+                <p className="text-lg text-white">
                   To be the leading renewable energy company in Iraq, setting
                   new standards for clean energy generation and inspiring the
                   adoption of sustainable technologies across the region.
                 </p>
-                <p className='text-lg text-gray-text leading-relaxed mt-4'>
+                <p className="text-lg text-white">
                   To be the global leader in sustainable energy solutions,
                   pioneering technologies that transform how the world
                   generates, distributes, and consumes energy while preserving
@@ -145,23 +145,23 @@ export default function LearnMorePage() {
       <section className='py-16 bg-gray-50'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto text-center'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-8'>
+            <h2 className="text-3xl font-bold text-white">
               Our Core Values
             </h2>
-            <p className='text-lg text-gray-600 leading-relaxed mb-12'>
+            <p className="text-lg text-white">
               These fundamental principles guide our decisions, shape our
               culture, and define how we work with each other and our
               stakeholders.
             </p>
             <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
               <div className='text-center'>
-                <div className='w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center'>
+                <div className="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center text-white">
                   <span className='text-white text-2xl'>💡</span>
                 </div>
-                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                <h3 className="text-xl font-semibold text-white">
                   Innovation
                 </h3>
-                <p className='text-gray-600 text-sm'>
+                <p className="text-white">
                   We constantly push boundaries and embrace new ideas to solve
                   complex challenges.
                 </p>
@@ -170,10 +170,10 @@ export default function LearnMorePage() {
                 <div className='w-16 h-16 mx-auto mb-4 bg-green-500 rounded-full flex items-center justify-center'>
                   <span className='text-white text-2xl'>🌱</span>
                 </div>
-                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                <h3 className="text-xl font-semibold text-white">
                   Sustainability
                 </h3>
-                <p className='text-gray-600 text-sm'>
+                <p className="text-white">
                   Every decision we make considers the long-term impact on our
                   planet and communities.
                 </p>
@@ -182,10 +182,10 @@ export default function LearnMorePage() {
                 <div className='w-16 h-16 mx-auto mb-4 bg-purple-500 rounded-full flex items-center justify-center'>
                   <span className='text-white text-2xl'>🤝</span>
                 </div>
-                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                <h3 className="text-xl font-semibold text-white">
                   Collaboration
                 </h3>
-                <p className='text-gray-600 text-sm'>
+                <p className="text-white">
                   We believe in the power of partnerships and diverse
                   perspectives to achieve our goals.
                 </p>
@@ -194,10 +194,10 @@ export default function LearnMorePage() {
                 <div className='w-16 h-16 mx-auto mb-4 bg-orange-500 rounded-full flex items-center justify-center'>
                   <span className='text-white text-2xl'>⭐</span>
                 </div>
-                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                <h3 className="text-xl font-semibold text-white">
                   Excellence
                 </h3>
-                <p className='text-gray-600 text-sm'>
+                <p className="text-white">
                   We strive for the highest quality in everything we do, from
                   technology to service.
                 </p>
@@ -217,7 +217,7 @@ export default function LearnMorePage() {
             <h2 className='text-3xl font-bold text-primary mb-8'>
               Our Commitment: ESG, CSR & HSE
             </h2>
-            <p className='text-lg text-gray-text mb-6'>
+            <p className="text-lg text-white">
               Deep Engineering integrates Environmental, Social, and Governance
               (ESG), Corporate Social Responsibility (CSR), and Health, Safety &
               Environment (HSE) principles into every aspect of our operations.
@@ -234,7 +234,7 @@ export default function LearnMorePage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Environmental, Social & Governance (ESG)</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our comprehensive ESG framework drives sustainable impact through
               the KPP project and responsible business practices.
             </p>
@@ -245,22 +245,22 @@ export default function LearnMorePage() {
               <div className='w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6'>
                 <Globe className='w-8 h-8 text-white' />
               </div>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+              <h3 className="text-2xl font-bold text-white">
                 Environmental
               </h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <ul className="text-white">
                 <li>Zero emissions technology: no fuel, no pollution</li>
                 <li>2.5M tons CO₂ emissions avoided annually</li>
                 <li>Zero water consumption, minimal land footprint</li>
                 <li>Reforestation, habitat restoration, and conservation</li>
               </ul>
             </div>
-            <div className='bg-blue-50 p-8 rounded-lg border border-blue-200'>
-              <div className='w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6'>
+            <div className="bg-blue-50 p-8 rounded-lg border border-blue-200 text-white">
+              <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6 text-white">
                 <Handshake className='w-8 h-8 text-white' />
               </div>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>Social</h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <h3 className="text-2xl font-bold text-white">Social</h3>
+              <ul className="text-white">
                 <li>2,500+ direct and indirect jobs created</li>
                 <li>Community development and education initiatives</li>
                 <li>Skills training and workforce development</li>
@@ -271,10 +271,10 @@ export default function LearnMorePage() {
               <div className='w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-6'>
                 <Scale className='w-8 h-8 text-white' />
               </div>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+              <h3 className="text-2xl font-bold text-white">
                 Governance
               </h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <ul className="text-white">
                 <li>International certifications (TÜV, SGS, DEKRA)</li>
                 <li>100% government approvals and compliance</li>
                 <li>Transparency, ethical leadership, and reporting</li>
@@ -290,51 +290,51 @@ export default function LearnMorePage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Corporate Social Responsibility (CSR)</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our CSR initiatives create value beyond profit, supporting
               communities, education, health, and the environment for a more
               sustainable and equitable world.
             </p>
           </div>
           <div className='grid lg:grid-cols-2 gap-12'>
-            <div className='bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg'>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg text-white">
+              <h3 className="text-2xl font-bold text-white">
                 Community Development
               </h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <ul className="text-white">
                 <li>Educational programs and scholarships for STEM students</li>
                 <li>Infrastructure development in underserved areas</li>
                 <li>Skills training and job creation programs</li>
                 <li>Support for local businesses and entrepreneurs</li>
               </ul>
             </div>
-            <div className='bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg'>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg text-white">
+              <h3 className="text-2xl font-bold text-white">
                 Environmental Stewardship
               </h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <ul className="text-white">
                 <li>Reforestation and habitat restoration projects</li>
                 <li>Clean energy adoption and carbon offset programs</li>
                 <li>Waste reduction and circular economy initiatives</li>
                 <li>Environmental education and awareness campaigns</li>
               </ul>
             </div>
-            <div className='bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-lg'>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-lg text-white">
+              <h3 className="text-2xl font-bold text-white">
                 Education & Innovation
               </h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <ul className="text-white">
                 <li>STEM education programs for schools and universities</li>
                 <li>Research partnerships and innovation hubs</li>
                 <li>Mentorship programs for young professionals</li>
                 <li>Open-source technology development</li>
               </ul>
             </div>
-            <div className='bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-lg'>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+            <div className="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-lg text-white">
+              <h3 className="text-2xl font-bold text-white">
                 Health & Wellbeing
               </h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <ul className="text-white">
                 <li>Healthcare access programs in underserved areas</li>
                 <li>Mental health awareness and support services</li>
                 <li>Workplace wellness and safety programs</li>
@@ -350,16 +350,16 @@ export default function LearnMorePage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Health, Safety & Environment (HSE)</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our comprehensive HSE framework ensures the wellbeing of our
               people and protection of our planet through innovative technology
               and responsible practices.
             </p>
           </div>
           <div className='grid lg:grid-cols-3 gap-8'>
-            <div className='bg-blue-50 p-8 rounded-lg border border-blue-200'>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>Health</h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+            <div className="bg-blue-50 p-8 rounded-lg border border-blue-200 text-white">
+              <h3 className="text-2xl font-bold text-white">Health</h3>
+              <ul className="text-white">
                 <li>Comprehensive health monitoring and wellness programs</li>
                 <li>Mental health support and work-life balance initiatives</li>
                 <li>Preventive care and early intervention programs</li>
@@ -367,8 +367,8 @@ export default function LearnMorePage() {
               </ul>
             </div>
             <div className='bg-orange-50 p-8 rounded-lg border border-orange-200'>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>Safety</h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <h3 className="text-2xl font-bold text-white">Safety</h3>
+              <ul className="text-white">
                 <li>Zero harm culture and comprehensive safety protocols</li>
                 <li>Continuous training and emergency response teams</li>
                 <li>Automated safety interlocks and real-time monitoring</li>
@@ -376,10 +376,10 @@ export default function LearnMorePage() {
               </ul>
             </div>
             <div className='bg-green-50 p-8 rounded-lg border border-green-200'>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+              <h3 className="text-2xl font-bold text-white">
                 Environment
               </h3>
-              <ul className='text-gray-600 text-sm space-y-2'>
+              <ul className="text-white">
                 <li>
                   Zero emissions, zero water consumption, minimal land use
                 </li>
@@ -397,7 +397,7 @@ export default function LearnMorePage() {
         <div className='container'>
           <div className='max-w-4xl mx-auto'>
             <h2 className='mb-4'>Our Partners</h2>
-            <p className='text-lg text-gray-text mb-8 leading-relaxed'>
+            <p className="text-lg text-white">
               We collaborate with world-class partners to bring the best
               technology and expertise to Iraq's energy sector.
             </p>
@@ -407,7 +407,7 @@ export default function LearnMorePage() {
                   <Sparkles className='w-8 h-8 text-white' />
                 </div>
                 <h3 className='font-semibold mb-2'>Rosch Innovations</h3>
-                <p className='text-gray-text text-sm'>
+                <p className="text-white">
                   German technology partner and KPP patent holder, providing
                   cutting-edge engineering and technical support.
                 </p>
@@ -419,7 +419,7 @@ export default function LearnMorePage() {
                 <h3 className='font-semibold mb-2'>
                   KRG Ministry of Electricity
                 </h3>
-                <p className='text-gray-text text-sm'>
+                <p className="text-white">
                   Government partner supporting renewable energy development in
                   the Kurdistan Region of Iraq.
                 </p>
@@ -429,7 +429,7 @@ export default function LearnMorePage() {
                   <BarChart3 className='w-8 h-8 text-white' />
                 </div>
                 <h3 className='font-semibold mb-2'>Board of Investment</h3>
-                <p className='text-gray-text text-sm'>
+                <p className="text-white">
                   Strategic partner facilitating investment and development
                   opportunities for renewable energy projects.
                 </p>
@@ -443,15 +443,15 @@ export default function LearnMorePage() {
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
+            <h2 className="text-3xl font-bold text-white">
               Strategic Goals
             </h2>
             <div className='grid md:grid-cols-2 gap-8'>
-              <div className='bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg'>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg text-white">
+                <h3 className="text-2xl font-bold text-white">
                   Technology Leadership
                 </h3>
-                <ul className='space-y-3 text-gray-600'>
+                <ul className="space-y-3 text-white">
                   <li className='flex items-start space-x-3'>
                     <span className='text-blue-500 font-bold'>•</span>
                     <span>
@@ -474,11 +474,11 @@ export default function LearnMorePage() {
                   </li>
                 </ul>
               </div>
-              <div className='bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg'>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+              <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg text-white">
+                <h3 className="text-2xl font-bold text-white">
                   Global Impact
                 </h3>
-                <ul className='space-y-3 text-gray-600'>
+                <ul className="space-y-3 text-white">
                   <li className='flex items-start space-x-3'>
                     <span className='text-green-500 font-bold'>•</span>
                     <span>

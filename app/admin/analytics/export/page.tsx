@@ -181,7 +181,7 @@ export default function AnalyticsExportPage() {
       case 'failed':
         return <AlertCircle className='w-5 h-5 text-red-500' />;
       default:
-        return <Clock className='w-5 h-5 text-gray-500' />;
+        return <Clock className="w-5 h-5 text-white" />;
     }
   };
 
@@ -209,8 +209,8 @@ export default function AnalyticsExportPage() {
   return (
     <div className='container mx-auto px-4 py-8'>
       <div className='mb-8'>
-        <h1 className='text-3xl font-bold text-gray-900'>Analytics Export</h1>
-        <p className='text-gray-600 mt-2'>
+        <h1 className="text-3xl font-bold text-white">Analytics Export</h1>
+        <p className="text-white">
           Export analytics data in various formats for reporting and analysis
         </p>
       </div>
@@ -219,10 +219,10 @@ export default function AnalyticsExportPage() {
       <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8'>
         <div className='flex items-center justify-between mb-6'>
           <div>
-            <h2 className='text-xl font-semibold text-gray-900'>
+            <h2 className="text-xl font-semibold text-white">
               Create New Export
             </h2>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Configure and schedule data exports
             </p>
           </div>
@@ -240,9 +240,9 @@ export default function AnalyticsExportPage() {
           <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
             <div className='flex items-center gap-3 mb-2'>
               <BarChart3 className='w-5 h-5 text-blue-500' />
-              <h3 className='font-medium text-gray-900'>System Overview</h3>
+              <h3 className="font-medium text-white">System Overview</h3>
             </div>
-            <p className='text-sm text-gray-600 mb-3'>
+            <p className="text-sm text-white">
               Complete system analytics and metrics
             </p>
             <Button
@@ -263,9 +263,9 @@ export default function AnalyticsExportPage() {
           <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
             <div className='flex items-center gap-3 mb-2'>
               <Users className='w-5 h-5 text-green-500' />
-              <h3 className='font-medium text-gray-900'>User Analytics</h3>
+              <h3 className="font-medium text-white">User Analytics</h3>
             </div>
-            <p className='text-sm text-gray-600 mb-3'>
+            <p className="text-sm text-white">
               User activity and engagement data
             </p>
             <Button
@@ -286,9 +286,9 @@ export default function AnalyticsExportPage() {
           <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
             <div className='flex items-center gap-3 mb-2'>
               <FileText className='w-5 h-5 text-purple-500' />
-              <h3 className='font-medium text-gray-900'>Content Analytics</h3>
+              <h3 className="font-medium text-white">Content Analytics</h3>
             </div>
-            <p className='text-sm text-gray-600 mb-3'>
+            <p className="text-sm text-white">
               Page and project performance data
             </p>
             <Button
@@ -309,9 +309,9 @@ export default function AnalyticsExportPage() {
           <div className='bg-gray-50 rounded-lg p-4 border border-gray-200'>
             <div className='flex items-center gap-3 mb-2'>
               <Activity className='w-5 h-5 text-orange-500' />
-              <h3 className='font-medium text-gray-900'>System Performance</h3>
+              <h3 className="font-medium text-white">System Performance</h3>
             </div>
-            <p className='text-sm text-gray-600 mb-3'>
+            <p className="text-sm text-white">
               System health and performance metrics
             </p>
             <Button
@@ -334,8 +334,8 @@ export default function AnalyticsExportPage() {
       {/* Export Jobs */}
       <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
         <div className='p-6 border-b border-gray-200'>
-          <h2 className='text-xl font-semibold text-gray-900'>Export Jobs</h2>
-          <p className='text-gray-600 mt-1'>
+          <h2 className="text-xl font-semibold text-white">Export Jobs</h2>
+          <p className="text-white">
             Track and manage your export requests
           </p>
         </div>
@@ -344,19 +344,19 @@ export default function AnalyticsExportPage() {
           <table className='w-full'>
             <thead className='bg-gray-50'>
               <tr>
-                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white">
                   Job Details
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white">
                   Status
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white">
                   Progress
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white">
                   Created
                 </th>
-                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white">
                   Actions
                 </th>
               </tr>
@@ -379,11 +379,11 @@ export default function AnalyticsExportPage() {
                         {job.config.dataType === 'system' && (
                           <Activity className='w-4 h-4 text-orange-500' />
                         )}
-                        <span className='font-medium text-gray-900 capitalize'>
+                        <span className="font-medium text-white">
                           {job.config.dataType} Export
                         </span>
                       </div>
-                      <div className='text-sm text-gray-500'>
+                      <div className="text-sm text-white">
                         {job.config.format.toUpperCase()} •{' '}
                         {job.config.dateRange} •
                         {job.config.includeCharts
@@ -406,16 +406,16 @@ export default function AnalyticsExportPage() {
                     <div className='flex items-center gap-2'>
                       <div className='w-16 bg-gray-200 rounded-full h-2'>
                         <div
-                          className='bg-blue-500 h-2 rounded-full transition-all duration-300'
+                          className="bg-blue-500 h-2 rounded-full transition-all duration-300 text-white"
                           style={{ width: `${job.progress}%` }}
                         />
                       </div>
-                      <span className='text-sm text-gray-600'>
+                      <span className="text-sm text-white">
                         {job.progress}%
                       </span>
                     </div>
                   </td>
-                  <td className='px-6 py-4 text-sm text-gray-500'>
+                  <td className="px-6 py-4 text-sm text-white">
                     {new Date(job.createdAt).toLocaleDateString()}
                     <br />
                     {new Date(job.createdAt).toLocaleTimeString()}
@@ -462,11 +462,11 @@ export default function AnalyticsExportPage() {
 
         {exportJobs.length === 0 && (
           <div className='p-8 text-center'>
-            <Database className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-            <h3 className='text-lg font-medium text-gray-900 mb-2'>
+            <Database className="w-12 h-12 text-white" />
+            <h3 className="text-lg font-medium text-white">
               No export jobs
             </h3>
-            <p className='text-gray-600 mb-4'>
+            <p className="text-white">
               Create your first export to get started
             </p>
             <Button onClick={() => setShowExportModal(true)}>
@@ -486,7 +486,7 @@ export default function AnalyticsExportPage() {
         <div className='space-y-6'>
           {/* Data Type Selection */}
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-3'>
+            <label className="block text-sm font-medium text-white">
               Data Type
             </label>
             <div className='grid grid-cols-2 gap-3'>
@@ -546,7 +546,7 @@ export default function AnalyticsExportPage() {
                   >
                     <div className='flex items-center gap-3'>
                       <Icon className={`w-5 h-5 ${option.color}`} />
-                      <span className='font-medium text-gray-900'>
+                      <span className="font-medium text-white">
                         {option.label}
                       </span>
                     </div>
@@ -558,7 +558,7 @@ export default function AnalyticsExportPage() {
 
           {/* Date Range */}
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-3'>
+            <label className="block text-sm font-medium text-white">
               Date Range
             </label>
             <div className='grid grid-cols-4 gap-3'>
@@ -592,7 +592,7 @@ export default function AnalyticsExportPage() {
           {exportConfig.dateRange === 'custom' && (
             <div className='grid grid-cols-2 gap-4'>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className="block text-sm font-medium text-white">
                   Start Date
                 </label>
                 <input
@@ -608,7 +608,7 @@ export default function AnalyticsExportPage() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className="block text-sm font-medium text-white">
                   End Date
                 </label>
                 <input
@@ -628,7 +628,7 @@ export default function AnalyticsExportPage() {
 
           {/* Export Format */}
           <div>
-            <label className='block text-sm font-medium text-gray-700 mb-3'>
+            <label className="block text-sm font-medium text-white">
               Export Format
             </label>
             <div className='grid grid-cols-4 gap-3'>
@@ -665,7 +665,7 @@ export default function AnalyticsExportPage() {
                   }`}
                 >
                   <div className='font-medium'>{option.label}</div>
-                  <div className='text-xs text-gray-500'>
+                  <div className="text-xs text-white">
                     {option.description}
                   </div>
                 </button>
@@ -687,7 +687,7 @@ export default function AnalyticsExportPage() {
                 }
                 className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
               />
-              <span className='ml-2 text-sm text-gray-700'>
+              <span className="ml-2 text-sm text-white">
                 Include charts and visualizations
               </span>
             </label>

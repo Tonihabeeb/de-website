@@ -182,10 +182,10 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               Project Analytics
             </h3>
-            <Activity className='w-5 h-5 text-gray-400' />
+            <Activity className="w-5 h-5 text-white" />
           </div>
           <div className='grid grid-cols-1 md:grid-cols-4 gap-4 animate-pulse'>
             {[...Array(4)].map((_, i) => (
@@ -202,10 +202,10 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
       <div className={`bg-white rounded-lg shadow-sm border ${className}`}>
         <div className='p-6'>
           <div className='flex items-center justify-between mb-6'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               Project Analytics
             </h3>
-            <Activity className='w-5 h-5 text-gray-400' />
+            <Activity className="w-5 h-5 text-white" />
           </div>
           <div className='text-center py-8'>
             <p className='text-red-600'>{error || 'No data available'}</p>
@@ -233,10 +233,10 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
       <div className='p-6'>
         <div className='flex items-center justify-between mb-6'>
           <div>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className="text-lg font-semibold text-white">
               Project Analytics
             </h3>
-            <p className='text-sm text-gray-600'>{analytics.project_name}</p>
+            <p className="text-sm text-white">{analytics.project_name}</p>
           </div>
           <div className='flex items-center space-x-4'>
             <select
@@ -250,7 +250,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
               <option value='30d'>Last 30 days</option>
               <option value='90d'>Last 90 days</option>
             </select>
-            <button className='p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors'>
+            <button className="p-2 text-gray-700 hover:text-white">
               <Share2 className='w-4 h-4' />
             </button>
           </div>
@@ -258,7 +258,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
 
         {/* Overview Cards */}
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mb-8'>
-          <div className='bg-blue-50 p-4 rounded-lg'>
+          <div className="bg-blue-50 p-4 rounded-lg text-white">
             <div className='flex items-center justify-between'>
               <div>
                 <p className='text-sm text-blue-600 font-medium'>Total Views</p>
@@ -331,7 +331,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8'>
           {/* Timeline Chart */}
           <div className='bg-gray-50 p-4 rounded-lg'>
-            <h4 className='text-sm font-medium text-gray-900 mb-4'>
+            <h4 className="text-sm font-medium text-white">
               Engagement Timeline
             </h4>
             <ResponsiveContainer width='100%' height={200}>
@@ -367,7 +367,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
 
           {/* Milestone Progress */}
           <div className='bg-gray-50 p-4 rounded-lg'>
-            <h4 className='text-sm font-medium text-gray-900 mb-4'>
+            <h4 className="text-sm font-medium text-white">
               Milestone Progress
             </h4>
             <ResponsiveContainer width='100%' height={200}>
@@ -399,7 +399,7 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
 
         {/* Team Performance */}
         <div className='bg-gray-50 p-4 rounded-lg'>
-          <h4 className='text-sm font-medium text-gray-900 mb-4'>
+          <h4 className="text-sm font-medium text-white">
             Team Performance
           </h4>
           <div className='space-y-3'>
@@ -409,22 +409,22 @@ const ProjectAnalytics: React.FC<ProjectAnalyticsProps> = ({
                 className='flex items-center justify-between p-3 bg-white rounded-lg'
               >
                 <div className='flex items-center space-x-3'>
-                  <div className='w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center'>
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-white">
                     <span className='text-sm font-medium text-blue-600'>
                       {member.member.charAt(0).toUpperCase()}
                     </span>
                   </div>
                   <div>
-                    <p className='text-sm font-medium text-gray-900'>
+                    <p className="text-sm font-medium text-white">
                       {member.member}
                     </p>
-                    <p className='text-xs text-gray-500'>
+                    <p className="text-xs text-white">
                       {member.tasks_completed} tasks completed
                     </p>
                   </div>
                 </div>
                 <div className='flex items-center space-x-4 text-sm'>
-                  <span className='text-gray-600'>
+                  <span className="text-white">
                     {member.hours_logged}h logged
                   </span>
                   <span

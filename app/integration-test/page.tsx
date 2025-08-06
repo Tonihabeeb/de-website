@@ -175,7 +175,7 @@ export default function IntegrationTestPage() {
       case 'pending':
         return <InlineLoader />;
       default:
-        return <Info className='h-5 w-5 text-gray-500' />;
+        return <Info className="h-5 w-5 text-white" />;
     }
   };
 
@@ -197,10 +197,10 @@ export default function IntegrationTestPage() {
       <div className='container mx-auto px-4'>
         {/* Header */}
         <div className='text-center mb-8'>
-          <h1 className='text-3xl font-bold text-gray-900 mb-4'>
+          <h1 className="text-3xl font-bold text-white">
             Frontend-Backend Integration Test
           </h1>
-          <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
+          <p className="text-lg text-white">
             This page tests all the integrations from previous stages to ensure
             everything is working together properly.
           </p>
@@ -208,7 +208,7 @@ export default function IntegrationTestPage() {
 
         {/* Authentication Status */}
         <div className='bg-white rounded-lg shadow p-6 mb-8'>
-          <h2 className='text-xl font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-xl font-semibold text-white">
             <User className='h-5 w-5 mr-2' />
             Authentication Status
           </h2>
@@ -217,17 +217,17 @@ export default function IntegrationTestPage() {
             <div className='space-y-4'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-sm font-medium text-gray-700'>
+                  <p className="text-sm font-medium text-white">
                     Logged in as:
                   </p>
-                  <p className='text-lg text-gray-900'>{user?.name}</p>
-                  <p className='text-sm text-gray-500'>
+                  <p className="text-lg text-white">{user?.name}</p>
+                  <p className="text-sm text-white">
                     {user?.email} • Role: {user?.role}
                   </p>
                 </div>
                 <button
                   onClick={logout}
-                  className='px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors'
+                  className="px-4 py-2 bg-gradient-to-b from-red-700 to-red-500 text-white hover:from-red-800 hover:to-red-600 active:from-red-900 active:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                 >
                   Logout
                 </button>
@@ -235,7 +235,7 @@ export default function IntegrationTestPage() {
 
               <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
                 <div className='text-center p-3 bg-gray-50 rounded'>
-                  <p className='text-sm font-medium text-gray-700'>
+                  <p className="text-sm font-medium text-white">
                     Admin Access
                   </p>
                   <p
@@ -245,7 +245,7 @@ export default function IntegrationTestPage() {
                   </p>
                 </div>
                 <div className='text-center p-3 bg-gray-50 rounded'>
-                  <p className='text-sm font-medium text-gray-700'>
+                  <p className="text-sm font-medium text-white">
                     Editor Access
                   </p>
                   <p
@@ -255,7 +255,7 @@ export default function IntegrationTestPage() {
                   </p>
                 </div>
                 <div className='text-center p-3 bg-gray-50 rounded'>
-                  <p className='text-sm font-medium text-gray-700'>
+                  <p className="text-sm font-medium text-white">
                     Viewer Access
                   </p>
                   <p
@@ -265,7 +265,7 @@ export default function IntegrationTestPage() {
                   </p>
                 </div>
                 <div className='text-center p-3 bg-gray-50 rounded'>
-                  <p className='text-sm font-medium text-gray-700'>
+                  <p className="text-sm font-medium text-white">
                     User Access
                   </p>
                   <p
@@ -278,12 +278,12 @@ export default function IntegrationTestPage() {
             </div>
           ) : (
             <div className='text-center py-8'>
-              <p className='text-gray-600 mb-4'>
+              <p className="text-white">
                 You need to be logged in to run integration tests.
               </p>
               <button
                 onClick={() => (window.location.href = '/login')}
-                className='px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors'
+                className="px-6 py-3 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Go to Login
               </button>
@@ -295,7 +295,7 @@ export default function IntegrationTestPage() {
         {isAuthenticated && (
           <div className='bg-white rounded-lg shadow p-6 mb-8'>
             <div className='flex items-center justify-between mb-6'>
-              <h2 className='text-xl font-semibold text-gray-900 flex items-center'>
+              <h2 className="text-xl font-semibold text-white">
                 <Database className='h-5 w-5 mr-2' />
                 Integration Tests
               </h2>
@@ -329,15 +329,15 @@ export default function IntegrationTestPage() {
                       <div className='flex items-start space-x-3'>
                         {getStatusIcon(test.status)}
                         <div className='flex-1'>
-                          <h3 className='text-sm font-medium text-gray-900'>
+                          <h3 className="text-sm font-medium text-white">
                             {test.name}
                           </h3>
-                          <p className='text-sm text-gray-600 mt-1'>
+                          <p className="text-sm text-white">
                             {test.message}
                           </p>
                           {test.details && (
                             <details className='mt-2'>
-                              <summary className='cursor-pointer text-xs text-gray-500 hover:text-gray-700'>
+                              <summary className="cursor-pointer text-xs text-gray-700 hover:text-white">
                                 View Details
                               </summary>
                               <pre className='mt-2 text-xs bg-white p-2 rounded border overflow-auto max-h-32'>
@@ -359,14 +359,14 @@ export default function IntegrationTestPage() {
         {isAuthenticated && (
           <div className='bg-white rounded-lg shadow p-6 mb-8'>
             <div className='flex items-center justify-between mb-6'>
-              <h2 className='text-xl font-semibold text-gray-900 flex items-center'>
+              <h2 className="text-xl font-semibold text-white">
                 <FileText className='h-5 w-5 mr-2' />
                 Document Management Test
               </h2>
               <RoleGuard roles={['admin', 'editor']}>
                 <button
                   onClick={() => setShowDocumentUpload(!showDocumentUpload)}
-                  className='px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition-colors'
+                  className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                 >
                   {showDocumentUpload ? 'Hide Upload' : 'Test Upload'}
                 </button>
@@ -401,32 +401,32 @@ export default function IntegrationTestPage() {
         {/* Toast Test */}
         {isAuthenticated && (
           <div className='bg-white rounded-lg shadow p-6'>
-            <h2 className='text-xl font-semibold text-gray-900 mb-4 flex items-center'>
+            <h2 className="text-xl font-semibold text-white">
               <Globe className='h-5 w-5 mr-2' />
               Toast Notification Test
             </h2>
             <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
               <button
                 onClick={() => toast.success('This is a success notification!')}
-                className='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors'
+                className="px-4 py-2 bg-gradient-to-b from-green-700 to-green-500 text-white hover:from-green-800 hover:to-green-600 active:from-green-900 active:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Success Toast
               </button>
               <button
                 onClick={() => toast.error('This is an error notification!')}
-                className='px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors'
+                className="px-4 py-2 bg-gradient-to-b from-red-700 to-red-500 text-white hover:from-red-800 hover:to-red-600 active:from-red-900 active:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Error Toast
               </button>
               <button
                 onClick={() => toast.warning('This is a warning notification!')}
-                className='px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition-colors'
+                className="px-4 py-2 bg-gradient-to-b from-yellow-700 to-yellow-500 text-white hover:from-yellow-800 hover:to-yellow-600 active:from-yellow-900 active:to-yellow-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Warning Toast
               </button>
               <button
                 onClick={() => toast.info('This is an info notification!')}
-                className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
+                className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Info Toast
               </button>

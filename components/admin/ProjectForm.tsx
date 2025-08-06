@@ -192,10 +192,10 @@ export default function ProjectForm({
       {/* Header */}
       <div className='flex items-center justify-between mb-6'>
         <div>
-          <h2 className='text-2xl font-bold text-gray-900'>
+          <h2 className="text-2xl font-bold text-white">
             {isEdit ? 'Edit Project' : 'Create New Project'}
           </h2>
-          <p className='text-gray-600 mt-1'>
+          <p className="text-white">
             {isEdit
               ? 'Update project information and settings'
               : 'Add a new project to your portfolio'}
@@ -211,7 +211,7 @@ export default function ProjectForm({
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className='bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center space-x-2'
+            className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none disabled:opacity-50 flex items-center space-x-2 text-white"
           >
             <Save className='w-4 h-4' />
             <span>{loading ? 'Saving...' : 'Save Project'}</span>
@@ -235,7 +235,7 @@ export default function ProjectForm({
               className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 ${
                 activeTab === tab.id
                   ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
               <tab.icon className='w-4 h-4' />
@@ -253,7 +253,7 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='title'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   Project Title *
                 </label>
@@ -275,7 +275,7 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='client'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   Client *
                 </label>
@@ -297,12 +297,12 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='location'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   Location *
                 </label>
                 <div className='relative'>
-                  <MapPin className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                   <input
                     type='text'
                     id='location'
@@ -324,12 +324,12 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='budget'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   Budget *
                 </label>
                 <div className='relative'>
-                  <DollarSign className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                   <input
                     type='number'
                     id='budget'
@@ -351,7 +351,7 @@ export default function ProjectForm({
                 {errors.budget && (
                   <p className='mt-1 text-sm text-red-600'>{errors.budget}</p>
                 )}
-                <p className='mt-1 text-sm text-gray-500'>
+                <p className="mt-1 text-sm text-white">
                   {formatCurrency(formData.budget)}
                 </p>
               </div>
@@ -359,12 +359,12 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='start_date'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   Start Date *
                 </label>
                 <div className='relative'>
-                  <Calendar className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                   <input
                     type='date'
                     id='start_date'
@@ -387,12 +387,12 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='end_date'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   End Date *
                 </label>
                 <div className='relative'>
-                  <Calendar className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                   <input
                     type='date'
                     id='end_date'
@@ -413,7 +413,7 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='status'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   Status
                 </label>
@@ -433,12 +433,12 @@ export default function ProjectForm({
               <div>
                 <label
                   htmlFor='progress'
-                  className='block text-sm font-medium text-gray-700 mb-2'
+                  className="block text-sm font-medium text-white"
                 >
                   Progress (%)
                 </label>
                 <div className='relative'>
-                  <Clock className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                  <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                   <input
                     type='number'
                     id='progress'
@@ -461,7 +461,7 @@ export default function ProjectForm({
                 )}
                 <div className='mt-2 w-full bg-gray-200 rounded-full h-2'>
                   <div
-                    className='bg-blue-600 h-2 rounded-full'
+                    className="bg-blue-600 h-2 rounded-full text-white"
                     style={{ width: `${formData.progress}%` }}
                   ></div>
                 </div>
@@ -471,7 +471,7 @@ export default function ProjectForm({
             <div>
               <label
                 htmlFor='description'
-                className='block text-sm font-medium text-gray-700 mb-2'
+                className="block text-sm font-medium text-white"
               >
                 Project Description *
               </label>
@@ -498,7 +498,7 @@ export default function ProjectForm({
         {activeTab === 'team' && (
           <div className='space-y-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Team Members
               </label>
               <div className='space-y-2'>
@@ -535,7 +535,7 @@ export default function ProjectForm({
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Technologies Used
               </label>
               <div className='space-y-2'>
@@ -577,7 +577,7 @@ export default function ProjectForm({
         {activeTab === 'objectives' && (
           <div className='space-y-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Objectives
               </label>
               <div className='space-y-2'>
@@ -619,7 +619,7 @@ export default function ProjectForm({
         {activeTab === 'risks' && (
           <div className='space-y-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Risks
               </label>
               <div className='space-y-2'>
@@ -661,7 +661,7 @@ export default function ProjectForm({
         {activeTab === 'attachments' && (
           <div className='space-y-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Attachments
               </label>
               <div className='border-2 border-dashed border-gray-300 rounded-lg p-6 text-center'>
@@ -673,11 +673,11 @@ export default function ProjectForm({
                   id='file-upload'
                 />
                 <label htmlFor='file-upload' className='cursor-pointer'>
-                  <Image className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-                  <p className='text-gray-600 mb-2'>
+                  <Image className="w-12 h-12 text-white" />
+                  <p className="text-white">
                     Click to upload files or drag and drop
                   </p>
-                  <p className='text-sm text-gray-500'>
+                  <p className="text-sm text-white">
                     PDF, DOC, images, or other project files
                   </p>
                 </label>
@@ -686,7 +686,7 @@ export default function ProjectForm({
 
             {formData.attachments.length > 0 && (
               <div>
-                <h4 className='text-sm font-medium text-gray-700 mb-3'>
+                <h4 className="text-sm font-medium text-white">
                   Uploaded Files
                 </h4>
                 <div className='space-y-2'>
@@ -696,12 +696,12 @@ export default function ProjectForm({
                       className='flex items-center justify-between p-3 bg-gray-50 rounded-lg'
                     >
                       <div className='flex items-center space-x-3'>
-                        <FileText className='w-5 h-5 text-gray-400' />
+                        <FileText className="w-5 h-5 text-white" />
                         <div>
-                          <p className='text-sm font-medium text-gray-900'>
+                          <p className="text-sm font-medium text-white">
                             {file.name}
                           </p>
-                          <p className='text-xs text-gray-500'>
+                          <p className="text-xs text-white">
                             {(file.size / 1024 / 1024).toFixed(2)} MB
                           </p>
                         </div>

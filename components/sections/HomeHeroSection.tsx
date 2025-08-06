@@ -2,12 +2,8 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 export default function HomeHeroSection() {
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
-
   // Generate deterministic random positions for particles and animated elements
   const energyParticles = useMemo(
     () =>
@@ -40,21 +36,25 @@ export default function HomeHeroSection() {
   );
 
   return (
-    <section
-      className={`relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden ${
-        isHomePage ? '-mt-16' : ''
-      }`}
+    <section 
+      className='relative h-screen flex items-center justify-center overflow-hidden'
       style={{
         backgroundImage: 'url("/herosection2_resized_1920x1080.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        marginTop: '-64px', // Push up under navbar (navbar height is 64px)
+        paddingTop: '64px', // Add padding to compensate for negative margin
       }}
     >
       {/* Dark overlay for better text readability */}
-      <div className='absolute inset-0 bg-black/40'></div>
+      <div className='absolute inset-0 bg-black/40 z-0'></div>
+
       {/* KPP-inspired mechanical background animations */}
       <div className='absolute inset-0 pointer-events-none z-0'>
         {/* Rotating gear system - representing KPP mechanical components */}
         <motion.div
-          className='absolute top-20 left-20 w-32 h-32 border-4 border-sky-300/40 rounded-full'
+          className='absolute top-20 left-20 w-32 h-32 border-4 border-white/40 rounded-full'
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
         >
@@ -62,7 +62,7 @@ export default function HomeHeroSection() {
           {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className='absolute w-4 h-8 bg-sky-300/30 rounded-full'
+              className='absolute w-4 h-8 bg-white/30 rounded-full'
               style={{
                 left: '50%',
                 top: '50%',
@@ -77,7 +77,7 @@ export default function HomeHeroSection() {
         {energyParticles.map((pos, i) => (
           <motion.div
             key={i}
-            className='absolute w-3 h-3 bg-green-400/40 rounded-full'
+            className='absolute w-3 h-3 bg-white/40 rounded-full'
             style={{ left: pos.left, top: pos.top }}
             animate={{
               y: [0, -30, 0],
@@ -96,7 +96,7 @@ export default function HomeHeroSection() {
 
         {/* Conveyor-like movement - representing KPP's continuous operation */}
         <motion.div
-          className='absolute bottom-32 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-sky-300/20 to-transparent'
+          className='absolute bottom-32 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-white/20 to-transparent'
           animate={{
             x: ['-100%', '100%'],
           }}
@@ -109,7 +109,7 @@ export default function HomeHeroSection() {
 
         {/* Pulsing energy core - representing the heart of KPP */}
         <motion.div
-          className='absolute top-1/2 left-1/2 w-24 h-24 bg-gradient-to-r from-sky-400/20 to-green-400/20 rounded-full'
+          className='absolute top-1/2 left-1/2 w-24 h-24 bg-gradient-to-r from-white/20 to-white/20 rounded-full'
           style={{ transform: 'translate(-50%, -50%)' }}
           animate={{
             scale: [1, 1.2, 1],
@@ -238,7 +238,7 @@ export default function HomeHeroSection() {
           Continuous Clean Energy, Anywhere
         </motion.h1>
         <motion.p
-          className='text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-lg text-white/90'
+          className='text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-lg text-white/80'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
@@ -255,7 +255,7 @@ export default function HomeHeroSection() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               href='/technology'
-              className='inline-flex items-center px-8 py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl'
+              className='inline-flex items-center px-8 py-4 bg-gradient-to-b from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl'
             >
               Explore Our Technology
               <svg
@@ -276,10 +276,7 @@ export default function HomeHeroSection() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               href='/about/learn-more'
-              className='inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg bg-transparent hover:bg-white hover:text-gray-900 focus:text-gray-900 transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
-              style={{
-                transition: 'color 0.2s, background 0.2s, transform 0.2s',
-              }}
+              className='inline-flex items-center px-8 py-4 bg-gradient-to-b from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400'
             >
               Learn more about us
               <svg

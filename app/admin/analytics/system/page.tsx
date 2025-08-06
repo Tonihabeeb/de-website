@@ -207,7 +207,7 @@ export default function SystemAnalyticsPage() {
       case 'critical':
         return <AlertTriangle className='h-4 w-4 text-red-500' />;
       default:
-        return <Clock className='h-4 w-4 text-gray-500' />;
+        return <Clock className="h-4 w-4 text-white" />;
     }
   };
 
@@ -224,10 +224,10 @@ export default function SystemAnalyticsPage() {
       <div className='flex items-center justify-center min-h-screen'>
         <div className='text-center'>
           <AlertTriangle className='h-12 w-12 text-red-500 mx-auto mb-4' />
-          <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+          <h2 className="text-xl font-semibold text-white">
             Error Loading System Analytics
           </h2>
-          <p className='text-gray-600 mb-4'>{error}</p>
+          <p className="text-white">{error}</p>
           <Button onClick={fetchSystemAnalytics}>Try Again</Button>
         </div>
       </div>
@@ -239,8 +239,8 @@ export default function SystemAnalyticsPage() {
       {/* Header */}
       <div className='flex justify-between items-center'>
         <div>
-          <h1 className='text-3xl font-bold text-gray-900'>System Analytics</h1>
-          <p className='text-gray-600 mt-2'>
+          <h1 className="text-3xl font-bold text-white">System Analytics</h1>
+          <p className="text-white">
             Real-time system monitoring and performance analytics
           </p>
         </div>
@@ -270,7 +270,7 @@ export default function SystemAnalyticsPage() {
       {systemHealth && (
         <div className='bg-white rounded-lg shadow-sm border p-6'>
           <div className='flex items-center justify-between mb-4'>
-            <h2 className='text-xl font-semibold text-gray-900 flex items-center gap-2'>
+            <h2 className="text-xl font-semibold text-white">
               <Server className='h-5 w-5' />
               System Health Overview
             </h2>
@@ -346,8 +346,8 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>CPU Usage</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm font-medium text-white">CPU Usage</p>
+                <p className="text-2xl font-bold text-white">
                   {currentMetrics.cpu_usage}%
                 </p>
               </div>
@@ -356,7 +356,7 @@ export default function SystemAnalyticsPage() {
             <div className='mt-4'>
               <div className='w-full bg-gray-200 rounded-full h-2'>
                 <div
-                  className='bg-blue-500 h-2 rounded-full transition-all duration-300'
+                  className="bg-blue-500 h-2 rounded-full transition-all duration-300 text-white"
                   style={{ width: `${currentMetrics.cpu_usage}%` }}
                 ></div>
               </div>
@@ -366,10 +366,10 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className="text-sm font-medium text-white">
                   Memory Usage
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-2xl font-bold text-white">
                   {currentMetrics.memory_usage}%
                 </p>
               </div>
@@ -388,17 +388,17 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className="text-sm font-medium text-white">
                   Active Users
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-2xl font-bold text-white">
                   {currentMetrics.active_users}
                 </p>
               </div>
               <Users className='h-8 w-8 text-purple-500' />
             </div>
             <div className='mt-4'>
-              <div className='flex items-center text-sm text-gray-600'>
+              <div className="flex items-center text-sm text-white">
                 <TrendingUp className='h-4 w-4 text-green-500 mr-1' />
                 <span>+12% from last hour</span>
               </div>
@@ -408,17 +408,17 @@ export default function SystemAnalyticsPage() {
           <div className='bg-white rounded-lg shadow-sm border p-6'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm font-medium text-gray-600'>
+                <p className="text-sm font-medium text-white">
                   API Requests/min
                 </p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-2xl font-bold text-white">
                   {currentMetrics.api_requests_per_minute}
                 </p>
               </div>
               <Activity className='h-8 w-8 text-orange-500' />
             </div>
             <div className='mt-4'>
-              <div className='flex items-center text-sm text-gray-600'>
+              <div className="flex items-center text-sm text-white">
                 <TrendingUp className='h-4 w-4 text-green-500 mr-1' />
                 <span>+5% from last hour</span>
               </div>
@@ -443,7 +443,7 @@ export default function SystemAnalyticsPage() {
                 className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
                 <tab.icon className='h-4 w-4' />
@@ -458,7 +458,7 @@ export default function SystemAnalyticsPage() {
             <div className='space-y-6'>
               <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
                 <div>
-                  <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                  <h3 className="text-lg font-medium text-white">
                     System Resources
                   </h3>
                   <div className='space-y-4'>
@@ -469,7 +469,7 @@ export default function SystemAnalyticsPage() {
                       </div>
                       <div className='w-full bg-gray-200 rounded-full h-2'>
                         <div
-                          className='bg-blue-500 h-2 rounded-full'
+                          className="bg-blue-500 h-2 rounded-full text-white"
                           style={{
                             width: `${currentMetrics?.cpu_usage || 0}%`,
                           }}
@@ -509,18 +509,18 @@ export default function SystemAnalyticsPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                  <h3 className="text-lg font-medium text-white">
                     Performance Metrics
                   </h3>
                   <div className='space-y-4'>
                     <div className='flex justify-between items-center'>
-                      <span className='text-sm text-gray-600'>Error Rate</span>
+                      <span className="text-sm text-white">Error Rate</span>
                       <span className='text-sm font-medium'>
                         {currentMetrics?.error_rate || 0}%
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
-                      <span className='text-sm text-gray-600'>
+                      <span className="text-sm text-white">
                         Response Time
                       </span>
                       <span className='text-sm font-medium'>
@@ -528,7 +528,7 @@ export default function SystemAnalyticsPage() {
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
-                      <span className='text-sm text-gray-600'>
+                      <span className="text-sm text-white">
                         Database Connections
                       </span>
                       <span className='text-sm font-medium'>
@@ -543,23 +543,23 @@ export default function SystemAnalyticsPage() {
 
           {activeTab === 'performance' && (
             <div>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 API Performance
               </h3>
               <div className='overflow-x-auto'>
                 <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='bg-gray-50'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Endpoint
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Avg Response Time
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Requests
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Error Rate
                       </th>
                     </tr>
@@ -567,16 +567,16 @@ export default function SystemAnalyticsPage() {
                   <tbody className='bg-white divide-y divide-gray-200'>
                     {performanceData.map((endpoint, index) => (
                       <tr key={index}>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                           {endpoint.endpoint}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {endpoint.avg_response_time}ms
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {endpoint.request_count}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {endpoint.error_rate}%
                         </td>
                       </tr>
@@ -589,11 +589,11 @@ export default function SystemAnalyticsPage() {
 
           {activeTab === 'trends' && (
             <div>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 System Trends
               </h3>
-              <div className='text-center py-12 text-gray-500'>
-                <LineChart className='h-12 w-12 mx-auto mb-4 text-gray-400' />
+              <div className="text-center py-12 text-white">
+                <LineChart className="h-12 w-12 mx-auto mb-4 text-white" />
                 <p>Trend analysis charts will be implemented here</p>
               </div>
             </div>
@@ -601,11 +601,11 @@ export default function SystemAnalyticsPage() {
 
           {activeTab === 'alerts' && (
             <div>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 System Alerts
               </h3>
-              <div className='text-center py-12 text-gray-500'>
-                <AlertTriangle className='h-12 w-12 mx-auto mb-4 text-gray-400' />
+              <div className="text-center py-12 text-white">
+                <AlertTriangle className="h-12 w-12 mx-auto mb-4 text-white" />
                 <p>No active alerts at this time</p>
               </div>
             </div>

@@ -180,7 +180,7 @@ export default function AdminNavigation() {
   return (
     <nav className='w-64 bg-white shadow-lg h-full overflow-y-auto'>
       <div className='p-6'>
-        <h2 className='text-lg font-semibold text-gray-900 mb-6'>
+        <h2 className="text-lg font-semibold text-white">
           Admin Panel
         </h2>
 
@@ -223,41 +223,41 @@ export default function AdminNavigation() {
 
         {/* Quick Actions */}
         <div className='mt-8 pt-6 border-t border-gray-200'>
-          <h3 className='text-sm font-medium text-gray-900 mb-3'>
+          <h3 className="text-sm font-medium text-white">
             Quick Actions
           </h3>
           <div className='space-y-2'>
             <Link
               href='/admin/pages/new'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <Plus className='w-4 h-4 mr-2' />
               New Page
             </Link>
             <Link
               href='/admin/projects/new'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <Plus className='w-4 h-4 mr-2' />
               New Project
             </Link>
             <Link
               href='/admin/users/new'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <UserPlus className='w-4 h-4 mr-2' />
               New User
             </Link>
             <Link
               href='/admin/media/upload'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <Upload className='w-4 h-4 mr-2' />
               Upload Media
             </Link>
             <Link
               href='/admin/system/backup'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <Database className='w-4 h-4 mr-2' />
               Create Backup
@@ -267,34 +267,34 @@ export default function AdminNavigation() {
 
         {/* System Status */}
         <div className='mt-8 pt-6 border-t border-gray-200'>
-          <h3 className='text-sm font-medium text-gray-900 mb-3'>
+          <h3 className="text-sm font-medium text-white">
             System Status
           </h3>
           <div className='space-y-2'>
             <Link
               href='/admin/system/health'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <Monitor className='w-4 h-4 mr-2' />
               Health Monitor
             </Link>
             <Link
               href='/admin/analytics'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <TrendingUp className='w-4 h-4 mr-2' />
               System Analytics
             </Link>
             <Link
               href='/admin/users/activity'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <Activity className='w-4 h-4 mr-2' />
               User Activity
             </Link>
             <Link
               href='/admin/system/performance'
-              className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors'
+              className="flex items-center px-4 py-2 text-sm text-white"
             >
               <Zap className='w-4 h-4 mr-2' />
               Performance
@@ -304,10 +304,10 @@ export default function AdminNavigation() {
 
         {/* Phase Features Summary */}
         <div className='mt-8 pt-6 border-t border-gray-200'>
-          <h3 className='text-sm font-medium text-gray-900 mb-3'>
+          <h3 className="text-sm font-medium text-white">
             Phase Features
           </h3>
-          <div className='space-y-2 text-xs text-gray-600'>
+          <div className="space-y-2 text-xs text-white">
             <div className='flex items-center'>
               <CheckCircle className='w-3 h-3 text-green-500 mr-2' />
               Phase 1: Backend Infrastructure

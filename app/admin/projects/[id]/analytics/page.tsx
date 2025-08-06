@@ -88,7 +88,7 @@ export default function ProjectAnalyticsPage() {
         <div className='mb-8'>
           <button
             onClick={() => router.back()}
-            className='flex items-center text-gray-600 hover:text-gray-900 mb-4'
+            className="flex items-center text-gray-600 hover:text-white"
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Project
@@ -96,13 +96,13 @@ export default function ProjectAnalyticsPage() {
 
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
+              <h1 className="text-3xl font-bold text-white">
                 {project.name} - Analytics
               </h1>
-              <p className='text-gray-600 mt-2'>{project.description}</p>
+              <p className="text-white">{project.description}</p>
             </div>
 
-            <div className='flex items-center space-x-4 text-sm text-gray-500'>
+            <div className="flex items-center space-x-4 text-sm text-white">
               <div className='flex items-center'>
                 <Calendar className='w-4 h-4 mr-1' />
                 <span>

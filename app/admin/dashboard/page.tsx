@@ -144,7 +144,7 @@ export default function AdminDashboard() {
       case 'inactive':
         return <XCircle className='w-4 h-4 text-red-500' />;
       default:
-        return <AlertCircle className='w-4 h-4 text-gray-500' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
     }
   };
 
@@ -188,8 +188,8 @@ export default function AdminDashboard() {
       <div className='max-w-7xl mx-auto'>
         {/* Header */}
         <div className='mb-8'>
-          <h1 className='text-3xl font-bold text-gray-900'>Admin Dashboard</h1>
-          <p className='text-gray-600 mt-2'>
+          <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+          <p className="text-white">
             Manage your website content, projects, and users
           </p>
         </div>
@@ -198,7 +198,7 @@ export default function AdminDashboard() {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
           <Link
             href='/admin/pages/new'
-            className='bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg flex items-center justify-center transition-colors'
+            className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg flex items-center justify-center transition-colors text-white"
           >
             <Plus className='w-5 h-5 mr-2' />
             New Page
@@ -230,7 +230,7 @@ export default function AdminDashboard() {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8'>
           {/* Content Management */}
           <div className='bg-white p-6 rounded-lg shadow'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <FileText className='w-5 h-5 mr-2' />
               Content Management
             </h3>
@@ -258,7 +258,7 @@ export default function AdminDashboard() {
 
           {/* Project Management */}
           <div className='bg-white p-6 rounded-lg shadow'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <FolderOpen className='w-5 h-5 mr-2' />
               Project Management
             </h3>
@@ -292,7 +292,7 @@ export default function AdminDashboard() {
 
           {/* Media Library */}
           <div className='bg-white p-6 rounded-lg shadow'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <Upload className='w-5 h-5 mr-2' />
               Media Library
             </h3>
@@ -326,7 +326,7 @@ export default function AdminDashboard() {
 
           {/* User Management */}
           <div className='bg-white p-6 rounded-lg shadow'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <Users className='w-5 h-5 mr-2' />
               User Management
             </h3>
@@ -360,32 +360,32 @@ export default function AdminDashboard() {
 
           {/* System Management */}
           <div className='bg-white p-6 rounded-lg shadow'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <Settings className='w-5 h-5 mr-2' />
               System Management
             </h3>
             <div className='space-y-2'>
               <Link
                 href='/admin/settings'
-                className='block text-sm text-gray-600 hover:text-gray-800'
+                className="block text-sm text-gray-600 hover:text-white"
               >
                 General Settings
               </Link>
               <Link
                 href='/admin/navigation'
-                className='block text-sm text-gray-600 hover:text-gray-800'
+                className="block text-sm text-gray-600 hover:text-white"
               >
                 Navigation
               </Link>
               <Link
                 href='/admin/system/backup'
-                className='block text-sm text-gray-600 hover:text-gray-800'
+                className="block text-sm text-gray-600 hover:text-white"
               >
                 Backup & Restore
               </Link>
               <Link
                 href='/admin/system/health'
-                className='block text-sm text-gray-600 hover:text-gray-800'
+                className="block text-sm text-gray-600 hover:text-white"
               >
                 System Health
               </Link>
@@ -394,7 +394,7 @@ export default function AdminDashboard() {
 
           {/* Analytics & Reports */}
           <div className='bg-white p-6 rounded-lg shadow'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <BarChart3 className='w-5 h-5 mr-2' />
               Analytics & Reports
             </h3>
@@ -439,8 +439,8 @@ export default function AdminDashboard() {
         {/* Recent Activity */}
         {stats && stats.recent_activity.length > 0 && (
           <div className='bg-white p-6 rounded-lg shadow'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
-              <Activity className='w-5 h-5 mr-2 text-gray-500' />
+            <h3 className="text-lg font-semibold text-white">
+              <Activity className="w-5 h-5 mr-2 text-white" />
               Recent Activity
             </h3>
             <div className='space-y-3'>
@@ -452,15 +452,15 @@ export default function AdminDashboard() {
                   <div className='flex items-center'>
                     {getStatusIcon(activity.action)}
                     <div className='ml-3'>
-                      <p className='text-sm font-medium text-gray-900'>
+                      <p className="text-sm font-medium text-white">
                         {activity.action} {activity.resource}
                       </p>
-                      <p className='text-xs text-gray-500'>
+                      <p className="text-xs text-white">
                         User ID: {activity.user_id}
                       </p>
                     </div>
                   </div>
-                  <span className='text-xs text-gray-500'>
+                  <span className="text-xs text-white">
                     {new Date(activity.created_at).toLocaleDateString()}
                   </span>
                 </div>

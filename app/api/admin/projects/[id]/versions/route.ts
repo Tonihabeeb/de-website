@@ -5,10 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 // GET /api/admin/projects/[id]/versions - Get project versions
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     // Get versions from content_versions table
     const stmt = db.prepare(`
       SELECT * FROM content_versions 
@@ -49,10 +49,10 @@ export async function GET(
 // POST /api/admin/projects/[id]/versions - Create new version
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     // Get current version number
     const versionStmt = db.prepare(`
       SELECT MAX(version_number) as max_version 

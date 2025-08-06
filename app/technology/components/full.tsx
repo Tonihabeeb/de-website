@@ -15,7 +15,7 @@ const toc = [
 
 export default function FullComponentsPage() {
   return (
-    <section className='relative py-20 bg-gradient-to-br from-primary via-primary-dark to-primary text-white min-h-screen'>
+    <section className="relative py-20 bg-gradient-to-br from-primary via-primary-dark to-primary text-white min-h-screen text-white">
       <div className='container mx-auto px-4'>
         {/* Hero Section */}
         <div className='max-w-4xl mx-auto text-center mb-12'>

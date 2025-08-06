@@ -4,16 +4,7 @@ import FadeInWhenVisible from '@/components/animations/FadeInWhenVisible';
 import ScrollTriggeredDiagram from '@/components/animations/ScrollTriggeredDiagram';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import HeroSection from '@/components/sections/HeroSection';
-import {
-  Wind,
-  ArrowUp,
-  Zap,
-  RotateCcw,
-  Fuel,
-  Sun,
-  Leaf,
-  TrendingUp,
-} from 'lucide-react';
+import { Wind, ArrowUp, Zap, RotateCcw, Fuel, Sun, Leaf, TrendingUp, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'How KPP Works',
@@ -121,7 +112,7 @@ export default function HowItWorksPage() {
           <FadeInWhenVisible>
             <div className='text-center mb-12'>
               <h2 className='mb-4'>The KPP Process</h2>
-              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+              <p className="text-lg text-white">
                 KPP technology harnesses kinetic energy through a sophisticated
                 mechanical system that converts motion into clean, continuous
                 electrical power.
@@ -139,23 +130,23 @@ export default function HowItWorksPage() {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
             <div>
               <h2 className='mb-6'>The Physics Behind KPP</h2>
-              <p className='text-lg text-gray-text mb-6 leading-relaxed'>
+              <p className="text-lg text-white">
                 By leveraging Archimedes' Principle (buoyancy) and gravity in a
                 closed-loop, KPP continuously converts mechanical motion into
                 electricity.
               </p>
-              <p className='text-lg text-gray-text mb-6 leading-relaxed'>
+              <p className="text-lg text-white">
                 The system uses an innovative air injection engine that creates
                 controlled buoyancy forces, driving a chain mechanism that
                 converts vertical motion into rotational energy with high
                 efficiency.
               </p>
-              <p className='text-lg text-gray-text mb-6 leading-relaxed'>
+              <p className="text-lg text-white">
                 A 500 kW Low-Speed Permanent Magnet Generator runs at 375 RPM
                 with ~95% efficiency, enabling direct grid connection without
                 gearboxes.
               </p>
-              <p className='text-lg text-gray-text leading-relaxed'>
+              <p className="text-lg text-white">
                 The entire process is controlled by an integrated SCADA system
                 that ensures optimal performance and safety, automatically
                 adjusting air input and monitoring output in real-time.
@@ -163,30 +154,18 @@ export default function HowItWorksPage() {
               <div className='mt-8'>
                 <Link
                   href='/technology/physics'
-                  className='inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none focus:bg-primary-dark focus:text-white transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white text-white"
                   style={{
                     transition: 'color 0.2s, background 0.2s, transform 0.2s',
                   }}
                 >
                   More Details
-                  <svg
-                    className='ml-2 w-5 h-5'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M17 8l4 4m0 0l-4 4m4-4H3'
-                    />
-                  </svg>
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </div>
             </div>
             <div className='bg-white rounded-lg p-8'>
-              <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
+              <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center text-white">
                 <div className='text-white text-center'>
                   <svg
                     className='w-4 h-4 mx-auto mb-4'
@@ -215,7 +194,7 @@ export default function HowItWorksPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Key Advantages</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               KPP technology offers significant advantages over traditional and
               renewable energy sources, making it ideal for Iraq's energy needs.
             </p>
@@ -230,7 +209,7 @@ export default function HowItWorksPage() {
                     <h3 className='text-xl font-semibold text-primary mb-2'>
                       {advantage.title}
                     </h3>
-                    <p className='text-gray-text'>{advantage.description}</p>
+                    <p className="text-white">{advantage.description}</p>
                   </div>
                 </div>
               </div>
@@ -244,14 +223,14 @@ export default function HowItWorksPage() {
         <div className='container'>
           <div className='text-center mb-8'>
             <h2 className='mb-4'>See KPP in Action</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Watch our detailed video explaining how KPP technology works and
               see it in operation at our demonstration facility.
             </p>
           </div>
 
           <div className='bg-white rounded-lg p-8 text-center'>
-            <div className='w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center'>
+            <div className="w-full h-64 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center text-white">
               <div className='text-white text-center'>
                 <svg
                   className='w-4 h-4 mx-auto mb-4'
@@ -308,14 +287,14 @@ export default function HowItWorksPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-600'>
+            <p className="text-base text-white">
               Explore more about KPP technology and related topics:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/technology'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark hover:text-white focus:text-white transition-colors'
+              className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none hover:text-white focus:text-white transition-colors text-white"
             >
               Technology Overview
             </Link>

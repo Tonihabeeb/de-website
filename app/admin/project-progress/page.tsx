@@ -219,9 +219,9 @@ export default function ProjectProgressManagement() {
       case 'in-progress':
         return <Clock className='w-4 h-4 text-yellow-500' />;
       case 'upcoming':
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
       default:
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
     }
   };
 
@@ -262,24 +262,24 @@ export default function ProjectProgressManagement() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Project Progress Management
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Manage project milestones, metrics, and activity logs
             </p>
           </div>
           <div className='flex gap-2'>
             <button
               onClick={() => setShowMilestoneForm(true)}
-              className='inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-white"
             >
               <Plus className='w-4 h-4 mr-2' />
               Add Milestone
             </button>
             <button
               onClick={() => setShowActivityForm(true)}
-              className='inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-b from-green-700 to-green-500 text-white hover:from-green-800 hover:to-green-600 active:from-green-900 active:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-white"
             >
               <Activity className='w-4 h-4 mr-2' />
               Log Activity
@@ -316,19 +316,19 @@ export default function ProjectProgressManagement() {
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Milestone
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Status
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Progress
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Timeline
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Actions
                   </th>
                 </tr>
@@ -338,10 +338,10 @@ export default function ProjectProgressManagement() {
                   <tr key={milestone.id}>
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <div>
-                        <div className='text-sm font-medium text-gray-900'>
+                        <div className="text-sm font-medium text-white">
                           {milestone.name}
                         </div>
-                        <div className='text-sm text-gray-500'>
+                        <div className="text-sm text-white">
                           {milestone.description}
                         </div>
                       </div>
@@ -360,16 +360,16 @@ export default function ProjectProgressManagement() {
                       <div className='flex items-center'>
                         <div className='w-16 bg-gray-200 rounded-full h-2 mr-2'>
                           <div
-                            className='bg-blue-600 h-2 rounded-full'
+                            className="bg-blue-600 h-2 rounded-full text-white"
                             style={{ width: `${milestone.progress}%` }}
                           ></div>
                         </div>
-                        <span className='text-sm text-gray-900'>
+                        <span className="text-sm text-white">
                           {milestone.progress}%
                         </span>
                       </div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {milestone.start_date} → {milestone.end_date}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
@@ -419,16 +419,16 @@ export default function ProjectProgressManagement() {
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Activity
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Type
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     User
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Timestamp
                   </th>
                 </tr>
@@ -438,23 +438,23 @@ export default function ProjectProgressManagement() {
                   <tr key={item.id}>
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <div>
-                        <div className='text-sm font-medium text-gray-900'>
+                        <div className="text-sm font-medium text-white">
                           {item.title}
                         </div>
-                        <div className='text-sm text-gray-500'>
+                        <div className="text-sm text-white">
                           {item.description}
                         </div>
                       </div>
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>
-                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800'>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 text-white">
                         {item.type.replace('_', ' ')}
                       </span>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {item.user}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {new Date(item.timestamp).toLocaleDateString()}
                     </td>
                   </tr>
@@ -470,12 +470,12 @@ export default function ProjectProgressManagement() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 {editingMilestone ? 'Edit Milestone' : 'Add New Milestone'}
               </h3>
               <form onSubmit={handleMilestoneSubmit} className='space-y-4'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Name
                   </label>
                   <input
@@ -492,7 +492,7 @@ export default function ProjectProgressManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Description
                   </label>
                   <textarea
@@ -509,7 +509,7 @@ export default function ProjectProgressManagement() {
                 </div>
                 <div className='grid grid-cols-2 gap-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       Start Date
                     </label>
                     <input
@@ -526,7 +526,7 @@ export default function ProjectProgressManagement() {
                     />
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       End Date
                     </label>
                     <input
@@ -545,7 +545,7 @@ export default function ProjectProgressManagement() {
                 </div>
                 <div className='grid grid-cols-2 gap-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       Status
                     </label>
                     <select
@@ -567,7 +567,7 @@ export default function ProjectProgressManagement() {
                     </select>
                   </div>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className="block text-sm font-medium text-white">
                       Progress (%)
                     </label>
                     <input
@@ -593,13 +593,13 @@ export default function ProjectProgressManagement() {
                       setEditingMilestone(null);
                       resetMilestoneForm();
                     }}
-                    className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                    className="px-4 py-2 text-sm font-medium text-white"
                   >
                     Cancel
                   </button>
                   <button
                     type='submit'
-                    className='inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-white"
                   >
                     <Save className='w-4 h-4 mr-2' />
                     {editingMilestone ? 'Update' : 'Create'}
@@ -616,12 +616,12 @@ export default function ProjectProgressManagement() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 Log Activity
               </h3>
               <form onSubmit={handleActivitySubmit} className='space-y-4'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Activity Type
                   </label>
                   <select
@@ -642,7 +642,7 @@ export default function ProjectProgressManagement() {
                   </select>
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Title
                   </label>
                   <input
@@ -659,7 +659,7 @@ export default function ProjectProgressManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Description
                   </label>
                   <textarea
@@ -675,7 +675,7 @@ export default function ProjectProgressManagement() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     User
                   </label>
                   <input
@@ -695,7 +695,7 @@ export default function ProjectProgressManagement() {
                       setShowActivityForm(false);
                       resetActivityForm();
                     }}
-                    className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                    className="px-4 py-2 text-sm font-medium text-white"
                   >
                     Cancel
                   </button>

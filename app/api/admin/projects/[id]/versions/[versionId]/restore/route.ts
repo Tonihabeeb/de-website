@@ -4,10 +4,10 @@ import { db } from '@/database/connection';
 // POST /api/admin/projects/[id]/versions/[versionId]/restore - Restore project version
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string; versionId: string } }
+  { params }: { params: Promise<{ id: string; versionId: string }> }
 ) {
   try {
-    const { id, versionId } = params;
+    const { id, versionId } = await params;
     // Get the specific version
     const versionStmt = db.prepare(`
       SELECT * FROM content_versions 

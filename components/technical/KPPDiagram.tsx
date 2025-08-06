@@ -89,13 +89,13 @@ export default function KPPDiagram({ className = '' }: KPPDiagramProps) {
   return (
     <div className={`relative w-full max-w-4xl mx-auto ${className}`}>
       {/* Main Diagram Container */}
-      <div className='relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200'>
+      <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200 text-white">
         {/* System Overview Title */}
         <div className='text-center mb-8'>
           <h3 className='text-2xl font-bold text-primary mb-2'>
             KPP System Overview
           </h3>
-          <p className='text-gray-600'>
+          <p className="text-white">
             Interactive diagram showing key components and their relationships
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function KPPDiagram({ className = '' }: KPPDiagramProps) {
 
           {/* Water Tank Background */}
           <motion.div
-            className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-blue-200 to-blue-100'
+            className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-blue-200 to-blue-100 text-white"
             initial={{ height: 0 }}
             animate={{ height: '50%' }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -280,7 +280,7 @@ export default function KPPDiagram({ className = '' }: KPPDiagramProps) {
                       </h4>
                       <button
                         onClick={() => setSelectedComponent(null)}
-                        className='text-gray-400 hover:text-gray-600 transition-colors'
+                        className="text-gray-600 hover:text-white"
                       >
                         <svg
                           className='w-5 h-5'
@@ -297,18 +297,18 @@ export default function KPPDiagram({ className = '' }: KPPDiagramProps) {
                         </svg>
                       </button>
                     </div>
-                    <p className='text-gray-600 mb-4'>
+                    <p className="text-white">
                       {component.description}
                     </p>
                     <div>
-                      <h5 className='font-semibold text-gray-800 mb-2'>
+                      <h5 className="font-semibold text-white">
                         Key Specifications:
                       </h5>
                       <ul className='space-y-1'>
                         {component.specs.map((spec, index) => (
                           <li
                             key={index}
-                            className='text-base text-gray-600 flex items-center'
+                            className="text-base text-white"
                           >
                             <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
                             {spec}
@@ -324,7 +324,7 @@ export default function KPPDiagram({ className = '' }: KPPDiagramProps) {
         </AnimatePresence>
 
         {/* Instructions */}
-        <div className='mt-4 text-center text-base text-gray-600'>
+        <div className="mt-4 text-center text-base text-white">
           <p>
             Hover over components to see labels • Click for detailed information
           </p>

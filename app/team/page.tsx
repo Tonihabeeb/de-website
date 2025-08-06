@@ -65,8 +65,8 @@ export default async function TeamPage() {
             '@type': 'Person',
             name: member.name,
             jobTitle: member.role,
-            description: member.bio,
-            knowsAbout: member.expertise,
+            description: member.role, // Use role as description since bio doesn't exist
+            knowsAbout: member.role, // Use role as expertise since bio doesn't exist
           })),
         }}
       />
@@ -75,7 +75,7 @@ export default async function TeamPage() {
         <div className='container mx-auto px-4'>
           <div className='text-center mb-12'>
             <h1 className='text-4xl font-bold text-primary mb-4'>Our Team</h1>
-            <p className='text-xl text-gray-text max-w-3xl mx-auto'>
+            <p className="text-xl text-white">
               Meet the talented professionals who drive innovation and
               excellence in every project we undertake.
             </p>
@@ -98,10 +98,10 @@ export default async function TeamPage() {
                   />
                 </svg>
               </div>
-              <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+              <h3 className="text-lg font-semibold text-white">
                 Error Loading Team
               </h3>
-              <p className='text-gray-600 mb-4'>{error}</p>
+              <p className="text-white">{error}</p>
               <ReloadButton>Try Again</ReloadButton>
             </div>
           ) : teamMembers.length > 0 ? (
@@ -112,7 +112,7 @@ export default async function TeamPage() {
                   className='bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow'
                 >
                   {/* Profile Image (not available in new API, so skip or add placeholder) */}
-                  <div className='w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mx-auto mb-4'>
+                  <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center mx-auto mb-4 text-white">
                     <div className='text-white text-center'>
                       <svg
                         className='w-8 h-8 mx-auto mb-2'
@@ -136,7 +136,7 @@ export default async function TeamPage() {
                   <p className='text-accent-warm font-medium mb-3'>
                     {member.role}
                   </p>
-                  <div className='text-xs text-gray-500 mt-4'>
+                  <div className="text-xs text-white">
                     <p>
                       Last updated:{' '}
                       {new Date(member.updated_at).toLocaleDateString()}
@@ -147,7 +147,7 @@ export default async function TeamPage() {
             </div>
           ) : (
             <div className='text-center py-12'>
-              <div className='text-gray-600 mb-4'>
+              <div className="text-white">
                 <svg
                   className='w-12 h-12 mx-auto'
                   fill='none'
@@ -162,10 +162,10 @@ export default async function TeamPage() {
                   />
                 </svg>
               </div>
-              <h3 className='text-lg font-semibold text-gray-900 mb-2'>
+              <h3 className="text-lg font-semibold text-white">
                 No Team Members Found
               </h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Team members will appear here once they are added to the system.
               </p>
             </div>

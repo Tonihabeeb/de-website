@@ -44,6 +44,7 @@ export default function NewPage() {
     unpublish_at: '',
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'content' | 'seo' | 'settings'>(
     'content'
   );
@@ -125,15 +126,15 @@ export default function NewPage() {
         <div className='flex items-center space-x-4'>
           <button
             onClick={() => router.back()}
-            className='text-gray-600 hover:text-gray-900'
+            className="text-gray-600 hover:text-white"
           >
             <ArrowLeft className='w-5 h-5' />
           </button>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Create New Page
             </h1>
-            <p className='text-gray-600'>Add a new page to your website</p>
+            <p className="text-white">Add a new page to your website</p>
           </div>
         </div>
         <div className='flex items-center space-x-3'>
@@ -141,7 +142,7 @@ export default function NewPage() {
             type='button'
             onClick={handlePreview}
             disabled={!formData.title || !formData.content || previewLoading}
-            className='px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 flex items-center space-x-2 disabled:opacity-50'
+            className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 flex items-center space-x-2 disabled:opacity-50 text-white"
           >
             <Eye className='w-4 h-4 mr-2' />
             {previewLoading ? 'Loading...' : 'Preview'}
@@ -150,7 +151,7 @@ export default function NewPage() {
             type='submit'
             form='page-form'
             disabled={loading}
-            className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center space-x-2'
+            className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none disabled:opacity-50 flex items-center space-x-2 text-white"
           >
             <Save className='w-4 h-4' />
             <span>{loading ? 'Saving...' : 'Save Page'}</span>
@@ -166,7 +167,7 @@ export default function NewPage() {
             className={`py-2 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'content'
                 ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
             <FileText className='w-4 h-4 inline mr-2' />
@@ -177,7 +178,7 @@ export default function NewPage() {
             className={`py-2 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'seo'
                 ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
             <Search className='w-4 h-4 inline mr-2' />
@@ -188,7 +189,7 @@ export default function NewPage() {
             className={`py-2 px-1 border-b-2 font-medium text-sm ${
               activeTab === 'settings'
                 ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
             <Settings className='w-4 h-4 inline mr-2' />
@@ -207,7 +208,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='title'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Page Title *
                   </label>
@@ -225,12 +226,12 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='slug'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     URL Slug *
                   </label>
                   <div className='flex'>
-                    <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
+                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-white">
                       /
                     </span>
                     <input
@@ -250,7 +251,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='content'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Page Content *
                   </label>
@@ -271,7 +272,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='meta_title'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Meta Title
                   </label>
@@ -289,7 +290,7 @@ export default function NewPage() {
                     placeholder='SEO title for search engines...'
                     maxLength={60}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.meta_title.length}/60 characters
                   </p>
                 </div>
@@ -297,7 +298,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='meta_description'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Meta Description
                   </label>
@@ -315,7 +316,7 @@ export default function NewPage() {
                     placeholder='Brief description for search results...'
                     maxLength={160}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.meta_description.length}/160 characters
                   </p>
                 </div>
@@ -323,7 +324,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='meta_keywords'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Meta Keywords
                   </label>
@@ -340,7 +341,7 @@ export default function NewPage() {
                     className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                     placeholder='keyword1, keyword2, keyword3...'
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     Separate keywords with commas
                   </p>
                 </div>
@@ -348,7 +349,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='og_title'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Open Graph Title
                   </label>
@@ -366,7 +367,7 @@ export default function NewPage() {
                     placeholder='Open Graph title for social media...'
                     maxLength={60}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.og_title.length}/60 characters
                   </p>
                 </div>
@@ -374,7 +375,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='og_description'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Open Graph Description
                   </label>
@@ -392,7 +393,7 @@ export default function NewPage() {
                     placeholder='Brief description for Open Graph...'
                     maxLength={160}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.og_description.length}/160 characters
                   </p>
                 </div>
@@ -400,7 +401,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='og_image'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Open Graph Image
                   </label>
@@ -431,7 +432,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='twitter_title'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Twitter Title
                   </label>
@@ -449,7 +450,7 @@ export default function NewPage() {
                     placeholder='Twitter title for social media...'
                     maxLength={60}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.twitter_title.length}/60 characters
                   </p>
                 </div>
@@ -457,7 +458,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='twitter_description'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Twitter Description
                   </label>
@@ -475,7 +476,7 @@ export default function NewPage() {
                     placeholder='Brief description for Twitter...'
                     maxLength={160}
                   />
-                  <p className='mt-1 text-sm text-gray-500'>
+                  <p className="mt-1 text-sm text-white">
                     {formData.twitter_description.length}/160 characters
                   </p>
                 </div>
@@ -483,7 +484,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='twitter_image'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Twitter Image
                   </label>
@@ -518,7 +519,7 @@ export default function NewPage() {
                 <div>
                   <label
                     htmlFor='status'
-                    className='block text-sm font-medium text-gray-700 mb-2'
+                    className="block text-sm font-medium text-white"
                   >
                     Page Status
                   </label>
@@ -539,7 +540,7 @@ export default function NewPage() {
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     Publish At
                   </label>
                   <input
@@ -552,7 +553,7 @@ export default function NewPage() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     Unpublish At
                   </label>
                   <input
@@ -565,7 +566,7 @@ export default function NewPage() {
                   />
                 </div>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                  <label className="block text-sm font-medium text-white">
                     Schedule Status
                   </label>
                   <div className='px-3 py-2 border rounded-lg bg-gray-50'>
@@ -585,7 +586,7 @@ export default function NewPage() {
                         );
                       if (unpub && now > unpub)
                         return (
-                          <span className='text-gray-500'>
+                          <span className="text-white">
                             Expired (unpublished at {unpub.toLocaleString()})
                           </span>
                         );
@@ -620,12 +621,12 @@ export default function NewPage() {
           <div className='space-y-6'>
             {/* Page Info */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className="text-sm font-medium text-white">
                 Page Information
               </h3>
               <div className='space-y-2 text-sm'>
                 <div>
-                  <span className='text-gray-500'>Status:</span>
+                  <span className="text-white">Status:</span>
                   <span
                     className={`ml-2 px-2 py-1 rounded-full text-xs font-medium ${
                       formData.status === 'published'
@@ -637,41 +638,41 @@ export default function NewPage() {
                   </span>
                 </div>
                 <div>
-                  <span className='text-gray-500'>URL:</span>
-                  <span className='ml-2 text-gray-900'>
+                  <span className="text-white">URL:</span>
+                  <span className="ml-2 text-white">
                     /{formData.slug || 'page-slug'}
                   </span>
                 </div>
                 <div>
-                  <span className='text-gray-500'>Created:</span>
-                  <span className='ml-2 text-gray-900'>Just now</span>
+                  <span className="text-white">Created:</span>
+                  <span className="ml-2 text-white">Just now</span>
                 </div>
               </div>
             </div>
 
             {/* Actions */}
             <div className='bg-white border border-gray-200 rounded-lg p-4'>
-              <h3 className='text-sm font-medium text-gray-900 mb-3'>
+              <h3 className="text-sm font-medium text-white">
                 Actions
               </h3>
               <div className='space-y-2'>
                 <button
                   type='submit'
                   disabled={loading}
-                  className='w-full bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm'
+                  className="w-full bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none disabled:opacity-50 text-sm text-white"
                 >
                   {loading ? 'Saving...' : 'Save Page'}
                 </button>
                 <button
                   type='button'
-                  className='w-full bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 text-sm'
+                  className="w-full bg-gray-100 text-white"
                 >
                   Save as Draft
                 </button>
                 <button
                   type='button'
                   onClick={() => router.back()}
-                  className='w-full border border-gray-300 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 text-sm'
+                  className="w-full border border-gray-300 text-white"
                 >
                   Cancel
                 </button>

@@ -360,8 +360,8 @@ export default function PagesManagement() {
   //   return (
   //     <div className="p-6">
   //       <div className="text-center">
-  //         <h2 className="text-xl font-semibold text-gray-900 mb-2">Authentication Required</h2>
-  //         <p className="text-gray-600">Please log in to access the pages management.</p>
+  //         <h2 className="text-xl font-semibold text-white">Authentication Required</h2>
+  //         <p className="text-white">Please log in to access the pages management.</p>
   //       </div>
   //     </div>
   //   );
@@ -393,13 +393,13 @@ export default function PagesManagement() {
         <div className='flex items-center gap-2'>
           <button
             onClick={handleExport}
-            className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+            className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none text-white"
           >
             Export
           </button>
           <button
             onClick={handleImportClick}
-            className='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700'
+            className="px-4 py-2 bg-gradient-to-b from-green-700 to-green-500 text-white hover:from-green-800 hover:to-green-600 active:from-green-900 active:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none text-white"
             disabled={importing}
           >
             Import
@@ -419,7 +419,7 @@ export default function PagesManagement() {
         <div className='flex flex-col sm:flex-row gap-4'>
           <div className='flex-1'>
             <div className='relative'>
-              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
               <input
                 type='text'
                 placeholder='Search pages...'
@@ -492,19 +492,19 @@ export default function PagesManagement() {
         <table className='min-w-full divide-y divide-gray-200'>
           <thead className='bg-gray-50'>
             <tr>
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+              <th className="px-6 py-3 text-left text-xs font-medium text-white">
                 Page
               </th>
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+              <th className="px-6 py-3 text-left text-xs font-medium text-white">
                 Status
               </th>
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+              <th className="px-6 py-3 text-left text-xs font-medium text-white">
                 Created
               </th>
-              <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+              <th className="px-6 py-3 text-left text-xs font-medium text-white">
                 Updated
               </th>
-              <th className='px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'>
+              <th className="px-6 py-3 text-right text-xs font-medium text-white">
                 Actions
               </th>
             </tr>
@@ -513,7 +513,7 @@ export default function PagesManagement() {
             {filteredPages.length === 0 ? (
               <tr>
                 <td colSpan={5} className='px-6 py-12 text-center'>
-                  <div className='text-gray-500'>
+                  <div className="text-white">
                     <p className='text-lg font-medium'>No pages found.</p>
                     <p className='mt-1'>
                       Get started by creating your first page.
@@ -533,19 +533,19 @@ export default function PagesManagement() {
                 <tr key={page.id} className='hover:bg-gray-50'>
                   <td className='px-6 py-4 whitespace-nowrap'>
                     <div>
-                      <div className='text-sm font-medium text-gray-900'>
+                      <div className="text-sm font-medium text-white">
                         {page.title}
                       </div>
-                      <div className='text-sm text-gray-500'>/{page.slug}</div>
+                      <div className="text-sm text-white">/{page.slug}</div>
                     </div>
                   </td>
                   <td className='px-6 py-4 whitespace-nowrap'>
                     {getStatusBadge(page.status)}
                   </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                     {new Date(page.created_at).toLocaleDateString()}
                   </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                     {new Date(page.updated_at).toLocaleDateString()}
                   </td>
                   <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
@@ -578,7 +578,7 @@ export default function PagesManagement() {
                       </button>
                       <button
                         onClick={() => openVersionModal(page.id)}
-                        className='text-gray-600 hover:text-blue-600'
+                        className="text-white"
                         aria-label='View version history'
                       >
                         <History className='w-4 h-4' />
@@ -600,7 +600,7 @@ export default function PagesManagement() {
           aria-modal='true'
         >
           <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+            <h3 className="text-lg font-semibold text-white">
               Version History
             </h3>
             {versionLoading ? (
@@ -610,20 +610,20 @@ export default function PagesManagement() {
             ) : (
               <>
                 {versions.length === 0 ? (
-                  <div className='text-gray-500'>
+                  <div className="text-white">
                     No previous versions found.
                   </div>
                 ) : (
                   <table className='min-w-full mb-4'>
                     <thead>
                       <tr>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className="text-left text-xs font-medium text-white">
                           Version
                         </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className="text-left text-xs font-medium text-white">
                           Created
                         </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className="text-left text-xs font-medium text-white">
                           User
                         </th>
                         <th></th>
@@ -673,7 +673,7 @@ export default function PagesManagement() {
             <div className='flex justify-end mt-4'>
               <button
                 onClick={() => setVersionModalPageId(null)}
-                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+                className="px-4 py-2 bg-gray-300 text-white"
               >
                 Close
               </button>
@@ -701,7 +701,7 @@ export default function PagesManagement() {
             <div className='flex justify-end'>
               <button
                 onClick={() => setImportResults(null)}
-                className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400'
+                className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-600'
               >
                 Close
               </button>

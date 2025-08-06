@@ -97,9 +97,9 @@ export default function ProgressTracker({
                     <Clock className='w-5 h-5 text-yellow-500' />
                   )}
                   {m.status === 'upcoming' && (
-                    <CalendarCheck className='w-5 h-5 text-gray-400' />
+                    <CalendarCheck className="w-5 h-5 text-white" />
                   )}
-                  <span className='font-medium text-gray-700'>{m.name}</span>
+                  <span className="font-medium text-white">{m.name}</span>
                 </div>
                 <div className='relative flex-1 h-6'>
                   <div className='absolute top-1/2 left-0 w-full h-2 bg-gray-200 rounded -translate-y-1/2' />
@@ -112,7 +112,7 @@ export default function ProgressTracker({
                     }}
                   />
                 </div>
-                <div className='w-32 text-sm text-gray-500 text-right'>
+                <div className="w-32 text-sm text-white">
                   {m.start} → {m.end}
                 </div>
               </div>

@@ -29,56 +29,56 @@ export default function OMPage() {
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='max-w-6xl mx-auto'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-12 text-center'>
+            <h2 className="text-3xl font-bold text-white">
               O&M Service Portfolio
             </h2>
 
             <div className='grid lg:grid-cols-2 gap-12'>
               {/* Operations */}
-              <div className='bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg'>
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg text-white">
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Zap className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className="text-2xl font-bold text-white">
                   Operations
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className="text-white">
                   Professional operations management ensuring continuous,
                   efficient, and safe power generation with maximum uptime.
                 </p>
                 <div className='space-y-3'>
                   <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full text-white"></div>
+                    <span className="text-white">
                       24/7 operations monitoring
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full text-white"></div>
+                    <span className="text-white">
                       Performance optimization
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-500 rounded-full'></div>
-                    <span className='text-gray-700'>Grid synchronization</span>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full text-white"></div>
+                    <span className="text-white">Grid synchronization</span>
                   </div>
                   <div className='flex items-center space-x-3'>
-                    <div className='w-2 h-2 bg-blue-500 rounded-full'></div>
-                    <span className='text-gray-700'>Load management</span>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full text-white"></div>
+                    <span className="text-white">Load management</span>
                   </div>
                 </div>
               </div>
 
               {/* Maintenance */}
-              <div className='bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg'>
+              <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg text-white">
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Wrench className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className="text-2xl font-bold text-white">
                   Maintenance
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className="text-white">
                   Comprehensive maintenance programs including preventive,
                   predictive, and corrective maintenance to maximize equipment
                   reliability.
@@ -86,25 +86,25 @@ export default function OMPage() {
                 <div className='space-y-3'>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-green-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <span className="text-white">
                       Preventive maintenance schedules
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-green-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <span className="text-white">
                       Predictive maintenance using IoT
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-green-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <span className="text-white">
                       Emergency repair services
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-green-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <span className="text-white">
                       Spare parts management
                     </span>
                   </div>
@@ -112,71 +112,71 @@ export default function OMPage() {
               </div>
 
               {/* Monitoring & Control */}
-              <div className='bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-lg'>
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-lg text-white">
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <TrendingUp className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className="text-2xl font-bold text-white">
                   Monitoring & Control
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className="text-white">
                   Advanced monitoring and control systems providing real-time
                   data, analytics, and remote operation capabilities.
                 </p>
                 <div className='space-y-3'>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-purple-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <span className="text-white">
                       Real-time performance monitoring
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-purple-500 rounded-full'></div>
-                    <span className='text-gray-700'>Predictive analytics</span>
+                    <span className="text-white">Predictive analytics</span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-purple-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <span className="text-white">
                       Remote control capabilities
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-purple-500 rounded-full'></div>
-                    <span className='text-gray-700'>Automated reporting</span>
+                    <span className="text-white">Automated reporting</span>
                   </div>
                 </div>
               </div>
 
               {/* Asset Management */}
-              <div className='bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-lg'>
+              <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-lg text-white">
                 <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6'>
                   <Settings className='w-8 h-8 text-white' />
                 </div>
-                <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+                <h3 className="text-2xl font-bold text-white">
                   Asset Management
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className="text-white">
                   Strategic asset management to optimize performance, extend
                   equipment life, and maximize return on investment.
                 </p>
                 <div className='space-y-3'>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-orange-500 rounded-full'></div>
-                    <span className='text-gray-700'>Lifecycle management</span>
+                    <span className="text-white">Lifecycle management</span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-orange-500 rounded-full'></div>
-                    <span className='text-gray-700'>
+                    <span className="text-white">
                       Performance optimization
                     </span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-orange-500 rounded-full'></div>
-                    <span className='text-gray-700'>Upgrade planning</span>
+                    <span className="text-white">Upgrade planning</span>
                   </div>
                   <div className='flex items-center space-x-3'>
                     <div className='w-2 h-2 bg-orange-500 rounded-full'></div>
-                    <span className='text-gray-700'>Cost optimization</span>
+                    <span className="text-white">Cost optimization</span>
                   </div>
                 </div>
               </div>
@@ -188,22 +188,22 @@ export default function OMPage() {
       <section className='py-16 bg-gray-50'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
+            <h2 className="text-3xl font-bold text-white">
               O&M Performance Metrics
             </h2>
 
             <div className='grid md:grid-cols-2 gap-8'>
               <div className='bg-white p-6 rounded-lg shadow-sm'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+                <h3 className="text-xl font-semibold text-white">
                   Reliability & Uptime
                 </h3>
                 <div className='space-y-3'>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>System Availability</span>
+                    <span className="text-white">System Availability</span>
                     <span className='font-semibold text-blue-600'>99.8%</span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>
+                    <span className="text-white">
                       Mean Time Between Failures
                     </span>
                     <span className='font-semibold text-blue-600'>
@@ -211,13 +211,13 @@ export default function OMPage() {
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Mean Time to Repair</span>
+                    <span className="text-white">Mean Time to Repair</span>
                     <span className='font-semibold text-blue-600'>
                       &lt; 4 hours
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Planned Maintenance</span>
+                    <span className="text-white">Planned Maintenance</span>
                     <span className='font-semibold text-blue-600'>
                       98% on schedule
                     </span>
@@ -226,26 +226,26 @@ export default function OMPage() {
               </div>
 
               <div className='bg-white p-6 rounded-lg shadow-sm'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+                <h3 className="text-xl font-semibold text-white">
                   Performance & Efficiency
                 </h3>
                 <div className='space-y-3'>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Energy Efficiency</span>
+                    <span className="text-white">Energy Efficiency</span>
                     <span className='font-semibold text-green-600'>94.2%</span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Response Time</span>
+                    <span className="text-white">Response Time</span>
                     <span className='font-semibold text-green-600'>
                       &lt; 100ms
                     </span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Grid Stability</span>
+                    <span className="text-white">Grid Stability</span>
                     <span className='font-semibold text-green-600'>99.9%</span>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <span className='text-gray-600'>Safety Record</span>
+                    <span className="text-white">Safety Record</span>
                     <span className='font-semibold text-green-600'>
                       Zero incidents
                     </span>
@@ -260,52 +260,52 @@ export default function OMPage() {
       <section className='py-16 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-bold text-gray-900 mb-8 text-center'>
+            <h2 className="text-3xl font-bold text-white">
               O&M Service Levels
             </h2>
 
             <div className='grid md:grid-cols-3 gap-8'>
-              <div className='bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-white">
+                <h3 className="text-xl font-semibold text-white">
                   Basic O&M
                 </h3>
-                <ul className='space-y-2 text-gray-600 mb-6'>
+                <ul className="space-y-2 text-white">
                   <li>• Scheduled maintenance</li>
                   <li>• Basic monitoring</li>
                   <li>• Emergency response</li>
                   <li>• Performance reporting</li>
                 </ul>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   Ideal for smaller installations
                 </p>
               </div>
 
-              <div className='bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border-2 border-green-200'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+              <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border-2 border-green-200 text-white">
+                <h3 className="text-xl font-semibold text-white">
                   Premium O&M
                 </h3>
-                <ul className='space-y-2 text-gray-600 mb-6'>
+                <ul className="space-y-2 text-white">
                   <li>• 24/7 monitoring</li>
                   <li>• Predictive maintenance</li>
                   <li>• Performance optimization</li>
                   <li>• Remote operation</li>
                   <li>• Advanced analytics</li>
                 </ul>
-                <p className='text-sm text-gray-500'>Most popular choice</p>
+                <p className="text-sm text-white">Most popular choice</p>
               </div>
 
-              <div className='bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg'>
-                <h3 className='text-xl font-semibold text-gray-900 mb-4'>
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-white">
+                <h3 className="text-xl font-semibold text-white">
                   Enterprise O&M
                 </h3>
-                <ul className='space-y-2 text-gray-600 mb-6'>
+                <ul className="space-y-2 text-white">
                   <li>• Full asset management</li>
                   <li>• Custom optimization</li>
                   <li>• Dedicated team</li>
                   <li>• Strategic planning</li>
                   <li>• ROI optimization</li>
                 </ul>
-                <p className='text-sm text-gray-500'>
+                <p className="text-sm text-white">
                   For large-scale operations
                 </p>
               </div>

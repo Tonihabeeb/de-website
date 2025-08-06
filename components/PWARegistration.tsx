@@ -96,7 +96,7 @@ export default function PWARegistration() {
             </div>
             <button
               onClick={handleDismissInstall}
-              className='flex-shrink-0 text-gray-400 hover:text-gray-600 touch-target min-w-[44px] min-h-[44px]'
+              className='flex-shrink-0 text-gray-600 hover:text-gray-600 touch-target min-w-[44px] min-h-[44px]'
               aria-label='Dismiss install prompt'
             >
               <LucideX className='w-5 h-5' />

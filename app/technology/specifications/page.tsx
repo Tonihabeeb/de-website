@@ -59,60 +59,60 @@ export default function TechnologySpecificationsPage() {
               </h2>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     Power Output
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Rated Power:</span>
+                      <span className="text-white">Rated Power:</span>
                       <span className='font-semibold'>500 kW</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Operating Speed:</span>
+                      <span className="text-white">Operating Speed:</span>
                       <span className='font-semibold'>375 RPM</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Efficiency:</span>
+                      <span className="text-white">Efficiency:</span>
                       <span className='font-semibold'>95.2%</span>
                     </div>
                   </div>
                 </div>
 
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     Physical Dimensions
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Diameter:</span>
+                      <span className="text-white">Diameter:</span>
                       <span className='font-semibold'>800 mm</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Height:</span>
+                      <span className="text-white">Height:</span>
                       <span className='font-semibold'>2,400 mm</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Weight:</span>
+                      <span className="text-white">Weight:</span>
                       <span className='font-semibold'>4,700 kg</span>
                     </div>
                   </div>
                 </div>
 
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     Environmental
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Protection Class:</span>
+                      <span className="text-white">Protection Class:</span>
                       <span className='font-semibold'>IP54</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Temperature Range:</span>
+                      <span className="text-white">Temperature Range:</span>
                       <span className='font-semibold'>90-130°C</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Noise Level:</span>
+                      <span className="text-white">Noise Level:</span>
                       <span className='font-semibold'>&lt;65 dB</span>
                     </div>
                   </div>
@@ -127,40 +127,40 @@ export default function TechnologySpecificationsPage() {
               </h2>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     Compression Parameters
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Operating Pressure:</span>
+                      <span className="text-white">Operating Pressure:</span>
                       <span className='font-semibold'>10 bar</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Air Flow Rate:</span>
+                      <span className="text-white">Air Flow Rate:</span>
                       <span className='font-semibold'>1.2-1.5 m³/min</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Compression Ratio:</span>
+                      <span className="text-white">Compression Ratio:</span>
                       <span className='font-semibold'>10:1</span>
                     </div>
                   </div>
                 </div>
 
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     System Components
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Compressor Type:</span>
+                      <span className="text-white">Compressor Type:</span>
                       <span className='font-semibold'>Reciprocating</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Cooling System:</span>
+                      <span className="text-white">Cooling System:</span>
                       <span className='font-semibold'>Water-cooled</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Control System:</span>
+                      <span className="text-white">Control System:</span>
                       <span className='font-semibold'>PLC-based</span>
                     </div>
                   </div>
@@ -175,48 +175,48 @@ export default function TechnologySpecificationsPage() {
               </h2>
               <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     Initial Fill
                   </h3>
                   <div className='text-center'>
                     <div className='text-4xl font-bold text-primary mb-2'>
                       30 m³
                     </div>
-                    <p className='text-gray-600'>
+                    <p className="text-white">
                       Initial water requirement for system startup
                     </p>
                   </div>
                 </div>
 
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     Annual Consumption
                   </h3>
                   <div className='text-center'>
                     <div className='text-4xl font-bold text-primary mb-2'>
                       &lt;5%
                     </div>
-                    <p className='text-gray-600'>
+                    <p className="text-white">
                       Annual water loss through evaporation
                     </p>
                   </div>
                 </div>
 
                 <div className='bg-gray-50 rounded-lg p-6'>
-                  <h3 className='text-xl font-semibold text-gray-800 mb-4'>
+                  <h3 className="text-xl font-semibold text-white">
                     Water Quality
                   </h3>
                   <div className='space-y-2'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>pH Level:</span>
+                      <span className="text-white">pH Level:</span>
                       <span className='font-semibold'>6.5-8.5</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Hardness:</span>
+                      <span className="text-white">Hardness:</span>
                       <span className='font-semibold'>&lt;150 ppm</span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>TDS:</span>
+                      <span className="text-white">TDS:</span>
                       <span className='font-semibold'>&lt;500 ppm</span>
                     </div>
                   </div>
@@ -230,19 +230,19 @@ export default function TechnologySpecificationsPage() {
                 Performance Metrics
               </h2>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-                <div className='bg-gradient-to-br from-green-500 to-green-600 text-white rounded-lg p-6 text-center'>
+                <div className="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-lg p-6 text-center text-white">
                   <div className='text-3xl font-bold mb-2'>24/7</div>
                   <div className='text-base'>Continuous Operation</div>
                 </div>
-                <div className='bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 text-center'>
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 text-center text-white">
                   <div className='text-3xl font-bold mb-2'>95.2%</div>
                   <div className='text-base'>System Efficiency</div>
                 </div>
-                <div className='bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-6 text-center'>
+                <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-6 text-center text-white">
                   <div className='text-3xl font-bold mb-2'>0</div>
                   <div className='text-base'>Emissions</div>
                 </div>
-                <div className='bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-6 text-center'>
+                <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-6 text-center text-white">
                   <div className='text-3xl font-bold mb-2'>&lt;3s</div>
                   <div className='text-base'>Startup Time</div>
                 </div>
@@ -251,15 +251,15 @@ export default function TechnologySpecificationsPage() {
 
             {/* Download Section */}
             <div className='bg-gray-50 rounded-lg p-8 text-center'>
-              <h2 className='text-2xl font-bold text-gray-800 mb-4'>
+              <h2 className="text-2xl font-bold text-white">
                 Download Technical Documentation
               </h2>
-              <p className='text-gray-600 mb-6'>
+              <p className="text-white">
                 Access detailed technical specifications, installation guides,
                 and maintenance manuals.
               </p>
               <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                <button className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 min-w-[44px] min-h-[44px]'>
+                <button className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors duration-200 min-w-[44px] min-h-[44px] text-white">
                   Download Full Specifications (PDF)
                 </button>
                 <button className='border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors duration-200 min-w-[44px] min-h-[44px]'>
@@ -303,14 +303,14 @@ export default function TechnologySpecificationsPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-600'>
+            <p className="text-base text-white">
               Explore more about KPP technology and related topics:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/technology'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
+              className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
             >
               Technology Overview
             </Link>

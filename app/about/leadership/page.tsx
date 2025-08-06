@@ -46,7 +46,7 @@ const leadershipTeam = [
       'Strategic Leadership',
       'Technology Innovation',
     ],
-    icon: <User className='w-24 h-24 text-gray-400' />,
+    icon: <User className="w-24 h-24 text-white" />,
   },
   {
     name: 'Michael Rodriguez',
@@ -58,7 +58,7 @@ const leadershipTeam = [
       'Energy Optimization',
       'Technology Development',
     ],
-    icon: <Zap className='w-24 h-24 text-gray-400' />,
+    icon: <Zap className="w-24 h-24 text-white" />,
   },
   {
     name: 'Jennifer Park',
@@ -70,7 +70,7 @@ const leadershipTeam = [
       'Clean Energy Finance',
       'Risk Management',
     ],
-    icon: <BarChart3 className='w-24 h-24 text-gray-400' />,
+    icon: <BarChart3 className="w-24 h-24 text-white" />,
   },
   {
     name: 'David Thompson',
@@ -82,7 +82,7 @@ const leadershipTeam = [
       'Operations Excellence',
       'Sustainable Development',
     ],
-    icon: <Target className='w-24 h-24 text-gray-400' />,
+    icon: <Target className="w-24 h-24 text-white" />,
   },
 ];
 
@@ -280,7 +280,7 @@ export default function LeadershipPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Executive Leadership Team</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our experienced leadership team brings decades of combined
               expertise in energy, technology, and sustainability, guiding Deep
               Engineering toward a cleaner, more efficient future.
@@ -293,11 +293,11 @@ export default function LeadershipPage() {
                 <div className='w-48 h-48 mx-auto mb-6 bg-gray-200 rounded-full flex items-center justify-center'>
                   {leader.icon}
                 </div>
-                <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+                <h3 className="text-xl font-semibold text-white">
                   {leader.name}
                 </h3>
                 <p className='text-primary font-medium mb-3'>{leader.title}</p>
-                <p className='text-gray-600 text-sm leading-relaxed mb-4'>
+                <p className="text-white">
                   {leader.description}
                 </p>
                 <div className='flex flex-wrap justify-center gap-2'>
@@ -321,7 +321,7 @@ export default function LeadershipPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Project Stakeholder Structure</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               The KPP project involves a diverse network of stakeholders, each
               playing a crucial role in ensuring project success and sustainable
               impact.
@@ -342,7 +342,7 @@ export default function LeadershipPage() {
                         <h4 className='font-semibold text-sm'>
                           {stakeholder.name}
                         </h4>
-                        <p className='text-xs text-gray-text'>
+                        <p className="text-xs text-white">
                           {stakeholder.role}
                         </p>
                       </div>
@@ -360,7 +360,7 @@ export default function LeadershipPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Governance Framework</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our multi-level governance structure ensures transparent
               decision-making, effective oversight, and stakeholder
               accountability.
@@ -377,7 +377,7 @@ export default function LeadershipPage() {
                     {level.responsibilities.map((responsibility, respIndex) => (
                       <li key={respIndex} className='flex items-start'>
                         <div className='w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0'></div>
-                        <span className='text-sm text-gray-text'>
+                        <span className="text-sm text-white">
                           {responsibility}
                         </span>
                       </li>
@@ -408,7 +408,7 @@ export default function LeadershipPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Decision-Making Process</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Our transparent and inclusive decision-making process ensures all
               stakeholders are heard and informed decisions are made for the
               benefit of all parties.
@@ -438,7 +438,7 @@ export default function LeadershipPage() {
                             <h3 className='font-semibold text-lg'>
                               {phase.phase}
                             </h3>
-                            <p className='text-sm text-gray-text'>
+                            <p className="text-sm text-white">
                               {phase.description}
                             </p>
                           </div>
@@ -450,7 +450,7 @@ export default function LeadershipPage() {
                               className='flex items-start'
                             >
                               <div className='w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0'></div>
-                              <span className='text-sm text-gray-text'>
+                              <span className="text-sm text-white">
                                 {activity}
                               </span>
                             </li>
@@ -471,7 +471,7 @@ export default function LeadershipPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Our Leadership Philosophy</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               At Deep Engineering, we believe in leading by example. Our
               leadership team is committed to transparency, innovation, and
               sustainability in everything we do.
@@ -484,7 +484,7 @@ export default function LeadershipPage() {
                 <Target className='w-8 h-8 text-white' />
               </div>
               <h3 className='text-xl font-semibold mb-2'>Vision-Driven</h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 We lead with a clear vision of a sustainable future and inspire
                 others to join us on this journey.
               </p>
@@ -494,7 +494,7 @@ export default function LeadershipPage() {
                 <Users className='w-8 h-8 text-white' />
               </div>
               <h3 className='text-xl font-semibold mb-2'>Collaborative</h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 We believe in the power of teamwork and diverse perspectives to
                 solve complex challenges.
               </p>
@@ -504,7 +504,7 @@ export default function LeadershipPage() {
                 <Leaf className='w-8 h-8 text-white' />
               </div>
               <h3 className='text-xl font-semibold mb-2'>Sustainable</h3>
-              <p className='text-gray-text'>
+              <p className="text-white">
                 Every decision we make considers the long-term impact on our
                 planet and future generations.
               </p>

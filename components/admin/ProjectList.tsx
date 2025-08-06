@@ -167,15 +167,15 @@ export default function ProjectList({
       {/* Header */}
       <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0'>
         <div>
-          <h2 className='text-lg font-medium text-gray-900'>Projects</h2>
-          <p className='text-sm text-gray-600'>
+          <h2 className="text-lg font-medium text-white">Projects</h2>
+          <p className="text-sm text-white">
             {filteredProjects.length} of {projects.length} projects
           </p>
         </div>
         <div className='flex items-center space-x-3'>
           <button
             onClick={onCreateNew}
-            className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2'
+            className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none flex items-center space-x-2 text-white"
           >
             <Plus className='w-4 h-4' />
             <span>New Project</span>
@@ -188,7 +188,7 @@ export default function ProjectList({
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
           {/* Search */}
           <div className='relative'>
-            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
             <input
               type='text'
               placeholder='Search projects...'
@@ -239,7 +239,7 @@ export default function ProjectList({
 
       {/* Bulk Actions */}
       {selectedProjects.length > 0 && (
-        <div className='bg-blue-50 border border-blue-200 rounded-lg p-4'>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-white">
           <div className='flex items-center justify-between'>
             <div className='flex items-center space-x-4'>
               <span className='text-sm font-medium text-blue-900'>
@@ -253,10 +253,10 @@ export default function ProjectList({
               </button>
             </div>
             <div className='flex items-center space-x-2'>
-              <button className='px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700'>
+              <button className="px-3 py-1 text-sm bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none text-white">
                 Export
               </button>
-              <button className='px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700'>
+              <button className="px-3 py-1 text-sm bg-gradient-to-b from-red-700 to-red-500 text-white hover:from-red-800 hover:to-red-600 active:from-red-900 active:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none text-white">
                 Delete Selected
               </button>
             </div>
@@ -269,12 +269,12 @@ export default function ProjectList({
         {filteredProjects.length === 0 ? (
           <div className='text-center py-12'>
             <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>
-              <Search className='w-8 h-8 text-gray-400' />
+              <Search className="w-8 h-8 text-white" />
             </div>
-            <h3 className='text-lg font-medium text-gray-900 mb-2'>
+            <h3 className="text-lg font-medium text-white">
               No projects found
             </h3>
-            <p className='text-gray-600 mb-4'>
+            <p className="text-white">
               {searchTerm || statusFilter !== 'all'
                 ? 'Try adjusting your search or filters'
                 : 'Get started by creating your first project'}
@@ -282,7 +282,7 @@ export default function ProjectList({
             {!searchTerm && statusFilter === 'all' && (
               <button
                 onClick={onCreateNew}
-                className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700'
+                className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none text-white"
               >
                 Create First Project
               </button>
@@ -310,10 +310,10 @@ export default function ProjectList({
                   <div className='flex-1 min-w-0'>
                     <div className='flex items-start justify-between'>
                       <div className='flex-1 min-w-0'>
-                        <h3 className='text-lg font-medium text-gray-900 truncate'>
+                        <h3 className="text-lg font-medium text-white">
                           {project.title}
                         </h3>
-                        <p className='text-sm text-gray-600 mt-1 line-clamp-2'>
+                        <p className="text-sm text-white">
                           {project.description}
                         </p>
                       </div>
@@ -330,26 +330,26 @@ export default function ProjectList({
                     {/* Project Details */}
                     <div className='mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm'>
                       <div className='flex items-center space-x-2'>
-                        <MapPin className='w-4 h-4 text-gray-400' />
-                        <span className='text-gray-600'>
+                        <MapPin className="w-4 h-4 text-white" />
+                        <span className="text-white">
                           {project.location}
                         </span>
                       </div>
                       <div className='flex items-center space-x-2'>
-                        <DollarSign className='w-4 h-4 text-gray-400' />
-                        <span className='text-gray-600'>
+                        <DollarSign className="w-4 h-4 text-white" />
+                        <span className="text-white">
                           {formatCurrency(project.budget)}
                         </span>
                       </div>
                       <div className='flex items-center space-x-2'>
-                        <Calendar className='w-4 h-4 text-gray-400' />
-                        <span className='text-gray-600'>
+                        <Calendar className="w-4 h-4 text-white" />
+                        <span className="text-white">
                           {formatDate(project.start_date)}
                         </span>
                       </div>
                       <div className='flex items-center space-x-2'>
-                        <Clock className='w-4 h-4 text-gray-400' />
-                        <span className='text-gray-600'>
+                        <Clock className="w-4 h-4 text-white" />
+                        <span className="text-white">
                           {formatDate(project.end_date)}
                         </span>
                       </div>
@@ -358,7 +358,7 @@ export default function ProjectList({
                     {/* Progress Bar */}
                     <div className='mt-4'>
                       <div className='flex items-center justify-between text-sm mb-2'>
-                        <span className='text-gray-600'>Progress</span>
+                        <span className="text-white">Progress</span>
                         <span className='font-medium'>{project.progress}%</span>
                       </div>
                       <div className='w-full bg-gray-200 rounded-full h-2'>
@@ -371,32 +371,32 @@ export default function ProjectList({
 
                     {/* Actions */}
                     <div className='mt-4 flex items-center justify-between'>
-                      <div className='text-xs text-gray-500'>
+                      <div className="text-xs text-white">
                         Created {formatDate(project.created_at)}
                       </div>
                       <div className='flex items-center space-x-2'>
                         <button
                           onClick={() => onView(project)}
-                          className='p-2 text-gray-400 hover:text-gray-600'
+                          className="p-2 text-gray-600 hover:text-white"
                           title='View project'
                         >
                           <Eye className='w-4 h-4' />
                         </button>
                         <button
                           onClick={() => onEdit(project)}
-                          className='p-2 text-gray-400 hover:text-blue-600'
+                          className="p-2 text-white"
                           title='Edit project'
                         >
                           <Edit className='w-4 h-4' />
                         </button>
                         <button
                           onClick={() => onDelete(project.id)}
-                          className='p-2 text-gray-400 hover:text-red-600'
+                          className="p-2 text-white"
                           title='Delete project'
                         >
                           <Trash2 className='w-4 h-4' />
                         </button>
-                        <button className='p-2 text-gray-400 hover:text-gray-600'>
+                        <button className="p-2 text-gray-600 hover:text-white">
                           <MoreHorizontal className='w-4 h-4' />
                         </button>
                       </div>

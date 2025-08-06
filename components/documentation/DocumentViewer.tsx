@@ -33,7 +33,7 @@ export default function DocumentViewer({
         )}
         <div>
           <h2 className='text-xl font-bold text-primary mb-1'>{doc.title}</h2>
-          <div className='flex gap-2 text-xs text-gray-500'>
+          <div className="flex gap-2 text-xs text-white">
             <span className='bg-gray-100 px-2 py-1 rounded'>
               {doc.category}
             </span>
@@ -41,8 +41,8 @@ export default function DocumentViewer({
           </div>
         </div>
       </div>
-      <p className='text-gray-700 mb-4'>{doc.description}</p>
-      <div className='bg-gray-50 border rounded p-4 text-gray-600 min-h-[180px] flex items-center justify-center'>
+      <p className="text-white">{doc.description}</p>
+      <div className="bg-gray-50 border rounded p-4 text-white">
         {doc.type === 'pdf' && <em>PDF preview will be shown here.</em>}
         {doc.type === 'image' && <em>Image preview will be shown here.</em>}
         {doc.type === 'text' && <em>Text file preview will be shown here.</em>}

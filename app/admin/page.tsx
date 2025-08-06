@@ -69,15 +69,15 @@ export default function AdminDashboard() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex justify-between items-center py-6'>
             <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
+              <h1 className="text-3xl font-bold text-white">
                 Admin Dashboard
               </h1>
-              <p className='text-gray-600'>
+              <p className="text-white">
                 Manage your website content and users
               </p>
             </div>
             <div className='flex items-center space-x-4'>
-              <button className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2'>
+              <button className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none flex items-center space-x-2 text-white">
                 <Plus className='w-4 h-4' />
                 <span>New Page</span>
               </button>
@@ -92,12 +92,12 @@ export default function AdminDashboard() {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
           <div className='bg-white rounded-lg shadow p-6'>
             <div className='flex items-center'>
-              <div className='p-2 bg-blue-100 rounded-lg'>
+              <div className="p-2 bg-blue-100 rounded-lg text-white">
                 <FileText className='w-6 h-6 text-blue-600' />
               </div>
               <div className='ml-4'>
-                <p className='text-sm font-medium text-gray-600'>Total Pages</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm font-medium text-white">Total Pages</p>
+                <p className="text-2xl font-bold text-white">
                   {stats.totalPages}
                 </p>
               </div>
@@ -120,8 +120,8 @@ export default function AdminDashboard() {
                 <FolderOpen className='w-6 h-6 text-purple-600' />
               </div>
               <div className='ml-4'>
-                <p className='text-sm font-medium text-gray-600'>Projects</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm font-medium text-white">Projects</p>
+                <p className="text-2xl font-bold text-white">
                   {stats.totalProjects}
                 </p>
               </div>
@@ -131,7 +131,7 @@ export default function AdminDashboard() {
                 <span className='text-green-600'>
                   {stats.activeProjects} Active
                 </span>
-                <span className='text-gray-600'>
+                <span className="text-white">
                   {stats.totalProjects - stats.activeProjects} Inactive
                 </span>
               </div>
@@ -144,8 +144,8 @@ export default function AdminDashboard() {
                 <Users className='w-6 h-6 text-green-600' />
               </div>
               <div className='ml-4'>
-                <p className='text-sm font-medium text-gray-600'>Users</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm font-medium text-white">Users</p>
+                <p className="text-2xl font-bold text-white">
                   {stats.totalUsers}
                 </p>
               </div>
@@ -155,7 +155,7 @@ export default function AdminDashboard() {
                 <span className='text-green-600'>
                   {stats.activeUsers} Active
                 </span>
-                <span className='text-gray-600'>
+                <span className="text-white">
                   {stats.totalUsers - stats.activeUsers} Inactive
                 </span>
               </div>
@@ -168,12 +168,12 @@ export default function AdminDashboard() {
                 <BarChart3 className='w-6 h-6 text-orange-600' />
               </div>
               <div className='ml-4'>
-                <p className='text-sm font-medium text-gray-600'>Analytics</p>
-                <p className='text-2xl font-bold text-gray-900'>Coming Soon</p>
+                <p className="text-sm font-medium text-white">Analytics</p>
+                <p className="text-2xl font-bold text-white">Coming Soon</p>
               </div>
             </div>
             <div className='mt-4'>
-              <div className='text-sm text-gray-600'>
+              <div className="text-sm text-white">
                 <span>Page views tracking</span>
               </div>
             </div>
@@ -183,15 +183,15 @@ export default function AdminDashboard() {
         {/* Quick Actions */}
         <div className='bg-white rounded-lg shadow mb-8'>
           <div className='px-6 py-4 border-b border-gray-200'>
-            <h2 className='text-lg font-medium text-gray-900'>Quick Actions</h2>
+            <h2 className="text-lg font-medium text-white">Quick Actions</h2>
           </div>
           <div className='p-6'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
               <button className='flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
                 <FileText className='w-5 h-5 text-blue-600 mr-3' />
                 <div className='text-left'>
-                  <p className='font-medium text-gray-900'>Create New Page</p>
-                  <p className='text-sm text-gray-600'>
+                  <p className="font-medium text-white">Create New Page</p>
+                  <p className="text-sm text-white">
                     Add content to your website
                   </p>
                 </div>
@@ -200,8 +200,8 @@ export default function AdminDashboard() {
               <button className='flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
                 <FolderOpen className='w-5 h-5 text-purple-600 mr-3' />
                 <div className='text-left'>
-                  <p className='font-medium text-gray-900'>New Project</p>
-                  <p className='text-sm text-gray-600'>
+                  <p className="font-medium text-white">New Project</p>
+                  <p className="text-sm text-white">
                     Start a new KPP project
                   </p>
                 </div>
@@ -210,8 +210,8 @@ export default function AdminDashboard() {
               <button className='flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors'>
                 <Users className='w-5 h-5 text-green-600 mr-3' />
                 <div className='text-left'>
-                  <p className='font-medium text-gray-900'>Manage Users</p>
-                  <p className='text-sm text-gray-600'>
+                  <p className="font-medium text-white">Manage Users</p>
+                  <p className="text-sm text-white">
                     Add or edit team members
                   </p>
                 </div>
@@ -226,10 +226,10 @@ export default function AdminDashboard() {
           <div className='lg:col-span-2'>
             <div className='bg-white rounded-lg shadow'>
               <div className='px-6 py-4 border-b border-gray-200'>
-                <h2 className='text-lg font-medium text-gray-900'>
+                <h2 className="text-lg font-medium text-white">
                   Recent Activity
                 </h2>
-                <p className='text-sm text-gray-600'>
+                <p className="text-sm text-white">
                   Latest actions across the system
                 </p>
               </div>
@@ -243,10 +243,10 @@ export default function AdminDashboard() {
           <div className='lg:col-span-1'>
             <div className='bg-white rounded-lg shadow'>
               <div className='px-6 py-4 border-b border-gray-200'>
-                <h2 className='text-lg font-medium text-gray-900'>
+                <h2 className="text-lg font-medium text-white">
                   User Overview
                 </h2>
-                <p className='text-sm text-gray-600'>Team activity and roles</p>
+                <p className="text-sm text-white">Team activity and roles</p>
               </div>
               <div className='p-6'>
                 <UserOverviewCharts />

@@ -27,7 +27,7 @@ export default function KPPAnimationBlueprint({
   if (shouldReduceMotion) {
     return (
       <div className={`relative w-full max-w-4xl mx-auto ${className}`}>
-        <div className='relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-600'>
+        <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-600 text-white">
           <div className='absolute inset-0 opacity-20'>
             <svg className='w-full h-full' xmlns='http://www.w3.org/2000/svg'>
               <defs>
@@ -65,7 +65,7 @@ export default function KPPAnimationBlueprint({
     <div className={`relative w-full max-w-4xl mx-auto ${className}`}>
       {/* Blueprint Container */}
       <div
-        className='relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-600'
+        className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-600 text-white"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -128,7 +128,7 @@ export default function KPPAnimationBlueprint({
             {/* Compressor Symbol */}
             <div className='w-16 h-16 border-2 border-blue-400 rounded-full flex items-center justify-center'>
               <div className='w-8 h-8 border border-blue-400 rounded-full flex items-center justify-center'>
-                <div className='w-4 h-4 bg-blue-400 rounded-full'></div>
+                <div className="w-4 h-4 bg-blue-400 rounded-full text-white"></div>
               </div>
             </div>
 
@@ -187,7 +187,7 @@ export default function KPPAnimationBlueprint({
             {/* Floater Symbol */}
             <div className='w-20 h-20 border-2 border-blue-400 rounded-full flex items-center justify-center'>
               <div className='w-12 h-12 border border-blue-400 rounded-full flex items-center justify-center'>
-                <div className='w-6 h-6 bg-blue-400 rounded-full'></div>
+                <div className="w-6 h-6 bg-blue-400 rounded-full text-white"></div>
               </div>
             </div>
 
@@ -396,7 +396,7 @@ export default function KPPAnimationBlueprint({
           </div>
           <div className='text-center'>
             <div className='w-8 h-8 border-2 border-blue-400 rounded-full mx-auto mb-2 flex items-center justify-center'>
-              <div className='w-4 h-4 bg-blue-400 rounded-full'></div>
+              <div className="w-4 h-4 bg-blue-400 rounded-full text-white"></div>
             </div>
             <p className='text-xs text-blue-400 font-mono'>FLOATER</p>
           </div>

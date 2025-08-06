@@ -298,7 +298,7 @@ export default function EditProject() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading project...</span>
+          <span className="ml-2 text-white">Loading project...</span>
         </div>
       </div>
     );
@@ -329,12 +329,12 @@ export default function EditProject() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>Edit Project</h1>
-            <p className='text-gray-600 mt-1'>
+            <h1 className="text-2xl font-bold text-white">Edit Project</h1>
+            <p className="text-white">
               Update project details and configuration
             </p>
             {project && (
-              <p className='text-sm text-gray-500 mt-1'>
+              <p className="text-sm text-white">
                 Last updated:{' '}
                 {new Date(project.updated_at).toLocaleDateString()}
               </p>
@@ -343,7 +343,7 @@ export default function EditProject() {
           <div className='flex space-x-3'>
             <button
               onClick={handleCancel}
-              className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+              className="px-4 py-2 border border-gray-300 rounded-lg text-white"
             >
               <X className='w-4 h-4 mr-2' />
               Cancel
@@ -351,7 +351,7 @@ export default function EditProject() {
             <button
               onClick={handleSubmit}
               disabled={saving}
-              className='px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center'
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center text-white"
             >
               {saving ? (
                 <Loader2 className='w-4 h-4 animate-spin mr-2' />
@@ -366,7 +366,7 @@ export default function EditProject() {
               disabled={
                 !formData.title || !formData.description || previewLoading
               }
-              className='px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 flex items-center space-x-2 disabled:opacity-50'
+              className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 flex items-center space-x-2 disabled:opacity-50 text-white"
             >
               <Eye className='w-4 h-4 mr-2' />
               {previewLoading ? 'Loading...' : 'Preview'}
@@ -405,7 +405,7 @@ export default function EditProject() {
           aria-modal='true'
         >
           <div className='bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
+            <h3 className="text-lg font-semibold text-white">
               Version History
             </h3>
             {versionLoading ? (
@@ -415,20 +415,20 @@ export default function EditProject() {
             ) : (
               <>
                 {versions.length === 0 ? (
-                  <div className='text-gray-500'>
+                  <div className="text-white">
                     No previous versions found.
                   </div>
                 ) : (
                   <table className='min-w-full mb-4'>
                     <thead>
                       <tr>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className="text-left text-xs font-medium text-white">
                           Version
                         </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className="text-left text-xs font-medium text-white">
                           Created
                         </th>
-                        <th className='text-left text-xs font-medium text-gray-500 uppercase px-2 py-1'>
+                        <th className="text-left text-xs font-medium text-white">
                           User
                         </th>
                         <th></th>
@@ -476,7 +476,7 @@ export default function EditProject() {
             <div className='flex justify-end mt-4'>
               <button
                 onClick={() => setVersionModalOpen(false)}
-                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors'
+                className="px-4 py-2 bg-gray-300 text-white"
               >
                 Close
               </button>
@@ -488,13 +488,13 @@ export default function EditProject() {
       {/* Form */}
       <form onSubmit={handleSubmit} className='space-y-6'>
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4'>
+          <h2 className="text-lg font-semibold text-white">
             Basic Information
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Title *
               </label>
               <input
@@ -508,7 +508,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Status
               </label>
               <select
@@ -525,7 +525,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Priority
               </label>
               <select
@@ -541,7 +541,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Risk Level
               </label>
               <select
@@ -557,7 +557,7 @@ export default function EditProject() {
           </div>
 
           <div className='mt-6'>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Description *
             </label>
             <textarea
@@ -573,14 +573,14 @@ export default function EditProject() {
 
         {/* Timeline */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <Calendar className='w-5 h-5 mr-2' />
             Timeline
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Start Date
               </label>
               <input
@@ -592,7 +592,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 End Date
               </label>
               <input
@@ -607,14 +607,14 @@ export default function EditProject() {
 
         {/* Budget */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <DollarSign className='w-5 h-5 mr-2' />
             Budget & Financials
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Budget Amount
               </label>
               <input
@@ -628,7 +628,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Currency
               </label>
               <select
@@ -646,7 +646,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Budget Status
               </label>
               <select
@@ -666,14 +666,14 @@ export default function EditProject() {
 
         {/* Team & Stakeholders */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <Users className='w-5 h-5 mr-2' />
             Team & Stakeholders
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Client Name
               </label>
               <input
@@ -686,7 +686,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Manager
               </label>
               <input
@@ -702,7 +702,7 @@ export default function EditProject() {
           </div>
 
           <div className='mt-6'>
-            <label className='block text-sm font-medium text-gray-700 mb-2'>
+            <label className="block text-sm font-medium text-white">
               Team Members
             </label>
             <div className='flex gap-2 mb-2'>
@@ -719,7 +719,7 @@ export default function EditProject() {
               <button
                 type='button'
                 onClick={addTeamMember}
-                className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+                className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
               >
                 Add
               </button>
@@ -728,7 +728,7 @@ export default function EditProject() {
               {formData.team_members.map((member, index) => (
                 <span
                   key={index}
-                  className='inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800'
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800 text-white"
                 >
                   {member}
                   <button
@@ -746,14 +746,14 @@ export default function EditProject() {
 
         {/* Location & Details */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <MapPin className='w-5 h-5 mr-2' />
             Location & Additional Details
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Location
               </label>
               <input
@@ -766,7 +766,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Tags
               </label>
               <div className='flex gap-2 mb-2'>
@@ -792,13 +792,13 @@ export default function EditProject() {
                 {formData.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className='inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-800'
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-white"
                   >
                     {tag}
                     <button
                       type='button'
                       onClick={() => removeTag(tag)}
-                      className='ml-2 text-gray-600 hover:text-gray-800'
+                      className="ml-2 text-gray-600 hover:text-white"
                     >
                       ×
                     </button>
@@ -810,7 +810,7 @@ export default function EditProject() {
 
           <div className='mt-6 grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Project Objectives
               </label>
               <textarea
@@ -823,7 +823,7 @@ export default function EditProject() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Deliverables
               </label>
               <textarea
@@ -843,21 +843,21 @@ export default function EditProject() {
         <div className='flex space-x-4 border-b mb-6'>
           <button
             type='button'
-            className={`py-2 px-4 ${activeTab === 'content' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-500'}`}
+            className={`py-2 px-4 ${activeTab === 'content' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-700'}`}
             onClick={() => setActiveTab('content')}
           >
             Content
           </button>
           <button
             type='button'
-            className={`py-2 px-4 ${activeTab === 'seo' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-500'}`}
+            className={`py-2 px-4 ${activeTab === 'seo' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-700'}`}
             onClick={() => setActiveTab('seo')}
           >
             SEO
           </button>
           <button
             type='button'
-            className={`py-2 px-4 ${activeTab === 'settings' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-500'}`}
+            className={`py-2 px-4 ${activeTab === 'settings' ? 'border-b-2 border-blue-600 font-semibold' : 'text-gray-700'}`}
             onClick={() => setActiveTab('settings')}
           >
             Settings
@@ -867,7 +867,7 @@ export default function EditProject() {
           <div className='space-y-4'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Meta Title
                 </label>
                 <input
@@ -882,7 +882,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Meta Description
                 </label>
                 <textarea
@@ -899,7 +899,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Meta Keywords
                 </label>
                 <input
@@ -913,7 +913,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   OG Title
                 </label>
                 <input
@@ -928,7 +928,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   OG Description
                 </label>
                 <textarea
@@ -942,7 +942,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   OG Image URL
                 </label>
                 <input
@@ -956,7 +956,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Twitter Title
                 </label>
                 <input
@@ -971,7 +971,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Twitter Description
                 </label>
                 <textarea
@@ -988,7 +988,7 @@ export default function EditProject() {
                 />
               </div>
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                <label className="block text-sm font-medium text-white">
                   Twitter Image URL
                 </label>
                 <input
@@ -1006,7 +1006,7 @@ export default function EditProject() {
             <div className='mt-8'>
               <h4 className='font-semibold mb-2'>SEO Preview</h4>
               <div className='bg-gray-50 border rounded-lg p-4'>
-                <div className='mb-2 text-xs text-gray-500'>
+                <div className="mb-2 text-xs text-white">
                   Google Search Result
                 </div>
                 <div className='font-bold text-blue-700'>
@@ -1015,17 +1015,17 @@ export default function EditProject() {
                 <div className='text-green-700'>
                   https://deepengineering.co/project/{projectId}
                 </div>
-                <div className='text-gray-700'>{formData.meta_description}</div>
+                <div className="text-white">{formData.meta_description}</div>
               </div>
               <div className='mt-4 flex flex-col md:flex-row gap-4'>
                 <div className='flex-1 bg-white border rounded-lg p-4'>
-                  <div className='mb-2 text-xs text-gray-500'>
+                  <div className="mb-2 text-xs text-white">
                     Open Graph Card
                   </div>
                   <div className='font-bold'>
                     {formData.og_title || formData.title}
                   </div>
-                  <div className='text-gray-700'>{formData.og_description}</div>
+                  <div className="text-white">{formData.og_description}</div>
                   {formData.og_image && (
                     <Image
                       src={formData.og_image}
@@ -1037,11 +1037,11 @@ export default function EditProject() {
                   )}
                 </div>
                 <div className='flex-1 bg-white border rounded-lg p-4'>
-                  <div className='mb-2 text-xs text-gray-500'>Twitter Card</div>
+                  <div className="mb-2 text-xs text-white">Twitter Card</div>
                   <div className='font-bold'>
                     {formData.twitter_title || formData.title}
                   </div>
-                  <div className='text-gray-700'>
+                  <div className="text-white">
                     {formData.twitter_description}
                   </div>
                   {formData.twitter_image && (
@@ -1063,7 +1063,7 @@ export default function EditProject() {
         {activeTab === 'settings' && (
           <div className='space-y-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
+              <label className="block text-sm font-medium text-white">
                 Publish At
               </label>
               <input
@@ -1074,7 +1074,7 @@ export default function EditProject() {
               />
             </div>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
+              <label className="block text-sm font-medium text-white">
                 Unpublish At
               </label>
               <input
@@ -1087,7 +1087,7 @@ export default function EditProject() {
               />
             </div>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
+              <label className="block text-sm font-medium text-white">
                 Schedule Status
               </label>
               <div className='px-3 py-2 border rounded-lg bg-gray-50'>
@@ -1107,7 +1107,7 @@ export default function EditProject() {
                     );
                   if (unpub && now > unpub)
                     return (
-                      <span className='text-gray-500'>
+                      <span className="text-white">
                         Expired (unpublished at {unpub.toLocaleString()})
                       </span>
                     );
@@ -1127,14 +1127,14 @@ export default function EditProject() {
           <button
             type='button'
             onClick={handleCancel}
-            className='px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+            className="px-6 py-2 border border-gray-300 rounded-lg text-white"
           >
             Cancel
           </button>
           <button
             type='submit'
             disabled={saving}
-            className='px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors'
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors text-white"
           >
             {saving ? 'Saving...' : 'Save Changes'}
           </button>

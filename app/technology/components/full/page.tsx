@@ -70,7 +70,7 @@ export default function FullComponentsPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Component Navigation</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Navigate through each core component of the Kinetic Power Plant
               system to understand its role and specifications.
             </p>
@@ -107,7 +107,7 @@ export default function FullComponentsPage() {
                 title: 'Water Tank (Shaft)',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       The KPP's vertical, cylindrical, water-filled shaft houses
                       all moving components. It can be constructed above or
                       below ground, with a typical height of ~22 meters for
@@ -119,7 +119,7 @@ export default function FullComponentsPage() {
                       <h4 className='font-semibold mb-3'>
                         Key Specifications:
                       </h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Material: Reinforced concrete or steel
@@ -147,7 +147,7 @@ export default function FullComponentsPage() {
                 title: 'Floaters (Buoyancy Bodies)',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       Each KPP module uses ~66 hollow steel floaters attached to
                       an endless chain. When filled with air, a floater rises;
                       when filled with water, it sinks. This alternating cycle
@@ -157,7 +157,7 @@ export default function FullComponentsPage() {
                       <h4 className='font-semibold mb-3'>
                         Key Specifications:
                       </h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Material: Corrosion-resistant steel
@@ -185,7 +185,7 @@ export default function FullComponentsPage() {
                 title: 'Endless Chain Conveyor',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       Two parallel chains run over upper and lower sprocket
                       wheels, carrying the floaters in a continuous loop. The
                       chain transmits the combined force of buoyant and heavy
@@ -194,7 +194,7 @@ export default function FullComponentsPage() {
                     </p>
                     <div className='bg-white p-6 rounded-lg'>
                       <h4 className='font-semibold mb-3'>Key Features:</h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Heavy-duty, corrosion-resistant chain
@@ -218,7 +218,7 @@ export default function FullComponentsPage() {
                 title: 'Drive Shaft & Gearbox',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       The chain loop turns an overhead drive shaft at the top of
                       the tank. A gearbox connects this shaft to the generator,
                       increasing rotation speed to the generator's rated RPM for
@@ -226,7 +226,7 @@ export default function FullComponentsPage() {
                     </p>
                     <div className='bg-white p-6 rounded-lg'>
                       <h4 className='font-semibold mb-3'>Key Features:</h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Drive shaft: High-strength steel, precision bearings
@@ -250,7 +250,7 @@ export default function FullComponentsPage() {
                 title: 'Generator',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       The generator converts mechanical rotation into
                       electricity. KPP uses a low-speed, permanent magnet AC
                       generator for high efficiency and reliability.
@@ -259,7 +259,7 @@ export default function FullComponentsPage() {
                       <h4 className='font-semibold mb-3'>
                         Technical Specifications:
                       </h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Type: Brushless, low-speed permanent magnet
@@ -296,7 +296,7 @@ export default function FullComponentsPage() {
                       </ul>
                     </div>
                     <div className='bg-primary/10 p-4 rounded-lg border-l-4 border-primary'>
-                      <p className='text-gray-text'>
+                      <p className="text-white">
                         <strong>Key Features:</strong> Modular design, compact
                         footprint, low maintenance, and robust operation in
                         demanding environments.
@@ -311,7 +311,7 @@ export default function FullComponentsPage() {
                 title: 'Compressed Air System',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       An oil-lubricated piston-type air compressor and storage
                       tank inject compressed air into the floaters at the bottom
                       of the tank. A pressure regulator and synchronized valve
@@ -321,7 +321,7 @@ export default function FullComponentsPage() {
                       <h4 className='font-semibold mb-3'>
                         Technical Specifications:
                       </h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Compressor: Oil-lubricated piston type, IE3 electric
@@ -362,7 +362,7 @@ export default function FullComponentsPage() {
                 title: 'Valve & Snorkel Mechanism',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       At the lowest point, valves inject air into submerged
                       floaters, displacing water. At the top, valves release air
                       so water can refill the floater. This ensures a
@@ -370,7 +370,7 @@ export default function FullComponentsPage() {
                     </p>
                     <div className='bg-white p-6 rounded-lg'>
                       <h4 className='font-semibold mb-3'>Key Features:</h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Precision-timed air injection and release
@@ -394,7 +394,7 @@ export default function FullComponentsPage() {
                 title: 'Control Unit',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       A PLC-based control system coordinates the compressor,
                       valves, and generator load. It maintains optimal timing
                       for air injection and system operation, including startup,
@@ -402,7 +402,7 @@ export default function FullComponentsPage() {
                     </p>
                     <div className='bg-white p-6 rounded-lg'>
                       <h4 className='font-semibold mb-3'>Key Features:</h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           PLC-based automation
@@ -430,7 +430,7 @@ export default function FullComponentsPage() {
                 title: 'System Integration & Operation',
                 content: (
                   <>
-                    <p className='text-lg text-gray-text mb-6'>
+                    <p className="text-lg text-white">
                       All components are integrated for seamless,
                       round-the-clock operation. The KPP's modular design allows
                       for scalable deployment, easy maintenance, and rapid
@@ -439,7 +439,7 @@ export default function FullComponentsPage() {
                     </p>
                     <div className='bg-white p-6 rounded-lg'>
                       <h4 className='font-semibold mb-3'>Key Features:</h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Continuous 24/7 operation
@@ -473,7 +473,7 @@ export default function FullComponentsPage() {
                   <>
                     <div className='bg-white p-6 rounded-lg mb-6'>
                       <h4 className='font-semibold mb-3'>Key Benefits:</h4>
-                      <ul className='space-y-2 text-gray-text'>
+                      <ul className="space-y-2 text-white">
                         <li className='flex items-center'>
                           <div className='w-2 h-2 bg-primary rounded-full mr-3'></div>
                           Zero emissions, no fuel required
@@ -505,7 +505,7 @@ export default function FullComponentsPage() {
                       </ul>
                     </div>
                     <div className='bg-primary/10 p-6 rounded-lg border-l-4 border-primary'>
-                      <p className='text-lg text-gray-text'>
+                      <p className="text-lg text-white">
                         The KPP is a transformative solution for sustainable,
                         reliable, and cost-effective power generation,
                         positioning Iraq and its partners at the forefront of
@@ -525,7 +525,7 @@ export default function FullComponentsPage() {
                   <div className='w-16 h-16 bg-primary rounded-full flex items-center justify-center mr-4'>
                     <div className='text-white'>{section.icon}</div>
                   </div>
-                  <h2 className='text-2xl font-bold text-gray-900'>
+                  <h2 className="text-2xl font-bold text-white">
                     {section.title}
                   </h2>
                 </div>

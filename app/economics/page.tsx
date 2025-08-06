@@ -131,7 +131,7 @@ export default function EconomicsPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Levelized Cost of Energy (LCOE) Comparison</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               KPP technology delivers the lowest levelized cost of energy among
               all power generation technologies, making it the most economically
               viable solution for Iraq's energy needs.
@@ -153,7 +153,7 @@ export default function EconomicsPage() {
                         className='bg-white rounded-lg p-4 border border-gray-200'
                       >
                         <div className='flex items-center justify-between mb-3'>
-                          <h4 className='font-semibold text-gray-800'>
+                          <h4 className="font-semibold text-white">
                             {tech.technology}
                           </h4>
                           <div
@@ -162,26 +162,26 @@ export default function EconomicsPage() {
                         </div>
                         <div className='grid grid-cols-2 gap-4 text-sm'>
                           <div>
-                            <span className='text-gray-600'>LCOE:</span>
+                            <span className="text-white">LCOE:</span>
                             <span className='font-semibold text-primary ml-2'>
                               {tech.lcoe}
                             </span>
                           </div>
                           <div>
-                            <span className='text-gray-600'>Fuel Cost:</span>
-                            <span className='font-semibold text-gray-800 ml-2'>
+                            <span className="text-white">Fuel Cost:</span>
+                            <span className="font-semibold text-white">
                               {tech.fuelCost}
                             </span>
                           </div>
                           <div>
-                            <span className='text-gray-600'>O&M Cost:</span>
-                            <span className='font-semibold text-gray-800 ml-2'>
+                            <span className="text-white">O&M Cost:</span>
+                            <span className="font-semibold text-white">
                               {tech.oamCost}
                             </span>
                           </div>
                           <div>
-                            <span className='text-gray-600'>Capital Cost:</span>
-                            <span className='font-semibold text-gray-800 ml-2'>
+                            <span className="text-white">Capital Cost:</span>
+                            <span className="font-semibold text-white">
                               {tech.capitalCost}
                             </span>
                           </div>
@@ -210,7 +210,7 @@ export default function EconomicsPage() {
                           className='bg-white rounded-lg p-4 border border-gray-200'
                         >
                           <div className='flex justify-between items-center mb-2'>
-                            <span className='font-medium text-gray-800'>
+                            <span className="font-medium text-white">
                               {tech.technology}
                             </span>
                             <span className='font-bold text-primary'>
@@ -239,7 +239,7 @@ export default function EconomicsPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Fuel Savings Analysis</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Calculate the significant fuel savings achieved by replacing
               diesel generators with KPP technology. Based on a 100MW power
               plant operating 24/7.
@@ -262,31 +262,31 @@ export default function EconomicsPage() {
                     <div className='text-3xl font-bold text-primary mb-2'>
                       €155M
                     </div>
-                    <div className='text-sm text-gray-600'>Annual Savings</div>
+                    <div className="text-sm text-white">Annual Savings</div>
                   </div>
                   <div className='text-center'>
                     <div className='text-3xl font-bold text-green-600 mb-2'>
                       85%
                     </div>
-                    <div className='text-sm text-gray-600'>Cost Reduction</div>
+                    <div className="text-sm text-white">Cost Reduction</div>
                   </div>
                   <div className='text-center'>
                     <div className='text-3xl font-bold text-blue-600 mb-2'>
                       0
                     </div>
-                    <div className='text-sm text-gray-600'>Fuel Required</div>
+                    <div className="text-sm text-white">Fuel Required</div>
                   </div>
                 </div>
 
                 {/* Cumulative Savings Chart */}
                 <div>
-                  <h4 className='font-semibold text-gray-800 mb-4'>
+                  <h4 className="font-semibold text-white">
                     Cumulative Savings Over 10 Years
                   </h4>
                   <div className='space-y-2'>
                     {savingsData.map((data, index) => (
                       <div key={index} className='flex items-center gap-4'>
-                        <span className='w-16 text-sm text-gray-600'>
+                        <span className="w-16 text-sm text-white">
                           Year {data.year}
                         </span>
                         <div className='flex-1 bg-gray-200 rounded-full h-4'>
@@ -315,7 +315,7 @@ export default function EconomicsPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Return on Investment (ROI) Analysis</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               KPP technology offers exceptional returns on investment with rapid
               payback periods and long-term profitability projections.
             </p>
@@ -327,10 +327,10 @@ export default function EconomicsPage() {
                 <div className='text-4xl font-bold text-primary mb-2'>
                   3-4 Years
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Payback Period
                 </h3>
-                <p className='text-sm text-gray-600'>
+                <p className="text-sm text-white">
                   Time to recover initial investment
                 </p>
               </div>
@@ -338,10 +338,10 @@ export default function EconomicsPage() {
                 <div className='text-4xl font-bold text-green-600 mb-2'>
                   15-25%
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Annual ROI
                 </h3>
-                <p className='text-sm text-gray-600'>
+                <p className="text-sm text-white">
                   Return on investment rate
                 </p>
               </div>
@@ -349,10 +349,10 @@ export default function EconomicsPage() {
                 <div className='text-4xl font-bold text-blue-600 mb-2'>
                   25+ Years
                 </div>
-                <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                <h3 className="text-lg font-semibold text-white">
                   Service Life
                 </h3>
-                <p className='text-sm text-gray-600'>
+                <p className="text-sm text-white">
                   Extended operational lifetime
                 </p>
               </div>
@@ -366,7 +366,7 @@ export default function EconomicsPage() {
         <div className='container'>
           <div className='text-center mb-12'>
             <h2 className='mb-4'>Investment Opportunities</h2>
-            <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+            <p className="text-lg text-white">
               Join Deep Engineering in developing Iraq's renewable energy
               infrastructure. Multiple investment opportunities available across
               different project phases.
@@ -391,32 +391,32 @@ export default function EconomicsPage() {
 
                   <div className='space-y-3 mb-4'>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Location:</span>
+                      <span className="text-white">Location:</span>
                       <span className='font-medium'>
                         {opportunity.location}
                       </span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Investment:</span>
+                      <span className="text-white">Investment:</span>
                       <span className='font-bold text-primary'>
                         {opportunity.investment}
                       </span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Expected Returns:</span>
+                      <span className="text-white">Expected Returns:</span>
                       <span className='font-bold text-green-600'>
                         {opportunity.returns}
                       </span>
                     </div>
                     <div className='flex justify-between'>
-                      <span className='text-gray-600'>Timeline:</span>
+                      <span className="text-white">Timeline:</span>
                       <span className='font-medium'>
                         {opportunity.timeline}
                       </span>
                     </div>
                   </div>
 
-                  <button className='w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px]'>
+                  <button className="w-full bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors min-w-[44px] min-h-[44px] text-white">
                     Learn More
                   </button>
                 </div>

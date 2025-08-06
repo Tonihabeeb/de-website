@@ -55,7 +55,7 @@ export default function AnimationDemoPage() {
           <FadeInWhenVisible>
             <div className='text-center mb-12'>
               <h2 className='mb-4'>System Overview Diagram</h2>
-              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+              <p className="text-lg text-white">
                 Interactive system diagram showing all KPP components and their
                 relationships. Hover over components to see labels and click for
                 detailed specifications.
@@ -73,7 +73,7 @@ export default function AnimationDemoPage() {
           <FadeInWhenVisible>
             <div className='text-center mb-12'>
               <h2 className='mb-4'>KPP Animation</h2>
-              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+              <p className="text-lg text-white">
                 Watch the complete energy generation cycle with air injection,
                 floater movement, chain drive, and power generation. Control the
                 animation speed and playback.
@@ -91,7 +91,7 @@ export default function AnimationDemoPage() {
           <FadeInWhenVisible>
             <div className='text-center mb-12'>
               <h2 className='mb-4'>Technical Blueprint View</h2>
-              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+              <p className="text-lg text-white">
                 Professional engineering blueprint style animation with
                 technical specifications, measurement indicators, and detailed
                 component information.
@@ -109,7 +109,7 @@ export default function AnimationDemoPage() {
           <FadeInWhenVisible>
             <div className='text-center mb-12'>
               <h2 className='mb-4'>Animation Styles Comparison</h2>
-              <p className='text-lg text-gray-text max-w-3xl mx-auto'>
+              <p className="text-lg text-white">
                 Compare different visualization styles for understanding KPP
                 technology.
               </p>
@@ -121,11 +121,11 @@ export default function AnimationDemoPage() {
               <h3 className='text-lg font-semibold text-primary mb-4'>
                 Interactive Diagram
               </h3>
-              <p className='text-gray-600 text-base mb-4'>
+              <p className="text-white">
                 Clickable components with detailed specifications and hover
                 effects.
               </p>
-              <ul className='text-base text-gray-600 space-y-2'>
+              <ul className="text-base text-white">
                 <li>• Component details on click</li>
                 <li>• Hover labels and tooltips</li>
                 <li>• System relationship visualization</li>
@@ -137,11 +137,11 @@ export default function AnimationDemoPage() {
               <h3 className='text-lg font-semibold text-primary mb-4'>
                 Dynamic Animation
               </h3>
-              <p className='text-gray-600 text-base mb-4'>
+              <p className="text-white">
                 Full cycle animation showing the complete energy generation
                 process.
               </p>
-              <ul className='text-base text-gray-600 space-y-2'>
+              <ul className="text-base text-white">
                 <li>• Play/pause controls</li>
                 <li>• Adjustable speed settings</li>
                 <li>• Real-time energy flow visualization</li>
@@ -153,10 +153,10 @@ export default function AnimationDemoPage() {
               <h3 className='text-lg font-semibold text-primary mb-4'>
                 Blueprint View
               </h3>
-              <p className='text-gray-600 text-base mb-4'>
+              <p className="text-white">
                 Professional engineering schematic with technical measurements.
               </p>
-              <ul className='text-base text-gray-600 space-y-2'>
+              <ul className="text-base text-white">
                 <li>• Engineering blueprint style</li>
                 <li>• Technical specifications overlay</li>
                 <li>• Measurement indicators</li>
@@ -175,25 +175,25 @@ export default function AnimationDemoPage() {
             <div className='flex flex-wrap justify-center gap-4'>
               <Link
                 href='/technology/how-it-works'
-                className='px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors min-w-[44px] min-h-[44px] inline-block text-center'
+                className="px-6 py-3 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors min-w-[44px] min-h-[44px] inline-block text-center text-white"
               >
                 How KPP Works
               </Link>
               <Link
                 href='/technology/components'
-                className='px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors min-w-[44px] min-h-[44px] inline-block text-center'
+                className="px-6 py-3 bg-gray-100 text-white"
               >
                 KPP Components
               </Link>
               <Link
                 href='/technology/specifications'
-                className='px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors min-w-[44px] min-h-[44px] inline-block text-center'
+                className="px-6 py-3 bg-gray-100 text-white"
               >
                 Technical Specifications
               </Link>
               <Link
                 href='/interactive-features'
-                className='px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors min-w-[44px] min-h-[44px] inline-block text-center'
+                className="px-6 py-3 bg-gray-100 text-white"
               >
                 Interactive Features
               </Link>
@@ -209,14 +209,14 @@ export default function AnimationDemoPage() {
             <h2 className='text-xl font-semibold text-primary mb-2'>
               Related Links
             </h2>
-            <p className='text-base text-gray-600'>
+            <p className="text-base text-white">
               Explore more about KPP technology and related topics:
             </p>
           </div>
           <div className='flex flex-wrap justify-center gap-4'>
             <Link
               href='/technology'
-              className='bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors'
+              className="bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
             >
               Technology Overview
             </Link>

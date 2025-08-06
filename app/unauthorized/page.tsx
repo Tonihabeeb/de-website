@@ -14,11 +14,11 @@ export default function UnauthorizedPage() {
             </div>
           </div>
 
-          <h1 className='text-2xl font-bold text-gray-900 mb-4'>
+          <h1 className="text-2xl font-bold text-white">
             Access Denied
           </h1>
 
-          <p className='text-gray-600 mb-8'>
+          <p className="text-white">
             You don't have permission to access this page. Please contact your
             administrator if you believe this is an error.
           </p>
@@ -26,7 +26,7 @@ export default function UnauthorizedPage() {
           <div className='space-y-4'>
             <Link
               href='/'
-              className='w-full flex items-center justify-center px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors'
+              className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
             >
               <Home className='w-4 h-4 mr-2' />
               Go to Homepage
@@ -34,7 +34,7 @@ export default function UnauthorizedPage() {
 
             <button
               onClick={() => window.history.back()}
-              className='w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors'
+              className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-white"
             >
               <ArrowLeft className='w-4 h-4 mr-2' />
               Go Back
@@ -42,7 +42,7 @@ export default function UnauthorizedPage() {
           </div>
 
           <div className='mt-8 pt-6 border-t border-gray-200'>
-            <div className='flex items-center justify-center text-sm text-gray-500'>
+            <div className="flex items-center justify-center text-sm text-white">
               <Shield className='w-4 h-4 mr-2' />
               Deep Engineering Security
             </div>

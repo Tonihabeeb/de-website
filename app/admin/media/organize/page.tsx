@@ -262,7 +262,7 @@ export default function MediaOrganize() {
       return <FileText className='w-6 h-6 text-purple-500' />;
     if (mimeType.startsWith('audio/'))
       return <FileText className='w-6 h-6 text-green-500' />;
-    return <FileText className='w-6 h-6 text-gray-500' />;
+    return <FileText className="w-6 h-6 text-white" />;
   };
 
   const formatFileSize = (bytes: number) => {
@@ -290,7 +290,7 @@ export default function MediaOrganize() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <RefreshCw className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading media organizer...</span>
+          <span className="ml-2 text-white">Loading media organizer...</span>
         </div>
       </div>
     );
@@ -302,10 +302,10 @@ export default function MediaOrganize() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Media Organization
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Organize media with folders, tags, and bulk operations
             </p>
           </div>
@@ -327,7 +327,7 @@ export default function MediaOrganize() {
             {selectedItems.length > 0 && (
               <button
                 onClick={() => setShowBulkEdit(true)}
-                className='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center'
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center text-white"
               >
                 <Edit className='w-4 h-4 mr-2' />
                 Bulk Edit ({selectedItems.length})
@@ -362,7 +362,7 @@ export default function MediaOrganize() {
         <div className='lg:col-span-1 space-y-6'>
           {/* Folders */}
           <div className='bg-white rounded-lg shadow p-6'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <Folder className='w-5 h-5 mr-2' />
               Folders
             </h3>
@@ -393,7 +393,7 @@ export default function MediaOrganize() {
                     <Folder className='w-4 h-4 mr-2' />
                     {folder.name}
                   </span>
-                  <span className='text-sm text-gray-500'>
+                  <span className="text-sm text-white">
                     {folder.item_count}
                   </span>
                 </button>
@@ -403,7 +403,7 @@ export default function MediaOrganize() {
 
           {/* Tags */}
           <div className='bg-white rounded-lg shadow p-6'>
-            <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+            <h3 className="text-lg font-semibold text-white">
               <Tag className='w-5 h-5 mr-2' />
               Tags
             </h3>
@@ -432,7 +432,7 @@ export default function MediaOrganize() {
                     />
                     {tag.name}
                   </span>
-                  <span className='text-sm text-gray-500'>
+                  <span className="text-sm text-white">
                     {tag.item_count}
                   </span>
                 </button>
@@ -447,7 +447,7 @@ export default function MediaOrganize() {
           <div className='mb-6 flex flex-col sm:flex-row gap-4'>
             <div className='flex-1'>
               <div className='relative'>
-                <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                 <input
                   type='text'
                   placeholder='Search media files...'
@@ -461,7 +461,7 @@ export default function MediaOrganize() {
             <div className='flex space-x-2'>
               <button
                 onClick={toggleSelectAll}
-                className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+                className="px-4 py-2 border border-gray-300 rounded-lg text-white"
               >
                 {selectedItems.length === filteredMedia.length ? (
                   <CheckSquare className='w-4 h-4' />
@@ -474,7 +474,7 @@ export default function MediaOrganize() {
                 onClick={() =>
                   setViewMode(viewMode === 'grid' ? 'list' : 'grid')
                 }
-                className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+                className="px-4 py-2 border border-gray-300 rounded-lg text-white"
               >
                 {viewMode === 'grid' ? (
                   <List className='w-4 h-4' />
@@ -488,7 +488,7 @@ export default function MediaOrganize() {
           {/* Media Grid/List */}
           <div className='bg-white rounded-lg shadow'>
             <div className='p-6 border-b border-gray-200'>
-              <h2 className='text-lg font-semibold text-gray-900'>
+              <h2 className="text-lg font-semibold text-white">
                 Media Files ({filteredMedia.length} files)
                 {selectedItems.length > 0 && (
                   <span className='ml-2 text-sm text-blue-600'>
@@ -520,12 +520,12 @@ export default function MediaOrganize() {
 
                       <div className='text-center'>
                         <div
-                          className='text-sm font-medium text-gray-900 truncate'
+                          className="text-sm font-medium text-white"
                           title={item.filename}
                         >
                           {item.filename}
                         </div>
-                        <div className='text-xs text-gray-500'>
+                        <div className="text-xs text-white">
                           {formatFileSize(item.file_size)}
                         </div>
                         {item.folder && (
@@ -538,12 +538,12 @@ export default function MediaOrganize() {
                             {item.tags.slice(0, 2).map((tag, index) => (
                               <span
                                 key={index}
-                                className='inline-block w-2 h-2 rounded-full bg-blue-500'
+                                className="inline-block w-2 h-2 rounded-full bg-blue-500 text-white"
                                 title={tag}
                               />
                             ))}
                             {item.tags.length > 2 && (
-                              <span className='text-xs text-gray-500'>
+                              <span className="text-xs text-white">
                                 +{item.tags.length - 2}
                               </span>
                             )}
@@ -559,7 +559,7 @@ export default function MediaOrganize() {
                 <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='bg-gray-50'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         <input
                           type='checkbox'
                           checked={
@@ -569,19 +569,19 @@ export default function MediaOrganize() {
                           className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                         />
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         File
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Folder
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Tags
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Size
                       </th>
-                      <th className='px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-right text-xs font-medium text-white">
                         Actions
                       </th>
                     </tr>
@@ -601,16 +601,16 @@ export default function MediaOrganize() {
                           <div className='flex items-center'>
                             {getFileIcon(item.mime_type)}
                             <div className='ml-3'>
-                              <div className='text-sm font-medium text-gray-900'>
+                              <div className="text-sm font-medium text-white">
                                 {item.filename}
                               </div>
-                              <div className='text-sm text-gray-500'>
+                              <div className="text-sm text-white">
                                 {item.original_name}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {item.folder || 'Root'}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap'>
@@ -618,14 +618,14 @@ export default function MediaOrganize() {
                             {item.tags?.map((tag, index) => (
                               <span
                                 key={index}
-                                className='inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800'
+                                className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 text-white"
                               >
                                 {tag}
                               </span>
                             ))}
                           </div>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {formatFileSize(item.file_size)}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
@@ -657,11 +657,11 @@ export default function MediaOrganize() {
 
             {filteredMedia.length === 0 && (
               <div className='text-center py-12'>
-                <Folder className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-                <h3 className='text-lg font-medium text-gray-900 mb-2'>
+                <Folder className="w-12 h-12 text-white" />
+                <h3 className="text-lg font-medium text-white">
                   No media files found
                 </h3>
-                <p className='text-gray-600'>
+                <p className="text-white">
                   Try adjusting your filters or search terms.
                 </p>
               </div>
@@ -675,7 +675,7 @@ export default function MediaOrganize() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 Create New Folder
               </h3>
               <input
@@ -688,13 +688,13 @@ export default function MediaOrganize() {
               <div className='flex justify-end space-x-3 mt-4'>
                 <button
                   onClick={() => setShowCreateFolder(false)}
-                  className='px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors'
+                  className="px-4 py-2 bg-gray-300 text-white"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={createFolder}
-                  className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors'
+                  className="px-4 py-2 bg-gradient-to-b from-green-700 to-green-500 text-white hover:from-green-800 hover:to-green-600 active:from-green-900 active:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                 >
                   Create
                 </button>
@@ -709,7 +709,7 @@ export default function MediaOrganize() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 Create New Tag
               </h3>
               <input
@@ -728,13 +728,13 @@ export default function MediaOrganize() {
               <div className='flex justify-end space-x-3 mt-4'>
                 <button
                   onClick={() => setShowCreateTag(false)}
-                  className='px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors'
+                  className="px-4 py-2 bg-gray-300 text-white"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={createTag}
-                  className='px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors'
+                  className="px-4 py-2 bg-gradient-to-b from-purple-700 to-purple-500 text-white hover:from-purple-800 hover:to-purple-600 active:from-purple-900 active:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                 >
                   Create
                 </button>
@@ -749,13 +749,13 @@ export default function MediaOrganize() {
         <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
           <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
             <div className='mt-3'>
-              <h3 className='text-lg font-medium text-gray-900 mb-4'>
+              <h3 className="text-lg font-medium text-white">
                 Bulk Edit ({selectedItems.length} items)
               </h3>
 
               <div className='space-y-4'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  <label className="block text-sm font-medium text-white">
                     Tags
                   </label>
                   <div className='flex flex-wrap gap-2'>
@@ -783,7 +783,7 @@ export default function MediaOrganize() {
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  <label className="block text-sm font-medium text-white">
                     Folder
                   </label>
                   <select
@@ -804,13 +804,13 @@ export default function MediaOrganize() {
               <div className='flex justify-end space-x-3 mt-6'>
                 <button
                   onClick={() => setShowBulkEdit(false)}
-                  className='px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors'
+                  className="px-4 py-2 bg-gray-300 text-white"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={bulkUpdateMedia}
-                  className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'
+                  className="px-4 py-2 bg-gradient-to-b from-blue-700 to-blue-500 text-white hover:from-blue-800 hover:to-blue-600 active:from-blue-900 active:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl select-none focus:outline-none transition-colors text-white"
                 >
                   Update
                 </button>

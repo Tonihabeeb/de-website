@@ -348,7 +348,7 @@ export default function MediaSearch() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <RefreshCw className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading media search...</span>
+          <span className="ml-2 text-white">Loading media search...</span>
         </div>
       </div>
     );
@@ -360,17 +360,17 @@ export default function MediaSearch() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Media Search & Filter
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Advanced search and filtering for media files
             </p>
           </div>
           <div className='flex space-x-3'>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+              className="px-4 py-2 border border-gray-300 rounded-lg text-white"
             >
               <Image
                 src='/icons/filter.svg'
@@ -382,7 +382,7 @@ export default function MediaSearch() {
             </button>
             <button
               onClick={clearFilters}
-              className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+              className="px-4 py-2 border border-gray-300 rounded-lg text-white"
             >
               Clear All
             </button>
@@ -413,7 +413,7 @@ export default function MediaSearch() {
       {/* Search Bar */}
       <div className='mb-6'>
         <div className='relative'>
-          <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5' />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
           <input
             type='text'
             placeholder='Search media files by name, tags, or content...'
@@ -427,7 +427,7 @@ export default function MediaSearch() {
       {/* Advanced Filters */}
       {showFilters && (
         <div className='mb-6 bg-white rounded-lg shadow p-6'>
-          <h3 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h3 className="text-lg font-semibold text-white">
             <Filter className='w-5 h-5 mr-2' />
             Advanced Filters
           </h3>
@@ -435,7 +435,7 @@ export default function MediaSearch() {
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {/* File Type Filter */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 File Type
               </label>
               <div className='space-y-2'>
@@ -453,7 +453,7 @@ export default function MediaSearch() {
                       onChange={() => toggleArrayFilter('fileType', type)}
                       className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                     />
-                    <span className='ml-2 text-sm text-gray-700'>
+                    <span className="ml-2 text-sm text-white">
                       {getFileTypeCategory(type)}
                     </span>
                   </label>
@@ -463,7 +463,7 @@ export default function MediaSearch() {
 
             {/* Size Range Filter */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 File Size
               </label>
               <div className='space-y-2'>
@@ -480,7 +480,7 @@ export default function MediaSearch() {
                     }
                     className='flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                   />
-                  <span className='text-gray-500'>to</span>
+                  <span className="text-white">to</span>
                   <input
                     type='number'
                     placeholder='Max (bytes)'
@@ -499,7 +499,7 @@ export default function MediaSearch() {
 
             {/* Date Range Filter */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Upload Date
               </label>
               <div className='space-y-2'>
@@ -530,7 +530,7 @@ export default function MediaSearch() {
 
             {/* Tags Filter */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Tags
               </label>
               <div className='max-h-32 overflow-y-auto space-y-1'>
@@ -542,7 +542,7 @@ export default function MediaSearch() {
                       onChange={() => toggleArrayFilter('tags', tag)}
                       className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                     />
-                    <span className='ml-2 text-sm text-gray-700'>{tag}</span>
+                    <span className="ml-2 text-sm text-white">{tag}</span>
                   </label>
                 ))}
               </div>
@@ -550,7 +550,7 @@ export default function MediaSearch() {
 
             {/* Folders Filter */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Folders
               </label>
               <div className='max-h-32 overflow-y-auto space-y-1'>
@@ -562,7 +562,7 @@ export default function MediaSearch() {
                       onChange={() => toggleArrayFilter('folders', folder)}
                       className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                     />
-                    <span className='ml-2 text-sm text-gray-700'>{folder}</span>
+                    <span className="ml-2 text-sm text-white">{folder}</span>
                   </label>
                 ))}
               </div>
@@ -570,7 +570,7 @@ export default function MediaSearch() {
 
             {/* Uploaded By Filter */}
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Uploaded By
               </label>
               <div className='max-h-32 overflow-y-auto space-y-1'>
@@ -582,7 +582,7 @@ export default function MediaSearch() {
                       onChange={() => toggleArrayFilter('uploadedBy', user)}
                       className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                     />
-                    <span className='ml-2 text-sm text-gray-700'>{user}</span>
+                    <span className="ml-2 text-sm text-white">{user}</span>
                   </label>
                 ))}
               </div>
@@ -594,7 +594,7 @@ export default function MediaSearch() {
       {/* Results Header */}
       <div className='mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
         <div>
-          <h2 className='text-lg font-semibold text-gray-900'>
+          <h2 className="text-lg font-semibold text-white">
             Search Results ({filteredItems.length} files)
           </h2>
           {Object.values(filters).some(value =>
@@ -603,7 +603,7 @@ export default function MediaSearch() {
               : typeof value === 'object'
                 ? Object.values(value).some(v => v !== '' && v !== 0)
                 : value !== ''
-          ) && <p className='text-sm text-gray-600 mt-1'>Filters applied</p>}
+          ) && <p className="text-sm text-white">Filters applied</p>}
         </div>
 
         <div className='flex items-center space-x-3'>
@@ -630,7 +630,7 @@ export default function MediaSearch() {
 
           <button
             onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-            className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+            className="px-4 py-2 border border-gray-300 rounded-lg text-white"
           >
             {viewMode === 'grid' ? (
               <List className='w-4 h-4' />
@@ -668,12 +668,12 @@ export default function MediaSearch() {
 
                   <div className='text-center'>
                     <div
-                      className='text-sm font-medium text-gray-900 truncate'
+                      className="text-sm font-medium text-white"
                       title={item.filename}
                     >
                       {item.filename}
                     </div>
-                    <div className='text-xs text-gray-500'>
+                    <div className="text-xs text-white">
                       {formatFileSize(item.file_size)}
                     </div>
                     {item.folder && (
@@ -686,12 +686,12 @@ export default function MediaSearch() {
                         {item.tags.slice(0, 2).map((tag, index) => (
                           <span
                             key={index}
-                            className='inline-block w-2 h-2 rounded-full bg-blue-500'
+                            className="inline-block w-2 h-2 rounded-full bg-blue-500 text-white"
                             title={tag}
                           />
                         ))}
                         {item.tags.length > 2 && (
-                          <span className='text-xs text-gray-500'>
+                          <span className="text-xs text-white">
                             +{item.tags.length - 2}
                           </span>
                         )}
@@ -703,14 +703,14 @@ export default function MediaSearch() {
                     <div className='flex space-x-2'>
                       <button
                         onClick={() => window.open(item.file_path, '_blank')}
-                        className='p-2 bg-white rounded-full text-gray-700 hover:bg-gray-100'
+                        className="p-2 bg-white rounded-full text-white"
                         title='View'
                       >
                         <Eye className='w-4 h-4' />
                       </button>
                       <button
                         onClick={() => window.open(item.file_path, '_blank')}
-                        className='p-2 bg-white rounded-full text-gray-700 hover:bg-gray-100'
+                        className="p-2 bg-white rounded-full text-white"
                         title='Download'
                       >
                         <Download className='w-4 h-4' />
@@ -733,25 +733,25 @@ export default function MediaSearch() {
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     File
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Type
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Size
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Folder
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Tags
                   </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-white">
                     Uploaded
                   </th>
-                  <th className='px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-white">
                     Actions
                   </th>
                 </tr>
@@ -763,22 +763,22 @@ export default function MediaSearch() {
                       <div className='flex items-center'>
                         {getFileIcon(item.mime_type)}
                         <div className='ml-3'>
-                          <div className='text-sm font-medium text-gray-900'>
+                          <div className="text-sm font-medium text-white">
                             {item.filename}
                           </div>
-                          <div className='text-sm text-gray-500'>
+                          <div className="text-sm text-white">
                             {item.original_name}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {getFileTypeCategory(item.mime_type)}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {formatFileSize(item.file_size)}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {item.folder || 'Root'}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>
@@ -786,14 +786,14 @@ export default function MediaSearch() {
                         {item.tags?.map((tag, index) => (
                           <span
                             key={index}
-                            className='inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800'
+                            className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 text-white"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {new Date(item.created_at).toLocaleDateString()}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
@@ -830,11 +830,11 @@ export default function MediaSearch() {
 
         {filteredItems.length === 0 && (
           <div className='text-center py-12'>
-            <Search className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-            <h3 className='text-lg font-medium text-gray-900 mb-2'>
+            <Search className="w-12 h-12 text-white" />
+            <h3 className="text-lg font-medium text-white">
               No files found
             </h3>
-            <p className='text-gray-600'>
+            <p className="text-white">
               Try adjusting your search terms or filters.
             </p>
           </div>

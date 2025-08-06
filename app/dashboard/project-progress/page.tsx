@@ -93,9 +93,9 @@ export default function ProjectProgressDashboard() {
       case 'in-progress':
         return <Clock className='w-4 h-4 text-yellow-500' />;
       case 'upcoming':
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
       default:
-        return <AlertCircle className='w-4 h-4 text-gray-400' />;
+        return <AlertCircle className="w-4 h-4 text-white" />;
     }
   };
 
@@ -139,7 +139,7 @@ export default function ProjectProgressDashboard() {
           <BarChart3 className='w-8 h-8 text-blue-600' />
           Project Progress Dashboard
         </h1>
-        <p className='mb-8 text-gray-700'>
+        <p className="mb-8 text-white">
           Real-time overview of project milestones, progress, and key
           performance indicators for KPP projects.
         </p>
@@ -181,16 +181,16 @@ export default function ProjectProgressDashboard() {
                 <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='bg-gray-50'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Milestone
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Status
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Progress
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Timeline
                       </th>
                     </tr>
@@ -200,10 +200,10 @@ export default function ProjectProgressDashboard() {
                       <tr key={milestone.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <div>
-                            <div className='text-sm font-medium text-gray-900'>
+                            <div className="text-sm font-medium text-white">
                               {milestone.name}
                             </div>
-                            <div className='text-sm text-gray-500'>
+                            <div className="text-sm text-white">
                               {milestone.description}
                             </div>
                           </div>
@@ -222,16 +222,16 @@ export default function ProjectProgressDashboard() {
                           <div className='flex items-center'>
                             <div className='w-16 bg-gray-200 rounded-full h-2 mr-2'>
                               <div
-                                className='bg-blue-600 h-2 rounded-full'
+                                className="bg-blue-600 h-2 rounded-full text-white"
                                 style={{ width: `${milestone.progress}%` }}
                               ></div>
                             </div>
-                            <span className='text-sm text-gray-900'>
+                            <span className="text-sm text-white">
                               {milestone.progress}%
                             </span>
                           </div>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {milestone.start_date} → {milestone.end_date}
                         </td>
                       </tr>
@@ -241,7 +241,7 @@ export default function ProjectProgressDashboard() {
               </div>
             </div>
           ) : (
-            <div className='bg-gray-50 border rounded p-4 text-gray-600'>
+            <div className="bg-gray-50 border rounded p-4 text-white">
               <em>
                 No milestones found. Add milestones through the admin panel.
               </em>
@@ -266,7 +266,7 @@ export default function ProjectProgressDashboard() {
                 }))}
               />
             ) : (
-              <div className='text-gray-600'>
+              <div className="text-white">
                 <em>No milestones available for progress tracking.</em>
               </div>
             )}
@@ -292,7 +292,7 @@ export default function ProjectProgressDashboard() {
                 </div>
               </div>
             ) : (
-              <div className='text-gray-600'>
+              <div className="text-white">
                 <em>
                   Financial metrics will be displayed here when available.
                 </em>
@@ -313,16 +313,16 @@ export default function ProjectProgressDashboard() {
                 <table className='min-w-full divide-y divide-gray-200'>
                   <thead className='bg-gray-50'>
                     <tr>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Activity
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Type
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         User
                       </th>
-                      <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white">
                         Timestamp
                       </th>
                     </tr>
@@ -332,23 +332,23 @@ export default function ProjectProgressDashboard() {
                       <tr key={item.id}>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <div>
-                            <div className='text-sm font-medium text-gray-900'>
+                            <div className="text-sm font-medium text-white">
                               {item.title}
                             </div>
-                            <div className='text-sm text-gray-500'>
+                            <div className="text-sm text-white">
                               {item.description}
                             </div>
                           </div>
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap'>
-                          <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800'>
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 text-white">
                             {item.type.replace('_', ' ')}
                           </span>
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {item.user}
                         </td>
-                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                           {new Date(item.timestamp).toLocaleDateString()}
                         </td>
                       </tr>
@@ -357,7 +357,7 @@ export default function ProjectProgressDashboard() {
                 </table>
               </div>
             ) : (
-              <div className='p-4 text-gray-600'>
+              <div className="p-4 text-white">
                 <em>
                   No recent activity found. Activity logs will appear here when
                   updates are made.

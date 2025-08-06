@@ -26,6 +26,20 @@ interface Document {
   updatedAt: string;
 }
 
+interface MediaItem {
+  id: string;
+  filename: string;
+  original_name: string;
+  file_path: string;
+  file_size: number;
+  mime_type: string;
+  alt_text?: string;
+  caption?: string;
+  tags?: string[];
+  uploaded_by?: string;
+  created_at: string;
+}
+
 const tabs = [
   { id: 'all', name: 'All Documents', icon: Folder },
   { id: 'document', name: 'Documents', icon: FileText },
@@ -52,10 +66,27 @@ export default function DocumentsPage() {
     // Optionally show error message to user
   };
 
-  const handleDocumentSelect = (document: Document) => {
+  const handleDocumentSelect = (media: MediaItem) => {
+    // Convert MediaItem to Document format for the modal
+    const document: Document = {
+      _id: media.id,
+      title: media.original_name || media.filename,
+      description: media.caption || '',
+      filename: media.filename,
+      originalName: media.original_name,
+      mimetype: media.mime_type,
+      size: media.file_size,
+      category: media.tags?.[0] || 'General',
+      type: media.mime_type,
+      uploadedBy: {
+        _id: media.uploaded_by || '',
+        name: 'Unknown',
+        email: '',
+      },
+      createdAt: media.created_at,
+      updatedAt: media.created_at,
+    };
     setSelectedDocument(document);
-    // You can implement a modal or navigation to document details
-    console.log('Selected document:', document);
   };
 
   return (
@@ -65,10 +96,10 @@ export default function DocumentsPage() {
         <div className='mb-8'>
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
+              <h1 className="text-3xl font-bold text-white">
                 Document Management
               </h1>
-              <p className='text-gray-600 mt-2'>
+              <p className="text-white">
                 Upload, organize, and manage your documents and files
               </p>
             </div>
@@ -89,7 +120,7 @@ export default function DocumentsPage() {
         {showUpload && (
           <div className='mb-8'>
             <div className='bg-white rounded-lg shadow p-6'>
-              <h2 className='text-xl font-semibold text-gray-900 mb-4'>
+              <h2 className="text-xl font-semibold text-white">
                 Upload New Document
               </h2>
               <DocumentUpload
@@ -114,7 +145,7 @@ export default function DocumentsPage() {
                     className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 ${
                       activeTab === tab.id
                         ? 'border-primary text-primary'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        : 'border-transparent text-gray-700 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
                     <Icon className='h-4 w-4' />
@@ -129,7 +160,7 @@ export default function DocumentsPage() {
         {/* Document List */}
         <div className='bg-white rounded-lg shadow p-6'>
           <DocumentList
-            type={activeTab === 'all' ? undefined : activeTab}
+            mimeTypes={activeTab === 'all' ? undefined : [activeTab]}
             showActions={true}
             onDocumentSelect={handleDocumentSelect}
           />
@@ -140,47 +171,47 @@ export default function DocumentsPage() {
           <div className='fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50'>
             <div className='relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
               <div className='mt-3'>
-                <h3 className='text-lg font-medium text-gray-900 mb-4'>
+                <h3 className="text-lg font-medium text-white">
                   Document Details
                 </h3>
                 <div className='space-y-3'>
                   <div>
-                    <label className='text-sm font-medium text-gray-700'>
+                    <label className="text-sm font-medium text-white">
                       Title:
                     </label>
-                    <p className='text-sm text-gray-900'>
+                    <p className="text-sm text-white">
                       {selectedDocument.title}
                     </p>
                   </div>
                   <div>
-                    <label className='text-sm font-medium text-gray-700'>
+                    <label className="text-sm font-medium text-white">
                       Description:
                     </label>
-                    <p className='text-sm text-gray-900'>
+                    <p className="text-sm text-white">
                       {selectedDocument.description}
                     </p>
                   </div>
                   <div>
-                    <label className='text-sm font-medium text-gray-700'>
+                    <label className="text-sm font-medium text-white">
                       Category:
                     </label>
-                    <p className='text-sm text-gray-900'>
+                    <p className="text-sm text-white">
                       {selectedDocument.category}
                     </p>
                   </div>
                   <div>
-                    <label className='text-sm font-medium text-gray-700'>
+                    <label className="text-sm font-medium text-white">
                       Uploaded by:
                     </label>
-                    <p className='text-sm text-gray-900'>
+                    <p className="text-sm text-white">
                       {selectedDocument.uploadedBy.name}
                     </p>
                   </div>
                   <div>
-                    <label className='text-sm font-medium text-gray-700'>
+                    <label className="text-sm font-medium text-white">
                       Upload date:
                     </label>
-                    <p className='text-sm text-gray-900'>
+                    <p className="text-sm text-white">
                       {new Date(
                         selectedDocument.createdAt
                       ).toLocaleDateString()}
@@ -190,7 +221,7 @@ export default function DocumentsPage() {
                 <div className='flex justify-end space-x-3 mt-6'>
                   <button
                     onClick={() => setSelectedDocument(null)}
-                    className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200'
+                    className="px-4 py-2 text-sm font-medium text-white"
                   >
                     Close
                   </button>

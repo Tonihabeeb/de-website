@@ -201,15 +201,15 @@ export default function NewUser() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Create New User
             </h1>
-            <p className='text-gray-600 mt-1'>Add a new user to the system</p>
+            <p className="text-white">Add a new user to the system</p>
           </div>
           <div className='flex space-x-3'>
             <button
               onClick={handleCancel}
-              className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+              className="px-4 py-2 border border-gray-300 rounded-lg text-white"
             >
               <X className='w-4 h-4 mr-2' />
               Cancel
@@ -217,7 +217,7 @@ export default function NewUser() {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className='px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center'
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center text-white"
             >
               {loading ? (
                 <Loader2 className='w-4 h-4 animate-spin mr-2' />
@@ -255,14 +255,14 @@ export default function NewUser() {
       {/* Form */}
       <form onSubmit={handleSubmit} className='space-y-6'>
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <User className='w-5 h-5 mr-2' />
             Basic Information
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Full Name *
               </label>
               <input
@@ -276,11 +276,11 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Email Address *
               </label>
               <div className='relative'>
-                <Mail className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
                 <input
                   type='email'
                   required
@@ -293,7 +293,7 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 First Name
               </label>
               <input
@@ -306,7 +306,7 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Last Name
               </label>
               <input
@@ -319,7 +319,7 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Phone Number
               </label>
               <input
@@ -332,7 +332,7 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Department
               </label>
               <input
@@ -345,7 +345,7 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Position
               </label>
               <input
@@ -361,14 +361,14 @@ export default function NewUser() {
 
         {/* Security Settings */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <Shield className='w-5 h-5 mr-2' />
             Security Settings
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Password *
               </label>
               <div className='relative'>
@@ -383,7 +383,7 @@ export default function NewUser() {
                 <button
                   type='button'
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-white"
                 >
                   {showPassword ? (
                     <EyeOff className='w-4 h-4' />
@@ -405,11 +405,11 @@ export default function NewUser() {
                         }}
                       />
                     </div>
-                    <span className='text-xs text-gray-600'>
+                    <span className="text-xs text-white">
                       {passwordStrength.text}
                     </span>
                   </div>
-                  <div className='mt-1 text-xs text-gray-500'>
+                  <div className="mt-1 text-xs text-white">
                     Password must be at least 8 characters long
                   </div>
                 </div>
@@ -417,7 +417,7 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Confirm Password *
               </label>
               <div className='relative'>
@@ -439,7 +439,7 @@ export default function NewUser() {
                 <button
                   type='button'
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-white"
                 >
                   {showConfirmPassword ? (
                     <EyeOff className='w-4 h-4' />
@@ -461,14 +461,14 @@ export default function NewUser() {
 
         {/* Role and Status */}
         <div className='bg-white rounded-lg shadow p-6'>
-          <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+          <h2 className="text-lg font-semibold text-white">
             <Shield className='w-5 h-5 mr-2' />
             Role & Status
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Role *
               </label>
               <select
@@ -487,7 +487,7 @@ export default function NewUser() {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className="block text-sm font-medium text-white">
                 Status
               </label>
               <select
@@ -504,13 +504,13 @@ export default function NewUser() {
           {/* Role Description */}
           {formData.role_id && (
             <div className='mt-4 p-4 bg-gray-50 rounded-lg'>
-              <h4 className='text-sm font-medium text-gray-900 mb-2'>
+              <h4 className="text-sm font-medium text-white">
                 Role Permissions
               </h4>
               {roles
                 .find(r => r.id === formData.role_id)
                 ?.permissions.map((permission, index) => (
-                  <div key={index} className='text-sm text-gray-600'>
+                  <div key={index} className="text-sm text-white">
                     • {permission}
                   </div>
                 ))}
@@ -523,14 +523,14 @@ export default function NewUser() {
           <button
             type='button'
             onClick={handleCancel}
-            className='px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+            className="px-6 py-2 border border-gray-300 rounded-lg text-white"
           >
             Cancel
           </button>
           <button
             type='submit'
             disabled={loading}
-            className='px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors'
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors text-white"
           >
             {loading ? 'Creating...' : 'Create User'}
           </button>

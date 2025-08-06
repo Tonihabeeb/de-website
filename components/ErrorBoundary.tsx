@@ -108,20 +108,20 @@ export default class ErrorBoundary extends Component<Props, State> {
               <div className='mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4'>
                 <AlertTriangle className='h-6 w-6 text-red-600' />
               </div>
-              <h1 className='text-xl font-semibold text-gray-900 mb-2'>
+              <h1 className="text-xl font-semibold text-white">
                 Something went wrong
               </h1>
-              <p className='text-gray-600 mb-6'>
+              <p className="text-white">
                 We're sorry, but something unexpected happened. Our team has
                 been notified and is working to fix this issue.
               </p>
 
               {process.env.NODE_ENV === 'development' && this.state.error && (
                 <details className='mb-6 text-left'>
-                  <summary className='cursor-pointer text-sm font-medium text-gray-700 mb-2'>
+                  <summary className="cursor-pointer text-sm font-medium text-white">
                     Error Details (Development)
                   </summary>
-                  <div className='bg-gray-100 p-4 rounded text-xs font-mono text-gray-800 overflow-auto max-h-40'>
+                  <div className="bg-gray-100 p-4 rounded text-xs font-mono text-white">
                     <div className='mb-2'>
                       <strong>Error ID:</strong> {this.state.errorId}
                     </div>
@@ -159,7 +159,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               <div className='flex space-x-3'>
                 <button
                   onClick={this.handleGoBack}
-                  className='flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors'
+                  className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-white"
                 >
                   <ArrowLeft className='h-4 w-4 mr-2' />
                   Go Back
@@ -167,7 +167,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
                 <button
                   onClick={this.handleGoHome}
-                  className='flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors'
+                  className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-white"
                 >
                   <Home className='h-4 w-4 mr-2' />
                   Go Home
@@ -177,10 +177,10 @@ export default class ErrorBoundary extends Component<Props, State> {
 
             {this.state.errorId && (
               <div className='mt-6 pt-4 border-t border-gray-200'>
-                <p className='text-xs text-gray-500'>
+                <p className="text-xs text-white">
                   Error ID: {this.state.errorId}
                 </p>
-                <p className='text-xs text-gray-500 mt-1'>
+                <p className="text-xs text-white">
                   If this problem persists, please contact support with this
                   error ID.
                 </p>

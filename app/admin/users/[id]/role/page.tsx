@@ -200,7 +200,7 @@ export default function UserRoleAssignment() {
       <div className='p-6'>
         <div className='flex items-center justify-center h-64'>
           <Loader2 className='w-8 h-8 animate-spin text-blue-600' />
-          <span className='ml-2 text-gray-600'>Loading user...</span>
+          <span className="ml-2 text-white">Loading user...</span>
         </div>
       </div>
     );
@@ -231,16 +231,16 @@ export default function UserRoleAssignment() {
       <div className='mb-6'>
         <div className='flex justify-between items-center'>
           <div>
-            <h1 className='text-2xl font-bold text-gray-900'>
+            <h1 className="text-2xl font-bold text-white">
               Role Assignment
             </h1>
-            <p className='text-gray-600 mt-1'>
+            <p className="text-white">
               Manage role and permissions for {user?.name}
             </p>
           </div>
           <button
             onClick={() => router.push('/admin/users')}
-            className='px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center'
+            className="px-4 py-2 border border-gray-300 rounded-lg text-white"
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Users
@@ -275,28 +275,28 @@ export default function UserRoleAssignment() {
           {/* User Information */}
           <div className='lg:col-span-1'>
             <div className='bg-white rounded-lg shadow p-6'>
-              <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+              <h2 className="text-lg font-semibold text-white">
                 <User className='w-5 h-5 mr-2' />
                 User Information
               </h2>
 
               <div className='space-y-4'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Name
                   </label>
-                  <p className='text-sm text-gray-900 mt-1'>{user.name}</p>
+                  <p className="text-sm text-white">{user.name}</p>
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Email
                   </label>
-                  <p className='text-sm text-gray-900 mt-1'>{user.email}</p>
+                  <p className="text-sm text-white">{user.email}</p>
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Current Role
                   </label>
                   <div className='mt-1'>
@@ -309,7 +309,7 @@ export default function UserRoleAssignment() {
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Status
                   </label>
                   <div className='mt-1'>
@@ -326,10 +326,10 @@ export default function UserRoleAssignment() {
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700'>
+                  <label className="block text-sm font-medium text-white">
                     Member Since
                   </label>
-                  <p className='text-sm text-gray-900 mt-1'>
+                  <p className="text-sm text-white">
                     {new Date(user.created_at).toLocaleDateString()}
                   </p>
                 </div>
@@ -341,14 +341,14 @@ export default function UserRoleAssignment() {
           <div className='lg:col-span-2'>
             <form onSubmit={handleSubmit} className='space-y-6'>
               <div className='bg-white rounded-lg shadow p-6'>
-                <h2 className='text-lg font-semibold text-gray-900 mb-4 flex items-center'>
+                <h2 className="text-lg font-semibold text-white">
                   <Shield className='w-5 h-5 mr-2' />
                   Role Assignment
                 </h2>
 
                 <div className='space-y-4'>
                   <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
+                    <label className="block text-sm font-medium text-white">
                       Select Role *
                     </label>
                     <select
@@ -368,14 +368,14 @@ export default function UserRoleAssignment() {
 
                   {selectedRole && (
                     <div className='mt-4 p-4 bg-gray-50 rounded-lg'>
-                      <h4 className='text-sm font-medium text-gray-900 mb-2'>
+                      <h4 className="text-sm font-medium text-white">
                         Role Description
                       </h4>
-                      <p className='text-sm text-gray-600 mb-3'>
+                      <p className="text-sm text-white">
                         {roles.find(r => r.id === selectedRole)?.description}
                       </p>
 
-                      <h5 className='text-sm font-medium text-gray-900 mb-2'>
+                      <h5 className="text-sm font-medium text-white">
                         Default Permissions
                       </h5>
                       <div className='space-y-1'>
@@ -384,7 +384,7 @@ export default function UserRoleAssignment() {
                           ?.permissions.map((permission, index) => (
                             <div
                               key={index}
-                              className='text-sm text-gray-600 flex items-center'
+                              className="text-sm text-white"
                             >
                               <CheckCircle className='w-4 h-4 text-green-500 mr-2' />
                               {permission}
@@ -399,7 +399,7 @@ export default function UserRoleAssignment() {
               {/* Custom Permissions */}
               <div className='bg-white rounded-lg shadow p-6'>
                 <div className='flex items-center justify-between mb-4'>
-                  <h2 className='text-lg font-semibold text-gray-900 flex items-center'>
+                  <h2 className="text-lg font-semibold text-white">
                     <Settings className='w-5 h-5 mr-2' />
                     Custom Permissions
                   </h2>
@@ -422,7 +422,7 @@ export default function UserRoleAssignment() {
                           key={resource}
                           className='border border-gray-200 rounded-lg p-4'
                         >
-                          <h3 className='text-sm font-medium text-gray-900 mb-3 capitalize'>
+                          <h3 className="text-sm font-medium text-white">
                             {resource.replace('_', ' ')}
                           </h3>
                           <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
@@ -442,10 +442,10 @@ export default function UserRoleAssignment() {
                                   className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                                 />
                                 <div>
-                                  <span className='text-sm font-medium text-gray-900'>
+                                  <span className="text-sm font-medium text-white">
                                     {permission.action.replace('_', ' ')}
                                   </span>
-                                  <p className='text-xs text-gray-500'>
+                                  <p className="text-xs text-white">
                                     {permission.description}
                                   </p>
                                 </div>
@@ -464,14 +464,14 @@ export default function UserRoleAssignment() {
                 <button
                   type='button'
                   onClick={handleCancel}
-                  className='px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors'
+                  className="px-6 py-2 border border-gray-300 rounded-lg text-white"
                 >
                   Cancel
                 </button>
                 <button
                   type='submit'
                   disabled={saving || !selectedRole}
-                  className='px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center'
+                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg transition-colors flex items-center text-white"
                 >
                   {saving ? (
                     <Loader2 className='w-4 h-4 animate-spin mr-2' />

@@ -210,7 +210,7 @@ export default function ProjectTimelinePage() {
         <div className='mb-8'>
           <button
             onClick={() => router.back()}
-            className='flex items-center text-gray-600 hover:text-gray-900 mb-4'
+            className="flex items-center text-gray-600 hover:text-white"
           >
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Project
@@ -218,13 +218,13 @@ export default function ProjectTimelinePage() {
 
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className='text-3xl font-bold text-gray-900'>
+              <h1 className="text-3xl font-bold text-white">
                 {project.name} - Timeline
               </h1>
-              <p className='text-gray-600 mt-2'>{project.description}</p>
+              <p className="text-white">{project.description}</p>
             </div>
 
-            <div className='flex items-center space-x-4 text-sm text-gray-500'>
+            <div className="flex items-center space-x-4 text-sm text-white">
               <div className='flex items-center'>
                 <Calendar className='w-4 h-4 mr-1' />
                 <span>
@@ -246,8 +246,8 @@ export default function ProjectTimelinePage() {
           <div className='bg-white p-4 rounded-lg shadow-sm border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm text-gray-600'>Total Milestones</p>
-                <p className='text-2xl font-bold text-gray-900'>
+                <p className="text-sm text-white">Total Milestones</p>
+                <p className="text-2xl font-bold text-white">
                   {milestones.length}
                 </p>
               </div>
@@ -258,7 +258,7 @@ export default function ProjectTimelinePage() {
           <div className='bg-white p-4 rounded-lg shadow-sm border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm text-gray-600'>Completed</p>
+                <p className="text-sm text-white">Completed</p>
                 <p className='text-2xl font-bold text-green-600'>
                   {milestones.filter(m => m.status === 'completed').length}
                 </p>
@@ -270,7 +270,7 @@ export default function ProjectTimelinePage() {
           <div className='bg-white p-4 rounded-lg shadow-sm border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm text-gray-600'>In Progress</p>
+                <p className="text-sm text-white">In Progress</p>
                 <p className='text-2xl font-bold text-blue-600'>
                   {milestones.filter(m => m.status === 'in-progress').length}
                 </p>
@@ -282,12 +282,12 @@ export default function ProjectTimelinePage() {
           <div className='bg-white p-4 rounded-lg shadow-sm border'>
             <div className='flex items-center justify-between'>
               <div>
-                <p className='text-sm text-gray-600'>Pending</p>
-                <p className='text-2xl font-bold text-gray-600'>
+                <p className="text-sm text-white">Pending</p>
+                <p className="text-2xl font-bold text-white">
                   {milestones.filter(m => m.status === 'pending').length}
                 </p>
               </div>
-              <Circle className='w-8 h-8 text-gray-400' />
+              <Circle className="w-8 h-8 text-white" />
             </div>
           </div>
         </div>
