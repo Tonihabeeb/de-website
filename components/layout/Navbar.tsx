@@ -312,7 +312,7 @@ export default function Navbar() {
                           setServicesDropdownOpen(false);
                         }
                       }}
-                      className={`flex items-center space-x-1 transition-colors duration-200 font-medium ${
+                      className={`flex items-center space-x-1 transition-colors duration-200 font-medium focus:outline-none ${
                         isHomePage && isOverHero
                           ? 'text-white hover:text-gray-200' 
                           : 'text-gray-text hover:text-primary'
@@ -369,7 +369,7 @@ export default function Navbar() {
                             {sub.submenu ? (
                               <>
                                 <button
-                                  className='flex items-center w-full px-4 py-2 text-left hover:bg-gray-100 text-gray-700 group-hover:bg-gray-100'
+                                  className='flex items-center w-full px-4 py-2 text-left hover:bg-gray-100 text-gray-700 group-hover:bg-gray-100 focus:outline-none'
                                   aria-haspopup='true'
                                   aria-label={`Toggle ${sub.name} submenu`}
                                 >
@@ -381,7 +381,7 @@ export default function Navbar() {
                                     <Link
                                       key={nested.name}
                                       href={nested.href}
-                                      className='block px-4 py-2 hover:bg-gray-100 text-gray-700'
+                                      className='block px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none'
                                     >
                                       {nested.name}
                                     </Link>
@@ -391,7 +391,7 @@ export default function Navbar() {
                             ) : (
                               <Link
                                 href={sub.href}
-                                className='block px-4 py-2 hover:bg-gray-100 text-gray-700'
+                                className='block px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none'
                               >
                                 {sub.name}
                               </Link>
@@ -406,7 +406,7 @@ export default function Navbar() {
                     href={item.href}
                     role='menuitem'
                     aria-current={pathname === item.href ? 'page' : undefined}
-                    className={`transition-colors duration-200 font-medium min-w-[44px] min-h-[44px] ${
+                    className={`transition-colors duration-200 font-medium min-w-[44px] min-h-[44px] focus:outline-none ${
                       isHomePage && isOverHero
                         ? 'text-white hover:text-gray-200' 
                         : 'text-gray-text hover:text-primary'
@@ -490,7 +490,7 @@ export default function Navbar() {
                     <div className='py-1'>
                       <Link
                         href='/documents'
-                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
+                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 focus:outline-none'
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         <FileText className='w-4 h-4 mr-3' />
@@ -499,7 +499,7 @@ export default function Navbar() {
                       <RoleGuard roles={['admin', 'super_admin']}>
                         <Link
                           href='/admin'
-                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
+                          className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 focus:outline-none'
                           onClick={() => setUserDropdownOpen(false)}
                         >
                           <Settings className='w-4 h-4 mr-3' />
@@ -508,7 +508,7 @@ export default function Navbar() {
                       </RoleGuard>
                       <Link
                         href='/dashboard'
-                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200'
+                        className='flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors duration-200 focus:outline-none'
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         <svg
@@ -532,7 +532,7 @@ export default function Navbar() {
                           logout();
                           setUserDropdownOpen(false);
                         }}
-                        className='flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200'
+                        className='flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 focus:outline-none'
                       >
                         <LogOut className='w-4 h-4 mr-3' />
                         Logout
@@ -545,7 +545,7 @@ export default function Navbar() {
               <div className='flex items-center space-x-4'>
                 <Link
                   href='/login'
-                  className={`text-sm transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-gray-50 ${
+                  className={`text-sm transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-gray-50 focus:outline-none ${
                     isHomePage && isOverHero
                       ? 'text-white hover:text-gray-200' 
                       : 'text-gray-700 hover:text-primary'
@@ -555,7 +555,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href='/register'
-                  className={`text-sm px-4 py-2 rounded-md transition-colors duration-200 font-medium shadow-sm hover:shadow-md ${
+                  className={`text-sm px-4 py-2 rounded-md transition-colors duration-200 font-medium shadow-sm hover:shadow-md focus:outline-none ${
                     isHomePage && isOverHero
                       ? 'bg-white text-primary hover:bg-gray-100' 
                       : 'bg-primary text-white hover:bg-primary-dark'
@@ -613,7 +613,7 @@ export default function Navbar() {
                           <li key={subItem.name}>
                             <Link
                               href={subItem.href}
-                              className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium ${
+                              className={`block px-3 py-3 rounded-lg transition-all duration-200 text-sm font-medium focus:outline-none ${
                                 pathname === subItem.href
                                   ? 'bg-primary text-white shadow-md'
                                   : 'text-gray-text hover:bg-gray-50 hover:text-primary'
@@ -631,7 +631,7 @@ export default function Navbar() {
                       href={item.href}
                       role='menuitem'
                       aria-current={pathname === item.href ? 'page' : undefined}
-                      className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium ${
+                      className={`block px-3 py-3 rounded-lg transition-all duration-200 font-medium focus:outline-none ${
                         pathname === item.href
                           ? 'bg-primary text-white shadow-md'
                           : 'text-gray-text hover:bg-gray-50 hover:text-primary'
@@ -671,7 +671,7 @@ export default function Navbar() {
                   <div className='space-y-2'>
                     <Link
                       href='/documents'
-                      className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                      className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 focus:outline-none'
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <FileText className='w-4 h-4 mr-3' />
@@ -680,7 +680,7 @@ export default function Navbar() {
                     <RoleGuard roles={['admin', 'super_admin']}>
                       <Link
                         href='/admin'
-                        className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                        className='flex items-center px-3 py-3 text-sm text-gray-700 hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 focus:outline-none'
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Settings className='w-4 h-4 mr-3' />
@@ -696,7 +696,7 @@ export default function Navbar() {
                         logout();
                         setMobileMenuOpen(false);
                       }}
-                      className='flex items-center w-full px-3 py-3 text-sm text-gray-700 hover:text-red-600 font-medium rounded-lg hover:bg-red-50 transition-all duration-200'
+                      className='flex items-center w-full px-3 py-3 text-sm text-gray-700 hover:text-red-600 font-medium rounded-lg hover:bg-red-50 transition-all duration-200 focus:outline-none'
                     >
                       <LogOut className='w-4 h-4 mr-3' />
                       Logout
@@ -711,14 +711,14 @@ export default function Navbar() {
                   <div className='space-y-2'>
                     <Link
                       href='/login'
-                      className='block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200'
+                      className='block px-3 py-3 text-sm text-gray-text hover:text-primary font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 focus:outline-none'
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Login
                     </Link>
                     <Link
                       href='/register'
-                      className='block px-3 py-3 text-sm bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-all duration-200 text-center'
+                      className='block px-3 py-3 text-sm bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-all duration-200 text-center focus:outline-none'
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Create Account
