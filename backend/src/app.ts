@@ -18,6 +18,7 @@ import {
   updateProject, 
   deleteProject 
 } from './controllers/projectController';
+import { seedProjects } from './scripts/seedProjects';
 
 // Load environment variables
 dotenv.config();
@@ -103,6 +104,9 @@ async function connectDB() {
 // Start server
 async function startServer() {
   await connectDB();
+  
+  // Seed demo projects
+  await seedProjects();
   
   app.listen(PORT, () => {
     console.log(`🚀 Backend server running on port ${PORT}`);
