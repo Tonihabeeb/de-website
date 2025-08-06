@@ -45,7 +45,7 @@ app.use('/api/', limiter);
 const speedLimiter = slowDown({
   windowMs: 15 * 60 * 1000, // 15 minutes
   delayAfter: 50, // allow 50 requests per 15 minutes, then...
-  delayMs: 500 // begin adding 500ms of delay per request above 50
+  delayMs: () => 500 // begin adding 500ms of delay per request above 50
 });
 app.use('/api/', speedLimiter);
 
