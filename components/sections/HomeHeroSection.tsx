@@ -2,8 +2,12 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function HomeHeroSection() {
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
   // Generate deterministic random positions for particles and animated elements
   const energyParticles = useMemo(
     () =>
@@ -36,7 +40,16 @@ export default function HomeHeroSection() {
   );
 
   return (
-    <section className='relative min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-white to-green-100 text-primary overflow-hidden'>
+    <section
+      className={`relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden ${
+        isHomePage ? '-mt-16' : ''
+      }`}
+      style={{
+        backgroundImage: 'url("/herosection2_resized_1920x1080.png")',
+      }}
+    >
+      {/* Dark overlay for better text readability */}
+      <div className='absolute inset-0 bg-black/40'></div>
       {/* KPP-inspired mechanical background animations */}
       <div className='absolute inset-0 pointer-events-none z-0'>
         {/* Rotating gear system - representing KPP mechanical components */}
@@ -217,7 +230,7 @@ export default function HomeHeroSection() {
       {/* Enhanced content with staggered animations */}
       <div className='container relative z-10 text-center'>
         <motion.h1
-          className='text-4xl md:text-6xl font-extrabold font-serif mb-6 leading-tight drop-shadow-xl text-primary'
+          className='text-4xl md:text-6xl font-extrabold font-serif mb-6 leading-tight drop-shadow-xl text-white'
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -225,7 +238,7 @@ export default function HomeHeroSection() {
           Continuous Clean Energy, Anywhere
         </motion.h1>
         <motion.p
-          className='text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-lg text-primary/80'
+          className='text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-lg text-white/90'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
@@ -242,7 +255,7 @@ export default function HomeHeroSection() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               href='/technology'
-              className='inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-sky-100 transition-colors shadow-lg hover:shadow-xl'
+              className='inline-flex items-center px-8 py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl'
             >
               Explore Our Technology
               <svg
@@ -263,7 +276,7 @@ export default function HomeHeroSection() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               href='/about/learn-more'
-              className='inline-flex items-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-lg bg-white hover:bg-green-100 hover:text-primary focus:text-primary transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-primary'
+              className='inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg bg-transparent hover:bg-white hover:text-gray-900 focus:text-gray-900 transition-colors shadow-lg hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white'
               style={{
                 transition: 'color 0.2s, background 0.2s, transform 0.2s',
               }}
